@@ -34,7 +34,7 @@ func mcpCredentialTestRouter() *gin.Engine {
 
 func setupMCPCredentialTestDB(t *testing.T) {
 	t.Helper()
-	database := testutil.NewTestDB(t, &model.MCPCredential{})
+	database := testutil.NewTestDB(t, &model.MCPCredential{}, &model.MCPCredentialKey{})
 	db.SetTestDB(database)
 	t.Cleanup(func() { db.SetTestDB(nil) })
 }

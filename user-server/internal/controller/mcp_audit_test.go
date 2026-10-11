@@ -31,6 +31,7 @@ func setupMCPAuditTestDB(t *testing.T) {
 		&model.MCPCallAudit{},
 		&model.MCPSkill{},
 		&model.MCPCredential{},
+		&model.MCPCredentialKey{},
 	)
 	db.SetTestDB(database)
 	t.Cleanup(func() { db.SetTestDB(nil) })
@@ -165,6 +166,8 @@ func TestListMCPCallAudits_Happy(t *testing.T) {
 		Allowed: false, OK: false, ErrorMsg: "越权",
 	})
 	_ = fut
+	// Record 走异步队列（批量+重试），断言前确定性落账，避免竞态读到 0 条。
+	service.FlushMCPAuditForTest()
 
 	r := mcpAuditTestRouter()
 	w := get(t, r, "/api/manage/mcp/audits?client_id=mcp-test")

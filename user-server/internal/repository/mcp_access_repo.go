@@ -28,6 +28,8 @@ func NewMCPCallAuditRepo() *MCPCallAuditRepo {
 // 不是一件事。构造出的 repo 恒非 nil，判可用性必须下探到 db 句柄。
 func (r *MCPCallAuditRepo) Available() bool { return r != nil && r.db != nil }
 
+// Create 落一条调用审计。
+// 普通 Create：Allowed 已在模型层去掉 default:true，零值 false 会真实落库。
 func (r *MCPCallAuditRepo) Create(ctx context.Context, row *model.MCPCallAudit) error {
 	if r.db == nil {
 		return gorm.ErrInvalidDB

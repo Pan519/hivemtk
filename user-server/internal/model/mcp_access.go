@@ -32,7 +32,9 @@ type MCPCallAudit struct {
 	// Tool 仅在 tools/call 时非空
 	Tool string `gorm:"type:varchar(128);index" json:"tool"`
 	// Allowed=false 表示被凭证的工具授权范围（scope）拒绝，未执行
-	Allowed   bool      `gorm:"not null;default:true;index" json:"allowed"`
+	// 刻意不设 default:true：拒绝行（false）是合法审计状态，DB 默认值会把
+	// 零值 false 吞成 true，allowed=0 过滤全部落空（2026-10-11 实测）。
+	Allowed   bool      `gorm:"not null;index" json:"allowed"`
 	OK        bool      `gorm:"not null;default:false;index" json:"ok"`
 	ErrorMsg  string    `gorm:"type:text" json:"error_msg"`
 	ArgsHash  string    `gorm:"column:args_hash;type:varchar(64)" json:"args_hash"`

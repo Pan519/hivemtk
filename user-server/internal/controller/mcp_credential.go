@@ -131,6 +131,11 @@ func CreateMCPCredential(ctx *gin.Context) {
 		// 显式 no_expiry=true 或给了绝对时间都直接用（给了绝对时间时 ttl_days 忽略）。
 		expiresAt = req.ExpiresAt
 	}
+	// 显式过期时间早于当前：拒绝（"刚建就过期"无意义，且会让第一把钥匙直接进入不可用态）。
+	if expiresAt != nil && expiresAt.Before(time.Now()) {
+		response.Error(ctx, http.StatusBadRequest, "过期时间须晚于当前时间")
+		return
+	}
 	// 1:N 之后凭证行不再自带钥匙：先落凭证，再经 IssueKey 签发第一把钥匙
 	// （sha256+密文双轨入 mcp_credential_keys，hash 同时镜像进凭证 legacy 列）。
 	cred := model.MCPCredential{
