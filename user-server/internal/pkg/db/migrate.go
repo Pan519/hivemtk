@@ -355,6 +355,8 @@ func allModels() []any {
 		// team_id 列同样走标签建列；本表登记晚一卡，EnsureDefaultTeamID 会
 		// 在全新库上建不出默认团队，注册流程当场 500。
 		&model.Team{},
+		// Tenant 租户（多租户 P1）：团队归属租户、租户超管的数据范围边界。
+		&model.Tenant{},
 		// MCPCallAudit（表 mcp_call_audits）：MCP 入口的调用审计（谁/哪把凭证/哪个工具/成没成）。
 		// MCPSkill（表 mcp_skills）：Skill 注册表（说明 + 绑定凭证 + 期望工具集）。
 		// 两者都是 2026-10-10 新增：MCP 入口此前只有"签发了哪些凭证"，没有调用记录与
@@ -534,6 +536,8 @@ func AutoMigrate() *gorm.DB {
 	// 幂等，可重复执行；回滚口径见 scripts/rollback-tenant-p0.sh。
 	postMigrateBackfillDefaultTeam(DB)
 	postMigrateRelaxSystemUserRoleCheck(DB)
+	// 多租户 P1（2026-10-11）：默认租户 + 存量团队归入（tenant_id=0→1）+ 租户表幂等种子。
+	postMigrateBackfillTenant(DB)
 	postMigrateBackfillMCPCredentialTeams(DB)
 	postMigrateSeedBillingPlans(DB)
 
@@ -682,6 +686,56 @@ func postMigrateRelaxSystemUserRoleCheck(db *gorm.DB) {
 		logger.Infof("[tenant-role-check] 已放宽 system_users 历史 CHECK：%s（Go 侧 IsValidSystemUserRole 为唯一口径）", row.Name)
 	}
 }
+
+// postMigrateBackfillTenant 多租户 P1 存量回填（2026-10-11，幂等）：
+//  1. 确保「默认租户」存在（id=1）；
+//  2. 存量团队 tenant_id=0 → 归入默认租户（tenant_id=1）；
+//  3. 存量用户 tenant_id=0 且已归属团队 → 按团队反查租户回填。
+// 回滚口径：tenant_id 列可清回 0，表数据保留（无降级删表）。
+func postMigrateBackfillTenant(db *gorm.DB) {
+	if db == nil {
+		return
+	}
+	// 1) 默认租户幂等创建
+	var tenant model.Tenant
+	err := db.Where("code = ?", DefaultTenantCode).First(&tenant).Error
+	if err != nil {
+		if !errors.Is(err, gorm.ErrRecordNotFound) {
+			logger.Warnf("[tenant-backfill] 查默认租户失败: %v", err)
+			return
+		}
+		tenant = model.Tenant{Code: DefaultTenantCode, Name: "默认租户", Status: model.TenantStatusActive}
+		if err := db.Create(&tenant).Error; err != nil {
+			if e2 := db.Where("code = ?", DefaultTenantCode).First(&tenant).Error; e2 != nil {
+				logger.Warnf("[tenant-backfill] 创建默认租户失败: %v", err)
+				return
+			}
+		} else {
+			logger.Infof("[tenant-backfill] 已创建默认租户 id=%d", tenant.ID)
+		}
+	}
+
+	// 2) 存量团队归入默认租户（幂等：只动 tenant_id=0 的）
+	res := db.Model(&model.Team{}).Where("tenant_id = 0").Update("tenant_id", tenant.ID)
+	if res.Error != nil {
+		logger.Warnf("[tenant-backfill] teams 租户回填失败: %v", res.Error)
+	} else if res.RowsAffected > 0 {
+		logger.Infof("[tenant-backfill] %d 个存量团队归入默认租户", res.RowsAffected)
+	}
+
+	// 3) 存量用户按团队反查租户（仅 tenant_id=0 且 team_id>0 的用户）
+	res = db.Model(&model.SystemUser{}).
+		Where("tenant_id = 0 AND team_id > 0").
+		Update("tenant_id", gorm.Expr("(SELECT tenant_id FROM teams WHERE teams.id = system_users.team_id)"))
+	if res.Error != nil {
+		logger.Warnf("[tenant-backfill] system_users 租户回填失败: %v", res.Error)
+	} else if res.RowsAffected > 0 {
+		logger.Infof("[tenant-backfill] %d 个存量用户按团队反查租户", res.RowsAffected)
+	}
+}
+
+// DefaultTenantCode 默认租户编码（存量多租户回填落点）。
+const DefaultTenantCode = "default"
 
 // postMigrateBackfillMCPCredentialKeys 把存量 1:1 凭证对迁移成钥匙行（2026-10-11）。
 //

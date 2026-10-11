@@ -20,14 +20,16 @@ import (
 // 存量库的 role CHECK（migrations/025）由 postMigrateRelaxSystemUserRoleCheck 放宽，
 // 否则 team_admin 在带 CHECK 的库上插不进去。
 const (
-	SystemUserRoleAdmin     = "admin"
-	SystemUserRoleTeamAdmin = "team_admin"
-	SystemUserRoleUser      = "user"
+	SystemUserRoleAdmin       = "admin"
+	SystemUserRoleTenantAdmin = "tenant_admin"
+	SystemUserRoleTeamAdmin   = "team_admin"
+	SystemUserRoleUser        = "user"
 )
 
 // IsValidSystemUserRole 校验系统用户角色是否合法
 func IsValidSystemUserRole(role string) bool {
 	return role == SystemUserRoleAdmin ||
+		role == SystemUserRoleTenantAdmin ||
 		role == SystemUserRoleTeamAdmin ||
 		role == SystemUserRoleUser
 }
@@ -80,6 +82,9 @@ type SystemUser struct {
 	Enabled      bool       `json:"enabled" gorm:"column:enabled;default:true;not null"`
 	LastLogin    *time.Time `json:"last_login"`
 	DataScope    string     `json:"data_scope" gorm:"size:20;default:'self'"`
+	// TenantID 所属租户（多租户 P1）：0=平台侧/项目超管；1+ 归属租户。
+	// tenant_admin 角色的数据范围 = 本租户全部团队；team_admin = 本团队。
+	TenantID     uint       `json:"tenant_id" gorm:"column:tenant_id;index;default:0"`
 	DepartmentID uint       `json:"department_id" gorm:"index;default:0"`
 	TeamID       uint       `json:"team_id" gorm:"index;default:0"`
 	CreatedAt    time.Time  `json:"created_at" gorm:"autoCreateTime"`

@@ -12,33 +12,33 @@ import (
 //   - TENANT_ISOLATION=off → TeamScoped 全直通（回滚口径，TeamScoped 内部判开关）。
 func TestTeamFilterDecision_ThreeStates(t *testing.T) {
 	// ① 系统上下文（无身份）→ 直通
-	if passthrough, teamID := teamFilterDecision(nil); !passthrough || teamID != 0 {
+	if passthrough, _, teamID := teamFilterDecision(nil); !passthrough || teamID != 0 {
 		t.Errorf("nil ctx 应直通，got passthrough=%v teamID=%d", passthrough, teamID)
 	}
-	if passthrough, _ := teamFilterDecision(context.Background()); !passthrough {
+	if passthrough, _, _ := teamFilterDecision(context.Background()); !passthrough {
 		t.Error("空 ctx 应视为系统上下文（直通）")
 	}
 
 	// ② 平台管理员 → 直通
 	ctx := WithTeamInfo(context.Background(), TeamInfo{TeamID: 3, Platform: true})
-	if passthrough, _ := teamFilterDecision(ctx); !passthrough {
+	if passthrough, _, _ := teamFilterDecision(ctx); !passthrough {
 		t.Error("平台管理员应直通（跨团队全量，需求 3）")
 	}
 
 	// ③ 普通身份 → 锁定本团队
 	ctx = WithTeamInfo(context.Background(), TeamInfo{TeamID: 7})
-	if passthrough, teamID := teamFilterDecision(ctx); passthrough || teamID != 7 {
+	if passthrough, _, teamID := teamFilterDecision(ctx); passthrough || teamID != 7 {
 		t.Errorf("普通身份应锁定团队 7，got passthrough=%v teamID=%d", passthrough, teamID)
 	}
 
 	// ④ 老调用方（只有 user_id/role 键，SetGinValuesToCtx 兼容链路）→ 有身份但无团队
 	ctx = WithRole(WithUID(context.Background(), 9), "user")
-	if passthrough, teamID := teamFilterDecision(ctx); passthrough || teamID != 0 {
+	if passthrough, _, teamID := teamFilterDecision(ctx); passthrough || teamID != 0 {
 		t.Errorf("有身份无团队应锁定 team 0（平台侧行），got passthrough=%v teamID=%d", passthrough, teamID)
 	}
 	// role=admin 走 isAdmin 兼容路径同样直通
 	ctx = WithRole(WithUID(context.Background(), 9), "admin")
-	if passthrough, _ := teamFilterDecision(ctx); !passthrough {
+	if passthrough, _, _ := teamFilterDecision(ctx); !passthrough {
 		t.Error("role=admin（兼容链路）应直通")
 	}
 }

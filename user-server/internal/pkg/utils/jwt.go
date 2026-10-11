@@ -96,6 +96,7 @@ type CustomClaims struct {
 	DataScope    string `json:"data_scope,omitempty"`
 	DepartmentID uint   `json:"department_id,omitempty"`
 	TeamID       uint   `json:"team_id,omitempty"`
+	TenantID     uint   `json:"tenant_id,omitempty"`
 	jwt.RegisteredClaims
 }
 
@@ -111,11 +112,11 @@ func NewJWTUtils(config JWTConfig) *JWTUtils {
 
 // GenerateToken 生成JWT令牌
 func (j *JWTUtils) GenerateToken(userID uint, username, role string) (string, error) {
-	return j.GenerateTokenWithScope(userID, username, role, "", 0, 0)
+	return j.GenerateTokenWithScope(userID, username, role, "", 0, 0, 0)
 }
 
-// GenerateTokenWithScope 生成带数据范围的 JWT 令牌（行级权限）
-func (j *JWTUtils) GenerateTokenWithScope(userID uint, username, role, dataScope string, departmentID, teamID uint) (string, error) {
+// GenerateTokenWithScope 生成带数据范围的 JWT 令牌（行级权限；tenantID 为多租户 P1 租户归属）
+func (j *JWTUtils) GenerateTokenWithScope(userID uint, username, role, dataScope string, departmentID, teamID, tenantID uint) (string, error) {
 	claims := CustomClaims{
 		UserID:       userID,
 		Username:     username,
@@ -123,6 +124,7 @@ func (j *JWTUtils) GenerateTokenWithScope(userID uint, username, role, dataScope
 		DataScope:    dataScope,
 		DepartmentID: departmentID,
 		TeamID:       teamID,
+		TenantID:     tenantID,
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Hour * time.Duration(j.config.ExpiresHours))),
 			IssuedAt:  jwt.NewNumericDate(time.Now()),
@@ -170,6 +172,7 @@ func (j *JWTUtils) RefreshToken(tokenString string) (string, error) {
 		DataScope:    claims.DataScope,
 		DepartmentID: claims.DepartmentID,
 		TeamID:       claims.TeamID,
+		TenantID:     claims.TenantID,
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Hour * time.Duration(j.config.ExpiresHours))),
 			IssuedAt:  jwt.NewNumericDate(time.Now()),

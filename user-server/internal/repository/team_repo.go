@@ -5,6 +5,7 @@ import (
 
 	"hivemtk-user/internal/model"
 	"hivemtk-user/internal/pkg/db"
+	"hivemtk-user/internal/scope"
 
 	"gorm.io/gorm"
 )
@@ -57,7 +58,7 @@ func (r *TeamRepository) List(ctx context.Context, page, size int) ([]model.Team
 	if size < 1 || size > 200 {
 		size = 20
 	}
-	q := r.db.WithContext(ctx).Model(&model.Team{})
+	q := r.db.WithContext(ctx).Model(&model.Team{}).Scopes(scope.TenantTeamScoped(ctx))
 	var total int64
 	if err := q.Count(&total).Error; err != nil {
 		return nil, 0, err

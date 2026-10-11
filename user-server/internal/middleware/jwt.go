@@ -100,7 +100,7 @@ func JWTAuthMiddleware() gin.HandlerFunc {
 		// 租户上下文进请求 ctx（多租户 P0）：repository 的 scope.TeamScoped /
 		// db 层的 Create 回调都从 Request.Context() 取团队身份——在中间件
 		// 这一处注入，全部下游调用无需各自透传 gin 值。
-		injectTeamScopeCtx(c, scope.TeamInfo{TeamID: claims.TeamID, Platform: claims.Role == "admin"})
+		injectTeamScopeCtx(c, scope.TeamInfo{TeamID: claims.TeamID, TenantID: claims.TenantID, Platform: claims.Role == "admin"})
 
 		c.Next()
 	}
@@ -134,6 +134,33 @@ func TeamAdminAuthMiddleware() gin.HandlerFunc {
 		r, _ := role.(string)
 		if r != "admin" && r != model.SystemUserRoleTeamAdmin {
 			c.JSON(http.StatusForbidden, gin.H{"code": 403, "msg": "权限不足，需要团队管理员权限"})
+			c.Abort()
+			return
+		}
+		c.Next()
+	}
+}
+
+
+// TenantAdminAuthMiddleware 租户管理员门（多租户 P1）：
+// 项目超管（role=admin）全量直通；租户超管（tenant_admin）放行到控制器后
+// 按"本租户"过滤（团队/成员/权限/计费数据范围在 controller/service 层判定，见 tenant_admin 归属校验）。
+func TenantAdminAuthMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		if IsTestMode && testModeGate() {
+			c.Set("role", "admin")
+			c.Next()
+			return
+		}
+		role, exists := c.Get("role")
+		if !exists {
+			c.JSON(http.StatusUnauthorized, gin.H{"code": 401, "msg": "未找到用户角色信息"})
+			c.Abort()
+			return
+		}
+		r, _ := role.(string)
+		if r != "admin" && r != model.SystemUserRoleTenantAdmin {
+			c.JSON(http.StatusForbidden, gin.H{"code": 403, "msg": "权限不足，需要租户管理员权限"})
 			c.Abort()
 			return
 		}

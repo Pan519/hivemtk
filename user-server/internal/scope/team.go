@@ -37,6 +37,9 @@ func SetTenantIsolationForTest(enabled bool) (restore func()) {
 type TeamInfo struct {
 	// TeamID 当前用户归属团队（0=平台侧/未归属）
 	TeamID uint
+	// TenantID 当前用户归属租户（多租户 P1）：0=平台侧/项目超管；1+ 归属租户。
+	// tenant_admin 角色的数据范围 = 本租户全部团队。
+	TenantID uint
 	// Platform 平台管理员直通：role==admin（超级管理员跨团队全量，需求 3）
 	Platform bool
 }
@@ -83,27 +86,71 @@ func TeamScoped(ctx context.Context) func(db *gorm.DB) *gorm.DB {
 		if db == nil || !tenantIsolationEnabled() {
 			return db
 		}
-		passthrough, teamID := teamFilterDecision(ctx)
+		passthrough, tenantID, teamID := teamFilterDecision(ctx)
 		if passthrough {
 			return db
+		}
+		if tenantID > 0 {
+			// 租户超管：team_id ∈ 本租户全部团队（子查询 teams 表，scope 不 import model 用字面表名）
+			return db.Where("team_id IN (?)", db.Table("teams").Where("tenant_id = ?", tenantID).Select("id"))
 		}
 		return db.Where("team_id = ?", teamID)
 	}
 }
 
-// teamFilterDecision 租户过滤的三态判定（纯函数，供 TeamScoped 与单测复用）：
-//   - (true, 0)：直通——系统上下文（无身份）或平台管理员；
-//   - (false, teamID)：锁定本团队（fail-closed，漏注入等于少看不是多看）。
-func teamFilterDecision(ctx context.Context) (passthrough bool, teamID uint) {
+// TenantTeamScoped 团队表的租户范围过滤（多租户 P1）：按 ctx 身份层级过滤 teams 表。
+//   - 系统上下文 / 平台管理员（admin）→ 全量直通；
+//   - 租户超管（tenant_admin）→ WHERE tenant_id = ctx 租户；
+//   - 其余（team_admin / 成员）→ WHERE id = 本团队。
+func TenantTeamScoped(ctx context.Context) func(db *gorm.DB) *gorm.DB {
+	return func(db *gorm.DB) *gorm.DB {
+		if db == nil || !tenantIsolationEnabled() {
+			return db
+		}
+		info, present := TeamInfoFromCtx(ctx)
+		if !present {
+			return db
+		}
+		if info.Platform || isAdmin(ctx) {
+			return db
+		}
+		if isTenantAdmin(ctx) {
+			return db.Where("tenant_id = ?", info.TenantID)
+		}
+		return db.Where("id = ?", info.TeamID)
+	}
+}
+
+// teamFilterDecision 租户过滤的四态判定（纯函数，供 TeamScoped 与单测复用）：
+//   - (true, 0, 0)：直通——系统上下文（无身份）或平台管理员（admin）；
+//   - (false, tenantID>0, 0)：租户超管（tenant_admin）——锁本租户团队集合；
+//   - (false, 0, teamID)：其余——锁本团队（fail-closed，漏注入等于少看不是多看）。
+func teamFilterDecision(ctx context.Context) (passthrough bool, tenantID, teamID uint) {
 	info, present := TeamInfoFromCtx(ctx)
 	if !present {
-		return true, 0 // 系统上下文（无身份）：平台机器流量直通（读全量）
+		return true, 0, 0 // 系统上下文（无身份）：平台机器流量直通（读全量）
 	}
 	if info.Platform || isAdmin(ctx) {
-		return true, 0 // 平台管理员：跨团队全量（需求 3）
+		return true, 0, 0 // 平台管理员：跨团队全量（需求 3）
 	}
-	return false, info.TeamID
+	if isTenantAdmin(ctx) {
+		return false, info.TenantID, 0 // 租户超管：本租户全部团队
+	}
+	return false, 0, info.TeamID
 }
+
+// isTenantAdmin 判断 ctx 身份是否为租户超管（tenant_admin）。
+func isTenantAdmin(ctx context.Context) bool {
+	if v, ok := fromGinContext(ctx, roleKey); ok {
+		if s, ok2 := v.(string); ok2 {
+			return s == "tenant_admin"
+		}
+	}
+	return false
+}
+
+// roleKey ctx 中的角色键（JWT 中间件 Set("role", ...)）。
+const roleKey = "role"
 
 // FillTeamIDOnCreate 建行前决定 team_id（db 包 GORM 回调调用）：
 //   - 隔离关闭 → 不动（全 0，回滚口径）；

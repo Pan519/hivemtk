@@ -154,7 +154,7 @@ func (s *AuthService) loginWithUser(ctx context.Context, user *model.SystemUser)
 	// 此前登录走 GenerateToken 空作用域，租户过滤在 ctx 里拿到的永远是 0——
 	// 刷新链路（RefreshToken）早已回源重签，这里对齐同一口径。
 	token, err := s.jwtUtils.GenerateTokenWithScope(
-		user.ID, user.Username, user.Role, user.DataScope, user.DepartmentID, user.TeamID)
+		user.ID, user.Username, user.Role, user.DataScope, user.DepartmentID, user.TeamID, user.TenantID)
 	if err != nil {
 		logger.Error(err, "生成JWT令牌失败")
 		return nil, errors.New("登录失败，请稍后重试")
@@ -190,7 +190,7 @@ func (s *AuthService) IssueTokenForUser(ctx context.Context, userID uint, userna
 		return "", errors.New("用户已被禁用")
 	}
 	return s.jwtUtils.GenerateTokenWithScope(
-		user.ID, user.Username, user.Role, user.DataScope, user.DepartmentID, user.TeamID)
+		user.ID, user.Username, user.Role, user.DataScope, user.DepartmentID, user.TeamID, user.TenantID)
 }
 
 // RefreshToken 续期令牌。
@@ -224,7 +224,7 @@ func (s *AuthService) RefreshToken(ctx context.Context, tokenString string) (str
 	}
 
 	newToken, err := s.jwtUtils.GenerateTokenWithScope(
-		user.ID, user.Username, user.Role, user.DataScope, user.DepartmentID, user.TeamID)
+		user.ID, user.Username, user.Role, user.DataScope, user.DepartmentID, user.TeamID, user.TenantID)
 	if err != nil {
 		logger.Error(err, "刷新令牌签发失败")
 		return "", errors.New("刷新令牌失败，请稍后重试")
@@ -446,7 +446,7 @@ func (s *AuthService) Register(ctx context.Context, req *RegisterRequest) (*Logi
 	}
 
 	token, err := s.jwtUtils.GenerateTokenWithScope(
-		user.ID, user.Username, user.Role, user.DataScope, user.DepartmentID, user.TeamID)
+		user.ID, user.Username, user.Role, user.DataScope, user.DepartmentID, user.TeamID, user.TenantID)
 	if err != nil {
 		logger.Error(err, "Register 生成 JWT 失败: "+username)
 		return nil, errors.New("注册成功但签发令牌失败，请登录")

@@ -13,6 +13,9 @@ import "time"
 type Team struct {
 	ID   uint   `gorm:"primaryKey;autoIncrement" json:"id"`
 	Name string `gorm:"type:varchar(128);not null;uniqueIndex" json:"name"`
+	// TenantID 所属租户（多租户 P1）：0=未归属（平台侧/存量），1+ 归属租户。
+	// 租户超管按 tenant_id 看本租户全部团队；0 的团队只对项目超管可见。
+	TenantID uint `gorm:"column:tenant_id;index;default:0" json:"tenant_id"`
 	// Plan 计费档位预留：free / pro / enterprise（P0 只登记不判定配额）
 	Plan string `gorm:"type:varchar(32);default:'free'" json:"plan"`
 	// Status 生命周期：active / disabled（停用后成员登录仍可，业务写入面在 P2 收紧）

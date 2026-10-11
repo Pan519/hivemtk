@@ -233,6 +233,9 @@ func setupLLMProviderRoutes(auth *gin.RouterGroup) {
 	// 团队管理员业务面（admin+team_admin 可用，数据按 TeamScoped 按团队隔离）：
 	// 知识库连接器 / MCP 凭证与钥匙管理。系统配置类（embedding/teams/rbac/billing）仍在 Admin 组。
 	authTeamBiz := auth.Group("", middleware.TeamAdminAuthMiddleware())
+	// 租户管理员面（多租户 P1）：项目超管（admin）+ 租户超管（tenant_admin）可用，
+	// 团队/RBAC/计费数据范围在 controller 层按本租户过滤（tenant_admin）。
+	authTenant := auth.Group("", middleware.TenantAdminAuthMiddleware())
 	{
 		authPlainAdmin.GET("/llm/embedding-config", controller.GetEmbeddingConfig)
 		authPlainAdmin.PUT("/llm/embedding-config", controller.UpdateEmbeddingConfig)
@@ -263,19 +266,19 @@ func setupLLMProviderRoutes(auth *gin.RouterGroup) {
 
 		// —— 多租户 P0：团队（租户）管理 ——
 		// 平台管理员面：全量 CRUD + 成员调拨（需求 3）。
-		authPlainAdmin.GET("/manage/teams", controller.ListTeams)
+		authTenant.GET("/manage/teams", controller.ListTeams)
 		// RBAC 矩阵只读出参（P1-2：前端"权限矩阵"页数据源）
-		authPlainAdmin.GET("/manage/rbac-matrix", controller.GetRBACMatrix)
+		authTenant.GET("/manage/rbac-matrix", controller.GetRBACMatrix)
 		// 权限覆盖层可编辑（P1-1：谁有什么权限，DB 优先/生成为兜底；super_admin 锁定）
-		authPlainAdmin.GET("/manage/role-permissions/:roleCode", controller.GetRolePermissions)
-		authPlainAdmin.PUT("/manage/role-permissions/:roleCode", controller.SetRolePermissions)
+		authTenant.GET("/manage/role-permissions/:roleCode", controller.GetRolePermissions)
+		authTenant.PUT("/manage/role-permissions/:roleCode", controller.SetRolePermissions)
 		// —— 计费管理（SaaS P2 首批）：方案 / 订阅 / 账单 ——
-		authPlainAdmin.GET("/manage/billing/plans", controller.ListBillingPlans)
-		authPlainAdmin.POST("/manage/billing/plans", controller.CreateBillingPlan)
-		authPlainAdmin.PUT("/manage/billing/plans/:id", controller.UpdateBillingPlan)
-		authPlainAdmin.DELETE("/manage/billing/plans/:id", controller.DeleteBillingPlan)
-		authPlainAdmin.GET("/manage/billing/subscriptions", controller.ListBillingSubscriptions)
-		authPlainAdmin.PUT("/manage/billing/subscriptions/:teamId", controller.AssignBillingPlan)
+		authTenant.GET("/manage/billing/plans", controller.ListBillingPlans)
+		authTenant.POST("/manage/billing/plans", controller.CreateBillingPlan)
+		authTenant.PUT("/manage/billing/plans/:id", controller.UpdateBillingPlan)
+		authTenant.DELETE("/manage/billing/plans/:id", controller.DeleteBillingPlan)
+		authTenant.GET("/manage/billing/subscriptions", controller.ListBillingSubscriptions)
+		authTenant.PUT("/manage/billing/subscriptions/:teamId", controller.AssignBillingPlan)
 		authPlainAdmin.POST("/manage/billing/subscriptions/:teamId/cancel", controller.CancelBillingSubscription)
 		authPlainAdmin.GET("/manage/billing/records", controller.ListBillingRecords)
 		authPlainAdmin.POST("/manage/billing/records", controller.CreateBillingRecord)
