@@ -4,7 +4,7 @@
     <el-card class="header-card" shadow="never">
       <div class="header-content">
         <div>
-          <h2>{{ $t('auto.List.21.2d499b') }}</h2>
+          <h2>{{ $t('auto.List.2d499b0f') }}</h2>
           <p class="subtitle">
             统一管理 RAG 文档库 / FAQ 知识库 / SOP 模板库，配置所属文档并查看被哪些智能体使用
           </p>
@@ -26,19 +26,19 @@
     <el-row :gutter="20" class="stat-row" v-if="stats">
       <el-col :span="8">
         <el-card shadow="never" class="stat-card">
-          <div class="stat-label">{{ $t('auto.List.22.b19ff8') }}</div>
+          <div class="stat-label">{{ $t('auto.List.b19ff884') }}</div>
           <div class="stat-value">{{ stats.total ?? 0 }}</div>
         </el-card>
       </el-col>
       <el-col :span="8">
         <el-card shadow="never" class="stat-card">
-          <div class="stat-label">{{ $t('auto.List.23.53ace4') }}</div>
+          <div class="stat-label">{{ $t('auto.List.53ace430') }}</div>
           <div class="stat-value text-success">{{ stats.enabled ?? 0 }}</div>
         </el-card>
       </el-col>
       <el-col :span="8">
         <el-card shadow="never" class="stat-card">
-          <div class="stat-label">{{ $t('auto.List.12.9b4c8f') }}</div>
+          <div class="stat-label">{{ $t('auto.List.9b4c8f90') }}</div>
           <div class="stat-value text-primary">{{ totalAgentBindings }}</div>
         </el-card>
       </el-col>
@@ -47,19 +47,19 @@
     
     <el-card shadow="never" class="filter-card">
       <el-tabs v-model="currentType" @tab-change="onTabChange">
-        <el-tab-pane :label="$t('auto.List.1.3ded98')" name="rag">
-          <span><el-icon><Document /></el-icon>{{ $t('auto.List.1.3ded98') }}</span>
+        <el-tab-pane :label="$t('auto.List.3ded9838')" name="rag">
+          <span><el-icon><Document /></el-icon>{{ $t('auto.List.3ded9838') }}</span>
         </el-tab-pane>
-        <el-tab-pane :label="$t('auto.List.2.e571cd')" name="faq">
-          <span><el-icon><Notebook /></el-icon>{{ $t('auto.List.2.e571cd') }}</span>
+        <el-tab-pane :label="$t('auto.List.e571cd55')" name="faq">
+          <span><el-icon><Notebook /></el-icon>{{ $t('auto.List.e571cd55') }}</span>
         </el-tab-pane>
-        <el-tab-pane :label="$t('auto.List.3.b9ce6f')" name="sop">
-          <span><el-icon><Tickets /></el-icon>{{ $t('auto.List.3.b9ce6f') }}</span>
+        <el-tab-pane :label="$t('auto.List.b9ce6f82')" name="sop">
+          <span><el-icon><Tickets /></el-icon>{{ $t('auto.List.b9ce6f82') }}</span>
         </el-tab-pane>
       </el-tabs>
 
       <el-form :inline="true" :model="filter" @submit.prevent>
-        <el-form-item ::label="$t('auto.List.4.648229')">
+        <el-form-item ::label="$t('auto.List.64822934')">
           <el-input
             v-model="filter.keyword"
             :placeholder="searchPlaceholder"
@@ -69,10 +69,10 @@
             @clear="onSearch"
           />
         </el-form-item>
-        <el-form-item ::label="$t('auto.List.5.1b8578')">
-          <el-select v-model="filter.status" :placeholder="$t('auto.List.6.443483')" clearable style="width: 130px" @change="onSearch">
-            <el-option :label="$t('auto.List.7.7854b5')" :value="1" />
-            <el-option :label="$t('auto.List.8.710ad0')" :value="0" />
+        <el-form-item ::label="$t('auto.List.1b857887')">
+          <el-select v-model="filter.status" :placeholder="$t('auto.List.443483c9')" clearable style="width: 130px" @change="onSearch">
+            <el-option :label="$t('auto.List.7854b52a')" :value="1" />
+            <el-option :label="$t('auto.List.710ad08b')" :value="0" />
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -89,20 +89,20 @@
     <el-card shadow="never">
       <el-table :data="list" v-loading="loading" stripe border>
         <el-table-column prop="id" label="ID" width="70" align="center" />
-        <el-table-column prop="kb_code" :label="$t('auto.List.9.031c07')" width="170" show-overflow-tooltip />
-        <el-table-column :label="$t('auto.List.10.d7ec2d')" min-width="180" show-overflow-tooltip>
+        <el-table-column prop="kb_code" :label="$t('auto.List.031c076a')" width="170" show-overflow-tooltip />
+        <el-table-column :label="$t('auto.List.d7ec2d3f')" min-width="180" show-overflow-tooltip>
           <template #default="{ row }">
             <span class="kb-name" role="button" tabindex="0" :class="{ 'kb-name--clickable': true }" @click="openDetail(row)" @keydown.enter.prevent="openDetail(row)" @keydown.space.prevent="openDetail(row)">
               {{ row.name }}
             </span>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.11.226b09')" width="120" align="center">
+        <el-table-column :label="$t('auto.List.226b0912')" width="120" align="center">
           <template #default="{ row }">
             <el-tag :type="getTypeTagType(row.kb_type)" size="small">{{ getTypeLabel(row.kb_type) }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.12.9b4c8f')" width="120" align="center">
+        <el-table-column :label="$t('auto.List.9b4c8f90')" width="120" align="center">
           <template #default="{ row }">
             <el-button
               v-if="row.agent_count > 0"
@@ -116,23 +116,23 @@
             <span v-else class="text-muted">0</span>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.13.3fea7c')" width="90" align="center">
+        <el-table-column :label="$t('auto.List.3fea7ca7')" width="90" align="center">
           <template #default="{ row }">
             <el-tag :type="row.status === 1 ? 'success' : 'info'" size="small">
               {{ row.status === 1 ? '启用' : '禁用' }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.14.3bdd08')" min-width="200" show-overflow-tooltip>
+        <el-table-column :label="$t('auto.List.3bdd08ad')" min-width="200" show-overflow-tooltip>
           <template #default="{ row }">{{ row.description || '-' }}</template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.15.eca37c')" width="160">
+        <el-table-column :label="$t('auto.List.eca37cb0')" width="160">
           <template #default="{ row }">{{ formatTime(row.created_at) }}</template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.16.2b6bc0')" width="240" fixed="right">
+        <el-table-column :label="$t('auto.List.2b6bc0f2')" width="240" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" size="small" @click="openDetail(row)">{{ $t('auto.List.24.f26225') }}</el-button>
-            <el-button link type="primary" size="small" @click="goEdit(row)">{{ $t('auto.List.25.95b351') }}</el-button>
+            <el-button link type="primary" size="small" @click="openDetail(row)">{{ $t('auto.List.f26225bd') }}</el-button>
+            <el-button link type="primary" size="small" @click="goEdit(row)">{{ $t('auto.List.95b351c8') }}</el-button>
             <el-button
               link
               :type="row.status === 1 ? 'warning' : 'success'"
@@ -141,12 +141,12 @@
             >
               {{ row.status === 1 ? '禁用' : '启用' }}
             </el-button>
-            <el-button link type="danger" size="small" @click="onDelete(row)">{{ $t('auto.List.26.2f4aad') }}</el-button>
+            <el-button link type="danger" size="small" @click="onDelete(row)">{{ $t('auto.List.2f4aaddd') }}</el-button>
           </template>
         </el-table-column>
         <template #empty>
           <el-empty :description="emptyText">
-            <el-button type="primary" @click="openCreateDialog">{{ $t('auto.List.27.f44b02') }}</el-button>
+            <el-button type="primary" @click="openCreateDialog">{{ $t('auto.List.f44b02c9') }}</el-button>
           </el-empty>
         </template>
       </el-table>
@@ -175,41 +175,41 @@
     
     <el-dialog
       v-model="formVisible"
-      ::title="$t('auto.List.17.3c2755')"
+      ::title="$t('auto.List.3c27551b')"
       width="520px"
       :close-on-click-modal="false"
     >
       <el-form :model="formData" label-width="90px" @submit.prevent>
-        <el-form-item :label="$t('auto.List.9.031c07')" required>
+        <el-form-item :label="$t('auto.List.031c076a')" required>
           <el-input
             v-model="formData.kb_code"
-            :placeholder="$t('auto.List.18.9130dd')"
+            :placeholder="$t('auto.List.9130dd46')"
             :disabled="!!formData.id"
             maxlength="64"
           />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.11.226b09')" required>
+        <el-form-item :label="$t('auto.List.226b0912')" required>
           <el-select v-model="formData.type" :disabled="!!formData.id" style="width: 100%">
-            <el-option :label="$t('auto.List.1.3ded98')" value="rag" />
-            <el-option :label="$t('auto.List.2.e571cd')" value="faq" />
-            <el-option :label="$t('auto.List.3.b9ce6f')" value="sop" />
+            <el-option :label="$t('auto.List.3ded9838')" value="rag" />
+            <el-option :label="$t('auto.List.e571cd55')" value="faq" />
+            <el-option :label="$t('auto.List.b9ce6f82')" value="sop" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.List.10.d7ec2d')" required>
-          <el-input v-model="formData.name" :placeholder="$t('auto.List.19.76e4ff')" maxlength="128" />
+        <el-form-item :label="$t('auto.List.d7ec2d3f')" required>
+          <el-input v-model="formData.name" :placeholder="$t('auto.List.76e4ff8c')" maxlength="128" />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.14.3bdd08')">
+        <el-form-item :label="$t('auto.List.3bdd08ad')">
           <el-input
             v-model="formData.description"
             type="textarea"
             :rows="3"
-            :placeholder="$t('auto.List.20.6ed323')"
+            :placeholder="$t('auto.List.6ed32330')"
             maxlength="500"
           />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="formVisible = false">{{ $t('auto.List.28.625fb2') }}</el-button>
+        <el-button @click="formVisible = false">{{ $t('auto.List.625fb26b') }}</el-button>
         <el-button type="primary" :loading="submitting" @click="onSubmitForm">
           {{ formData.id ? '保存' : '创建' }}
         </el-button>
@@ -279,13 +279,13 @@ const openEditDialog = (row) => {
 
 const onSubmitForm = async () => {
   const f = formData.value
-  if (!f.kb_code.trim()) return ElMessage.warning(t('auto.List.29.4b2737'))
-  if (!f.name.trim()) return ElMessage.warning(t('auto.List.19.76e4ff'))
+  if (!f.kb_code.trim()) return ElMessage.warning(t('auto.List.4b2737ab'))
+  if (!f.name.trim()) return ElMessage.warning(t('auto.List.76e4ff8c'))
   submitting.value = true
   try {
     if (f.id) {
       await updateKB(f.id, { type: f.type, name: f.name.trim(), description: f.description })
-      ElMessage.success(t('auto.List.30.3b1083'))
+      ElMessage.success(t('auto.List.3b108349'))
     } else {
       await createKB({
         kb_code: f.kb_code.trim(),
@@ -294,26 +294,26 @@ const onSubmitForm = async () => {
         description: f.description,
         owner_type: f.owner_type || 'shared'
       })
-      ElMessage.success(t('auto.List.31.04a691'))
+      ElMessage.success(t('auto.List.04a691b3'))
     }
     formVisible.value = false
     loadList(currentType.value)
   } catch (e) {
-    ElMessage.error((f.id ? t('auto.List.32.be5fbb') : t('auto.List.33.d9ac92')) + t('auto.List.34.2914dc') + (e?.message || t('auto.List.35.974e74')))
+    ElMessage.error((f.id ? t('auto.List.be5fbbe3') : t('auto.List.d9ac9228')) + t('auto.List.2914dc04') + (e?.message || t('auto.List.974e7484')))
   } finally {
     submitting.value = false
   }
 }
 
 const searchPlaceholder = computed(() => {
-  if (currentType.value === 'rag') return t('auto.List.36.f8f9f2')
-  if (currentType.value === 'faq') return t('auto.List.37.c4c0d0')
-  return t('auto.List.38.3ad6cb')
+  if (currentType.value === 'rag') return t('auto.List.f8f9f29b')
+  if (currentType.value === 'faq') return t('auto.List.c4c0d02c')
+  return t('auto.List.3ad6cb13')
 })
 
 const emptyText = computed(() => {
-  if (loading.value) return t('auto.List.39.26b5bd')
-  return t('auto.List.40.45799d')
+  if (loading.value) return t('auto.List.26b5bd49')
+  return t('auto.List.45799d5c')
 })
 
 const getTypeLabel = (type) => {
@@ -452,7 +452,7 @@ const openAgentBindings = (row) => {
 
 const onToggle = async (row) => {
   const next = row.status === 1 ? 0 : 1
-  const action = next === 1 ? t('auto.List.7.7854b5') : t('auto.List.8.710ad0')
+  const action = next === 1 ? t('auto.List.7854b52a') : t('auto.List.710ad08b')
   try {
     await ElMessageBox.confirm(
       `确认要${action}知识库「${row.name}」吗？`,
@@ -468,7 +468,7 @@ const onToggle = async (row) => {
     ElMessage.success(`${action}成功`)
     loadList()
   } catch (e) {
-    ElMessage.error(`${action}失败：` + (e?.message || t('auto.List.35.974e74')))
+    ElMessage.error(`${action}失败：` + (e?.message || t('auto.List.974e7484')))
   }
 }
 
@@ -476,7 +476,7 @@ const onDelete = async (row) => {
   try {
     await ElMessageBox.confirm(
       `确认要删除知识库「${row.name}」吗？删除后关联的智能体挂载关系将一并解除。`,
-      t('auto.List.41.50eaf9'),
+      t('auto.List.50eaf94d'),
       { type: 'warning' }
     )
   } catch {
@@ -484,10 +484,10 @@ const onDelete = async (row) => {
   }
   try {
     await deleteKB(row.id)
-    ElMessage.success(t('auto.List.42.0007d1'))
+    ElMessage.success(t('auto.List.0007d170'))
     loadList()
   } catch (e) {
-    ElMessage.error(t('auto.List.43.bc42bb') + (e?.message || t('auto.List.35.974e74')))
+    ElMessage.error(t('auto.List.bc42bb8f') + (e?.message || t('auto.List.974e7484')))
   }
 }
 

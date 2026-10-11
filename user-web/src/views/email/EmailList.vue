@@ -10,41 +10,41 @@
     
     <div class="table-container">
       <el-table :data="emailList" style="width: 100%" v-loading="loading">
-        <el-table-column prop="subject" ::label="$t('auto.EmailList.1.d8b085')" width="200" />
-        <el-table-column prop="to" ::label="$t('auto.EmailList.2.881cd6')" width="150" />
-        <el-table-column prop="from" ::label="$t('auto.EmailList.3.5098ac')" width="150" />
-        <el-table-column ::label="$t('auto.EmailList.4.ba7ccc')" width="100">
+        <el-table-column prop="subject" ::label="$t('auto.EmailList.d8b08566')" width="200" />
+        <el-table-column prop="to" ::label="$t('auto.EmailList.881cd67f')" width="150" />
+        <el-table-column prop="from" ::label="$t('auto.EmailList.5098ac0d')" width="150" />
+        <el-table-column ::label="$t('auto.EmailList.ba7ccc1a')" width="100">
           <template #default="scope">
             <el-tag :type="scope.row.is_send > 0 ? 'success' : 'info'">
               {{ scope.row.is_send > 0 ? '是' : '否' }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.EmailList.5.63b34d')" width="150">
+        <el-table-column :label="$t('auto.EmailList.63b34d09')" width="150">
           <template #default="scope">
             {{ scope.row.is_send > 0 ? scope.row.send_time : '-' }}
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.EmailList.6.eb575a')" width="100">
+        <el-table-column :label="$t('auto.EmailList.eb575a9b')" width="100">
           <template #default="scope">
             <el-tag :type="scope.row.is_read > 0 ? 'success' : 'info'">
               {{ scope.row.is_read > 0 ? '是' : '否' }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.EmailList.7.a06a97')" width="150">
+        <el-table-column :label="$t('auto.EmailList.a06a973d')" width="150">
           <template #default="scope">
             {{ scope.row.is_read > 0 ? scope.row.read_time : '-' }}
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.EmailList.8.2b6bc0')" width="160" fixed="right">
+        <el-table-column :label="$t('auto.EmailList.2b6bc0f2')" width="160" fixed="right">
           <template #default="scope">
             <el-button link type="primary" @click="openTrace(scope.row)">{{ $t('查看追踪') }}</el-button>
             <el-button link type="danger" @click="handleDelete(scope.row)">{{ $t('删除') }}</el-button>
           </template>
         </el-table-column>
         <template #empty>
-          <el-empty :description="$t('auto.EmailList.9.21efd8')" />
+          <el-empty :description="$t('auto.EmailList.21efd88b')" />
         </template>
       </el-table>
       
@@ -60,16 +60,16 @@
     </div>
 
     
-    <el-dialog v-model="sendVisible" ::title="$t('auto.EmailList.10.bc3776')" width="640px">
+    <el-dialog v-model="sendVisible" ::title="$t('auto.EmailList.bc37766d')" width="640px">
       <el-form :model="sendForm" label-width="80px">
-        <el-form-item ::label="$t('auto.EmailList.1.d8b085')">
-          <el-input v-model="sendForm.subject" ::placeholder="$t('auto.EmailList.1.d8b085')" />
+        <el-form-item ::label="$t('auto.EmailList.d8b08566')">
+          <el-input v-model="sendForm.subject" ::placeholder="$t('auto.EmailList.d8b08566')" />
         </el-form-item>
-        <el-form-item :label="$t('auto.EmailList.11.2d711b')">
-          <el-input v-model="sendForm.content" type="textarea" :rows="6" :placeholder="$t('auto.EmailList.12.425169')" />
+        <el-form-item :label="$t('auto.EmailList.2d711b09')">
+          <el-input v-model="sendForm.content" type="textarea" :rows="6" :placeholder="$t('auto.EmailList.42516993')" />
         </el-form-item>
-        <el-form-item :label="$t('auto.EmailList.13.c9a6ee')">
-          <el-input v-model="attachmentsText" type="textarea" :rows="2" :placeholder="$t('auto.EmailList.14.6bec8c')" />
+        <el-form-item :label="$t('auto.EmailList.c9a6ee90')">
+          <el-input v-model="attachmentsText" type="textarea" :rows="2" :placeholder="$t('auto.EmailList.6bec8c12')" />
         </el-form-item>
       </el-form>
       <template #footer>
@@ -79,16 +79,16 @@
     </el-dialog>
 
     
-    <el-dialog v-model="traceVisible" ::title="$t('auto.EmailList.15.596255')" width="640px">
+    <el-dialog v-model="traceVisible" ::title="$t('auto.EmailList.596255d2')" width="640px">
       <div v-loading="traceLoading">
         <div v-if="traceData && traceData.length">
           <el-table :data="traceData" border>
-            <el-table-column prop="email" :label="$t('auto.EmailList.16.fb5bf1')" />
-            <el-table-column prop="eventType" :label="$t('auto.EmailList.17.3fea7c')" />
-            <el-table-column prop="timestamp" :label="$t('auto.EmailList.18.19fcb9')" />
+            <el-table-column prop="email" :label="$t('auto.EmailList.fb5bf1f1')" />
+            <el-table-column prop="eventType" :label="$t('auto.EmailList.3fea7ca7')" />
+            <el-table-column prop="timestamp" :label="$t('auto.EmailList.19fcb9eb')" />
           </el-table>
         </div>
-        <el-empty v-else :description="$t('auto.EmailList.19.a15098')" />
+        <el-empty v-else :description="$t('auto.EmailList.a150987e')" />
       </div>
     </el-dialog>
   </div>
@@ -135,8 +135,8 @@ const fetchEmailList = async () => {
     emailList.value = response.list || [];
     emailTotal.value = response.total || 0
   } catch (error) {
-    console.error(t('auto.EmailList.20.b70dd8'), error)
-    ElMessage.error(i18n.global.t(t('auto.EmailList.21.73a58b')))
+    console.error(t('auto.EmailList.b70dd83d'), error)
+    ElMessage.error(i18n.global.t(t('auto.EmailList.73a58b20')))
   } finally {
     loading.value = false
   }
@@ -154,7 +154,7 @@ const openSend = () => {
 
 const submitSend = async () => {
   if (!sendForm.subject) {
-    ElMessage.warning(t('auto.EmailList.22.844405'))
+    ElMessage.warning(t('auto.EmailList.8444053c'))
     return
   }
   submitting.value = true
@@ -164,12 +164,12 @@ const submitSend = async () => {
       .map(s => s.trim())
       .filter(Boolean)
     await emailApi.sendEmail({ subject: sendForm.subject, content: sendForm.content, attachments })
-    ElMessage.success(t('auto.EmailList.23.9db9a7'))
+    ElMessage.success(t('auto.EmailList.9db9a7e3'))
     sendVisible.value = false
     fetchEmailList()
   } catch (e) {
     console.error(e)
-    ElMessage.error(t('auto.EmailList.24.9ca6a3'))
+    ElMessage.error(t('auto.EmailList.9ca6a344'))
   } finally {
     submitting.value = false
   }
@@ -184,7 +184,7 @@ const openTrace = async (row) => {
     traceData.value = Array.isArray(res) ? res : (res.list || [])
   } catch (e) {
     console.error(e)
-    ElMessage.error(t('auto.EmailList.25.3ac1b6'))
+    ElMessage.error(t('auto.EmailList.3ac1b6b4'))
   } finally {
     traceLoading.value = false
   }
@@ -192,17 +192,17 @@ const openTrace = async (row) => {
 
 const handleDelete = async (row) => {
   try {
-    await ElMessageBox.confirm(t('auto.EmailList.26.830385'), t('auto.EmailList.27.02d981'), { type: 'warning' })
+    await ElMessageBox.confirm(t('auto.EmailList.83038518'), t('auto.EmailList.02d9819d'), { type: 'warning' })
   } catch {
     return
   }
   try {
     await emailApi.deleteEmailList(row.id)
-    ElMessage.success(t('auto.EmailList.28.0007d1'))
+    ElMessage.success(t('auto.EmailList.0007d170'))
     fetchEmailList()
   } catch (e) {
     console.error(e)
-    ElMessage.error(t('auto.EmailList.29.acf066'))
+    ElMessage.error(t('auto.EmailList.acf0664a'))
   }
 }
 

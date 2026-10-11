@@ -3,14 +3,14 @@
     <el-card shadow="never">
       <template #header>
         <div class="card-header">
-          <span>{{ $t('auto.SchemaTemplates.9.a531a5') }}</span>
-          <el-button type="primary" @click="openDialog()">{{ $t('auto.SchemaTemplates.10.4140a5') }}</el-button>
+          <span>{{ $t('auto.SchemaTemplates.a531a563') }}</span>
+          <el-button type="primary" @click="openDialog()">{{ $t('auto.SchemaTemplates.4140a5f7') }}</el-button>
         </div>
       </template>
 
       <el-row :gutter="8" style="margin-bottom:12px">
         <el-col :span="6">
-          <el-select v-model="filterPageType" :placeholder="$t('auto.SchemaTemplates.1.814a48')" clearable style="width:100%" @change="load">
+          <el-select v-model="filterPageType" :placeholder="$t('auto.SchemaTemplates.814a4863')" clearable style="width:100%" @change="load">
             <el-option label="article" value="article" />
             <el-option label="faq" value="faq" />
             <el-option label="guide" value="guide" />
@@ -18,7 +18,7 @@
           </el-select>
         </el-col>
         <el-col :span="6">
-          <el-select v-model="filterSchemaType" :placeholder="$t('auto.SchemaTemplates.2.11dbed')" clearable style="width:100%" @change="load">
+          <el-select v-model="filterSchemaType" :placeholder="$t('auto.SchemaTemplates.11dbed3f')" clearable style="width:100%" @change="load">
             <el-option label="FAQPage" value="FAQPage" />
             <el-option label="Product" value="Product" />
             <el-option label="Article" value="Article" />
@@ -39,20 +39,20 @@
             <el-tag size="small" type="success">{{ row.schema_type }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.SchemaTemplates.3.2c7d72')">
+        <el-table-column :label="$t('auto.SchemaTemplates.2c7d7218')">
           <template #default="{ row }">
             <code class="preview">{{ jsonPreview(row.template_json) }}</code>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.SchemaTemplates.4.3fea7c')" width="80">
+        <el-table-column :label="$t('auto.SchemaTemplates.3fea7ca7')" width="80">
           <template #default="{ row }">
             <el-tag :type="row.active ? 'success' : 'info'" size="small">{{ row.active ? '启用' : '停用' }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.SchemaTemplates.5.2b6bc0')" width="160" fixed="right">
+        <el-table-column :label="$t('auto.SchemaTemplates.2b6bc0f2')" width="160" fixed="right">
           <template #default="{ row }">
-            <el-button size="small" @click="openDialog(row)">{{ $t('auto.SchemaTemplates.11.95b351') }}</el-button>
-            <el-button size="small" type="danger" @click="remove(row)">{{ $t('auto.SchemaTemplates.12.2f4aad') }}</el-button>
+            <el-button size="small" @click="openDialog(row)">{{ $t('auto.SchemaTemplates.95b351c8') }}</el-button>
+            <el-button size="small" type="danger" @click="remove(row)">{{ $t('auto.SchemaTemplates.2f4aaddd') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -70,7 +70,7 @@
       </div>
     </el-card>
 
-    <el-dialog v-model="dialogVisible" ::title="$t('auto.SchemaTemplates.6.229bc6')" width="640px">
+    <el-dialog v-model="dialogVisible" ::title="$t('auto.SchemaTemplates.229bc67d')" width="640px">
       <el-form :model="form" label-width="110px">
         <el-form-item label="PageType" required>
           <el-select v-model="form.page_type" :disabled="isEdit" style="width:100%">
@@ -83,7 +83,7 @@
         <el-form-item label="Schema @type" required>
           <el-input v-model="form.schema_type" placeholder="FAQPage" :disabled="isEdit" />
         </el-form-item>
-        <el-form-item :label="$t('auto.SchemaTemplates.7.66f5bb')">
+        <el-form-item :label="$t('auto.SchemaTemplates.66f5bb88')">
           <el-input
             v-model="form.template_json_text"
             type="textarea"
@@ -91,13 +91,13 @@
             placeholder='{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[]}'
           />
         </el-form-item>
-        <el-form-item :label="$t('auto.SchemaTemplates.8.7854b5')">
+        <el-form-item :label="$t('auto.SchemaTemplates.7854b52a')">
           <el-switch v-model="form.active" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="dialogVisible = false">{{ $t('auto.SchemaTemplates.13.625fb2') }}</el-button>
-        <el-button type="primary" @click="save">{{ $t('auto.SchemaTemplates.14.be5fbb') }}</el-button>
+        <el-button @click="dialogVisible = false">{{ $t('auto.SchemaTemplates.625fb26b') }}</el-button>
+        <el-button type="primary" @click="save">{{ $t('auto.SchemaTemplates.be5fbbe3') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -176,19 +176,19 @@ async function save() {
     } else {
       await geoApi.createSchemaTemplate(payload)
     }
-    ElMessage.success(t('auto.SchemaTemplates.15.f8dfed'))
+    ElMessage.success(t('auto.SchemaTemplates.f8dfedcd'))
     dialogVisible.value = false
     load()
   } catch (e) {
-    ElMessage.error(e?.response?.data?.message || t('auto.SchemaTemplates.16.6de920'))
+    ElMessage.error(e?.response?.data?.message || t('auto.SchemaTemplates.6de920b4'))
   }
 }
 
 async function remove(row) {
   try {
-    await ElMessageBox.confirm(`确认删除 ${row.page_type}/${row.schema_type} ?`, t('auto.SchemaTemplates.17.900c70'), { type: 'warning' })
+    await ElMessageBox.confirm(`确认删除 ${row.page_type}/${row.schema_type} ?`, t('auto.SchemaTemplates.900c70fa'), { type: 'warning' })
     await geoApi.deleteSchemaTemplate(row.id)
-    ElMessage.success(t('auto.SchemaTemplates.18.5cc232'))
+    ElMessage.success(t('auto.SchemaTemplates.5cc23262'))
     load()
   } catch (e) { /* 忽略异常：失败时保持既有状态，不打断用户 */ }
 }

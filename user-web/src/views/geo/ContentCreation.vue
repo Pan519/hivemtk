@@ -5,15 +5,15 @@
       
       <el-col :xs="24" :lg="10">
         <el-card shadow="never" class="form-card">
-          <template #header><span class="card-title">{{ $t('auto.ContentCreation.13.febd91') }}</span></template>
+          <template #header><span class="card-title">{{ $t('auto.ContentCreation.febd913f') }}</span></template>
           <el-form :model="form" label-width="92px" class="gen-form">
-            <el-form-item :label="$t('auto.ContentCreation.1.9699a5')">
-              <el-input v-model="form.keyword" :placeholder="$t('auto.ContentCreation.2.44e001')" clearable />
+            <el-form-item :label="$t('auto.ContentCreation.9699a50e')">
+              <el-input v-model="form.keyword" :placeholder="$t('auto.ContentCreation.44e001fa')" clearable />
             </el-form-item>
-            <el-form-item :label="$t('auto.ContentCreation.3.4e8713')">
-              <el-input v-model="form.brand_name" :placeholder="$t('auto.ContentCreation.4.a08eb5')" clearable />
+            <el-form-item :label="$t('auto.ContentCreation.4e871349')">
+              <el-input v-model="form.brand_name" :placeholder="$t('auto.ContentCreation.a08eb519')" clearable />
             </el-form-item>
-            <el-form-item :label="$t('auto.ContentCreation.5.4e4d6f')">
+            <el-form-item :label="$t('auto.ContentCreation.4e4d6fa5')">
               <div class="tags-input">
                 <el-tag
                   v-for="(tag, i) in form.advantages"
@@ -31,28 +31,28 @@
                   @keyup.enter="addAdv"
                   @blur="onBlurAddAdv"
                 />
-                <el-button v-else size="small" class="adv-add" @click="showAdvInput">{{ $t('auto.ContentCreation.14.ad725b') }}</el-button>
+                <el-button v-else size="small" class="adv-add" @click="showAdvInput">{{ $t('auto.ContentCreation.ad725b02') }}</el-button>
               </div>
             </el-form-item>
-            <el-form-item :label="$t('auto.ContentCreation.6.5ed9c8')">
+            <el-form-item :label="$t('auto.ContentCreation.5ed9c8cd')">
               <el-select v-model="form.model" style="width: 100%">
                 <el-option v-for="m in models" :key="m.value" :label="m.label" :value="m.value" />
               </el-select>
             </el-form-item>
-            <el-form-item :label="$t('auto.ContentCreation.7.7b5770')">
+            <el-form-item :label="$t('auto.ContentCreation.7b5770db')">
               <el-input-number v-model="form.word_count" :min="200" :max="3000" :step="100" style="width: 100%" />
             </el-form-item>
-            <el-form-item :label="$t('auto.ContentCreation.8.c50632')">
+            <el-form-item :label="$t('auto.ContentCreation.c50632e5')">
               <el-select v-model="form.style" style="width: 100%">
-                <el-option :label="$t('auto.ContentCreation.9.e7d798')" value="professional" />
-                <el-option :label="$t('auto.ContentCreation.10.c8da06')" value="popular" />
-                <el-option :label="$t('auto.ContentCreation.11.506aec')" value="casual" />
+                <el-option :label="$t('auto.ContentCreation.e7d798e8')" value="professional" />
+                <el-option :label="$t('auto.ContentCreation.c8da06d9')" value="popular" />
+                <el-option :label="$t('auto.ContentCreation.506aec91')" value="casual" />
               </el-select>
             </el-form-item>
             <el-form-item>
               <el-button type="primary" :loading="generating" @click="handleGenerate">
                 <el-icon><EditPen /></el-icon>
-                <span>{{ $t('auto.ContentCreation.15.12e8dc') }}</span>
+                <span>{{ $t('auto.ContentCreation.12e8dc34') }}</span>
               </el-button>
             </el-form-item>
           </el-form>
@@ -64,22 +64,22 @@
         <el-card shadow="never" class="result-card">
           <template #header>
             <div class="card-header">
-              <span class="card-title">{{ $t('auto.ContentCreation.16.7951b7') }}</span>
+              <span class="card-title">{{ $t('auto.ContentCreation.7951b776') }}</span>
               <el-button v-if="generatedContent" text type="primary" @click="copyContent">
-                <el-icon><DocumentCopy /></el-icon><span>{{ $t('auto.ContentCreation.17.79d3ab') }}</span>
+                <el-icon><DocumentCopy /></el-icon><span>{{ $t('auto.ContentCreation.79d3abe9') }}</span>
               </el-button>
             </div>
           </template>
 
           <div v-loading="generating" class="result-body">
-            <el-empty v-if="!generatedContent && !generating" :description="$t('auto.ContentCreation.12.d4d3d6')" />
+            <el-empty v-if="!generatedContent && !generating" :description="$t('auto.ContentCreation.d4d3d6ad')" />
             <div v-else class="content-text">{{ generatedContent }}</div>
           </div>
 
           <div v-if="generatedContent" class="score-section">
             <div class="score-actions">
               <el-button type="success" :loading="scoring" @click="handleScore">
-                <el-icon><DataAnalysis /></el-icon><span>{{ $t('auto.ContentCreation.18.0cb893') }}</span>
+                <el-icon><DataAnalysis /></el-icon><span>{{ $t('auto.ContentCreation.0cb893be') }}</span>
               </el-button>
             </div>
 
@@ -87,27 +87,27 @@
               <div class="score-grid">
                 <div class="score-item total">
                   <div class="score-value">{{ score.scores?.total ?? '—' }}</div>
-                  <div class="score-label">{{ $t('auto.ContentCreation.19.8a74af') }}</div>
+                  <div class="score-label">{{ $t('auto.ContentCreation.8a74afdc') }}</div>
                 </div>
                 <div class="score-item">
                   <div class="score-value">{{ score.scores?.structure ?? '—' }}</div>
-                  <div class="score-label">{{ $t('auto.ContentCreation.20.9fda5b') }}</div>
+                  <div class="score-label">{{ $t('auto.ContentCreation.9fda5b20') }}</div>
                 </div>
                 <div class="score-item">
                   <div class="score-value">{{ score.scores?.brand_mention ?? '—' }}</div>
-                  <div class="score-label">{{ $t('auto.ContentCreation.21.0a01f6') }}</div>
+                  <div class="score-label">{{ $t('auto.ContentCreation.0a01f66d') }}</div>
                 </div>
                 <div class="score-item">
                   <div class="score-value">{{ score.scores?.authority ?? '—' }}</div>
-                  <div class="score-label">{{ $t('auto.ContentCreation.22.2d8c57') }}</div>
+                  <div class="score-label">{{ $t('auto.ContentCreation.2d8c5764') }}</div>
                 </div>
                 <div class="score-item">
                   <div class="score-value">{{ score.scores?.citations ?? '—' }}</div>
-                  <div class="score-label">{{ $t('auto.ContentCreation.23.665924') }}</div>
+                  <div class="score-label">{{ $t('auto.ContentCreation.665924e8') }}</div>
                 </div>
               </div>
               <div v-if="score.improvements?.length" class="score-suggest">
-                <div class="suggest-title">{{ $t('auto.ContentCreation.24.6e4d61') }}</div>
+                <div class="suggest-title">{{ $t('auto.ContentCreation.6e4d6109') }}</div>
                 <ul>
                   <li v-for="(s, i) in score.improvements" :key="i">{{ s }}</li>
                 </ul>
@@ -185,7 +185,7 @@ const onBlurAddAdv = () => setTimeout(addAdv, 100);
 
 const handleGenerate = async () => {
   if (!form.keyword.trim() || !form.brand_name.trim()) {
-    ElMessage.warning(t('auto.ContentCreation.25.7fae28'))
+    ElMessage.warning(t('auto.ContentCreation.7fae282a'))
     return
   }
   generating.value = true
@@ -201,9 +201,9 @@ const handleGenerate = async () => {
       style: form.style
     })
     generatedContent.value = res?.content || res?.article || (typeof res === 'string' ? res : '')
-    ElMessage.success(t('auto.ContentCreation.26.8be38c'))
+    ElMessage.success(t('auto.ContentCreation.8be38cec'))
   } catch (e) {
-    ElMessage.error(e.message || t('auto.ContentCreation.27.d355c5'))
+    ElMessage.error(e.message || t('auto.ContentCreation.d355c565'))
   } finally {
     generating.value = false
   }
@@ -219,9 +219,9 @@ const handleScore = async () => {
       keyword: form.keyword
     })
     score.value = res || null
-    ElMessage.success(t('auto.ContentCreation.28.4ea68d'))
+    ElMessage.success(t('auto.ContentCreation.4ea68d92'))
   } catch (e) {
-    ElMessage.error(e.message || t('auto.ContentCreation.29.bf54e4'))
+    ElMessage.error(e.message || t('auto.ContentCreation.bf54e4e6'))
   } finally {
     scoring.value = false
   }
@@ -230,9 +230,9 @@ const handleScore = async () => {
 const copyContent = async () => {
   try {
     await navigator.clipboard.writeText(generatedContent.value)
-    ElMessage.success(t('auto.ContentCreation.30.4fb42e'))
+    ElMessage.success(t('auto.ContentCreation.4fb42e6e'))
   } catch {
-    ElMessage.error(t('auto.ContentCreation.31.9b2d71'))
+    ElMessage.error(t('auto.ContentCreation.9b2d716b'))
   }
 }
 </script>

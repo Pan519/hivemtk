@@ -2,15 +2,15 @@
   <div class="llm-routing-page">
     <el-card class="header-card">
       <div class="header-content">
-        <h2>{{ $t('auto.List.58.fdc601') }}</h2>
-        <p class="subtitle">{{ $t('auto.List.59.a402fe') }}</p>
+        <h2>{{ $t('auto.List.fdc6011c') }}</h2>
+        <p class="subtitle">{{ $t('auto.List.a402fea9') }}</p>
       </div>
       <div class="header-actions">
         <el-button type="primary" @click="showModelDialog()">
           <el-icon><Plus /></el-icon>
           新增模型
         </el-button>
-        <el-button @click="$router.push('/llmRouting/cost')">{{ $t('auto.List.60.99da45') }}</el-button>
+        <el-button @click="$router.push('/llmRouting/cost')">{{ $t('auto.List.99da45bc') }}</el-button>
         <el-button @click="refreshAll">
           <el-icon><Refresh /></el-icon>
           刷新
@@ -20,67 +20,67 @@
 
     <el-tabs v-model="activeTab" class="content-tabs">
       
-      <el-tab-pane :label="$t('auto.List.1.851f3d')" name="models">
+      <el-tab-pane :label="$t('auto.List.851f3dff')" name="models">
         <el-table :data="models" v-loading="loading.models" stripe>
           <template #empty>
-            <el-empty :description="$t('auto.List.2.285a2e')" />
+            <el-empty :description="$t('auto.List.285a2e77')" />
           </template>
-          <el-table-column prop="name" :label="$t('auto.List.3.920fe3')" min-width="140" />
-          <el-table-column prop="vendor" :label="$t('auto.List.4.70aefc')" width="110">
+          <el-table-column prop="name" :label="$t('auto.List.920fe38e')" min-width="140" />
+          <el-table-column prop="vendor" :label="$t('auto.List.70aefc6a')" width="110">
             <template #default="{ row }">
               <el-tag size="small" :type="row.vendor === 'local' ? 'success' : 'info'">
                 {{ vendorLabel(row.vendor) }}
               </el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="model" :label="$t('auto.List.5.f97c13')" min-width="160" show-overflow-tooltip />
-          <el-table-column :label="$t('auto.List.6.3fea7c')" width="90">
+          <el-table-column prop="model" :label="$t('auto.List.f97c1388')" min-width="160" show-overflow-tooltip />
+          <el-table-column :label="$t('auto.List.3fea7ca7')" width="90">
             <template #default="{ row }">
               <el-tag :type="row.enabled ? 'success' : 'info'" size="small">
                 {{ row.enabled ? '启用' : '禁用' }}
               </el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="max_rpm" :label="$t('auto.List.7.e87182')" width="110" align="center" />
-          <el-table-column prop="cost_per_1k" :label="$t('auto.List.8.94b3d8')" width="120" align="center">
+          <el-table-column prop="max_rpm" :label="$t('auto.List.e8718247')" width="110" align="center" />
+          <el-table-column prop="cost_per_1k" :label="$t('auto.List.94b3d898')" width="120" align="center">
             <template #default="{ row }">
               <span :class="row.cost_per_1k > 0 ? 'cost-paid' : 'cost-free'">
                 {{ row.cost_per_1k > 0 ? row.cost_per_1k.toFixed(4) : '免费' }}
               </span>
             </template>
           </el-table-column>
-          <el-table-column prop="base_url" :label="$t('auto.List.9.f682f8')" min-width="200" show-overflow-tooltip />
+          <el-table-column prop="base_url" :label="$t('auto.List.f682f85e')" min-width="200" show-overflow-tooltip />
           <el-table-column label="API Key" width="90">
             <template #default="{ row }">
-              <el-tag v-if="row.api_key_set" type="success" size="small">{{ $t('auto.List.61.44e607') }}</el-tag>
-              <el-tag v-else type="info" size="small">{{ $t('auto.List.62.fe2d26') }}</el-tag>
+              <el-tag v-if="row.api_key_set" type="success" size="small">{{ $t('auto.List.44e60789') }}</el-tag>
+              <el-tag v-else type="info" size="small">{{ $t('auto.List.fe2d26a2') }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column :label="$t('auto.List.10.bd177f')" width="80">
+          <el-table-column :label="$t('auto.List.bd177f3a')" width="80">
             <template #default="{ row }">
               <el-tag v-if="row.no_fc" type="warning" size="small">NoFC</el-tag>
-              <el-tag v-else type="success" size="small">{{ $t('auto.List.63.262b0b') }}</el-tag>
+              <el-tag v-else type="success" size="small">{{ $t('auto.List.262b0b07') }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column :label="$t('auto.List.11.2b6bc0')" width="260" fixed="right">
+          <el-table-column :label="$t('auto.List.2b6bc0f2')" width="260" fixed="right">
             <template #default="{ row }">
-              <el-button link type="primary" @click="testModel(row)">{{ $t('auto.List.64.db06c7') }}</el-button>
+              <el-button link type="primary" @click="testModel(row)">{{ $t('auto.List.db06c78d') }}</el-button>
               <el-button link type="primary" @click="toggleStatus(row)">
                 {{ row.enabled ? '禁用' : '启用' }}
               </el-button>
-              <el-button link type="primary" @click="showModelDialog(row)">{{ $t('auto.List.65.95b351') }}</el-button>
-              <el-button link type="danger" @click="deleteModel(row)">{{ $t('auto.List.66.2f4aad') }}</el-button>
+              <el-button link type="primary" @click="showModelDialog(row)">{{ $t('auto.List.95b351c8') }}</el-button>
+              <el-button link type="danger" @click="deleteModel(row)">{{ $t('auto.List.2f4aaddd') }}</el-button>
             </template>
           </el-table-column>
         </el-table>
       </el-tab-pane>
 
       
-      <el-tab-pane :label="$t('auto.List.12.603ec6')" name="routing">
+      <el-tab-pane :label="$t('auto.List.603ec630')" name="routing">
         <el-card>
           <template #header>
             <div class="card-header">
-              <span>{{ $t('auto.List.67.78862a') }}</span>
+              <span>{{ $t('auto.List.78862aed') }}</span>
               <div>
                 <el-button size="small" @click="loadRouting">
                   <el-icon><Refresh /></el-icon> 刷新
@@ -93,11 +93,11 @@
           </template>
           <el-table :data="sceneRouting" v-loading="loading.routing" stripe>
             <template #empty>
-              <el-empty :description="$t('auto.List.13.de4dec')" />
+              <el-empty :description="$t('auto.List.de4dec26')" />
             </template>
-            <el-table-column prop="scenario" :label="$t('auto.List.14.c93165')" min-width="160" />
-            <el-table-column prop="provider" :label="$t('auto.List.15.85b70c')" min-width="140" />
-            <el-table-column :label="$t('auto.List.16.6a8a00')" min-width="200">
+            <el-table-column prop="scenario" :label="$t('auto.List.c931653c')" min-width="160" />
+            <el-table-column prop="provider" :label="$t('auto.List.85b70c4a')" min-width="140" />
+            <el-table-column :label="$t('auto.List.6a8a0069')" min-width="200">
               <template #default="{ row }">
                 <el-tag v-for="fb in (row.fallbacks || [])" :key="fb" size="small" type="info" style="margin-right: 4px">
                   {{ fb }}
@@ -105,8 +105,8 @@
                 <span v-if="!row.fallbacks?.length" class="text-muted">-</span>
               </template>
             </el-table-column>
-            <el-table-column prop="version" :label="$t('auto.List.17.fe2df0')" width="80" align="center" />
-            <el-table-column prop="weight" :label="$t('auto.List.18.e4455f')" width="110" align="center">
+            <el-table-column prop="version" :label="$t('auto.List.fe2df04a')" width="80" align="center" />
+            <el-table-column prop="weight" :label="$t('auto.List.e4455fd1')" width="110" align="center">
               <template #default="{ row }">
                 <el-progress
                   v-if="row.weight > 0 && row.weight < 100"
@@ -114,16 +114,16 @@
                   :stroke-width="10"
                   :color="canaryColors"
                 />
-                <el-tag v-else-if="row.weight === 100" type="warning" size="small">{{ $t('auto.List.68.0d3c7a') }}</el-tag>
+                <el-tag v-else-if="row.weight === 100" type="warning" size="small">{{ $t('auto.List.0d3c7a08') }}</el-tag>
                 <span v-else class="text-muted">-</span>
               </template>
             </el-table-column>
-            <el-table-column prop="min_quality" :label="$t('auto.List.19.0f8516')" width="100" align="center" />
-            <el-table-column prop="max_latency" :label="$t('auto.List.20.19510c')" width="120" align="center" />
-            <el-table-column :label="$t('auto.List.11.2b6bc0')" width="160" fixed="right">
+            <el-table-column prop="min_quality" :label="$t('auto.List.0f851629')" width="100" align="center" />
+            <el-table-column prop="max_latency" :label="$t('auto.List.19510ce7')" width="120" align="center" />
+            <el-table-column :label="$t('auto.List.2b6bc0f2')" width="160" fixed="right">
               <template #default="{ row, $index }">
-                <el-button link type="primary" @click="editRoutingRow(row, $index)">{{ $t('auto.List.65.95b351') }}</el-button>
-                <el-button link type="danger" @click="removeRoutingRow($index)">{{ $t('auto.List.66.2f4aad') }}</el-button>
+                <el-button link type="primary" @click="editRoutingRow(row, $index)">{{ $t('auto.List.95b351c8') }}</el-button>
+                <el-button link type="danger" @click="removeRoutingRow($index)">{{ $t('auto.List.2f4aaddd') }}</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -131,58 +131,58 @@
       </el-tab-pane>
 
       
-      <el-tab-pane :label="$t('auto.List.21.96264b')" name="fallback">
+      <el-tab-pane :label="$t('auto.List.96264b6b')" name="fallback">
         <el-card v-loading="loading.fallback">
-          <template #header><span>{{ $t('auto.List.69.bbbabb') }}</span></template>
+          <template #header><span>{{ $t('auto.List.bbbabb7b') }}</span></template>
           <el-table :data="fallbackRows" stripe>
             <template #empty>
-              <el-empty :description="$t('auto.List.22.612531')" />
+              <el-empty :description="$t('auto.List.612531ae')" />
             </template>
-            <el-table-column prop="scenario" :label="$t('auto.List.14.c93165')" min-width="160" />
-            <el-table-column :label="$t('auto.List.23.2b935d')" min-width="140">
+            <el-table-column prop="scenario" :label="$t('auto.List.c931653c')" min-width="160" />
+            <el-table-column :label="$t('auto.List.2b935d09')" min-width="140">
               <template #default="{ row }">
                 <el-tag type="primary" size="small">{{ row.provider }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column :label="$t('auto.List.24.0208fc')" min-width="300">
+            <el-table-column :label="$t('auto.List.0208fce1')" min-width="300">
               <template #default="{ row }">
                 <template v-if="row.fallbacks?.length">
                   <el-tag v-for="(fb, i) in row.fallbacks" :key="fb" size="small" type="info" style="margin-right: 4px">
                     {{ i + 1 }}. {{ fb }}
                   </el-tag>
                 </template>
-                <span v-else class="text-muted">{{ $t('auto.List.70.69a24b') }}</span>
+                <span v-else class="text-muted">{{ $t('auto.List.69a24bad') }}</span>
               </template>
             </el-table-column>
-            <el-table-column prop="version" :label="$t('auto.List.17.fe2df0')" width="80" align="center" />
+            <el-table-column prop="version" :label="$t('auto.List.fe2df04a')" width="80" align="center" />
           </el-table>
         </el-card>
       </el-tab-pane>
 
       
-      <el-tab-pane :label="$t('auto.List.25.380e60')" name="cost">
+      <el-tab-pane :label="$t('auto.List.380e60e2')" name="cost">
         <el-row :gutter="20" class="stat-row">
           <el-col :span="6">
             <el-card class="stat-card">
-              <div class="stat-label">{{ $t('auto.List.71.7f6f35') }}</div>
+              <div class="stat-label">{{ $t('auto.List.7f6f35c4') }}</div>
               <div class="stat-value">{{ costStats.total_calls || 0 }}</div>
             </el-card>
           </el-col>
           <el-col :span="6">
             <el-card class="stat-card">
-              <div class="stat-label">{{ $t('auto.List.72.808bcc') }}</div>
+              <div class="stat-label">{{ $t('auto.List.808bcc57') }}</div>
               <div class="stat-value" style="color: #4F46E5">{{ formatNumber(costStats.total_tokens) }}</div>
             </el-card>
           </el-col>
           <el-col :span="6">
             <el-card class="stat-card">
-              <div class="stat-label">{{ $t('auto.List.73.d6ee07') }}</div>
+              <div class="stat-label">{{ $t('auto.List.d6ee0789') }}</div>
               <div class="stat-value" style="color: #EF4444">{{ (costStats.monthly_cost || 0).toFixed(4) }}</div>
             </el-card>
           </el-col>
           <el-col :span="6">
             <el-card class="stat-card">
-              <div class="stat-label">{{ $t('auto.List.74.5691ed') }}</div>
+              <div class="stat-label">{{ $t('auto.List.5691eda9') }}</div>
               <div class="stat-value" style="color: #F59E0B">{{ costStats.enabled_models || 0 }} / {{ costStats.active_models || 0 }}</div>
             </el-card>
           </el-col>
@@ -190,24 +190,24 @@
         <el-card style="margin-top: 20px">
           <template #header>
             <div class="card-header">
-              <span>{{ $t('auto.List.75.f2547c') }}</span>
+              <span>{{ $t('auto.List.f2547cf6') }}</span>
               <el-radio-group v-model="costWindow" size="small" @change="loadCost">
-                <el-radio-button label="today">{{ $t('auto.List.76.296304') }}</el-radio-button>
-                <el-radio-button label="week">{{ $t('auto.List.77.d765ef') }}</el-radio-button>
-                <el-radio-button label="month">{{ $t('auto.List.78.c059be') }}</el-radio-button>
-                <el-radio-button label="all">{{ $t('auto.List.79.a8b0c2') }}</el-radio-button>
+                <el-radio-button label="today">{{ $t('auto.List.296304f1') }}</el-radio-button>
+                <el-radio-button label="week">{{ $t('auto.List.d765efc4') }}</el-radio-button>
+                <el-radio-button label="month">{{ $t('auto.List.c059bed7') }}</el-radio-button>
+                <el-radio-button label="all">{{ $t('auto.List.a8b0c204') }}</el-radio-button>
               </el-radio-group>
             </div>
           </template>
           <el-table :data="costStats.by_provider || []" v-loading="loading.cost" stripe>
-            <template #empty><el-empty :description="$t('auto.List.26.1e091b')" /></template>
+            <template #empty><el-empty :description="$t('auto.List.1e091b12')" /></template>
             <el-table-column prop="provider" label="Provider" min-width="140" />
-            <el-table-column prop="call_count" :label="$t('auto.List.27.00d5bd')" width="120" align="center" />
-            <el-table-column prop="total_tokens" :label="$t('auto.List.28.8952bc')" width="140" align="center" />
-            <el-table-column prop="total_cost" :label="$t('auto.List.29.1f9507')" width="120" align="center">
+            <el-table-column prop="call_count" :label="$t('auto.List.00d5bdf1')" width="120" align="center" />
+            <el-table-column prop="total_tokens" :label="$t('auto.List.8952bc8d')" width="140" align="center" />
+            <el-table-column prop="total_cost" :label="$t('auto.List.1f9507e1')" width="120" align="center">
               <template #default="{ row }">{{ (row.total_cost || 0).toFixed(4) }}</template>
             </el-table-column>
-            <el-table-column :label="$t('auto.List.30.c909e6')" width="200" align="center">
+            <el-table-column :label="$t('auto.List.c909e6eb')" width="200" align="center">
               <template #default="{ row }">
                 <el-progress
                   :percentage="calcRatio(row.total_cost)"
@@ -218,13 +218,13 @@
           </el-table>
         </el-card>
         <el-card style="margin-top: 20px">
-          <template #header><span>{{ $t('auto.List.80.8fb479') }}</span></template>
+          <template #header><span>{{ $t('auto.List.8fb479ae') }}</span></template>
           <el-table :data="costStats.by_scenario || []" stripe>
-            <template #empty><el-empty :description="$t('auto.List.31.6ed551')" /></template>
-            <el-table-column prop="scenario" :label="$t('auto.List.14.c93165')" min-width="160" />
-            <el-table-column prop="call_count" :label="$t('auto.List.27.00d5bd')" width="120" align="center" />
-            <el-table-column prop="total_tokens" :label="$t('auto.List.28.8952bc')" width="140" align="center" />
-            <el-table-column prop="total_cost" :label="$t('auto.List.29.1f9507')" width="120" align="center">
+            <template #empty><el-empty :description="$t('auto.List.6ed55112')" /></template>
+            <el-table-column prop="scenario" :label="$t('auto.List.c931653c')" min-width="160" />
+            <el-table-column prop="call_count" :label="$t('auto.List.00d5bdf1')" width="120" align="center" />
+            <el-table-column prop="total_tokens" :label="$t('auto.List.8952bc8d')" width="140" align="center" />
+            <el-table-column prop="total_cost" :label="$t('auto.List.1f9507e1')" width="120" align="center">
               <template #default="{ row }">{{ (row.total_cost || 0).toFixed(4) }}</template>
             </el-table-column>
           </el-table>
@@ -232,76 +232,76 @@
       </el-tab-pane>
 
       
-      <el-tab-pane :label="$t('auto.List.32.39c6c9')" name="audit">
+      <el-tab-pane :label="$t('auto.List.39c6c930')" name="audit">
         <el-card>
           <template #header>
             <div class="card-header">
-              <span>{{ $t('auto.List.81.88fac8') }}</span>
+              <span>{{ $t('auto.List.88fac83f') }}</span>
               <el-button size="small" @click="loadAudit">
                 <el-icon><Refresh /></el-icon> 刷新
               </el-button>
             </div>
           </template>
           <el-table :data="auditList" v-loading="loading.audit" stripe>
-            <template #empty><el-empty :description="$t('auto.List.33.79c058')" /></template>
-            <el-table-column :label="$t('auto.List.34.19fcb9')" min-width="180">
+            <template #empty><el-empty :description="$t('auto.List.79c05840')" /></template>
+            <el-table-column :label="$t('auto.List.19fcb9eb')" min-width="180">
               <template #default="{ row }">{{ formatTime(row.created_at) }}</template>
             </el-table-column>
-            <el-table-column prop="scenario" :label="$t('auto.List.14.c93165')" min-width="140" />
-            <el-table-column prop="version" :label="$t('auto.List.17.fe2df0')" width="80" align="center" />
-            <el-table-column :label="$t('auto.List.35.1dd554')" min-width="280">
+            <el-table-column prop="scenario" :label="$t('auto.List.c931653c')" min-width="140" />
+            <el-table-column prop="version" :label="$t('auto.List.fe2df04a')" width="80" align="center" />
+            <el-table-column :label="$t('auto.List.1dd554cd')" min-width="280">
               <template #default="{ row }">
                 <span v-if="row.action === 'update_strategy'">
                   <el-tag size="small" type="info">{{ row.prev_provider || '无' }}</el-tag>
                   →
                   <el-tag size="small" type="success">{{ row.new_provider }}</el-tag>
                 </span>
-                <el-tag v-else-if="row.action === 'create_model'" type="primary" size="small">{{ $t('auto.List.82.1cbdde') }}</el-tag>
-                <el-tag v-else-if="row.action === 'delete_model'" type="danger" size="small">{{ $t('auto.List.83.bb7a2e') }}</el-tag>
-                <el-tag v-else-if="row.action === 'update_model'" type="warning" size="small">{{ $t('auto.List.84.bb1abf') }}</el-tag>
+                <el-tag v-else-if="row.action === 'create_model'" type="primary" size="small">{{ $t('auto.List.1cbddef0') }}</el-tag>
+                <el-tag v-else-if="row.action === 'delete_model'" type="danger" size="small">{{ $t('auto.List.bb7a2ea8') }}</el-tag>
+                <el-tag v-else-if="row.action === 'update_model'" type="warning" size="small">{{ $t('auto.List.bb1abfa5') }}</el-tag>
                 <el-tag v-else size="small">{{ getRoutingActionLabel(row.action) }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="operator" :label="$t('auto.List.36.f9ac4b')" width="120" />
+            <el-table-column prop="operator" :label="$t('auto.List.f9ac4b2a')" width="120" />
             <el-table-column prop="trace_id" label="Trace ID" min-width="180" show-overflow-tooltip />
           </el-table>
         </el-card>
       </el-tab-pane>
 
       
-      <el-tab-pane :label="$t('auto.List.37.c6b035')" name="modeltype">
+      <el-tab-pane :label="$t('auto.List.c6b03576')" name="modeltype">
         <el-row :gutter="20" class="stat-row">
           <el-col :span="12">
             <el-card v-loading="loading.modelType">
               <template #header>
                 <div class="card-header">
-                  <span>{{ $t('auto.List.85.ce20e7') }}</span>
+                  <span>{{ $t('auto.List.ce20e7a4') }}</span>
                   <el-radio-group v-model="modelTypeWindow" size="small" @change="loadModelType">
-                    <el-radio-button label="today">{{ $t('auto.List.76.296304') }}</el-radio-button>
-                    <el-radio-button label="week">{{ $t('auto.List.77.d765ef') }}</el-radio-button>
-                    <el-radio-button label="month">{{ $t('auto.List.78.c059be') }}</el-radio-button>
-                    <el-radio-button label="all">{{ $t('auto.List.79.a8b0c2') }}</el-radio-button>
+                    <el-radio-button label="today">{{ $t('auto.List.296304f1') }}</el-radio-button>
+                    <el-radio-button label="week">{{ $t('auto.List.d765efc4') }}</el-radio-button>
+                    <el-radio-button label="month">{{ $t('auto.List.c059bed7') }}</el-radio-button>
+                    <el-radio-button label="all">{{ $t('auto.List.a8b0c204') }}</el-radio-button>
                   </el-radio-group>
                 </div>
               </template>
               <el-row :gutter="12">
                 <el-col :span="8">
                   <div class="metric-box local">
-                    <div class="metric-label">{{ $t('auto.List.86.9b91fc') }}</div>
+                    <div class="metric-label">{{ $t('auto.List.9b91fcc5') }}</div>
                     <div class="metric-value">{{ getModelTypeCount('local') }}</div>
                     <div class="metric-sub">¥{{ getModelTypeCost('local').toFixed(4) }}</div>
                   </div>
                 </el-col>
                 <el-col :span="8">
                   <div class="metric-box cloud">
-                    <div class="metric-label">{{ $t('auto.List.87.c29b95') }}</div>
+                    <div class="metric-label">{{ $t('auto.List.c29b95b1') }}</div>
                     <div class="metric-value">{{ getModelTypeCount('cloud') }}</div>
                     <div class="metric-sub">¥{{ getModelTypeCost('cloud').toFixed(4) }}</div>
                   </div>
                 </el-col>
                 <el-col :span="8">
                   <div class="metric-box">
-                    <div class="metric-label">{{ $t('auto.List.88.3c9542') }}</div>
+                    <div class="metric-label">{{ $t('auto.List.3c95425a') }}</div>
                     <div class="metric-value">{{ getModelTypeCount('missing') }}</div>
                     <div class="metric-sub">{{ getMissingRatio() }}%</div>
                   </div>
@@ -322,28 +322,28 @@
             <el-card v-loading="loading.health">
               <template #header>
                 <div class="card-header">
-                  <span>{{ $t('auto.List.89.37b207') }}</span>
+                  <span>{{ $t('auto.List.37b20722') }}</span>
                   <el-button size="small" @click="loadHealth">
                     <el-icon><Refresh /></el-icon> 刷新
                   </el-button>
                 </div>
               </template>
               <el-table :data="llmHealth.providers || []" stripe size="small">
-                <template #empty><el-empty :description="$t('auto.List.38.b856d0')" /></template>
+                <template #empty><el-empty :description="$t('auto.List.b856d0cf')" /></template>
                 <el-table-column prop="name" label="Provider" min-width="120" />
-                <el-table-column prop="vendor" :label="$t('auto.List.4.70aefc')" width="100" />
-                <el-table-column :label="$t('auto.List.6.3fea7c')" width="100" align="center">
+                <el-table-column prop="vendor" :label="$t('auto.List.70aefc6a')" width="100" />
+                <el-table-column :label="$t('auto.List.3fea7ca7')" width="100" align="center">
                   <template #default="{ row }">
-                    <el-tag v-if="row.healthy" type="success" size="small">{{ $t('auto.List.90.fbc026') }}</el-tag>
-                    <el-tag v-else-if="row.circuit_open" type="danger" size="small">{{ $t('auto.List.91.3a0c78') }}</el-tag>
-                    <el-tag v-else type="warning" size="small">{{ $t('auto.List.92.2981d4') }}</el-tag>
+                    <el-tag v-if="row.healthy" type="success" size="small">{{ $t('auto.List.fbc026c9') }}</el-tag>
+                    <el-tag v-else-if="row.circuit_open" type="danger" size="small">{{ $t('auto.List.3a0c7850') }}</el-tag>
+                    <el-tag v-else type="warning" size="small">{{ $t('auto.List.2981d4c8') }}</el-tag>
                   </template>
                 </el-table-column>
-                <el-table-column :label="$t('auto.List.39.7030ff')" width="80" align="center">
+                <el-table-column :label="$t('auto.List.7030ff64')" width="80" align="center">
                   <template #default="{ row }">{{ row.error_count || 0 }}</template>
                 </el-table-column>
-                <el-table-column prop="avg_latency" :label="$t('auto.List.40.32da34')" width="100" align="center" />
-                <el-table-column :label="$t('auto.List.41.c7efa1')" min-width="160" show-overflow-tooltip>
+                <el-table-column prop="avg_latency" :label="$t('auto.List.32da342a')" width="100" align="center" />
+                <el-table-column :label="$t('auto.List.c7efa1d6')" min-width="160" show-overflow-tooltip>
                   <template #default="{ row }">{{ row.last_error || '-' }}</template>
                 </el-table-column>
               </el-table>
@@ -353,7 +353,7 @@
         <el-card style="margin-top: 20px" v-loading="loading.egress">
           <template #header>
             <div class="card-header">
-              <span>{{ $t('auto.List.93.182ec9') }}</span>
+              <span>{{ $t('auto.List.182ec9d6') }}</span>
               <el-button size="small" @click="loadEgressAlerts">
                 <el-icon><Refresh /></el-icon> 刷新
               </el-button>
@@ -363,23 +363,23 @@
             v-if="egressAlerts.length === 0"
             type="success"
             :closable="false"
-            :title="$t('auto.List.42.6ba8c1')"
-            :description="$t('auto.List.43.c4ca1a')"
+            :title="$t('auto.List.6ba8c159')"
+            :description="$t('auto.List.c4ca1a0c')"
             show-icon
           />
           <el-table v-else :data="egressAlerts" stripe size="small">
-            <el-table-column prop="scenario" :label="$t('auto.List.14.c93165')" min-width="120" />
+            <el-table-column prop="scenario" :label="$t('auto.List.c931653c')" min-width="120" />
             <el-table-column prop="provider" label="Provider" min-width="120" />
             <el-table-column prop="model" label="Model" min-width="140" />
-            <el-table-column prop="base_url" :label="$t('auto.List.44.aa5c24')" min-width="240" show-overflow-tooltip />
-            <el-table-column prop="vendor" :label="$t('auto.List.4.70aefc')" width="100" />
-            <el-table-column :label="$t('auto.List.45.f672c2')" width="100" align="center">
+            <el-table-column prop="base_url" :label="$t('auto.List.aa5c2464')" min-width="240" show-overflow-tooltip />
+            <el-table-column prop="vendor" :label="$t('auto.List.70aefc6a')" width="100" />
+            <el-table-column :label="$t('auto.List.f672c2c9')" width="100" align="center">
               <template #default="{ row }">{{ row.call_count || 0 }}</template>
             </el-table-column>
-            <el-table-column :label="$t('auto.List.46.ac59bc')" min-width="180">
+            <el-table-column :label="$t('auto.List.ac59bc30')" min-width="180">
               <template #default="{ row }">{{ formatTime(row.first_seen) }}</template>
             </el-table-column>
-            <el-table-column :label="$t('auto.List.47.8f10f0')" min-width="180">
+            <el-table-column :label="$t('auto.List.8f10f0ef')" min-width="180">
               <template #default="{ row }">{{ formatTime(row.last_seen) }}</template>
             </el-table-column>
           </el-table>
@@ -390,74 +390,74 @@
     
     <el-dialog v-model="modelDialogVisible" :title="modelDialogTitle" width="640px">
       <el-form :model="modelForm" :rules="modelFormRules" ref="modelFormRef" label-width="100px">
-        <el-form-item :label="$t('auto.List.48.5d551c')" prop="name">
-          <el-input v-model="modelForm.name" :placeholder="$t('auto.List.49.0f89de')" :disabled="!!modelForm._isEdit" />
+        <el-form-item :label="$t('auto.List.5d551c2c')" prop="name">
+          <el-input v-model="modelForm.name" :placeholder="$t('auto.List.0f89de58')" :disabled="!!modelForm._isEdit" />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.5.f97c13')" prop="model">
-          <el-input v-model="modelForm.model" :placeholder="$t('auto.List.50.a1ba1b')" />
+        <el-form-item :label="$t('auto.List.f97c1388')" prop="model">
+          <el-input v-model="modelForm.model" :placeholder="$t('auto.List.a1ba1b31')" />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.9.f682f8')" prop="base_url">
-          <el-input v-model="modelForm.base_url" :placeholder="$t('auto.List.51.a38eb0')" />
+        <el-form-item :label="$t('auto.List.f682f85e')" prop="base_url">
+          <el-input v-model="modelForm.base_url" :placeholder="$t('auto.List.a38eb0cf')" />
         </el-form-item>
         <el-form-item label="API Key" prop="api_key">
-          <el-input v-model="modelForm.api_key" type="password" show-password :placeholder="$t('auto.List.52.5a2303')" />
+          <el-input v-model="modelForm.api_key" type="password" show-password :placeholder="$t('auto.List.5a23035c')" />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.53.3ea3a5')">
+        <el-form-item :label="$t('auto.List.3ea3a5c7')">
           <el-input-number v-model="modelForm.quality_score" :min="0" :max="1" :step="0.01" :precision="2" />
-          <span class="form-tip">{{ $t('auto.List.94.b82466') }}</span>
+          <span class="form-tip">{{ $t('auto.List.b824660f') }}</span>
         </el-form-item>
-        <el-form-item :label="$t('auto.List.7.e87182')">
+        <el-form-item :label="$t('auto.List.e8718247')">
           <el-input-number v-model="modelForm.max_rpm" :min="0" :step="10" />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.8.94b3d8')">
+        <el-form-item :label="$t('auto.List.94b3d898')">
           <el-input-number v-model="modelForm.cost_per_1k" :min="0" :precision="4" :step="0.001" />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.54.7854b5')">
+        <el-form-item :label="$t('auto.List.7854b52a')">
           <el-switch v-model="modelForm.enabled" />
         </el-form-item>
         <el-form-item label="NoFC">
           <el-switch v-model="modelForm.no_fc" />
-          <span class="form-tip">{{ $t('auto.List.95.faf48e') }}</span>
+          <span class="form-tip">{{ $t('auto.List.faf48eb0') }}</span>
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="modelDialogVisible = false">{{ $t('auto.List.96.625fb2') }}</el-button>
-        <el-button type="primary" @click="submitModel">{{ $t('auto.List.97.38cf16') }}</el-button>
+        <el-button @click="modelDialogVisible = false">{{ $t('auto.List.625fb26b') }}</el-button>
+        <el-button type="primary" @click="submitModel">{{ $t('auto.List.38cf16f2') }}</el-button>
       </template>
     </el-dialog>
 
     
     <el-dialog v-model="routingDialogVisible" :title="routingDialogTitle" width="600px">
       <el-form :model="routingForm" :rules="routingFormRules" ref="routingFormRef" label-width="120px">
-        <el-form-item :label="$t('auto.List.14.c93165')" prop="scenario">
-          <el-select v-model="routingForm.scenario" :placeholder="$t('auto.List.55.354a40')" filterable allow-create style="width: 100%">
+        <el-form-item :label="$t('auto.List.c931653c')" prop="scenario">
+          <el-select v-model="routingForm.scenario" :placeholder="$t('auto.List.354a40ac')" filterable allow-create style="width: 100%">
             <el-option v-for="s in scenarioPresets" :key="s" :label="s" :value="s" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.List.15.85b70c')" prop="provider">
-          <el-select v-model="routingForm.provider" :placeholder="$t('auto.List.56.f2d373')" style="width: 100%">
+        <el-form-item :label="$t('auto.List.85b70c4a')" prop="provider">
+          <el-select v-model="routingForm.provider" :placeholder="$t('auto.List.f2d3731b')" style="width: 100%">
             <el-option v-for="m in models" :key="m.name" :label="`${m.name} (${m.vendor})`" :value="m.name" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.List.16.6a8a00')">
-          <el-select v-model="routingForm.fallbacks" multiple style="width: 100%" :placeholder="$t('auto.List.57.02a77f')">
+        <el-form-item :label="$t('auto.List.6a8a0069')">
+          <el-select v-model="routingForm.fallbacks" multiple style="width: 100%" :placeholder="$t('auto.List.02a77f5d')">
             <el-option v-for="m in models" :key="m.name" :label="m.name" :value="m.name" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.List.18.e4455f')">
+        <el-form-item :label="$t('auto.List.e4455fd1')">
           <el-input-number v-model="routingForm.weight" :min="0" :max="100" :step="5" />
-          <span class="form-tip">{{ $t('auto.List.98.d5e4ce') }}</span>
+          <span class="form-tip">{{ $t('auto.List.d5e4ce6b') }}</span>
         </el-form-item>
-        <el-form-item :label="$t('auto.List.19.0f8516')">
+        <el-form-item :label="$t('auto.List.0f851629')">
           <el-input-number v-model="routingForm.min_quality" :min="0" :max="1" :step="0.01" :precision="2" />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.20.19510c')">
+        <el-form-item :label="$t('auto.List.19510ce7')">
           <el-input-number v-model="routingForm.max_latency" :min="0" :step="1000" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="routingDialogVisible = false">{{ $t('auto.List.96.625fb2') }}</el-button>
-        <el-button type="primary" @click="submitRouting">{{ $t('auto.List.97.38cf16') }}</el-button>
+        <el-button @click="routingDialogVisible = false">{{ $t('auto.List.625fb26b') }}</el-button>
+        <el-button type="primary" @click="submitRouting">{{ $t('auto.List.38cf16f2') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -505,7 +505,7 @@ const canaryColors = [
 ]
 
 const modelDialogVisible = ref(false);
-const modelDialogTitle = ref(t('auto.List.82.1cbdde'))
+const modelDialogTitle = ref(t('auto.List.1cbddef0'))
 const modelFormRef = ref()
 const emptyModelForm = () => ({
   name: '', model: '', base_url: '', api_key: '',
@@ -514,13 +514,13 @@ const emptyModelForm = () => ({
 })
 const modelForm = ref(emptyModelForm())
 const modelFormRules = {
-  name: [{ required: true, message: t('auto.List.99.97b6dc'), trigger: 'blur' }],
-  model: [{ required: true, message: t('auto.List.100.4b6ff7'), trigger: 'blur' }],
-  base_url: [{ required: true, message: t('auto.List.101.800727'), trigger: 'blur' }],
+  name: [{ required: true, message: t('auto.List.97b6dccd'), trigger: 'blur' }],
+  model: [{ required: true, message: t('auto.List.4b6ff7d4'), trigger: 'blur' }],
+  base_url: [{ required: true, message: t('auto.List.8007271c'), trigger: 'blur' }],
 }
 
 const routingDialogVisible = ref(false);
-const routingDialogTitle = ref(t('auto.List.102.374e03'))
+const routingDialogTitle = ref(t('auto.List.374e0375'))
 const routingFormRef = ref()
 const emptyRoutingForm = () => ({
   scenario: '',
@@ -533,8 +533,8 @@ const emptyRoutingForm = () => ({
 const routingForm = ref(emptyRoutingForm())
 const routingEditIndex = ref(-1)
 const routingFormRules = {
-  scenario: [{ required: true, message: t('auto.List.103.75f77a'), trigger: 'change' }],
-  provider: [{ required: true, message: t('auto.List.104.e347fa'), trigger: 'change' }],
+  scenario: [{ required: true, message: t('auto.List.75f77abd'), trigger: 'change' }],
+  provider: [{ required: true, message: t('auto.List.e347fa73'), trigger: 'change' }],
 }
 
 const loadModels = async () => {
@@ -687,10 +687,10 @@ const showModelDialog = (row) => {
       no_fc: row.no_fc,
       _isEdit: true,
     }
-    modelDialogTitle.value = t('auto.List.105.c85b90')
+    modelDialogTitle.value = t('auto.List.c85b90dd')
   } else {
     modelForm.value = emptyModelForm()
-    modelDialogTitle.value = t('auto.List.82.1cbdde')
+    modelDialogTitle.value = t('auto.List.1cbddef0')
   }
   modelDialogVisible.value = true
 };
@@ -704,27 +704,27 @@ const submitModel = async () => {
       delete payload._isEdit
       if (modelForm.value._isEdit) {
         await LlmRoutingApi.updateModel(modelForm.value.name, payload);
-        ElMessage.success(t('auto.List.106.55aa63'))
+        ElMessage.success(t('auto.List.55aa6366'))
       } else {
         await LlmRoutingApi.createModel(payload)
-        ElMessage.success(t('auto.List.107.a5bfd7'))
+        ElMessage.success(t('auto.List.a5bfd70d'))
       }
       modelDialogVisible.value = false
       loadModels()
     } catch (e) {
-      ElMessage.error(e?.message || t('auto.List.108.6de920'))
+      ElMessage.error(e?.message || t('auto.List.6de920b4'))
     }
   })
 }
 
 const deleteModel = async (row) => {
   try {
-    await ElMessageBox.confirm(`确定删除模型 "${row.name}" 吗？`, t('auto.List.109.e83a25'), { type: 'warning' })
+    await ElMessageBox.confirm(`确定删除模型 "${row.name}" 吗？`, t('auto.List.e83a256e'), { type: 'warning' })
     await LlmRoutingApi.deleteModel(row.name)
-    ElMessage.success(t('auto.List.110.0007d1'))
+    ElMessage.success(t('auto.List.0007d170'))
     loadModels()
   } catch (e) {
-    if (e !== 'cancel') ElMessage.error(t('auto.List.111.acf066'))
+    if (e !== 'cancel') ElMessage.error(t('auto.List.acf0664a'))
   }
 }
 
@@ -732,30 +732,30 @@ const toggleStatus = async (row) => {
   const next = !row.enabled
   try {
     await LlmRoutingApi.updateModel(row.name, { enabled: next });
-    ElMessage.success(t('auto.List.112.7d6e0e'))
+    ElMessage.success(t('auto.List.7d6e0e1a'))
     loadModels()
   } catch (e) {
-    ElMessage.error(t('auto.List.113.effbdc') + (e?.message || ''))
+    ElMessage.error(t('auto.List.effbdce5') + (e?.message || ''))
   }
 }
 
 const testModel = async (row) => {
   try {
-    const result = await LlmRoutingApi.testModel(row.name, { prompt: t('auto.List.114.7f370a'), timeout_seconds: 30 })
+    const result = await LlmRoutingApi.testModel(row.name, { prompt: t('auto.List.7f370af4'), timeout_seconds: 30 })
     if (result?.success) {
       ElMessage.success(`模型 "${row.name}" 连通性正常（延迟 ${result.latency_ms}ms）`)
     } else {
-      ElMessage.warning(`模型 "${row.name}" 调用失败：${result?.error || t('auto.List.115.974e74')}`)
+      ElMessage.warning(`模型 "${row.name}" 调用失败：${result?.error || t('auto.List.974e7484')}`)
     }
   } catch (e) {
-    ElMessage.error(t('auto.List.116.4b3cb9') + (e?.message || ''))
+    ElMessage.error(t('auto.List.4b3cb9fe') + (e?.message || ''))
   }
 }
 
 const addRoutingRow = () => {
   routingForm.value = emptyRoutingForm()
   routingEditIndex.value = -1
-  routingDialogTitle.value = t('auto.List.102.374e03')
+  routingDialogTitle.value = t('auto.List.374e0375')
   routingDialogVisible.value = true
 };
 
@@ -769,20 +769,20 @@ const editRoutingRow = (row, index) => {
     max_latency: row.max_latency || 90000,
   }
   routingEditIndex.value = index
-  routingDialogTitle.value = t('auto.List.117.cb14eb')
+  routingDialogTitle.value = t('auto.List.cb14eb12')
   routingDialogVisible.value = true
 }
 
 const removeRoutingRow = async (index) => {
   try {
-    await ElMessageBox.confirm(t('auto.List.118.b9adc1'), t('auto.List.109.e83a25'), { type: 'warning' })
+    await ElMessageBox.confirm(t('auto.List.b9adc1be'), t('auto.List.e83a256e'), { type: 'warning' })
     const removed = sceneRouting.value[index]
     const next = sceneRouting.value.filter((_, i) => i !== index)
     sceneRouting.value = next
     await LlmRoutingApi.saveSceneRouting(next);
     ElMessage.success(`已删除 ${removed?.scenario || ''}`)
   } catch (e) {
-    if (e !== 'cancel') ElMessage.error(t('auto.List.111.acf066'))
+    if (e !== 'cancel') ElMessage.error(t('auto.List.acf0664a'))
   }
 }
 
@@ -798,18 +798,18 @@ const submitRouting = async () => {
     }
     try {
       await LlmRoutingApi.saveSceneRouting(next)
-      ElMessage.success(t('auto.List.119.3b1083'))
+      ElMessage.success(t('auto.List.3b108349'))
       routingDialogVisible.value = false
       loadRouting()
     } catch (e) {
-      ElMessage.error(t('auto.List.120.78d235') + (e?.message || ''))
+      ElMessage.error(t('auto.List.78d235cc') + (e?.message || ''))
     }
   })
 }
 
 const vendorLabel = (v) => ({
-  local: t('auto.List.121.8e7eca'), deepseek: 'DeepSeek', qwen: t('auto.List.122.4680d3'),
-  openai: 'OpenAI', zhipu: t('auto.List.123.7f567e'), moonshot: t('auto.List.124.e562c5'), other: t('auto.List.125.5a0afc'),
+  local: t('auto.List.8e7eca1f'), deepseek: 'DeepSeek', qwen: t('auto.List.4680d368'),
+  openai: 'OpenAI', zhipu: t('auto.List.7f567eea'), moonshot: t('auto.List.e562c560'), other: t('auto.List.5a0afc9d'),
 }[v] || v || '-');
 
 const formatNumber = (n) => {

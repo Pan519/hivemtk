@@ -3,25 +3,25 @@
     <el-row :gutter="16" class="stats-row">
       <el-col :span="6">
         <el-card class="stat-card">
-          <div class="stat-label">{{ $t('auto.CostDashboard.3.a539a9') }}</div>
+          <div class="stat-label">{{ $t('auto.CostDashboard.a539a90f') }}</div>
           <div class="stat-value">¥{{ Number(stats.total_cost || 0).toFixed(2) }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="stat-card">
-          <div class="stat-label">{{ $t('auto.CostDashboard.4.b615f5') }}</div>
+          <div class="stat-label">{{ $t('auto.CostDashboard.b615f5b2') }}</div>
           <div class="stat-value">{{ formatNumber(stats.total_tokens) }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="stat-card warning">
-          <div class="stat-label">{{ $t('auto.CostDashboard.5.0bedb9') }}</div>
+          <div class="stat-label">{{ $t('auto.CostDashboard.0bedb9f6') }}</div>
           <div class="stat-value">{{ stats.total_failed || 0 }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="stat-card success">
-          <div class="stat-label">{{ $t('auto.CostDashboard.6.11d2f8') }}</div>
+          <div class="stat-label">{{ $t('auto.CostDashboard.11d2f836') }}</div>
           <div class="stat-value">{{ stats.total_calls ? Math.round(stats.total_success / stats.total_calls * 100) : 0 }}%</div>
         </el-card>
       </el-col>
@@ -30,13 +30,13 @@
     <el-row :gutter="16">
       <el-col :span="16">
         <el-card>
-          <template #header><span>{{ $t('auto.CostDashboard.7.d5bd40') }}</span></template>
+          <template #header><span>{{ $t('auto.CostDashboard.d5bd40d6') }}</span></template>
           <div ref="trendRef" class="chart" />
         </el-card>
       </el-col>
       <el-col :span="8">
         <el-card>
-          <template #header><span>{{ $t('auto.CostDashboard.8.ba70ac') }}</span></template>
+          <template #header><span>{{ $t('auto.CostDashboard.ba70ac84') }}</span></template>
           <div ref="distRef" class="chart" />
         </el-card>
       </el-col>
@@ -45,21 +45,21 @@
     <el-card class="breakdown-card">
       <template #header>
         <div class="card-header">
-          <span>{{ $t('auto.CostDashboard.9.f0067d') }}</span>
+          <span>{{ $t('auto.CostDashboard.f0067d68') }}</span>
           <el-radio-group v-model="breakdown" size="small">
-            <el-radio-button label="scenario">{{ $t('auto.CostDashboard.10.e1ec3b') }}</el-radio-button>
-            <el-radio-button label="model">{{ $t('auto.CostDashboard.11.046f78') }}</el-radio-button>
-            <el-radio-button label="agent">{{ $t('auto.CostDashboard.12.a40967') }}</el-radio-button>
+            <el-radio-button label="scenario">{{ $t('auto.CostDashboard.e1ec3be8') }}</el-radio-button>
+            <el-radio-button label="model">{{ $t('auto.CostDashboard.046f7896') }}</el-radio-button>
+            <el-radio-button label="agent">{{ $t('auto.CostDashboard.a40967f8') }}</el-radio-button>
           </el-radio-group>
         </div>
       </template>
       <el-table :data="breakdownData" v-loading="loading">
         <el-table-column prop="name" :label="breakdownName" />
-        <el-table-column prop="call_count" :label="$t('auto.CostDashboard.1.00d5bd')" width="120" />
+        <el-table-column prop="call_count" :label="$t('auto.CostDashboard.00d5bdf1')" width="120" />
         <el-table-column prop="total_tokens" label="Token" width="120">
           <template #default="{ row }">{{ formatNumber(row.total_tokens) }}</template>
         </el-table-column>
-        <el-table-column prop="total_cost" :label="$t('auto.CostDashboard.2.1f9507')" width="120">
+        <el-table-column prop="total_cost" :label="$t('auto.CostDashboard.1f9507e1')" width="120">
           <template #default="{ row }">{{ Number(row.total_cost || 0).toFixed(4) }}</template>
         </el-table-column>
       </el-table>
@@ -85,9 +85,9 @@ const trendRef = ref()
 const distRef = ref()
 
 const breakdownName = computed(() => ({
-  scenario: t('auto.CostDashboard.13.c93165'),
-  model: t('auto.CostDashboard.14.8000f1'),
-  agent: t('auto.CostDashboard.15.72fbb9')
+  scenario: t('auto.CostDashboard.c931653c'),
+  model: t('auto.CostDashboard.8000f187'),
+  agent: t('auto.CostDashboard.72fbb9b5')
 }[breakdown.value]))
 
 const formatNumber = formatCompactNumber
@@ -120,11 +120,11 @@ function renderTrend(rows) {
     xAxis: { type: 'category', data: top.map((d) => d.name) },
     yAxis: [
       { type: 'value', name: '¥' },
-      { type: 'value', name: t('auto.CostDashboard.1.00d5bd'), position: 'right' }
+      { type: 'value', name: t('auto.CostDashboard.00d5bdf1'), position: 'right' }
     ],
     series: [
-      { name: t('auto.CostDashboard.16.7e237e'), type: 'bar', data: top.map((d) => Number(d.total_cost || 0)) },
-      { name: t('auto.CostDashboard.1.00d5bd'), type: 'bar', yAxisIndex: 1, data: top.map((d) => Number(d.call_count || 0)) }
+      { name: t('auto.CostDashboard.7e237e94'), type: 'bar', data: top.map((d) => Number(d.total_cost || 0)) },
+      { name: t('auto.CostDashboard.00d5bdf1'), type: 'bar', yAxisIndex: 1, data: top.map((d) => Number(d.call_count || 0)) }
     ]
   })
 }

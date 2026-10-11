@@ -3,30 +3,30 @@
     <el-card shadow="never">
       <template #header>
         <div class="card-header">
-          <span>{{ $t('auto.SyncLog.8.e1be44') }}</span>
-          <el-button @click="$router.back()">{{ $t('auto.SyncLog.9.5f4112') }}</el-button>
+          <span>{{ $t('auto.SyncLog.e1be449f') }}</span>
+          <el-button @click="$router.back()">{{ $t('auto.SyncLog.5f411223') }}</el-button>
         </div>
       </template>
       <el-form inline>
-        <el-form-item :label="$t('auto.SyncLog.1.69847d')">
-          <el-input v-model="assetId" clearable :placeholder="$t('auto.SyncLog.2.c20cba')" />
+        <el-form-item :label="$t('auto.SyncLog.69847d0a')">
+          <el-input v-model="assetId" clearable :placeholder="$t('auto.SyncLog.c20cba89')" />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="fetchList">{{ $t('auto.SyncLog.10.bee912') }}</el-button>
+          <el-button type="primary" @click="fetchList">{{ $t('auto.SyncLog.bee912d7') }}</el-button>
         </el-form-item>
       </el-form>
       <el-table :data="list" v-loading="loading" stripe>
-        <el-table-column prop="created_at" :label="$t('auto.SyncLog.3.19fcb9')" width="180" />
-        <el-table-column prop="asset_id" :label="$t('auto.SyncLog.4.5110a0')" min-width="180" />
-        <el-table-column prop="action" :label="$t('auto.SyncLog.5.2b6bc0')" width="120" />
-        <el-table-column prop="status" :label="$t('auto.SyncLog.6.3fea7c')" width="100">
+        <el-table-column prop="created_at" :label="$t('auto.SyncLog.19fcb9eb')" width="180" />
+        <el-table-column prop="asset_id" :label="$t('auto.SyncLog.5110a0d1')" min-width="180" />
+        <el-table-column prop="action" :label="$t('auto.SyncLog.2b6bc0f2')" width="120" />
+        <el-table-column prop="status" :label="$t('auto.SyncLog.3fea7ca7')" width="100">
           <template #default="{ row }">
             <el-tag :type="row.status === 'success' ? 'success' : 'danger'" size="small">
               {{ row.status }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="error_msg" :label="$t('auto.SyncLog.7.4604d5')" min-width="200" show-overflow-tooltip />
+        <el-table-column prop="error_msg" :label="$t('auto.SyncLog.4604d502')" min-width="200" show-overflow-tooltip />
       </el-table>
     </el-card>
   </div>

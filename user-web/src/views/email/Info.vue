@@ -1,14 +1,14 @@
 <template>
   <div class="email-providers-container">
     <el-table :data="filteredProviders" border stripe style="width: 100%">
-      <el-table-column prop="name" ::label="$t('auto.Info.1.f0213e')" width="120" fixed />
-      <el-table-column prop="vendor" ::label="$t('auto.Info.2.5219be')" width="120" />
-      <el-table-column ::label="$t('auto.Info.3.9a53b2')" width="180">
+      <el-table-column prop="name" ::label="$t('auto.Info.f0213e4c')" width="120" fixed />
+      <el-table-column prop="vendor" ::label="$t('auto.Info.5219be7d')" width="120" />
+      <el-table-column ::label="$t('auto.Info.9a53b2b8')" width="180">
         <template #default="{ row }">
           <el-tag>{{ row.smtp }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('auto.Info.4.c76cfe')" width="120">
+      <el-table-column :label="$t('auto.Info.c76cfefe')" width="120">
         <template #default="{ row }">
           <div class="port-badges">
             <el-tag
@@ -21,7 +21,7 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('auto.Info.5.d5b8cf')" min-width="220">
+      <el-table-column :label="$t('auto.Info.d5b8cf0c')" min-width="220">
         <template #default="{ row }">
           <div class="auth-notes">
             <el-popover placement="top" width="300" trigger="hover">
@@ -40,14 +40,14 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('auto.Info.6.6f1afa')" min-width="200">
+      <el-table-column :label="$t('auto.Info.6f1afa4f')" min-width="200">
         <template #default="{ row }">
           <el-link type="primary" :href="row.registerUrl" target="_blank">
             {{ row.registerUrl }}
           </el-link>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('auto.Info.7.2b6bc0')" width="120" fixed="right">
+      <el-table-column :label="$t('auto.Info.2b6bc0f2')" width="120" fixed="right">
         <template #default="{ row }">
           <el-button type="primary" size="small" @click="goRegister(row)">
             前往注册
@@ -74,82 +74,82 @@ const emailProviders = ref([
   {
     id: 1,
     name: '163邮箱',
-    vendor: t('auto.Info.8.f396b4'),
+    vendor: t('auto.Info.f396b465'),
     smtp: 'smtp.163.com',
     ports: [{ value: 465, type: 'ssl' }, { value: 994, type: 'ssl' }],
-    authSummary: t('auto.Info.9.8f9f12'),
+    authSummary: t('auto.Info.8f9f12a0'),
     authNotes: [
-      t('auto.Info.10.d05c2e'),
-      t('auto.Info.11.588ea4'),
-      t('auto.Info.12.a67fb0')
+      t('auto.Info.d05c2ee1'),
+      t('auto.Info.588ea461'),
+      t('auto.Info.a67fb0d6')
     ],
     registerUrl: 'https://mail.163.com'
   },
   {
     id: 2,
     name: '126邮箱',
-    vendor: t('auto.Info.8.f396b4'),
+    vendor: t('auto.Info.f396b465'),
     smtp: 'smtp.126.com',
     ports: [{ value: 465, type: 'ssl' }],
-    authSummary: t('auto.Info.13.54d75c'),
+    authSummary: t('auto.Info.54d75cd7'),
     authNotes: [
-      t('auto.Info.14.eddb63'),
-      t('auto.Info.15.18178a'),
-      t('auto.Info.16.f6b46a')
+      t('auto.Info.eddb6326'),
+      t('auto.Info.18178a78'),
+      t('auto.Info.f6b46a63')
     ],
     registerUrl: 'https://mail.126.com'
   },
   {
     id: 3,
     name: 'Yeah邮箱',
-    vendor: t('auto.Info.8.f396b4'),
+    vendor: t('auto.Info.f396b465'),
     smtp: 'smtp.yeah.net',
     ports: [{ value: 25, type: 'plain' }],
-    authSummary: t('auto.Info.17.160a09'),
+    authSummary: t('auto.Info.160a0976'),
     authNotes: [
-      t('auto.Info.18.1e3678'),
-      t('auto.Info.19.778d42')
+      t('auto.Info.1e3678bd'),
+      t('auto.Info.778d42d7')
     ],
     registerUrl: 'https://mail.yeah.net'
   },
   {
     id: 4,
     name: 'QQ邮箱',
-    vendor: t('auto.Info.20.197780'),
+    vendor: t('auto.Info.19778031'),
     smtp: 'smtp.qq.com',
     ports: [{ value: 465, type: 'ssl' }, { value: 587, type: 'tls' }],
-    authSummary: t('auto.Info.21.f6bc20'),
+    authSummary: t('auto.Info.f6bc2097'),
     authNotes: [
-      t('auto.Info.22.7b0a2a'),
-      t('auto.Info.23.63844e'),
-      t('auto.Info.24.5568fe')
+      t('auto.Info.7b0a2a96'),
+      t('auto.Info.63844e43'),
+      t('auto.Info.5568fe01')
     ],
     registerUrl: 'https://mail.qq.com'
   },
   {
     id: 5,
-    name: t('auto.Info.25.bf7f33'),
-    vendor: t('auto.Info.26.62a3c7'),
+    name: t('auto.Info.bf7f333b'),
+    vendor: t('auto.Info.62a3c7ee'),
     smtp: 'smtp.sina.com',
     ports: [{ value: 25, type: 'plain' }],
-    authSummary: t('auto.Info.27.81f56a'),
+    authSummary: t('auto.Info.81f56ac9'),
     authNotes: [
-      t('auto.Info.28.f9a9f5'),
-      t('auto.Info.29.81b6c3')
+      t('auto.Info.f9a9f547'),
+      t('auto.Info.81b6c3a5')
     ],
     registerUrl: 'https://mail.sina.com.cn'
   },
   {
     id: 6,
     name: '139邮箱',
-    vendor: t('auto.Info.30.a470d2'),
+    vendor: t('auto.Info.a470d2e2'),
     smtp: 'smtp.139.com',
     ports: [{ value: 465, type: 'ssl' }],
-    authSummary: t('auto.Info.31.dada70'),
+    authSummary: t('auto.Info.dada7060'),
     authNotes: [
-      t('auto.Info.32.06ca0b'),
-      t('auto.Info.33.bb188f'),
-      t('auto.Info.34.e95feb')
+      t('auto.Info.06ca0bf7'),
+      t('auto.Info.bb188f2a'),
+      t('auto.Info.e95feba9')
     ],
     registerUrl: 'https://mail.10086.cn'
   },
@@ -159,11 +159,11 @@ const emailProviders = ref([
     vendor: 'Google',
     smtp: 'smtp.gmail.com',
     ports: [{ value: 587, type: 'tls' }],
-    authSummary: t('auto.Info.35.c9b726'),
+    authSummary: t('auto.Info.c9b726f6'),
     authNotes: [
-      t('auto.Info.36.79274d'),
-      t('auto.Info.37.3233b8'),
-      t('auto.Info.38.63c4ca')
+      t('auto.Info.79274df4'),
+      t('auto.Info.3233b822'),
+      t('auto.Info.63c4ca0c')
     ],
     registerUrl: 'https://mail.google.com'
   },
@@ -173,11 +173,11 @@ const emailProviders = ref([
     vendor: 'Microsoft',
     smtp: 'smtp.office365.com',
     ports: [{ value: 587, type: 'tls' }],
-    authSummary: t('auto.Info.39.8867c4'),
+    authSummary: t('auto.Info.8867c4ae'),
     authNotes: [
-      t('auto.Info.40.ed753e'),
-      t('auto.Info.41.21c750'),
-      t('auto.Info.42.f9f2ab')
+      t('auto.Info.ed753e28'),
+      t('auto.Info.21c75016'),
+      t('auto.Info.f9f2abd9')
     ],
     registerUrl: 'https://outlook.live.com'
   },
@@ -187,11 +187,11 @@ const emailProviders = ref([
     vendor: 'Yahoo',
     smtp: 'smtp.mail.yahoo.com',
     ports: [{ value: 465, type: 'ssl' }],
-    authSummary: t('auto.Info.42.f9f2ab'),
+    authSummary: t('auto.Info.f9f2abd9'),
     authNotes: [
-      t('auto.Info.43.def2c9'),
-      t('auto.Info.42.f9f2ab'),
-      t('auto.Info.44.e5595d')
+      t('auto.Info.def2c9d7'),
+      t('auto.Info.f9f2abd9'),
+      t('auto.Info.e5595dec')
     ],
     registerUrl: 'https://mail.yahoo.com'
   },
@@ -201,8 +201,8 @@ const emailProviders = ref([
     vendor: 'Verizon',
     smtp: 'smtp.aol.com',
     ports: [{ value: 587, type: 'tls' }],
-    authSummary: t('auto.Info.45.81f6fc'),
-    authNotes: [t('auto.Info.46.e21cbe'), t('auto.Info.47.10b4d6')],
+    authSummary: t('auto.Info.81f6fc55'),
+    authNotes: [t('auto.Info.e21cbe61'), t('auto.Info.10b4d692')],
     registerUrl: 'https://mail.aol.com'
   },
   {
@@ -211,8 +211,8 @@ const emailProviders = ref([
     vendor: 'United Internet',
     smtp: 'smtp.gmx.com',
     ports: [{ value: 465, type: 'ssl' }],
-    authSummary: t('auto.Info.48.d8f5f9'),
-    authNotes: [t('auto.Info.49.5e85d3'), t('auto.Info.50.97f705')],
+    authSummary: t('auto.Info.d8f5f97f'),
+    authNotes: [t('auto.Info.5e85d3c7'), t('auto.Info.97f705e0')],
     registerUrl: 'https://www.gmx.com'
   }
 ]);

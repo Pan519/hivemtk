@@ -12,7 +12,7 @@
     />
     <div v-else class="loading-container">
       <div class="loading-spinner"></div>
-      <p>{{ $t('auto.Index.1.bd0271') }}</p>
+      <p>{{ $t('auto.Index.bd0271ed') }}</p>
     </div>
   </div>
 </template>
@@ -31,7 +31,7 @@ const router = useRouter()
 const { t } = useI18n()
 
 const channelId = ref('default');
-const channelTitle = ref(t('auto.Index.2.7f72e8'))
+const channelTitle = ref(t('auto.Index.7f72e8fe'))
 const widgetColor = ref('#1989fa')
 const source = ref('')
 const cardId = ref('')

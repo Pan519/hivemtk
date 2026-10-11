@@ -16,37 +16,37 @@
         <div class="card-header">
           <span>{{ $t('话术列表') }}</span>
           <div>
-            <el-select v-model="filterScenario" ::placeholder="$t('auto.List.1.5d1d73')" clearable style="width: 130px; margin-right: 10px">
-              <el-option ::label="$t('auto.List.2.ff2c67')" value="opening" />
-              <el-option ::label="$t('auto.List.3.0b8352')" value="follow" />
-              <el-option ::label="$t('auto.List.4.b65c58')" value="objection" />
-              <el-option ::label="$t('auto.List.5.655aed')" value="closing" />
+            <el-select v-model="filterScenario" ::placeholder="$t('auto.List.5d1d7351')" clearable style="width: 130px; margin-right: 10px">
+              <el-option ::label="$t('auto.List.ff2c676a')" value="opening" />
+              <el-option ::label="$t('auto.List.0b8352e6')" value="follow" />
+              <el-option ::label="$t('auto.List.b65c587d')" value="objection" />
+              <el-option ::label="$t('auto.List.655aed99')" value="closing" />
             </el-select>
-            <el-input v-model="searchKeyword" ::placeholder="$t('auto.List.6.59ecb4')" clearable style="width: 200px" />
+            <el-input v-model="searchKeyword" ::placeholder="$t('auto.List.59ecb46e')" clearable style="width: 200px" />
           </div>
         </div>
       </template>
       <el-table :data="filteredScripts" v-loading="loading" stripe>
-        <el-table-column prop="title" :label="$t('auto.List.7.32c65d')" min-width="180" />
-        <el-table-column prop="scenario" :label="$t('auto.List.8.c93165')" width="100">
+        <el-table-column prop="title" :label="$t('auto.List.32c65d8d')" min-width="180" />
+        <el-table-column prop="scenario" :label="$t('auto.List.c931653c')" width="100">
           <template #default="{ row }">
             <el-tag>{{ getScenarioText(row.scenario) }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="content" :label="$t('auto.List.9.2d711b')" min-width="300" show-overflow-tooltip />
-        <el-table-column prop="useCount" :label="$t('auto.List.10.194df9')" width="100" />
-        <el-table-column prop="effectiveness" :label="$t('auto.List.11.65a647')" width="120">
+        <el-table-column prop="content" :label="$t('auto.List.2d711b09')" min-width="300" show-overflow-tooltip />
+        <el-table-column prop="useCount" :label="$t('auto.List.194df98d')" width="100" />
+        <el-table-column prop="effectiveness" :label="$t('auto.List.65a64798')" width="120">
           <template #default="{ row }">
             <el-rate v-model="row.effectiveness" disabled size="small" />
           </template>
         </el-table-column>
-        <el-table-column prop="updatedAt" :label="$t('auto.List.12.a001a2')" width="180" />
-        <el-table-column :label="$t('auto.List.13.2b6bc0')" width="250" fixed="right">
+        <el-table-column prop="updatedAt" :label="$t('auto.List.a001a226')" width="180" />
+        <el-table-column :label="$t('auto.List.2b6bc0f2')" width="250" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" @click="useScript(row)">{{ $t('auto.List.28.ecff77') }}</el-button>
-            <el-button link type="primary" @click="editScript(row)">{{ $t('auto.List.29.95b351') }}</el-button>
-            <el-button link type="primary" @click="copyScript(row)">{{ $t('auto.List.30.79d3ab') }}</el-button>
-            <el-button link type="danger" @click="deleteScript(row)">{{ $t('auto.List.31.2f4aad') }}</el-button>
+            <el-button link type="primary" @click="useScript(row)">{{ $t('auto.List.ecff77a8') }}</el-button>
+            <el-button link type="primary" @click="editScript(row)">{{ $t('auto.List.95b351c8') }}</el-button>
+            <el-button link type="primary" @click="copyScript(row)">{{ $t('auto.List.79d3abe9') }}</el-button>
+            <el-button link type="danger" @click="deleteScript(row)">{{ $t('auto.List.2f4aaddd') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -54,38 +54,38 @@
 
     <el-dialog v-model="dialogVisible" :title="dialogTitle" width="700px">
       <el-form :model="form" :rules="formRules" ref="formRef" label-width="100px">
-        <el-form-item :label="$t('auto.List.14.044363')" prop="title">
+        <el-form-item :label="$t('auto.List.04436328')" prop="title">
           <el-input v-model="form.title" />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.15.7efcb0')" prop="scenario">
+        <el-form-item :label="$t('auto.List.7efcb0ce')" prop="scenario">
           <el-select v-model="form.scenario" style="width: 100%">
-            <el-option :label="$t('auto.List.16.c0a428')" value="opening" />
-            <el-option :label="$t('auto.List.17.994dcf')" value="follow" />
-            <el-option :label="$t('auto.List.18.054579')" value="objection" />
-            <el-option :label="$t('auto.List.19.87acf3')" value="closing" />
+            <el-option :label="$t('auto.List.c0a428ee')" value="opening" />
+            <el-option :label="$t('auto.List.994dcf28')" value="follow" />
+            <el-option :label="$t('auto.List.054579de')" value="objection" />
+            <el-option :label="$t('auto.List.87acf327')" value="closing" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.List.20.48dbef')" prop="category">
-          <el-select v-model="form.category" :placeholder="$t('auto.List.21.9ef9e3')" filterable allow-create default-first-option style="width: 100%">
+        <el-form-item :label="$t('auto.List.48dbefe8')" prop="category">
+          <el-select v-model="form.category" :placeholder="$t('auto.List.9ef9e35f')" filterable allow-create default-first-option style="width: 100%">
             <el-option v-for="cat in categories" :key="cat.id" :label="cat.name" :value="cat.name" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.List.22.4395ee')" prop="content">
+        <el-form-item :label="$t('auto.List.4395eead')" prop="content">
           <el-input v-model="form.content" type="textarea" :rows="6" />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.23.ddc7d2')">
-          <el-input v-model="form.variables" :placeholder="$t('auto.List.24.c0b802')" />
+        <el-form-item :label="$t('auto.List.ddc7d28b')">
+          <el-input v-model="form.variables" :placeholder="$t('auto.List.c0b8027e')" />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.25.14d342')">
-          <el-input v-model="form.tags" :placeholder="$t('auto.List.26.c379e8')" />
+        <el-form-item :label="$t('auto.List.14d34236')">
+          <el-input v-model="form.tags" :placeholder="$t('auto.List.c379e80c')" />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.27.2432b5')">
+        <el-form-item :label="$t('auto.List.2432b575')">
           <el-input v-model="form.remark" type="textarea" :rows="2" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="dialogVisible = false">{{ $t('auto.List.32.625fb2') }}</el-button>
-        <el-button type="primary" @click="submitForm">{{ $t('auto.List.33.38cf16') }}</el-button>
+        <el-button @click="dialogVisible = false">{{ $t('auto.List.625fb26b') }}</el-button>
+        <el-button type="primary" @click="submitForm">{{ $t('auto.List.38cf16f2') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -108,7 +108,7 @@ const searchKeyword = ref('')
 const filterScenario = ref('')
 const scripts = ref([])
 const dialogVisible = ref(false)
-const dialogTitle = ref(t('auto.List.34.fd722d'))
+const dialogTitle = ref(t('auto.List.fd722d31'))
 const formRef = ref()
 const form = ref({
   id: 0,
@@ -121,10 +121,10 @@ const form = ref({
   remark: ''
 })
 const formRules = {
-  title: [{ required: true, message: i18n.global.t(t('auto.List.35.96641a')), trigger: 'blur' }],
-  scenario: [{ required: true, message: i18n.global.t(t('auto.List.36.75f77a')), trigger: 'change' }],
-  category: [{ required: true, message: i18n.global.t(t('auto.List.21.9ef9e3')), trigger: 'change' }],
-  content: [{ required: true, message: i18n.global.t(t('auto.List.37.a11cc7')), trigger: 'blur' }]
+  title: [{ required: true, message: i18n.global.t(t('auto.List.96641a78')), trigger: 'blur' }],
+  scenario: [{ required: true, message: i18n.global.t(t('auto.List.75f77abd')), trigger: 'change' }],
+  category: [{ required: true, message: i18n.global.t(t('auto.List.9ef9e35f')), trigger: 'change' }],
+  content: [{ required: true, message: i18n.global.t(t('auto.List.a11cc7a6')), trigger: 'blur' }]
 }
 
 const categories = ref([]);
@@ -145,7 +145,7 @@ const filteredScripts = computed(() => {
 })
 
 const getScenarioText = (s) => {
-  const map = { opening: t('auto.List.16.c0a428'), follow: t('auto.List.17.994dcf'), objection: t('auto.List.18.054579'), closing: t('auto.List.19.87acf3') }
+  const map = { opening: t('auto.List.c0a428ee'), follow: t('auto.List.994dcf28'), objection: t('auto.List.054579de'), closing: t('auto.List.87acf327') }
   return map[s] || s
 }
 
@@ -161,13 +161,13 @@ const refreshData = async () => {
 
 const showCreateDialog = () => {
   form.value = { id: 0, title: '', scenario: 'opening', category: '', content: '', variables: '', tags: '', remark: '' }
-  dialogTitle.value = t('auto.List.34.fd722d')
+  dialogTitle.value = t('auto.List.fd722d31')
   dialogVisible.value = true
 }
 
 const editScript = (row) => {
   form.value = { ...row }
-  dialogTitle.value = t('auto.List.38.28400f')
+  dialogTitle.value = t('auto.List.28400f19')
   dialogVisible.value = true
 }
 
@@ -191,34 +191,34 @@ const submitForm = async () => {
       } else {
         await createScript(payload)
       }
-      ElMessage.success(i18n.global.t(t('auto.List.39.3b1083')))
+      ElMessage.success(i18n.global.t(t('auto.List.3b108349')))
       dialogVisible.value = false
       refreshData()
     } catch (error) {
-      ElMessage.error(i18n.global.t(t('auto.List.40.6de920')))
+      ElMessage.error(i18n.global.t(t('auto.List.6de920b4')))
     }
   })
 }
 
 const useScript = async (row) => {
   await useScriptApi(row.id)
-  ElMessage.success(i18n.global.t(t('auto.List.41.634121')))
+  ElMessage.success(i18n.global.t(t('auto.List.63412144')))
   navigator.clipboard.writeText(row.content)
 }
 
 const copyScript = (row) => {
   navigator.clipboard.writeText(row.content)
-  ElMessage.success(i18n.global.t(t('auto.List.42.52e6ab')))
+  ElMessage.success(i18n.global.t(t('auto.List.52e6abbe')))
 }
 
 const deleteScript = async (row) => {
   try {
-    await ElMessageBox.confirm(`确定删除话术 "${row.title}"？`, t('auto.List.43.e83a25'), { type: 'warning' })
+    await ElMessageBox.confirm(`确定删除话术 "${row.title}"？`, t('auto.List.e83a256e'), { type: 'warning' })
     await deleteScriptApi(row.id)
-    ElMessage.success(i18n.global.t(t('auto.List.44.0007d1')))
+    ElMessage.success(i18n.global.t(t('auto.List.0007d170')))
     refreshData()
   } catch (e) {
-    if (e !== 'cancel') ElMessage.error(i18n.global.t(t('auto.List.45.acf066')))
+    if (e !== 'cancel') ElMessage.error(i18n.global.t(t('auto.List.acf0664a')))
   }
 }
 

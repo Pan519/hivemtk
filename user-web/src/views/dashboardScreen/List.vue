@@ -4,7 +4,7 @@
       <h1>{{ $t('营销数据大屏') }}</h1>
       <div class="header-info">
         <span class="time">{{ currentTime }}</span>
-        <el-button type="primary" @click="$router.push('/dashboardScreen/builder')">{{ $t('auto.List.1.0226ed') }}</el-button>
+        <el-button type="primary" @click="$router.push('/dashboardScreen/builder')">{{ $t('auto.List.0226ed61') }}</el-button>
         <el-button type="primary" @click="toggleFullscreen">
           <el-icon><FullScreen /></el-icon>
           {{ isFullscreen ? '退出全屏' : '全屏' }}
@@ -31,7 +31,7 @@
       <el-col :span="12">
         <el-card class="chart-card">
           <template #header>
-            <span>{{ $t('auto.List.2.28cc2e') }}</span>
+            <span>{{ $t('auto.List.28cc2eec') }}</span>
           </template>
           <div ref="trendChartRef" class="chart-container"></div>
         </el-card>
@@ -39,7 +39,7 @@
       <el-col :span="12">
         <el-card class="chart-card">
           <template #header>
-            <span>{{ $t('auto.List.3.da46d2') }}</span>
+            <span>{{ $t('auto.List.da46d2d8') }}</span>
           </template>
           <div ref="channelChartRef" class="chart-container"></div>
         </el-card>
@@ -50,7 +50,7 @@
       <el-col :span="8">
         <el-card class="chart-card">
           <template #header>
-            <span>{{ $t('auto.List.4.607379') }}</span>
+            <span>{{ $t('auto.List.6073791d') }}</span>
           </template>
           <div ref="sourceChartRef" class="chart-container"></div>
         </el-card>
@@ -58,7 +58,7 @@
       <el-col :span="8">
         <el-card class="chart-card">
           <template #header>
-            <span>{{ $t('auto.List.5.e78418') }}</span>
+            <span>{{ $t('auto.List.e78418a3') }}</span>
           </template>
           <div ref="funnelChartRef" class="chart-container"></div>
         </el-card>
@@ -66,7 +66,7 @@
       <el-col :span="8">
         <el-card class="chart-card">
           <template #header>
-            <span>{{ $t('auto.List.6.f34609') }}</span>
+            <span>{{ $t('auto.List.f3460980') }}</span>
           </template>
           <div class="realtime-list">
             <div v-for="(item, idx) in realtimeActivities" :key="idx" class="activity-item">
@@ -83,7 +83,7 @@
       <el-col :span="12">
         <el-card class="chart-card">
           <template #header>
-            <span>{{ $t('auto.List.7.a5f8f9') }}</span>
+            <span>{{ $t('auto.List.a5f8f963') }}</span>
           </template>
           <div ref="mapChartRef" class="chart-container"></div>
         </el-card>
@@ -91,7 +91,7 @@
       <el-col :span="12">
         <el-card class="chart-card">
           <template #header>
-            <span>{{ $t('auto.List.8.61c7f2') }}</span>
+            <span>{{ $t('auto.List.61c7f262') }}</span>
           </template>
           <div ref="conversionChartRef" class="chart-container"></div>
         </el-card>
@@ -167,14 +167,14 @@ const initCharts = (data) => {
     trendChart = safeInit(trendChartRef.value)
     trendChart.setOption({
       tooltip: { trigger: 'axis' },
-      legend: { data: [t('auto.List.9.d5c0eb'), t('auto.List.10.ad46a9'), t('auto.List.11.613b48')], textStyle: { color: '#fff' } },
+      legend: { data: [t('auto.List.d5c0ebde'), t('auto.List.ad46a96c'), t('auto.List.613b48bd')], textStyle: { color: '#fff' } },
       grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
       xAxis: { type: 'category', data: data.trend?.dates || [], axisLine: { lineStyle: { color: '#fff' } } },
       yAxis: { type: 'value', axisLine: { lineStyle: { color: '#fff' } } },
       series: [
-        { name: t('auto.List.9.d5c0eb'), type: 'line', smooth: true, data: data.trend?.visits || [], itemStyle: { color: '#5470c6' } },
-        { name: t('auto.List.10.ad46a9'), type: 'line', smooth: true, data: data.trend?.clues || [], itemStyle: { color: '#91cc75' } },
-        { name: t('auto.List.11.613b48'), type: 'line', smooth: true, data: data.trend?.conversions || [], itemStyle: { color: '#ee6666' } }
+        { name: t('auto.List.d5c0ebde'), type: 'line', smooth: true, data: data.trend?.visits || [], itemStyle: { color: '#5470c6' } },
+        { name: t('auto.List.ad46a96c'), type: 'line', smooth: true, data: data.trend?.clues || [], itemStyle: { color: '#91cc75' } },
+        { name: t('auto.List.613b48bd'), type: 'line', smooth: true, data: data.trend?.conversions || [], itemStyle: { color: '#ee6666' } }
       ]
     })
   }
@@ -209,7 +209,7 @@ const initCharts = (data) => {
     funnelChart.setOption({
       tooltip: { trigger: 'item', formatter: '{a} <br/>{b}: {c}%' },
       series: [{
-        name: t('auto.List.12.be4e6e'),
+        name: t('auto.List.be4e6e85'),
         type: 'funnel',
         left: '10%', top: '10%', bottom: '10%', width: '80%',
         data: data.funnel || []
@@ -241,12 +241,12 @@ const initCharts = (data) => {
     conversionChart = safeInit(conversionChartRef.value)
     conversionChart.setOption({
       tooltip: { trigger: 'axis' },
-      legend: { data: [t('auto.List.13.725205'), t('auto.List.14.79abd4')], textStyle: { color: '#fff' } },
+      legend: { data: [t('auto.List.72520580'), t('auto.List.79abd4ee')], textStyle: { color: '#fff' } },
       xAxis: { type: 'category', data: data.conversion?.dates || [], axisLine: { lineStyle: { color: '#fff' } } },
       yAxis: { type: 'value', axisLine: { lineStyle: { color: '#fff' } } },
       series: [
-        { name: t('auto.List.13.725205'), type: 'bar', data: data.conversion?.thisWeek || [], itemStyle: { color: '#5470c6' } },
-        { name: t('auto.List.14.79abd4'), type: 'bar', data: data.conversion?.lastWeek || [], itemStyle: { color: '#91cc75' } }
+        { name: t('auto.List.72520580'), type: 'bar', data: data.conversion?.thisWeek || [], itemStyle: { color: '#5470c6' } },
+        { name: t('auto.List.79abd4ee'), type: 'bar', data: data.conversion?.lastWeek || [], itemStyle: { color: '#91cc75' } }
       ]
     })
   }

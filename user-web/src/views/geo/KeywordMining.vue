@@ -6,10 +6,10 @@
       <el-form :model="query" label-width="92px" class="search-form">
         <el-row :gutter="16">
           <el-col :xs="24" :sm="12" :md="8">
-            <el-form-item :label="$t('auto.KeywordMining.1.d83af8')">
+            <el-form-item :label="$t('auto.KeywordMining.d83af87b')">
               <el-input
                 v-model="query.seed_words"
-                :placeholder="$t('auto.KeywordMining.2.40bb36')"
+                :placeholder="$t('auto.KeywordMining.40bb3600')"
                 type="textarea"
                 :rows="2"
                 clearable
@@ -17,30 +17,30 @@
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="12" :md="8">
-            <el-form-item :label="$t('auto.KeywordMining.3.037701')">
+            <el-form-item :label="$t('auto.KeywordMining.037701d5')">
               <el-select v-model="query.mode" style="width: 100%">
-                <el-option :label="$t('auto.KeywordMining.4.e6b171')" value="llm" />
-                <el-option :label="$t('auto.KeywordMining.5.8446cf')" value="combination" />
-                <el-option :label="$t('auto.KeywordMining.6.29508c')" value="mixed" />
+                <el-option :label="$t('auto.KeywordMining.e6b1710b')" value="llm" />
+                <el-option :label="$t('auto.KeywordMining.8446cfc8')" value="combination" />
+                <el-option :label="$t('auto.KeywordMining.29508c51')" value="mixed" />
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="12" :md="4" class="action-col">
             <el-button type="primary" :loading="mining" @click="handleMine">
               <el-icon><Search /></el-icon>
-              <span>{{ $t('auto.KeywordMining.27.8b88a7') }}</span>
+              <span>{{ $t('auto.KeywordMining.8b88a780') }}</span>
             </el-button>
           </el-col>
         </el-row>
         <el-row :gutter="16">
           <el-col :xs="24" :md="14">
-            <el-form-item :label="$t('auto.KeywordMining.7.5b5734')">
+            <el-form-item :label="$t('auto.KeywordMining.5b573406')">
               <el-checkbox-group v-model="query.engines">
-                <el-checkbox value="baidu">{{ $t('auto.KeywordMining.28.a3f4a5') }}</el-checkbox>
+                <el-checkbox value="baidu">{{ $t('auto.KeywordMining.a3f4a5b0') }}</el-checkbox>
                 <el-checkbox value="bing">Bing</el-checkbox>
                 <el-checkbox value="google">Google</el-checkbox>
                 <el-checkbox value="360">360</el-checkbox>
-                <el-checkbox value="sogou">{{ $t('auto.KeywordMining.29.10d247') }}</el-checkbox>
+                <el-checkbox value="sogou">{{ $t('auto.KeywordMining.10d247e0') }}</el-checkbox>
               </el-checkbox-group>
             </el-form-item>
           </el-col>
@@ -48,11 +48,11 @@
             <div class="pipeline-actions">
               <el-button :loading="suggesting" @click="handleCrawlSuggest">
                 <el-icon><Download /></el-icon>
-                <span>{{ $t('auto.KeywordMining.30.fe2805') }}</span>
+                <span>{{ $t('auto.KeywordMining.fe28055e') }}</span>
               </el-button>
               <el-button :loading="longtailing" @click="handleLongtail">
                 <el-icon><MagicStick /></el-icon>
-                <span>{{ $t('auto.KeywordMining.31.3aedd0') }}</span>
+                <span>{{ $t('auto.KeywordMining.3aedd097') }}</span>
               </el-button>
             </div>
           </el-col>
@@ -64,8 +64,8 @@
     <el-card shadow="never" class="funnel-card">
       <template #header>
         <div class="card-header">
-          <span>{{ $t('auto.KeywordMining.32.06c839') }}</span>
-          <el-button link type="primary" :loading="funnelLoading" @click="loadFunnel">{{ $t('auto.KeywordMining.33.694fc5') }}</el-button>
+          <span>{{ $t('auto.KeywordMining.06c83912') }}</span>
+          <el-button link type="primary" :loading="funnelLoading" @click="loadFunnel">{{ $t('auto.KeywordMining.694fc5ef') }}</el-button>
         </div>
       </template>
       <el-row :gutter="16">
@@ -80,7 +80,7 @@
             </div>
           </div>
           <div class="funnel-meta">
-            <span>{{ $t('auto.KeywordMining.34.599b5a') }}<b>{{ funnel.total || 0 }}</b></span>
+            <span>{{ $t('auto.KeywordMining.599b5a32') }}<b>{{ funnel.total || 0 }}</b></span>
             <span v-for="stage in funnelStageList" :key="stage.name" class="funnel-stage-tag">
               {{ stageLabel(stage.name) }}: {{ stage.count }}
             </span>
@@ -88,20 +88,20 @@
         </el-col>
         <el-col :xs="24" :md="10">
           <div class="funnel-side">
-            <div class="funnel-side-title">{{ $t('auto.KeywordMining.35.1b65f2') }}</div>
+            <div class="funnel-side-title">{{ $t('auto.KeywordMining.1b65f20b') }}</div>
             <div v-if="engineList.length" class="tag-wrap">
               <el-tag v-for="e in engineList" :key="e.name" size="small" effect="light">
                 {{ engineLabel(e.name) }} · {{ e.count }}
               </el-tag>
             </div>
-            <el-empty v-else :description="$t('auto.KeywordMining.8.7609ee')" :image-size="48" />
-            <div class="funnel-side-title" style="margin-top: 12px">{{ $t('auto.KeywordMining.36.0ae513') }}</div>
+            <el-empty v-else :description="$t('auto.KeywordMining.7609eeb2')" :image-size="48" />
+            <div class="funnel-side-title" style="margin-top: 12px">{{ $t('auto.KeywordMining.0ae513b8') }}</div>
             <div v-if="intentList.length" class="tag-wrap">
               <el-tag v-for="i in intentList" :key="i.name" size="small" type="success" effect="plain">
                 {{ intentLabel(i.name) }} · {{ i.count }}
               </el-tag>
             </div>
-            <el-empty v-else :description="$t('auto.KeywordMining.9.fee39c')" :image-size="48" />
+            <el-empty v-else :description="$t('auto.KeywordMining.fee39ccf')" :image-size="48" />
           </div>
         </el-col>
       </el-row>
@@ -111,46 +111,46 @@
     <el-card shadow="never" class="table-card">
       <template #header>
         <div class="card-header">
-          <span>{{ $t('auto.KeywordMining.37.f3f5fd') }}</span>
+          <span>{{ $t('auto.KeywordMining.f3f5fd0c') }}</span>
           <div class="header-actions">
-            <el-select v-model="listQuery.layer" :placeholder="$t('auto.KeywordMining.10.8f3acb')" clearable style="width: 130px" @change="handleLayerChange">
-              <el-option :label="$t('auto.KeywordMining.1.d83af8')" value="seed" />
-              <el-option :label="$t('auto.KeywordMining.11.a85b92')" value="related" />
-              <el-option :label="$t('auto.KeywordMining.12.719b80')" value="suggest" />
-              <el-option :label="$t('auto.KeywordMining.13.022f20')" value="longtail" />
+            <el-select v-model="listQuery.layer" :placeholder="$t('auto.KeywordMining.8f3acb59')" clearable style="width: 130px" @change="handleLayerChange">
+              <el-option :label="$t('auto.KeywordMining.d83af87b')" value="seed" />
+              <el-option :label="$t('auto.KeywordMining.a85b92a2')" value="related" />
+              <el-option :label="$t('auto.KeywordMining.719b8008')" value="suggest" />
+              <el-option :label="$t('auto.KeywordMining.022f200b')" value="longtail" />
             </el-select>
             <el-input
               v-model="listQuery.search"
-              :placeholder="$t('auto.KeywordMining.14.9e415f')"
+              :placeholder="$t('auto.KeywordMining.9e415f99')"
               clearable
               style="width: 240px"
               @keyup.enter="loadList"
               @clear="loadList"
             />
-            <el-button @click="loadList">{{ $t('auto.KeywordMining.38.bee912') }}</el-button>
+            <el-button @click="loadList">{{ $t('auto.KeywordMining.bee912d7') }}</el-button>
           </div>
         </div>
       </template>
 
       <el-table v-loading="loading" :data="tableData" stripe style="width: 100%">
         <el-table-column type="selection" width="44" />
-        <el-table-column prop="keyword" :label="$t('auto.KeywordMining.15.9699a5')" min-width="180" show-overflow-tooltip />
-        <el-table-column prop="layer" :label="$t('auto.KeywordMining.16.6896da')" width="90">
+        <el-table-column prop="keyword" :label="$t('auto.KeywordMining.9699a50e')" min-width="180" show-overflow-tooltip />
+        <el-table-column prop="layer" :label="$t('auto.KeywordMining.6896da74')" width="90">
           <template #default="{ row }">
             <el-tag size="small" :type="layerTagType(row.layer)">{{ layerLabel(row.layer) }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="parent_keyword" :label="$t('auto.KeywordMining.17.514925')" width="130" show-overflow-tooltip>
+        <el-table-column prop="parent_keyword" :label="$t('auto.KeywordMining.514925c3')" width="130" show-overflow-tooltip>
           <template #default="{ row }">{{ row.parent_keyword || '—' }}</template>
         </el-table-column>
-        <el-table-column prop="category" :label="$t('auto.KeywordMining.18.383a6d')" width="110" show-overflow-tooltip />
-        <el-table-column prop="source" :label="$t('auto.KeywordMining.19.26ca20')" width="100">
+        <el-table-column prop="category" :label="$t('auto.KeywordMining.383a6d16')" width="110" show-overflow-tooltip />
+        <el-table-column prop="source" :label="$t('auto.KeywordMining.26ca20b1')" width="100">
           <template #default="{ row }">
             <el-tag size="small" :type="sourceTagType(row.source)">{{ row.source || '—' }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="search_volume" :label="$t('auto.KeywordMining.20.71cdef')" width="90" align="right" />
-        <el-table-column prop="difficulty" :label="$t('auto.KeywordMining.21.3f256e')" width="80" align="center">
+        <el-table-column prop="search_volume" :label="$t('auto.KeywordMining.71cdef53')" width="90" align="right" />
+        <el-table-column prop="difficulty" :label="$t('auto.KeywordMining.3f256e10')" width="80" align="center">
           <template #default="{ row }">
             <el-progress
               v-if="row.difficulty != null"
@@ -161,29 +161,29 @@
             <span v-else>—</span>
           </template>
         </el-table-column>
-        <el-table-column prop="query_intent" :label="$t('auto.KeywordMining.22.764aca')" width="90">
+        <el-table-column prop="query_intent" :label="$t('auto.KeywordMining.764aca4e')" width="90">
           <template #default="{ row }">
             <el-tag size="small" effect="plain">{{ intentLabel(row.query_intent || row.intent) || '—' }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="suggest_count" :label="$t('auto.KeywordMining.23.96247f')" width="90" align="center">
+        <el-table-column prop="suggest_count" :label="$t('auto.KeywordMining.96247fc0')" width="90" align="center">
           <template #default="{ row }">
             <span v-if="row.suggest_count > 0">{{ row.suggest_count }} 个引擎</span>
             <span v-else>—</span>
           </template>
         </el-table-column>
-        <el-table-column prop="status" :label="$t('auto.KeywordMining.24.3fea7c')" width="80">
+        <el-table-column prop="status" :label="$t('auto.KeywordMining.3fea7ca7')" width="80">
           <template #default="{ row }">
-            <el-tag size="small" ::type="$t('auto.KeywordMining.25.550edc')">
+            <el-tag size="small" ::type="$t('auto.KeywordMining.550edcf5')">
               {{ row.status || '待处理' }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.KeywordMining.26.2b6bc0')" width="220" fixed="right">
+        <el-table-column :label="$t('auto.KeywordMining.2b6bc0f2')" width="220" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" :loading="row._expanding" @click="handleExpand(row)">{{ $t('auto.KeywordMining.39.7cff93') }}</el-button>
-            <el-button link type="primary" :loading="row._clustering" @click="handleCluster(row)">{{ $t('auto.KeywordMining.40.b39799') }}</el-button>
-            <el-button link type="danger" @click="handleDelete(row)">{{ $t('auto.KeywordMining.41.2f4aad') }}</el-button>
+            <el-button link type="primary" :loading="row._expanding" @click="handleExpand(row)">{{ $t('auto.KeywordMining.7cff936f') }}</el-button>
+            <el-button link type="primary" :loading="row._clustering" @click="handleCluster(row)">{{ $t('auto.KeywordMining.b397993a') }}</el-button>
+            <el-button link type="danger" @click="handleDelete(row)">{{ $t('auto.KeywordMining.2f4aaddd') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -238,10 +238,10 @@ const listQuery = reactive({
 })
 
 const LAYER_META = {
-  seed: { label: t('auto.KeywordMining.1.d83af8'), color: '#409eff' },
-  related: { label: t('auto.KeywordMining.11.a85b92'), color: '#67c23a' },
-  suggest: { label: t('auto.KeywordMining.12.719b80'), color: '#e6a23c' },
-  longtail: { label: t('auto.KeywordMining.13.022f20'), color: '#f56c6c' }
+  seed: { label: t('auto.KeywordMining.d83af87b'), color: '#409eff' },
+  related: { label: t('auto.KeywordMining.a85b92a2'), color: '#67c23a' },
+  suggest: { label: t('auto.KeywordMining.719b8008'), color: '#e6a23c' },
+  longtail: { label: t('auto.KeywordMining.022f200b'), color: '#f56c6c' }
 }
 
 const funnelLayers = computed(() => {
@@ -253,10 +253,10 @@ const funnelLayers = computed(() => {
     1
   )
   return [
-    { key: 'seed', label: t('auto.KeywordMining.1.d83af8'), count: funnel.value.seed_count || 0 },
-    { key: 'related', label: t('auto.KeywordMining.11.a85b92'), count: funnel.value.related_count || 0 },
-    { key: 'suggest', label: t('auto.KeywordMining.12.719b80'), count: funnel.value.suggest_count || 0 },
-    { key: 'longtail', label: t('auto.KeywordMining.13.022f20'), count: funnel.value.longtail_count || 0 }
+    { key: 'seed', label: t('auto.KeywordMining.d83af87b'), count: funnel.value.seed_count || 0 },
+    { key: 'related', label: t('auto.KeywordMining.a85b92a2'), count: funnel.value.related_count || 0 },
+    { key: 'suggest', label: t('auto.KeywordMining.719b8008'), count: funnel.value.suggest_count || 0 },
+    { key: 'longtail', label: t('auto.KeywordMining.022f200b'), count: funnel.value.longtail_count || 0 }
   ].map(l => ({
     ...l,
     color: LAYER_META[l.key].color,
@@ -283,17 +283,17 @@ const funnelStageList = computed(() =>
     .map(([name, count]) => ({ name, count }))
 )
 
-const ENGINE_LABELS = { baidu: t('auto.KeywordMining.28.a3f4a5'), bing: 'Bing', google: 'Google', 360: '360', sogou: t('auto.KeywordMining.29.10d247') }
+const ENGINE_LABELS = { baidu: t('auto.KeywordMining.a3f4a5b0'), bing: 'Bing', google: 'Google', 360: '360', sogou: t('auto.KeywordMining.10d247e0') }
 const INTENT_LABELS = {
-  informational: t('auto.KeywordMining.42.d8c7e0'), navigational: t('auto.KeywordMining.43.056f2d'), transactional: t('auto.KeywordMining.44.2685c0'),
-  commercial: t('auto.KeywordMining.45.837171'), 信息: t('auto.KeywordMining.42.d8c7e0'), 导航: t('auto.KeywordMining.43.056f2d'), 交易: t('auto.KeywordMining.44.2685c0'), 商业: t('auto.KeywordMining.45.837171')
+  informational: t('auto.KeywordMining.d8c7e04c'), navigational: t('auto.KeywordMining.056f2d7d'), transactional: t('auto.KeywordMining.2685c0a0'),
+  commercial: t('auto.KeywordMining.837171e3'), 信息: t('auto.KeywordMining.d8c7e04c'), 导航: t('auto.KeywordMining.056f2d7d'), 交易: t('auto.KeywordMining.2685c0a0'), 商业: t('auto.KeywordMining.837171e3')
 }
-const STAGE_LABELS = { awareness: t('auto.KeywordMining.46.2351d7'), consideration: t('auto.KeywordMining.47.42d166'), decision: t('auto.KeywordMining.48.5fd3a1') }
+const STAGE_LABELS = { awareness: t('auto.KeywordMining.2351d792'), consideration: t('auto.KeywordMining.42d16622'), decision: t('auto.KeywordMining.5fd3a15c') }
 
 const engineLabel = (name) => ENGINE_LABELS[name] || name
 const intentLabel = (name) => (name ? (INTENT_LABELS[name] || name) : '')
 const stageLabel = (name) => STAGE_LABELS[name] || name
-const layerLabel = (layer) => LAYER_META[layer || 'seed']?.label || layer || t('auto.KeywordMining.1.d83af8')
+const layerLabel = (layer) => LAYER_META[layer || 'seed']?.label || layer || t('auto.KeywordMining.d83af87b')
 
 const layerTagType = (layer) => {
   const map = { seed: 'primary', related: 'success', suggest: 'warning', longtail: 'danger' }
@@ -308,7 +308,7 @@ const sourceTagType = (source) => {
 const parseSeeds = () => {
   const seeds = query.seed_words.split(/[\n\r，,]/).map(s => s.trim()).filter(Boolean)
   if (!seeds.length) {
-    ElMessage.warning(t('auto.KeywordMining.49.a922b6'))
+    ElMessage.warning(t('auto.KeywordMining.a922b671'))
     return null
   }
   return seeds
@@ -323,7 +323,7 @@ const loadList = async () => {
     tableData.value = res?.list || res?.items || res || []
     total.value = res?.total || tableData.value.length
   } catch (e) {
-    ElMessage.error(e.message || t('auto.KeywordMining.50.e156e9'))
+    ElMessage.error(e.message || t('auto.KeywordMining.e156e925'))
     tableData.value = []
     total.value = 0
   } finally {
@@ -336,7 +336,7 @@ const loadFunnel = async () => {
   try {
     funnel.value = (await geoApi.getKeywordFunnel()) || {}
   } catch (e) {
-    ElMessage.error(e.message || t('auto.KeywordMining.51.cbf6c6'))
+    ElMessage.error(e.message || t('auto.KeywordMining.cbf6c6b3'))
   } finally {
     funnelLoading.value = false
   }
@@ -349,7 +349,7 @@ const handleLayerChange = () => {
 
 const handleMine = async () => {
   if (!query.seed_words.trim()) {
-    ElMessage.warning(t('auto.KeywordMining.49.a922b6'))
+    ElMessage.warning(t('auto.KeywordMining.a922b671'))
     return
   }
   mining.value = true
@@ -363,7 +363,7 @@ const handleMine = async () => {
     listQuery.page = 1
     await Promise.all([loadList(), loadFunnel()])
   } catch (e) {
-    ElMessage.error(e.message || t('auto.KeywordMining.52.2b9d4f'))
+    ElMessage.error(e.message || t('auto.KeywordMining.2b9d4f72'))
   } finally {
     mining.value = false
   }
@@ -373,7 +373,7 @@ const handleCrawlSuggest = async () => {
   const seeds = parseSeeds()
   if (!seeds) return
   if (!query.engines.length) {
-    ElMessage.warning(t('auto.KeywordMining.53.a77c26'))
+    ElMessage.warning(t('auto.KeywordMining.a77c26f8'))
     return
   }
   suggesting.value = true
@@ -383,7 +383,7 @@ const handleCrawlSuggest = async () => {
     listQuery.page = 1
     await Promise.all([loadList(), loadFunnel()])
   } catch (e) {
-    ElMessage.error(e.message || t('auto.KeywordMining.54.91b052'))
+    ElMessage.error(e.message || t('auto.KeywordMining.91b0527a'))
   } finally {
     suggesting.value = false
   }
@@ -399,7 +399,7 @@ const handleLongtail = async () => {
     listQuery.page = 1
     await Promise.all([loadList(), loadFunnel()])
   } catch (e) {
-    ElMessage.error(e.message || t('auto.KeywordMining.55.dd3912'))
+    ElMessage.error(e.message || t('auto.KeywordMining.dd3912f0'))
   } finally {
     longtailing.value = false
   }
@@ -413,7 +413,7 @@ const handleExpand = async (row) => {
     ElMessage.success(`语义扩展完成，新增 ${expanded.length} 个近义 / 长尾词`)
     await Promise.all([loadList(), loadFunnel()])
   } catch (e) {
-    ElMessage.error(e.message || t('auto.KeywordMining.56.3c31a0'))
+    ElMessage.error(e.message || t('auto.KeywordMining.3c31a08d'))
   } finally {
     row._expanding = false
   }
@@ -423,26 +423,26 @@ const handleCluster = async (row) => {
   row._clustering = true
   try {
     await geoApi.topicCluster({ keywords: [row.keyword], brand_name: brandName.value })
-    ElMessage.success(t('auto.KeywordMining.57.f814d8'))
+    ElMessage.success(t('auto.KeywordMining.f814d81b'))
     await loadList()
   } catch (e) {
-    ElMessage.error(e.message || t('auto.KeywordMining.58.1ee42b'))
+    ElMessage.error(e.message || t('auto.KeywordMining.1ee42b7d'))
   } finally {
     row._clustering = false
   }
 }
 
 const handleDelete = (row) => {
-  ElMessageBox.confirm(`确认删除关键词「${row.keyword}」？`, t('auto.KeywordMining.59.50eaf9'), {
+  ElMessageBox.confirm(`确认删除关键词「${row.keyword}」？`, t('auto.KeywordMining.50eaf94d'), {
     type: 'warning'
   })
     .then(async () => {
       try {
         await geoApi.deleteKeyword(row.id)
-        ElMessage.success(t('auto.KeywordMining.60.5cc232'))
+        ElMessage.success(t('auto.KeywordMining.5cc23262'))
         await Promise.all([loadList(), loadFunnel()])
       } catch (e) {
-        ElMessage.error(e.message || t('auto.KeywordMining.61.acf066'))
+        ElMessage.error(e.message || t('auto.KeywordMining.acf0664a'))
       }
     })
     .catch(() => {})

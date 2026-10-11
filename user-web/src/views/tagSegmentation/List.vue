@@ -3,7 +3,7 @@
     <el-card class="header-card">
       <div class="header-content">
         <h2>{{ $t('标签分层') }}</h2>
-        <p class="subtitle">{{ $t('auto.List.41.996ed7') }}</p>
+        <p class="subtitle">{{ $t('auto.List.996ed783') }}</p>
       </div>
       <div class="header-actions">
         <el-button type="primary" @click="showTagDialog()">
@@ -18,106 +18,106 @@
     </el-card>
 
     <el-tabs v-model="activeTab" class="content-tabs">
-      <el-tab-pane ::label="$t('auto.List.1.7114ff')" name="tags">
+      <el-tab-pane ::label="$t('auto.List.7114ff89')" name="tags">
         <div class="filter-bar">
-          <el-input v-model="tagSearch" ::placeholder="$t('auto.List.2.24eabe')" clearable style="width: 220px" />
-          <el-select v-model="tagTypeFilter" ::placeholder="$t('auto.List.3.f19b72')" clearable style="width: 160px">
-            <el-option ::label="$t('auto.List.4.1b14ee')" value="manual" />
-            <el-option ::label="$t('auto.List.5.c08f63')" value="auto" />
-            <el-option ::label="$t('auto.List.6.b67742')" value="system" />
+          <el-input v-model="tagSearch" ::placeholder="$t('auto.List.24eabe70')" clearable style="width: 220px" />
+          <el-select v-model="tagTypeFilter" ::placeholder="$t('auto.List.f19b7240')" clearable style="width: 160px">
+            <el-option ::label="$t('auto.List.1b14ee3a')" value="manual" />
+            <el-option ::label="$t('auto.List.c08f63c1')" value="auto" />
+            <el-option ::label="$t('auto.List.b67742c2')" value="system" />
           </el-select>
         </div>
         <el-table :data="filteredTags" v-loading="loading.tags" stripe>
-          <template #empty><el-empty :description="$t('auto.List.7.dafa8c')" /></template>
-          <el-table-column prop="name" :label="$t('auto.List.8.341fe8')" min-width="180" show-overflow-tooltip />
-          <el-table-column :label="$t('auto.List.9.226b09')" min-width="90">
+          <template #empty><el-empty :description="$t('auto.List.dafa8c0b')" /></template>
+          <el-table-column prop="name" :label="$t('auto.List.341fe804')" min-width="180" show-overflow-tooltip />
+          <el-table-column :label="$t('auto.List.226b0912')" min-width="90">
             <template #default="{ row }">
               <el-tag :type="getTypeColor(row.tag_type || row.type || 'manual')" size="small">
                 {{ getTypeText(row.tag_type || row.type || 'manual') }}
               </el-tag>
             </template>
           </el-table-column>
-          <el-table-column :label="$t('auto.List.10.d0771a')" min-width="120" show-overflow-tooltip>
+          <el-table-column :label="$t('auto.List.d0771a42')" min-width="120" show-overflow-tooltip>
             <template #default="{ row }">{{ row.group || row.category || '默认' }}</template>
           </el-table-column>
-          <el-table-column :label="$t('auto.List.11.71cb56')" min-width="90" align="center">
+          <el-table-column :label="$t('auto.List.71cb565f')" min-width="90" align="center">
             <template #default="{ row }">{{ row.user_count ?? row.userCount ?? 0 }}</template>
           </el-table-column>
-          <el-table-column :label="$t('auto.List.12.3fea7c')" min-width="90" align="center">
+          <el-table-column :label="$t('auto.List.3fea7ca7')" min-width="90" align="center">
             <template #default="{ row }">
               <el-tag :type="row.is_active ? 'success' : 'info'" size="small">
                 {{ row.is_active ? '启用' : '禁用' }}
               </el-tag>
             </template>
           </el-table-column>
-          <el-table-column :label="$t('auto.List.13.eca37c')" min-width="160" show-overflow-tooltip>
+          <el-table-column :label="$t('auto.List.eca37cb0')" min-width="160" show-overflow-tooltip>
             <template #default="{ row }">{{ formatTime(row.created_at || row.createdAt) }}</template>
           </el-table-column>
-          <el-table-column :label="$t('auto.List.14.2b6bc0')" min-width="160" fixed="right">
+          <el-table-column :label="$t('auto.List.2b6bc0f2')" min-width="160" fixed="right">
             <template #default="{ row }">
-              <el-button link type="primary" size="small" @click="showTagDialog(row)">{{ $t('auto.List.42.95b351') }}</el-button>
-              <el-button link type="danger" size="small" @click="deleteTag(row)">{{ $t('auto.List.43.2f4aad') }}</el-button>
+              <el-button link type="primary" size="small" @click="showTagDialog(row)">{{ $t('auto.List.95b351c8') }}</el-button>
+              <el-button link type="danger" size="small" @click="deleteTag(row)">{{ $t('auto.List.2f4aaddd') }}</el-button>
             </template>
           </el-table-column>
         </el-table>
       </el-tab-pane>
 
-      <el-tab-pane :label="$t('auto.List.15.ad4676')" name="rules">
+      <el-tab-pane :label="$t('auto.List.ad46760b')" name="rules">
         <el-card>
           <template #header>
             <div class="card-header">
-              <span>{{ $t('auto.List.44.c7a994') }}</span>
+              <span>{{ $t('auto.List.c7a994f1') }}</span>
               <el-button type="primary" size="small" @click="showRuleDialog()">
                 <el-icon><Plus /></el-icon> 新增规则
               </el-button>
             </div>
           </template>
           <el-table :data="tagRuleList" v-loading="loading.rules" stripe>
-            <template #empty><el-empty :description="$t('auto.List.16.60639b')" /></template>
-            <el-table-column prop="name" :label="$t('auto.List.17.870802')" min-width="150" />
-            <el-table-column prop="condition" :label="$t('auto.List.18.65939c')" min-width="260" show-overflow-tooltip />
-            <el-table-column prop="tagName" :label="$t('auto.List.19.fedbca')" width="140">
+            <template #empty><el-empty :description="$t('auto.List.60639b1a')" /></template>
+            <el-table-column prop="name" :label="$t('auto.List.87080256')" min-width="150" />
+            <el-table-column prop="condition" :label="$t('auto.List.65939ccd')" min-width="260" show-overflow-tooltip />
+            <el-table-column prop="tagName" :label="$t('auto.List.fedbcac8')" width="140">
               <template #default="{ row }">
                 <el-tag size="small">{{ row.tagName }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="status" :label="$t('auto.List.12.3fea7c')" width="100">
+            <el-table-column prop="status" :label="$t('auto.List.3fea7ca7')" width="100">
               <template #default="{ row }">
                 <el-tag :type="getStatusTagType(row.status)" size="small">
                   {{ getStatusLabel(row.status) }}
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="matchedCount" :label="$t('auto.List.20.2f0aac')" width="100" align="center" />
-            <el-table-column :label="$t('auto.List.14.2b6bc0')" width="180" fixed="right">
+            <el-table-column prop="matchedCount" :label="$t('auto.List.2f0aacde')" width="100" align="center" />
+            <el-table-column :label="$t('auto.List.2b6bc0f2')" width="180" fixed="right">
               <template #default="{ row }">
-                <el-button link type="primary" @click="showRuleDialog(row)">{{ $t('auto.List.42.95b351') }}</el-button>
-                <el-button link type="danger" @click="deleteRule(row)">{{ $t('auto.List.43.2f4aad') }}</el-button>
+                <el-button link type="primary" @click="showRuleDialog(row)">{{ $t('auto.List.95b351c8') }}</el-button>
+                <el-button link type="danger" @click="deleteRule(row)">{{ $t('auto.List.2f4aaddd') }}</el-button>
               </template>
             </el-table-column>
           </el-table>
         </el-card>
       </el-tab-pane>
 
-      <el-tab-pane :label="$t('auto.List.21.b61fbd')" name="strategy">
+      <el-tab-pane :label="$t('auto.List.b61fbd90')" name="strategy">
         <el-card v-loading="loading.strategy">
           <template #header>
             <div class="card-header">
-              <span>{{ $t('auto.List.45.e9f023') }}</span>
-              <el-button type="primary" size="small" @click="saveStrategy">{{ $t('auto.List.46.2d3f52') }}</el-button>
+              <span>{{ $t('auto.List.e9f023d7') }}</span>
+              <el-button type="primary" size="small" @click="saveStrategy">{{ $t('auto.List.2d3f52b4') }}</el-button>
             </div>
           </template>
           <el-table :data="strategyList" stripe>
-            <template #empty><el-empty :description="$t('auto.List.22.f4c3a4')" /></template>
-            <el-table-column prop="layer" :label="$t('auto.List.23.a8d7cf')" width="160">
+            <template #empty><el-empty :description="$t('auto.List.f4c3a43e')" /></template>
+            <el-table-column prop="layer" :label="$t('auto.List.a8d7cfa2')" width="160">
               <template #default="{ row }">
                 <el-tag :type="getLayerColor(row.layer)">{{ row.layer }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="description" :label="$t('auto.List.24.dcced8')" min-width="200" />
-            <el-table-column :label="$t('auto.List.25.c0eb17')" min-width="280">
+            <el-table-column prop="description" :label="$t('auto.List.dcced87a')" min-width="200" />
+            <el-table-column :label="$t('auto.List.c0eb17fa')" min-width="280">
               <template #default="{ row }">
-                <el-select v-model="row.tagIds" multiple style="width: 100%" :placeholder="$t('auto.List.26.f9b05d')">
+                <el-select v-model="row.tagIds" multiple style="width: 100%" :placeholder="$t('auto.List.f9b05da9')">
                   <el-option v-for="t in tags" :key="t.id" :label="t.name" :value="t.id" />
                 </el-select>
               </template>
@@ -126,41 +126,41 @@
         </el-card>
       </el-tab-pane>
 
-      <el-tab-pane :label="$t('auto.List.27.acc4bd')" name="stats">
+      <el-tab-pane :label="$t('auto.List.acc4bd63')" name="stats">
         <el-row :gutter="20" class="stat-row">
           <el-col :span="6">
             <el-card class="stat-card">
-              <div class="stat-label">{{ $t('auto.List.47.a7f020') }}</div>
+              <div class="stat-label">{{ $t('auto.List.a7f02015') }}</div>
               <div class="stat-value">{{ stats.total || 0 }}</div>
             </el-card>
           </el-col>
           <el-col :span="6">
             <el-card class="stat-card">
-              <div class="stat-label">{{ $t('auto.List.48.87ae72') }}</div>
+              <div class="stat-label">{{ $t('auto.List.87ae72cb') }}</div>
               <div class="stat-value" style="color: #4F46E5">{{ stats.auto || 0 }}</div>
             </el-card>
           </el-col>
           <el-col :span="6">
             <el-card class="stat-card">
-              <div class="stat-label">{{ $t('auto.List.49.68004d') }}</div>
+              <div class="stat-label">{{ $t('auto.List.68004de1') }}</div>
               <div class="stat-value" style="color: #10B981">{{ stats.manual || 0 }}</div>
             </el-card>
           </el-col>
           <el-col :span="6">
             <el-card class="stat-card">
-              <div class="stat-label">{{ $t('auto.List.50.11d835') }}</div>
+              <div class="stat-label">{{ $t('auto.List.11d835a2') }}</div>
               <div class="stat-value" style="color: #F59E0B">{{ stats.matchedUsers || 0 }}</div>
             </el-card>
           </el-col>
         </el-row>
         <el-card>
-          <template #header><span>{{ $t('auto.List.51.55ebe6') }}</span></template>
+          <template #header><span>{{ $t('auto.List.55ebe64e') }}</span></template>
           <el-table :data="stats.topUsed" v-loading="loading.stats" stripe>
-            <template #empty><el-empty :description="$t('auto.List.28.a3b437')" /></template>
-            <el-table-column type="index" :label="$t('auto.List.29.a4dc00')" width="80" />
-            <el-table-column prop="name" :label="$t('auto.List.30.14d342')" min-width="160" />
-            <el-table-column prop="userCount" :label="$t('auto.List.11.71cb56')" width="120" align="center" />
-            <el-table-column prop="ratio" :label="$t('auto.List.31.c909e6')" width="200">
+            <template #empty><el-empty :description="$t('auto.List.a3b437c9')" /></template>
+            <el-table-column type="index" :label="$t('auto.List.a4dc00d8')" width="80" />
+            <el-table-column prop="name" :label="$t('auto.List.14d34236')" min-width="160" />
+            <el-table-column prop="userCount" :label="$t('auto.List.71cb565f')" width="120" align="center" />
+            <el-table-column prop="ratio" :label="$t('auto.List.c909e6eb')" width="200">
               <template #default="{ row }">
                 <el-progress :percentage="Number(row.ratio || 0)" :stroke-width="8" />
               </template>
@@ -172,49 +172,49 @@
 
     <el-dialog v-model="tagDialogVisible" :title="tagDialogTitle" width="560px">
       <el-form :model="tagForm" :rules="tagFormRules" ref="tagFormRef" label-width="100px">
-        <el-form-item :label="$t('auto.List.8.341fe8')" prop="name">
-          <el-input v-model="tagForm.name" :placeholder="$t('auto.List.32.6f81f3')" />
+        <el-form-item :label="$t('auto.List.341fe804')" prop="name">
+          <el-input v-model="tagForm.name" :placeholder="$t('auto.List.6f81f3f1')" />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.33.200948')" prop="type">
+        <el-form-item :label="$t('auto.List.200948a1')" prop="type">
           <el-select v-model="tagForm.type" style="width: 100%">
-            <el-option :label="$t('auto.List.34.2a3e7f')" value="manual" />
-            <el-option :label="$t('auto.List.35.3aed2c')" value="auto" />
-            <el-option :label="$t('auto.List.36.8a8b89')" value="system" />
+            <el-option :label="$t('auto.List.2a3e7f5c')" value="manual" />
+            <el-option :label="$t('auto.List.3aed2c11')" value="auto" />
+            <el-option :label="$t('auto.List.8a8b895f')" value="system" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.List.10.d0771a')" prop="category">
-          <el-input v-model="tagForm.category" :placeholder="$t('auto.List.37.d34f6c')" />
+        <el-form-item :label="$t('auto.List.d0771a42')" prop="category">
+          <el-input v-model="tagForm.category" :placeholder="$t('auto.List.d34f6c52')" />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.38.3bdd08')">
+        <el-form-item :label="$t('auto.List.3bdd08ad')">
           <el-input v-model="tagForm.description" type="textarea" :rows="3" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="tagDialogVisible = false">{{ $t('auto.List.52.625fb2') }}</el-button>
-        <el-button type="primary" @click="submitTag">{{ $t('auto.List.53.38cf16') }}</el-button>
+        <el-button @click="tagDialogVisible = false">{{ $t('auto.List.625fb26b') }}</el-button>
+        <el-button type="primary" @click="submitTag">{{ $t('auto.List.38cf16f2') }}</el-button>
       </template>
     </el-dialog>
 
     <el-dialog v-model="ruleDialogVisible" :title="ruleDialogTitle" width="640px">
       <el-form :model="ruleForm" :rules="ruleFormRules" ref="ruleFormRef" label-width="100px">
-        <el-form-item :label="$t('auto.List.17.870802')" prop="name">
-          <el-input v-model="ruleForm.name" :placeholder="$t('auto.List.39.40f3f1')" />
+        <el-form-item :label="$t('auto.List.87080256')" prop="name">
+          <el-input v-model="ruleForm.name" :placeholder="$t('auto.List.40f3f17d')" />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.18.65939c')" prop="condition">
-          <el-input v-model="ruleForm.condition" type="textarea" :rows="3" :placeholder="$t('auto.List.40.7ad15c')" />
+        <el-form-item :label="$t('auto.List.65939ccd')" prop="condition">
+          <el-input v-model="ruleForm.condition" type="textarea" :rows="3" :placeholder="$t('auto.List.7ad15c12')" />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.19.fedbca')" prop="tagId">
-          <el-select v-model="ruleForm.tagId" filterable :placeholder="$t('auto.List.26.f9b05d')" style="width: 100%">
+        <el-form-item :label="$t('auto.List.fedbcac8')" prop="tagId">
+          <el-select v-model="ruleForm.tagId" filterable :placeholder="$t('auto.List.f9b05da9')" style="width: 100%">
             <el-option v-for="t in tags" :key="t.id" :label="t.name" :value="t.id" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.List.12.3fea7c')">
+        <el-form-item :label="$t('auto.List.3fea7ca7')">
           <el-switch v-model="ruleForm.status" active-value="enabled" inactive-value="disabled" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="ruleDialogVisible = false">{{ $t('auto.List.52.625fb2') }}</el-button>
-        <el-button type="primary" @click="submitRule">{{ $t('auto.List.53.38cf16') }}</el-button>
+        <el-button @click="ruleDialogVisible = false">{{ $t('auto.List.625fb26b') }}</el-button>
+        <el-button type="primary" @click="submitRule">{{ $t('auto.List.38cf16f2') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -247,22 +247,22 @@ const tagSearch = ref('')
 const tagTypeFilter = ref('')
 
 const tagDialogVisible = ref(false)
-const tagDialogTitle = ref(t('auto.List.54.a1d3bf'))
+const tagDialogTitle = ref(t('auto.List.a1d3bf88'))
 const tagFormRef = ref()
 const tagForm = ref({ id: 0, name: '', type: 'manual', category: '', description: '' })
 const tagFormRules = {
-  name: [{ required: true, message: i18n.global.t(t('auto.List.32.6f81f3')), trigger: 'blur' }],
-  type: [{ required: true, message: i18n.global.t(t('auto.List.55.f5d604')), trigger: 'change' }]
+  name: [{ required: true, message: i18n.global.t(t('auto.List.6f81f3f1')), trigger: 'blur' }],
+  type: [{ required: true, message: i18n.global.t(t('auto.List.f5d604a3')), trigger: 'change' }]
 }
 
 const ruleDialogVisible = ref(false)
-const ruleDialogTitle = ref(t('auto.List.56.ba3c80'))
+const ruleDialogTitle = ref(t('auto.List.ba3c802f'))
 const ruleFormRef = ref()
 const ruleForm = ref({ id: 0, name: '', condition: '', tagId: '', status: 'enabled' })
 const ruleFormRules = {
-  name: [{ required: true, message: i18n.global.t(t('auto.List.39.40f3f1')), trigger: 'blur' }],
-  condition: [{ required: true, message: i18n.global.t(t('auto.List.57.40c86c')), trigger: 'blur' }],
-  tagId: [{ required: true, message: i18n.global.t(t('auto.List.58.ce7cf5')), trigger: 'change' }]
+  name: [{ required: true, message: i18n.global.t(t('auto.List.40f3f17d')), trigger: 'blur' }],
+  condition: [{ required: true, message: i18n.global.t(t('auto.List.40c86c32')), trigger: 'blur' }],
+  tagId: [{ required: true, message: i18n.global.t(t('auto.List.ce7cf505')), trigger: 'change' }]
 }
 
 const filteredTags = computed(() => {
@@ -277,14 +277,14 @@ const getTypeColor = (type) => {
   const map = { manual: 'primary', auto: 'success', system: 'info' }
   return map[type]}
 const getTypeText = (type) => {
-  const map = { manual: t('auto.List.34.2a3e7f'), auto: t('auto.List.35.3aed2c'), system: t('auto.List.36.8a8b89') }
+  const map = { manual: t('auto.List.2a3e7f5c'), auto: t('auto.List.3aed2c11'), system: t('auto.List.8a8b895f') }
   return map[type] || type
 }
 const getLayerColor = (layer) => {
   if (!layer || typeof layer !== 'string') return 'primary'
-  if (layer.includes(t('auto.List.59.2bafca')) || layer.includes(t('auto.List.60.fc7e38'))) return 'success'
-  if (layer.includes(t('auto.List.61.3adc53'))) return 'danger'
-  if (layer.includes(t('auto.List.62.5f0c0b'))) return 'warning'
+  if (layer.includes(t('auto.List.2bafcaef')) || layer.includes(t('auto.List.fc7e3846'))) return 'success'
+  if (layer.includes(t('auto.List.3adc53a3'))) return 'danger'
+  if (layer.includes(t('auto.List.5f0c0bf3'))) return 'warning'
   return 'primary'
 }
 
@@ -350,10 +350,10 @@ const refreshAll = () => {
 const showTagDialog = (row) => {
   if (row) {
     tagForm.value = { ...row }
-    tagDialogTitle.value = t('auto.List.63.4f3b1f')
+    tagDialogTitle.value = t('auto.List.4f3b1f67')
   } else {
     tagForm.value = { id: 0, name: '', code: '', type: 'manual', category: '', description: '' }
-    tagDialogTitle.value = t('auto.List.54.a1d3bf')
+    tagDialogTitle.value = t('auto.List.a1d3bf88')
   }
   tagDialogVisible.value = true
 }
@@ -378,11 +378,11 @@ const formatTime = (timeStr) => {
     const hours = Math.floor(diff / (1000 * 60 * 60))
     if (hours === 0) {
       const minutes = Math.floor(diff / (1000 * 60))
-      return minutes <= 1 ? t('auto.List.64.4181f7') : `${minutes}分钟前`
+      return minutes <= 1 ? t('auto.List.4181f7fe') : `${minutes}分钟前`
     }
     return `${hours}小时前`
   } else if (days === 1) {
-    return t('auto.List.65.2f8d6f')
+    return t('auto.List.2f8d6f15')
   } else if (days < 7) {
     return `${days}天前`
   } else {
@@ -414,33 +414,33 @@ const submitTag = async () => {
       } else {
         await TagSegmentationApi.createTag(payload)
       }
-      ElMessage.success(tagForm.value.id ? t('auto.List.66.55aa63') : t('auto.List.67.a5bfd7'))
+      ElMessage.success(tagForm.value.id ? t('auto.List.55aa6366') : t('auto.List.a5bfd70d'))
       tagDialogVisible.value = false
       loadTags()
     } catch (e) {
-      ElMessage.error(i18n.global.t(t('auto.List.68.6de920')))
+      ElMessage.error(i18n.global.t(t('auto.List.6de920b4')))
     }
   })
 }
 
 const deleteTag = async (row) => {
   try {
-    await ElMessageBox.confirm(`确定删除标签 "${row.name}" 吗？`, t('auto.List.69.e83a25'), { type: 'warning' })
+    await ElMessageBox.confirm(`确定删除标签 "${row.name}" 吗？`, t('auto.List.e83a256e'), { type: 'warning' })
     await TagSegmentationApi.deleteTag(row.id)
-    ElMessage.success(i18n.global.t(t('auto.List.70.0007d1')))
+    ElMessage.success(i18n.global.t(t('auto.List.0007d170')))
     loadTags()
   } catch (e) {
-    if (e !== 'cancel') ElMessage.error(i18n.global.t(t('auto.List.71.acf066')))
+    if (e !== 'cancel') ElMessage.error(i18n.global.t(t('auto.List.acf0664a')))
   }
 }
 
 const showRuleDialog = (row) => {
   if (row) {
     ruleForm.value = { ...row }
-    ruleDialogTitle.value = t('auto.List.72.a1d940')
+    ruleDialogTitle.value = t('auto.List.a1d940b0')
   } else {
     ruleForm.value = { id: 0, name: '', condition: '', tagId: '', status: 'enabled' }
-    ruleDialogTitle.value = t('auto.List.56.ba3c80')
+    ruleDialogTitle.value = t('auto.List.ba3c802f')
   }
   ruleDialogVisible.value = true
 }
@@ -457,23 +457,23 @@ const submitRule = async () => {
       } else {
         await TagSegmentationApi.saveTagRule(payload)
       }
-      ElMessage.success(ruleForm.value.id ? t('auto.List.66.55aa63') : t('auto.List.67.a5bfd7'))
+      ElMessage.success(ruleForm.value.id ? t('auto.List.55aa6366') : t('auto.List.a5bfd70d'))
       ruleDialogVisible.value = false
       loadRules()
     } catch (e) {
-      ElMessage.error(i18n.global.t(t('auto.List.68.6de920')))
+      ElMessage.error(i18n.global.t(t('auto.List.6de920b4')))
     }
   })
 }
 
 const deleteRule = async (row) => {
   try {
-    await ElMessageBox.confirm(`确定删除规则 "${row.name}" 吗？`, t('auto.List.69.e83a25'), { type: 'warning' })
+    await ElMessageBox.confirm(`确定删除规则 "${row.name}" 吗？`, t('auto.List.e83a256e'), { type: 'warning' })
     await TagSegmentationApi.deleteTagRule(row.id)
-    ElMessage.success(i18n.global.t(t('auto.List.70.0007d1')))
+    ElMessage.success(i18n.global.t(t('auto.List.0007d170')))
     loadRules()
   } catch (e) {
-    if (e !== 'cancel') ElMessage.error(i18n.global.t(t('auto.List.71.acf066')))
+    if (e !== 'cancel') ElMessage.error(i18n.global.t(t('auto.List.acf0664a')))
   }
 }
 
@@ -484,9 +484,9 @@ const saveStrategy = async () => {
       description: r.description || ''
     }));
     await TagSegmentationApi.saveLayerStrategy(payload)
-    ElMessage.success(i18n.global.t(t('auto.List.73.2864c2')))
+    ElMessage.success(i18n.global.t(t('auto.List.2864c254')))
   } catch (e) {
-    ElMessage.error(i18n.global.t(t('auto.List.68.6de920')))
+    ElMessage.error(i18n.global.t(t('auto.List.6de920b4')))
   }
 }
 

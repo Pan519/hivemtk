@@ -2,8 +2,8 @@
   <div class="ai-suggestion-page">
     <el-card class="header-card">
       <div>
-        <h2>{{ $t('auto.AISuggestion.2.5d4180') }}</h2>
-        <p class="subtitle">{{ $t('auto.AISuggestion.9.bc224d') }}</p>
+        <h2>{{ $t('auto.AISuggestion.5d41806c') }}</h2>
+        <p class="subtitle">{{ $t('auto.AISuggestion.bc224d7a') }}</p>
       </div>
     </el-card>
 
@@ -13,7 +13,7 @@
           <el-space>
             <el-input
               v-model="sessionId"
-              ::placeholder="$t('auto.AISuggestion.1.42dd8c')"
+              ::placeholder="$t('auto.AISuggestion.42dd8c65')"
               style="width: 280px"
               clearable
               @keyup.enter="loadSuggestions"
@@ -28,8 +28,8 @@
 
       <el-table :data="suggestions" v-loading="loading" stripe>
         <el-table-column prop="id" label="ID" width="80" />
-        <el-table-column prop="suggestion" :label="$t('auto.AISuggestion.2.5d4180')" min-width="320" show-overflow-tooltip />
-        <el-table-column prop="confidence" :label="$t('auto.AISuggestion.3.8f3599')" width="120" align="center">
+        <el-table-column prop="suggestion" :label="$t('auto.AISuggestion.5d41806c')" min-width="320" show-overflow-tooltip />
+        <el-table-column prop="confidence" :label="$t('auto.AISuggestion.8f3599b6')" width="120" align="center">
           <template #default="{ row }">
             <el-progress
               :percentage="Math.round((row.confidence || 0) * 100)"
@@ -38,35 +38,35 @@
             />
           </template>
         </el-table-column>
-        <el-table-column prop="source" :label="$t('auto.AISuggestion.4.26ca20')" width="120">
+        <el-table-column prop="source" :label="$t('auto.AISuggestion.26ca20b1')" width="120">
           <template #default="{ row }">
             <el-tag size="small">{{ row.source || 'rule' }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="is_used" :label="$t('auto.AISuggestion.5.453597')" width="120" align="center">
+        <el-table-column prop="is_used" :label="$t('auto.AISuggestion.45359782')" width="120" align="center">
           <template #default="{ row }">
-            <el-tag v-if="row.is_used" type="success">{{ $t('auto.AISuggestion.10.5dadca') }}</el-tag>
-            <el-tag v-else type="info">{{ $t('auto.AISuggestion.11.d05325') }}</el-tag>
+            <el-tag v-if="row.is_used" type="success">{{ $t('auto.AISuggestion.5dadca63') }}</el-tag>
+            <el-tag v-else type="info">{{ $t('auto.AISuggestion.d0532500') }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="created_at" :label="$t('auto.AISuggestion.6.b683c8')" min-width="160">
+        <el-table-column prop="created_at" :label="$t('auto.AISuggestion.b683c82e')" min-width="160">
           <template #default="{ row }">
             {{ formatTime(row.created_at) }}
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.AISuggestion.7.2b6bc0')" width="120" fixed="right">
+        <el-table-column :label="$t('auto.AISuggestion.2b6bc0f2')" width="120" fixed="right">
           <template #default="{ row }">
             <el-button
               v-if="!row.is_used"
               link
               type="success"
               @click="handleUse(row)"
-            >{{ $t('auto.AISuggestion.12.6cffff') }}</el-button>
-            <span v-else style="color: #909399">{{ $t('auto.AISuggestion.13.b59b00') }}</span>
+            >{{ $t('auto.AISuggestion.6cfffff5') }}</el-button>
+            <span v-else style="color: #909399">{{ $t('auto.AISuggestion.b59b0061') }}</span>
           </template>
         </el-table-column>
         <template #empty>
-          <el-empty ::description="$t('auto.AISuggestion.8.6f28b6')" />
+          <el-empty ::description="$t('auto.AISuggestion.6f28b65b')" />
         </template>
       </el-table>
     </el-card>
@@ -103,7 +103,7 @@ const confidenceColor = (c) => {
 
 const loadSuggestions = async () => {
   if (!sessionId.value) {
-    ElMessage.warning(i18n.global.t(t('auto.AISuggestion.14.8b9019')))
+    ElMessage.warning(i18n.global.t(t('auto.AISuggestion.8b9019fa')))
     return
   }
   loading.value = true
@@ -112,7 +112,7 @@ const loadSuggestions = async () => {
     const data = res || []
     suggestions.value = Array.isArray(data) ? data : data.list || []
   } catch (e) {
-    ElMessage.error(i18n.global.t(t('auto.AISuggestion.15.6cacd0')))
+    ElMessage.error(i18n.global.t(t('auto.AISuggestion.6cacd010')))
     suggestions.value = []
   } finally {
     loading.value = false
@@ -122,10 +122,10 @@ const loadSuggestions = async () => {
 const handleUse = async (row) => {
   try {
     await useAISuggestion(row.id)
-    ElMessage.success(i18n.global.t(t('auto.AISuggestion.10.5dadca')))
+    ElMessage.success(i18n.global.t(t('auto.AISuggestion.5dadca63')))
     row.is_used = true
   } catch (e) {
-    ElMessage.error(i18n.global.t(t('auto.AISuggestion.16.b257f6')))
+    ElMessage.error(i18n.global.t(t('auto.AISuggestion.b257f65c')))
   }
 }
 

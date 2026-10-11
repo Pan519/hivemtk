@@ -3,123 +3,123 @@
     <el-card shadow="never">
       <template #header>
         <div class="card-header">
-          <span>{{ $t('auto.Billing.35.da6b9b') }}</span>
+          <span>{{ $t('auto.Billing.da6b9b7b') }}</span>
         </div>
       </template>
 
       <el-tabs v-model="tab">
         <!-- 计费方案 CRUD -->
-        <el-tab-pane :label="$t('auto.Billing.1.a56bd8')" name="plans">
+        <el-tab-pane :label="$t('auto.Billing.a56bd8a7')" name="plans">
           <div style="margin-bottom: 12px">
-            <el-button type="primary" size="small" @click="openPlanDialog()">{{ $t('auto.Billing.36.90e34b') }}</el-button>
+            <el-button type="primary" size="small" @click="openPlanDialog()">{{ $t('auto.Billing.90e34b85') }}</el-button>
           </div>
           <el-table v-loading="plansLoading" :data="plans" border size="small">
-            <el-table-column prop="code" :label="$t('auto.Billing.2.cc6c35')" width="110" />
-            <el-table-column prop="name" :label="$t('auto.Billing.3.d7ec2d')" width="120" />
-            <el-table-column :label="$t('auto.Billing.4.a1af44')" width="90">
+            <el-table-column prop="code" :label="$t('auto.Billing.cc6c35a3')" width="110" />
+            <el-table-column prop="name" :label="$t('auto.Billing.d7ec2d3f')" width="120" />
+            <el-table-column :label="$t('auto.Billing.a1af448f')" width="90">
               <template #default="{ row }">{{ row.price_mode === 'per_seat' ? '按人头' : '固定' }}</template>
             </el-table-column>
-            <el-table-column :label="$t('auto.Billing.5.e45ac6')" width="100">
+            <el-table-column :label="$t('auto.Billing.e45ac657')" width="100">
               <template #default="{ row }">¥{{ (row.price_cents / 100).toFixed(2) }}</template>
             </el-table-column>
-            <el-table-column :label="$t('auto.Billing.6.30806d')" width="110">
+            <el-table-column :label="$t('auto.Billing.30806dcb')" width="110">
               <template #default="{ row }">¥{{ (row.yearly_price_cents / 100).toFixed(2) }}</template>
             </el-table-column>
-            <el-table-column :label="$t('auto.Billing.7.937bdd')" width="90">
+            <el-table-column :label="$t('auto.Billing.937bdd75')" width="90">
               <template #default="{ row }">{{ row.max_users || '不限' }}</template>
             </el-table-column>
-            <el-table-column :label="$t('auto.Billing.8.5d4a37')" width="100">
+            <el-table-column :label="$t('auto.Billing.5d4a37e5')" width="100">
               <template #default="{ row }">{{ row.max_messages_monthly || '不限' }}</template>
             </el-table-column>
-            <el-table-column :label="$t('auto.Billing.9.3fea7c')" width="80">
+            <el-table-column :label="$t('auto.Billing.3fea7ca7')" width="80">
               <template #default="{ row }">
                 <el-tag :type="row.status === 'active' ? 'success' : 'info'" size="small">
                   {{ row.status === 'active' ? '在售' : '下架' }}
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="remark" :label="$t('auto.Billing.10.2432b5')" min-width="160" show-overflow-tooltip />
-            <el-table-column :label="$t('auto.Billing.11.2b6bc0')" width="150" fixed="right">
+            <el-table-column prop="remark" :label="$t('auto.Billing.2432b575')" min-width="160" show-overflow-tooltip />
+            <el-table-column :label="$t('auto.Billing.2b6bc0f2')" width="150" fixed="right">
               <template #default="{ row }">
-                <el-button size="small" @click="openPlanDialog(row)">{{ $t('auto.Billing.37.95b351') }}</el-button>
-                <el-button size="small" type="danger" @click="removePlan(row)">{{ $t('auto.Billing.38.2f4aad') }}</el-button>
+                <el-button size="small" @click="openPlanDialog(row)">{{ $t('auto.Billing.95b351c8') }}</el-button>
+                <el-button size="small" type="danger" @click="removePlan(row)">{{ $t('auto.Billing.2f4aaddd') }}</el-button>
               </template>
             </el-table-column>
           </el-table>
         </el-tab-pane>
 
         <!-- 团队订阅 -->
-        <el-tab-pane :label="$t('auto.Billing.12.5c2f11')" name="subs">
+        <el-tab-pane :label="$t('auto.Billing.5c2f1147')" name="subs">
           <el-table v-loading="subsLoading" :data="subs" border size="small">
-            <el-table-column :label="$t('auto.Billing.13.4675fb')" width="140">
+            <el-table-column :label="$t('auto.Billing.4675fbaf')" width="140">
               <template #default="{ row }">{{ teamName(row.team_id) }}</template>
             </el-table-column>
-            <el-table-column prop="plan_code" :label="$t('auto.Billing.14.729de1')" width="110" />
-            <el-table-column :label="$t('auto.Billing.9.3fea7c')" width="90">
+            <el-table-column prop="plan_code" :label="$t('auto.Billing.729de1d0')" width="110" />
+            <el-table-column :label="$t('auto.Billing.3fea7ca7')" width="90">
               <template #default="{ row }">
                 <el-tag :type="row.status === 'active' ? 'success' : 'info'" size="small">
                   {{ row.status === 'active' ? '生效中' : '已停用' }}
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column :label="$t('auto.Billing.15.308fdf')" width="160">
+            <el-table-column :label="$t('auto.Billing.308fdfa0')" width="160">
               <template #default="{ row }">{{ fmtTime(row.starts_at) }}</template>
             </el-table-column>
-            <el-table-column :label="$t('auto.Billing.16.a2bf2b')" width="160">
+            <el-table-column :label="$t('auto.Billing.a2bf2b41')" width="160">
               <template #default="{ row }">{{ fmtTime(row.ends_at) }}</template>
             </el-table-column>
-            <el-table-column :label="$t('auto.Billing.17.d7550f')" width="90">
+            <el-table-column :label="$t('auto.Billing.d7550fbb')" width="90">
               <template #default="{ row }">{{ row.auto_renew ? '是' : '否' }}</template>
             </el-table-column>
-            <el-table-column :label="$t('auto.Billing.11.2b6bc0')" width="220" fixed="right">
+            <el-table-column :label="$t('auto.Billing.2b6bc0f2')" width="220" fixed="right">
               <template #default="{ row }">
-                <el-button size="small" @click="openAssign(row)">{{ $t('auto.Billing.39.3bf8b1') }}</el-button>
-                <el-button v-if="row.status === 'active'" size="small" type="warning" plain @click="cancelSub(row)">{{ $t('auto.Billing.40.5c56a8') }}</el-button>
+                <el-button size="small" @click="openAssign(row)">{{ $t('auto.Billing.3bf8b198') }}</el-button>
+                <el-button v-if="row.status === 'active'" size="small" type="warning" plain @click="cancelSub(row)">{{ $t('auto.Billing.5c56a889') }}</el-button>
               </template>
             </el-table-column>
           </el-table>
           <div style="margin-top: 12px">
-            <el-button type="primary" size="small" @click="openAssign(null)">{{ $t('auto.Billing.41.b7da3b') }}</el-button>
+            <el-button type="primary" size="small" @click="openAssign(null)">{{ $t('auto.Billing.b7da3b7c') }}</el-button>
           </div>
         </el-tab-pane>
 
         <!-- 账单记录 -->
-        <el-tab-pane :label="$t('auto.Billing.18.931a6f')" name="records">
+        <el-tab-pane :label="$t('auto.Billing.931a6ffd')" name="records">
           <div style="margin-bottom: 12px; display: flex; gap: 8px; align-items: center">
-            <el-select v-model="recordTeamId" :placeholder="$t('auto.Billing.19.c7f83c')" clearable size="small" style="width: 180px" @change="loadRecords">
+            <el-select v-model="recordTeamId" :placeholder="$t('auto.Billing.c7f83c74')" clearable size="small" style="width: 180px" @change="loadRecords">
               <el-option v-for="t in teams" :key="t.id" :label="t.name" :value="t.id" />
             </el-select>
-            <el-select v-model="recordStatus" :placeholder="$t('auto.Billing.20.443483')" clearable size="small" style="width: 140px" @change="loadRecords">
-              <el-option :label="$t('auto.Billing.21.fccab9')" value="pending" />
-              <el-option :label="$t('auto.Billing.22.b511e9')" value="paid" />
-              <el-option :label="$t('auto.Billing.23.c4a4d9')" value="void" />
+            <el-select v-model="recordStatus" :placeholder="$t('auto.Billing.443483c9')" clearable size="small" style="width: 140px" @change="loadRecords">
+              <el-option :label="$t('auto.Billing.fccab93a')" value="pending" />
+              <el-option :label="$t('auto.Billing.b511e9bd')" value="paid" />
+              <el-option :label="$t('auto.Billing.c4a4d9f7')" value="void" />
             </el-select>
-            <el-button type="primary" size="small" @click="openRecordDialog">{{ $t('auto.Billing.33.2a7bf9') }}</el-button>
+            <el-button type="primary" size="small" @click="openRecordDialog">{{ $t('auto.Billing.2a7bf9da') }}</el-button>
           </div>
           <el-table v-loading="recordsLoading" :data="records" border size="small">
-            <el-table-column :label="$t('auto.Billing.13.4675fb')" width="140">
+            <el-table-column :label="$t('auto.Billing.4675fbaf')" width="140">
               <template #default="{ row }">{{ teamName(row.team_id) }}</template>
             </el-table-column>
-            <el-table-column prop="plan_code" :label="$t('auto.Billing.14.729de1')" width="110" />
-            <el-table-column :label="$t('auto.Billing.24.4cf24a')" width="110">
+            <el-table-column prop="plan_code" :label="$t('auto.Billing.729de1d0')" width="110" />
+            <el-table-column :label="$t('auto.Billing.4cf24aba')" width="110">
               <template #default="{ row }">¥{{ (row.amount_cents / 100).toFixed(2) }}</template>
             </el-table-column>
-            <el-table-column prop="months" :label="$t('auto.Billing.25.479196')" width="70" />
-            <el-table-column :label="$t('auto.Billing.9.3fea7c')" width="90">
+            <el-table-column prop="months" :label="$t('auto.Billing.479196cf')" width="70" />
+            <el-table-column :label="$t('auto.Billing.3fea7ca7')" width="90">
               <template #default="{ row }">
                 <el-tag :type="row.status === 'paid' ? 'success' : row.status === 'pending' ? 'warning' : 'info'" size="small">
                   {{ { pending: '应收', paid: '已收', void: '作废' }[row.status] }}
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column :label="$t('auto.Billing.26.05c5dc')" width="160">
+            <el-table-column :label="$t('auto.Billing.05c5dc04')" width="160">
               <template #default="{ row }">{{ fmtTime(row.paid_at) }}</template>
             </el-table-column>
-            <el-table-column prop="remark" :label="$t('auto.Billing.10.2432b5')" min-width="140" show-overflow-tooltip />
-            <el-table-column :label="$t('auto.Billing.11.2b6bc0')" width="170" fixed="right">
+            <el-table-column prop="remark" :label="$t('auto.Billing.2432b575')" min-width="140" show-overflow-tooltip />
+            <el-table-column :label="$t('auto.Billing.2b6bc0f2')" width="170" fixed="right">
               <template #default="{ row }">
-                <el-button v-if="row.status === 'pending'" size="small" type="success" plain @click="markPaid(row)">{{ $t('auto.Billing.42.379439') }}</el-button>
-                <el-button v-if="row.status === 'pending'" size="small" type="warning" plain @click="voidRecord(row)">{{ $t('auto.Billing.23.c4a4d9') }}</el-button>
+                <el-button v-if="row.status === 'pending'" size="small" type="success" plain @click="markPaid(row)">{{ $t('auto.Billing.37943999') }}</el-button>
+                <el-button v-if="row.status === 'pending'" size="small" type="warning" plain @click="voidRecord(row)">{{ $t('auto.Billing.c4a4d9f7') }}</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -137,106 +137,106 @@
     </el-card>
 
     <!-- 方案弹窗 -->
-    <el-dialog v-model="planDialogVisible" ::title="$t('auto.Billing.27.2a3697')" width="480px">
+    <el-dialog v-model="planDialogVisible" ::title="$t('auto.Billing.2a3697fa')" width="480px">
       <el-form label-width="110px">
-        <el-form-item :label="$t('auto.Billing.2.cc6c35')">
+        <el-form-item :label="$t('auto.Billing.cc6c35a3')">
           <el-input v-model="planForm.code" :disabled="planEditing" placeholder="free/pro/..." maxlength="32" />
         </el-form-item>
-        <el-form-item :label="$t('auto.Billing.3.d7ec2d')">
+        <el-form-item :label="$t('auto.Billing.d7ec2d3f')">
           <el-input v-model="planForm.name" maxlength="60" />
         </el-form-item>
-        <el-form-item :label="$t('auto.Billing.4.a1af44')">
+        <el-form-item :label="$t('auto.Billing.a1af448f')">
           <el-radio-group v-model="planForm.price_mode">
-            <el-radio value="flat">{{ $t('auto.Billing.43.468c5b') }}</el-radio>
-            <el-radio value="per_seat">{{ $t('auto.Billing.44.219054') }}</el-radio>
+            <el-radio value="flat">{{ $t('auto.Billing.468c5b11') }}</el-radio>
+            <el-radio value="per_seat">{{ $t('auto.Billing.2190545d') }}</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item v-if="planForm.price_mode === 'flat'" :label="$t('auto.Billing.28.03253c')">
+        <el-form-item v-if="planForm.price_mode === 'flat'" :label="$t('auto.Billing.03253c56')">
           <el-input-number v-model="planForm.priceYuan" :min="0" :precision="2" style="width: 160px" />
         </el-form-item>
-        <el-form-item v-if="planForm.price_mode === 'per_seat'" :label="$t('auto.Billing.29.eb9c24')">
+        <el-form-item v-if="planForm.price_mode === 'per_seat'" :label="$t('auto.Billing.eb9c24d2')">
           <el-input-number v-model="planForm.seatYuan" :min="0" :precision="2" style="width: 160px" />
         </el-form-item>
-        <el-form-item :label="$t('auto.Billing.30.7c3c70')">
+        <el-form-item :label="$t('auto.Billing.7c3c701d')">
           <el-input-number v-model="planForm.yearlyYuan" :min="0" :precision="2" style="width: 160px" />
         </el-form-item>
-        <el-form-item :label="$t('auto.Billing.7.937bdd')">
+        <el-form-item :label="$t('auto.Billing.937bdd75')">
           <el-input-number v-model="planForm.max_users" :min="0" style="width: 160px" />
-          <span class="muted" style="margin-left: 8px">{{ $t('auto.Billing.45.768abb') }}</span>
+          <span class="muted" style="margin-left: 8px">{{ $t('auto.Billing.768abb4d') }}</span>
         </el-form-item>
-        <el-form-item :label="$t('auto.Billing.8.5d4a37')">
+        <el-form-item :label="$t('auto.Billing.5d4a37e5')">
           <el-input-number v-model="planForm.max_messages_monthly" :min="0" style="width: 160px" />
-          <span class="muted" style="margin-left: 8px">{{ $t('auto.Billing.45.768abb') }}</span>
+          <span class="muted" style="margin-left: 8px">{{ $t('auto.Billing.768abb4d') }}</span>
         </el-form-item>
-        <el-form-item v-if="planEditing" :label="$t('auto.Billing.9.3fea7c')">
+        <el-form-item v-if="planEditing" :label="$t('auto.Billing.3fea7ca7')">
           <el-radio-group v-model="planForm.status">
-            <el-radio value="active">{{ $t('auto.Billing.46.d31f8f') }}</el-radio>
-            <el-radio value="retired">{{ $t('auto.Billing.47.d2379a') }}</el-radio>
+            <el-radio value="active">{{ $t('auto.Billing.d31f8f1e') }}</el-radio>
+            <el-radio value="retired">{{ $t('auto.Billing.d2379a56') }}</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item :label="$t('auto.Billing.10.2432b5')">
+        <el-form-item :label="$t('auto.Billing.2432b575')">
           <el-input v-model="planForm.remark" maxlength="200" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="planDialogVisible = false">{{ $t('auto.Billing.48.625fb2') }}</el-button>
-        <el-button type="primary" :loading="saving" @click="savePlan">{{ $t('auto.Billing.49.be5fbb') }}</el-button>
+        <el-button @click="planDialogVisible = false">{{ $t('auto.Billing.625fb26b') }}</el-button>
+        <el-button type="primary" :loading="saving" @click="savePlan">{{ $t('auto.Billing.be5fbbe3') }}</el-button>
       </template>
     </el-dialog>
 
     <!-- 指派/续期弹窗 -->
-    <el-dialog v-model="assignVisible" :title="$t('auto.Billing.31.f896ef')" width="440px" append-to-body>
+    <el-dialog v-model="assignVisible" :title="$t('auto.Billing.f896ef6b')" width="440px" append-to-body>
       <el-form label-width="110px">
-        <el-form-item :label="$t('auto.Billing.13.4675fb')">
-          <el-select v-model="assignForm.team_id" :placeholder="$t('auto.Billing.32.1e2e42')" style="width: 220px" :disabled="!!assignEditingTeam">
+        <el-form-item :label="$t('auto.Billing.4675fbaf')">
+          <el-select v-model="assignForm.team_id" :placeholder="$t('auto.Billing.1e2e42c5')" style="width: 220px" :disabled="!!assignEditingTeam">
             <el-option v-for="t in teams" :key="t.id" :label="t.name" :value="t.id" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.Billing.14.729de1')">
+        <el-form-item :label="$t('auto.Billing.729de1d0')">
           <el-select v-model="assignForm.plan_id" style="width: 220px">
             <el-option v-for="p in activePlans" :key="p.id" :label="`${p.name}（¥${(p.price_cents / 100).toFixed(2)}/月）`" :value="p.id" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.Billing.25.479196')">
+        <el-form-item :label="$t('auto.Billing.479196cf')">
           <el-input-number v-model="assignForm.months" :min="1" :max="36" style="width: 160px" />
         </el-form-item>
-        <el-form-item :label="$t('auto.Billing.17.d7550f')">
+        <el-form-item :label="$t('auto.Billing.d7550fbb')">
           <el-switch v-model="assignForm.auto_renew" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="assignVisible = false">{{ $t('auto.Billing.48.625fb2') }}</el-button>
-        <el-button type="primary" :loading="saving" @click="saveAssign">{{ $t('auto.Billing.50.e83a25') }}</el-button>
+        <el-button @click="assignVisible = false">{{ $t('auto.Billing.625fb26b') }}</el-button>
+        <el-button type="primary" :loading="saving" @click="saveAssign">{{ $t('auto.Billing.e83a256e') }}</el-button>
       </template>
     </el-dialog>
 
     <!-- 应收账单弹窗 -->
-    <el-dialog v-model="recordDialogVisible" :title="$t('auto.Billing.33.2a7bf9')" width="440px" append-to-body>
+    <el-dialog v-model="recordDialogVisible" :title="$t('auto.Billing.2a7bf9da')" width="440px" append-to-body>
       <el-form label-width="110px">
-        <el-form-item :label="$t('auto.Billing.13.4675fb')">
+        <el-form-item :label="$t('auto.Billing.4675fbaf')">
           <el-select v-model="recordForm.team_id" style="width: 220px">
             <el-option v-for="t in teams" :key="t.id" :label="t.name" :value="t.id" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.Billing.14.729de1')">
+        <el-form-item :label="$t('auto.Billing.729de1d0')">
           <el-select v-model="recordForm.plan_id" style="width: 220px">
             <el-option v-for="p in plans" :key="p.id" :label="p.name" :value="p.id" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.Billing.25.479196')">
+        <el-form-item :label="$t('auto.Billing.479196cf')">
           <el-input-number v-model="recordForm.months" :min="1" :max="36" style="width: 160px" />
         </el-form-item>
-        <el-form-item :label="$t('auto.Billing.34.92c95a')">
+        <el-form-item :label="$t('auto.Billing.92c95a39')">
           <el-input-number v-model="recordForm.amountYuan" :min="0" :precision="2" style="width: 160px" />
-          <span class="muted" style="margin-left: 8px">{{ $t('auto.Billing.51.edb196') }}</span>
+          <span class="muted" style="margin-left: 8px">{{ $t('auto.Billing.edb1967f') }}</span>
         </el-form-item>
-        <el-form-item :label="$t('auto.Billing.10.2432b5')">
+        <el-form-item :label="$t('auto.Billing.2432b575')">
           <el-input v-model="recordForm.remark" maxlength="200" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="recordDialogVisible = false">{{ $t('auto.Billing.48.625fb2') }}</el-button>
-        <el-button type="primary" :loading="saving" @click="saveRecord">{{ $t('auto.Billing.52.d9ac92') }}</el-button>
+        <el-button @click="recordDialogVisible = false">{{ $t('auto.Billing.625fb26b') }}</el-button>
+        <el-button type="primary" :loading="saving" @click="saveRecord">{{ $t('auto.Billing.d9ac9228') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -369,24 +369,24 @@ const savePlan = async () => {
     } else {
       await billingApi.createPlan(payload)
     }
-    ElMessage.success(t('auto.Billing.53.f8dfed'))
+    ElMessage.success(t('auto.Billing.f8dfedcd'))
     planDialogVisible.value = false
     await loadPlans()
   } catch (e) {
-    ElMessage.error(e?.response?.data?.message || t('auto.Billing.54.6de920'))
+    ElMessage.error(e?.response?.data?.message || t('auto.Billing.6de920b4'))
   } finally {
     saving.value = false
   }
 }
 
 const removePlan = async (row) => {
-  await ElMessageBox.confirm(`确认删除方案「${row.name}」？被订阅引用的方案需先下架。`, t('auto.Billing.55.50eaf9'), { type: 'warning' })
+  await ElMessageBox.confirm(`确认删除方案「${row.name}」？被订阅引用的方案需先下架。`, t('auto.Billing.50eaf94d'), { type: 'warning' })
   try {
     await billingApi.removePlan(row.id)
-    ElMessage.success(t('auto.Billing.56.5cc232'))
+    ElMessage.success(t('auto.Billing.5cc23262'))
     await loadPlans()
   } catch (e) {
-    ElMessage.error(e?.response?.data?.message || t('auto.Billing.57.acf066'))
+    ElMessage.error(e?.response?.data?.message || t('auto.Billing.acf0664a'))
   }
 }
 
@@ -403,7 +403,7 @@ const openAssign = (row) => {
 
 const saveAssign = async () => {
   if (!assignForm.value.team_id || !assignForm.value.plan_id) {
-    ElMessage.warning(t('auto.Billing.58.3c6910'))
+    ElMessage.warning(t('auto.Billing.3c691082'))
     return
   }
   saving.value = true
@@ -413,20 +413,20 @@ const saveAssign = async () => {
       months: assignForm.value.months,
       auto_renew: assignForm.value.auto_renew
     })
-    ElMessage.success(t('auto.Billing.59.6c8a95'))
+    ElMessage.success(t('auto.Billing.6c8a95ba'))
     assignVisible.value = false
     await loadSubs()
   } catch (e) {
-    ElMessage.error(e?.response?.data?.message || t('auto.Billing.60.67c95b'))
+    ElMessage.error(e?.response?.data?.message || t('auto.Billing.67c95bbe'))
   } finally {
     saving.value = false
   }
 }
 
 const cancelSub = async (row) => {
-  await ElMessageBox.confirm(`确认停用 ${teamName(row.team_id)} 的订阅？`, t('auto.Billing.50.e83a25'), { type: 'warning' })
+  await ElMessageBox.confirm(`确认停用 ${teamName(row.team_id)} 的订阅？`, t('auto.Billing.e83a256e'), { type: 'warning' })
   await billingApi.cancel(row.team_id)
-  ElMessage.success(t('auto.Billing.61.69b0f6'))
+  ElMessage.success(t('auto.Billing.69b0f684'))
   await loadSubs()
 }
 
@@ -437,7 +437,7 @@ const openRecordDialog = () => {
 
 const saveRecord = async () => {
   if (!recordForm.value.team_id || !recordForm.value.plan_id) {
-    ElMessage.warning(t('auto.Billing.58.3c6910'))
+    ElMessage.warning(t('auto.Billing.3c691082'))
     return
   }
   saving.value = true
@@ -449,11 +449,11 @@ const saveRecord = async () => {
       amount_cents: Math.round((recordForm.value.amountYuan || 0) * 100),
       remark: recordForm.value.remark
     })
-    ElMessage.success(t('auto.Billing.62.e1030f'))
+    ElMessage.success(t('auto.Billing.e1030f60'))
     recordDialogVisible.value = false
     await loadRecords()
   } catch (e) {
-    ElMessage.error(e?.response?.data?.message || t('auto.Billing.63.a88928'))
+    ElMessage.error(e?.response?.data?.message || t('auto.Billing.a889286a'))
   } finally {
     saving.value = false
   }
@@ -461,14 +461,14 @@ const saveRecord = async () => {
 
 const markPaid = async (row) => {
   await billingApi.payRecord(row.id)
-  ElMessage.success(t('auto.Billing.64.a36166'))
+  ElMessage.success(t('auto.Billing.a36166c2'))
   await loadRecords()
 }
 
 const voidRecord = async (row) => {
-  await ElMessageBox.confirm(t('auto.Billing.65.6d74d1'), t('auto.Billing.50.e83a25'), { type: 'warning' })
+  await ElMessageBox.confirm(t('auto.Billing.6d74d1b7'), t('auto.Billing.e83a256e'), { type: 'warning' })
   await billingApi.voidRecord(row.id)
-  ElMessage.success(t('auto.Billing.66.dcc961'))
+  ElMessage.success(t('auto.Billing.dcc961ae'))
   await loadRecords()
 }
 

@@ -5,17 +5,17 @@
     <el-row :gutter="16" class="mb-4">
       <el-col :span="8">
         <el-card>
-          <el-statistic :title="$t('auto.PlatformPublish.1.a3b565')" :value="availablePlatforms.length" />
+          <el-statistic :title="$t('auto.PlatformPublish.a3b56572')" :value="availablePlatforms.length" />
         </el-card>
       </el-col>
       <el-col :span="8">
         <el-card>
-          <el-statistic :title="$t('auto.PlatformPublish.2.23811c')" :value="articles.length" />
+          <el-statistic :title="$t('auto.PlatformPublish.23811cbc')" :value="articles.length" />
         </el-card>
       </el-col>
       <el-col :span="8">
         <el-card>
-          <el-statistic :title="$t('auto.PlatformPublish.3.abddee')" :value="recordsToday" />
+          <el-statistic :title="$t('auto.PlatformPublish.abddeeb7')" :value="recordsToday" />
         </el-card>
       </el-col>
     </el-row>
@@ -24,55 +24,55 @@
     <el-card class="mb-4">
       <template #header>
         <div class="flex items-center justify-between">
-          <span class="font-bold">{{ $t('auto.PlatformPublish.23.e63f99') }}</span>
-          <el-button size="small" type="primary" @click="loadAll">{{ $t('auto.PlatformPublish.24.694fc5') }}</el-button>
+          <span class="font-bold">{{ $t('auto.PlatformPublish.e63f99fc') }}</span>
+          <el-button size="small" type="primary" @click="loadAll">{{ $t('auto.PlatformPublish.694fc5ef') }}</el-button>
         </div>
       </template>
       <el-table :data="availablePlatforms" v-loading="platformsLoading" size="small">
-        <el-table-column prop="display_name" :label="$t('auto.PlatformPublish.4.498128')" width="160">
+        <el-table-column prop="display_name" :label="$t('auto.PlatformPublish.4981287f')" width="160">
           <template #default="{ row }">
             <a v-if="row.url" :href="row.url" target="_blank" class="platform-link">{{ row.display_name }}</a>
             <span v-else>{{ row.display_name }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="name" :label="$t('auto.PlatformPublish.5.45235f')" width="160" />
-        <el-table-column :label="$t('auto.PlatformPublish.6.16bd32')" width="110">
+        <el-table-column prop="name" :label="$t('auto.PlatformPublish.45235f6c')" width="160" />
+        <el-table-column :label="$t('auto.PlatformPublish.16bd32d2')" width="110">
           <template #default="{ row }">
-            <el-tag v-if="row.capability === 'real_api'" type="success" size="small">{{ $t('auto.PlatformPublish.25.144d38') }}</el-tag>
+            <el-tag v-if="row.capability === 'real_api'" type="success" size="small">{{ $t('auto.PlatformPublish.144d3805') }}</el-tag>
             <el-tag v-else-if="row.capability === 'cookie_gray'" type="warning" size="small">Cookie</el-tag>
             <el-tag v-else type="info" size="small">{{ row.capability || '未知' }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.PlatformPublish.7.b33c72')" width="110">
+        <el-table-column :label="$t('auto.PlatformPublish.b33c7279')" width="110">
           <template #default="{ row }">
             <span class="auth-type">{{ authLabel(row.auth_type) }}</span>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.PlatformPublish.8.3fea7c')" width="130">
+        <el-table-column :label="$t('auto.PlatformPublish.3fea7ca7')" width="130">
           <template #default="{ row }">
-            <el-tag v-if="isConfigured(row.name)" type="success" size="small">{{ $t('auto.PlatformPublish.26.da208e') }}</el-tag>
-            <el-tag v-else type="info" size="small">{{ $t('auto.PlatformPublish.27.f6c72d') }}</el-tag>
+            <el-tag v-if="isConfigured(row.name)" type="success" size="small">{{ $t('auto.PlatformPublish.da208e9c') }}</el-tag>
+            <el-tag v-else type="info" size="small">{{ $t('auto.PlatformPublish.f6c72d76') }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.PlatformPublish.9.f411d0')" min-width="360">
+        <el-table-column :label="$t('auto.PlatformPublish.f411d0f1')" min-width="360">
           <template #default="{ row }">
             <span v-if="row.name && row.name.includes('github')" class="hint">
-              访问 <a href="https://github.com/settings/tokens" target="_blank">https://github.com/settings/tokens</a>{{ $t('auto.PlatformPublish.28.57a0d7') }}<code>GITHUB_TOKEN</code>
+              访问 <a href="https://github.com/settings/tokens" target="_blank">https://github.com/settings/tokens</a>{{ $t('auto.PlatformPublish.57a0d75d') }}<code>GITHUB_TOKEN</code>
             </span>
             <span v-else-if="row.name === 'medium'" class="hint">
-              访问 <a href="https://medium.com/me/settings/security" target="_blank">https://medium.com/me/settings/security</a>{{ $t('auto.PlatformPublish.29.e203cd') }}<code>MEDIUM_TOKEN</code>
+              访问 <a href="https://medium.com/me/settings/security" target="_blank">https://medium.com/me/settings/security</a>{{ $t('auto.PlatformPublish.e203cd8e') }}<code>MEDIUM_TOKEN</code>
             </span>
             <span v-else-if="row.name === 'wordpress'" class="hint">
               WordPress 后台 → 用户 → 应用密码 → 生成专用密码，填入环境变量 <code>WORDPRESS_APPPASS</code>（用户名+密码）
             </span>
-            <span v-else-if="row.capability === 'real_api'" class="hint">{{ $t('auto.PlatformPublish.30.65c68c') }}</span>
+            <span v-else-if="row.capability === 'real_api'" class="hint">{{ $t('auto.PlatformPublish.65c68c84') }}</span>
             <span v-else class="hint">—</span>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.PlatformPublish.10.2b6bc0')" width="200">
+        <el-table-column :label="$t('auto.PlatformPublish.2b6bc0f2')" width="200">
           <template #default="{ row }">
-            <el-button size="small" @click="openAccountDialog(row)">{{ $t('auto.PlatformPublish.31.4e4010') }}</el-button>
-            <el-button size="small" type="primary" plain :disabled="!isConfigured(row.name)" @click="onTestPublish(row)">{{ $t('auto.PlatformPublish.32.b5c546') }}</el-button>
+            <el-button size="small" @click="openAccountDialog(row)">{{ $t('auto.PlatformPublish.4e401048') }}</el-button>
+            <el-button size="small" type="primary" plain :disabled="!isConfigured(row.name)" @click="onTestPublish(row)">{{ $t('auto.PlatformPublish.b5c54691') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -83,25 +83,25 @@
 
     
     <el-card class="mb-4">
-      <template #header><span class="font-bold">{{ $t('auto.PlatformPublish.33.51b2c2') }}</span></template>
+      <template #header><span class="font-bold">{{ $t('auto.PlatformPublish.51b2c299') }}</span></template>
       <div class="flex items-center gap-4 mb-4 flex-wrap">
-        <el-select v-model="selectedArticle" :placeholder="$t('auto.PlatformPublish.11.b72fad')" size="small" style="width:260px">
+        <el-select v-model="selectedArticle" :placeholder="$t('auto.PlatformPublish.b72fad55')" size="small" style="width:260px">
           <el-option v-for="a in articles" :key="a.id" :label="a.title || a.id" :value="a.id" />
         </el-select>
-        <el-select v-model="selectedPlatforms" multiple :placeholder="$t('auto.PlatformPublish.12.e2c01f')" size="small" style="min-width:260px">
-          <el-option v-for="p in realApiPlatforms" :key="p.name" ::label="$t('auto.PlatformPublish.13.25e491')" :value="p.name" />
+        <el-select v-model="selectedPlatforms" multiple :placeholder="$t('auto.PlatformPublish.e2c01ffc')" size="small" style="min-width:260px">
+          <el-option v-for="p in realApiPlatforms" :key="p.name" ::label="$t('auto.PlatformPublish.25e49195')" :value="p.name" />
         </el-select>
-        <el-button size="small" type="primary" :disabled="!selectedArticle || !selectedPlatforms.length" :loading="pipelineRunning" @click="runPipeline">{{ $t('auto.PlatformPublish.34.25de77') }}</el-button>
+        <el-button size="small" type="primary" :disabled="!selectedArticle || !selectedPlatforms.length" :loading="pipelineRunning" @click="runPipeline">{{ $t('auto.PlatformPublish.25de77cb') }}</el-button>
       </div>
       <el-table v-if="pipelineStatuses.length" :data="pipelineStatuses" size="small">
-        <el-table-column prop="platform" :label="$t('auto.PlatformPublish.4.498128')" width="160" />
-        <el-table-column prop="status" :label="$t('auto.PlatformPublish.8.3fea7c')" width="120">
+        <el-table-column prop="platform" :label="$t('auto.PlatformPublish.4981287f')" width="160" />
+        <el-table-column prop="status" :label="$t('auto.PlatformPublish.3fea7ca7')" width="120">
           <template #default="{ row }">
             <el-tag :type="statusType(row.status)" size="small">{{ row.status }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="message" :label="$t('auto.PlatformPublish.14.ff692f')" min-width="200" show-overflow-tooltip />
-        <el-table-column prop="url" :label="$t('auto.PlatformPublish.15.1a3b08')" min-width="200">
+        <el-table-column prop="message" :label="$t('auto.PlatformPublish.ff692f04')" min-width="200" show-overflow-tooltip />
+        <el-table-column prop="url" :label="$t('auto.PlatformPublish.1a3b0804')" min-width="200">
           <template #default="{ row }">
             <a v-if="row.url" :href="row.url" target="_blank">{{ row.url }}</a>
             <span v-else>-</span>
@@ -112,37 +112,37 @@
 
     
     <el-card>
-      <template #header><span class="font-bold">{{ $t('auto.PlatformPublish.35.c15348') }}</span></template>
+      <template #header><span class="font-bold">{{ $t('auto.PlatformPublish.c1534887') }}</span></template>
       <el-table :data="records" v-loading="recordsLoading" size="small">
-        <el-table-column prop="article_title" :label="$t('auto.PlatformPublish.16.c75625')" min-width="160" show-overflow-tooltip />
-        <el-table-column prop="platform" :label="$t('auto.PlatformPublish.4.498128')" width="160" />
-        <el-table-column prop="status" :label="$t('auto.PlatformPublish.8.3fea7c')" width="100">
+        <el-table-column prop="article_title" :label="$t('auto.PlatformPublish.c75625dc')" min-width="160" show-overflow-tooltip />
+        <el-table-column prop="platform" :label="$t('auto.PlatformPublish.4981287f')" width="160" />
+        <el-table-column prop="status" :label="$t('auto.PlatformPublish.3fea7ca7')" width="100">
           <template #default="{ row }">
             <el-tag :type="statusType(row.status)" size="small">{{ row.status }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="error" :label="$t('auto.PlatformPublish.17.4604d5')" min-width="200" show-overflow-tooltip />
-        <el-table-column prop="created_at" :label="$t('auto.PlatformPublish.18.19fcb9')" width="180" />
+        <el-table-column prop="error" :label="$t('auto.PlatformPublish.4604d502')" min-width="200" show-overflow-tooltip />
+        <el-table-column prop="created_at" :label="$t('auto.PlatformPublish.19fcb9eb')" width="180" />
       </el-table>
-      <div v-if="records.length === 0" class="empty-hint">{{ $t('auto.PlatformPublish.36.9b97e3') }}</div>
+      <div v-if="records.length === 0" class="empty-hint">{{ $t('auto.PlatformPublish.9b97e3c1') }}</div>
     </el-card>
 
     
     <el-dialog v-model="accountDialogVisible" :title="`配置 ${currentPlatform?.display_name} Token`" width="480px">
       <el-form :model="accountForm" label-width="120px">
         <el-form-item label="AppKey / UserID">
-          <el-input v-model="accountForm.app_key" :placeholder="$t('auto.PlatformPublish.19.05a7fe')" />
+          <el-input v-model="accountForm.app_key" :placeholder="$t('auto.PlatformPublish.05a7fe59')" />
         </el-form-item>
         <el-form-item label="Secret / Token">
-          <el-input v-model="accountForm.secret" type="password" show-password :placeholder="$t('auto.PlatformPublish.20.02b73d')" />
+          <el-input v-model="accountForm.secret" type="password" show-password :placeholder="$t('auto.PlatformPublish.02b73d5b')" />
         </el-form-item>
-        <el-form-item :label="$t('auto.PlatformPublish.21.05b5a8')">
-          <el-input v-model="accountForm.extra" type="textarea" :rows="3" :placeholder="$t('auto.PlatformPublish.22.fcb91a')" />
+        <el-form-item :label="$t('auto.PlatformPublish.05b5a8e5')">
+          <el-input v-model="accountForm.extra" type="textarea" :rows="3" :placeholder="$t('auto.PlatformPublish.fcb91a13')" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="accountDialogVisible = false">{{ $t('auto.PlatformPublish.37.625fb2') }}</el-button>
-        <el-button type="primary" @click="saveAccount">{{ $t('auto.PlatformPublish.38.be5fbb') }}</el-button>
+        <el-button @click="accountDialogVisible = false">{{ $t('auto.PlatformPublish.625fb26b') }}</el-button>
+        <el-button type="primary" @click="saveAccount">{{ $t('auto.PlatformPublish.be5fbbe3') }}</el-button>
       </template>
     </el-dialog>
     </div>
@@ -208,7 +208,7 @@ const configuredPlatformNames = computed(() =>
 const isConfigured = (name) => configuredPlatformNames.value.includes(name)
 
 const authLabel = (t) => {
-  const map = { token: 'API Token', oauth: 'OAuth', cookie: 'Cookie', xmlrpc: 'XML-RPC', custom: t('auto.PlatformPublish.39.f1d4ff') }
+  const map = { token: 'API Token', oauth: 'OAuth', cookie: 'Cookie', xmlrpc: 'XML-RPC', custom: t('auto.PlatformPublish.f1d4ff50') }
   return map[t] || t || '-'
 }
 
@@ -277,17 +277,17 @@ const saveAccount = async () => {
       secret: accountForm.secret,
       extra: accountForm.extra
     })
-    ElMessage.success(t('auto.PlatformPublish.40.3b1083'))
+    ElMessage.success(t('auto.PlatformPublish.3b108349'))
     accountDialogVisible.value = false
     await loadAccounts()
   } catch (e) {
-    ElMessage.error(e?.message || t('auto.PlatformPublish.41.6de920'))
+    ElMessage.error(e?.message || t('auto.PlatformPublish.6de920b4'))
   }
 }
 
 const onTestPublish = async (p) => {
   if (!selectedArticle.value && !articles.value.length) {
-    ElMessage.warning(t('auto.PlatformPublish.42.3c4489'))
+    ElMessage.warning(t('auto.PlatformPublish.3c44892c'))
     return
   }
   const articleId = selectedArticle.value || articles.value[0]?.id
@@ -302,19 +302,19 @@ const onTestPublish = async (p) => {
 
 const runPipeline = async () => {
   if (!selectedArticle.value || !selectedPlatforms.value.length) {
-    ElMessage.warning(t('auto.PlatformPublish.43.ed9c22'))
+    ElMessage.warning(t('auto.PlatformPublish.ed9c22a7'))
     return
   }
   pipelineRunning.value = true
-  pipelineStatuses.value = selectedPlatforms.value.map(p => ({ platform: p, status: 'running', message: t('auto.PlatformPublish.44.27d8a2') }))
+  pipelineStatuses.value = selectedPlatforms.value.map(p => ({ platform: p, status: 'running', message: t('auto.PlatformPublish.27d8a2fa') }))
   try {
     for (const p of selectedPlatforms.value) {
       const idx = pipelineStatuses.value.findIndex(s => s.platform === p)
       try {
         await publishToPlatform(selectedArticle.value, p, {})
-        if (idx >= 0) pipelineStatuses.value[idx] = { platform: p, status: 'success', message: t('auto.PlatformPublish.45.2fff07') }
+        if (idx >= 0) pipelineStatuses.value[idx] = { platform: p, status: 'success', message: t('auto.PlatformPublish.2fff079b') }
       } catch (err) {
-        if (idx >= 0) pipelineStatuses.value[idx] = { platform: p, status: 'failed', message: err?.message || t('auto.PlatformPublish.46.250688') }
+        if (idx >= 0) pipelineStatuses.value[idx] = { platform: p, status: 'failed', message: err?.message || t('auto.PlatformPublish.250688d7') }
       }
     }
     try {

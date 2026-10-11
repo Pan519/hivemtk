@@ -1,49 +1,49 @@
 <template>
   <el-dialog
     :model-value="modelValue"
-    :title="$t('auto.BlacklistDialog.1.5adc9f')"
+    :title="$t('auto.BlacklistDialog.5adc9f43')"
     width="680px"
     :close-on-click-modal="false"
     @update:model-value="$emit('update:modelValue', $event)"
   >
     <div class="blacklist-toolbar">
       <span class="count">共 {{ blacklistItems.length }} 条记录</span>
-      <el-button size="small" :loading="blacklistLoading" @click="$emit('reload')">{{ $t('auto.BlacklistDialog.9.694fc5') }}</el-button>
+      <el-button size="small" :loading="blacklistLoading" @click="$emit('reload')">{{ $t('auto.BlacklistDialog.694fc5ef') }}</el-button>
     </div>
     <el-table
       v-loading="blacklistLoading"
       :data="blacklistItems"
       size="small"
       max-height="420"
-      :empty-text="$t('auto.BlacklistDialog.2.dc5b46')"
+      :empty-text="$t('auto.BlacklistDialog.dc5b46a1')"
     >
-      <el-table-column :label="$t('auto.BlacklistDialog.3.79b519')" min-width="130">
+      <el-table-column :label="$t('auto.BlacklistDialog.79b519d4')" min-width="130">
         <template #default="{ row }">{{ row.user_id ?? row.UserID ?? row.userId ?? '-' }}</template>
       </el-table-column>
-      <el-table-column :label="$t('auto.BlacklistDialog.4.498128')" width="100">
+      <el-table-column :label="$t('auto.BlacklistDialog.4981287f')" width="100">
         <template #default="{ row }">{{ getChannelLabel(row.platform ?? row.Platform) }}</template>
       </el-table-column>
-      <el-table-column :label="$t('auto.BlacklistDialog.5.67dc0f')" min-width="160" show-overflow-tooltip>
+      <el-table-column :label="$t('auto.BlacklistDialog.67dc0fb6')" min-width="160" show-overflow-tooltip>
         <template #default="{ row }">{{ row.reason ?? row.Reason ?? '-' }}</template>
       </el-table-column>
-      <el-table-column :label="$t('auto.BlacklistDialog.6.26ca20')" width="90">
+      <el-table-column :label="$t('auto.BlacklistDialog.26ca20b1')" width="90">
         <template #default="{ row }">
           <el-tag size="small" :type="(row.source ?? row.Source) === 'auto' ? 'warning' : 'info'">
             {{ row.source ?? row.Source ?? 'manual' }}
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('auto.BlacklistDialog.7.cf252d')" width="140">
+      <el-table-column :label="$t('auto.BlacklistDialog.cf252d0f')" width="140">
         <template #default="{ row }">{{ formatTime(row.created_at ?? row.CreatedAt) }}</template>
       </el-table-column>
-      <el-table-column :label="$t('auto.BlacklistDialog.8.2b6bc0')" width="90" fixed="right">
+      <el-table-column :label="$t('auto.BlacklistDialog.2b6bc0f2')" width="90" fixed="right">
         <template #default="{ row }">
-          <el-button size="small" type="danger" link @click="$emit('unblacklist', row)">{{ $t('auto.BlacklistDialog.10.2d9253') }}</el-button>
+          <el-button size="small" type="danger" link @click="$emit('unblacklist', row)">{{ $t('auto.BlacklistDialog.2d92531b') }}</el-button>
         </template>
       </el-table-column>
     </el-table>
     <template #footer>
-      <el-button @click="$emit('update:modelValue', false)">{{ $t('auto.BlacklistDialog.11.b15d91') }}</el-button>
+      <el-button @click="$emit('update:modelValue', false)">{{ $t('auto.BlacklistDialog.b15d9127') }}</el-button>
     </template>
   </el-dialog>
 </template>

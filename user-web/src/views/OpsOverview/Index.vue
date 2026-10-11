@@ -1,35 +1,35 @@
 <template>
   <div class="ops-overview">
-    <PageHeader :title="$t('auto.Index.1.99d546')" :subtitle="$t('auto.Index.2.e1e8ef')" />
+    <PageHeader :title="$t('auto.Index.99d5464f')" :subtitle="$t('auto.Index.e1e8ef54')" />
 
     
     <el-row :gutter="20" class="status-row">
       <el-col :span="6">
         <el-card class="status-card status-ok">
-          <div class="status-label">{{ $t('auto.Index.13.a838a9') }}</div>
+          <div class="status-label">{{ $t('auto.Index.a838a981') }}</div>
           <div class="status-value">{{ systemStatus.text }}</div>
           <div class="status-meta">运行时长 {{ uptime }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="status-card">
-          <div class="status-label">{{ $t('auto.Index.14.753e9e') }}</div>
+          <div class="status-label">{{ $t('auto.Index.753e9e75') }}</div>
           <div class="status-value">{{ stats.onlineUsers }}</div>
           <div class="status-meta">总用户 {{ stats.totalUsers }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="status-card">
-          <div class="status-label">{{ $t('auto.Index.15.3fa571') }}</div>
+          <div class="status-label">{{ $t('auto.Index.3fa57183') }}</div>
           <div class="status-value">{{ stats.todayMessages }}</div>
           <div class="status-meta">环比 {{ stats.messagesDelta }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card :class="['status-card', alertsCount > 0 ? 'status-warn' : '']">
-          <div class="status-label">{{ $t('auto.Index.16.d5aede') }}</div>
+          <div class="status-label">{{ $t('auto.Index.d5aede72') }}</div>
           <div class="status-value">{{ alertsCount }}</div>
-          <div class="status-meta">{{ $t('auto.Index.17.6e1e00') }}</div>
+          <div class="status-meta">{{ $t('auto.Index.6e1e0000') }}</div>
         </el-card>
       </el-col>
     </el-row>
@@ -37,29 +37,29 @@
     
     <el-row :gutter="20" class="mt-20">
       <el-col :span="12">
-        <el-card :header="$t('auto.Index.3.dd300f')">
+        <el-card :header="$t('auto.Index.dd300fd9')">
           <el-table :data="moduleStatus" stripe>
-            <el-table-column prop="name" :label="$t('auto.Index.4.fac54c')" />
-            <el-table-column prop="status" :label="$t('auto.Index.5.3fea7c')">
+            <el-table-column prop="name" :label="$t('auto.Index.fac54c34')" />
+            <el-table-column prop="status" :label="$t('auto.Index.3fea7ca7')">
               <template #default="{ row }">
                 <el-tag :type="row.status === 'ok' ? 'success' : row.status === 'warn' ? 'warning' : 'danger'">
                   {{ row.status === 'ok' ? '正常' : row.status === 'warn' ? '告警' : '异常' }}
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="latency" :label="$t('auto.Index.6.93d028')" />
+            <el-table-column prop="latency" :label="$t('auto.Index.93d0286b')" />
             <el-table-column prop="qps" label="QPS" />
-            <el-table-column prop="errorRate" :label="$t('auto.Index.7.0c8524')" />
+            <el-table-column prop="errorRate" :label="$t('auto.Index.0c8524d7')" />
           </el-table>
         </el-card>
       </el-col>
       <el-col :span="12">
-        <el-card :header="$t('auto.Index.8.bbb49e')">
+        <el-card :header="$t('auto.Index.bbb49e4b')">
           <el-table :data="recentOps" stripe max-height="400">
-            <el-table-column prop="time" :label="$t('auto.Index.9.19fcb9')" width="100" />
-            <el-table-column prop="user" :label="$t('auto.Index.10.f9ac4b')" />
-            <el-table-column prop="action" :label="$t('auto.Index.11.2b6bc0')" />
-            <el-table-column prop="result" :label="$t('auto.Index.12.5ad7f5')">
+            <el-table-column prop="time" :label="$t('auto.Index.19fcb9eb')" width="100" />
+            <el-table-column prop="user" :label="$t('auto.Index.f9ac4b2a')" />
+            <el-table-column prop="action" :label="$t('auto.Index.2b6bc0f2')" />
+            <el-table-column prop="result" :label="$t('auto.Index.5ad7f5a8')">
               <template #default="{ row }">
                 <el-tag :type="row.result === 'success' ? 'success' : 'danger'" size="small">
                   {{ row.result === 'success' ? '成功' : '失败' }}
@@ -82,7 +82,7 @@ import { getSystemStatus, getOpsStats, getModuleStatus, getRecentOperations } fr
 
 const { t } = useI18n()
 
-const systemStatus = ref({ text: t('auto.Index.18.26b5bd'), code: 'loading' })
+const systemStatus = ref({ text: t('auto.Index.26b5bd49'), code: 'loading' })
 const uptime = ref('0h 0m')
 const stats = ref({ onlineUsers: 0, totalUsers: 0, todayMessages: 0, messagesDelta: '0%' })
 const moduleStatus = ref([])
@@ -112,11 +112,11 @@ function mapRecentOps(anomalies) {
   if (!anomalies) return []
   const rows = []
   const groups = [
-    { key: 'sync_gap', label: t('auto.Index.19.78b323') },
-    { key: 'stuck_reachable', label: t('auto.Index.20.a2ea28') },
-    { key: 'stuck_unreachable', label: t('auto.Index.21.0fb8b2') },
-    { key: 'unreachable', label: t('auto.Index.22.834f7c') },
-    { key: 'node_abnormal', label: t('auto.Index.23.209a8c') }
+    { key: 'sync_gap', label: t('auto.Index.78b323b1') },
+    { key: 'stuck_reachable', label: t('auto.Index.a2ea2848') },
+    { key: 'stuck_unreachable', label: t('auto.Index.0fb8b251') },
+    { key: 'unreachable', label: t('auto.Index.834f7cd8') },
+    { key: 'node_abnormal', label: t('auto.Index.209a8c83') }
   ]
   for (const g of groups) {
     const items = anomalies[g.key] || []
@@ -143,7 +143,7 @@ async function loadOverview() {
 
     const s = statusRes.data || {}
     systemStatus.value = {
-      text: s.status || (s.cpu_usage > 90 ? t('auto.Index.24.aa0eab') : t('auto.Index.25.fd6e80')),
+      text: s.status || (s.cpu_usage > 90 ? t('auto.Index.aa0eab9d') : t('auto.Index.fd6e80f1')),
       code: s.status || 'ok'
     }
     uptime.value = formatUptime(s.system_uptime ?? s.uptime)

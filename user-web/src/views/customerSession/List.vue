@@ -3,7 +3,7 @@
     <el-card class="header-card">
       <div>
         <h2>{{ $t('客户会话管理') }}</h2>
-        <p class="subtitle">{{ $t('auto.List.14.68e45d') }}</p>
+        <p class="subtitle">{{ $t('auto.List.68e45ded') }}</p>
       </div>
       <div class="header-actions">
 
@@ -43,14 +43,14 @@
             <div class="card-header">
               <span>{{ $t('会话列表') }}</span>
               <el-select v-model="filterStatus" size="small" style="width: 120px">
-                <el-option ::label="$t('auto.List.1.86f694')" value="" />
-                <el-option ::label="$t('auto.List.2.936560')" value="__active__" />
-                <el-option ::label="$t('auto.List.3.28eda9')" value="pending" />
-                <el-option ::label="$t('auto.List.4.f4bf16')" value="ai_handling" />
-                <el-option ::label="$t('auto.List.5.573383')" value="human_handling" />
-                <el-option ::label="$t('auto.List.6.aa9c3a')" value="waiting" />
-                <el-option ::label="$t('auto.List.7.b10891')" value="resolved" />
-                <el-option ::label="$t('auto.List.8.ca9df5')" value="closed" />
+                <el-option ::label="$t('auto.List.86f69427')" value="" />
+                <el-option ::label="$t('auto.List.9365602e')" value="__active__" />
+                <el-option ::label="$t('auto.List.28eda9eb')" value="pending" />
+                <el-option ::label="$t('auto.List.f4bf16f7')" value="ai_handling" />
+                <el-option ::label="$t('auto.List.5733839c')" value="human_handling" />
+                <el-option ::label="$t('auto.List.aa9c3a1d')" value="waiting" />
+                <el-option ::label="$t('auto.List.b10891ba')" value="resolved" />
+                <el-option ::label="$t('auto.List.ca9df58c')" value="closed" />
               </el-select>
             </div>
           </template>
@@ -91,12 +91,12 @@
                   size="small"
                   type="danger"
                   effect="dark"
-                >{{ $t('auto.List.15.505759') }}</el-tag>
+                >{{ $t('auto.List.505759aa') }}</el-tag>
               </div>
             </div>
             <el-badge v-if="session.unread" :value="session.unread" />
           </div>
-          <el-empty v-if="filteredSessions.length === 0" :description="$t('auto.List.9.24b929')" :image-size="80" />
+          <el-empty v-if="filteredSessions.length === 0" :description="$t('auto.List.24b92959')" :image-size="80" />
         </el-card>
       </div>
 
@@ -138,7 +138,7 @@
                   </el-tag>
                   <el-select
                     v-model="tagToAdd"
-                    :placeholder="$t('auto.List.10.ea971b')"
+                    :placeholder="$t('auto.List.ea971bd2')"
                     size="small"
                     style="width: 110px"
                     clearable
@@ -176,7 +176,7 @@
                 >
                   释放回 AI
                 </el-button>
-                <el-button size="small" @click="closeSession">{{ $t('auto.List.16.2322d5') }}</el-button>
+                <el-button size="small" @click="closeSession">{{ $t('auto.List.2322d5f4') }}</el-button>
               </div>
             </div>
           </template>
@@ -212,7 +212,7 @@
                     type="primary"
                     size="small"
                     @click.stop="useAiSuggestion(s)"
-                  >{{ $t('auto.List.17.318fc5') }}</el-button>
+                  >{{ $t('auto.List.318fc590') }}</el-button>
                 </div>
               </div>
             </div>
@@ -230,7 +230,7 @@
                 <span v-else>{{ msg.from?.charAt(0) }}</span>
               </el-avatar>
               <div class="bubble">
-                <div class="sender-tag" v-if="msg.senderType === 'ai'">{{ $t('auto.List.18.318e1b') }}</div>
+                <div class="sender-tag" v-if="msg.senderType === 'ai'">{{ $t('auto.List.318e1bb0') }}</div>
                 <div class="sender-tag agent" v-else-if="msg.senderType === 'agent'">{{ msg.from }}</div>
                 <div class="content">{{ msg.content }}</div>
                 <div class="time">{{ msg.createdAt }}</div>
@@ -270,7 +270,7 @@
               <el-input
                 v-model="quickReplySearch"
                 size="small"
-                :placeholder="$t('auto.List.11.694f49')"
+                :placeholder="$t('auto.List.694f4905')"
                 style="flex: 1; margin-left: 10px"
                 clearable
                 @input="onQuickReplySearch"
@@ -286,7 +286,7 @@
               style="margin-bottom: 10px"
             >
               <template #title>
-                AI 正在处理该会话。如需人工回复，请先点击右上角 <b>{{ $t('auto.List.19.289acb') }}</b> 按钮。
+                AI 正在处理该会话。如需人工回复，请先点击右上角 <b>{{ $t('auto.List.289acbc4') }}</b> 按钮。
               </template>
             </el-alert>
 
@@ -295,11 +295,11 @@
               type="textarea"
               :rows="3"
               :disabled="currentHandler === 'ai'"
-              ::placeholder="$t('auto.List.12.c8f08e')"
+              ::placeholder="$t('auto.List.c8f08e15')"
               @keydown.ctrl.enter="sendMessage"
             />
             <div class="input-actions">
-              <el-button @click="insertTemplate" :disabled="currentHandler === 'ai'">{{ $t('auto.List.20.d49563') }}</el-button>
+              <el-button @click="insertTemplate" :disabled="currentHandler === 'ai'">{{ $t('auto.List.d49563bf') }}</el-button>
               <el-button
                 type="primary"
                 :disabled="!inputMsg.trim() || currentHandler === 'ai'"
@@ -310,7 +310,7 @@
             </div>
           </div>
         </el-card>
-        <el-empty v-else :description="$t('auto.List.13.ae75ac')" />
+        <el-empty v-else :description="$t('auto.List.ae75ac4e')" />
       </div>
 
 
@@ -408,7 +408,7 @@ setReload(loadSessions)
 
 // 话术模板:填充输入框(原实现保留在容器层)
 const insertTemplate = () => {
-  inputMsg.value = t('auto.List.21.6fef08')
+  inputMsg.value = t('auto.List.6fef08a0')
 }
 
 // 会话列表加载(容器层保留:多个 composables 通过回调依赖此函数)
@@ -424,7 +424,7 @@ async function loadSessions(params) {
       id: s.id,
       sessionId: s.session_id,
       customerId: s.user_id,
-      customerName: s.user_name || t('auto.List.22.852da3'),
+      customerName: s.user_name || t('auto.List.852da3f7'),
       channel: s.platform || 'web',
       status: s.status,
       handlerType: s.handler_type || 'ai',
@@ -435,7 +435,7 @@ async function loadSessions(params) {
       tags: s.tags
     }))
   } catch (e) {
-    console.error(t('auto.List.23.6a24b4'), e)
+    console.error(t('auto.List.6a24b411'), e)
     sessions.value = []
   }
 }

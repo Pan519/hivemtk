@@ -1,41 +1,41 @@
 <template>
   <div class="geo-brand-config">
     <el-tabs v-model="activeTab">
-      <el-tab-pane :label="$t('auto.BrandConfig.1.05b4f3')" name="llms">
+      <el-tab-pane :label="$t('auto.BrandConfig.05b4f3fc')" name="llms">
         <el-card shadow="never">
           <template #header>
             <div class="card-header">
-              <span>{{ $t('auto.BrandConfig.5.ff9c4c') }}</span>
+              <span>{{ $t('auto.BrandConfig.ff9c4ccb') }}</span>
               <div>
                 <el-input v-model="previewDomain" placeholder="example.com" style="width:200px;margin-right:8px" />
-                <el-button type="primary" @click="loadLlms">{{ $t('auto.BrandConfig.6.b542b0') }}</el-button>
+                <el-button type="primary" @click="loadLlms">{{ $t('auto.BrandConfig.b542b0a0') }}</el-button>
               </div>
             </div>
           </template>
-          <el-empty v-if="!llmsContent" :description="$t('auto.BrandConfig.2.94ef7c')">
-            <el-button type="primary" @click="loadLlms">{{ $t('auto.BrandConfig.7.50e17c') }}</el-button>
+          <el-empty v-if="!llmsContent" :description="$t('auto.BrandConfig.94ef7c3f')">
+            <el-button type="primary" @click="loadLlms">{{ $t('auto.BrandConfig.50e17cf6') }}</el-button>
           </el-empty>
           <pre v-else class="code-block">{{ llmsContent }}</pre>
           <div v-if="llmsContent" style="margin-top:12px">
-            <el-tag type="success">{{ $t('auto.BrandConfig.8.38bc6a') }}</el-tag>
-            <el-tag style="margin-left:8px">{{ $t('auto.BrandConfig.9.5ef0f0') }}</el-tag>
-            <el-tag style="margin-left:8px">{{ $t('auto.BrandConfig.10.333724') }}</el-tag>
+            <el-tag type="success">{{ $t('auto.BrandConfig.38bc6af0') }}</el-tag>
+            <el-tag style="margin-left:8px">{{ $t('auto.BrandConfig.5ef0f05c') }}</el-tag>
+            <el-tag style="margin-left:8px">{{ $t('auto.BrandConfig.3337248b') }}</el-tag>
           </div>
         </el-card>
       </el-tab-pane>
 
-      <el-tab-pane :label="$t('auto.BrandConfig.3.c91198')" name="robots">
+      <el-tab-pane :label="$t('auto.BrandConfig.c9119863')" name="robots">
         <el-card shadow="never">
           <template #header>
             <div class="card-header">
-              <span>{{ $t('auto.BrandConfig.11.a14124') }}</span>
-              <el-button type="primary" @click="loadRobots">{{ $t('auto.BrandConfig.6.b542b0') }}</el-button>
+              <span>{{ $t('auto.BrandConfig.a1412414') }}</span>
+              <el-button type="primary" @click="loadRobots">{{ $t('auto.BrandConfig.b542b0a0') }}</el-button>
             </div>
           </template>
-          <el-empty v-if="!robotsContent" :description="$t('auto.BrandConfig.4.1c0c7e')" />
+          <el-empty v-if="!robotsContent" :description="$t('auto.BrandConfig.1c0c7efe')" />
           <pre v-else class="code-block">{{ robotsContent }}</pre>
           <div v-if="robotsContent" style="margin-top:12px">
-            <el-tag type="success">{{ $t('auto.BrandConfig.12.d7460e') }}</el-tag>
+            <el-tag type="success">{{ $t('auto.BrandConfig.d7460eb9') }}</el-tag>
             <el-tag style="margin-left:8px">Bytespider/DeepSeekBot/QwenBot/ErnieBot</el-tag>
             <el-tag style="margin-left:8px">GPTBot/ClaudeBot/PerplexityBot/Amazonbot</el-tag>
           </div>

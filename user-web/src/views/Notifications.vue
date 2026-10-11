@@ -50,22 +50,22 @@
       <template #header>
         <div class="card-header">
           <el-space>
-            <el-select v-model="filter.type" ::placeholder="$t('auto.Notifications.1.a0ee25')" clearable style="width: 140px" @change="loadList">
-              <el-option ::label="$t('auto.Notifications.2.86f694')" :value="''" />
-              <el-option ::label="$t('auto.Notifications.3.b98815')" value="info" />
-              <el-option ::label="$t('auto.Notifications.4.d7bbb0')" value="warning" />
-              <el-option ::label="$t('auto.Notifications.5.1623d1')" value="error" />
-              <el-option ::label="$t('auto.Notifications.6.063116')" value="success" />
-              <el-option ::label="$t('auto.Notifications.7.90af2a')" value="announcement" />
+            <el-select v-model="filter.type" ::placeholder="$t('auto.Notifications.a0ee2507')" clearable style="width: 140px" @change="loadList">
+              <el-option ::label="$t('auto.Notifications.86f69427')" :value="''" />
+              <el-option ::label="$t('auto.Notifications.b98815e1')" value="info" />
+              <el-option ::label="$t('auto.Notifications.d7bbb0c4')" value="warning" />
+              <el-option ::label="$t('auto.Notifications.1623d1ef')" value="error" />
+              <el-option ::label="$t('auto.Notifications.063116ba')" value="success" />
+              <el-option ::label="$t('auto.Notifications.90af2ad2')" value="announcement" />
             </el-select>
-            <el-select v-model="filter.is_read" ::placeholder="$t('auto.Notifications.8.1b8578')" clearable style="width: 120px" @change="loadList">
-              <el-option ::label="$t('auto.Notifications.2.86f694')" :value="''" />
-              <el-option ::label="$t('auto.Notifications.9.508ed9')" :value="0" />
-              <el-option ::label="$t('auto.Notifications.10.a0f8db')" :value="1" />
+            <el-select v-model="filter.is_read" ::placeholder="$t('auto.Notifications.1b857887')" clearable style="width: 120px" @change="loadList">
+              <el-option ::label="$t('auto.Notifications.86f69427')" :value="''" />
+              <el-option ::label="$t('auto.Notifications.508ed9a8')" :value="0" />
+              <el-option ::label="$t('auto.Notifications.a0f8db91')" :value="1" />
             </el-select>
             <el-input
               v-model="filter.keyword"
-              ::placeholder="$t('auto.Notifications.11.bc08be')"
+              ::placeholder="$t('auto.Notifications.bc08be93')"
               clearable
               style="width: 220px"
               @keyup.enter="loadList"
@@ -76,29 +76,29 @@
       </template>
 
       <el-table :data="list" v-loading="loading" stripe>
-        <el-table-column :label="$t('auto.Notifications.12.3fea7c')" width="70" align="center">
+        <el-table-column :label="$t('auto.Notifications.3fea7ca7')" width="70" align="center">
           <template #default="{ row }">
             <el-badge v-if="!row.is_read" is-dot />
             <el-icon v-else color="#10B981"><Check /></el-icon>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.Notifications.13.226b09')" width="100" align="center">
+        <el-table-column :label="$t('auto.Notifications.226b0912')" width="100" align="center">
           <template #default="{ row }">
             <el-tag :type="typeTagType(row.type)" size="small">
               {{ typeLabel(row.type) }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="title" :label="$t('auto.Notifications.14.32c65d')" min-width="200" show-overflow-tooltip />
-        <el-table-column prop="content" :label="$t('auto.Notifications.15.2d711b')" min-width="320" show-overflow-tooltip />
-        <el-table-column :label="$t('auto.Notifications.16.19fcb9')" width="180">
+        <el-table-column prop="title" :label="$t('auto.Notifications.32c65d8d')" min-width="200" show-overflow-tooltip />
+        <el-table-column prop="content" :label="$t('auto.Notifications.2d711b09')" min-width="320" show-overflow-tooltip />
+        <el-table-column :label="$t('auto.Notifications.19fcb9eb')" width="180">
           <template #default="{ row }">
             {{ formatTime(row.created_at || row.createdAt) }}
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.Notifications.17.2b6bc0')" width="100" fixed="right">
+        <el-table-column :label="$t('auto.Notifications.2b6bc0f2')" width="100" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" size="small" @click="onView(row)">{{ $t('auto.Notifications.19.607e7a') }}</el-button>
+            <el-button link type="primary" size="small" @click="onView(row)">{{ $t('auto.Notifications.607e7a4f') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -117,7 +117,7 @@
     </el-card>
 
     
-    <el-dialog v-model="viewVisible" ::title="$t('auto.Notifications.18.8102ab')" width="560px">
+    <el-dialog v-model="viewVisible" ::title="$t('auto.Notifications.8102ab0f')" width="560px">
       <div v-if="current" class="detail-content">
         <el-tag :type="typeTagType(current.type)" size="small">
           {{ typeLabel(current.type) }}
@@ -133,7 +133,7 @@
         </div>
       </div>
       <template #footer>
-        <el-button @click="viewVisible = false">{{ $t('auto.Notifications.20.b15d91') }}</el-button>
+        <el-button @click="viewVisible = false">{{ $t('auto.Notifications.b15d9127') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -172,8 +172,8 @@ const stats = ref({
 const hasUnread = computed(() => (stats.value.unread || 0) > 0)
 
 const typeLabel = (t) => {
-  const map = { info: t('auto.Notifications.21.d8c7e0'), warning: t('auto.Notifications.22.900c70'), error: t('auto.Notifications.23.7030ff'), success: t('auto.Notifications.24.330363'), announcement: t('auto.Notifications.25.fa86f1'), notification: t('auto.Notifications.26.5660bc') }
-  return map[t] || t || t('auto.Notifications.26.5660bc')
+  const map = { info: t('auto.Notifications.d8c7e04c'), warning: t('auto.Notifications.900c70fa'), error: t('auto.Notifications.7030ff64'), success: t('auto.Notifications.330363df'), announcement: t('auto.Notifications.fa86f1a5'), notification: t('auto.Notifications.5660bcd2') }
+  return map[t] || t || t('auto.Notifications.5660bcd2')
 }
 
 const typeTagType = (t) => {
@@ -212,7 +212,7 @@ const loadList = async () => {
     total.value = res?.total || list.value.length
     computeStats();
   } catch (err) {
-    ElMessage.error(t('auto.Notifications.27.724b62') + (err?.message || err))
+    ElMessage.error(t('auto.Notifications.724b6268') + (err?.message || err))
   } finally {
     loading.value = false
   }
@@ -252,9 +252,9 @@ const onMarkAllRead = async () => {
     }
     list.value.forEach(m => { m.is_read = true })
     computeStats()
-    ElMessage.success(i18n.global.t(t('auto.Notifications.28.2746f9')))
+    ElMessage.success(i18n.global.t(t('auto.Notifications.2746f923')))
   } catch (err) {
-    ElMessage.error(t('auto.Notifications.29.79585f') + (err?.message || err))
+    ElMessage.error(t('auto.Notifications.79585f92') + (err?.message || err))
   } finally {
     marking.value = false
   }

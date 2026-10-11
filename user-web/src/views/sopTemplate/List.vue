@@ -4,8 +4,8 @@
     <el-card class="header-card" shadow="never">
       <div class="header-content">
         <div>
-          <h2>{{ $t('auto.List.20.b9ce6f') }}</h2>
-          <p class="subtitle">{{ $t('auto.List.21.68fe91') }}</p>
+          <h2>{{ $t('auto.List.b9ce6f82') }}</h2>
+          <p class="subtitle">{{ $t('auto.List.68fe9153') }}</p>
         </div>
         <div class="header-actions">
           <el-button @click="loadList" :loading="loading">
@@ -23,35 +23,35 @@
     
     <el-card shadow="never" class="filter-card">
       <el-form :inline="true" :model="filter" @submit.prevent>
-        <el-form-item :label="$t('auto.List.1.d7ec2d')">
+        <el-form-item :label="$t('auto.List.d7ec2d3f')">
           <el-input
             v-model="filter.keyword"
-            :placeholder="$t('auto.List.2.91a340')"
+            :placeholder="$t('auto.List.91a34091')"
             clearable
             style="width: 200px"
             @keyup.enter="onSearch"
             @clear="onSearch"
           />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.3.764aca')">
+        <el-form-item :label="$t('auto.List.764aca4e')">
           <el-input
             v-model="filter.intent"
-            :placeholder="$t('auto.List.4.3814c5')"
+            :placeholder="$t('auto.List.3814c5cd')"
             clearable
             style="width: 160px"
             @keyup.enter="onSearch"
             @clear="onSearch"
           />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.5.d31633')">
-          <el-select v-model="filter.stage" :placeholder="$t('auto.List.6.7f3b19')" clearable style="width: 160px" @change="onSearch">
+        <el-form-item :label="$t('auto.List.d316330b')">
+          <el-select v-model="filter.stage" :placeholder="$t('auto.List.7f3b19c5')" clearable style="width: 160px" @change="onSearch">
             <el-option v-for="s in stageOptions" :key="s" :label="s" :value="s" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.List.7.3fea7c')">
-          <el-select v-model="filter.enabled" :placeholder="$t('auto.List.8.a8b0c2')" clearable style="width: 130px" @change="onSearch">
-            <el-option :label="$t('auto.List.9.7854b5')" :value="true" />
-            <el-option :label="$t('auto.List.10.710ad0')" :value="false" />
+        <el-form-item :label="$t('auto.List.3fea7ca7')">
+          <el-select v-model="filter.enabled" :placeholder="$t('auto.List.a8b0c204')" clearable style="width: 130px" @change="onSearch">
+            <el-option :label="$t('auto.List.7854b52a')" :value="true" />
+            <el-option :label="$t('auto.List.710ad08b')" :value="false" />
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -59,7 +59,7 @@
             <el-icon><Search /></el-icon>
             搜索
           </el-button>
-          <el-button @click="resetFilter">{{ $t('auto.List.22.4b9c32') }}</el-button>
+          <el-button @click="resetFilter">{{ $t('auto.List.4b9c3271') }}</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -68,22 +68,22 @@
     <el-card shadow="never">
       <el-table :data="list" v-loading="loading" stripe border>
         <el-table-column prop="id" label="ID" width="70" align="center" />
-        <el-table-column :label="$t('auto.List.11.a5d1c5')" min-width="180" show-overflow-tooltip>
+        <el-table-column :label="$t('auto.List.a5d1c511')" min-width="180" show-overflow-tooltip>
           <template #default="{ row }">
             <div class="tpl-name">{{ row.name }}</div>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.3.764aca')" width="120" align="center">
+        <el-table-column :label="$t('auto.List.764aca4e')" width="120" align="center">
           <template #default="{ row }">
             <el-tag size="small" type="warning">{{ row.intent || '-' }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.5.d31633')" width="100" align="center">
+        <el-table-column :label="$t('auto.List.d316330b')" width="100" align="center">
           <template #default="{ row }">
             <el-tag size="small" type="info">{{ row.stage || '-' }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.12.de9210')" width="180" show-overflow-tooltip>
+        <el-table-column :label="$t('auto.List.de92100c')" width="180" show-overflow-tooltip>
           <template #default="{ row }">
             <el-tag
               v-if="getKBName(row.kb_id)"
@@ -93,22 +93,22 @@
             >
               {{ getKBName(row.kb_id) }}
             </el-tag>
-            <span v-else class="text-muted">{{ $t('auto.List.23.f64a38') }}</span>
+            <span v-else class="text-muted">{{ $t('auto.List.f64a3850') }}</span>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.13.03ae79')" min-width="240" show-overflow-tooltip>
+        <el-table-column :label="$t('auto.List.03ae7940')" min-width="240" show-overflow-tooltip>
           <template #default="{ row }">
             <code class="tpl-code">{{ truncate(row.template, 90) }}</code>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.14.ee8ecb')" width="80" align="center">
+        <el-table-column :label="$t('auto.List.ee8ecb9e')" width="80" align="center">
           <template #default="{ row }">
             <el-tag :type="row.priority >= 50 ? 'success' : row.priority >= 0 ? 'info' : 'warning'" size="small">
               {{ row.priority || 0 }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.15.8f3599')" width="100" align="center">
+        <el-table-column :label="$t('auto.List.8f3599b6')" width="100" align="center">
           <template #default="{ row }">
             <el-progress
               :percentage="Math.round((row.confidence || 0) * 100)"
@@ -117,14 +117,14 @@
             />
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.16.e5852c')" width="100" align="center">
+        <el-table-column :label="$t('auto.List.e5852c46')" width="100" align="center">
           <template #default="{ row }">
             <el-tag size="small" :type="row.hit_count > 0 ? 'success' : 'info'">
               {{ row.hit_count || 0 }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.7.3fea7c')" width="90" align="center">
+        <el-table-column :label="$t('auto.List.3fea7ca7')" width="90" align="center">
           <template #default="{ row }">
             <el-switch
               :model-value="row.enabled !== false"
@@ -133,17 +133,17 @@
             />
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.17.a001a2')" width="160">
+        <el-table-column :label="$t('auto.List.a001a226')" width="160">
           <template #default="{ row }">{{ formatTime(row.updated_at) }}</template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.18.2b6bc0')" width="160" fixed="right">
+        <el-table-column :label="$t('auto.List.2b6bc0f2')" width="160" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" size="small" @click="goEdit(row)">{{ $t('auto.List.24.95b351') }}</el-button>
-            <el-button link type="danger" size="small" @click="onDelete(row)">{{ $t('auto.List.25.2f4aad') }}</el-button>
+            <el-button link type="primary" size="small" @click="goEdit(row)">{{ $t('auto.List.95b351c8') }}</el-button>
+            <el-button link type="danger" size="small" @click="onDelete(row)">{{ $t('auto.List.2f4aaddd') }}</el-button>
           </template>
         </el-table-column>
         <template #empty>
-          <el-empty :description="$t('auto.List.19.ecc822')" />
+          <el-empty :description="$t('auto.List.ecc8222a')" />
         </template>
       </el-table>
 
@@ -248,7 +248,7 @@ const loadList = async () => {
     list.value = res?.list || []
     total.value = res?.total || 0
   } catch (e) {
-    ElMessage.error(t('auto.List.26.3a1ee2') + (e.message || t('auto.List.27.974e74')))
+    ElMessage.error(t('auto.List.3a1ee2d2') + (e.message || t('auto.List.974e7484')))
   } finally {
     loading.value = false
   }
@@ -293,27 +293,27 @@ const onToggle = async (row, v) => {
       confidence: row.confidence || 0,
       enabled: v
     })
-    ElMessage.success(v ? t('auto.List.28.53ace4') : t('auto.List.29.1c1ed9'))
+    ElMessage.success(v ? t('auto.List.53ace430') : t('auto.List.1c1ed981'))
     await loadList()
   } catch (e) {
-    ElMessage.error(t('auto.List.30.428b3b') + (e.message || t('auto.List.27.974e74')))
+    ElMessage.error(t('auto.List.428b3b05') + (e.message || t('auto.List.974e7484')))
   } finally {
     row._toggling = false
   }
 };
 
 const onDelete = (row) => {
-  ElMessageBox.confirm(`确认删除模板「${row.name}」吗？删除后不可恢复。`, t('auto.List.31.50eaf9'), {
+  ElMessageBox.confirm(`确认删除模板「${row.name}」吗？删除后不可恢复。`, t('auto.List.50eaf94d'), {
     type: 'warning',
-    confirmButtonText: t('auto.List.32.631cd2'),
-    cancelButtonText: t('auto.List.33.625fb2')
+    confirmButtonText: t('auto.List.631cd220'),
+    cancelButtonText: t('auto.List.625fb26b')
   }).then(async () => {
     try {
       await sopTemplateApi.remove(row.id)
-      ElMessage.success(t('auto.List.34.0007d1'))
+      ElMessage.success(t('auto.List.0007d170'))
       await loadList()
     } catch (e) {
-      ElMessage.error(t('auto.List.35.bc42bb') + (e.message || t('auto.List.27.974e74')))
+      ElMessage.error(t('auto.List.bc42bb8f') + (e.message || t('auto.List.974e7484')))
     }
   }).catch(() => {})
 };

@@ -3,10 +3,10 @@
     <el-card class="box-card">
       <template #header>
         <div class="card-header">
-          <span>{{ $t('auto.Conflicts.13.ca03e2') }}</span>
+          <span>{{ $t('auto.Conflicts.ca03e24e') }}</span>
           <div class="header-actions">
             <el-tag v-if="pendingCount > 0" type="danger" effect="dark">待处理 {{ pendingCount }}</el-tag>
-            <el-button type="primary" size="small" :loading="loading" @click="fetchData">{{ $t('auto.Conflicts.14.694fc5') }}</el-button>
+            <el-button type="primary" size="small" :loading="loading" @click="fetchData">{{ $t('auto.Conflicts.694fc5ef') }}</el-button>
           </div>
         </div>
       </template>
@@ -16,8 +16,8 @@
         type="warning"
         :closable="false"
         show-icon
-        :title="$t('auto.Conflicts.1.3a2504')"
-        :description="$t('auto.Conflicts.2.e2ff18')"
+        :title="$t('auto.Conflicts.3a25041f')"
+        :description="$t('auto.Conflicts.e2ff182b')"
         style="margin-bottom: 16px"
       />
 
@@ -26,16 +26,16 @@
         :data="conflicts"
         border
         stripe
-        :empty-text="$t('auto.Conflicts.3.cbd5e3')"
+        :empty-text="$t('auto.Conflicts.cbd5e3aa')"
         style="width: 100%"
       >
-        <el-table-column prop="identity_type" :label="$t('auto.Conflicts.4.dbe885')" width="130">
+        <el-table-column prop="identity_type" :label="$t('auto.Conflicts.dbe8853d')" width="130">
           <template #default="{ row }">
             <el-tag :type="typeTag(row.identity_type)">{{ channelLabel(row.identity_type) }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="identity_value" :label="$t('auto.Conflicts.5.af77ec')" min-width="160" />
-        <el-table-column :label="$t('auto.Conflicts.6.6d7170')" min-width="200">
+        <el-table-column prop="identity_value" :label="$t('auto.Conflicts.af77ecf3')" min-width="160" />
+        <el-table-column :label="$t('auto.Conflicts.6d717038')" min-width="200">
           <template #default="{ row }">
             <el-tag
               v-for="(cid, idx) in row.customer_ids"
@@ -45,21 +45,21 @@
               style="margin-right: 6px"
             >
               {{ short(cid) }}
-              <span v-if="idx === 0">{{ $t('auto.Conflicts.15.11c010') }}</span>
+              <span v-if="idx === 0">{{ $t('auto.Conflicts.11c01014') }}</span>
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="status" :label="$t('auto.Conflicts.7.3fea7c')" width="110">
+        <el-table-column prop="status" :label="$t('auto.Conflicts.3fea7ca7')" width="110">
           <template #default="{ row }">
             <el-tag :type="row.status === 'resolved' ? 'success' : 'danger'">
               {{ row.status === 'resolved' ? '已解决' : '待处理' }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="created_at" :label="$t('auto.Conflicts.8.2fe5f3')" width="170">
+        <el-table-column prop="created_at" :label="$t('auto.Conflicts.2fe5f3d8')" width="170">
           <template #default="{ row }">{{ formatTime(row.created_at) }}</template>
         </el-table-column>
-        <el-table-column :label="$t('auto.Conflicts.9.2b6bc0')" width="240" fixed="right">
+        <el-table-column :label="$t('auto.Conflicts.2b6bc0f2')" width="240" fixed="right">
           <template #default="{ row }">
             <el-button
               v-if="row.status !== 'resolved'"
@@ -67,33 +67,33 @@
               size="small"
               :loading="row._merging"
               @click="handleMerge(row)"
-            >{{ $t('auto.Conflicts.16.e5d853') }}</el-button>
+            >{{ $t('auto.Conflicts.e5d8537a') }}</el-button>
             <el-button
               v-if="row.status !== 'resolved'"
               type="info"
               size="small"
               :loading="row._ignoring"
               @click="handleIgnore(row)"
-            >{{ $t('auto.Conflicts.17.08aecf') }}</el-button>
+            >{{ $t('auto.Conflicts.08aecfb4') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
 
       
-      <el-dialog v-model="mergeDialog" :title="$t('auto.Conflicts.10.0ca23e')" width="520px">
+      <el-dialog v-model="mergeDialog" :title="$t('auto.Conflicts.0ca23eab')" width="520px">
         <div v-if="selected">
-          <p>{{ $t('auto.Conflicts.18.c53486') }}<b>{{ channelLabel(selected.identity_type) }}</b> = <b>{{ selected.identity_value }}</b></p>
-          <p>{{ $t('auto.Conflicts.19.33f9c5') }}</p>
+          <p>{{ $t('auto.Conflicts.c5348675') }}<b>{{ channelLabel(selected.identity_type) }}</b> = <b>{{ selected.identity_value }}</b></p>
+          <p>{{ $t('auto.Conflicts.33f9c5b1') }}</p>
           <el-table :data="mergeRows" border size="small">
-            <el-table-column prop="role" :label="$t('auto.Conflicts.11.464f3d')" width="90" />
-            <el-table-column prop="id" :label="$t('auto.Conflicts.12.3f61de')" />
+            <el-table-column prop="role" :label="$t('auto.Conflicts.464f3d4e')" width="90" />
+            <el-table-column prop="id" :label="$t('auto.Conflicts.3f61dec5')" />
           </el-table>
           <el-alert type="info" :closable="false" style="margin-top: 12px"
-            >{{ $t('auto.Conflicts.20.c592be') }}</el-alert>
+            >{{ $t('auto.Conflicts.c592be53') }}</el-alert>
         </div>
         <template #footer>
-          <el-button @click="mergeDialog = false">{{ $t('auto.Conflicts.21.625fb2') }}</el-button>
-          <el-button type="danger" :loading="submitting" @click="confirmMerge">{{ $t('auto.Conflicts.22.8ba608') }}</el-button>
+          <el-button @click="mergeDialog = false">{{ $t('auto.Conflicts.625fb26b') }}</el-button>
+          <el-button type="danger" :loading="submitting" @click="confirmMerge">{{ $t('auto.Conflicts.8ba6082a') }}</el-button>
         </template>
       </el-dialog>
     </el-card>
@@ -118,13 +118,13 @@ const pendingCount = computed(() => conflicts.value.filter(c => c.status !== 're
 const mergeRows = computed(() => {
   if (!selected.value) return []
   const ids = selected.value.customer_ids || []
-  return ids.map((id, idx) => ({ role: idx === 0 ? t('auto.Conflicts.23.b31d47') : t('auto.Conflicts.24.1fc6cb'), id }))
+  return ids.map((id, idx) => ({ role: idx === 0 ? t('auto.Conflicts.b31d4768') : t('auto.Conflicts.1fc6cbbd'), id }))
 })
 
 function channelLabel(t) {
   const map = {
-    phone: t('auto.Conflicts.25.8098e2'), email: t('auto.Conflicts.26.3bc5e6'), wechat_open_id: t('auto.Conflicts.27.cfbf6f'),
-    douyin_open_id: t('auto.Conflicts.28.277a98'), xiaohongshu_id: t('auto.Conflicts.29.ae26bb')
+    phone: t('auto.Conflicts.8098e2b4'), email: t('auto.Conflicts.3bc5e602'), wechat_open_id: t('auto.Conflicts.cfbf6f4c'),
+    douyin_open_id: t('auto.Conflicts.277a984f'), xiaohongshu_id: t('auto.Conflicts.ae26bb04')
   }
   return map[t] || t
 }
@@ -144,7 +144,7 @@ async function fetchData() {
     const data = res?.data?.data || res?.data || res?.list || []
     conflicts.value = Array.isArray(data) ? data.map(c => ({ ...c, customer_ids: c.customer_ids || [] })) : []
   } catch (e) {
-    ElMessage.error(t('auto.Conflicts.30.913829') + (e?.message || e))
+    ElMessage.error(t('auto.Conflicts.913829cf') + (e?.message || e))
   } finally {
     loading.value = false
   }
@@ -162,8 +162,8 @@ async function confirmMerge() {
   try {
     await ElMessageBox.confirm(
       `即将把以下客户合并为主客户 ${primary}：\n从属客户 ${secondary[0]} 将被永久删除，其会话与事件归属迁移至主客户。\n该操作不可撤销，确认继续？`,
-      t('auto.Conflicts.31.f605d2'),
-      { type: 'warning', confirmButtonText: t('auto.Conflicts.22.8ba608'), cancelButtonText: t('auto.Conflicts.21.625fb2') }
+      t('auto.Conflicts.f605d2a8'),
+      { type: 'warning', confirmButtonText: t('auto.Conflicts.8ba6082a'), cancelButtonText: t('auto.Conflicts.625fb26b') }
     )
   } catch {
     return
@@ -173,11 +173,11 @@ async function confirmMerge() {
   try {
     await mergeOneID({ primary_id: primary, secondary_id: secondary[0] })
     await resolveConflict(row.conflict_id, { action: 'merge', primary_id: primary, secondary_id: secondary[0] })
-    ElMessage.success(t('auto.Conflicts.32.301896'))
+    ElMessage.success(t('auto.Conflicts.3018960b'))
     mergeDialog.value = false
     await fetchData()
   } catch (e) {
-    ElMessage.error(t('auto.Conflicts.33.3f9aa1') + (e?.message || e))
+    ElMessage.error(t('auto.Conflicts.3f9aa174') + (e?.message || e))
   } finally {
     row._merging = false
     submitting.value = false
@@ -186,17 +186,17 @@ async function confirmMerge() {
 
 async function handleIgnore(row) {
   try {
-    await ElMessageBox.confirm(t('auto.Conflicts.34.90f4e8'), t('auto.Conflicts.17.08aecf'), { type: 'warning' })
+    await ElMessageBox.confirm(t('auto.Conflicts.90f4e850'), t('auto.Conflicts.08aecfb4'), { type: 'warning' })
   } catch {
     return
   }
   row._ignoring = true
   try {
     await resolveConflict(row.conflict_id, { action: 'ignore' })
-    ElMessage.success(t('auto.Conflicts.35.17f2ba'))
+    ElMessage.success(t('auto.Conflicts.17f2ba0c'))
     await fetchData()
   } catch (e) {
-    ElMessage.error(t('auto.Conflicts.36.79585f') + (e?.message || e))
+    ElMessage.error(t('auto.Conflicts.79585f92') + (e?.message || e))
   } finally {
     row._ignoring = false
   }

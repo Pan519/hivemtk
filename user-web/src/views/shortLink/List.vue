@@ -14,16 +14,16 @@
     
     <div class="search-form">
       <el-form :inline="true" :model="searchForm" class="search-form-content">
-        <el-form-item ::label="$t('auto.List.1.e8fb33')">
-          <el-input v-model="searchForm.short_code" ::placeholder="$t('auto.List.2.0d8013')" clearable />
+        <el-form-item ::label="$t('auto.List.e8fb33e2')">
+          <el-input v-model="searchForm.short_code" ::placeholder="$t('auto.List.0d80133a')" clearable />
         </el-form-item>
-        <el-form-item ::label="$t('auto.List.3.7ad5dc')">
-          <el-input v-model="searchForm.original_url" ::placeholder="$t('auto.List.4.a20b88')" clearable />
+        <el-form-item ::label="$t('auto.List.7ad5dc73')">
+          <el-input v-model="searchForm.original_url" ::placeholder="$t('auto.List.a20b8828')" clearable />
         </el-form-item>
-        <el-form-item ::label="$t('auto.List.5.1b8578')">
-          <el-select v-model="searchForm.status" ::placeholder="$t('auto.List.6.333291')" clearable>
-            <el-option ::label="$t('auto.List.7.62f11e')" value="1" />
-            <el-option ::label="$t('auto.List.8.27ea4f')" value="2" />
+        <el-form-item ::label="$t('auto.List.1b857887')">
+          <el-select v-model="searchForm.status" ::placeholder="$t('auto.List.33329123')" clearable>
+            <el-option ::label="$t('auto.List.62f11ef3')" value="1" />
+            <el-option ::label="$t('auto.List.27ea4fcb')" value="2" />
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -43,25 +43,25 @@
     <PageState v-if="error" state="error" :error-text="error" @retry="fetchShortLinkList" />
     <el-table v-if="!error" :data="shortLinkList" border style="width: 100%" v-loading="loading">
       <el-table-column prop="id" label="ID" width="80" />
-      <el-table-column prop="short_code" ::label="$t('auto.List.1.e8fb33')" width="120" />
-      <el-table-column prop="original_url" ::label="$t('auto.List.3.7ad5dc')" min-width="200" show-overflow-tooltip />
-      <el-table-column prop="title" ::label="$t('auto.List.9.319eda')" min-width="150" show-overflow-tooltip />
-      <el-table-column prop="description" ::label="$t('auto.List.10.d1ef7e')" min-width="150" show-overflow-tooltip />
-      <el-table-column prop="click_count" ::label="$t('auto.List.11.20d518')" width="100" />
-      <el-table-column prop="status_str" ::label="$t('auto.List.5.1b8578')" width="100">
+      <el-table-column prop="short_code" ::label="$t('auto.List.e8fb33e2')" width="120" />
+      <el-table-column prop="original_url" ::label="$t('auto.List.7ad5dc73')" min-width="200" show-overflow-tooltip />
+      <el-table-column prop="title" ::label="$t('auto.List.319eda89')" min-width="150" show-overflow-tooltip />
+      <el-table-column prop="description" ::label="$t('auto.List.d1ef7e0b')" min-width="150" show-overflow-tooltip />
+      <el-table-column prop="click_count" ::label="$t('auto.List.20d51866')" width="100" />
+      <el-table-column prop="status_str" ::label="$t('auto.List.1b857887')" width="100">
         <template #default="scope">
           <el-tag :type="getStatusType(scope.row)">
             {{ scope.row.status_str }}
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="expire_time" :label="$t('auto.List.12.1fa23f')" width="180">
+      <el-table-column prop="expire_time" :label="$t('auto.List.1fa23f4d')" width="180">
         <template #default="scope">
           {{ scope.row.expire_time || '永不过期' }}
         </template>
       </el-table-column>
-      <el-table-column prop="created_at" :label="$t('auto.List.13.eca37c')" width="180" />
-      <el-table-column :label="$t('auto.List.14.2b6bc0')" width="300" fixed="right">
+      <el-table-column prop="created_at" :label="$t('auto.List.eca37cb0')" width="180" />
+      <el-table-column :label="$t('auto.List.2b6bc0f2')" width="300" fixed="right">
         <template #default="scope">
           <el-button type="primary" size="small" @click="handleEdit(scope.row)">
             编辑
@@ -80,7 +80,7 @@
         </template>
       </el-table-column>
       <template #empty>
-        <el-empty :description="$t('auto.List.15.21efd8')" />
+        <el-empty :description="$t('auto.List.21efd88b')" />
       </template>
     </el-table>
 
@@ -110,44 +110,44 @@
         :rules="rules"
         label-width="80px"
       >
-        <el-form-item :label="$t('auto.List.16.2fdc27')" prop="short_code">
-          <el-input v-model="form.short_code" :placeholder="$t('auto.List.17.c5bfc0')">
+        <el-form-item :label="$t('auto.List.2fdc27c6')" prop="short_code">
+          <el-input v-model="form.short_code" :placeholder="$t('auto.List.c5bfc054')">
             <template #append>
-              <el-button @click="generateShortCode" :loading="generating">{{ $t('auto.List.35.4dfe70') }}</el-button>
+              <el-button @click="generateShortCode" :loading="generating">{{ $t('auto.List.4dfe7036') }}</el-button>
             </template>
           </el-input>
         </el-form-item>
-        <el-form-item :label="$t('auto.List.18.5e3436')" prop="original_url">
-          <el-input v-model="form.original_url" :placeholder="$t('auto.List.19.c2c347')" />
+        <el-form-item :label="$t('auto.List.5e343648')" prop="original_url">
+          <el-input v-model="form.original_url" :placeholder="$t('auto.List.c2c347fc')" />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.20.32c65d')" prop="title">
-          <el-input v-model="form.title" :placeholder="$t('auto.List.21.96641a')" />
+        <el-form-item :label="$t('auto.List.32c65d8d')" prop="title">
+          <el-input v-model="form.title" :placeholder="$t('auto.List.96641a78')" />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.22.3bdd08')" prop="description">
-          <el-input v-model="form.description" type="textarea" :placeholder="$t('auto.List.23.11956a')" />
+        <el-form-item :label="$t('auto.List.3bdd08ad')" prop="description">
+          <el-input v-model="form.description" type="textarea" :placeholder="$t('auto.List.11956a43')" />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.24.300e01')" prop="password">
-          <el-input v-model="form.password" type="password" :placeholder="$t('auto.List.25.b2340c')" show-password />
+        <el-form-item :label="$t('auto.List.300e011b')" prop="password">
+          <el-input v-model="form.password" type="password" :placeholder="$t('auto.List.b2340ce6')" show-password />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.12.1fa23f')" prop="expire_time">
+        <el-form-item :label="$t('auto.List.1fa23f4d')" prop="expire_time">
           <el-date-picker
             v-model="form.expire_time"
             type="datetime"
-            :placeholder="$t('auto.List.26.71342e')"
+            :placeholder="$t('auto.List.71342e28')"
             format="YYYY-MM-DD HH:mm:ss"
             value-format="YYYY-MM-DD HH:mm:ss"
           />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.27.3fea7c')" prop="status" v-if="isEdit">
-          <el-select v-model="form.status" :placeholder="$t('auto.List.28.e1c965')">
-            <el-option :label="$t('auto.List.29.fd6e80')" :value="1" />
-            <el-option :label="$t('auto.List.30.710ad0')" :value="2" />
+        <el-form-item :label="$t('auto.List.3fea7ca7')" prop="status" v-if="isEdit">
+          <el-select v-model="form.status" :placeholder="$t('auto.List.e1c965ef')">
+            <el-option :label="$t('auto.List.fd6e80f1')" :value="1" />
+            <el-option :label="$t('auto.List.710ad08b')" :value="2" />
           </el-select>
         </el-form-item>
       </el-form>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="dialogVisible = false">{{ $t('auto.List.36.625fb2') }}</el-button>
+          <el-button @click="dialogVisible = false">{{ $t('auto.List.625fb26b') }}</el-button>
           <el-button type="primary" @click="handleSubmit" :loading="submitting">
             确定
           </el-button>
@@ -158,7 +158,7 @@
     
     <el-dialog
       v-model="statsDialogVisible"
-      :title="$t('auto.List.31.aa8158')"
+      :title="$t('auto.List.aa8158f3')"
       width="80%"
       top="5vh"
     >
@@ -169,7 +169,7 @@
               <el-card class="stats-card">
                 <div class="stats-item">
                   <div class="stats-value">{{ currentStats.total_clicks || 0 }}</div>
-                  <div class="stats-label">{{ $t('auto.List.37.f3d321') }}</div>
+                  <div class="stats-label">{{ $t('auto.List.f3d321e3') }}</div>
                 </div>
               </el-card>
             </el-col>
@@ -177,7 +177,7 @@
               <el-card class="stats-card">
                 <div class="stats-item">
                   <div class="stats-value">{{ currentStats.today_clicks || 0 }}</div>
-                  <div class="stats-label">{{ $t('auto.List.38.bee53f') }}</div>
+                  <div class="stats-label">{{ $t('auto.List.bee53f7b') }}</div>
                 </div>
               </el-card>
             </el-col>
@@ -185,7 +185,7 @@
               <el-card class="stats-card">
                 <div class="stats-item">
                   <div class="stats-value">{{ currentStats.yesterday_clicks || 0 }}</div>
-                  <div class="stats-label">{{ $t('auto.List.39.10ce7c') }}</div>
+                  <div class="stats-label">{{ $t('auto.List.10ce7cc2') }}</div>
                 </div>
               </el-card>
             </el-col>
@@ -193,7 +193,7 @@
               <el-card class="stats-card">
                 <div class="stats-item">
                   <div class="stats-value">{{ currentStats.avg_daily_clicks || 0 }}</div>
-                  <div class="stats-label">{{ $t('auto.List.40.271445') }}</div>
+                  <div class="stats-label">{{ $t('auto.List.27144593') }}</div>
                 </div>
               </el-card>
             </el-col>
@@ -204,13 +204,13 @@
           <el-row :gutter="20">
             <el-col :span="16">
               <el-card>
-                <div class="chart-title">{{ $t('auto.List.41.b5b95b') }}</div>
+                <div class="chart-title">{{ $t('auto.List.b5b95b2b') }}</div>
                 <div ref="trendChartRef" class="chart-container"></div>
               </el-card>
             </el-col>
             <el-col :span="8">
               <el-card>
-                <div class="chart-title">{{ $t('auto.List.42.c76b9b') }}</div>
+                <div class="chart-title">{{ $t('auto.List.c76b9b27') }}</div>
                 <div ref="deviceChartRef" class="chart-container"></div>
               </el-card>
             </el-col>
@@ -222,22 +222,22 @@
     
     <el-dialog
       v-model="shareDialogVisible"
-      :title="$t('auto.List.32.7bae0c')"
+      :title="$t('auto.List.7bae0c6f')"
       width="500px"
     >
       <div v-loading="shareLoading" class="share-content">
         <el-form label-width="80px">
-          <el-form-item :label="$t('auto.List.33.74cf91')">
+          <el-form-item :label="$t('auto.List.74cf91f3')">
             <el-input v-model="shareData.short_url" readonly>
               <template #append>
-                <el-button @click="copyToClipboard(shareData.short_url)">{{ $t('auto.List.43.79d3ab') }}</el-button>
+                <el-button @click="copyToClipboard(shareData.short_url)">{{ $t('auto.List.79d3abe9') }}</el-button>
               </template>
             </el-input>
           </el-form-item>
-          <el-form-item :label="$t('auto.List.34.22b03c')">
+          <el-form-item :label="$t('auto.List.22b03c02')">
             <div class="qr-code-container">
-              <img v-if="shareData.qr_code" :src="shareData.qr_code" :alt="$t('auto.List.34.22b03c')" />
-              <div v-else class="qr-code-placeholder">{{ $t('auto.List.44.3db028') }}</div>
+              <img v-if="shareData.qr_code" :src="shareData.qr_code" :alt="$t('auto.List.22b03c02')" />
+              <div v-else class="qr-code-placeholder">{{ $t('auto.List.3db02883') }}</div>
             </div>
           </el-form-item>
         </el-form>
@@ -306,18 +306,18 @@ const form = reactive({
 
 const rules = {
   short_code: [
-    { required: true, message: i18n.global.t(t('auto.List.17.c5bfc0')), trigger: 'blur' },
-    { min: 4, max: 20, message: i18n.global.t(t('auto.List.45.f5a9a7')), trigger: 'blur' },
-    { pattern: /^[a-zA-Z0-9]+$/, message: i18n.global.t(t('auto.List.46.af8fdf')), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.List.c5bfc054')), trigger: 'blur' },
+    { min: 4, max: 20, message: i18n.global.t(t('auto.List.f5a9a757')), trigger: 'blur' },
+    { pattern: /^[a-zA-Z0-9]+$/, message: i18n.global.t(t('auto.List.af8fdfa8')), trigger: 'blur' }
   ],
   original_url: [
-    { required: true, message: i18n.global.t(t('auto.List.19.c2c347')), trigger: 'blur' },
-    { type: 'url', message: i18n.global.t(t('auto.List.47.a7f6ca')), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.List.c2c347fc')), trigger: 'blur' },
+    { type: 'url', message: i18n.global.t(t('auto.List.a7f6ca3f')), trigger: 'blur' }
   ]
 };
 
 const dialogTitle = computed(() => {
-  return isEdit.value ? t('auto.List.48.f344cb') : t('auto.List.49.b2abd5')
+  return isEdit.value ? t('auto.List.f344cb87') : t('auto.List.b2abd5a8')
 });
 
 onMounted(() => {
@@ -340,10 +340,10 @@ const fetchShortLinkList = async () => {
       shortLinkList.value = res.list
       pagination.total = res.total
     } else {
-      error.value = i18n.global.t(t('auto.List.50.049f09'))
+      error.value = i18n.global.t(t('auto.List.049f09dd'))
     }
   } catch (error) {
-    error.value = i18n.global.t(t('auto.List.50.049f09'))
+    error.value = i18n.global.t(t('auto.List.049f09dd'))
     console.error(error)
   } finally {
     loading.value = false
@@ -404,19 +404,19 @@ const handleEdit = (row) => {
 const handleDelete = (row) => {
   ElMessageBox.confirm(
     `确定要删除短链 "${row.short_code}" 吗？`,
-    t('auto.List.51.02d981'),
+    t('auto.List.02d9819d'),
     {
-      confirmButtonText: t('auto.List.52.38cf16'),
-      cancelButtonText: t('auto.List.36.625fb2'),
+      confirmButtonText: t('auto.List.38cf16f2'),
+      cancelButtonText: t('auto.List.625fb26b'),
       type: 'warning'
     }
   ).then(async () => {
     try {
       const res = await shortLinkApi.delete(row.id)
-      ElMessage.success(i18n.global.t(t('auto.List.53.0007d1')));
+      ElMessage.success(i18n.global.t(t('auto.List.0007d170')));
       fetchShortLinkList()
     } catch (error) {
-      ElMessage.error(i18n.global.t(t('auto.List.54.acf066')))
+      ElMessage.error(i18n.global.t(t('auto.List.acf0664a')))
       console.error(error)
     }
   }).catch((e) => {
@@ -431,7 +431,7 @@ const generateShortCode = async () => {
     const res = await shortLinkApi.generateShortCode({ length: 6 })
     form.short_code = res.short_code;
   } catch (error) {
-    ElMessage.error(i18n.global.t(t('auto.List.55.055b5a')))
+    ElMessage.error(i18n.global.t(t('auto.List.055b5a4a')))
     console.error(error)
   } finally {
     generating.value = false
@@ -452,11 +452,11 @@ const handleSubmit = async () => {
           res = await shortLinkApi.create(form)
         }
 
-        ElMessage.success(isEdit.value ? t('auto.List.56.55aa63') : t('auto.List.57.04a691'));
+        ElMessage.success(isEdit.value ? t('auto.List.55aa6366') : t('auto.List.04a691b3'));
         dialogVisible.value = false
         fetchShortLinkList()
       } catch (error) {
-        ElMessage.error(isEdit.value ? t('auto.List.58.930442') : t('auto.List.59.a88928'))
+        ElMessage.error(isEdit.value ? t('auto.List.930442e2') : t('auto.List.a889286a'))
         console.error(error)
       } finally {
         submitting.value = false
@@ -503,7 +503,7 @@ const handleStats = async (row) => {
     await nextTick();
     initCharts(res)
   } catch (error) {
-    ElMessage.error(i18n.global.t(t('auto.List.60.063dc7')))
+    ElMessage.error(i18n.global.t(t('auto.List.063dc79a')))
     console.error(error)
   } finally {
     statsLoading.value = false
@@ -518,7 +518,7 @@ const handleShare = async (row) => {
     const res = await shortLinkApi.share(row.id)
     shareData.value = res;
   } catch (error) {
-    ElMessage.error(i18n.global.t(t('auto.List.61.0df764')))
+    ElMessage.error(i18n.global.t(t('auto.List.0df764a2')))
     console.error(error)
   } finally {
     shareLoading.value = false
@@ -528,9 +528,9 @@ const handleShare = async (row) => {
 const copyToClipboard = (text) => {
   if (navigator.clipboard) {
     navigator.clipboard.writeText(text).then(() => {
-      ElMessage.success(i18n.global.t(t('auto.List.62.20a495')))
+      ElMessage.success(i18n.global.t(t('auto.List.20a49536')))
     }).catch(() => {
-      ElMessage.error(i18n.global.t(t('auto.List.63.5154ae')))
+      ElMessage.error(i18n.global.t(t('auto.List.5154ae17')))
     })
   } else {
     const textarea = document.createElement('textarea');
@@ -539,7 +539,7 @@ const copyToClipboard = (text) => {
     textarea.select()
     document.execCommand('copy')
     document.body.removeChild(textarea)
-    ElMessage.success(i18n.global.t(t('auto.List.62.20a495')))
+    ElMessage.success(i18n.global.t(t('auto.List.20a49536')))
   }
 }
 
@@ -564,7 +564,7 @@ const initCharts = (data) => {
       trigger: 'axis'
     },
     legend: {
-      data: [t('auto.List.64.4461a6')]
+      data: [t('auto.List.4461a6d2')]
     },
     grid: {
       left: '3%',
@@ -582,7 +582,7 @@ const initCharts = (data) => {
     },
     series: [
       {
-        name: t('auto.List.64.4461a6'),
+        name: t('auto.List.4461a6d2'),
         type: 'line',
         stack: 'Total',
         smooth: true,
@@ -607,7 +607,7 @@ const initCharts = (data) => {
     },
     series: [
       {
-        name: t('auto.List.65.02f41e'),
+        name: t('auto.List.02f41e23'),
         type: 'pie',
         radius: ['50%', '70%'],
         avoidLabelOverlap: false,

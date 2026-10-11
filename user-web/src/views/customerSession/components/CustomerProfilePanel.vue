@@ -3,43 +3,43 @@
     <el-card>
       <template #header>
         <div class="profile-header">
-          <span><el-icon><UserFilled /></el-icon>{{ $t('auto.CustomerProfilePanel.1.863210') }}</span>
-          <el-button link size="small" @click="$emit('refresh')">{{ $t('auto.CustomerProfilePanel.2.694fc5') }}</el-button>
+          <span><el-icon><UserFilled /></el-icon>{{ $t('auto.CustomerProfilePanel.863210b6') }}</span>
+          <el-button link size="small" @click="$emit('refresh')">{{ $t('auto.CustomerProfilePanel.694fc5ef') }}</el-button>
         </div>
       </template>
 
 
       <div class="profile-section">
         <div class="profile-row">
-          <span class="label">{{ $t('auto.CustomerProfilePanel.3.1c2ecf') }}</span>
+          <span class="label">{{ $t('auto.CustomerProfilePanel.1c2ecf70') }}</span>
           <span class="value">{{ currentSession.customerId || currentSession.sessionId }}</span>
         </div>
         <div class="profile-row">
-          <span class="label">{{ $t('auto.CustomerProfilePanel.4.ebee05') }}</span>
+          <span class="label">{{ $t('auto.CustomerProfilePanel.ebee0533') }}</span>
           <span class="value">{{ getChannelLabel(currentSession.channel) }}</span>
         </div>
         <div class="profile-row">
-          <span class="label">{{ $t('auto.CustomerProfilePanel.5.5d6354') }}</span>
+          <span class="label">{{ $t('auto.CustomerProfilePanel.5d6354d6') }}</span>
           <span class="value">{{ formatTime(currentSession.createdAt) }}</span>
         </div>
         <div class="profile-row">
-          <span class="label">{{ $t('auto.CustomerProfilePanel.6.342cea') }}</span>
+          <span class="label">{{ $t('auto.CustomerProfilePanel.342ceac9') }}</span>
           <span class="value">{{ profileStats.messageCount || 0 }}</span>
         </div>
         <div class="profile-row">
-          <span class="label">{{ $t('auto.CustomerProfilePanel.7.de0a38') }}</span>
+          <span class="label">{{ $t('auto.CustomerProfilePanel.de0a387d') }}</span>
           <span class="value">{{ profileStats.sessionCount || 0 }}</span>
         </div>
         <div class="profile-row">
-          <span class="label">{{ $t('auto.CustomerProfilePanel.8.ae8297') }}</span>
+          <span class="label">{{ $t('auto.CustomerProfilePanel.ae829781') }}</span>
           <span class="value">{{ profileStats.aiReplyCount || 0 }}</span>
         </div>
       </div>
 
 
       <div class="profile-section">
-        <div class="section-title">{{ $t('auto.CustomerProfilePanel.9.9fa9d0') }}</div>
-        <div v-if="profileTags.length === 0" class="empty-hint">{{ $t('auto.CustomerProfilePanel.10.43e5ef') }}</div>
+        <div class="section-title">{{ $t('auto.CustomerProfilePanel.9fa9d049') }}</div>
+        <div v-if="profileTags.length === 0" class="empty-hint">{{ $t('auto.CustomerProfilePanel.43e5ef23') }}</div>
         <div class="tag-cloud">
           <el-tag
             v-for="t in profileTags"
@@ -55,12 +55,12 @@
 
 
       <div class="profile-section">
-        <div class="section-title">{{ $t('auto.CustomerProfilePanel.11.bc02a2') }}</div>
+        <div class="section-title">{{ $t('auto.CustomerProfilePanel.bc02a22e') }}</div>
         <el-radio-group :model-value="sopStage" size="small" style="display: flex; flex-direction: column; gap: 6px" @update:model-value="$emit('update:sopStage', $event)">
-          <el-radio value="presale">{{ $t('auto.CustomerProfilePanel.12.b19aec') }}</el-radio>
-          <el-radio value="lead">{{ $t('auto.CustomerProfilePanel.13.37cd3c') }}</el-radio>
-          <el-radio value="aftersale">{{ $t('auto.CustomerProfilePanel.14.a62ae1') }}</el-radio>
-          <el-radio value="refund">{{ $t('auto.CustomerProfilePanel.15.323770') }}</el-radio>
+          <el-radio value="presale">{{ $t('auto.CustomerProfilePanel.b19aec05') }}</el-radio>
+          <el-radio value="lead">{{ $t('auto.CustomerProfilePanel.37cd3c84') }}</el-radio>
+          <el-radio value="aftersale">{{ $t('auto.CustomerProfilePanel.a62ae11d') }}</el-radio>
+          <el-radio value="refund">{{ $t('auto.CustomerProfilePanel.323770d0') }}</el-radio>
         </el-radio-group>
         <el-button
           size="small"
@@ -75,7 +75,7 @@
 
 
       <div class="profile-section">
-        <div class="section-title">{{ $t('auto.CustomerProfilePanel.16.9530e8') }}</div>
+        <div class="section-title">{{ $t('auto.CustomerProfilePanel.9530e8e4') }}</div>
         <el-button-group style="width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 6px">
           <el-button size="small" @click="$emit('send-coupon')">
             <el-icon><Ticket /></el-icon> 发券

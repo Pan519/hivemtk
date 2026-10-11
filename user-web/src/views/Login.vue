@@ -76,13 +76,13 @@
             <el-form-item v-if="registerMode === 'invite' || registerMode === 'default_team'">
               <el-input
                 v-model="registerForm.invite_code"
-                ::placeholder="$t('auto.Login.1.a43a4c')"
+                ::placeholder="$t('auto.Login.a43a4c8e')"
                 prefix-icon="Ticket"
                 size="large"
               />
             </el-form-item>
             <el-form-item v-if="registerMode === 'create_team'">
-              <el-input v-model="registerForm.team_name" :placeholder="$t('auto.Login.2.a7e4fb')" prefix-icon="OfficeBuilding" size="large" />
+              <el-input v-model="registerForm.team_name" :placeholder="$t('auto.Login.a7e4fbac')" prefix-icon="OfficeBuilding" size="large" />
             </el-form-item>
           </div>
 
@@ -218,15 +218,15 @@ const handleLogin = async () => {
         ElMessage.success(t('core.login.success'))
         router.push('/')
       } else {
-        console.error(t('auto.Login.3.f76002'), response)
+        console.error(t('auto.Login.f7600263'), response)
         ElMessage.error(t('core.login.failServer'))
       }
     } else {
-      console.error(t('auto.Login.3.f76002'), response)
+      console.error(t('auto.Login.f7600263'), response)
       ElMessage.error(t('core.login.failServer'))
     }
     } catch (error) {
-    console.error(t('auto.Login.4.0fe50a'), error)
+    console.error(t('auto.Login.0fe50a13'), error)
     ElMessage.error(error.message || t('core.login.fail'))
   } finally {
     loading.value = false

@@ -3,13 +3,13 @@
     <el-card shadow="never">
       <template #header>
         <div class="card-header">
-          <span>{{ $t('auto.FunnelDashboard.7.3073ed') }}</span>
-          <el-button type="primary" size="small" @click="load">{{ $t('auto.FunnelDashboard.8.694fc5') }}</el-button>
+          <span>{{ $t('auto.FunnelDashboard.3073eda2') }}</span>
+          <el-button type="primary" size="small" @click="load">{{ $t('auto.FunnelDashboard.694fc5ef') }}</el-button>
         </div>
       </template>
 
-      <div v-if="loading">{{ $t('auto.FunnelDashboard.9.26b5bd') }}</div>
-      <el-empty v-else-if="!stats" :description="$t('auto.FunnelDashboard.1.0c1515')" />
+      <div v-if="loading">{{ $t('auto.FunnelDashboard.26b5bd49') }}</div>
+      <el-empty v-else-if="!stats" :description="$t('auto.FunnelDashboard.0c151559')" />
 
       <template v-else>
         <!-- 双漏斗 -->
@@ -25,11 +25,11 @@
         <!-- 引擎对比 -->
         <el-row :gutter="16" class="stats-row">
           <el-col :span="12">
-            <h4>{{ $t('auto.FunnelDashboard.10.c2fbb4') }}</h4>
+            <h4>{{ $t('auto.FunnelDashboard.c2fbb488') }}</h4>
             <el-table :data="engineIndexed" size="small" border>
-              <el-table-column prop="engine" :label="$t('auto.FunnelDashboard.2.6c1b19')" width="120" />
-              <el-table-column prop="count" :label="$t('auto.FunnelDashboard.3.ed138c')" />
-              <el-table-column :label="$t('auto.FunnelDashboard.4.b0e0fc')">
+              <el-table-column prop="engine" :label="$t('auto.FunnelDashboard.6c1b19dd')" width="120" />
+              <el-table-column prop="count" :label="$t('auto.FunnelDashboard.ed138cfc')" />
+              <el-table-column :label="$t('auto.FunnelDashboard.b0e0fc44')">
                 <template #default="{ row }">
                   <el-progress :percentage="rate(row.count)" />
                 </template>
@@ -37,11 +37,11 @@
             </el-table>
           </el-col>
           <el-col :span="12">
-            <h4>{{ $t('auto.FunnelDashboard.11.8b6f7a') }}</h4>
+            <h4>{{ $t('auto.FunnelDashboard.8b6f7af2') }}</h4>
             <el-table :data="engineCited" size="small" border>
-              <el-table-column prop="engine" :label="$t('auto.FunnelDashboard.2.6c1b19')" width="120" />
-              <el-table-column prop="count" :label="$t('auto.FunnelDashboard.5.373f31')" />
-              <el-table-column :label="$t('auto.FunnelDashboard.6.db472b')">
+              <el-table-column prop="engine" :label="$t('auto.FunnelDashboard.6c1b19dd')" width="120" />
+              <el-table-column prop="count" :label="$t('auto.FunnelDashboard.373f31aa')" />
+              <el-table-column :label="$t('auto.FunnelDashboard.db472b2e')">
                 <template #default="{ row }">
                   <el-progress :percentage="rate(row.count)" />
                 </template>
@@ -72,14 +72,14 @@ const stats = ref(null)
 const loading = ref(false)
 
 const labelMap = {
-  seed_count: t('auto.FunnelDashboard.12.d83af8'),
-  longtail_count: t('auto.FunnelDashboard.13.022f20'),
-  article_count: t('auto.FunnelDashboard.14.c75625'),
-  deployed_count: t('auto.FunnelDashboard.15.d87522'),
-  indexed: t('auto.FunnelDashboard.16.b585fa'),
-  ai_cited: t('auto.FunnelDashboard.17.d5c968'),
-  longtail_to_article: t('auto.FunnelDashboard.18.dc1a7b'),
-  article_to_deployed: t('auto.FunnelDashboard.19.33ecec')
+  seed_count: t('auto.FunnelDashboard.d83af87b'),
+  longtail_count: t('auto.FunnelDashboard.022f200b'),
+  article_count: t('auto.FunnelDashboard.c75625dc'),
+  deployed_count: t('auto.FunnelDashboard.d87522c3'),
+  indexed: t('auto.FunnelDashboard.b585faf9'),
+  ai_cited: t('auto.FunnelDashboard.d5c968f7'),
+  longtail_to_article: t('auto.FunnelDashboard.dc1a7bdf'),
+  article_to_deployed: t('auto.FunnelDashboard.33ecec4b')
 }
 
 const funnel = computed(() => {

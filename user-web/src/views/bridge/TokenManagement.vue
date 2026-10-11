@@ -3,7 +3,7 @@
     <el-card>
       <template #header>
         <div class="flex items-center justify-between">
-          <span>{{ $t('auto.TokenManagement.5.ae69bb') }}</span>
+          <span>{{ $t('auto.TokenManagement.ae69bbab') }}</span>
           <el-tag :type="status.main_configured ? 'success' : 'danger'" size="small">
             {{ status.main_configured ? `已配置(${status.source === 'db' ? '运行时' : '环境变量'})` : '未配置(通道拒绝访问)' }}
           </el-tag>
@@ -11,22 +11,22 @@
       </template>
 
       <el-alert v-if="status.prev_configured" type="warning" :closable="false" show-icon class="mb-3"
-        :title="$t('auto.TokenManagement.1.736e03')" />
+        :title="$t('auto.TokenManagement.736e03bb')" />
 
       <el-alert type="info" :closable="false" show-icon class="mb-3"
-        :title="$t('auto.TokenManagement.2.d2a603')" />
+        :title="$t('auto.TokenManagement.d2a60388')" />
 
       <el-form label-width="90px">
-        <el-form-item :label="$t('auto.TokenManagement.3.8f9448')">
-          <el-input v-model="newToken" readonly :placeholder="$t('auto.TokenManagement.4.78cfcb')">
+        <el-form-item :label="$t('auto.TokenManagement.8f944893')">
+          <el-input v-model="newToken" readonly :placeholder="$t('auto.TokenManagement.78cfcb87')">
             <template #append>
-              <el-button @click="copyToken" :disabled="!newToken">{{ $t('auto.TokenManagement.6.79d3ab') }}</el-button>
+              <el-button @click="copyToken" :disabled="!newToken">{{ $t('auto.TokenManagement.79d3abe9') }}</el-button>
             </template>
           </el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" :loading="resetting" @click="onReset">{{ $t('auto.TokenManagement.7.456ef4') }}</el-button>
-          <span class="ml-3 text-xs text-gray-400">{{ $t('auto.TokenManagement.8.fcf89e') }}</span>
+          <el-button type="primary" :loading="resetting" @click="onReset">{{ $t('auto.TokenManagement.456ef430') }}</el-button>
+          <span class="ml-3 text-xs text-gray-400">{{ $t('auto.TokenManagement.fcf89e1b') }}</span>
         </el-form-item>
       </el-form>
     </el-card>
@@ -56,7 +56,7 @@ const onReset = async () => {
   try {
     const res = await resetBridgeToken()
     newToken.value = res?.token || ''
-    ElMessage.success(t('auto.TokenManagement.9.f2495b'))
+    ElMessage.success(t('auto.TokenManagement.f2495b61'))
     await loadStatus()
   } finally {
     resetting.value = false
@@ -65,7 +65,7 @@ const onReset = async () => {
 
 const copyToken = async () => {
   await navigator.clipboard.writeText(newToken.value)
-  ElMessage.success(t('auto.TokenManagement.10.52e6ab'))
+  ElMessage.success(t('auto.TokenManagement.52e6abbe'))
 }
 
 onMounted(loadStatus)

@@ -10,7 +10,7 @@
             <el-select
               v-model="currentVersion"
               style="width: 140px"
-              ::placeholder="$t('auto.Editor.1.b4c33f')"
+              ::placeholder="$t('auto.Editor.b4c33fc5')"
               @change="onVersionChange"
             >
               <el-option
@@ -101,7 +101,7 @@
                 marker-end="url(#wf-arrow)"
                 role="button"
                 tabindex="0"
-                :aria-label="$t('auto.Editor.2.70c2f1')"
+                :aria-label="$t('auto.Editor.70c2f188')"
                 @click="removeEdge(idx)"
                 @keydown.enter.prevent="removeEdge(idx)"
                 @keydown.space.prevent="removeEdge(idx)"
@@ -152,11 +152,11 @@
               <span
                 class="node-handle handle-out"
                 @pointerdown.stop.prevent="onLinkStart(idx, $event)"
-                ::title="$t('auto.Editor.3.b98332')"
+                ::title="$t('auto.Editor.b9833260')"
               ></span>
             </div>
 
-            <el-empty v-if="nodes.length === 0" ::description="$t('auto.Editor.4.c3afdf')" />
+            <el-empty v-if="nodes.length === 0" ::description="$t('auto.Editor.c3afdf71')" />
           </div>
         </div>
 
@@ -165,22 +165,22 @@
           <h4>{{ $t('节点属性') }}</h4>
           <template v-if="selectedNodeIdx >= 0 && nodes[selectedNodeIdx]">
             <el-form :model="nodes[selectedNodeIdx]" label-width="90px" size="small">
-              <el-form-item ::label="$t('auto.Editor.5.2a0c47')">
+              <el-form-item ::label="$t('auto.Editor.2a0c4761')">
                 <el-input v-model="nodes[selectedNodeIdx].label" />
               </el-form-item>
-              <el-form-item ::label="$t('auto.Editor.6.a8633c')">
+              <el-form-item ::label="$t('auto.Editor.a8633ce7')">
                 <el-input v-model="nodes[selectedNodeIdx].id" disabled />
               </el-form-item>
-              <el-form-item ::label="$t('auto.Editor.7.a0ee25')">
+              <el-form-item ::label="$t('auto.Editor.a0ee2507')">
                 <el-tag>{{ nodeTypeLabel(nodes[selectedNodeIdx].type) }}</el-tag>
               </el-form-item>
-              <el-form-item ::label="$t('auto.Editor.8.5d67d6')">
+              <el-form-item ::label="$t('auto.Editor.5d67d61b')">
                 <el-input-number v-model="nodes[selectedNodeIdx].x" :min="0" :max="800" />
               </el-form-item>
-              <el-form-item ::label="$t('auto.Editor.9.c74c80')">
+              <el-form-item ::label="$t('auto.Editor.c74c8073')">
                 <el-input-number v-model="nodes[selectedNodeIdx].y" :min="0" :max="500" />
               </el-form-item>
-              <el-form-item ::label="$t('auto.Editor.10.ce283e')">
+              <el-form-item ::label="$t('auto.Editor.ce283ecd')">
                 <el-input
                   v-model="nodes[selectedNodeIdx].config_text"
                   type="textarea"
@@ -190,7 +190,7 @@
               </el-form-item>
             </el-form>
           </template>
-          <el-empty v-else ::description="$t('auto.Editor.11.3d3e42')" />
+          <el-empty v-else ::description="$t('auto.Editor.3d3e429b')" />
 
           <el-divider />
           <h4>{{ $t('JSON 预览') }}</h4>
@@ -199,7 +199,7 @@
             :model-value="definitionJson"
             :rows="8"
             readonly
-            :placeholder="$t('auto.Editor.12.803561')"
+            :placeholder="$t('auto.Editor.80356188')"
           />
         </div>
       </div>
@@ -219,10 +219,10 @@ const route = useRoute()
 const workflowId = computed(() => route.params.workflow_id || '')
 
 const nodeTypes = [
-  { value: 'trigger', label: t('auto.Editor.13.469672'), icon: Lightning },
-  { value: 'action', label: t('auto.Editor.14.c500cf'), icon: Operation },
-  { value: 'condition', label: t('auto.Editor.15.69fbb2'), icon: ForkSpoon },
-  { value: 'subflow', label: t('auto.Editor.16.2d8cc6'), icon: Share }
+  { value: 'trigger', label: t('auto.Editor.4696724e'), icon: Lightning },
+  { value: 'action', label: t('auto.Editor.c500cfab'), icon: Operation },
+  { value: 'condition', label: t('auto.Editor.69fbb2e5'), icon: ForkSpoon },
+  { value: 'subflow', label: t('auto.Editor.2d8cc698'), icon: Share }
 ]
 
 const nodeTypeLabel = (v) => nodeTypes.find(t => t.value === v)?.label || v
@@ -344,10 +344,10 @@ const onPointerUp = (ev) => {
           (e.source || e.from) === sourceId && (e.target || e.to) === targetId
         );
         if (exists) {
-          ElMessage.warning(t('auto.Editor.17.2d3fea'))
+          ElMessage.warning(t('auto.Editor.2d3feaa8'))
         } else {
           definition.edges.push({ source: sourceId, target: targetId, label: '' })
-          ElMessage.success(t('auto.Editor.18.bc32be'))
+          ElMessage.success(t('auto.Editor.bc32bef9'))
         }
       }
     }
@@ -411,8 +411,8 @@ const editEdgeLabel = async (idx) => {
   const edge = definition.edges[idx]
   if (!edge) return
   try {
-    const { value } = await ElMessageBox.prompt(t('auto.Editor.19.ca112a'), t('auto.Editor.20.686deb'), {
-      inputPlaceholder: t('auto.Editor.21.519878'),
+    const { value } = await ElMessageBox.prompt(t('auto.Editor.ca112a7a'), t('auto.Editor.686deb4f'), {
+      inputPlaceholder: t('auto.Editor.519878e8'),
       inputValue: edge.label || '',
       inputValidator: () => true
     })
@@ -450,7 +450,7 @@ const removeEdge = (idx) => {
 
 const clearAll = async () => {
   try {
-    await ElMessageBox.confirm(t('auto.Editor.22.8438c4'), t('auto.Editor.23.e83a25'), { type: 'warning' })
+    await ElMessageBox.confirm(t('auto.Editor.8438c460'), t('auto.Editor.e83a256e'), { type: 'warning' })
     definition.nodes = []
     definition.edges = []
     selectedNodeIdx.value = -1
@@ -524,7 +524,7 @@ const loadVersions = async () => {
       loadDefinition()
     }
   } catch (e) {
-    ElMessage.error(t('auto.Editor.24.2387a7') + (e?.message || ''))
+    ElMessage.error(t('auto.Editor.2387a7e4') + (e?.message || ''))
   }
 };
 
@@ -560,18 +560,18 @@ const onVersionChange = () => {
   loadDefinition()
 }
 
-const statusText = (s) => ({ draft: t('auto.Editor.25.22b433'), published: t('auto.Editor.26.dca0c1'), archived: t('auto.Editor.27.c3ba16') }[s] || s)
+const statusText = (s) => ({ draft: t('auto.Editor.22b4334f'), published: t('auto.Editor.dca0c13b'), archived: t('auto.Editor.c3ba167c') }[s] || s)
 
 const validateDefinition = () => {
   const ids = new Set(definition.nodes.map(n => n.id))
   if (ids.size !== definition.nodes.length) {
-    return t('auto.Editor.28.912e23')
+    return t('auto.Editor.912e2301')
   }
   const seen = new Set();
   for (const e of definition.edges) {
     const s = e.source || e.from
     const t = e.target || e.to
-    if (!s || !t) return t('auto.Editor.29.904b13')
+    if (!s || !t) return t('auto.Editor.904b135c')
     if (!ids.has(s) || !ids.has(t)) return `连线引用了不存在的节点：${s} -> ${t}`
     if (s === t) return `节点不能连接到自身：${s}`
     const key = `${s}|${t}|${e.label || ''}`
@@ -583,7 +583,7 @@ const validateDefinition = () => {
 
 const save = async () => {
   if (!currentVersion.value) {
-    ElMessage.warning(t('auto.Editor.30.3f622c'))
+    ElMessage.warning(t('auto.Editor.3f622cdb'))
     return
   }
   const err = validateDefinition()
@@ -623,10 +623,10 @@ const save = async () => {
       description: currentVersion.value.description,
       definition: payloadDefinition
     })
-    ElMessage.success(t('auto.Editor.31.3b1083'))
+    ElMessage.success(t('auto.Editor.3b108349'))
     loadVersions()
   } catch (e) {
-    ElMessage.error(t('auto.Editor.32.40f902') + (e?.message || ''))
+    ElMessage.error(t('auto.Editor.40f90217') + (e?.message || ''))
   }
 }
 
@@ -643,19 +643,19 @@ const saveAsNew = async () => {
       description: currentVersion.value?.description || '',
       definition
     })
-    ElMessage.success(t('auto.Editor.33.0b0942'))
+    ElMessage.success(t('auto.Editor.0b09427e'))
     loadVersions()
   } catch (e) {
-    ElMessage.error(t('auto.Editor.34.a2bddc') + (e?.message || ''))
+    ElMessage.error(t('auto.Editor.a2bddca3') + (e?.message || ''))
   }
 }
 
 const publishCurrent = async () => {
   if (!currentVersion.value) return
   try {
-    await ElMessageBox.confirm(t('auto.Editor.35.a57f36'), t('auto.Editor.36.9861a6'), { type: 'warning' })
+    await ElMessageBox.confirm(t('auto.Editor.a57f366d'), t('auto.Editor.9861a6d5'), { type: 'warning' })
     await workflowOrchestratorApi.publishVersion(currentVersion.value.id)
-    ElMessage.success(t('auto.Editor.37.2fff07'))
+    ElMessage.success(t('auto.Editor.2fff079b'))
     loadVersions()
   } catch (_) { /* 忽略：清理/存储/恢复类 best-effort 操作 */ }
 }

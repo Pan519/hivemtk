@@ -2,29 +2,29 @@
   <div class="page">
     <el-card>
       <template #header>
-        <div class="card-header">{{ $t('auto.WhatsappAccount.7.3bf9cb') }}</div>
+        <div class="card-header">{{ $t('auto.WhatsappAccount.3bf9cb0f') }}</div>
       </template>
       <el-form :inline="true" @submit.prevent>
-        <el-form-item :label="$t('auto.WhatsappAccount.1.d7ec2d')">
-          <el-input v-model="form.name" :placeholder="$t('auto.WhatsappAccount.2.17327f')" />
+        <el-form-item :label="$t('auto.WhatsappAccount.d7ec2d3f')">
+          <el-input v-model="form.name" :placeholder="$t('auto.WhatsappAccount.17327f9c')" />
         </el-form-item>
-        <el-form-item :label="$t('auto.WhatsappAccount.3.2432b5')">
-          <el-input v-model="form.remark" :placeholder="$t('auto.WhatsappAccount.3.2432b5')" />
+        <el-form-item :label="$t('auto.WhatsappAccount.2432b575')">
+          <el-input v-model="form.remark" :placeholder="$t('auto.WhatsappAccount.2432b575')" />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="createAccount">{{ $t('auto.WhatsappAccount.8.f0677c') }}</el-button>
+          <el-button type="primary" @click="createAccount">{{ $t('auto.WhatsappAccount.f0677cec') }}</el-button>
         </el-form-item>
       </el-form>
 
       <el-table :data="accounts" style="width:100%" v-loading="loading">
-        <el-table-column prop="name" :label="$t('auto.WhatsappAccount.1.d7ec2d')" />
-        <el-table-column prop="remark" :label="$t('auto.WhatsappAccount.3.2432b5')" />
-        <el-table-column prop="status" :label="$t('auto.WhatsappAccount.4.3fea7c')" />
-        <el-table-column :label="$t('auto.WhatsappAccount.5.2b6bc0')" width="340">
+        <el-table-column prop="name" :label="$t('auto.WhatsappAccount.d7ec2d3f')" />
+        <el-table-column prop="remark" :label="$t('auto.WhatsappAccount.2432b575')" />
+        <el-table-column prop="status" :label="$t('auto.WhatsappAccount.3fea7ca7')" />
+        <el-table-column :label="$t('auto.WhatsappAccount.2b6bc0f2')" width="340">
           <template #default="{ row }">
-            <el-button size="small" @click="startLogin(row)">{{ $t('auto.WhatsappAccount.9.402d19') }}</el-button>
-            <el-button size="small" @click="refreshStatus(row)">{{ $t('auto.WhatsappAccount.4.3fea7c') }}</el-button>
-            <el-button size="small" type="primary" @click="openBindingDialog(row)">{{ $t('auto.WhatsappAccount.10.c9e87d') }}</el-button>
+            <el-button size="small" @click="startLogin(row)">{{ $t('auto.WhatsappAccount.402d19e5') }}</el-button>
+            <el-button size="small" @click="refreshStatus(row)">{{ $t('auto.WhatsappAccount.3fea7ca7') }}</el-button>
+            <el-button size="small" type="primary" @click="openBindingDialog(row)">{{ $t('auto.WhatsappAccount.c9e87d56') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -39,11 +39,11 @@
       :account-enabled="true"
     />
 
-    <el-dialog v-model="qrDialog" :title="$t('auto.WhatsappAccount.6.d85b03')" width="360px">
+    <el-dialog v-model="qrDialog" :title="$t('auto.WhatsappAccount.d85b03a4')" width="360px">
       <div v-if="qrCode" class="qr-box">
         <img :src="qrImageSrc" alt="QR" width="300" height="300" />
       </div>
-      <div v-else>{{ $t('auto.WhatsappAccount.11.866d40') }}</div>
+      <div v-else>{{ $t('auto.WhatsappAccount.866d40ef') }}</div>
     </el-dialog>
   </div>
 </template>
@@ -77,9 +77,9 @@ function loadAccounts() {
 }
 
 function createAccount() {
-  if (!form.value.name) { ElMessage.error(i18n.global.t(t('auto.WhatsappAccount.12.06e2f8'))); return }
+  if (!form.value.name) { ElMessage.error(i18n.global.t(t('auto.WhatsappAccount.06e2f88f'))); return }
   api.createAccount(form.value).then(() => {
-    ElMessage.success(i18n.global.t(t('auto.WhatsappAccount.13.04a691')))
+    ElMessage.success(i18n.global.t(t('auto.WhatsappAccount.04a691b3')))
     form.value = { name: '', remark: '' }
     loadAccounts()
   })
@@ -90,22 +90,22 @@ function startLogin(row) {
     qrCode.value = res.qr;
     qrDialog.value = true
   }).catch((e) => {
-    ElMessage.error(e?.message || t('auto.WhatsappAccount.14.7515ac'));
+    ElMessage.error(e?.message || t('auto.WhatsappAccount.7515acee'));
   })
 }
 
 function refreshStatus(row) {
   api.loginStatus(row.id).then(res => {
     if (res.logged_in) {
-      ElMessage.success(i18n.global.t(t('auto.WhatsappAccount.15.71fa3b')))
+      ElMessage.success(i18n.global.t(t('auto.WhatsappAccount.71fa3bd0')))
       loadAccounts()
     } else {
       qrCode.value = res.qr || ''
       if (qrCode.value) qrDialog.value = true
-      else ElMessage.info(i18n.global.t(t('auto.WhatsappAccount.16.e6499a')))
+      else ElMessage.info(i18n.global.t(t('auto.WhatsappAccount.e6499a3d')))
     }
   }).catch((e) => {
-    ElMessage.error(e?.message || t('auto.WhatsappAccount.17.540141'))
+    ElMessage.error(e?.message || t('auto.WhatsappAccount.5401418a'))
   })
 }
 

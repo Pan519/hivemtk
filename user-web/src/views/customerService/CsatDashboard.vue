@@ -11,28 +11,28 @@
     <el-row :gutter="16" class="stats-row">
       <el-col :span="6">
         <el-card shadow="hover" class="stat-card">
-          <div class="stat-label">{{ $t('auto.CsatDashboard.8.c8533d') }}</div>
+          <div class="stat-label">{{ $t('auto.CsatDashboard.c8533d1d') }}</div>
           <div class="stat-value">{{ stats.responded > 0 ? stats.avgScore : '—' }}</div>
-          <div class="stat-sub">{{ $t('auto.CsatDashboard.9.fa5ef3') }}</div>
+          <div class="stat-sub">{{ $t('auto.CsatDashboard.fa5ef354') }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card shadow="hover" class="stat-card">
-          <div class="stat-label">{{ $t('auto.CsatDashboard.10.8f7e3a') }}</div>
+          <div class="stat-label">{{ $t('auto.CsatDashboard.8f7e3a1a') }}</div>
           <div class="stat-value">{{ stats.responded > 0 ? stats.positiveRate + '%' : '—' }}</div>
-          <div class="stat-sub">{{ $t('auto.CsatDashboard.11.692918') }}</div>
+          <div class="stat-sub">{{ $t('auto.CsatDashboard.692918c2') }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card shadow="hover" class="stat-card">
-          <div class="stat-label">{{ $t('auto.CsatDashboard.12.f133dd') }}</div>
+          <div class="stat-label">{{ $t('auto.CsatDashboard.f133ddbe') }}</div>
           <div class="stat-value">{{ stats.responded }}</div>
           <div class="stat-sub">{{ stats.windowLabel }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card shadow="hover" class="stat-card">
-          <div class="stat-label">{{ $t('auto.CsatDashboard.13.08e5d1') }}</div>
+          <div class="stat-label">{{ $t('auto.CsatDashboard.08e5d15e') }}</div>
           <div class="stat-value" style="color: #EF4444">{{ stats.negativeCount }}</div>
           <div class="stat-sub">≤{{ stats.threshold }} 星</div>
         </el-card>
@@ -43,7 +43,7 @@
       <el-col :span="16">
         <el-card>
           <template #header>
-            <span>{{ $t('auto.CsatDashboard.14.4bfe85') }}</span>
+            <span>{{ $t('auto.CsatDashboard.4bfe856c') }}</span>
           </template>
           <div ref="trendChartRef" class="chart" />
         </el-card>
@@ -51,7 +51,7 @@
       <el-col :span="8">
         <el-card>
           <template #header>
-            <span>{{ $t('auto.CsatDashboard.15.c4311b') }}</span>
+            <span>{{ $t('auto.CsatDashboard.c4311bba') }}</span>
           </template>
           <div ref="distChartRef" class="chart" />
         </el-card>
@@ -63,25 +63,25 @@
         <span>差评列表（≤{{ stats.threshold }} 星）</span>
       </template>
       <el-table :data="negativeList" v-loading="loading">
-        <el-table-column prop="session_id" :label="$t('auto.CsatDashboard.1.427bc5')" width="240" show-overflow-tooltip />
-        <el-table-column prop="agent_name" :label="$t('auto.CsatDashboard.2.2504da')" width="120">
+        <el-table-column prop="session_id" :label="$t('auto.CsatDashboard.427bc5b3')" width="240" show-overflow-tooltip />
+        <el-table-column prop="agent_name" :label="$t('auto.CsatDashboard.2504da66')" width="120">
           <template #default="{ row }">{{ row.agent_name || '—' }}</template>
         </el-table-column>
-        <el-table-column prop="user_name" :label="$t('auto.CsatDashboard.3.ff0b20')" width="120">
+        <el-table-column prop="user_name" :label="$t('auto.CsatDashboard.ff0b2077')" width="120">
           <template #default="{ row }">{{ row.user_name || '—' }}</template>
         </el-table-column>
-        <el-table-column prop="score" :label="$t('auto.CsatDashboard.4.108db1')" width="80">
+        <el-table-column prop="score" :label="$t('auto.CsatDashboard.108db12e')" width="80">
           <template #default="{ row }">
             <el-rate v-model="row.score" disabled :max="5" show-score />
           </template>
         </el-table-column>
-        <el-table-column prop="comment" :label="$t('auto.CsatDashboard.5.55374d')" min-width="200" show-overflow-tooltip />
-        <el-table-column :label="$t('auto.CsatDashboard.6.fb4cc0')" width="180">
+        <el-table-column prop="comment" :label="$t('auto.CsatDashboard.55374d7b')" min-width="200" show-overflow-tooltip />
+        <el-table-column :label="$t('auto.CsatDashboard.fb4cc0f7')" width="180">
           <template #default="{ row }">{{ formatTime(row.responded_at) }}</template>
         </el-table-column>
-        <el-table-column :label="$t('auto.CsatDashboard.7.2b6bc0')" width="120" fixed="right">
+        <el-table-column :label="$t('auto.CsatDashboard.2b6bc0f2')" width="120" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" @click="viewSession(row)">{{ $t('auto.CsatDashboard.16.a85ed2') }}</el-button>
+            <el-button link type="primary" @click="viewSession(row)">{{ $t('auto.CsatDashboard.a85ed23c') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -106,7 +106,7 @@ const stats = reactive({
   responded: 0,
   negativeCount: 0,
   threshold: 3,
-  windowLabel: t('auto.CsatDashboard.17.a8b0c2')
+  windowLabel: t('auto.CsatDashboard.a8b0c204')
 })
 const negativeList = ref([])
 const loading = ref(false)
@@ -137,7 +137,7 @@ async function load() {
       negativeCount: Number(s?.negative_count ?? 0),
       // 阈值只有一个事实源：差评列表返回的 threshold（模板 low_threshold）
       threshold: Number(neg?.threshold ?? s?.threshold ?? 3),
-      windowLabel: s?.window || t('auto.CsatDashboard.17.a8b0c2')
+      windowLabel: s?.window || t('auto.CsatDashboard.a8b0c204')
     })
     negativeList.value = Array.isArray(neg?.list) ? neg.list : []
     renderTrend(Array.isArray(t?.list) ? t.list : [])

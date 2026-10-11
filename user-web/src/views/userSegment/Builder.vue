@@ -5,11 +5,11 @@
         <el-card>
           <template #header>
             <div class="card-header">
-              <span>{{ $t('auto.Builder.11.b0fd0d') }}</span>
+              <span>{{ $t('auto.Builder.b0fd0de2') }}</span>
               <el-button-group>
-                <el-button @click="addNode('and')">{{ $t('auto.Builder.12.41cd0b') }}</el-button>
-                <el-button @click="addNode('or')">{{ $t('auto.Builder.13.86143c') }}</el-button>
-                <el-button @click="addNode('condition')">{{ $t('auto.Builder.14.52fa34') }}</el-button>
+                <el-button @click="addNode('and')">{{ $t('auto.Builder.41cd0bf4') }}</el-button>
+                <el-button @click="addNode('or')">{{ $t('auto.Builder.86143c1a') }}</el-button>
+                <el-button @click="addNode('condition')">{{ $t('auto.Builder.52fa34e1') }}</el-button>
               </el-button-group>
             </div>
           </template>
@@ -17,42 +17,42 @@
             <RuleNode v-for="(node, i) in rules" :key="i" :node="node" :level="0" @update="(n) => rules[i] = n" @remove="removeNode(i)" />
           </div>
           <div class="sql-preview">
-            <h4>{{ $t('auto.Builder.15.64816d') }}</h4>
+            <h4>{{ $t('auto.Builder.64816d1d') }}</h4>
             <pre>{{ sqlPreview }}</pre>
-            <el-statistic :value="sqlCount" :title="$t('auto.Builder.1.63db38')" />
+            <el-statistic :value="sqlCount" :title="$t('auto.Builder.63db3897')" />
           </div>
         </el-card>
       </el-col>
       <el-col :span="8">
         <el-card>
-          <template #header><span>{{ $t('auto.Builder.16.469672') }}</span></template>
+          <template #header><span>{{ $t('auto.Builder.4696724e') }}</span></template>
           <el-form :model="trigger" label-width="80px">
-            <el-form-item :label="$t('auto.Builder.2.159dbc')">
+            <el-form-item :label="$t('auto.Builder.159dbc2f')">
               <el-radio-group v-model="trigger.type">
-                <el-radio label="manual">{{ $t('auto.Builder.17.2a3e7f') }}</el-radio>
-                <el-radio label="schedule">{{ $t('auto.Builder.18.72ebfe') }}</el-radio>
-                <el-radio label="event">{{ $t('auto.Builder.19.79ff3e') }}</el-radio>
+                <el-radio label="manual">{{ $t('auto.Builder.2a3e7f5c') }}</el-radio>
+                <el-radio label="schedule">{{ $t('auto.Builder.72ebfe28') }}</el-radio>
+                <el-radio label="event">{{ $t('auto.Builder.79ff3e87') }}</el-radio>
               </el-radio-group>
             </el-form-item>
             <el-form-item v-if="trigger.type === 'schedule'" label="Cron">
               <el-input v-model="trigger.cron" placeholder="0 0 9 * * ?" />
             </el-form-item>
-            <el-form-item v-if="trigger.type === 'event'" :label="$t('auto.Builder.3.10b276')">
+            <el-form-item v-if="trigger.type === 'event'" :label="$t('auto.Builder.10b2761d')">
               <el-select v-model="trigger.event">
-                <el-option :label="$t('auto.Builder.4.0f1aa9')" value="customer.created" />
-                <el-option :label="$t('auto.Builder.5.c1a80c')" value="order.completed" />
-                <el-option :label="$t('auto.Builder.6.beaf9a')" value="behavior.high_value" />
+                <el-option :label="$t('auto.Builder.0f1aa9c0')" value="customer.created" />
+                <el-option :label="$t('auto.Builder.c1a80c76')" value="order.completed" />
+                <el-option :label="$t('auto.Builder.beaf9a03')" value="behavior.high_value" />
               </el-select>
             </el-form-item>
-            <el-form-item :label="$t('auto.Builder.7.d081f2')">
+            <el-form-item :label="$t('auto.Builder.d081f249')">
               <el-select v-model="trigger.sink" multiple>
-                <el-option :label="$t('auto.Builder.8.58dfae')" value="reach" />
-                <el-option :label="$t('auto.Builder.9.33ae22')" value="cs" />
-                <el-option :label="$t('auto.Builder.10.ea4392')" value="bulk" />
+                <el-option :label="$t('auto.Builder.58dfae26')" value="reach" />
+                <el-option :label="$t('auto.Builder.33ae22a7')" value="cs" />
+                <el-option :label="$t('auto.Builder.ea43925b')" value="bulk" />
               </el-select>
             </el-form-item>
           </el-form>
-          <el-button type="primary" style="width: 100%" @click="save">{{ $t('auto.Builder.20.797f7e') }}</el-button>
+          <el-button type="primary" style="width: 100%" @click="save">{{ $t('auto.Builder.797f7ef0') }}</el-button>
         </el-card>
       </el-col>
     </el-row>
@@ -125,7 +125,7 @@ async function save() {
     rules: rules.value,
     trigger: JSON.stringify(trigger)
   })
-  ElMessage.success(t('auto.Builder.21.e82641'))
+  ElMessage.success(t('auto.Builder.e82641a7'))
 }
 </script>
 

@@ -106,23 +106,23 @@
     
     <el-card class="filter-card">
       <el-form :model="filterForm" inline>
-        <el-form-item ::label="$t('auto.CardStats.1.3690ef')">
+        <el-form-item ::label="$t('auto.CardStats.3690ef9b')">
           <el-date-picker
             v-model="filterForm.dateRange"
             type="daterange"
-            :range-separator="$t('auto.CardStats.2.981cbe')"
-            :start-placeholder="$t('auto.CardStats.3.b44c0f')"
-            :end-placeholder="$t('auto.CardStats.4.1d468b')"
+            :range-separator="$t('auto.CardStats.981cbe31')"
+            :start-placeholder="$t('auto.CardStats.b44c0f33')"
+            :end-placeholder="$t('auto.CardStats.1d468be9')"
             format="YYYY-MM-DD"
             value-format="YYYY-MM-DD"
             @change="handleDateChange"
           />
         </el-form-item>
-        <el-form-item ::label="$t('auto.CardStats.5.bf8db0')">
-          <el-select v-model="filterForm.groupBy" ::placeholder="$t('auto.CardStats.6.e59c18')" @change="handleGroupByChange">
-            <el-option ::label="$t('auto.CardStats.7.4eb3b0')" value="day" />
-            <el-option ::label="$t('auto.CardStats.8.787456')" value="week" />
-            <el-option ::label="$t('auto.CardStats.9.31019b')" value="month" />
+        <el-form-item ::label="$t('auto.CardStats.bf8db0fe')">
+          <el-select v-model="filterForm.groupBy" ::placeholder="$t('auto.CardStats.e59c18b1')" @change="handleGroupByChange">
+            <el-option ::label="$t('auto.CardStats.4eb3b00e')" value="day" />
+            <el-option ::label="$t('auto.CardStats.7874566d')" value="week" />
+            <el-option ::label="$t('auto.CardStats.31019b33')" value="month" />
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -149,8 +149,8 @@
         <span>{{ $t('最近活动') }}</span>
       </div>
       <el-table :data="recentActivities" stripe style="width: 100%" v-loading="loading">
-          <el-table-column prop="date" ::label="$t('auto.CardStats.10.0e23e0')" width="120" />
-          <el-table-column prop="views" ::label="$t('auto.CardStats.11.4b63a3')" width="80" />
+          <el-table-column prop="date" ::label="$t('auto.CardStats.0e23e014')" width="120" />
+          <el-table-column prop="views" ::label="$t('auto.CardStats.4b63a3c5')" width="80" />
         </el-table>
       
       
@@ -226,7 +226,7 @@ const pagination = reactive({
 const fetchCardInfo = async () => {
   const cardId = route.params.id
   if (!cardId) {
-    ElMessage.error(i18n.global.t(t('auto.CardStats.12.556b03')))
+    ElMessage.error(i18n.global.t(t('auto.CardStats.556b039a')))
     return
   }
   
@@ -234,7 +234,7 @@ const fetchCardInfo = async () => {
     const res = await getXiaohongshuCard(cardId)
     Object.assign(cardInfo, res);
   } catch (error) {
-    ElMessage.error(i18n.global.t(t('auto.CardStats.13.eea2ec')))
+    ElMessage.error(i18n.global.t(t('auto.CardStats.eea2ec18')))
     console.error(error)
   }
 };
@@ -242,7 +242,7 @@ const fetchCardInfo = async () => {
 const fetchCardStats = async () => {
   const cardId = route.params.id
   if (!cardId) {
-    ElMessage.error(i18n.global.t(t('auto.CardStats.12.556b03')))
+    ElMessage.error(i18n.global.t(t('auto.CardStats.556b039a')))
     return
   }
   
@@ -274,7 +274,7 @@ const fetchCardStats = async () => {
       updateCharts()
     });
   } catch (error) {
-    ElMessage.error(i18n.global.t(t('auto.CardStats.14.063dc7')))
+    ElMessage.error(i18n.global.t(t('auto.CardStats.063dc79a')))
     console.error(error)
   } finally {
     loading.value = false
@@ -316,7 +316,7 @@ const updateCharts = () => {
     viewChart.value = safeInit(viewChartDom)
     const viewOption = {
       title: {
-        text: t('auto.CardStats.15.8205ea'),
+        text: t('auto.CardStats.8205ea14'),
         left: 'center'
       },
       tooltip: {
@@ -331,7 +331,7 @@ const updateCharts = () => {
       },
       series: [
         {
-          name: t('auto.CardStats.16.88bc4d'),
+          name: t('auto.CardStats.88bc4d7a'),
           type: 'line',
           data: recentActivities.value.map(item => item.view),
           smooth: true,
@@ -370,7 +370,7 @@ const getActionType = (type) => {
 }
 
 const getActionText = (type) => {
-  return t('auto.CardStats.17.9c5c5c')
+  return t('auto.CardStats.9c5c5cdb')
 }
 
 onMounted(() => {

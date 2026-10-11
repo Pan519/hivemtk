@@ -1,35 +1,35 @@
 <template>
   <div class="page">
     <div class="toolbar">
-      <el-button type="primary" icon="Plus" @click="$router.push('/browser-automation/tasks/create')">{{ $t('auto.List.8.b255a2') }}</el-button>
-      <el-select v-model="query.status" :placeholder="$t('auto.List.1.3fea7c')" clearable style="width: 140px" @change="onFilterChange">
+      <el-button type="primary" icon="Plus" @click="$router.push('/browser-automation/tasks/create')">{{ $t('auto.List.b255a277') }}</el-button>
+      <el-select v-model="query.status" :placeholder="$t('auto.List.3fea7ca7')" clearable style="width: 140px" @change="onFilterChange">
         <el-option v-for="s in statusOptions" :key="s.value" :label="s.label" :value="s.value" />
       </el-select>
     </div>
 
     <el-table :data="list" v-loading="loading">
       <el-table-column prop="id" label="ID" width="70" />
-      <el-table-column prop="name" :label="$t('auto.List.2.d7ec2d')" min-width="160" />
-      <el-table-column prop="task_type" :label="$t('auto.List.3.226b09')" width="100" />
-      <el-table-column prop="status" :label="$t('auto.List.1.3fea7c')" width="100">
+      <el-table-column prop="name" :label="$t('auto.List.d7ec2d3f')" min-width="160" />
+      <el-table-column prop="task_type" :label="$t('auto.List.226b0912')" width="100" />
+      <el-table-column prop="status" :label="$t('auto.List.3fea7ca7')" width="100">
         <template #default="{ row }">
           <el-tag :type="statusTagType(row.status)">{{ row.status }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="brain_mode" :label="$t('auto.List.4.f0789e')" width="90">
+      <el-table-column prop="brain_mode" :label="$t('auto.List.f0789e79')" width="90">
         <template #default="{ row }">{{ row.brain_mode ? 'Brain' : '步骤' }}</template>
       </el-table-column>
-      <el-table-column prop="last_run_at" :label="$t('auto.List.5.f3d8ee')" width="170">
+      <el-table-column prop="last_run_at" :label="$t('auto.List.f3d8eec5')" width="170">
         <template #default="{ row }">{{ row.last_run_at ? formatTime(row.last_run_at) : '—' }}</template>
       </el-table-column>
-      <el-table-column :label="$t('auto.List.6.2b6bc0')" width="330" fixed="right">
+      <el-table-column :label="$t('auto.List.2b6bc0f2')" width="330" fixed="right">
         <template #default="{ row }">
-          <el-button size="small" type="success" :disabled="row.status === 'running'" @click="onRun(row)">{{ $t('auto.List.9.1a6aa2') }}</el-button>
-          <el-button size="small" v-if="row.status === 'draft'" @click="onPublish(row)">{{ $t('auto.List.10.83611a') }}</el-button>
-          <el-button size="small" v-if="row.status === 'running'" @click="onPause(row)">{{ $t('auto.List.11.8d63ef') }}</el-button>
-          <el-button size="small" @click="$router.push(`/browser-automation/tasks/${row.id}`)">{{ $t('auto.List.12.f26225') }}</el-button>
-          <el-button size="small" @click="$router.push(`/browser-automation/tasks/${row.id}/edit`)">{{ $t('auto.List.13.95b351') }}</el-button>
-          <el-button size="small" type="danger" @click="onDelete(row)">{{ $t('auto.List.14.2f4aad') }}</el-button>
+          <el-button size="small" type="success" :disabled="row.status === 'running'" @click="onRun(row)">{{ $t('auto.List.1a6aa24e') }}</el-button>
+          <el-button size="small" v-if="row.status === 'draft'" @click="onPublish(row)">{{ $t('auto.List.83611abd') }}</el-button>
+          <el-button size="small" v-if="row.status === 'running'" @click="onPause(row)">{{ $t('auto.List.8d63ef38') }}</el-button>
+          <el-button size="small" @click="$router.push(`/browser-automation/tasks/${row.id}`)">{{ $t('auto.List.f26225bd') }}</el-button>
+          <el-button size="small" @click="$router.push(`/browser-automation/tasks/${row.id}/edit`)">{{ $t('auto.List.95b351c8') }}</el-button>
+          <el-button size="small" type="danger" @click="onDelete(row)">{{ $t('auto.List.2f4aaddd') }}</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -44,7 +44,7 @@
     />
 
     <!-- 无 Host 引导弹窗（8001）：与详情页、Host 状态页同一份步骤 -->
-    <el-dialog v-model="hostDialog.visible" :title="$t('auto.List.7.604cad')" width="520px">
+    <el-dialog v-model="hostDialog.visible" :title="$t('auto.List.604cad2f')" width="520px">
       <HostInstallGuide />
     </el-dialog>
   </div>
@@ -64,10 +64,10 @@ import HostInstallGuide from './HostInstallGuide.vue'
 const router = useRouter()
 
 const statusOptions = [
-  { value: 'draft', label: t('auto.List.15.22b433') }, { value: 'ready', label: t('auto.List.16.c0d218') },
-  { value: 'running', label: t('auto.List.17.46e386') }, { value: 'paused', label: t('auto.List.18.a2d930') },
-  { value: 'done', label: t('auto.List.19.769d88') }, { value: 'failed', label: t('auto.List.20.acd5cb') },
-  { value: 'archived', label: t('auto.List.21.c3ba16') },
+  { value: 'draft', label: t('auto.List.22b4334f') }, { value: 'ready', label: t('auto.List.c0d2181d') },
+  { value: 'running', label: t('auto.List.46e38679') }, { value: 'paused', label: t('auto.List.a2d930fd') },
+  { value: 'done', label: t('auto.List.769d88e4') }, { value: 'failed', label: t('auto.List.acd5cb84') },
+  { value: 'archived', label: t('auto.List.c3ba167c') },
 ]
 
 const { t } = useI18n()
@@ -126,7 +126,7 @@ async function onRun(row) {
     const res = await runBrowserTask(row.id)
     // 点了执行就要看得见执行——直接进这条会话的监控页（放行闸门、步骤流都在那里）
     const sid = unpack(res)?.session_id
-    ElMessage.success(t('auto.List.22.2bdc57'))
+    ElMessage.success(t('auto.List.2bdc5742'))
     load()
     if (sid) router.push(`/browser-automation/sessions/${sid}`)
   } catch (e) { handleRunError(e) }
@@ -135,7 +135,7 @@ async function onRun(row) {
 async function onPublish(row) {
   try {
     await publishBrowserTask(row.id)
-    ElMessage.success(t('auto.List.23.dca0c1'))
+    ElMessage.success(t('auto.List.dca0c13b'))
     load()
   } catch (e) { ElMessage.error(String(e?.message || e)) }
 }
@@ -143,7 +143,7 @@ async function onPublish(row) {
 async function onPause(row) {
   try {
     await pauseBrowserTask(row.id)
-    ElMessage.success(t('auto.List.18.a2d930'))
+    ElMessage.success(t('auto.List.a2d930fd'))
     load()
   } catch (e) { ElMessage.error(String(e?.message || e)) }
 }
@@ -151,12 +151,12 @@ async function onPause(row) {
 async function onDelete(row) {
   let go = true
   try {
-    await ElMessageBox.confirm(`确认删除任务「${row.name}」？`, t('auto.List.24.02d981'), { type: 'warning' })
+    await ElMessageBox.confirm(`确认删除任务「${row.name}」？`, t('auto.List.02d9819d'), { type: 'warning' })
   } catch { go = false } // 用户取消不是失败：不接住它，控制台里会多一份假异常
   if (!go) return
   try {
     await deleteBrowserTask(row.id)
-    ElMessage.success(t('auto.List.25.5cc232'))
+    ElMessage.success(t('auto.List.5cc23262'))
   } catch (e) {
     ElMessage.error(`删除失败：${String(e?.message || e)}`)
   }

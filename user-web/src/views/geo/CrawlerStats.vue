@@ -5,29 +5,29 @@
       <el-col :span="6">
         <el-card shadow="hover" class="coverage-card">
           <div class="text-center py-2">
-            <div class="text-xs text-gray-500 mb-1">{{ $t('auto.CrawlerStats.17.94079c') }}</div>
+            <div class="text-xs text-gray-500 mb-1">{{ $t('auto.CrawlerStats.94079c79') }}</div>
             <div class="text-3xl font-bold" :style="{ color: coverageColor }">{{ (coverageScore || 0).toFixed(1) }}%</div>
             <el-progress :percentage="Math.round(coverageScore || 0)" :color="coverageColor" :stroke-width="8" class="mt-2" />
           </div>
         </el-card>
       </el-col>
       <el-col :span="3">
-        <el-card shadow="hover"><el-statistic :title="$t('auto.CrawlerStats.1.c7810f')" :value="s.today_visits || 0" /></el-card>
+        <el-card shadow="hover"><el-statistic :title="$t('auto.CrawlerStats.c7810f79')" :value="s.today_visits || 0" /></el-card>
       </el-col>
       <el-col :span="3">
         <el-card shadow="hover"><el-statistic title="HiveMTK" :value="s.hivemtk_visits || 0" /></el-card>
       </el-col>
       <el-col :span="3">
-        <el-card shadow="hover"><el-statistic :title="$t('auto.CrawlerStats.2.f0d182')" :value="s.competitor_visits || 0" /></el-card>
+        <el-card shadow="hover"><el-statistic :title="$t('auto.CrawlerStats.f0d1823c')" :value="s.competitor_visits || 0" /></el-card>
       </el-col>
       <el-col :span="3">
-        <el-card shadow="hover"><el-statistic :title="$t('auto.CrawlerStats.3.e9870d')" :value="s.active_keywords || 0" /></el-card>
+        <el-card shadow="hover"><el-statistic :title="$t('auto.CrawlerStats.e9870d3c')" :value="s.active_keywords || 0" /></el-card>
       </el-col>
       <el-col :span="3">
-        <el-card shadow="hover"><el-statistic :title="$t('auto.CrawlerStats.4.02b40a')" :value="s.active_engines || 0" /></el-card>
+        <el-card shadow="hover"><el-statistic :title="$t('auto.CrawlerStats.02b40a15')" :value="s.active_engines || 0" /></el-card>
       </el-col>
       <el-col :span="3">
-        <el-card shadow="hover"><el-statistic :title="$t('auto.CrawlerStats.5.7ff807')" :value="s.active_domains || 0" /></el-card>
+        <el-card shadow="hover"><el-statistic :title="$t('auto.CrawlerStats.7ff80799')" :value="s.active_domains || 0" /></el-card>
       </el-col>
     </el-row>
 
@@ -35,40 +35,40 @@
     <el-card class="mb-4">
       <template #header>
         <div class="flex items-center justify-between">
-          <span class="font-bold">{{ $t('auto.CrawlerStats.18.130885') }}</span>
+          <span class="font-bold">{{ $t('auto.CrawlerStats.130885f5') }}</span>
           <div class="flex items-center gap-2">
-            <el-button size="small" type="primary" @click="loadAll">{{ $t('auto.CrawlerStats.19.694fc5') }}</el-button>
-            <el-button size="small" type="success" :loading="running" @click="triggerCrawl">{{ $t('auto.CrawlerStats.20.4a152a') }}</el-button>
+            <el-button size="small" type="primary" @click="loadAll">{{ $t('auto.CrawlerStats.694fc5ef') }}</el-button>
+            <el-button size="small" type="success" :loading="running" @click="triggerCrawl">{{ $t('auto.CrawlerStats.4a152abf') }}</el-button>
           </div>
         </div>
       </template>
       <el-table :data="domainCompare" v-loading="loading" size="default" :default-sort="{prop:'visits', order:'descending'}">
-        <el-table-column :label="$t('auto.CrawlerStats.6.a4dc00')" width="60">
+        <el-table-column :label="$t('auto.CrawlerStats.a4dc00d8')" width="60">
           <template #default="{ $index }">
             <span class="font-bold">{{ $index + 1 }}</span>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.CrawlerStats.7.190980')" min-width="240">
+        <el-table-column :label="$t('auto.CrawlerStats.190980c7')" min-width="240">
           <template #default="{ row }">
             <div class="flex items-center gap-2">
               <el-tag v-if="row.is_hivemtk" type="success" size="small" effect="dark" round>🔥 HiveMTK</el-tag>
-              <el-tag v-else type="info" size="small" effect="plain" round>{{ $t('auto.CrawlerStats.21.9868d2') }}</el-tag>
+              <el-tag v-else type="info" size="small" effect="plain" round>{{ $t('auto.CrawlerStats.9868d289') }}</el-tag>
               <span class="font-mono" :class="row.is_hivemtk ? 'font-bold' : ''">{{ row.domain }}</span>
             </div>
           </template>
         </el-table-column>
-        <el-table-column prop="visits" :label="$t('auto.CrawlerStats.8.9ca20a')" width="120" sortable>
+        <el-table-column prop="visits" :label="$t('auto.CrawlerStats.9ca20a1b')" width="120" sortable>
           <template #default="{ row }">
             <span class="font-mono font-bold text-lg">{{ row.visits }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="engines" :label="$t('auto.CrawlerStats.9.18d0f4')" width="120">
+        <el-table-column prop="engines" :label="$t('auto.CrawlerStats.18d0f437')" width="120">
           <template #default="{ row }">
             <el-progress :percentage="Math.round(row.engines / 8 * 100)" :stroke-width="10" :color="row.engines >= 6 ? '#22c55e' : row.engines >= 4 ? '#eab308' : '#ef4444'" />
             <div class="text-xs text-gray-500 mt-1">{{ row.engines }} / 8</div>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.CrawlerStats.10.a790ba')" width="200">
+        <el-table-column :label="$t('auto.CrawlerStats.a790ba2f')" width="200">
           <template #default="{ row }">
             <div class="flex items-center gap-2">
               <el-progress :percentage="Math.round(row.share_pct)" :stroke-width="12" :color="row.is_hivemtk ? '#10b981' : '#6366f1'" style="flex:1" />
@@ -76,14 +76,14 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column prop="source_level" :label="$t('auto.CrawlerStats.11.b99f2a')" width="100">
+        <el-table-column prop="source_level" :label="$t('auto.CrawlerStats.b99f2a2c')" width="100">
           <template #default="{ row }">
             <el-tag :type="levelType(row.source_level)" size="small">{{ row.source_level || 'D' }}</el-tag>
           </template>
         </el-table-column>
       </el-table>
       <template #empty>
-        <div class="py-8 text-gray-400">{{ $t('auto.CrawlerStats.22.569e80') }}</div>
+        <div class="py-8 text-gray-400">{{ $t('auto.CrawlerStats.569e800b') }}</div>
       </template>
     </el-card>
 
@@ -91,23 +91,23 @@
     <el-card class="mb-4">
       <template #header>
         <div class="flex items-center justify-between">
-          <span class="font-bold">{{ $t('auto.CrawlerStats.23.057067') }}</span>
-          <el-input v-model="kwFilter" :placeholder="$t('auto.CrawlerStats.12.2f5112')" size="small" style="width:160px" clearable />
+          <span class="font-bold">{{ $t('auto.CrawlerStats.057067ab') }}</span>
+          <el-input v-model="kwFilter" :placeholder="$t('auto.CrawlerStats.2f5112b8')" size="small" style="width:160px" clearable />
         </div>
       </template>
       <el-table :data="filteredKeywordStats" v-loading="loading" size="small" :default-sort="{prop:'visit_count', order:'descending'}">
-        <el-table-column prop="keyword" :label="$t('auto.CrawlerStats.13.9699a5')" min-width="220">
+        <el-table-column prop="keyword" :label="$t('auto.CrawlerStats.9699a50e')" min-width="220">
           <template #default="{ row }"><span class="font-semibold">{{ row.keyword }}</span></template>
         </el-table-column>
-        <el-table-column prop="engine" :label="$t('auto.CrawlerStats.4.02b40a')" width="160">
+        <el-table-column prop="engine" :label="$t('auto.CrawlerStats.02b40a15')" width="160">
           <template #default="{ row }">
             <el-tag size="small" :type="engineTagType(row.engine)">{{ row.engine }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="visit_count" :label="$t('auto.CrawlerStats.14.f0be64')" width="100" sortable>
+        <el-table-column prop="visit_count" :label="$t('auto.CrawlerStats.f0be64f4')" width="100" sortable>
           <template #default="{ row }"><span class="font-mono font-bold">{{ row.visit_count }}</span></template>
         </el-table-column>
-        <el-table-column :label="$t('auto.CrawlerStats.15.2e2566')" min-width="240">
+        <el-table-column :label="$t('auto.CrawlerStats.2e25664f')" min-width="240">
           <template #default="{ row }">
             <div class="heat-bar" :style="{ width: heatWidth(row.visit_count) + '%', background: heatColor(row.visit_count) }"></div>
           </template>
@@ -119,17 +119,17 @@
     <el-card>
       <template #header>
         <div class="flex items-center justify-between">
-          <span class="font-bold">{{ $t('auto.CrawlerStats.24.00fa60') }}</span>
-          <el-tag size="small" type="info">{{ $t('auto.CrawlerStats.25.95d706') }}</el-tag>
+          <span class="font-bold">{{ $t('auto.CrawlerStats.00fa606d') }}</span>
+          <el-tag size="small" type="info">{{ $t('auto.CrawlerStats.95d7067f') }}</el-tag>
         </div>
       </template>
       <el-table :data="domainStats" v-loading="loading" size="small" :default-sort="{prop:'visit_count', order:'descending'}">
-        <el-table-column prop="domain" :label="$t('auto.CrawlerStats.7.190980')" min-width="200">
+        <el-table-column prop="domain" :label="$t('auto.CrawlerStats.190980c7')" min-width="200">
           <template #default="{ row }"><span class="font-mono">{{ row.domain }}</span></template>
         </el-table-column>
-        <el-table-column prop="engine" :label="$t('auto.CrawlerStats.16.6c1b19')" width="160" />
-        <el-table-column prop="visit_count" :label="$t('auto.CrawlerStats.14.f0be64')" width="100" sortable />
-        <el-table-column prop="source_level" :label="$t('auto.CrawlerStats.11.b99f2a')" width="100">
+        <el-table-column prop="engine" :label="$t('auto.CrawlerStats.6c1b19dd')" width="160" />
+        <el-table-column prop="visit_count" :label="$t('auto.CrawlerStats.f0be64f4')" width="100" sortable />
+        <el-table-column prop="source_level" :label="$t('auto.CrawlerStats.b99f2a2c')" width="100">
           <template #default="{ row }">
             <el-tag :type="levelType(row.source_level)" size="small">{{ row.source_level || 'D' }}</el-tag>
           </template>
@@ -211,10 +211,10 @@ const triggerCrawl = async () => {
   running.value = true
   try {
     const d = await runCrawlerApi()
-    ElMessage.success(d?.message || t('auto.CrawlerStats.26.001bc6'))
+    ElMessage.success(d?.message || t('auto.CrawlerStats.001bc678'))
     setTimeout(loadAll, 35000)
   } catch (e) {
-    ElMessage.error(t('auto.CrawlerStats.27.acfa83') + (e?.data?.message || e?.message || e))
+    ElMessage.error(t('auto.CrawlerStats.acfa8303') + (e?.data?.message || e?.message || e))
   }
   running.value = false
 }

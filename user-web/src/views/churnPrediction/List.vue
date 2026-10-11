@@ -2,8 +2,8 @@
   <div class="churn-prediction-page">
     <el-card class="header-card">
       <div class="header-content">
-        <h2>{{ $t('auto.List.39.e01632') }}</h2>
-        <p class="subtitle">{{ $t('auto.List.40.e4aa48') }}</p>
+        <h2>{{ $t('auto.List.e016323d') }}</h2>
+        <p class="subtitle">{{ $t('auto.List.e4aa48c2') }}</p>
       </div>
       <div>
         <el-button type="primary" :loading="predicting" @click="runPrediction">
@@ -19,12 +19,12 @@
 
     <el-tabs v-model="activeTab">
       
-      <el-tab-pane :label="$t('auto.List.1.a6440f')" name="predictions">
+      <el-tab-pane :label="$t('auto.List.a6440fee')" name="predictions">
         <el-row :gutter="20" class="stats-row">
           <el-col :span="6">
             <el-card>
               <div class="stat-item">
-                <div class="stat-label">{{ $t('auto.List.41.28198f') }}</div>
+                <div class="stat-label">{{ $t('auto.List.28198f83') }}</div>
                 <div class="stat-value" style="color: #EF4444">{{ stats.highRisk }}</div>
               </div>
             </el-card>
@@ -32,7 +32,7 @@
           <el-col :span="6">
             <el-card>
               <div class="stat-item">
-                <div class="stat-label">{{ $t('auto.List.42.36e164') }}</div>
+                <div class="stat-label">{{ $t('auto.List.36e164b6') }}</div>
                 <div class="stat-value" style="color: #F59E0B">{{ stats.mediumRisk }}</div>
               </div>
             </el-card>
@@ -40,7 +40,7 @@
           <el-col :span="6">
             <el-card>
               <div class="stat-item">
-                <div class="stat-label">{{ $t('auto.List.43.d9c0b8') }}</div>
+                <div class="stat-label">{{ $t('auto.List.d9c0b8a7') }}</div>
                 <div class="stat-value" style="color: #10B981">{{ stats.lowRisk }}</div>
               </div>
             </el-card>
@@ -48,7 +48,7 @@
           <el-col :span="6">
             <el-card>
               <div class="stat-item">
-                <div class="stat-label">{{ $t('auto.List.44.beab8b') }}</div>
+                <div class="stat-label">{{ $t('auto.List.beab8b64') }}</div>
                 <div class="stat-value" style="color: #B91C1C">{{ stats.criticalRisk }}</div>
               </div>
             </el-card>
@@ -58,105 +58,105 @@
         <el-card>
           <template #header>
             <div class="card-header">
-              <span>{{ $t('auto.List.45.82b808') }}</span>
-              <el-input v-model="searchKeyword" :placeholder="$t('auto.List.2.c3635c')" clearable style="width: 200px" />
+              <span>{{ $t('auto.List.82b808f1') }}</span>
+              <el-input v-model="searchKeyword" :placeholder="$t('auto.List.c3635c94')" clearable style="width: 200px" />
             </div>
           </template>
           <el-table :data="filteredUsers" v-loading="loadingPred" stripe>
-            <el-table-column prop="user_id" :label="$t('auto.List.3.30acd2')" width="120" />
-            <el-table-column prop="churn_score" :label="$t('auto.List.4.8372f3')" width="160">
+            <el-table-column prop="user_id" :label="$t('auto.List.30acd20d')" width="120" />
+            <el-table-column prop="churn_score" :label="$t('auto.List.8372f3ae')" width="160">
               <template #default="{ row }">
                 <el-progress :percentage="Math.round(row.churn_score || 0)" :color="getRiskColor(row.churn_score)" />
               </template>
             </el-table-column>
-            <el-table-column prop="churn_risk" :label="$t('auto.List.5.25eb6b')" width="100">
+            <el-table-column prop="churn_risk" :label="$t('auto.List.25eb6ba3')" width="100">
               <template #default="{ row }">
                 <el-tag :type="getRiskLevelType(row.churn_risk)">{{ row.churn_risk }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="last_activity_at" :label="$t('auto.List.6.7f2846')" min-width="180" />
-            <el-table-column prop="predicted_at" :label="$t('auto.List.7.e79e7b')" min-width="180" />
-            <el-table-column prop="risk_factors" :label="$t('auto.List.8.0bed4e')" min-width="200" show-overflow-tooltip />
-            <el-table-column :label="$t('auto.List.9.2b6bc0')" width="180" fixed="right">
+            <el-table-column prop="last_activity_at" :label="$t('auto.List.7f2846ef')" min-width="180" />
+            <el-table-column prop="predicted_at" :label="$t('auto.List.e79e7b21')" min-width="180" />
+            <el-table-column prop="risk_factors" :label="$t('auto.List.0bed4e95')" min-width="200" show-overflow-tooltip />
+            <el-table-column :label="$t('auto.List.2b6bc0f2')" width="180" fixed="right">
               <template #default="{ row }">
-                <el-button link type="primary" @click="viewUserDetail(row)">{{ $t('auto.List.46.f26225') }}</el-button>
-                <el-button link type="success" @click="intervene(row)">{{ $t('auto.List.47.ba996d') }}</el-button>
+                <el-button link type="primary" @click="viewUserDetail(row)">{{ $t('auto.List.f26225bd') }}</el-button>
+                <el-button link type="success" @click="intervene(row)">{{ $t('auto.List.ba996d64') }}</el-button>
               </template>
             </el-table-column>
             <template #empty>
-              <el-empty :description="$t('auto.List.10.21efd8')" />
+              <el-empty :description="$t('auto.List.21efd88b')" />
             </template>
           </el-table>
         </el-card>
       </el-tab-pane>
 
       
-      <el-tab-pane :label="$t('auto.List.11.8c9bcb')" name="warnings">
+      <el-tab-pane :label="$t('auto.List.8c9bcbdd')" name="warnings">
         <el-card>
           <el-table :data="warnings" v-loading="loadingWarn" stripe>
-            <el-table-column prop="user_id" :label="$t('auto.List.3.30acd2')" width="120" />
-            <el-table-column prop="warning_level" :label="$t('auto.List.12.64d58e')" width="100">
+            <el-table-column prop="user_id" :label="$t('auto.List.30acd20d')" width="120" />
+            <el-table-column prop="warning_level" :label="$t('auto.List.64d58e05')" width="100">
               <template #default="{ row }">
                 <el-tag :type="warnLevelType(row.warning_level)">{{ row.warning_level }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="warning_type" :label="$t('auto.List.13.226b09')" width="140" />
-            <el-table-column prop="description" :label="$t('auto.List.14.3bdd08')" min-width="200" show-overflow-tooltip />
-            <el-table-column prop="suggestion" :label="$t('auto.List.15.6dca6f')" min-width="200" show-overflow-tooltip />
-            <el-table-column :label="$t('auto.List.16.3fea7c')" width="100">
+            <el-table-column prop="warning_type" :label="$t('auto.List.226b0912')" width="140" />
+            <el-table-column prop="description" :label="$t('auto.List.3bdd08ad')" min-width="200" show-overflow-tooltip />
+            <el-table-column prop="suggestion" :label="$t('auto.List.6dca6fb4')" min-width="200" show-overflow-tooltip />
+            <el-table-column :label="$t('auto.List.3fea7ca7')" width="100">
               <template #default="{ row }">
                 <el-tag :type="row.is_handled ? 'success' : 'danger'">
                   {{ row.is_handled ? '已处理' : '未处理' }}
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column :label="$t('auto.List.9.2b6bc0')" width="120" fixed="right">
+            <el-table-column :label="$t('auto.List.2b6bc0f2')" width="120" fixed="right">
               <template #default="{ row }">
                 <el-button v-if="!row.is_handled" size="small" type="primary" @click="handleWarning(row)">
                   标记已处理
                 </el-button>
-                <span v-else class="handled-text">{{ $t('auto.List.48.5ad605') }}</span>
+                <span v-else class="handled-text">{{ $t('auto.List.5ad6056a') }}</span>
               </template>
             </el-table-column>
             <template #empty>
-              <el-empty :description="$t('auto.List.17.f80068')" />
+              <el-empty :description="$t('auto.List.f8006830')" />
             </template>
           </el-table>
         </el-card>
       </el-tab-pane>
 
       
-      <el-tab-pane :label="$t('auto.List.18.73cbcf')" name="config">
+      <el-tab-pane :label="$t('auto.List.73cbcf30')" name="config">
         <el-card>
           <el-form :model="configForm" label-width="170px" style="max-width: 640px">
-            <el-divider content-position="left">{{ $t('auto.List.49.fa2d94') }}</el-divider>
-            <el-form-item :label="$t('auto.List.19.82c8e8')">
+            <el-divider content-position="left">{{ $t('auto.List.fa2d940e') }}</el-divider>
+            <el-form-item :label="$t('auto.List.82c8e82a')">
               <el-input-number v-model="configForm.inactive_days_weight" :step="0.05" :min="0" :max="1" />
             </el-form-item>
-            <el-form-item :label="$t('auto.List.20.3ff416')">
+            <el-form-item :label="$t('auto.List.3ff41641')">
               <el-input-number v-model="configForm.purchase_freq_weight" :step="0.05" :min="0" :max="1" />
             </el-form-item>
-            <el-form-item :label="$t('auto.List.21.5a4d65')">
+            <el-form-item :label="$t('auto.List.5a4d65e1')">
               <el-input-number v-model="configForm.order_value_weight" :step="0.05" :min="0" :max="1" />
             </el-form-item>
-            <el-form-item :label="$t('auto.List.22.4f0085')">
+            <el-form-item :label="$t('auto.List.4f00858f')">
               <el-input-number v-model="configForm.engagement_weight" :step="0.05" :min="0" :max="1" />
             </el-form-item>
-            <el-divider content-position="left">{{ $t('auto.List.50.35a388') }}</el-divider>
-            <el-form-item :label="$t('auto.List.23.a12f2b')">
+            <el-divider content-position="left">{{ $t('auto.List.35a388ea') }}</el-divider>
+            <el-form-item :label="$t('auto.List.a12f2b56')">
               <el-input-number v-model="configForm.inactive_threshold" :min="1" :max="365" />
             </el-form-item>
-            <el-form-item :label="$t('auto.List.24.0d33fc')">
+            <el-form-item :label="$t('auto.List.0d33fcbc')">
               <el-input-number v-model="configForm.purchase_threshold" :min="1" :max="365" />
             </el-form-item>
-            <el-form-item :label="$t('auto.List.25.877151')">
+            <el-form-item :label="$t('auto.List.8771512f')">
               <el-input-number v-model="configForm.high_risk_score" :min="0" :max="100" />
             </el-form-item>
-            <el-form-item :label="$t('auto.List.26.448449')">
+            <el-form-item :label="$t('auto.List.44844987')">
               <el-input-number v-model="configForm.critical_risk_score" :min="0" :max="100" />
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" :loading="savingConfig" @click="saveConfig">{{ $t('auto.List.51.ed7526') }}</el-button>
+              <el-button type="primary" :loading="savingConfig" @click="saveConfig">{{ $t('auto.List.ed752639') }}</el-button>
             </el-form-item>
           </el-form>
         </el-card>
@@ -164,23 +164,23 @@
     </el-tabs>
 
     
-    <el-dialog v-model="interveneDialogVisible" :title="$t('auto.List.27.defbd8')" width="500px">
+    <el-dialog v-model="interveneDialogVisible" :title="$t('auto.List.defbd81f')" width="500px">
       <el-form :model="interveneForm" label-width="100px">
-        <el-form-item :label="$t('auto.List.28.66a3c7')">
+        <el-form-item :label="$t('auto.List.66a3c7a8')">
           <el-select v-model="interveneForm.method" style="width: 100%">
-            <el-option :label="$t('auto.List.29.53285e')" value="coupon" />
-            <el-option :label="$t('auto.List.30.1f9b1f')" value="sms" />
-            <el-option :label="$t('auto.List.31.997fd2')" value="manual" />
-            <el-option :label="$t('auto.List.32.9a4e5d')" value="push" />
+            <el-option :label="$t('auto.List.53285e0c')" value="coupon" />
+            <el-option :label="$t('auto.List.1f9b1f07')" value="sms" />
+            <el-option :label="$t('auto.List.997fd210')" value="manual" />
+            <el-option :label="$t('auto.List.9a4e5d49')" value="push" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.List.33.34f5ab')">
+        <el-form-item :label="$t('auto.List.34f5ab79')">
           <el-input v-model="interveneForm.content" type="textarea" :rows="4" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="interveneDialogVisible = false">{{ $t('auto.List.52.625fb2') }}</el-button>
-        <el-button type="primary" :loading="submittingIntervene" @click="confirmIntervene">{{ $t('auto.List.53.d97d59') }}</el-button>
+        <el-button @click="interveneDialogVisible = false">{{ $t('auto.List.625fb26b') }}</el-button>
+        <el-button type="primary" :loading="submittingIntervene" @click="confirmIntervene">{{ $t('auto.List.d97d5953') }}</el-button>
       </template>
     </el-dialog>
 
@@ -189,19 +189,19 @@
          元素，Vue 会打 "Runtime directive used on component with non-element root node.
          The directives will not function as intended."，指令也实际不生效。挂到弹窗体内
          的普通 div 上才是 Element Plus 的正确用法。 -->
-    <el-dialog v-model="detailVisible" :title="$t('auto.List.34.214890')" width="700px">
+    <el-dialog v-model="detailVisible" :title="$t('auto.List.214890a9')" width="700px">
       <div v-loading="detailLoading" style="min-height: 80px">
         <template v-if="currentUser">
           <el-descriptions :column="2" border>
-            <el-descriptions-item :label="$t('auto.List.3.30acd2')">{{ currentUser.user_id }}</el-descriptions-item>
-            <el-descriptions-item :label="$t('auto.List.5.25eb6b')">
+            <el-descriptions-item :label="$t('auto.List.30acd20d')">{{ currentUser.user_id }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.List.25eb6ba3')">
               <el-tag :type="getRiskLevelType(currentUser.churn_risk)">{{ currentUser.churn_risk }}</el-tag>
             </el-descriptions-item>
-            <el-descriptions-item :label="$t('auto.List.6.7f2846')">{{ currentUser.last_activity_at }}</el-descriptions-item>
-            <el-descriptions-item :label="$t('auto.List.7.e79e7b')">{{ currentUser.predicted_at }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.List.7f2846ef')">{{ currentUser.last_activity_at }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.List.e79e7b21')">{{ currentUser.predicted_at }}</el-descriptions-item>
           </el-descriptions>
 
-          <el-divider content-position="left">{{ $t('auto.List.4.8372f3') }}</el-divider>
+          <el-divider content-position="left">{{ $t('auto.List.8372f3ae') }}</el-divider>
           <div style="padding: 0 20px">
             <el-progress
               :percentage="Math.round(currentUser.churn_score || 0)"
@@ -210,7 +210,7 @@
             />
           </div>
 
-          <el-divider content-position="left">{{ $t('auto.List.54.ba2a87') }}</el-divider>
+          <el-divider content-position="left">{{ $t('auto.List.ba2a87b8') }}</el-divider>
           <el-alert
             v-if="currentUser.risk_factors"
             :title="currentUser.risk_factors"
@@ -220,17 +220,17 @@
           />
 
           <template v-if="currentUser.riskFactors && currentUser.riskFactors.length">
-            <el-divider content-position="left">{{ $t('auto.List.55.914b48') }}</el-divider>
+            <el-divider content-position="left">{{ $t('auto.List.914b48f8') }}</el-divider>
             <el-table :data="currentUser.riskFactors" border size="small">
-              <el-table-column prop="factor" :label="$t('auto.List.35.a7c456')" min-width="180" />
-              <el-table-column prop="impact" :label="$t('auto.List.36.f6590a')" width="120">
+              <el-table-column prop="factor" :label="$t('auto.List.a7c4560b')" min-width="180" />
+              <el-table-column prop="impact" :label="$t('auto.List.f6590a76')" width="120">
                 <template #default="{ row: r }">
-                  <el-tag ::type="$t('auto.List.37.ef0446')" size="small">
+                  <el-tag ::type="$t('auto.List.ef044656')" size="small">
                     {{ r.impact }}
                   </el-tag>
                 </template>
               </el-table-column>
-              <el-table-column prop="description" :label="$t('auto.List.38.f411d0')" min-width="200" show-overflow-tooltip />
+              <el-table-column prop="description" :label="$t('auto.List.f411d0f1')" min-width="200" show-overflow-tooltip />
             </el-table>
           </template>
         </template>
@@ -329,7 +329,7 @@ const loadPredictions = async () => {
     users.value = toList(res?.data ?? res)
     computeStats(users.value)
   } catch (e) {
-    ElMessage.error(t('auto.List.56.d13651') + (e && e.message ? e.message : ''))
+    ElMessage.error(t('auto.List.d13651b4') + (e && e.message ? e.message : ''))
   } finally {
     loadingPred.value = false
   }
@@ -341,7 +341,7 @@ const loadWarnings = async () => {
     const res = await getChurnWarnings({ page: 1, page_size: 100 })
     warnings.value = toList(res?.data ?? res)
   } catch (e) {
-    ElMessage.error(t('auto.List.57.84109e') + (e && e.message ? e.message : ''))
+    ElMessage.error(t('auto.List.84109eeb') + (e && e.message ? e.message : ''))
   } finally {
     loadingWarn.value = false
   }
@@ -375,10 +375,10 @@ const runPrediction = async () => {
   predicting.value = true
   try {
     await runChurnPrediction()
-    ElMessage.success(t('auto.List.58.38db5c'))
+    ElMessage.success(t('auto.List.38db5ccb'))
     await refreshAll()
   } catch (e) {
-    ElMessage.error(t('auto.List.59.bc20e0') + (e && e.message ? e.message : ''))
+    ElMessage.error(t('auto.List.bc20e050') + (e && e.message ? e.message : ''))
   } finally {
     predicting.value = false
   }
@@ -399,10 +399,10 @@ const confirmIntervene = async () => {
       intervention_type: interveneForm.method,
       note: interveneForm.content,
     })
-    ElMessage.success(t('auto.List.60.02178c'))
+    ElMessage.success(t('auto.List.02178cf5'))
     interveneDialogVisible.value = false
   } catch (e) {
-    ElMessage.error(t('auto.List.61.625b6a') + (e && e.message ? e.message : ''))
+    ElMessage.error(t('auto.List.625b6a84') + (e && e.message ? e.message : ''))
   } finally {
     submittingIntervene.value = false
   }
@@ -431,17 +431,17 @@ const viewUserDetail = async (row) => {
 
 const handleWarning = async (row) => {
   try {
-    const { value } = await ElMessageBox.prompt(t('auto.List.62.5dfa6d'), t('auto.List.63.4247e2'), {
-      confirmButtonText: t('auto.List.64.38cf16'),
-      cancelButtonText: t('auto.List.52.625fb2'),
+    const { value } = await ElMessageBox.prompt(t('auto.List.5dfa6db6'), t('auto.List.4247e294'), {
+      confirmButtonText: t('auto.List.38cf16f2'),
+      cancelButtonText: t('auto.List.625fb26b'),
       inputType: 'textarea',
     })
     await markWarningHandled(row.id, { note: value || '' })
-    ElMessage.success(t('auto.List.65.193512'))
+    ElMessage.success(t('auto.List.193512d5'))
     await loadWarnings()
   } catch (e) {
     if (e !== 'cancel' && e && e.message) {
-      ElMessage.error(t('auto.List.66.79585f') + e.message)
+      ElMessage.error(t('auto.List.79585f92') + e.message)
     }
   }
 }
@@ -450,9 +450,9 @@ const saveConfig = async () => {
   savingConfig.value = true
   try {
     await saveChurnModelConfig({ ...configForm })
-    ElMessage.success(t('auto.List.67.e94729'))
+    ElMessage.success(t('auto.List.e9472910'))
   } catch (e) {
-    ElMessage.error(t('auto.List.68.78d235') + (e && e.message ? e.message : ''))
+    ElMessage.error(t('auto.List.78d235cc') + (e && e.message ? e.message : ''))
   } finally {
     savingConfig.value = false
   }

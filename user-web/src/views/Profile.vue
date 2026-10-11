@@ -44,30 +44,30 @@
             label-width="100px"
             label-position="right"
           >
-            <el-form-item :label="$t('auto.Profile.1.bb2cdf')" prop="username">
+            <el-form-item :label="$t('auto.Profile.bb2cdfac')" prop="username">
               <el-input v-model="form.username" disabled />
             </el-form-item>
-            <el-form-item :label="$t('auto.Profile.2.7eacb4')" prop="real_name">
-              <el-input v-model="form.real_name" :placeholder="$t('auto.Profile.3.3348b7')" maxlength="32" />
+            <el-form-item :label="$t('auto.Profile.7eacb4d9')" prop="real_name">
+              <el-input v-model="form.real_name" :placeholder="$t('auto.Profile.3348b714')" maxlength="32" />
             </el-form-item>
-            <el-form-item :label="$t('auto.Profile.4.3bc5e6')" prop="email">
-              <el-input v-model="form.email" :placeholder="$t('auto.Profile.5.dbf6d0')" maxlength="64" />
+            <el-form-item :label="$t('auto.Profile.3bc5e602')" prop="email">
+              <el-input v-model="form.email" :placeholder="$t('auto.Profile.dbf6d02a')" maxlength="64" />
             </el-form-item>
-            <el-form-item :label="$t('auto.Profile.6.8098e2')" prop="phone">
-              <el-input v-model="form.phone" :placeholder="$t('auto.Profile.7.6e4f4b')" maxlength="20" />
+            <el-form-item :label="$t('auto.Profile.8098e2b4')" prop="phone">
+              <el-input v-model="form.phone" :placeholder="$t('auto.Profile.6e4f4b33')" maxlength="20" />
             </el-form-item>
-            <el-form-item :label="$t('auto.Profile.8.464f3d')">
+            <el-form-item :label="$t('auto.Profile.464f3d4e')">
               <el-tag :type="roleTagType">{{ roleLabel }}</el-tag>
-              <span class="readonly-hint">{{ $t('auto.Profile.18.5b6eb1') }}</span>
+              <span class="readonly-hint">{{ $t('auto.Profile.5b6eb1cc') }}</span>
             </el-form-item>
-            <el-form-item :label="$t('auto.Profile.9.3fea7c')">
-              <el-tag v-if="form.status === 1" type="success">{{ $t('auto.Profile.19.7854b5') }}</el-tag>
-              <el-tag v-else type="info">{{ $t('auto.Profile.20.69b0f6') }}</el-tag>
+            <el-form-item :label="$t('auto.Profile.3fea7ca7')">
+              <el-tag v-if="form.status === 1" type="success">{{ $t('auto.Profile.7854b52a') }}</el-tag>
+              <el-tag v-else type="info">{{ $t('auto.Profile.69b0f684') }}</el-tag>
             </el-form-item>
-            <el-form-item :label="$t('auto.Profile.10.eca37c')">
+            <el-form-item :label="$t('auto.Profile.eca37cb0')">
               <span class="readonly-text">{{ form.created_at || '-' }}</span>
             </el-form-item>
-            <el-form-item :label="$t('auto.Profile.11.19fb21')">
+            <el-form-item :label="$t('auto.Profile.19fb2179')">
               <span class="readonly-text">{{ form.last_login_at || '尚未记录' }}</span>
             </el-form-item>
             <el-form-item>
@@ -75,14 +75,14 @@
                 <el-icon><Check /></el-icon>
                 保存修改
               </el-button>
-              <el-button @click="loadProfile">{{ $t('auto.Profile.21.4b9c32') }}</el-button>
+              <el-button @click="loadProfile">{{ $t('auto.Profile.4b9c3271') }}</el-button>
             </el-form-item>
           </el-form>
         </el-card>
 
         <el-card class="password-card" shadow="never">
           <template #header>
-            <span>{{ $t('auto.Profile.22.7fc88a') }}</span>
+            <span>{{ $t('auto.Profile.7fc88aee') }}</span>
           </template>
           <el-alert
             type="info"
@@ -99,28 +99,28 @@
             label-width="100px"
             label-position="right"
           >
-            <el-form-item :label="$t('auto.Profile.12.a806ce')" prop="oldPassword">
+            <el-form-item :label="$t('auto.Profile.a806ce95')" prop="oldPassword">
               <el-input
                 v-model="pwdForm.oldPassword"
                 type="password"
                 show-password
-                :placeholder="$t('auto.Profile.13.cd043c')"
+                :placeholder="$t('auto.Profile.cd043c16')"
               />
             </el-form-item>
-            <el-form-item :label="$t('auto.Profile.14.bf7da0')" prop="newPassword">
+            <el-form-item :label="$t('auto.Profile.bf7da0bf')" prop="newPassword">
               <el-input
                 v-model="pwdForm.newPassword"
                 type="password"
                 show-password
-                :placeholder="$t('auto.Profile.15.204d3e')"
+                :placeholder="$t('auto.Profile.204d3e6b')"
               />
             </el-form-item>
-            <el-form-item :label="$t('auto.Profile.16.670d63')" prop="confirmPassword">
+            <el-form-item :label="$t('auto.Profile.670d631e')" prop="confirmPassword">
               <el-input
                 v-model="pwdForm.confirmPassword"
                 type="password"
                 show-password
-                :placeholder="$t('auto.Profile.17.ec7b73')"
+                :placeholder="$t('auto.Profile.ec7b7324')"
                 @keyup.enter="onChangePassword"
               />
             </el-form-item>
@@ -181,11 +181,11 @@ const initial = computed(() => (form.username || '?').charAt(0).toUpperCase())
 
 const roleLabel = computed(() => {
   const r = form.role || userStore.role || ''
-  if (r === 'admin') return t('auto.Profile.23.1dd8e0')
-  if (r === 'manager') return t('auto.Profile.24.c0477f')
-  if (r === 'sales') return t('auto.Profile.25.4ae98a')
-  if (r === 'viewer') return t('auto.Profile.26.6c5190')
-  return r || t('auto.Profile.27.fe2d26')
+  if (r === 'admin') return t('auto.Profile.1dd8e0ba')
+  if (r === 'manager') return t('auto.Profile.c0477f1e')
+  if (r === 'sales') return t('auto.Profile.4ae98a94')
+  if (r === 'viewer') return t('auto.Profile.6c51904d')
+  return r || t('auto.Profile.fe2d26a2')
 })
 
 const roleTagType = computed(() => {
@@ -197,12 +197,12 @@ const roleTagType = computed(() => {
 })
 
 const rules = {
-  real_name: [{ max: 32, message: i18n.global.t(t('auto.Profile.28.9864ba')), trigger: 'blur' }],
+  real_name: [{ max: 32, message: i18n.global.t(t('auto.Profile.9864ba32')), trigger: 'blur' }],
   email: [{
     validator: (_rule, value, cb) => {
       if (!value) return cb()
       if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value)) {
-        return cb(new Error(t('auto.Profile.29.75262e')))
+        return cb(new Error(t('auto.Profile.75262e18')))
       }
       cb()
     },
@@ -212,7 +212,7 @@ const rules = {
     validator: (_rule, value, cb) => {
       if (!value) return cb()
       if (!/^1[3-9]\d{9}$/.test(value)) {
-        return cb(new Error(t('auto.Profile.30.19c896')))
+        return cb(new Error(t('auto.Profile.19c896fe')))
       }
       cb()
     },
@@ -221,27 +221,27 @@ const rules = {
 }
 
 const pwdRules = {
-  oldPassword: [{ required: true, message: i18n.global.t(t('auto.Profile.13.cd043c')), trigger: 'blur' }],
+  oldPassword: [{ required: true, message: i18n.global.t(t('auto.Profile.cd043c16')), trigger: 'blur' }],
   newPassword: [
-    { required: true, message: i18n.global.t(t('auto.Profile.31.abdd7e')), trigger: 'blur' },
-    { min: 8, max: 64, message: i18n.global.t(t('auto.Profile.32.73ca94')), trigger: 'blur' },
+    { required: true, message: i18n.global.t(t('auto.Profile.abdd7ea8')), trigger: 'blur' },
+    { min: 8, max: 64, message: i18n.global.t(t('auto.Profile.73ca9454')), trigger: 'blur' },
     {
       validator: (_rule, value, cb) => {
         if (!value) return cb()
-        if (!/[a-z]/.test(value)) return cb(new Error(t('auto.Profile.33.799739')))
-        if (!/[A-Z]/.test(value)) return cb(new Error(t('auto.Profile.34.bb02c8')))
-        if (!/\d/.test(value)) return cb(new Error(t('auto.Profile.35.a65c9e')))
+        if (!/[a-z]/.test(value)) return cb(new Error(t('auto.Profile.7997399b')))
+        if (!/[A-Z]/.test(value)) return cb(new Error(t('auto.Profile.bb02c842')))
+        if (!/\d/.test(value)) return cb(new Error(t('auto.Profile.a65c9e06')))
         cb()
       },
       trigger: 'blur'
     }
   ],
   confirmPassword: [
-    { required: true, message: i18n.global.t(t('auto.Profile.36.d98a14')), trigger: 'blur' },
+    { required: true, message: i18n.global.t(t('auto.Profile.d98a14a9')), trigger: 'blur' },
     {
       validator: (_rule, value, cb) => {
         if (value !== pwdForm.newPassword) {
-          return cb(new Error(t('auto.Profile.37.6046d6')))
+          return cb(new Error(t('auto.Profile.6046d642')))
         }
         cb()
       },
@@ -273,7 +273,7 @@ const loadProfile = async () => {
       role: data.role
     });
   } catch (err) {
-    ElMessage.error(t('auto.Profile.38.19a682') + (err?.message || err))
+    ElMessage.error(t('auto.Profile.19a68247') + (err?.message || err))
   } finally {
     loading.value = false
   }
@@ -289,10 +289,10 @@ const onSave = async () => {
       email: form.email,
       phone: form.phone
     })
-    ElMessage.success(i18n.global.t(t('auto.Profile.39.3b1083')))
+    ElMessage.success(i18n.global.t(t('auto.Profile.3b108349')))
   } catch (err) {
     if (err?.message) {
-      ElMessage.error(t('auto.Profile.40.78d235') + err.message)
+      ElMessage.error(t('auto.Profile.78d235cc') + err.message)
     }
   } finally {
     saving.value = false
@@ -305,9 +305,9 @@ const onChangePassword = async () => {
     await pwdFormRef.value.validate()
     try {
       await ElMessageBox.confirm(
-        t('auto.Profile.41.0abe7e'),
-        t('auto.Profile.42.146713'),
-        { type: 'warning', confirmButtonText: t('auto.Profile.43.49e56c'), cancelButtonText: t('auto.Profile.44.625fb2') }
+        t('auto.Profile.0abe7e45'),
+        t('auto.Profile.146713fc'),
+        { type: 'warning', confirmButtonText: t('auto.Profile.49e56c7b'), cancelButtonText: t('auto.Profile.625fb26b') }
       )
     } catch {
       return;
@@ -317,14 +317,14 @@ const onChangePassword = async () => {
       old_password: pwdForm.oldPassword,
       new_password: pwdForm.newPassword
     })
-    ElMessage.success(i18n.global.t(t('auto.Profile.45.4e400f')))
+    ElMessage.success(i18n.global.t(t('auto.Profile.4e400f1f')))
     setTimeout(() => {
       userStore.logout()
       window.location.href = '/#/login'
     }, 1200)
   } catch (err) {
     if (err?.message) {
-      ElMessage.error(t('auto.Profile.46.c26a1c') + err.message)
+      ElMessage.error(t('auto.Profile.c26a1cd4') + err.message)
     }
   } finally {
     pwdSaving.value = false

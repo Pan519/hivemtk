@@ -2,60 +2,60 @@
   <div class="chat-channel-form-page">
     <el-card class="header-card" shadow="never">
       <div class="header-content">
-        <h2>{{ $t('auto.Create.19.257549') }}</h2>
+        <h2>{{ $t('auto.Create.25754973') }}</h2>
         <el-button @click="goBack">{{ $t('返回') }}</el-button>
       </div>
     </el-card>
 
     <el-card shadow="never">
       <el-form :model="form" :rules="rules" ref="formRef" label-width="140px" style="max-width: 720px">
-        <el-form-item ::label="$t('auto.Create.1.bbeea9')" prop="channel_name">
-          <el-input v-model="form.channel_name" ::placeholder="$t('auto.Create.2.1fca53')" maxlength="100" show-word-limit />
+        <el-form-item ::label="$t('auto.Create.bbeea931')" prop="channel_name">
+          <el-input v-model="form.channel_name" ::placeholder="$t('auto.Create.1fca53a4')" maxlength="100" show-word-limit />
         </el-form-item>
 
-        <el-form-item ::label="$t('auto.Create.3.aa082b')" prop="allowed_origins">
+        <el-form-item ::label="$t('auto.Create.aa082b8f')" prop="allowed_origins">
           <el-input
             v-model="originsText"
             type="textarea"
             :rows="4"
-            :placeholder="$t('auto.Create.4.92fc87')"
+            :placeholder="$t('auto.Create.92fc876b')"
           />
-          <div class="form-tip">{{ $t('auto.Create.20.81e2be') }}<code>*</code>{{ $t('auto.Create.21.4a66e4') }}</div>
+          <div class="form-tip">{{ $t('auto.Create.81e2beec') }}<code>*</code>{{ $t('auto.Create.4a66e4cc') }}</div>
         </el-form-item>
 
-        <el-form-item ::label="$t('auto.Create.5.3a47ed')">
+        <el-form-item ::label="$t('auto.Create.3a47ede0')">
           <el-input
             v-model="form.welcome_message"
             type="textarea"
             :rows="3"
-            ::placeholder="$t('auto.Create.6.364e29')"
+            ::placeholder="$t('auto.Create.364e2934')"
             maxlength="500"
             show-word-limit
           />
         </el-form-item>
 
-        <el-form-item ::label="$t('auto.Create.7.648b48')">
+        <el-form-item ::label="$t('auto.Create.648b4861')">
           <el-color-picker v-model="form.widget_color" />
           <span class="form-tip">{{ $t('聊天窗主色，建议与网站主色一致') }}</span>
         </el-form-item>
 
-        <el-form-item ::label="$t('auto.Create.8.cd7a69')">
+        <el-form-item ::label="$t('auto.Create.cd7a699c')">
           <el-radio-group v-model="form.widget_position">
             <el-radio value="bottom-right">{{ $t('右下角') }}</el-radio>
             <el-radio value="bottom-left">{{ $t('左下角') }}</el-radio>
           </el-radio-group>
         </el-form-item>
 
-        <el-form-item ::label="$t('auto.Create.9.e9bfd4')">
-          <el-input v-model="form.widget_title" ::placeholder="$t('auto.Create.10.6012f3')" maxlength="50" />
+        <el-form-item ::label="$t('auto.Create.e9bfd4b7')">
+          <el-input v-model="form.widget_title" ::placeholder="$t('auto.Create.6012f364')" maxlength="50" />
         </el-form-item>
 
-        <el-form-item ::label="$t('auto.Create.11.da8009')">
+        <el-form-item ::label="$t('auto.Create.da80092f')">
           <el-switch v-model="form.auto_assign" />
           <span class="form-tip">{{ $t('关闭后所有访客消息需人工接管') }}</span>
         </el-form-item>
 
-        <el-form-item ::label="$t('auto.Create.12.f22976')">
+        <el-form-item ::label="$t('auto.Create.f2297685')">
           <el-input-number
             v-model="form.confidence_threshold"
             :min="0"
@@ -63,13 +63,13 @@
             :step="0.05"
             :precision="2"
           />
-          <span class="form-tip">{{ $t('auto.Create.22.662f10') }}</span>
+          <span class="form-tip">{{ $t('auto.Create.662f103d') }}</span>
         </el-form-item>
 
-        <el-form-item ::label="$t('auto.Create.13.1ca3f6')">
+        <el-form-item ::label="$t('auto.Create.1ca3f6d2')">
           <el-select
             v-model="form.default_agent_id"
-            :placeholder="$t('auto.Create.14.611251')"
+            :placeholder="$t('auto.Create.611251bd')"
             clearable
             filterable
             style="width: 100%"
@@ -87,11 +87,11 @@
               </div>
             </el-option>
           </el-select>
-          <div class="form-tip">{{ $t('auto.Create.23.4159d3') }}</div>
+          <div class="form-tip">{{ $t('auto.Create.4159d328') }}</div>
         </el-form-item>
 
-        <el-form-item ::label="$t('auto.Create.15.07ae79')" prop="target_language">
-          <el-select v-model="form.target_language" ::placeholder="$t('auto.Create.16.a28232')" clearable style="width: 100%">
+        <el-form-item ::label="$t('auto.Create.07ae792a')" prop="target_language">
+          <el-select v-model="form.target_language" ::placeholder="$t('auto.Create.a28232ae')" clearable style="width: 100%">
             <el-option
               v-for="lang in targetLanguageOptions"
               :key="lang.value"
@@ -99,7 +99,7 @@
               :value="lang.value"
             />
           </el-select>
-          <div class="form-tip">{{ $t('auto.Create.24.ac1784') }}</div>
+          <div class="form-tip">{{ $t('auto.Create.ac178471') }}</div>
         </el-form-item>
 
         <el-form-item>
@@ -112,18 +112,18 @@
     
     <el-dialog
       v-model="credentialsVisible"
-      ::title="$t('auto.Create.17.e049c7')"
+      ::title="$t('auto.Create.e049c740')"
       width="640px"
       :close-on-click-modal="false"
       :close-on-press-escape="false"
     >
       <el-alert type="warning" :closable="false" style="margin-bottom: 16px">
-        <p style="margin: 0 0 4px"><strong>{{ $t('auto.Create.25.b5e59f') }}</strong></p>
-        <p style="margin: 0">{{ $t('auto.Create.26.67a7c5') }}</p>
+        <p style="margin: 0 0 4px"><strong>{{ $t('auto.Create.b5e59faf') }}</strong></p>
+        <p style="margin: 0">{{ $t('auto.Create.67a7c570') }}</p>
       </el-alert>
 
       <el-form label-width="120px">
-        <el-form-item ::label="$t('auto.Create.18.881452')">
+        <el-form-item ::label="$t('auto.Create.88145263')">
           <code class="cred">{{ createdData?.Channel?.channel_id }}</code>
         </el-form-item>
         <el-form-item label="AppKey">
@@ -178,17 +178,17 @@ const enabledAgents = ref([]);
 const loadingAgents = ref(false)
 
 const getAgentTypeLabel = (type) => {
-  const map = { sales: t('auto.Create.27.7f0dc5'), customer_service: t('auto.Create.28.e7dea7'), hybrid: t('auto.Create.29.41ce13') }
+  const map = { sales: t('auto.Create.7f0dc5e3'), customer_service: t('auto.Create.e7dea7c4'), hybrid: t('auto.Create.41ce131a') }
   return map[type] || type || '-'
 }
 
 const form = ref({
   channel_name: '',
   allowed_origins: [],
-  welcome_message: t('auto.Create.30.0b7281'),
+  welcome_message: t('auto.Create.0b7281ab'),
   widget_color: '#1989fa',
   widget_position: 'bottom-right',
-  widget_title: t('auto.Create.31.7f72e8'),
+  widget_title: t('auto.Create.7f72e8fe'),
   auto_assign: true,
   confidence_threshold: 0.70,
   default_agent_id: null
@@ -197,13 +197,13 @@ const form = ref({
 const targetLanguageOptions = TARGET_LANGUAGE_OPTIONS
 
 const rules = {
-  channel_name: [{ required: true, message: i18n.global.t(t('auto.Create.32.3fdb50')), trigger: 'blur' }],
+  channel_name: [{ required: true, message: i18n.global.t(t('auto.Create.3fdb506c')), trigger: 'blur' }],
   allowed_origins: [
     {
       validator: (rule, value, cb) => {
         const lines = originsText.value.split('\n').map(s => s.trim()).filter(Boolean)
         if (lines.length === 0) {
-          cb(new Error(t('auto.Create.33.c232ed')))
+          cb(new Error(t('auto.Create.c232ed81')))
         } else {
           cb()
         }
@@ -237,7 +237,7 @@ const onSubmit = async () => {
       .map(s => s.trim())
       .filter(Boolean)
     if (form.value.allowed_origins.includes('*')) {
-      ElMessage.warning(i18n.global.t(t('auto.Create.34.7c583b')))
+      ElMessage.warning(i18n.global.t(t('auto.Create.7c583b4b')))
     }
     const payload = { ...form.value }
     delete payload.default_agent_id;
@@ -253,14 +253,14 @@ const onSubmit = async () => {
           is_primary: true,
           enabled: true
         })
-        ElMessage.success(i18n.global.t(t('auto.Create.35.7bcc8a')))
+        ElMessage.success(i18n.global.t(t('auto.Create.7bcc8a4e')))
       } catch (bindErr) {
-        ElMessage.warning(t('auto.Create.36.a2e0d8') + (bindErr?.message || t('auto.Create.37.974e74')));
+        ElMessage.warning(t('auto.Create.a2e0d831') + (bindErr?.message || t('auto.Create.974e7484')));
       }
     }
     credentialsVisible.value = true
   } catch (err) {
-    ElMessage.error(t('auto.Create.38.3d6b61') + (err?.message || err))
+    ElMessage.error(t('auto.Create.3d6b61b7') + (err?.message || err))
   } finally {
     saving.value = false
   }
@@ -281,7 +281,7 @@ const copy = async (text) => {
     } else {
       throw new Error('clipboard unavailable')
     }
-    ElMessage.success(i18n.global.t(t('auto.Create.39.52e6ab')))
+    ElMessage.success(i18n.global.t(t('auto.Create.52e6abbe')))
   } catch {
     try {
       const ta = document.createElement('textarea')
@@ -292,9 +292,9 @@ const copy = async (text) => {
       ta.select()
       document.execCommand('copy')
       document.body.removeChild(ta)
-      ElMessage.success(i18n.global.t(t('auto.Create.39.52e6ab')))
+      ElMessage.success(i18n.global.t(t('auto.Create.52e6abbe')))
     } catch {
-      ElMessage.error(i18n.global.t(t('auto.Create.40.063c17')))
+      ElMessage.error(i18n.global.t(t('auto.Create.063c173b')))
     }
   }
 }

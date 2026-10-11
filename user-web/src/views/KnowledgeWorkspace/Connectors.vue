@@ -1,6 +1,6 @@
 <template>
   <div class="connectors-page">
-    <PageHeader :title="$t('auto.Connectors.1.7de30c')" :subtitle="$t('auto.Connectors.2.e570eb')" />
+    <PageHeader :title="$t('auto.Connectors.7de30cf7')" :subtitle="$t('auto.Connectors.e570eba0')" />
 
     <el-row :gutter="16">
       <el-col :span="6" v-for="c in connectors" :key="c.source">
@@ -10,36 +10,36 @@
             <el-tag :type="c.enabled ? 'success' : 'info'" size="small">{{ c.enabled ? '已启用' : '未启用' }}</el-tag>
           </div>
           <el-descriptions :column="1" size="small" class="conn-desc">
-            <el-descriptions-item :label="$t('auto.Connectors.3.5f811d')">{{ c.configured ? '已配置' : '未配置' }}</el-descriptions-item>
-            <el-descriptions-item v-if="c.last_test_at" :label="$t('auto.Connectors.4.a59903')">
+            <el-descriptions-item :label="$t('auto.Connectors.5f811dd8')">{{ c.configured ? '已配置' : '未配置' }}</el-descriptions-item>
+            <el-descriptions-item v-if="c.last_test_at" :label="$t('auto.Connectors.a5990382')">
               <el-tag :type="c.last_test_ok ? 'success' : 'danger'" size="small">{{ c.last_test_ok ? '通过' : '失败' }}</el-tag>
               <span class="test-msg">{{ c.last_test_msg }}</span>
             </el-descriptions-item>
           </el-descriptions>
 
           <el-collapse accordion class="cred-form">
-            <el-collapse-item :title="$t('auto.Connectors.5.d1df54')">
+            <el-collapse-item :title="$t('auto.Connectors.d1df5468')">
               <el-form label-position="top" size="small">
                 <el-form-item v-for="field in credFields(c.source)" :key="field.key" :label="field.label">
                   <el-input v-model="credForm[c.source][field.key]"
-                    ::placeholder="$t('auto.Connectors.6.d96d8c')"
+                    ::placeholder="$t('auto.Connectors.d96d8c87')"
                     show-password />
                 </el-form-item>
-                <el-switch v-model="credForm[c.source].enabled" :active-text="$t('auto.Connectors.7.7854b5')" />
+                <el-switch v-model="credForm[c.source].enabled" :active-text="$t('auto.Connectors.7854b52a')" />
                 <div class="form-actions">
-                  <el-button size="small" type="primary" @click="saveCred(c.source)">{{ $t('auto.Connectors.12.bab964') }}</el-button>
-                  <el-button size="small" @click="testConn(c.source)">{{ $t('auto.Connectors.13.69e747') }}</el-button>
+                  <el-button size="small" type="primary" @click="saveCred(c.source)">{{ $t('auto.Connectors.bab96443') }}</el-button>
+                  <el-button size="small" @click="testConn(c.source)">{{ $t('auto.Connectors.69e74756') }}</el-button>
                 </div>
               </el-form>
             </el-collapse-item>
           </el-collapse>
 
           <div class="pull-box">
-            <el-select v-model="pullKb[c.source]" size="small" :placeholder="$t('auto.Connectors.8.210f36')" class="kb-select">
+            <el-select v-model="pullKb[c.source]" size="small" :placeholder="$t('auto.Connectors.210f363d')" class="kb-select">
               <el-option v-for="kb in kbList" :key="kb.id" :label="kb.name" :value="String(kb.id)" />
             </el-select>
             <el-button size="small" type="success" :loading="pulling === c.source" :disabled="!c.enabled"
-              @click="pull(c.source)">{{ $t('auto.Connectors.14.a2b59c') }}</el-button>
+              @click="pull(c.source)">{{ $t('auto.Connectors.a2b59c0b') }}</el-button>
           </div>
         </el-card>
       </el-col>
@@ -48,13 +48,13 @@
     <el-card v-if="lastResult" class="result-card">
       <template #header>最近拉取结果（{{ lastResult.source }}）：成功 {{ lastResult.imported }} / 失败 {{ lastResult.failed }} / 跳过 {{ lastResult.skipped }}</template>
       <el-table :data="lastResult.details" size="small" max-height="320">
-        <el-table-column prop="title" :label="$t('auto.Connectors.9.59ceff')" min-width="180" show-overflow-tooltip />
-        <el-table-column prop="status" :label="$t('auto.Connectors.10.3fea7c')" width="100">
+        <el-table-column prop="title" :label="$t('auto.Connectors.59ceff46')" min-width="180" show-overflow-tooltip />
+        <el-table-column prop="status" :label="$t('auto.Connectors.3fea7ca7')" width="100">
           <template #default="{ row }">
             <el-tag :type="row.status === 'imported' ? 'success' : row.status === 'skipped' ? 'info' : 'danger'" size="small">{{ row.status }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="message" :label="$t('auto.Connectors.11.f411d0')" min-width="200" show-overflow-tooltip />
+        <el-table-column prop="message" :label="$t('auto.Connectors.f411d0f1')" min-width="200" show-overflow-tooltip />
       </el-table>
     </el-card>
   </div>
@@ -82,11 +82,11 @@ const credFields = (source) => ({
   notion: [{ key: 'token', label: 'Internal Integration Token', placeholder: 'secret_xxx / ntn_xxx' }],
   feishu: [
     { key: 'app_id', label: 'App ID', placeholder: 'cli_xxx' },
-    { key: 'app_secret', label: 'App Secret', placeholder: t('auto.Connectors.15.a86754') }
+    { key: 'app_secret', label: 'App Secret', placeholder: t('auto.Connectors.a86754cd') }
   ],
   dingtalk: [
-    { key: 'app_key', label: 'AppKey', placeholder: t('auto.Connectors.16.7d9032') },
-    { key: 'app_secret', label: 'AppSecret', placeholder: t('auto.Connectors.17.71f8c4') }
+    { key: 'app_key', label: 'AppKey', placeholder: t('auto.Connectors.7d9032dc') },
+    { key: 'app_secret', label: 'AppSecret', placeholder: t('auto.Connectors.71f8c476') }
   ],
   crm: [
     { key: 'webhook_url', label: 'Webhook URL', placeholder: 'https://crm.example.com/api' },
@@ -139,10 +139,10 @@ const saveCred = async (source) => {
       if (f.key !== 'enabled') cfg[f.key] = payload[f.key]
     }
     await http.put(`/api/knowledge/connectors/${source}`, { enabled: payload.enabled, config: cfg })
-    ElMessage.success(t('auto.Connectors.18.1a2c3f'))
+    ElMessage.success(t('auto.Connectors.1a2c3f24'))
     await loadConnectors()
   } catch (e) {
-    ElMessage.error(e?.response?.data?.message || t('auto.Connectors.19.6de920'))
+    ElMessage.error(e?.response?.data?.message || t('auto.Connectors.6de920b4'))
   }
 }
 
@@ -151,16 +151,16 @@ const testConn = async (source) => {
     const res = await http.post(`/api/knowledge/connectors/${source}/test`)
     // 拦截器已拆包：test 直接回 {ok, message, latency_ms}，按信封取 .data 只会读到 undefined
     const d = res?.data ?? res ?? {}
-    d.ok ? ElMessage.success(d.message || t('auto.Connectors.20.b33199')) : ElMessage.warning(d.message || t('auto.Connectors.21.0745fc'))
+    d.ok ? ElMessage.success(d.message || t('auto.Connectors.b33199d3')) : ElMessage.warning(d.message || t('auto.Connectors.0745fc09'))
     await loadConnectors()
   } catch (e) {
-    ElMessage.error(e?.response?.data?.message || t('auto.Connectors.22.9710d9'))
+    ElMessage.error(e?.response?.data?.message || t('auto.Connectors.9710d9b9'))
   }
 }
 
 const pull = async (source) => {
   const kbId = pullKb.value[source]
-  if (!kbId) { ElMessage.warning(t('auto.Connectors.23.a56e1b')); return }
+  if (!kbId) { ElMessage.warning(t('auto.Connectors.a56e1b8d')); return }
   pulling.value = source
   try {
     const res = await http.post(`/api/knowledge/connectors/${source}/pull`, { product_id: kbId })
@@ -169,7 +169,7 @@ const pull = async (source) => {
     lastResult.value = d
     ElMessage.success(`拉取完成: 成功 ${d?.imported || 0} / 失败 ${d?.failed || 0}`)
   } catch (e) {
-    ElMessage.error(e?.response?.data?.message || t('auto.Connectors.24.8796b7'))
+    ElMessage.error(e?.response?.data?.message || t('auto.Connectors.8796b774'))
   } finally {
     pulling.value = ''
   }

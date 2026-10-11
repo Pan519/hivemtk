@@ -6,8 +6,8 @@
       type="warning"
       show-icon
       :closable="false"
-      :title="$t('auto.List.1.fdbee8')"
-      :description="$t('auto.List.2.ad96af')"
+      :title="$t('auto.List.fdbee843')"
+      :description="$t('auto.List.ad96af55')"
     />
     <el-alert
       v-if="!me"
@@ -15,14 +15,14 @@
       type="info"
       show-icon
       :closable="false"
-      :title="$t('auto.List.3.d5e452')"
-      :description="$t('auto.List.4.978472')"
+      :title="$t('auto.List.d5e452f2')"
+      :description="$t('auto.List.978472f6')"
     />
 
     <el-card shadow="never">
       <template #header>
         <div class="card-header">
-          <span>{{ $t('auto.List.26.ba7506') }}</span>
+          <span>{{ $t('auto.List.ba75064b') }}</span>
           <el-button
             :loading="loading"
             @click="refresh"
@@ -56,14 +56,14 @@
         inline
         class="mb-12"
       >
-        <el-form-item :label="$t('auto.List.5.226b09')">
+        <el-form-item :label="$t('auto.List.226b0912')">
           <el-select
             v-model="filter.kind"
             class="filter-select"
             multiple
             clearable
             collapse-tags
-            :placeholder="$t('auto.List.6.c079e7')"
+            :placeholder="$t('auto.List.c079e7d5')"
             @change="reload"
           >
             <el-option
@@ -74,14 +74,14 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.List.7.3fea7c')">
+        <el-form-item :label="$t('auto.List.3fea7ca7')">
           <el-select
             v-model="filter.status"
             class="filter-select"
             multiple
             clearable
             collapse-tags
-            :placeholder="$t('auto.List.8.5f17fb')"
+            :placeholder="$t('auto.List.5f17fb92')"
             @change="reload"
           >
             <el-option
@@ -92,18 +92,18 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.List.9.2296bd')">
+        <el-form-item :label="$t('auto.List.2296bd83')">
           <el-select
             v-model="filter.assignee"
             class="filter-select"
             @change="reload"
           >
             <el-option
-              :label="$t('auto.List.10.04d85c')"
+              :label="$t('auto.List.04d85c53')"
               value="all"
             />
             <el-option
-              :label="$t('auto.List.11.b671b7')"
+              :label="$t('auto.List.b671b7db')"
               value="me"
             />
           </el-select>
@@ -116,7 +116,7 @@
         stripe
       >
         <el-table-column
-          :label="$t('auto.List.5.226b09')"
+          :label="$t('auto.List.226b0912')"
           width="110"
         >
           <template #default="{ row }">
@@ -129,7 +129,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          :label="$t('auto.List.12.32c65d')"
+          :label="$t('auto.List.32c65d8d')"
           min-width="240"
         >
           <template #default="{ row }">
@@ -149,7 +149,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          :label="$t('auto.List.7.3fea7c')"
+          :label="$t('auto.List.3fea7ca7')"
           width="100"
         >
           <template #default="{ row }">
@@ -157,7 +157,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          :label="$t('auto.List.13.b5d396')"
+          :label="$t('auto.List.b5d396a8')"
           width="100"
         >
           <template #default="{ row }">
@@ -165,7 +165,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          :label="$t('auto.List.14.cd8fbf')"
+          :label="$t('auto.List.cd8fbf6f')"
           width="170"
         >
           <template #default="{ row }">
@@ -173,7 +173,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          :label="$t('auto.List.15.2b6bc0')"
+          :label="$t('auto.List.2b6bc0f2')"
           width="240"
           fixed="right"
         >
@@ -203,7 +203,7 @@
 
     <el-drawer
       v-model="detail.visible"
-      :title="$t('auto.List.16.a152e1')"
+      :title="$t('auto.List.a152e111')"
       size="42%"
     >
       <pre class="json-preview">{{ detail.text }}</pre>
@@ -211,7 +211,7 @@
 
     <el-drawer
       v-model="decide.visible"
-      :title="$t('auto.List.17.e722a3')"
+      :title="$t('auto.List.e722a3f5')"
       size="46%"
     >
       <el-alert
@@ -234,33 +234,33 @@
           border
           class="mb-12"
         >
-          <el-descriptions-item :label="$t('auto.List.18.b60ec8')">
+          <el-descriptions-item :label="$t('auto.List.b60ec8b0')">
             {{ decide.task?.title || '—' }}
           </el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.19.84a2c6')">
+          <el-descriptions-item :label="$t('auto.List.84a2c6a2')">
             {{ decide.approvalId }}
           </el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.20.669145')">
+          <el-descriptions-item :label="$t('auto.List.66914536')">
             {{ decide.approval?.policy_key || '—' }}
           </el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.21.5249b6')">
+          <el-descriptions-item :label="$t('auto.List.5249b6de')">
             {{ subjectText(decide.approval) }}
           </el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.22.d352ae')">
+          <el-descriptions-item :label="$t('auto.List.d352aeb6')">
             {{ decide.approval?.status || '—' }}
           </el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.14.cd8fbf')">
+          <el-descriptions-item :label="$t('auto.List.cd8fbf6f')">
             {{ formatTime(decide.approval?.expires_at) }}
           </el-descriptions-item>
           <el-descriptions-item
             v-if="decide.approval?.decided_by"
-            :label="$t('auto.List.23.d43c7a')"
+            :label="$t('auto.List.d43c7ac9')"
           >
             {{ decide.approval.decided_by }}
           </el-descriptions-item>
           <el-descriptions-item
             v-if="decide.approval?.decision_note"
-            :label="$t('auto.List.24.fe9803')"
+            :label="$t('auto.List.fe9803f2')"
           >
             {{ decide.approval.decision_note }}
           </el-descriptions-item>
@@ -270,14 +270,14 @@
           v-if="verdicts.length"
           label-position="top"
         >
-          <el-form-item :label="$t('auto.List.24.fe9803')">
+          <el-form-item :label="$t('auto.List.fe9803f2')">
             <el-input
               v-model="decide.note"
               type="textarea"
               :rows="3"
               maxlength="2000"
               show-word-limit
-              :placeholder="$t('auto.List.25.850b27')"
+              :placeholder="$t('auto.List.850b2750')"
             />
           </el-form-item>
         </el-form>
@@ -340,9 +340,9 @@ const STATUSES = ['pending', 'claimed', 'done', 'cancelled']
 const OPEN_STATUSES = ['pending', 'claimed']
 
 const KIND_LABELS = {
-  [KIND_HANDOFF]: t('auto.List.27.e8c16d'),
-  [KIND_APPROVAL]: t('auto.List.28.b0bf01'),
-  [KIND_COLLECTION]: t('auto.List.29.7f180a')
+  [KIND_HANDOFF]: t('auto.List.e8c16d26'),
+  [KIND_APPROVAL]: t('auto.List.b0bf01a4'),
+  [KIND_COLLECTION]: t('auto.List.7f180af3')
 }
 const KIND_TAG_TYPES = {
   [KIND_HANDOFF]: 'warning',
@@ -350,19 +350,19 @@ const KIND_TAG_TYPES = {
   [KIND_COLLECTION]: 'info'
 }
 const STATUS_LABELS = {
-  pending: t('auto.List.30.047109'),
-  claimed: t('auto.List.31.b32d7c'),
-  done: t('auto.List.32.fad522'),
-  cancelled: t('auto.List.33.50239f')
+  pending: t('auto.List.047109de'),
+  claimed: t('auto.List.b32d7c1e'),
+  done: t('auto.List.fad5222c'),
+  cancelled: t('auto.List.50239f4f')
 }
 const ACTION_LABELS = {
-  claim: t('auto.List.34.54b931'),
-  release: t('auto.List.35.cbdcab'),
-  complete: t('auto.List.36.769d88'),
-  cancel: t('auto.List.37.bd9fcf'),
-  decide: t('auto.List.38.7756f1')
+  claim: t('auto.List.54b931f9'),
+  release: t('auto.List.cbdcabad'),
+  complete: t('auto.List.769d88e4'),
+  cancel: t('auto.List.bd9fcf46'),
+  decide: t('auto.List.7756f1bd')
 }
-const VERDICT_LABELS = { approved: t('auto.List.39.7a712b'), rejected: t('auto.List.40.325254') }
+const VERDICT_LABELS = { approved: t('auto.List.7a712b9a'), rejected: t('auto.List.32525478') }
 
 // COUNTS_POLL_MS 未读数轮询间隔。30s 是"值班换班时看得见新账"的量级；
 // 更短只是把读接口打成压力源，而这一页的正确性不靠推送（推送归 Notifications.vue）。
@@ -394,7 +394,7 @@ const decide = reactive({
   note: ''
 })
 
-const kindLabel = (k) => KIND_LABELS[k] || k || t('auto.List.41.485d34')
+const kindLabel = (k) => KIND_LABELS[k] || k || t('auto.List.485d34dc')
 const kindTagType = (k) => KIND_TAG_TYPES[k] || 'info'
 const statusLabel = (s) => STATUS_LABELS[s] || s
 const actionLabel = (a) => ACTION_LABELS[a] || a
@@ -405,7 +405,7 @@ const verdicts = computed(() => verdictButtons(decide.approval))
 // 没有按钮时要说得出为什么没有：只把按钮收起来，读的人看到的是"这条点不动"，
 // 而他会去查的方向（权限？数据坏了？）和真原因（时限已过）往往不是同一个。
 const decideHint = computed(() =>
-  verdictBlockReason(decide.approval) || t('auto.List.42.005f2b')
+  verdictBlockReason(decide.approval) || t('auto.List.005f2b2e')
 )
 
 function formatTime(value) {
@@ -436,7 +436,7 @@ function slaText(row) {
   const field = slaField(row.kind)
   if (!field) return '—'
   const due = dueAt(row)
-  if (!due) return t('auto.List.43.a534e7')
+  if (!due) return t('auto.List.a534e79f')
   if (row.status === 'done' || row.status === 'cancelled') return formatTime(row[field])
   return `${formatTime(row[field])} 前`
 }
@@ -509,14 +509,14 @@ async function openDecide(row) {
   decide.note = ''
   decide.error = ''
   if (!decide.approvalId) {
-    decide.error = t('auto.List.44.8f071b')
+    decide.error = t('auto.List.8f071b58')
     return
   }
   decide.loading = true
   try {
     decide.approval = await approvalApi.get(decide.approvalId)
   } catch (err) {
-    decide.error = err?.message || t('auto.List.45.22c5fa')
+    decide.error = err?.message || t('auto.List.22c5faea')
   } finally {
     decide.loading = false
   }
@@ -526,7 +526,7 @@ async function submitDecide(verdict) {
   decide.submitting = true
   try {
     decide.approval = await approvalApi.decide(decide.approvalId, verdict, decide.note)
-    ElMessage.success(verdict === 'approved' ? t('auto.List.46.58464f') : t('auto.List.47.dbf36d'))
+    ElMessage.success(verdict === 'approved' ? t('auto.List.58464f9c') : t('auto.List.dbf36ddc'))
     decide.visible = false
     refresh()
   } catch (err) {
@@ -534,7 +534,7 @@ async function submitDecide(verdict) {
       // 两个人同时开着这条详情：后端在 409 的响应体里回的就是当前那一行，
       // 直接把它显示出来 —— 这比"刷新一下看看"准，因为它不会把别人的结论冲成新读取。
       decide.approval = err.response?.data?.data || decide.approval
-      ElMessage.warning(err.message || t('auto.List.48.12ec83'))
+      ElMessage.warning(err.message || t('auto.List.12ec8373'))
       refresh()
     }
   } finally {
@@ -572,19 +572,19 @@ async function runAction(row, action) {
 async function cancelTask(row) {
   let value
   try {
-    ({ value } = await ElMessageBox.prompt(t('auto.List.49.df10c5'), t('auto.List.50.b622ae'), {
+    ({ value } = await ElMessageBox.prompt(t('auto.List.df10c505'), t('auto.List.b622ae1c'), {
       inputType: 'textarea',
-      inputPlaceholder: t('auto.List.51.c9823f'),
-      inputValidator: (v) => (hasRejectReason(v) ? true : t('auto.List.52.9c365d')),
-      confirmButtonText: t('auto.List.37.bd9fcf'),
-      cancelButtonText: t('auto.List.53.5f4112')
+      inputPlaceholder: t('auto.List.c9823f5f'),
+      inputValidator: (v) => (hasRejectReason(v) ? true : t('auto.List.9c365dd0')),
+      confirmButtonText: t('auto.List.bd9fcf46'),
+      cancelButtonText: t('auto.List.5f411223')
     }))
   } catch {
     return // 点了返回
   }
   try {
     await humanTaskApi.cancel(row.id, value)
-    ElMessage.success(t('auto.List.33.50239f'))
+    ElMessage.success(t('auto.List.50239f4f'))
     refresh()
   } catch (err) {
     if (err?.status === 409 || err?.status === 403) refresh()

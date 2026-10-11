@@ -15,14 +15,14 @@
                 {{ summary.change >= 0 ? '↑' : '↓' }}{{ pct(Math.abs(summary.change)) }}
               </span>
             </div>
-            <div class="stat-sub muted" v-else>{{ $t('auto.VisibilityBoard.15.7b04cb') }}</div>
+            <div class="stat-sub muted" v-else>{{ $t('auto.VisibilityBoard.7b04cb17') }}</div>
           </div>
         </el-card>
       </el-col>
       <el-col :xs="12" :sm="6">
         <el-card shadow="hover">
           <div class="stat-block">
-            <div class="stat-label">{{ $t('auto.VisibilityBoard.16.95660d') }}</div>
+            <div class="stat-label">{{ $t('auto.VisibilityBoard.95660d26') }}</div>
             <div class="stat-value">{{ formatInt(summary.total_probes) }}</div>
             <div class="stat-sub">品牌命中 {{ formatInt(summary.total_brand_hits) }} 次</div>
           </div>
@@ -31,7 +31,7 @@
       <el-col :xs="12" :sm="6">
         <el-card shadow="hover">
           <div class="stat-block">
-            <div class="stat-label">{{ $t('auto.VisibilityBoard.17.96247f') }}</div>
+            <div class="stat-label">{{ $t('auto.VisibilityBoard.96247fc0') }}</div>
             <div class="stat-value">{{ engines.length }}</div>
             <div class="stat-sub">最弱引擎：{{ weakestEngine || '—' }}</div>
           </div>
@@ -40,9 +40,9 @@
       <el-col :xs="12" :sm="6">
         <el-card shadow="hover">
           <div class="stat-block">
-            <div class="stat-label">{{ $t('auto.VisibilityBoard.18.3ae768') }}</div>
+            <div class="stat-label">{{ $t('auto.VisibilityBoard.3ae768fe') }}</div>
             <div class="stat-value" :class="totalNegative > 0 ? 'text-danger' : ''">{{ formatInt(totalNegative) }}</div>
-            <div class="stat-sub">{{ $t('auto.VisibilityBoard.19.e614c4') }}</div>
+            <div class="stat-sub">{{ $t('auto.VisibilityBoard.e614c40b') }}</div>
           </div>
         </el-card>
       </el-col>
@@ -52,21 +52,21 @@
     <el-card class="mb-4" shadow="never">
       <div class="flex items-center gap-3 flex-wrap">
         <el-radio-group v-model="days" @change="loadAll">
-          <el-radio-button :value="7">{{ $t('auto.VisibilityBoard.20.d765ef') }}</el-radio-button>
-          <el-radio-button :value="30">{{ $t('auto.VisibilityBoard.21.c059be') }}</el-radio-button>
-          <el-radio-button :value="90">{{ $t('auto.VisibilityBoard.22.9be1fd') }}</el-radio-button>
+          <el-radio-button :value="7">{{ $t('auto.VisibilityBoard.d765efc4') }}</el-radio-button>
+          <el-radio-button :value="30">{{ $t('auto.VisibilityBoard.c059bed7') }}</el-radio-button>
+          <el-radio-button :value="90">{{ $t('auto.VisibilityBoard.9be1fd33') }}</el-radio-button>
         </el-radio-group>
         <el-button type="primary" :loading="probing" @click="runProbe" plain>
-          <el-icon><VideoPlay /></el-icon><span>{{ $t('auto.VisibilityBoard.23.b12607') }}</span>
+          <el-icon><VideoPlay /></el-icon><span>{{ $t('auto.VisibilityBoard.b12607be') }}</span>
         </el-button>
-        <el-button @click="loadAll" :loading="loading">{{ $t('auto.VisibilityBoard.24.694fc5') }}</el-button>
+        <el-button @click="loadAll" :loading="loading">{{ $t('auto.VisibilityBoard.694fc5ef') }}</el-button>
       </div>
     </el-card>
 
     <!-- 可见性趋势折线图 -->
     <el-card class="mb-4" shadow="never">
       <template #header>
-        <span class="font-bold">{{ $t('auto.VisibilityBoard.25.36a180') }}</span>
+        <span class="font-bold">{{ $t('auto.VisibilityBoard.36a1806a') }}</span>
       </template>
       <div v-if="!loading && !hasTrendData" class="py-12 text-center text-gray-400">
         暂无观测数据。点击上方「立即探测一轮」，或在「多模型验证」页运行验证后回来看趋势。
@@ -77,16 +77,16 @@
     <!-- 引擎对比 -->
     <el-card class="mb-4" shadow="never">
       <template #header>
-        <span class="font-bold">{{ $t('auto.VisibilityBoard.26.12ed10') }}</span>
+        <span class="font-bold">{{ $t('auto.VisibilityBoard.12ed10d9') }}</span>
       </template>
-      <el-empty v-if="!loading && engines.length === 0" :description="$t('auto.VisibilityBoard.1.e32543')" :image-size="60" />
+      <el-empty v-if="!loading && engines.length === 0" :description="$t('auto.VisibilityBoard.e32543a7')" :image-size="60" />
       <el-table v-else :data="engines" v-loading="loading" size="default">
-        <el-table-column prop="engine" :label="$t('auto.VisibilityBoard.2.6c1b19')" min-width="160">
+        <el-table-column prop="engine" :label="$t('auto.VisibilityBoard.6c1b19dd')" min-width="160">
           <template #default="{ row }">
             <span class="font-semibold">{{ row.engine }}</span>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.VisibilityBoard.3.b89857')" min-width="220">
+        <el-table-column :label="$t('auto.VisibilityBoard.b8985724')" min-width="220">
           <template #default="{ row }">
             <div class="flex items-center gap-2">
               <el-progress
@@ -99,12 +99,12 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column prop="probe_count" :label="$t('auto.VisibilityBoard.4.500003')" width="100" align="right" sortable />
-        <el-table-column prop="brand_hits" :label="$t('auto.VisibilityBoard.5.648129')" width="100" align="right" sortable />
-        <el-table-column :label="$t('auto.VisibilityBoard.6.a76c59')" width="100" align="right">
+        <el-table-column prop="probe_count" :label="$t('auto.VisibilityBoard.50000352')" width="100" align="right" sortable />
+        <el-table-column prop="brand_hits" :label="$t('auto.VisibilityBoard.6481295c')" width="100" align="right" sortable />
+        <el-table-column :label="$t('auto.VisibilityBoard.a76c591a')" width="100" align="right">
           <template #default="{ row }">{{ (row.avg_citations || 0).toFixed(2) }}</template>
         </el-table-column>
-        <el-table-column :label="$t('auto.VisibilityBoard.7.f3c630')" width="90" align="right">
+        <el-table-column :label="$t('auto.VisibilityBoard.f3c63021')" width="90" align="right">
           <template #default="{ row }">
             <el-tag v-if="row.negative_count > 0" type="danger" size="small">{{ row.negative_count }}</el-tag>
             <span v-else class="text-gray-400">0</span>
@@ -119,35 +119,35 @@
         <div class="flex items-center justify-between">
           <span class="font-bold">探针运行记录（最近 {{ runsLimit }} 条）</span>
           <div class="flex items-center gap-2">
-            <el-select v-model="runsEngine" :placeholder="$t('auto.VisibilityBoard.8.1d4c0f')" clearable size="small" style="width: 160px" @change="loadRuns">
+            <el-select v-model="runsEngine" :placeholder="$t('auto.VisibilityBoard.1d4c0f54')" clearable size="small" style="width: 160px" @change="loadRuns">
               <el-option v-for="e in engines" :key="e.engine" :label="e.engine" :value="e.engine" />
             </el-select>
-            <el-button size="small" @click="loadRuns" :loading="runsLoading">{{ $t('auto.VisibilityBoard.24.694fc5') }}</el-button>
+            <el-button size="small" @click="loadRuns" :loading="runsLoading">{{ $t('auto.VisibilityBoard.694fc5ef') }}</el-button>
           </div>
         </div>
       </template>
       <el-table :data="runs" v-loading="runsLoading" size="small">
-        <el-table-column prop="created_at" :label="$t('auto.VisibilityBoard.9.19fcb9')" width="160">
+        <el-table-column prop="created_at" :label="$t('auto.VisibilityBoard.19fcb9eb')" width="160">
           <template #default="{ row }">{{ formatTime(row.created_at) }}</template>
         </el-table-column>
-        <el-table-column prop="engine" :label="$t('auto.VisibilityBoard.2.6c1b19')" width="150">
+        <el-table-column prop="engine" :label="$t('auto.VisibilityBoard.6c1b19dd')" width="150">
           <template #default="{ row }"><el-tag size="small" effect="plain">{{ row.engine }}</el-tag></template>
         </el-table-column>
-        <el-table-column prop="query" :label="$t('auto.VisibilityBoard.10.042e36')" min-width="180" show-overflow-tooltip />
-        <el-table-column :label="$t('auto.VisibilityBoard.11.09307c')" width="90" align="center">
+        <el-table-column prop="query" :label="$t('auto.VisibilityBoard.042e366e')" min-width="180" show-overflow-tooltip />
+        <el-table-column :label="$t('auto.VisibilityBoard.09307ce8')" width="90" align="center">
           <template #default="{ row }">
             <el-tag :type="row.brand_mentioned ? 'success' : 'info'" size="small">
               {{ row.brand_mentioned ? '提及' : '未提及' }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.VisibilityBoard.12.2b1c16')" width="80" align="center">
+        <el-table-column :label="$t('auto.VisibilityBoard.2b1c1688')" width="80" align="center">
           <template #default="{ row }">
             <el-tag size="small" :type="sentimentType(row.sentiment)">{{ sentimentLabel(row.sentiment) }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="latency_ms" :label="$t('auto.VisibilityBoard.13.7f62c0')" width="100" align="right" />
-        <el-table-column :label="$t('auto.VisibilityBoard.14.54e5c9')" min-width="240">
+        <el-table-column prop="latency_ms" :label="$t('auto.VisibilityBoard.7f62c087')" width="100" align="right" />
+        <el-table-column :label="$t('auto.VisibilityBoard.54e5c95d')" min-width="240">
           <template #default="{ row }">
             <el-tooltip :content="snippet(row.response)" placement="top" :show-after="200">
               <span class="text-gray-500 text-xs">{{ snippet(row.response) }}</span>
@@ -205,7 +205,7 @@ const visibilityColor = (v) => {
 const formatInt = (n) => Number(n || 0).toLocaleString('zh-CN')
 const formatTime = (t) => (t ? new Date(t).toLocaleString('zh-CN', { hour12: false }) : '-')
 const sentimentType = (s) => ({ positive: 'success', negative: 'danger' }[s] || 'info')
-const sentimentLabel = (s) => ({ positive: t('auto.VisibilityBoard.27.1b614b'), negative: t('auto.VisibilityBoard.7.f3c630') }[s] || t('auto.VisibilityBoard.28.62731a'))
+const sentimentLabel = (s) => ({ positive: t('auto.VisibilityBoard.1b614bdc'), negative: t('auto.VisibilityBoard.f3c63021') }[s] || t('auto.VisibilityBoard.62731aaf'))
 const snippet = (text) => {
   const t = String(text || '').replace(/\s+/g, ' ').trim()
   return t.length > 60 ? t.slice(0, 60) + '…' : t || '—'
@@ -221,16 +221,16 @@ const renderTrendChart = () => {
   const dates = points.map((p) => p.date)
   chartInstance.setOption({
     tooltip: { trigger: 'axis' },
-    legend: { data: [t('auto.VisibilityBoard.3.b89857'), t('auto.VisibilityBoard.4.500003')] },
+    legend: { data: [t('auto.VisibilityBoard.b8985724'), t('auto.VisibilityBoard.50000352')] },
     grid: { left: 60, right: 60, top: 40, bottom: 30 },
     xAxis: { type: 'category', data: dates },
     yAxis: [
-      { type: 'value', name: t('auto.VisibilityBoard.3.b89857'), min: 0, max: 1, axisLabel: { formatter: (v) => `${Math.round(v * 100)}%` } },
-      { type: 'value', name: t('auto.VisibilityBoard.4.500003'), minInterval: 1 }
+      { type: 'value', name: t('auto.VisibilityBoard.b8985724'), min: 0, max: 1, axisLabel: { formatter: (v) => `${Math.round(v * 100)}%` } },
+      { type: 'value', name: t('auto.VisibilityBoard.50000352'), minInterval: 1 }
     ],
     series: [
       {
-        name: t('auto.VisibilityBoard.3.b89857'),
+        name: t('auto.VisibilityBoard.b8985724'),
         type: 'line',
         smooth: true,
         data: points.map((p) => p.visibility),
@@ -238,7 +238,7 @@ const renderTrendChart = () => {
         areaStyle: { opacity: 0.12 }
       },
       {
-        name: t('auto.VisibilityBoard.4.500003'),
+        name: t('auto.VisibilityBoard.50000352'),
         type: 'bar',
         yAxisIndex: 1,
         data: points.map((p) => p.probe_count),
@@ -262,7 +262,7 @@ const loadAll = async () => {
     renderTrendChart()
     await loadRuns()
   } catch (e) {
-    ElMessage.error(e?.message || t('auto.VisibilityBoard.29.00141a'))
+    ElMessage.error(e?.message || t('auto.VisibilityBoard.00141ad7'))
   } finally {
     loading.value = false
   }
@@ -283,11 +283,11 @@ const loadRuns = async () => {
 const runProbe = async () => {
   probing.value = true
   try {
-    await probeAllEngines([], t('auto.VisibilityBoard.30.7e7bd4'))
-    ElMessage.success(t('auto.VisibilityBoard.31.eea9ca'))
+    await probeAllEngines([], t('auto.VisibilityBoard.7e7bd48f'))
+    ElMessage.success(t('auto.VisibilityBoard.eea9caf2'))
     setTimeout(loadAll, 8000)
   } catch (e) {
-    ElMessage.error(e?.message || t('auto.VisibilityBoard.32.51049e'))
+    ElMessage.error(e?.message || t('auto.VisibilityBoard.51049e10'))
   } finally {
     probing.value = false
   }

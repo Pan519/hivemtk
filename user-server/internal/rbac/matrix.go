@@ -5,16 +5,19 @@ package rbac
 
 // RoleDef / PermissionDef / StateDef 矩阵出参（labels 见 docs/registry/generated/api-vocabulary.md）。
 type RoleDef struct {
-	ID string `json:"id"`
+	ID    string `json:"id"`
+	Label string `json:"label"`
 }
 
 type PermissionDef struct {
 	ID    string   `json:"id"`
+	Label string   `json:"label"`
 	Roles []string `json:"roles"`
 }
 
 type StateDef struct {
-	ID string `json:"id"`
+	ID    string `json:"id"`
+	Label string `json:"label"`
 }
 
 // Matrix 返回角色清单 + 权限点→角色映射 + API Key 状态机。
@@ -24,7 +27,7 @@ func Matrix() (roles []RoleDef, permissions []PermissionDef, states []StateDef) 
 	for rid := range RoleAllPermissions {
 		if !seen[rid] {
 			seen[rid] = true
-			roleList = append(roleList, RoleDef{ID: rid})
+			roleList = append(roleList, RoleDef{ID: rid, Label: roleLabel(rid)})
 		}
 	}
 	roles = roleList
@@ -43,16 +46,16 @@ func Matrix() (roles []RoleDef, permissions []PermissionDef, states []StateDef) 
 					holder = append(holder, r2)
 				}
 			}
-			permissions = append(permissions, PermissionDef{ID: pid, Roles: holder})
+			permissions = append(permissions, PermissionDef{ID: pid, Label: PermissionLabel(pid), Roles: holder})
 		}
 		_ = rid
 	}
 
 	states = []StateDef{
-		{ID: APIKeyStateActive},
-		{ID: APIKeyStateDisabled},
-		{ID: APIKeyStateSuspended},
-		{ID: APIKeyStateRevoked},
+		{ID: APIKeyStateActive, Label: "启用"},
+		{ID: APIKeyStateDisabled, Label: "禁用"},
+		{ID: APIKeyStateSuspended, Label: "暂停"},
+		{ID: APIKeyStateRevoked, Label: "吊销"},
 	}
 	return roles, permissions, states
 }
@@ -78,6 +81,14 @@ func RBACRoleFor(systemRole string) (string, bool) {
 		return "member", true
 	}
 	return "", false
+}
+
+// roleLabel 角色中文标签（生成层 RoleLabels；未知角色回落 id）。
+func roleLabel(rid string) string {
+	if l, ok := RoleLabels[rid]; ok {
+		return l
+	}
+	return rid
 }
 
 // PermissionsFor 某矩阵角色持有的全部权限点（my-permissions 出参）。

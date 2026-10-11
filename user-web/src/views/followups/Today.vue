@@ -5,7 +5,7 @@
         <h2 class="page-title">
           今日跟进
         </h2>
-        <span class="page-sub">{{ $t('auto.Today.5.2cc047') }}</span>
+        <span class="page-sub">{{ $t('auto.Today.2cc04798') }}</span>
       </div>
       <div class="head-right">
         <el-button
@@ -14,7 +14,7 @@
           @click="reload"
         >
           <el-icon><Refresh /></el-icon>
-          <span>{{ $t('auto.Today.6.694fc5') }}</span>
+          <span>{{ $t('auto.Today.694fc5ef') }}</span>
         </el-button>
       </div>
     </div>
@@ -39,7 +39,7 @@
             <el-icon class="zone-icon danger">
               <WarningFilled />
             </el-icon>
-            <span class="zone-title">{{ $t('auto.Today.7.5d8559') }}</span>
+            <span class="zone-title">{{ $t('auto.Today.5d855937') }}</span>
             <el-tag
               size="small"
               type="danger"
@@ -118,7 +118,7 @@
             <el-icon class="zone-icon">
               <Calendar />
             </el-icon>
-            <span class="zone-title">{{ $t('auto.Today.8.ab7056') }}</span>
+            <span class="zone-title">{{ $t('auto.Today.ab705627') }}</span>
             <span class="zone-date">{{ todayDate }}</span>
             <el-tag
               size="small"
@@ -197,7 +197,7 @@
             <el-icon class="zone-icon">
               <List />
             </el-icon>
-            <span class="zone-title">{{ $t('auto.Today.9.04d85c') }}</span>
+            <span class="zone-title">{{ $t('auto.Today.04d85c53') }}</span>
             <el-tag
               size="small"
               effect="plain"
@@ -271,12 +271,12 @@
 
     <el-dialog
       v-model="completeVisible"
-      :title="$t('auto.Today.1.dd3daa')"
+      :title="$t('auto.Today.dd3daaed')"
       width="460px"
       append-to-body
     >
       <el-form label-width="80px">
-        <el-form-item :label="$t('auto.Today.2.5ad7f5')">
+        <el-form-item :label="$t('auto.Today.5ad7f5a8')">
           <el-select
             v-model="completeForm.result"
             class="fu-select"
@@ -289,12 +289,12 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.Today.3.2432b5')">
+        <el-form-item :label="$t('auto.Today.2432b575')">
           <el-input
             v-model="completeForm.note"
             type="textarea"
             :rows="3"
-            :placeholder="$t('auto.Today.4.39fdae')"
+            :placeholder="$t('auto.Today.39fdae7e')"
           />
         </el-form-item>
       </el-form>
@@ -353,16 +353,16 @@ const todayDate = computed(() => {
 // 与后端 FollowUpResultInfo 键一一对应（后端七枚举，缺一会出现"能选但
 // 后端 400"的半坏选项）。
 const resultOptions = [
-  { value: 'contacted', label: t('auto.Today.10.6b00b8') },
-  { value: 'interested', label: t('auto.Today.11.003637') },
-  { value: 'quoted', label: t('auto.Today.12.e36736') },
-  { value: 'converted', label: t('auto.Today.13.f9a204') },
-  { value: 'rejected', label: t('auto.Today.14.81233d') },
-  { value: 'lost', label: t('auto.Today.15.f22a4d') },
-  { value: 'no_response', label: t('auto.Today.16.6231a2') }
+  { value: 'contacted', label: t('auto.Today.6b00b8a1') },
+  { value: 'interested', label: t('auto.Today.003637f8') },
+  { value: 'quoted', label: t('auto.Today.e36736ce') },
+  { value: 'converted', label: t('auto.Today.f9a204fc') },
+  { value: 'rejected', label: t('auto.Today.81233d75') },
+  { value: 'lost', label: t('auto.Today.f22a4db3') },
+  { value: 'no_response', label: t('auto.Today.6231a20e') }
 ]
 
-const priorityLabel = (p) => ({ 0: t('auto.Today.17.19ac67'), 1: t('auto.Today.18.35242c'), 2: t('auto.Today.19.4296d7'), 3: t('auto.Today.20.cb0ed5') }[p] || t('auto.Today.18.35242c'))
+const priorityLabel = (p) => ({ 0: t('auto.Today.19ac677a'), 1: t('auto.Today.35242cff'), 2: t('auto.Today.4296d7d2'), 3: t('auto.Today.cb0ed5ef') }[p] || t('auto.Today.35242cff'))
 const priorityType = (p) => ({ 0: 'info', 1: 'info', 2: 'warning', 3: 'danger' }[p] || 'info')
 
 const fmtTime = (s) => {
@@ -383,11 +383,11 @@ const isOverdue = (r) => !!r.dueAt && new Date(r.dueAt).getTime() < Date.now()
 const describeError = (err) => {
   const status = err?.status ?? err?.response?.status
   const msg = err?.message || ''
-  if (status === 503) return { text: t('auto.Today.21.7a8abf'), type: 'warning' }
-  if (status === 400) return { text: `参数错误：${msg || t('auto.Today.22.2289f5')}`, type: 'error' }
-  if (status === 409) return { text: msg || t('auto.Today.23.612124'), type: 'warning' }
-  if (status === 404) return { text: msg || t('auto.Today.24.e6c84e'), type: 'warning' }
-  return { text: msg || t('auto.Today.25.866b79'), type: 'error' }
+  if (status === 503) return { text: t('auto.Today.7a8abf54'), type: 'warning' }
+  if (status === 400) return { text: `参数错误：${msg || t('auto.Today.2289f537')}`, type: 'error' }
+  if (status === 409) return { text: msg || t('auto.Today.61212439'), type: 'warning' }
+  if (status === 404) return { text: msg || t('auto.Today.e6c84ef4'), type: 'warning' }
+  return { text: msg || t('auto.Today.866b795e'), type: 'error' }
 }
 
 // ownerId：后端 owner_id 必带（空串=不过滤全员，读侧按当前登录人隔离）。
@@ -413,13 +413,13 @@ const locateRouteId = async () => {
   }
   // 深链 id 不在任何一区：提醒不存在/已处理/非本人 —— 只提示不跳转（与
   // I11 goTodo 的"无落点不进 NotFound"相反：这里有落点但提醒已不在 pending）。
-  ElMessage.info(t('auto.Today.26.ce57f8'))
+  ElMessage.info(t('auto.Today.ce57f801'))
 }
 
 const reload = async () => {
   const ownerId = currentOwnerId()
   if (!ownerId) {
-    statusError.value = t('auto.Today.27.55d9c6')
+    statusError.value = t('auto.Today.55d9c61c')
     statusErrorType.value = 'error'
     return
   }
@@ -456,7 +456,7 @@ const doComplete = async () => {
   submitting.value = true
   try {
     await followupApi.complete(activeReminder.value.id, completeForm.value.result, completeForm.value.note)
-    ElMessage.success(t('auto.Today.28.16ccb6'))
+    ElMessage.success(t('auto.Today.16ccb6b8'))
     completeVisible.value = false
     await reload()
   } catch (err) {
@@ -470,15 +470,15 @@ const doComplete = async () => {
 
 const doCancel = async (r) => {
   try {
-    await ElMessageBox.confirm(`确认取消「${r.title || r.id}」？取消后不可恢复。`, t('auto.Today.29.3fcc39'), {
+    await ElMessageBox.confirm(`确认取消「${r.title || r.id}」？取消后不可恢复。`, t('auto.Today.3fcc391a'), {
       type: 'warning',
-      confirmButtonText: t('auto.Today.30.e8606a'),
-      cancelButtonText: t('auto.Today.31.abe78b')
+      confirmButtonText: t('auto.Today.e8606af7'),
+      cancelButtonText: t('auto.Today.abe78b4f')
     })
   } catch { return }
   try {
     await followupApi.cancel(r.id)
-    ElMessage.success(t('auto.Today.32.2111cc'))
+    ElMessage.success(t('auto.Today.2111ccbb'))
     await reload()
   } catch (err) {
     const e = describeError(err)

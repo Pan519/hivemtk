@@ -18,8 +18,8 @@
     
     <div class="search-form">
       <el-form :inline="true" :model="searchForm" class="search-form-content">
-        <el-form-item ::label="$t('auto.List.1.80a5d0')">
-          <el-select v-model="searchForm.platform" ::placeholder="$t('auto.List.2.9b247d')" clearable>
+        <el-form-item ::label="$t('auto.List.80a5d0c4')">
+          <el-select v-model="searchForm.platform" ::placeholder="$t('auto.List.9b247dc7')" clearable>
             <el-option
               v-for="platform in platformOptions"
               :key="platform.value"
@@ -28,14 +28,14 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item ::label="$t('auto.List.3.4a56d3')">
-          <el-input v-model="searchForm.account" ::placeholder="$t('auto.List.4.5a2cef')" clearable />
+        <el-form-item ::label="$t('auto.List.4a56d300')">
+          <el-input v-model="searchForm.account" ::placeholder="$t('auto.List.5a2cef1e')" clearable />
         </el-form-item>
-        <el-form-item ::label="$t('auto.List.5.1b8578')">
-          <el-select v-model="searchForm.status" ::placeholder="$t('auto.List.6.333291')" clearable>
-            <el-option ::label="$t('auto.List.7.62f11e')" value="1" />
-            <el-option ::label="$t('auto.List.8.38b899')" value="2" />
-            <el-option ::label="$t('auto.List.9.c66e0a')" value="3" />
+        <el-form-item ::label="$t('auto.List.1b857887')">
+          <el-select v-model="searchForm.status" ::placeholder="$t('auto.List.33329123')" clearable>
+            <el-option ::label="$t('auto.List.62f11ef3')" value="1" />
+            <el-option ::label="$t('auto.List.38b8999f')" value="2" />
+            <el-option ::label="$t('auto.List.c66e0aab')" value="3" />
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -54,19 +54,19 @@
     
     <el-table :data="accountList" border style="width: 100%" v-loading="loading">
       <el-table-column prop="id" label="ID" width="80" />
-      <el-table-column prop="platform" ::label="$t('auto.List.1.80a5d0')" width="120" />
-      <el-table-column prop="account_name" ::label="$t('auto.List.10.5f0720')" min-width="150" show-overflow-tooltip />
-      <el-table-column prop="account_id" ::label="$t('auto.List.11.61c2f5')" min-width="150" show-overflow-tooltip />
-      <el-table-column prop="status" ::label="$t('auto.List.5.1b8578')" width="100">
+      <el-table-column prop="platform" ::label="$t('auto.List.80a5d0c4')" width="120" />
+      <el-table-column prop="account_name" ::label="$t('auto.List.5f0720d4')" min-width="150" show-overflow-tooltip />
+      <el-table-column prop="account_id" ::label="$t('auto.List.61c2f592')" min-width="150" show-overflow-tooltip />
+      <el-table-column prop="status" ::label="$t('auto.List.1b857887')" width="100">
         <template #default="scope">
           <el-tag :type="getStatusType(scope.row.status)">
             {{ getStatusText(scope.row.status) }}
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="last_login_at" :label="$t('auto.List.12.19fb21')" width="180" />
-      <el-table-column prop="created_at" :label="$t('auto.List.13.eca37c')" width="180" />
-      <el-table-column :label="$t('auto.List.14.2b6bc0')" width="280" fixed="right">
+      <el-table-column prop="last_login_at" :label="$t('auto.List.19fb2179')" width="180" />
+      <el-table-column prop="created_at" :label="$t('auto.List.eca37cb0')" width="180" />
+      <el-table-column :label="$t('auto.List.2b6bc0f2')" width="280" fixed="right">
         <template #default="scope">
           <el-button type="primary" size="small" @click="handleEdit(scope.row)">
             <el-icon><Edit /></el-icon>
@@ -114,8 +114,8 @@
         :rules="rules"
         label-width="100px"
       >
-        <el-form-item :label="$t('auto.List.15.498128')" prop="platform">
-          <el-select v-model="form.platform" :placeholder="$t('auto.List.16.72b562')" style="width: 100%">
+        <el-form-item :label="$t('auto.List.4981287f')" prop="platform">
+          <el-select v-model="form.platform" :placeholder="$t('auto.List.72b562ed')" style="width: 100%">
             <el-option
               v-for="platform in platformOptions"
               :key="platform.value"
@@ -124,31 +124,31 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.List.17.17327f')" prop="account_name">
-          <el-input v-model="form.account_name" :placeholder="$t('auto.List.18.1f3797')" />
+        <el-form-item :label="$t('auto.List.17327f9c')" prop="account_name">
+          <el-input v-model="form.account_name" :placeholder="$t('auto.List.1f3797f1')" />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.19.14d171')" prop="account_id">
-          <el-input v-model="form.account_id" :placeholder="$t('auto.List.20.cf5e16')" />
+        <el-form-item :label="$t('auto.List.14d1718c')" prop="account_id">
+          <el-input v-model="form.account_id" :placeholder="$t('auto.List.cf5e16f7')" />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.21.ecf09a')" prop="credentials">
+        <el-form-item :label="$t('auto.List.ecf09ad5')" prop="credentials">
           <el-input
             v-model="form.credentials"
             type="textarea"
             :rows="4"
-            :placeholder="$t('auto.List.22.763626')"
+            :placeholder="$t('auto.List.7636264b')"
           />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.23.3fea7c')" prop="status">
+        <el-form-item :label="$t('auto.List.3fea7ca7')" prop="status">
           <el-radio-group v-model="form.status">
-            <el-radio :label="1">{{ $t('auto.List.34.fd6e80') }}</el-radio>
-            <el-radio :label="2">{{ $t('auto.List.35.c195df') }}</el-radio>
-            <el-radio :label="3">{{ $t('auto.List.36.63e85d') }}</el-radio>
+            <el-radio :label="1">{{ $t('auto.List.fd6e80f1') }}</el-radio>
+            <el-radio :label="2">{{ $t('auto.List.c195df63') }}</el-radio>
+            <el-radio :label="3">{{ $t('auto.List.63e85df1') }}</el-radio>
           </el-radio-group>
         </el-form-item>
       </el-form>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="dialogVisible = false">{{ $t('auto.List.37.625fb2') }}</el-button>
+          <el-button @click="dialogVisible = false">{{ $t('auto.List.625fb26b') }}</el-button>
           <el-button type="primary" @click="handleSubmit" :loading="submitting">
             确定
           </el-button>
@@ -159,14 +159,14 @@
     
     <el-dialog
       v-model="platformsDialogVisible"
-      :title="$t('auto.List.24.39e4a5')"
+      :title="$t('auto.List.39e4a584')"
       width="600px"
     >
       <div v-loading="platformsLoading">
         <el-table :data="platformList" border style="width: 100%">
-          <el-table-column prop="code" :label="$t('auto.List.25.cb4e0f')" width="150" />
-          <el-table-column prop="name" :label="$t('auto.List.26.00c1f0')" min-width="150" />
-          <el-table-column prop="description" :label="$t('auto.List.27.f411d0')" min-width="200" show-overflow-tooltip />
+          <el-table-column prop="code" :label="$t('auto.List.cb4e0fae')" width="150" />
+          <el-table-column prop="name" :label="$t('auto.List.00c1f00b')" min-width="150" />
+          <el-table-column prop="description" :label="$t('auto.List.f411d0f1')" min-width="200" show-overflow-tooltip />
         </el-table>
       </div>
     </el-dialog>
@@ -174,26 +174,26 @@
     
     <el-dialog
       v-model="loginDialogVisible"
-      :title="$t('auto.List.28.efae77')"
+      :title="$t('auto.List.efae7764')"
       width="500px"
       @close="handleLoginDialogClose"
     >
       <div v-loading="loginLoading">
         <el-form :model="loginForm" label-width="100px">
-          <el-form-item :label="$t('auto.List.29.7035c6')">
+          <el-form-item :label="$t('auto.List.7035c62f')">
             <span>{{ currentAccount.account_name }}</span>
           </el-form-item>
-          <el-form-item :label="$t('auto.List.15.498128')">
+          <el-form-item :label="$t('auto.List.4981287f')">
             <span>{{ currentAccount.platform }}</span>
           </el-form-item>
-          <el-form-item :label="$t('auto.List.30.983f59')">
-            <el-input v-model="loginForm.code" :placeholder="$t('auto.List.31.09998b')" />
+          <el-form-item :label="$t('auto.List.983f59c9')">
+            <el-input v-model="loginForm.code" :placeholder="$t('auto.List.09998b47')" />
           </el-form-item>
         </el-form>
       </div>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="loginDialogVisible = false">{{ $t('auto.List.37.625fb2') }}</el-button>
+          <el-button @click="loginDialogVisible = false">{{ $t('auto.List.625fb26b') }}</el-button>
           <el-button type="primary" @click="submitLogin" :loading="loginLoading">
             确认登录
           </el-button>
@@ -204,20 +204,20 @@
     
     <el-dialog
       v-model="statusDialogVisible"
-      :title="$t('auto.List.32.d05d90')"
+      :title="$t('auto.List.d05d902f')"
       width="500px"
     >
       <div v-loading="statusLoading">
         <el-descriptions :column="1" border>
-          <el-descriptions-item :label="$t('auto.List.29.7035c6')">{{ currentAccount.account_name }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.15.498128')">{{ currentAccount.platform }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.23.3fea7c')">
+          <el-descriptions-item :label="$t('auto.List.7035c62f')">{{ currentAccount.account_name }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.4981287f')">{{ currentAccount.platform }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.3fea7ca7')">
             <el-tag :type="getStatusType(statusResult.status)">
               {{ getStatusText(statusResult.status) }}
             </el-tag>
           </el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.33.44c422')">{{ statusResult.checked_at }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.27.f411d0')">{{ statusResult.message || '-' }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.44c42271')">{{ statusResult.checked_at }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.f411d0f1')">{{ statusResult.message || '-' }}</el-descriptions-item>
         </el-descriptions>
       </div>
     </el-dialog>
@@ -282,18 +282,18 @@ const loginForm = reactive({
 
 const rules = {
   platform: [
-    { required: true, message: i18n.global.t(t('auto.List.16.72b562')), trigger: 'change' }
+    { required: true, message: i18n.global.t(t('auto.List.72b562ed')), trigger: 'change' }
   ],
   account_name: [
-    { required: true, message: i18n.global.t(t('auto.List.18.1f3797')), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.List.1f3797f1')), trigger: 'blur' }
   ],
   account_id: [
-    { required: true, message: i18n.global.t(t('auto.List.20.cf5e16')), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.List.cf5e16f7')), trigger: 'blur' }
   ]
 };
 
 const dialogTitle = computed(() => {
-  return isEdit.value ? t('auto.List.38.656e89') : t('auto.List.39.34374b')
+  return isEdit.value ? t('auto.List.656e8921') : t('auto.List.34374b71')
 });
 
 onMounted(() => {
@@ -365,19 +365,19 @@ const handleEdit = (row) => {
 const handleDelete = (row) => {
   ElMessageBox.confirm(
     `确定要删除平台账号 "${row.account_name}" 吗？`,
-    t('auto.List.40.02d981'),
+    t('auto.List.02d9819d'),
     {
-      confirmButtonText: t('auto.List.41.38cf16'),
-      cancelButtonText: t('auto.List.37.625fb2'),
+      confirmButtonText: t('auto.List.38cf16f2'),
+      cancelButtonText: t('auto.List.625fb26b'),
       type: 'warning'
     }
   ).then(async () => {
     try {
       await platformAccountApi.deleteAccount(row.id)
-      ElMessage.success(i18n.global.t(t('auto.List.42.0007d1')))
+      ElMessage.success(i18n.global.t(t('auto.List.0007d170')))
       fetchAccountList()
     } catch (error) {
-      ElMessage.error(i18n.global.t(t('auto.List.43.acf066')))
+      ElMessage.error(i18n.global.t(t('auto.List.acf0664a')))
       console.error(error)
     }
   }).catch((e) => {
@@ -404,11 +404,11 @@ const handleSubmit = async () => {
         } else {
           await platformAccountApi.createAccount(submitData)
         }
-        ElMessage.success(isEdit.value ? t('auto.List.44.55aa63') : t('auto.List.45.04a691'))
+        ElMessage.success(isEdit.value ? t('auto.List.55aa6366') : t('auto.List.04a691b3'))
         dialogVisible.value = false
         fetchAccountList()
       } catch (error) {
-        ElMessage.error(isEdit.value ? t('auto.List.46.930442') : t('auto.List.47.a88928'))
+        ElMessage.error(isEdit.value ? t('auto.List.930442e2') : t('auto.List.a889286a'))
         console.error(error)
       } finally {
         submitting.value = false
@@ -465,11 +465,11 @@ const submitLogin = async () => {
   loginLoading.value = true
   try {
     await platformAccountApi.loginAccount(currentAccount.value.id, loginForm)
-    ElMessage.success(i18n.global.t(t('auto.List.48.71fa3b')))
+    ElMessage.success(i18n.global.t(t('auto.List.71fa3bd0')))
     loginDialogVisible.value = false
     fetchAccountList()
   } catch (error) {
-    ElMessage.error(i18n.global.t(t('auto.List.49.b6076a')))
+    ElMessage.error(i18n.global.t(t('auto.List.b6076a05')))
     console.error(error)
   } finally {
     loginLoading.value = false

@@ -3,7 +3,7 @@
     <el-card class="rag-overview-card">
       <template #header>
         <div class="card-header">
-          <span>{{ $t('auto.RagOverview.11.d34062') }}</span>
+          <span>{{ $t('auto.RagOverview.d3406221') }}</span>
         </div>
       </template>
       
@@ -13,7 +13,7 @@
             <el-card class="stat-card">
               <div class="stat-item">
                 <div class="stat-number">{{ stats.totalProducts }}</div>
-                <div class="stat-label">{{ $t('auto.RagOverview.12.b0291c') }}</div>
+                <div class="stat-label">{{ $t('auto.RagOverview.b0291c22') }}</div>
               </div>
             </el-card>
           </el-col>
@@ -21,7 +21,7 @@
             <el-card class="stat-card">
               <div class="stat-item">
                 <div class="stat-number">{{ stats.activeProducts }}</div>
-                <div class="stat-label">{{ $t('auto.RagOverview.13.51a086') }}</div>
+                <div class="stat-label">{{ $t('auto.RagOverview.51a08641') }}</div>
               </div>
             </el-card>
           </el-col>
@@ -29,7 +29,7 @@
             <el-card class="stat-card">
               <div class="stat-item">
                 <div class="stat-number">{{ stats.activatedAccounts }}</div>
-                <div class="stat-label">{{ $t('auto.RagOverview.14.31ceae') }}</div>
+                <div class="stat-label">{{ $t('auto.RagOverview.31ceae5b') }}</div>
               </div>
             </el-card>
           </el-col>
@@ -38,13 +38,13 @@
         <el-divider />
 
         <div class="quick-actions">
-          <h3>{{ $t('auto.RagOverview.15.002df9') }}</h3>
+          <h3>{{ $t('auto.RagOverview.002df904') }}</h3>
           <el-row :gutter="20">
             <el-col :span="6">
               <el-card class="action-card" @click="goToConfig">
                 <div class="action-item">
                   <el-icon class="action-icon"><Setting /></el-icon>
-                  <div class="action-label">{{ $t('auto.RagOverview.16.924c17') }}</div>
+                  <div class="action-label">{{ $t('auto.RagOverview.924c17cf') }}</div>
                 </div>
               </el-card>
             </el-col>
@@ -52,7 +52,7 @@
               <el-card class="action-card" @click="goToAccountConfig">
                 <div class="action-item">
                   <el-icon class="action-icon"><User /></el-icon>
-                  <div class="action-label">{{ $t('auto.RagOverview.17.a16a35') }}</div>
+                  <div class="action-label">{{ $t('auto.RagOverview.a16a35a5') }}</div>
                 </div>
               </el-card>
             </el-col>
@@ -60,7 +60,7 @@
               <el-card class="action-card" @click="goToAccountConfig">
                 <div class="action-item">
                   <el-icon class="action-icon"><ChatDotRound /></el-icon>
-                  <div class="action-label">{{ $t('auto.RagOverview.18.1f6097') }}</div>
+                  <div class="action-label">{{ $t('auto.RagOverview.1f6097c4') }}</div>
                 </div>
               </el-card>
             </el-col>
@@ -68,7 +68,7 @@
               <el-card class="action-card" @click="goToDocs">
                 <div class="action-item">
                   <el-icon class="action-icon"><Document /></el-icon>
-                  <div class="action-label">{{ $t('auto.RagOverview.19.c39ced') }}</div>
+                  <div class="action-label">{{ $t('auto.RagOverview.c39ced2c') }}</div>
                 </div>
               </el-card>
             </el-col>
@@ -78,12 +78,12 @@
         <el-divider />
 
         <div class="recent-activity">
-          <h3>{{ $t('auto.RagOverview.20.73378a') }}</h3>
+          <h3>{{ $t('auto.RagOverview.73378a1f') }}</h3>
           <el-table :data="activities" style="width: 100%">
-            <el-table-column prop="time" :label="$t('auto.RagOverview.1.19fcb9')" width="180" />
-            <el-table-column prop="action" :label="$t('auto.RagOverview.2.2b6bc0')" />
-            <el-table-column prop="user" :label="$t('auto.RagOverview.3.1fd02a')" width="120" />
-            <el-table-column prop="status" :label="$t('auto.RagOverview.4.3fea7c')" width="100">
+            <el-table-column prop="time" :label="$t('auto.RagOverview.19fcb9eb')" width="180" />
+            <el-table-column prop="action" :label="$t('auto.RagOverview.2b6bc0f2')" />
+            <el-table-column prop="user" :label="$t('auto.RagOverview.1fd02a90')" width="120" />
+            <el-table-column prop="status" :label="$t('auto.RagOverview.3fea7ca7')" width="100">
               <template #default="{ row }">
                 <el-tag :type="getStatusTagType(row.status)">{{ getStatusLabel(row.status) }}</el-tag>
               </template>
@@ -94,97 +94,97 @@
     </el-card>
 
     
-    <el-dialog v-model="helpDialogVisible" :title="$t('auto.RagOverview.5.d6c143')" width="780px" :close-on-click-modal="false">
+    <el-dialog v-model="helpDialogVisible" :title="$t('auto.RagOverview.d6c1434b')" width="780px" :close-on-click-modal="false">
       <div class="help-doc-content">
         <el-collapse v-model="activeHelpSections">
-          <el-collapse-item :title="$t('auto.RagOverview.6.40d5f4')" name="1">
+          <el-collapse-item :title="$t('auto.RagOverview.40d5f4b2')" name="1">
             <div class="help-section">
-              <p>{{ $t('auto.RagOverview.21.853b1a') }}</p>
-              <p><strong>{{ $t('auto.RagOverview.22.a3d379') }}</strong></p>
+              <p>{{ $t('auto.RagOverview.853b1a14') }}</p>
+              <p><strong>{{ $t('auto.RagOverview.a3d37957') }}</strong></p>
               <ul>
-                <li>{{ $t('auto.RagOverview.23.98e74b') }}</li>
-                <li>{{ $t('auto.RagOverview.24.e39f91') }}</li>
-                <li>{{ $t('auto.RagOverview.25.f78301') }}</li>
-                <li>{{ $t('auto.RagOverview.26.081fb9') }}</li>
+                <li>{{ $t('auto.RagOverview.98e74b3b') }}</li>
+                <li>{{ $t('auto.RagOverview.e39f91f3') }}</li>
+                <li>{{ $t('auto.RagOverview.f78301c0') }}</li>
+                <li>{{ $t('auto.RagOverview.081fb90f') }}</li>
               </ul>
             </div>
           </el-collapse-item>
 
-          <el-collapse-item :title="$t('auto.RagOverview.7.321e9b')" name="2">
+          <el-collapse-item :title="$t('auto.RagOverview.321e9b7f')" name="2">
             <div class="help-section">
-              <p><strong>{{ $t('auto.RagOverview.27.1cdf63') }}</strong>{{ $t('auto.RagOverview.28.3769ad') }}</p>
-              <p><strong>{{ $t('auto.RagOverview.29.e8ad9f') }}</strong>{{ $t('auto.RagOverview.30.4531fb') }}</p>
+              <p><strong>{{ $t('auto.RagOverview.1cdf6381') }}</strong>{{ $t('auto.RagOverview.3769adad') }}</p>
+              <p><strong>{{ $t('auto.RagOverview.e8ad9fab') }}</strong>{{ $t('auto.RagOverview.4531fbc8') }}</p>
               <ul>
-                <li><strong>{{ $t('auto.RagOverview.31.0fcac7') }}</strong>{{ $t('auto.RagOverview.32.5496af') }}</li>
-                <li><strong>{{ $t('auto.RagOverview.33.b421bd') }}</strong>{{ $t('auto.RagOverview.34.ac5641') }}</li>
-                <li><strong>{{ $t('auto.RagOverview.35.29e965') }}</strong>{{ $t('auto.RagOverview.36.9b6fdb') }}</li>
-                <li><strong>{{ $t('auto.RagOverview.37.97af7e') }}</strong>{{ $t('auto.RagOverview.38.183281') }}</li>
-                <li><strong>{{ $t('auto.RagOverview.39.577bc8') }}</strong>{{ $t('auto.RagOverview.40.9287f9') }}</li>
+                <li><strong>{{ $t('auto.RagOverview.0fcac790') }}</strong>{{ $t('auto.RagOverview.5496af86') }}</li>
+                <li><strong>{{ $t('auto.RagOverview.b421bd00') }}</strong>{{ $t('auto.RagOverview.ac5641ca') }}</li>
+                <li><strong>{{ $t('auto.RagOverview.29e965a4') }}</strong>{{ $t('auto.RagOverview.9b6fdbbb') }}</li>
+                <li><strong>{{ $t('auto.RagOverview.97af7e41') }}</strong>{{ $t('auto.RagOverview.1832818f') }}</li>
+                <li><strong>{{ $t('auto.RagOverview.577bc8c8') }}</strong>{{ $t('auto.RagOverview.9287f915') }}</li>
               </ul>
-              <p><strong>{{ $t('auto.RagOverview.41.a5da0d') }}</strong>{{ $t('auto.RagOverview.42.70329e') }}</p>
+              <p><strong>{{ $t('auto.RagOverview.a5da0dc5') }}</strong>{{ $t('auto.RagOverview.70329e4c') }}</p>
             </div>
           </el-collapse-item>
 
-          <el-collapse-item :title="$t('auto.RagOverview.8.ff7b09')" name="3">
+          <el-collapse-item :title="$t('auto.RagOverview.ff7b0905')" name="3">
             <div class="help-section">
-              <p><strong>{{ $t('auto.RagOverview.27.1cdf63') }}</strong>{{ $t('auto.RagOverview.43.ad5afa') }}</p>
-              <p><strong>{{ $t('auto.RagOverview.29.e8ad9f') }}</strong>{{ $t('auto.RagOverview.44.37e560') }}</p>
+              <p><strong>{{ $t('auto.RagOverview.1cdf6381') }}</strong>{{ $t('auto.RagOverview.ad5afa7a') }}</p>
+              <p><strong>{{ $t('auto.RagOverview.e8ad9fab') }}</strong>{{ $t('auto.RagOverview.37e560ae') }}</p>
               <ul>
-                <li>{{ $t('auto.RagOverview.45.11f65b') }}</li>
-                <li>{{ $t('auto.RagOverview.46.56227f') }}</li>
-                <li>{{ $t('auto.RagOverview.47.6ca908') }}</li>
-                <li>{{ $t('auto.RagOverview.48.6bc0b5') }}</li>
-                <li>{{ $t('auto.RagOverview.49.537a9b') }}</li>
+                <li>{{ $t('auto.RagOverview.11f65b04') }}</li>
+                <li>{{ $t('auto.RagOverview.56227f1c') }}</li>
+                <li>{{ $t('auto.RagOverview.6ca9087d') }}</li>
+                <li>{{ $t('auto.RagOverview.6bc0b5b3') }}</li>
+                <li>{{ $t('auto.RagOverview.537a9b56') }}</li>
               </ul>
-              <p><strong>{{ $t('auto.RagOverview.41.a5da0d') }}</strong>{{ $t('auto.RagOverview.50.9d540f') }}</p>
-              <p><strong>{{ $t('auto.RagOverview.51.4cdc88') }}</strong>{{ $t('auto.RagOverview.52.58b184') }}</p>
-              <p><strong>{{ $t('auto.RagOverview.53.f35cf6') }}</strong></p>
+              <p><strong>{{ $t('auto.RagOverview.a5da0dc5') }}</strong>{{ $t('auto.RagOverview.9d540f8b') }}</p>
+              <p><strong>{{ $t('auto.RagOverview.4cdc8893') }}</strong>{{ $t('auto.RagOverview.58b1846f') }}</p>
+              <p><strong>{{ $t('auto.RagOverview.f35cf621') }}</strong></p>
               <ul>
-                <li>{{ $t('auto.RagOverview.54.819c2b') }}</li>
-                <li>{{ $t('auto.RagOverview.55.0712c1') }}</li>
-                <li>{{ $t('auto.RagOverview.56.6bba16') }}</li>
-                <li>{{ $t('auto.RagOverview.57.4e3a94') }}</li>
+                <li>{{ $t('auto.RagOverview.819c2b45') }}</li>
+                <li>{{ $t('auto.RagOverview.0712c103') }}</li>
+                <li>{{ $t('auto.RagOverview.6bba16db') }}</li>
+                <li>{{ $t('auto.RagOverview.4e3a949b') }}</li>
               </ul>
             </div>
           </el-collapse-item>
 
-          <el-collapse-item :title="$t('auto.RagOverview.9.988503')" name="4">
+          <el-collapse-item :title="$t('auto.RagOverview.98850364')" name="4">
             <div class="help-section">
-              <p><strong>{{ $t('auto.RagOverview.27.1cdf63') }}</strong>{{ $t('auto.RagOverview.58.e2d2b4') }}</p>
-              <p><strong>{{ $t('auto.RagOverview.29.e8ad9f') }}</strong>{{ $t('auto.RagOverview.59.4db3c8') }}</p>
-              <p><strong>{{ $t('auto.RagOverview.41.a5da0d') }}</strong>{{ $t('auto.RagOverview.60.ab11f7') }}</p>
+              <p><strong>{{ $t('auto.RagOverview.1cdf6381') }}</strong>{{ $t('auto.RagOverview.e2d2b4b2') }}</p>
+              <p><strong>{{ $t('auto.RagOverview.e8ad9fab') }}</strong>{{ $t('auto.RagOverview.4db3c80a') }}</p>
+              <p><strong>{{ $t('auto.RagOverview.a5da0dc5') }}</strong>{{ $t('auto.RagOverview.ab11f796') }}</p>
               <ul>
-                <li><strong>{{ $t('auto.RagOverview.61.68cf1f') }}</strong>{{ $t('auto.RagOverview.62.6759c6') }}</li>
-                <li><strong>{{ $t('auto.RagOverview.63.ef7595') }}</strong>{{ $t('auto.RagOverview.64.58b6bf') }}</li>
-                <li><strong>{{ $t('auto.RagOverview.65.873fe7') }}</strong>{{ $t('auto.RagOverview.66.c61007') }}</li>
-                <li><strong>{{ $t('auto.RagOverview.67.aff544') }}</strong>{{ $t('auto.RagOverview.68.18a3e3') }}</li>
+                <li><strong>{{ $t('auto.RagOverview.68cf1f5e') }}</strong>{{ $t('auto.RagOverview.6759c68e') }}</li>
+                <li><strong>{{ $t('auto.RagOverview.ef75959e') }}</strong>{{ $t('auto.RagOverview.58b6bff0') }}</li>
+                <li><strong>{{ $t('auto.RagOverview.873fe7c1') }}</strong>{{ $t('auto.RagOverview.c6100798') }}</li>
+                <li><strong>{{ $t('auto.RagOverview.aff5442d') }}</strong>{{ $t('auto.RagOverview.18a3e3a2') }}</li>
               </ul>
-              <p><strong>{{ $t('auto.RagOverview.51.4cdc88') }}</strong>{{ $t('auto.RagOverview.69.e5e8a8') }}</p>
+              <p><strong>{{ $t('auto.RagOverview.4cdc8893') }}</strong>{{ $t('auto.RagOverview.e5e8a89b') }}</p>
             </div>
           </el-collapse-item>
 
-          <el-collapse-item :title="$t('auto.RagOverview.10.90ebc2')" name="5">
+          <el-collapse-item :title="$t('auto.RagOverview.90ebc26e')" name="5">
             <div class="help-section">
-              <p><strong>{{ $t('auto.RagOverview.70.4cc9ef') }}</strong></p>
-              <p>{{ $t('auto.RagOverview.71.bbf19b') }}</p>
+              <p><strong>{{ $t('auto.RagOverview.4cc9efe8') }}</strong></p>
+              <p>{{ $t('auto.RagOverview.bbf19b0c') }}</p>
 
-              <p><strong>{{ $t('auto.RagOverview.72.25fdf5') }}</strong></p>
-              <p>{{ $t('auto.RagOverview.73.a20efa') }}</p>
+              <p><strong>{{ $t('auto.RagOverview.25fdf50b') }}</strong></p>
+              <p>{{ $t('auto.RagOverview.a20efa94') }}</p>
 
-              <p><strong>{{ $t('auto.RagOverview.74.4114d0') }}</strong></p>
-              <p>{{ $t('auto.RagOverview.75.8a2dee') }}</p>
+              <p><strong>{{ $t('auto.RagOverview.4114d088') }}</strong></p>
+              <p>{{ $t('auto.RagOverview.8a2dee01') }}</p>
 
-              <p><strong>{{ $t('auto.RagOverview.76.126a6a') }}</strong></p>
-              <p>{{ $t('auto.RagOverview.77.d31088') }}</p>
+              <p><strong>{{ $t('auto.RagOverview.126a6a63') }}</strong></p>
+              <p>{{ $t('auto.RagOverview.d310882a') }}</p>
 
-              <p><strong>{{ $t('auto.RagOverview.78.024e92') }}</strong></p>
-              <p>{{ $t('auto.RagOverview.79.fffe41') }}</p>
+              <p><strong>{{ $t('auto.RagOverview.024e92a1') }}</strong></p>
+              <p>{{ $t('auto.RagOverview.fffe41d1') }}</p>
             </div>
           </el-collapse-item>
         </el-collapse>
       </div>
       <template #footer>
-        <el-button type="primary" @click="helpDialogVisible = false">{{ $t('auto.RagOverview.80.b15d91') }}</el-button>
+        <el-button type="primary" @click="helpDialogVisible = false">{{ $t('auto.RagOverview.b15d9127') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -223,8 +223,8 @@ const getStatusTagType = (status) => {
     default:        return 'info'
   }
 }
-const STATUS_ZH_LABEL = { '成功': t('auto.RagOverview.81.330363'), '失败': t('auto.RagOverview.82.acd5cb'), '运行中': t('auto.RagOverview.83.fb852f') }
-const getStatusLabel = (status) => STATUS_ZH_LABEL[status] || (status === 'success' ? t('auto.RagOverview.81.330363') : status === 'failed' ? t('auto.RagOverview.82.acd5cb') : status === 'running' ? t('auto.RagOverview.83.fb852f') : status)
+const STATUS_ZH_LABEL = { '成功': t('auto.RagOverview.330363df'), '失败': t('auto.RagOverview.acd5cb84'), '运行中': t('auto.RagOverview.fb852fc6') }
+const getStatusLabel = (status) => STATUS_ZH_LABEL[status] || (status === 'success' ? t('auto.RagOverview.330363df') : status === 'failed' ? t('auto.RagOverview.acd5cb84') : status === 'running' ? t('auto.RagOverview.fb852fc6') : status)
 
 const goToConfig = () => {
   router.push('/system/rag-product-config')
@@ -255,7 +255,7 @@ const loadStats = async () => {
       const kbs = kbsRes?.list || kbsRes?.items || (Array.isArray(kbsRes) ? kbsRes : [])
       stats.value.totalDocuments = kbs.reduce((sum, k) => sum + Number(k?.doc_count || k?.document_count || 0), 0)
     } catch (e) {
-      console.warn(t('auto.RagOverview.84.3e9149'), e);
+      console.warn(t('auto.RagOverview.3e914998'), e);
     }
 
     try {
@@ -265,21 +265,21 @@ const loadStats = async () => {
         stats.value.activatedAccounts = accounts.filter((a) => a.is_active !== false).length
       }
     } catch (e) {
-      console.warn(t('auto.RagOverview.85.139fa0'), e);
+      console.warn(t('auto.RagOverview.139fa04d'), e);
     }
 
     if (Array.isArray(products) && products.length > 0) {
       activities.value = products.slice(0, 5).map((p) => ({
-        time: p.updated_at || p.created_at || t('auto.RagOverview.86.9418d7'),
-        action: `RAG产品: ${p.name || t('auto.RagOverview.87.7f0425')}`,
+        time: p.updated_at || p.created_at || t('auto.RagOverview.9418d7cb'),
+        action: `RAG产品: ${p.name || t('auto.RagOverview.7f0425a8')}`,
         user: p.creator || 'system',
-        status: p.is_active ? t('auto.RagOverview.81.330363') : t('auto.RagOverview.82.acd5cb')
+        status: p.is_active ? t('auto.RagOverview.330363df') : t('auto.RagOverview.acd5cb84')
       }))
     } else {
       activities.value = []
     }
   } catch (error) {
-    console.error(t('auto.RagOverview.88.b6ee62'), error)
+    console.error(t('auto.RagOverview.b6ee622f'), error)
     ElMessage.warning(i18n.global.t('RAG 概览数据加载失败,请稍后重试'))
   }
 };

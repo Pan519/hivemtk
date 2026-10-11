@@ -14,9 +14,9 @@
       
       <div class="search-bar">
         <el-form :inline="true" :model="searchForm">
-          <el-form-item :label="$t('auto.MaterialLibrary.1.d0771a')">
-            <el-select v-model="searchForm.categoryId" :placeholder="$t('auto.MaterialLibrary.2.1a7503')" clearable>
-              <el-option :label="$t('auto.MaterialLibrary.2.1a7503')" value="" />
+          <el-form-item :label="$t('auto.MaterialLibrary.d0771a42')">
+            <el-select v-model="searchForm.categoryId" :placeholder="$t('auto.MaterialLibrary.1a750305')" clearable>
+              <el-option :label="$t('auto.MaterialLibrary.1a750305')" value="" />
               <el-option
                 v-for="category in categories"
                 :key="category.id"
@@ -25,21 +25,21 @@
               />
             </el-select>
           </el-form-item>
-          <el-form-item :label="$t('auto.MaterialLibrary.3.226b09')">
-            <el-select v-model="searchForm.type" :placeholder="$t('auto.MaterialLibrary.4.c079e7')" clearable>
-              <el-option :label="$t('auto.MaterialLibrary.4.c079e7')" value="" />
-              <el-option :label="$t('auto.MaterialLibrary.5.20def7')" value="image" />
-              <el-option :label="$t('auto.MaterialLibrary.6.7fcf42')" value="video" />
-              <el-option :label="$t('auto.MaterialLibrary.7.726dd5')" value="audio" />
-              <el-option :label="$t('auto.MaterialLibrary.8.325369')" value="document" />
+          <el-form-item :label="$t('auto.MaterialLibrary.226b0912')">
+            <el-select v-model="searchForm.type" :placeholder="$t('auto.MaterialLibrary.c079e7d5')" clearable>
+              <el-option :label="$t('auto.MaterialLibrary.c079e7d5')" value="" />
+              <el-option :label="$t('auto.MaterialLibrary.20def794')" value="image" />
+              <el-option :label="$t('auto.MaterialLibrary.7fcf42ed')" value="video" />
+              <el-option :label="$t('auto.MaterialLibrary.726dd5df')" value="audio" />
+              <el-option :label="$t('auto.MaterialLibrary.32536950')" value="document" />
             </el-select>
           </el-form-item>
-          <el-form-item :label="$t('auto.MaterialLibrary.9.9699a5')">
-            <el-input v-model="searchForm.keyword" :placeholder="$t('auto.MaterialLibrary.10.21724d')" clearable />
+          <el-form-item :label="$t('auto.MaterialLibrary.9699a50e')">
+            <el-input v-model="searchForm.keyword" :placeholder="$t('auto.MaterialLibrary.21724db1')" clearable />
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="handleSearch">{{ $t('auto.MaterialLibrary.17.e5f71f') }}</el-button>
-            <el-button @click="handleReset">{{ $t('auto.MaterialLibrary.18.4b9c32') }}</el-button>
+            <el-button type="primary" @click="handleSearch">{{ $t('auto.MaterialLibrary.e5f71fc3') }}</el-button>
+            <el-button @click="handleReset">{{ $t('auto.MaterialLibrary.4b9c3271') }}</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -72,8 +72,8 @@
               </el-icon>
             </div>
             <div class="material-actions">
-              <el-button type="primary" link @click.stop="handleCopyUrl(material.url)">{{ $t('auto.MaterialLibrary.19.879058') }}</el-button>
-              <el-button type="danger" link @click.stop="handleDelete(material)">{{ $t('auto.MaterialLibrary.20.2f4aad') }}</el-button>
+              <el-button type="primary" link @click.stop="handleCopyUrl(material.url)">{{ $t('auto.MaterialLibrary.879058ce') }}</el-button>
+              <el-button type="danger" link @click.stop="handleDelete(material)">{{ $t('auto.MaterialLibrary.2f4aaddd') }}</el-button>
             </div>
           </div>
           <div class="material-info">
@@ -103,14 +103,14 @@
 
     
     <el-dialog
-      :title="$t('auto.MaterialLibrary.11.fc5b61')"
+      :title="$t('auto.MaterialLibrary.fc5b616e')"
       v-model="uploadDialogVisible"
       width="600px"
       @close="handleUploadClose"
     >
       <el-form ref="uploadFormRef" :model="uploadForm" label-width="100px">
-        <el-form-item :label="$t('auto.MaterialLibrary.12.5fcb1e')" prop="categoryId">
-          <el-select v-model="uploadForm.categoryId" :placeholder="$t('auto.MaterialLibrary.13.8bb820')">
+        <el-form-item :label="$t('auto.MaterialLibrary.5fcb1e4d')" prop="categoryId">
+          <el-select v-model="uploadForm.categoryId" :placeholder="$t('auto.MaterialLibrary.8bb820b8')">
             <el-option
               v-for="category in categories"
               :key="category.id"
@@ -119,7 +119,7 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.MaterialLibrary.14.a6fc9e')">
+        <el-form-item :label="$t('auto.MaterialLibrary.a6fc9e3a')">
           <el-upload
             ref="uploadRef"
             drag
@@ -133,7 +133,7 @@
           >
             <el-icon class="el-icon--upload"><upload-filled /></el-icon>
             <div class="el-upload__text">
-              拖拽文件到此处或 <em>{{ $t('auto.MaterialLibrary.21.2c808b') }}</em>
+              拖拽文件到此处或 <em>{{ $t('auto.MaterialLibrary.2c808b02') }}</em>
             </div>
             <template #tip>
               <div class="el-upload__tip">
@@ -145,14 +145,14 @@
       </el-form>
 
       <template #footer>
-        <el-button @click="uploadDialogVisible = false">{{ $t('auto.MaterialLibrary.22.625fb2') }}</el-button>
-        <el-button type="primary" @click="handleUploadSubmit">{{ $t('auto.MaterialLibrary.23.020f1e') }}</el-button>
+        <el-button @click="uploadDialogVisible = false">{{ $t('auto.MaterialLibrary.625fb26b') }}</el-button>
+        <el-button type="primary" @click="handleUploadSubmit">{{ $t('auto.MaterialLibrary.020f1ecd') }}</el-button>
       </template>
     </el-dialog>
 
     
     <el-dialog
-      :title="$t('auto.MaterialLibrary.15.5c2747')"
+      :title="$t('auto.MaterialLibrary.5c274709')"
       v-model="categoryDialogVisible"
       width="500px"
     >
@@ -164,8 +164,8 @@
         >
           <span>{{ category.name }}</span>
           <div class="category-actions">
-            <el-button type="primary" link @click="handleEditCategory(category)">{{ $t('auto.MaterialLibrary.24.95b351') }}</el-button>
-            <el-button type="danger" link @click="handleDeleteCategory(category)">{{ $t('auto.MaterialLibrary.20.2f4aad') }}</el-button>
+            <el-button type="primary" link @click="handleEditCategory(category)">{{ $t('auto.MaterialLibrary.95b351c8') }}</el-button>
+            <el-button type="danger" link @click="handleDeleteCategory(category)">{{ $t('auto.MaterialLibrary.2f4aaddd') }}</el-button>
           </div>
         </div>
       </div>
@@ -173,15 +173,15 @@
       <div class="category-form" v-if="showCategoryForm">
         <el-input
           v-model="categoryForm.name"
-          :placeholder="$t('auto.MaterialLibrary.16.68363f')"
+          :placeholder="$t('auto.MaterialLibrary.68363f18')"
           style="width: 200px; margin-right: 10px"
         />
-        <el-button type="primary" @click="handleSaveCategory">{{ $t('auto.MaterialLibrary.25.be5fbb') }}</el-button>
-        <el-button @click="handleCancelCategory">{{ $t('auto.MaterialLibrary.22.625fb2') }}</el-button>
+        <el-button type="primary" @click="handleSaveCategory">{{ $t('auto.MaterialLibrary.be5fbbe3') }}</el-button>
+        <el-button @click="handleCancelCategory">{{ $t('auto.MaterialLibrary.625fb26b') }}</el-button>
       </div>
 
       <div class="category-add" v-else>
-        <el-button type="primary" link @click="handleAddCategory">{{ $t('auto.MaterialLibrary.26.b6a506') }}</el-button>
+        <el-button type="primary" link @click="handleAddCategory">{{ $t('auto.MaterialLibrary.b6a50669') }}</el-button>
       </div>
     </el-dialog>
   </div>
@@ -242,12 +242,12 @@ const pagination = reactive({
 
 const getTypeLabel = (type) => {
   const labels = {
-    image: t('auto.MaterialLibrary.5.20def7'),
-    video: t('auto.MaterialLibrary.6.7fcf42'),
-    audio: t('auto.MaterialLibrary.7.726dd5'),
-    document: t('auto.MaterialLibrary.8.325369')
+    image: t('auto.MaterialLibrary.20def794'),
+    video: t('auto.MaterialLibrary.7fcf42ed'),
+    audio: t('auto.MaterialLibrary.726dd5df'),
+    document: t('auto.MaterialLibrary.32536950')
   }
-  return labels[type] || t('auto.MaterialLibrary.27.0d98c7')
+  return labels[type] || t('auto.MaterialLibrary.0d98c747')
 }
 
 const formatFileSize = (size) => {
@@ -270,7 +270,7 @@ const loadMaterialList = async () => {
     pagination.total = (response && response.total) || 0
   } catch (error) {
     if (error.response?.status !== 401) {
-      ElMessage.error(i18n.global.t(t('auto.MaterialLibrary.28.934bcb')))
+      ElMessage.error(i18n.global.t(t('auto.MaterialLibrary.934bcb9c')))
     }
   } finally {
     loading.value = false
@@ -283,7 +283,7 @@ const loadCategories = async () => {
     categories.value = (response && response.list) || []
   } catch (error) {
     if (error.response?.status !== 401) {
-      ElMessage.error(i18n.global.t(t('auto.MaterialLibrary.29.a8205d')))
+      ElMessage.error(i18n.global.t(t('auto.MaterialLibrary.a8205d01')))
     }
   }
 }
@@ -325,7 +325,7 @@ const handleFileChange = (file, files) => {
 const beforeUpload = (file) => {
   const maxSize = 10 * 1024 * 1024;
   if (file.size > maxSize) {
-    ElMessage.error(i18n.global.t(t('auto.MaterialLibrary.30.e84c26')))
+    ElMessage.error(i18n.global.t(t('auto.MaterialLibrary.e84c269b')))
     return false
   }
   return true
@@ -333,12 +333,12 @@ const beforeUpload = (file) => {
 
 const handleUploadSubmit = async () => {
   if (!uploadForm.categoryId) {
-    ElMessage.error(i18n.global.t(t('auto.MaterialLibrary.13.8bb820')))
+    ElMessage.error(i18n.global.t(t('auto.MaterialLibrary.8bb820b8')))
     return
   }
   
   if (fileList.value.length === 0) {
-    ElMessage.error(i18n.global.t(t('auto.MaterialLibrary.31.9febf3')))
+    ElMessage.error(i18n.global.t(t('auto.MaterialLibrary.9febf311')))
     return
   }
 
@@ -351,11 +351,11 @@ const handleUploadSubmit = async () => {
       await uploadMaterial(formData)
     }
     
-    ElMessage.success(i18n.global.t(t('auto.MaterialLibrary.32.a7699b')))
+    ElMessage.success(i18n.global.t(t('auto.MaterialLibrary.a7699ba7')))
     uploadDialogVisible.value = false
     loadMaterialList()
   } catch (error) {
-    ElMessage.error(i18n.global.t(t('auto.MaterialLibrary.33.54e5de')))
+    ElMessage.error(i18n.global.t(t('auto.MaterialLibrary.54e5de42')))
   }
 }
 
@@ -366,24 +366,24 @@ const handleUploadClose = () => {
 
 const handleCopyUrl = (url) => {
   navigator.clipboard.writeText(url).then(() => {
-    ElMessage.success(i18n.global.t(t('auto.MaterialLibrary.34.deb26c')))
+    ElMessage.success(i18n.global.t(t('auto.MaterialLibrary.deb26c26')))
   }).catch(() => {
-    ElMessage.error(i18n.global.t(t('auto.MaterialLibrary.35.5154ae')))
+    ElMessage.error(i18n.global.t(t('auto.MaterialLibrary.5154ae17')))
   })
 }
 
 const handleDelete = async (material) => {
   try {
-    await ElMessageBox.confirm(t('auto.MaterialLibrary.36.6fe549'), t('auto.MaterialLibrary.37.02d981'), {
+    await ElMessageBox.confirm(t('auto.MaterialLibrary.6fe54905'), t('auto.MaterialLibrary.02d9819d'), {
       type: 'warning'
     })
     
     await deleteMaterial(material.id)
-    ElMessage.success(i18n.global.t(t('auto.MaterialLibrary.38.0007d1')))
+    ElMessage.success(i18n.global.t(t('auto.MaterialLibrary.0007d170')))
     loadMaterialList()
   } catch (error) {
     if (error !== 'cancel') {
-      ElMessage.error(i18n.global.t(t('auto.MaterialLibrary.39.acf066')))
+      ElMessage.error(i18n.global.t(t('auto.MaterialLibrary.acf0664a')))
     }
   }
 }
@@ -404,16 +404,16 @@ const handleEditCategory = (category) => {
 
 const handleDeleteCategory = async (category) => {
   try {
-    await ElMessageBox.confirm(t('auto.MaterialLibrary.40.cc0ca3'), t('auto.MaterialLibrary.37.02d981'), {
+    await ElMessageBox.confirm(t('auto.MaterialLibrary.cc0ca398'), t('auto.MaterialLibrary.02d9819d'), {
       type: 'warning'
     })
     
     await deleteMaterialCategory(category.id)
-    ElMessage.success(i18n.global.t(t('auto.MaterialLibrary.38.0007d1')))
+    ElMessage.success(i18n.global.t(t('auto.MaterialLibrary.0007d170')))
     loadCategories()
   } catch (error) {
     if (error !== 'cancel') {
-      ElMessage.error(i18n.global.t(t('auto.MaterialLibrary.39.acf066')))
+      ElMessage.error(i18n.global.t(t('auto.MaterialLibrary.acf0664a')))
     }
   }
 }
@@ -426,23 +426,23 @@ const handleAddCategory = () => {
 
 const handleSaveCategory = async () => {
   if (!categoryForm.name.trim()) {
-    ElMessage.error(i18n.global.t(t('auto.MaterialLibrary.16.68363f')))
+    ElMessage.error(i18n.global.t(t('auto.MaterialLibrary.68363f18')))
     return
   }
   
   try {
     if (categoryForm.id) {
       await updateMaterialCategory(categoryForm.id, categoryForm)
-      ElMessage.success(i18n.global.t(t('auto.MaterialLibrary.41.55aa63')))
+      ElMessage.success(i18n.global.t(t('auto.MaterialLibrary.55aa6366')))
     } else {
       await createMaterialCategory(categoryForm)
-      ElMessage.success(i18n.global.t(t('auto.MaterialLibrary.42.04a691')))
+      ElMessage.success(i18n.global.t(t('auto.MaterialLibrary.04a691b3')))
     }
     
     showCategoryForm.value = false
     loadCategories()
   } catch (error) {
-    ElMessage.error(categoryForm.id ? t('auto.MaterialLibrary.43.930442') : t('auto.MaterialLibrary.44.a88928'))
+    ElMessage.error(categoryForm.id ? t('auto.MaterialLibrary.930442e2') : t('auto.MaterialLibrary.a889286a'))
   }
 }
 

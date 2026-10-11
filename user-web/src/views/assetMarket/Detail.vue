@@ -1,6 +1,6 @@
 <template>
   <div class="asset-detail" v-loading="loading">
-    <el-page-header @back="$router.back()" :content="$t('auto.Detail.1.f508a4')" />
+    <el-page-header @back="$router.back()" :content="$t('auto.Detail.f508a46b')" />
     <el-card v-if="detail" class="mt-16">
       <template #header>
         <div class="header">
@@ -22,11 +22,11 @@
               </div>
             </div>
           </div>
-          <el-button type="primary" @click="handlePurchase">{{ $t('auto.Detail.2.248f81') }}</el-button>
+          <el-button type="primary" @click="handlePurchase">{{ $t('auto.Detail.248f81e2') }}</el-button>
         </div>
       </template>
       <p class="desc">{{ asset.description || '暂无描述' }}</p>
-      <el-divider>{{ $t('auto.Detail.3.3bc470') }}</el-divider>
+      <el-divider>{{ $t('auto.Detail.3bc470c6') }}</el-divider>
       <pre class="json-preview">{{ previewText }}</pre>
     </el-card>
   </div>
@@ -63,7 +63,7 @@ const fetchDetail = async () => {
     const resp = await assetDetail(route.params.id)
     detail.value = resp?.data || resp
   } catch (e) {
-    ElMessage.error(e?.message || t('auto.Detail.4.93be62'))
+    ElMessage.error(e?.message || t('auto.Detail.93be6254'))
   } finally {
     loading.value = false
   }
@@ -71,12 +71,12 @@ const fetchDetail = async () => {
 
 const handlePurchase = async () => {
   try {
-    await ElMessageBox.confirm(`确认免费试用「${asset.value.name}」？`, t('auto.Detail.2.248f81'))
+    await ElMessageBox.confirm(`确认免费试用「${asset.value.name}」？`, t('auto.Detail.248f81e2'))
   } catch {
     return
   }
   await purchaseAsset({ asset_id: asset.value.asset_id || route.params.id })
-  ElMessage.success(t('auto.Detail.5.bc6d7a'))
+  ElMessage.success(t('auto.Detail.bc6d7a0d'))
   router.push('/asset-market/my-assets')
 }
 

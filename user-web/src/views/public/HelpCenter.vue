@@ -1,16 +1,16 @@
 <template>
   <div class="help-center">
     <header class="hc-header">
-      <h1>{{ $t('auto.HelpCenter.3.fe4416') }}</h1>
-      <p class="hc-sub">{{ $t('auto.HelpCenter.4.b40666') }}</p>
-      <el-input v-model="keyword" class="hc-search" size="large" :placeholder="$t('auto.HelpCenter.1.88fc04')" clearable @input="onSearch">
+      <h1>{{ $t('auto.HelpCenter.fe4416f2') }}</h1>
+      <p class="hc-sub">{{ $t('auto.HelpCenter.b40666e6') }}</p>
+      <el-input v-model="keyword" class="hc-search" size="large" :placeholder="$t('auto.HelpCenter.88fc043e')" clearable @input="onSearch">
         <template #prefix><el-icon><Search /></el-icon></template>
       </el-input>
     </header>
 
     <div class="hc-body">
       <aside class="hc-cats">
-        <div class="cat" role="button" tabindex="0" :class="{ active: activeCat === '' }" @click="setCat('')" @keydown.enter.prevent="setCat('')" @keydown.space.prevent="setCat('')">{{ $t('auto.HelpCenter.5.a8b0c2') }}</div>
+        <div class="cat" role="button" tabindex="0" :class="{ active: activeCat === '' }" @click="setCat('')" @keydown.enter.prevent="setCat('')" @keydown.space.prevent="setCat('')">{{ $t('auto.HelpCenter.a8b0c204') }}</div>
         <div v-for="c in categories" :key="c.category" class="cat" role="button" tabindex="0" :class="{ active: activeCat === c.category }" @click="setCat(c.category)" @keydown.enter.prevent="setCat(c.category)" @keydown.space.prevent="setCat(c.category)">
           {{ c.category }} <span class="cnt">{{ c.count }}</span>
         </div>
@@ -24,11 +24,11 @@
             <div class="a-summary">{{ a.summary || '（暂无摘要）' }}</div>
             <div class="a-time">{{ fmtTime(a.updated_at) }}</div>
           </div>
-          <el-empty v-if="!loading && articles.length === 0" :description="$t('auto.HelpCenter.2.8c894c')" />
+          <el-empty v-if="!loading && articles.length === 0" :description="$t('auto.HelpCenter.8c894ce8')" />
         </div>
 
         <article v-else class="article-detail">
-          <el-button text @click="detail = null"><el-icon><ArrowLeft /></el-icon>{{ $t('auto.HelpCenter.6.adcd1d') }}</el-button>
+          <el-button text @click="detail = null"><el-icon><ArrowLeft /></el-icon>{{ $t('auto.HelpCenter.adcd1dd7') }}</el-button>
           <h2>{{ detail.title }}</h2>
           <div class="a-meta">{{ detail.category }} · 更新于 {{ fmtTime(detail.updated_at) }}</div>
           <div class="a-content">{{ detail.content }}</div>

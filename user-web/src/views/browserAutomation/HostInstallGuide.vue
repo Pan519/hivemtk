@@ -1,17 +1,17 @@
 <template>
   <div class="guide">
-    <p class="lead">{{ $t('auto.HostInstallGuide.1.973ffb') }}</p>
+    <p class="lead">{{ $t('auto.HostInstallGuide.973ffb79') }}</p>
     <ol class="steps">
-      <li>{{ $t('auto.HostInstallGuide.2.03f04f') }}<code>cd user-web/browser_automation && npm install && npm run build</code>
-        <div class="note">{{ $t('auto.HostInstallGuide.3.2b83f6') }}<code>dist</code>{{ $t('auto.HostInstallGuide.4.11ae6e') }}</div></li>
+      <li>{{ $t('auto.HostInstallGuide.03f04f0e') }}<code>cd user-web/browser_automation && npm install && npm run build</code>
+        <div class="note">{{ $t('auto.HostInstallGuide.2b83f616') }}<code>dist</code>{{ $t('auto.HostInstallGuide.11ae6e1f') }}</div></li>
       <li>chrome://extensions → 打开「开发者模式」→「加载已解压的扩展程序」→ 选择
         <code>user-web/browser_automation/dist</code></li>
-      <li>{{ $t('auto.HostInstallGuide.5.51105c') }}<code>user-server/cmd/nm-host/install.sh</code>
-        <div class="note">{{ $t('auto.HostInstallGuide.6.d009e5') }}<code>key</code>{{ $t('auto.HostInstallGuide.7.ab4aa9') }}</div></li>
-      <li>{{ $t('auto.HostInstallGuide.8.bb57d8') }}<code>~/.hivemtk/nm_host.conf</code>{{ $t('auto.HostInstallGuide.9.01d7aa') }}<code>token=</code> 行
-        <div class="note">{{ $t('auto.HostInstallGuide.10.983005') }}</div></li>
+      <li>{{ $t('auto.HostInstallGuide.51105c7e') }}<code>user-server/cmd/nm-host/install.sh</code>
+        <div class="note">{{ $t('auto.HostInstallGuide.d009e596') }}<code>key</code>{{ $t('auto.HostInstallGuide.ab4aa970') }}</div></li>
+      <li>{{ $t('auto.HostInstallGuide.bb57d8a9') }}<code>~/.hivemtk/nm_host.conf</code>{{ $t('auto.HostInstallGuide.01d7aa49') }}<code>token=</code> 行
+        <div class="note">{{ $t('auto.HostInstallGuide.98300539') }}</div></li>
     </ol>
-    <p class="lead">{{ $t('auto.HostInstallGuide.11.cfe7bf') }}</p>
+    <p class="lead">{{ $t('auto.HostInstallGuide.cfe7bf82') }}</p>
   </div>
 </template>
 

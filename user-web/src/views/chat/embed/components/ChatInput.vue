@@ -2,7 +2,7 @@
   <div class="chat-input">
     
     <div v-if="pendingAttachment" class="attachment-preview">
-      <img v-if="pendingAttachment.mediaType === 'image'" :src="pendingAttachment.preview" class="preview-img" :alt="$t('auto.ChatInput.1.cce640')" />
+      <img v-if="pendingAttachment.mediaType === 'image'" :src="pendingAttachment.preview" class="preview-img" :alt="$t('auto.ChatInput.cce640e2')" />
       <div v-else class="preview-file">
         <div class="file-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
         <div class="file-info">
@@ -10,7 +10,7 @@
           <div class="file-size">{{ formatSize(pendingAttachment.size) }}</div>
         </div>
       </div>
-      <button class="remove-btn" @click="removeAttachment" ::aria-label="$t('auto.ChatInput.2.3d2eed')">×</button>
+      <button class="remove-btn" @click="removeAttachment" ::aria-label="$t('auto.ChatInput.3d2eed33')">×</button>
       <div v-if="uploading" class="upload-progress">
         <div class="progress-bar" :style="{ width: uploadProgress + '%' }"></div>
         <span class="progress-text">上传中 {{ uploadProgress }}%</span>
@@ -21,7 +21,7 @@
       ref="textareaRef"
       v-model="text"
       class="input"
-      :aria-label="$t('auto.ChatInput.3.ebd99c')"
+      :aria-label="$t('auto.ChatInput.ebd99cb2')"
       rows="1"
       :placeholder="placeholder"
       :maxlength="maxLength"
@@ -35,7 +35,7 @@
         ref="fileInputRef"
         type="file"
         style="display: none"
-        :aria-label="$t('auto.ChatInput.4.6ed455')"
+        :aria-label="$t('auto.ChatInput.6ed455dd')"
         :accept="acceptString"
         @change="onFileSelected"
       />
@@ -43,8 +43,8 @@
         class="action-btn attach"
         :disabled="sending || uploading"
         @click="triggerFileSelect"
-        ::title="$t('auto.ChatInput.5.f3edee')"
-        ::aria-label="$t('auto.ChatInput.5.f3edee')"
+        ::title="$t('auto.ChatInput.f3edee4b')"
+        ::aria-label="$t('auto.ChatInput.f3edee4b')"
       >
         <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true">
           <path d="M8.5 1.5a3.5 3.5 0 0 0-4.95 4.95l5.5 5.5a2 2 0 0 0 2.83-2.83l-4.5-4.5a.5.5 0 1 1 .71-.71l4.5 4.5a3 3 0 0 1-4.24 4.24l-5.5-5.5A4.5 4.5 0 0 1 8.5.5l5.5 5.5a.5.5 0 0 1-.7.7L8.5 1.5z"/>
@@ -141,7 +141,7 @@ const onFileSelected = async (e) => {
   if (!file) return
 
   if (file.size > 20 * 1024 * 1024) {
-    ElMessage.warning(i18n.global.t(t('auto.ChatInput.7.ceb523')))
+    ElMessage.warning(i18n.global.t(t('auto.ChatInput.ceb523af')))
     e.target.value = ''
     return
   }
@@ -190,7 +190,7 @@ const uploadAttachment = async () => {
       }
     })
     if (r.status !== 200) {
-      throw new Error(t('auto.ChatInput.8.ab56fb') + r.status)
+      throw new Error(t('auto.ChatInput.ab56fb24') + r.status)
     }
 
     pendingAttachment.value = {
@@ -201,7 +201,7 @@ const uploadAttachment = async () => {
     uploadProgress.value = 100
     emit('upload', pendingAttachment.value)
   } catch (err) {
-    ElMessage.error(t('auto.ChatInput.9.46bb97') + (err?.message || err))
+    ElMessage.error(t('auto.ChatInput.46bb9716') + (err?.message || err))
     pendingAttachment.value = null
   } finally {
     uploading.value = false

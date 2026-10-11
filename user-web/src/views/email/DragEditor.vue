@@ -5,11 +5,11 @@
         <el-card>
           <template #header>
             <div class="card-header">
-              <span>{{ $t('auto.DragEditor.5.4b00ca') }}</span>
+              <span>{{ $t('auto.DragEditor.4b00caf0') }}</span>
               <div>
-                <el-button @click="previewDesktop">{{ $t('auto.DragEditor.6.745bb9') }}</el-button>
-                <el-button @click="previewMobile">{{ $t('auto.DragEditor.7.e79ace') }}</el-button>
-                <el-button type="primary" @click="save">{{ $t('auto.DragEditor.8.be5fbb') }}</el-button>
+                <el-button @click="previewDesktop">{{ $t('auto.DragEditor.745bb9d7') }}</el-button>
+                <el-button @click="previewMobile">{{ $t('auto.DragEditor.e79ace24') }}</el-button>
+                <el-button type="primary" @click="save">{{ $t('auto.DragEditor.be5fbbe3') }}</el-button>
               </div>
             </div>
           </template>
@@ -41,33 +41,33 @@
               <el-button-group size="small" class="block-actions">
                 <el-button @click="moveUp(i)" :disabled="i === 0">↑</el-button>
                 <el-button @click="moveDown(i)" :disabled="i === blocks_state.length - 1">↓</el-button>
-                <el-button type="danger" @click="removeBlock(i)">{{ $t('auto.DragEditor.9.fe5c38') }}</el-button>
+                <el-button type="danger" @click="removeBlock(i)">{{ $t('auto.DragEditor.fe5c38f2') }}</el-button>
               </el-button-group>
             </div>
-            <div v-if="blocks_state.length === 0" class="empty">{{ $t('auto.DragEditor.10.34c361') }}</div>
+            <div v-if="blocks_state.length === 0" class="empty">{{ $t('auto.DragEditor.34c36159') }}</div>
           </div>
         </el-card>
       </el-col>
       <el-col :span="8">
         <el-card>
-          <template #header><span>{{ $t('auto.DragEditor.11.bc3480') }}</span></template>
+          <template #header><span>{{ $t('auto.DragEditor.bc348063') }}</span></template>
           <el-form label-width="80px">
-            <el-form-item :label="$t('auto.DragEditor.1.9970ad')">
+            <el-form-item :label="$t('auto.DragEditor.9970ad07')">
               <el-input v-model="subject" />
             </el-form-item>
-            <el-form-item :label="$t('auto.DragEditor.2.88c952')">
+            <el-form-item :label="$t('auto.DragEditor.88c95248')">
               <el-input v-model="fromName" />
             </el-form-item>
-            <el-form-item :label="$t('auto.DragEditor.3.b3e170')">
+            <el-form-item :label="$t('auto.DragEditor.b3e170b9')">
               <el-tag v-for="(t, i) in testEmails" :key="i" closable @close="testEmails.splice(i, 1)">{{ t }}</el-tag>
               <el-input v-model="newTestEmail" size="small" @keyup.enter="addTestEmail" placeholder="test@x.com" style="width: 200px" />
             </el-form-item>
             <el-form-item>
-              <el-button @click="sendTest" :loading="sending">{{ $t('auto.DragEditor.12.99b3a7') }}</el-button>
+              <el-button @click="sendTest" :loading="sending">{{ $t('auto.DragEditor.99b3a7ac') }}</el-button>
             </el-form-item>
           </el-form>
           <el-divider />
-          <h4>{{ $t('auto.DragEditor.13.4e1d5d') }}</h4>
+          <h4>{{ $t('auto.DragEditor.4e1d5d14') }}</h4>
           <el-tag v-for="v in builtinVars" :key="v.key" size="small" style="margin: 2px">
             {{ v.key }}
           </el-tag>
@@ -75,7 +75,7 @@
       </el-col>
     </el-row>
 
-    <el-dialog v-model="previewVisible" :title="$t('auto.DragEditor.4.645dbc')" width="640px">
+    <el-dialog v-model="previewVisible" :title="$t('auto.DragEditor.645dbc55')" width="640px">
       <div class="preview-frame" v-html="compiledHTML" />
     </el-dialog>
   </div>
@@ -92,12 +92,12 @@ import mjml2html from 'mjml-browser'
 import { http } from '@/utils/request'
 
 const BLOCK_TYPES = [
-  { type: 'text', label: t('auto.DragEditor.14.97d076'), icon: 'EditPen', default: { content: t('auto.DragEditor.15.657b63') } },
-  { type: 'image', label: t('auto.DragEditor.16.20def7'), icon: 'Picture', default: { src: '', alt: '' } },
-  { type: 'button', label: t('auto.DragEditor.17.fa9663'), icon: 'PriceTag', default: { text: t('auto.DragEditor.18.65e6e6'), url: '#', color: '#4F46E5' } },
-  { type: 'divider', label: t('auto.DragEditor.19.8c47ec'), icon: 'Minus' },
-  { type: 'social', label: t('auto.DragEditor.20.8b8588'), icon: 'Share', default: { networks: ['wechat', 'weibo'] } },
-  { type: 'coupon', label: t('auto.DragEditor.21.2f3635'), icon: 'PriceTag', default: { code: 'SAVE10', amount: 10, expires: '30d' } }
+  { type: 'text', label: t('auto.DragEditor.97d07614'), icon: 'EditPen', default: { content: t('auto.DragEditor.657b6324') } },
+  { type: 'image', label: t('auto.DragEditor.20def794'), icon: 'Picture', default: { src: '', alt: '' } },
+  { type: 'button', label: t('auto.DragEditor.fa966345'), icon: 'PriceTag', default: { text: t('auto.DragEditor.65e6e645'), url: '#', color: '#4F46E5' } },
+  { type: 'divider', label: t('auto.DragEditor.8c47ecd4'), icon: 'Minus' },
+  { type: 'social', label: t('auto.DragEditor.8b85881d'), icon: 'Share', default: { networks: ['wechat', 'weibo'] } },
+  { type: 'coupon', label: t('auto.DragEditor.2f36359e'), icon: 'PriceTag', default: { code: 'SAVE10', amount: 10, expires: '30d' } }
 ]
 
 const blocks = BLOCK_TYPES.map((b) => ({ ...b, icon: resolveIcon(b.icon) }))
@@ -106,7 +106,7 @@ const { t } = useI18n()
 
 const blocks_state = ref([])
 const subject = ref('')
-const fromName = ref(t('auto.DragEditor.22.e6976d'))
+const fromName = ref(t('auto.DragEditor.e6976d97'))
 const testEmails = ref([])
 const newTestEmail = ref('')
 const sending = ref(false)
@@ -172,7 +172,7 @@ function addTestEmail() {
 }
 
 async function sendTest() {
-  if (testEmails.value.length === 0) return ElMessage.warning(t('auto.DragEditor.23.cf001e'))
+  if (testEmails.value.length === 0) return ElMessage.warning(t('auto.DragEditor.cf001e6c'))
   sending.value = true
   try {
     await http.post('/api/email/test-send', {
@@ -180,7 +180,7 @@ async function sendTest() {
       html: compiledHTML.value,
       to: testEmails.value
     })
-    ElMessage.success(t('auto.DragEditor.24.17e557'))
+    ElMessage.success(t('auto.DragEditor.17e55746'))
   } finally {
     sending.value = false
   }
@@ -191,12 +191,12 @@ async function save() {
   saving.value = true
   try {
     await http.post('/api/email/drafts', {
-      subject: subject.value || t('auto.DragEditor.25.93db44'),
+      subject: subject.value || t('auto.DragEditor.93db448a'),
       content: compiledHTML.value
     })
-    ElMessage.success(t('auto.DragEditor.26.22b831'))
+    ElMessage.success(t('auto.DragEditor.22b8314b'))
   } catch (e) {
-    ElMessage.error(t('auto.DragEditor.27.78d235') + (e?.message || e))
+    ElMessage.error(t('auto.DragEditor.78d235cc') + (e?.message || e))
   } finally {
     saving.value = false
   }

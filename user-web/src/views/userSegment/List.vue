@@ -2,8 +2,8 @@
   <div class="user-segment-page">
     <el-card class="header-card">
       <div class="header-content">
-        <h2>{{ $t('auto.List.29.79ed66') }}</h2>
-        <p class="subtitle">{{ $t('auto.List.30.8a13c4') }}</p>
+        <h2>{{ $t('auto.List.79ed6688') }}</h2>
+        <p class="subtitle">{{ $t('auto.List.8a13c41c') }}</p>
       </div>
       <div class="header-actions">
         <el-button type="primary" @click="showCreateDialog">
@@ -52,61 +52,61 @@
     
     <el-card class="matrix-card">
       <template #header>
-        <span>{{ $t('auto.List.31.87e724') }}</span>
+        <span>{{ $t('auto.List.87e724a2') }}</span>
       </template>
       <div class="rfm-matrix">
         <table>
           <thead>
             <tr>
               <th></th>
-              <th>{{ $t('auto.List.32.19ec90') }}</th>
-              <th>{{ $t('auto.List.33.2ec604') }}</th>
-              <th>{{ $t('auto.List.34.b758d3') }}</th>
+              <th>{{ $t('auto.List.19ec9067') }}</th>
+              <th>{{ $t('auto.List.2ec60468') }}</th>
+              <th>{{ $t('auto.List.b758d3db') }}</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <th>{{ $t('auto.List.35.c67247') }}</th>
+              <th>{{ $t('auto.List.c6724728') }}</th>
               <td class="cell high-value" @click="onCellClick('high_value')">
-                <div class="cell-name">{{ $t('auto.List.36.66f84a') }}</div>
+                <div class="cell-name">{{ $t('auto.List.66f84a63') }}</div>
                 <div class="cell-count">{{ matrixCounts.high_value || 0 }} 人</div>
               </td>
               <td class="cell good" @click="onCellClick('important_develop')">
-                <div class="cell-name">{{ $t('auto.List.37.adda3b') }}</div>
+                <div class="cell-name">{{ $t('auto.List.adda3b2b') }}</div>
                 <div class="cell-count">{{ matrixCounts.important_develop || 0 }} 人</div>
               </td>
               <td class="cell warn" @click="onCellClick('important_keep')">
-                <div class="cell-name">{{ $t('auto.List.38.1c57e2') }}</div>
+                <div class="cell-name">{{ $t('auto.List.1c57e273') }}</div>
                 <div class="cell-count">{{ matrixCounts.important_keep || 0 }} 人</div>
               </td>
             </tr>
             <tr>
-              <th>{{ $t('auto.List.39.f84a72') }}</th>
+              <th>{{ $t('auto.List.f84a7217') }}</th>
               <td class="cell good" @click="onCellClick('general_value')">
-                <div class="cell-name">{{ $t('auto.List.40.6ecb76') }}</div>
+                <div class="cell-name">{{ $t('auto.List.6ecb7655') }}</div>
                 <div class="cell-count">{{ matrixCounts.general_value || 0 }} 人</div>
               </td>
               <td class="cell normal" @click="onCellClick('general_develop')">
-                <div class="cell-name">{{ $t('auto.List.41.cef1bd') }}</div>
+                <div class="cell-name">{{ $t('auto.List.cef1bd54') }}</div>
                 <div class="cell-count">{{ matrixCounts.general_develop || 0 }} 人</div>
               </td>
               <td class="cell warn" @click="onCellClick('general_keep')">
-                <div class="cell-name">{{ $t('auto.List.42.1d517c') }}</div>
+                <div class="cell-name">{{ $t('auto.List.1d517caf') }}</div>
                 <div class="cell-count">{{ matrixCounts.general_keep || 0 }} 人</div>
               </td>
             </tr>
             <tr>
-              <th>{{ $t('auto.List.43.b85c4d') }}</th>
+              <th>{{ $t('auto.List.b85c4db5') }}</th>
               <td class="cell normal" @click="onCellClick('potential_value')">
-                <div class="cell-name">{{ $t('auto.List.44.74ba3e') }}</div>
+                <div class="cell-name">{{ $t('auto.List.74ba3ec1') }}</div>
                 <div class="cell-count">{{ matrixCounts.potential_value || 0 }} 人</div>
               </td>
               <td class="cell warn" @click="onCellClick('potential_develop')">
-                <div class="cell-name">{{ $t('auto.List.45.2df631') }}</div>
+                <div class="cell-name">{{ $t('auto.List.2df63190') }}</div>
                 <div class="cell-count">{{ matrixCounts.potential_develop || 0 }} 人</div>
               </td>
               <td class="cell low-value" @click="onCellClick('churn')">
-                <div class="cell-name">{{ $t('auto.List.46.ddd6e7') }}</div>
+                <div class="cell-name">{{ $t('auto.List.ddd6e759') }}</div>
                 <div class="cell-count">{{ matrixCounts.churn || 0 }} 人</div>
               </td>
             </tr>
@@ -119,35 +119,35 @@
     <el-card class="segments-card">
       <template #header>
         <div class="card-header">
-          <span>{{ $t('auto.List.47.e204cd') }}</span>
+          <span>{{ $t('auto.List.e204cd03') }}</span>
           <el-input
             v-model="searchKeyword"
-            :placeholder="$t('auto.List.1.a1bbf5')"
+            :placeholder="$t('auto.List.a1bbf545')"
             style="width: 200px"
             clearable
           />
         </div>
       </template>
       <el-table :data="filteredSegments" v-loading="loading" stripe>
-        <el-table-column prop="name" :label="$t('auto.List.2.33429b')" min-width="150" />
-        <el-table-column prop="type" :label="$t('auto.List.3.65f306')" width="120">
+        <el-table-column prop="name" :label="$t('auto.List.33429b82')" min-width="150" />
+        <el-table-column prop="type" :label="$t('auto.List.65f3062f')" width="120">
           <template #default="{ row }">
             <el-tag :type="getTypeTagType(row.type)">{{ getTypeLabel(row.type) }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="userCount" :label="$t('auto.List.4.71cb56')" width="100" />
-        <el-table-column prop="criteria" :label="$t('auto.List.5.012c7f')" min-width="250" />
-        <el-table-column prop="createdAt" :label="$t('auto.List.6.eca37c')" width="180" />
-        <el-table-column prop="status" :label="$t('auto.List.7.3fea7c')" width="100">
+        <el-table-column prop="userCount" :label="$t('auto.List.71cb565f')" width="100" />
+        <el-table-column prop="criteria" :label="$t('auto.List.012c7f06')" min-width="250" />
+        <el-table-column prop="createdAt" :label="$t('auto.List.eca37cb0')" width="180" />
+        <el-table-column prop="status" :label="$t('auto.List.3fea7ca7')" width="100">
           <template #default="{ row }">
             <el-tag :type="getStatusTagType(row.status)">{{ getStatusLabel(row.status) }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.8.2b6bc0')" width="250" fixed="right">
+        <el-table-column :label="$t('auto.List.2b6bc0f2')" width="250" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" @click="viewUsers(row)">{{ $t('auto.List.48.9519f4') }}</el-button>
-            <el-button link type="primary" @click="editSegment(row)">{{ $t('auto.List.49.95b351') }}</el-button>
-            <el-button link type="danger" @click="deleteSegment(row)">{{ $t('auto.List.50.2f4aad') }}</el-button>
+            <el-button link type="primary" @click="viewUsers(row)">{{ $t('auto.List.9519f420') }}</el-button>
+            <el-button link type="primary" @click="editSegment(row)">{{ $t('auto.List.95b351c8') }}</el-button>
+            <el-button link type="danger" @click="deleteSegment(row)">{{ $t('auto.List.2f4aaddd') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -156,71 +156,71 @@
     
     <el-dialog v-model="dialogVisible" :title="dialogTitle" width="700px">
       <el-form :model="form" :rules="formRules" ref="formRef" label-width="100px">
-        <el-form-item :label="$t('auto.List.2.33429b')" prop="name">
-          <el-input v-model="form.name" :placeholder="$t('auto.List.9.4bb33c')" />
+        <el-form-item :label="$t('auto.List.33429b82')" prop="name">
+          <el-input v-model="form.name" :placeholder="$t('auto.List.4bb33cf5')" />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.3.65f306')" prop="type">
-          <el-select v-model="form.type" :placeholder="$t('auto.List.10.099cb7')" style="width: 100%">
-            <el-option :label="$t('auto.List.11.ef764b')" value="RFM" />
-            <el-option :label="$t('auto.List.12.f1d4ff')" value="CUSTOM" />
-            <el-option :label="$t('auto.List.13.578fa4')" value="BEHAVIOR" />
+        <el-form-item :label="$t('auto.List.65f3062f')" prop="type">
+          <el-select v-model="form.type" :placeholder="$t('auto.List.099cb72c')" style="width: 100%">
+            <el-option :label="$t('auto.List.ef764b9c')" value="RFM" />
+            <el-option :label="$t('auto.List.f1d4ff50')" value="CUSTOM" />
+            <el-option :label="$t('auto.List.578fa411')" value="BEHAVIOR" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.List.14.787b74')" v-if="form.type === 'RFM'">
+        <el-form-item :label="$t('auto.List.787b749e')" v-if="form.type === 'RFM'">
           <el-input-number v-model="form.rDays" :min="1" :max="365" />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.15.b25268')" v-if="form.type === 'RFM'">
+        <el-form-item :label="$t('auto.List.b25268da')" v-if="form.type === 'RFM'">
           <el-input-number v-model="form.fCount" :min="1" :max="100" />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.16.ad8ce7')" v-if="form.type === 'RFM'">
+        <el-form-item :label="$t('auto.List.ad8ce744')" v-if="form.type === 'RFM'">
           <el-input-number v-model="form.mAmount" :min="0" />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.5.012c7f')" prop="criteria">
+        <el-form-item :label="$t('auto.List.012c7f06')" prop="criteria">
           <el-input
             v-model="form.criteria"
             type="textarea"
             :rows="4"
-            :placeholder="$t('auto.List.17.ac5bc6')"
+            :placeholder="$t('auto.List.ac5bc6cf')"
           />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.18.2432b5')">
+        <el-form-item :label="$t('auto.List.2432b575')">
           <el-input v-model="form.remark" type="textarea" :rows="2" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="dialogVisible = false">{{ $t('auto.List.51.625fb2') }}</el-button>
-        <el-button type="primary" @click="submitForm">{{ $t('auto.List.52.38cf16') }}</el-button>
+        <el-button @click="dialogVisible = false">{{ $t('auto.List.625fb26b') }}</el-button>
+        <el-button type="primary" @click="submitForm">{{ $t('auto.List.38cf16f2') }}</el-button>
       </template>
     </el-dialog>
 
     
     <el-dialog
       v-model="viewUsersDialogVisible"
-      ::title="$t('auto.List.19.fb3844')"
+      ::title="$t('auto.List.fb38447c')"
       width="900px"
     >
       <el-table :data="segmentUsers" v-loading="viewUsersLoading" stripe max-height="500">
-        <el-table-column prop="id" :label="$t('auto.List.20.30acd2')" width="80" />
-        <el-table-column prop="name" :label="$t('auto.List.21.819767')" min-width="120" />
-        <el-table-column prop="email" :label="$t('auto.List.22.3bc5e6')" min-width="180" />
-        <el-table-column prop="phone" :label="$t('auto.List.23.8098e2')" width="140" />
-        <el-table-column prop="rScore" :label="$t('auto.List.24.d96b97')" width="80" align="center" />
-        <el-table-column prop="fScore" :label="$t('auto.List.25.72c524')" width="80" align="center" />
-        <el-table-column prop="mScore" :label="$t('auto.List.26.4e30b7')" width="80" align="center" />
-        <el-table-column prop="segmentLabel" :label="$t('auto.List.27.96636b')" width="120">
+        <el-table-column prop="id" :label="$t('auto.List.30acd20d')" width="80" />
+        <el-table-column prop="name" :label="$t('auto.List.819767ad')" min-width="120" />
+        <el-table-column prop="email" :label="$t('auto.List.3bc5e602')" min-width="180" />
+        <el-table-column prop="phone" :label="$t('auto.List.8098e2b4')" width="140" />
+        <el-table-column prop="rScore" :label="$t('auto.List.d96b978e')" width="80" align="center" />
+        <el-table-column prop="fScore" :label="$t('auto.List.72c5241d')" width="80" align="center" />
+        <el-table-column prop="mScore" :label="$t('auto.List.4e30b774')" width="80" align="center" />
+        <el-table-column prop="segmentLabel" :label="$t('auto.List.96636b7a')" width="120">
           <template #default="{ row: user }">
             <el-tag type="primary">{{ user.segmentLabel}}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="lastOrderTime" :label="$t('auto.List.28.9bc1d7')" width="170" />
-        <el-table-column :label="$t('auto.List.8.2b6bc0')" width="100" fixed="right">
+        <el-table-column prop="lastOrderTime" :label="$t('auto.List.9bc1d7b2')" width="170" />
+        <el-table-column :label="$t('auto.List.2b6bc0f2')" width="100" fixed="right">
           <template #default="{ row: user }">
-            <el-button link type="primary" @click="viewUserDetail(user)">{{ $t('auto.List.53.f26225') }}</el-button>
+            <el-button link type="primary" @click="viewUserDetail(user)">{{ $t('auto.List.f26225bd') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
       <template #footer>
-        <el-button @click="viewUsersDialogVisible = false">{{ $t('auto.List.54.b15d91') }}</el-button>
+        <el-button @click="viewUsersDialogVisible = false">{{ $t('auto.List.b15d9127') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -261,7 +261,7 @@ const segments = ref([])
 const stats = ref({ totalUsers: 0, highValue: 0, active: 0, churnRisk: 0 })
 const matrixCounts = ref({})
 const dialogVisible = ref(false)
-const dialogTitle = ref(t('auto.List.55.c28915'))
+const dialogTitle = ref(t('auto.List.c2891536'))
 const viewUsersDialogVisible = ref(false)
 const viewUsersLoading = ref(false)
 const currentSegment = ref(null)
@@ -279,9 +279,9 @@ const form = ref({
   status: 'active'
 })
 const formRules = {
-  name: [{ required: true, message: i18n.global.t(t('auto.List.9.4bb33c')), trigger: 'blur' }],
-  type: [{ required: true, message: i18n.global.t(t('auto.List.10.099cb7')), trigger: 'change' }],
-  criteria: [{ required: true, message: i18n.global.t(t('auto.List.56.e419bd')), trigger: 'blur' }]
+  name: [{ required: true, message: i18n.global.t(t('auto.List.4bb33cf5')), trigger: 'blur' }],
+  type: [{ required: true, message: i18n.global.t(t('auto.List.099cb72c')), trigger: 'change' }],
+  criteria: [{ required: true, message: i18n.global.t(t('auto.List.e419bdd7')), trigger: 'blur' }]
 }
 
 const filteredSegments = computed(() => {
@@ -289,7 +289,7 @@ const filteredSegments = computed(() => {
   return segments.value.filter(s => s.name.includes(searchKeyword.value))
 })
 
-const LEGACY_SEGMENT_TYPE = { RFM: 'RFM', CUSTOM: t('auto.List.12.f1d4ff'), BEHAVIOR: t('auto.List.57.a04961') };
+const LEGACY_SEGMENT_TYPE = { RFM: 'RFM', CUSTOM: t('auto.List.f1d4ff50'), BEHAVIOR: t('auto.List.a0496123') };
 const getTypeLabel = (type) => LEGACY_SEGMENT_TYPE[type] || getStatusLabelFromArr(type, SEGMENT_TYPE)
 const getTypeTagType = (type) => {
   const map = { RFM: 'success', CUSTOM: 'primary', BEHAVIOR: 'warning' }
@@ -316,7 +316,7 @@ const refreshData = async () => {
     }
     matrixCounts.value = s.matrix || s.matrix_counts || s.rfmMatrix || {}
   } catch (error) {
-    console.error(t('auto.List.58.65804d'), error)
+    console.error(t('auto.List.65804d0a'), error)
   } finally {
     loading.value = false
   }
@@ -324,15 +324,15 @@ const refreshData = async () => {
 
 const onCellClick = (key) => {
   const map = {
-    high_value: t('auto.List.36.66f84a'),
-    important_develop: t('auto.List.37.adda3b'),
-    important_keep: t('auto.List.38.1c57e2'),
-    general_value: t('auto.List.40.6ecb76'),
-    general_develop: t('auto.List.41.cef1bd'),
-    general_keep: t('auto.List.42.1d517c'),
-    potential_value: t('auto.List.44.74ba3e'),
-    potential_develop: t('auto.List.45.2df631'),
-    churn: t('auto.List.46.ddd6e7')
+    high_value: t('auto.List.66f84a63'),
+    important_develop: t('auto.List.adda3b2b'),
+    important_keep: t('auto.List.1c57e273'),
+    general_value: t('auto.List.6ecb7655'),
+    general_develop: t('auto.List.cef1bd54'),
+    general_keep: t('auto.List.1d517caf'),
+    potential_value: t('auto.List.74ba3ec1'),
+    potential_develop: t('auto.List.2df63190'),
+    churn: t('auto.List.ddd6e759')
   }
   ElMessage.info(`查看分群：${map[key] || key}`)
   const fakeSegment = { id: key, name: map[key] };
@@ -341,13 +341,13 @@ const onCellClick = (key) => {
 
 const showCreateDialog = () => {
   form.value = { id: 0, name: '', type: 'RFM', rDays: 30, fCount: 3, mAmount: 1000, criteria: '', remark: '', status: 'active' }
-  dialogTitle.value = t('auto.List.55.c28915')
+  dialogTitle.value = t('auto.List.c2891536')
   dialogVisible.value = true
 }
 
 const editSegment = (row) => {
   form.value = { ...row }
-  dialogTitle.value = t('auto.List.59.086612')
+  dialogTitle.value = t('auto.List.086612c5')
   dialogVisible.value = true
 }
 
@@ -358,27 +358,27 @@ const submitForm = async () => {
     try {
       if (form.value.id) {
         await updateUserSegment(form.value.id, form.value)
-        ElMessage.success(i18n.global.t(t('auto.List.60.55aa63')))
+        ElMessage.success(i18n.global.t(t('auto.List.55aa6366')))
       } else {
         await createUserSegment(form.value)
-        ElMessage.success(i18n.global.t(t('auto.List.61.04a691')))
+        ElMessage.success(i18n.global.t(t('auto.List.04a691b3')))
       }
       dialogVisible.value = false
       refreshData()
     } catch (error) {
-      ElMessage.error(i18n.global.t(t('auto.List.62.5fa802')))
+      ElMessage.error(i18n.global.t(t('auto.List.5fa802be')))
     }
   })
 }
 
 const deleteSegment = async (row) => {
   try {
-    await ElMessageBox.confirm(`确定要删除分群 "${row.name}" 吗？`, t('auto.List.63.e83a25'), { type: 'warning' })
+    await ElMessageBox.confirm(`确定要删除分群 "${row.name}" 吗？`, t('auto.List.e83a256e'), { type: 'warning' })
     await deleteUserSegment(row.id)
-    ElMessage.success(i18n.global.t(t('auto.List.64.0007d1')))
+    ElMessage.success(i18n.global.t(t('auto.List.0007d170')))
     refreshData()
   } catch (error) {
-    if (error !== 'cancel') ElMessage.error(i18n.global.t(t('auto.List.65.acf066')))
+    if (error !== 'cancel') ElMessage.error(i18n.global.t(t('auto.List.acf0664a')))
   }
 }
 
@@ -390,7 +390,7 @@ const viewUsers = async (row) => {
     const res = await getSegmentUsers(row.id)
     segmentUsers.value = toList(res)
   } catch {
-    ElMessage.error(i18n.global.t(t('auto.List.66.7cd2c6')))
+    ElMessage.error(i18n.global.t(t('auto.List.7cd2c66a')))
     segmentUsers.value = []
   } finally {
     viewUsersLoading.value = false

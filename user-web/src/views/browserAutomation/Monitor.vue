@@ -6,10 +6,10 @@
         <el-tag v-if="session" :type="{ completed: 'success', failed: 'danger', stopped: 'info', active: 'warning' }[session.status] || 'info'">
           {{ session.status }}
         </el-tag>
-        <el-tag v-if="session?.confirm_pending" type="warning">{{ $t('auto.Monitor.20.3f7a87') }}</el-tag>
-        <el-button v-if="session && ['created','active'].includes(session.status)" type="danger" @click="onStop">{{ $t('auto.Monitor.21.095e93') }}</el-button>
-        <el-button v-if="session?.confirm_pending" type="primary" :loading="confirming" :disabled="!gate?.payload_hash" @click="onConfirm">{{ $t('auto.Monitor.22.fb1558') }}</el-button>
-        <el-button v-if="session" @click="onExport">{{ $t('auto.Monitor.23.9f7b31') }}</el-button>
+        <el-tag v-if="session?.confirm_pending" type="warning">{{ $t('auto.Monitor.3f7a87f1') }}</el-tag>
+        <el-button v-if="session && ['created','active'].includes(session.status)" type="danger" @click="onStop">{{ $t('auto.Monitor.095e938e') }}</el-button>
+        <el-button v-if="session?.confirm_pending" type="primary" :loading="confirming" :disabled="!gate?.payload_hash" @click="onConfirm">{{ $t('auto.Monitor.fb155863') }}</el-button>
+        <el-button v-if="session" @click="onExport">{{ $t('auto.Monitor.9f7b3162') }}</el-button>
       </el-space>
     </div>
 
@@ -18,16 +18,16 @@
         {{ session ? '最新状态读取失败，下方是刷新前的残留内容' : '这条会话读不到，本页没有在监控任何东西' }}：{{ loadError }}
       </template>
       <el-space style="margin-top: 6px">
-        <el-button size="small" type="primary" @click="retryLoad">{{ $t('auto.Monitor.24.132c5c') }}</el-button>
-        <el-button size="small" @click="goTasks">{{ $t('auto.Monitor.25.90e22f') }}</el-button>
+        <el-button size="small" type="primary" @click="retryLoad">{{ $t('auto.Monitor.132c5cdc') }}</el-button>
+        <el-button size="small" @click="goTasks">{{ $t('auto.Monitor.90e22f5e') }}</el-button>
       </el-space>
     </el-alert>
 
-    <el-card v-if="gate" :header="$t('auto.Monitor.1.97a854')" style="margin-top: 12px">
+    <el-card v-if="gate" :header="$t('auto.Monitor.97a8546c')" style="margin-top: 12px">
       <el-descriptions :column="2" border>
-        <el-descriptions-item :label="$t('auto.Monitor.2.a3e361')">第 {{ gate?.step_index }} 步</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.Monitor.3.df826a')">{{ formatTime(gate?.expires_at) }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.Monitor.4.509fea')" :span="2">
+        <el-descriptions-item :label="$t('auto.Monitor.a3e36110')">第 {{ gate?.step_index }} 步</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.Monitor.df826a24')">{{ formatTime(gate?.expires_at) }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.Monitor.509feaf0')" :span="2">
           <span style="white-space: pre-wrap">{{ gate?.preview || '（无预览）' }}</span>
         </el-descriptions-item>
       </el-descriptions>
@@ -35,20 +35,20 @@
 
     <el-card v-if="session" style="margin-top: 12px">
       <el-descriptions :column="4" border>
-        <el-descriptions-item :label="$t('auto.Monitor.5.39f137')">{{ sessionDurationText(session) }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.Monitor.6.b66435')">{{ session.total_steps ? `${session.success_steps}/${session.total_steps}` : '—' }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.Monitor.7.592c59')">{{ session.started_at ? new Date(session.started_at).toLocaleString('zh-CN') : '—' }}</el-descriptions-item>
-        <el-descriptions-item v-if="session.error_msg" :label="$t('auto.Monitor.8.7030ff')" :span="4">
+        <el-descriptions-item :label="$t('auto.Monitor.39f1374d')">{{ sessionDurationText(session) }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.Monitor.b664352f')">{{ session.total_steps ? `${session.success_steps}/${session.total_steps}` : '—' }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.Monitor.592c5958')">{{ session.started_at ? new Date(session.started_at).toLocaleString('zh-CN') : '—' }}</el-descriptions-item>
+        <el-descriptions-item v-if="session.error_msg" :label="$t('auto.Monitor.7030ff64')" :span="4">
           <span style="color: #ef4444">{{ session.error_msg }}</span>
         </el-descriptions-item>
       </el-descriptions>
     </el-card>
 
-    <el-card v-if="session?.llm_summary" :header="$t('auto.Monitor.9.3cab36')" style="margin-top: 12px">
+    <el-card v-if="session?.llm_summary" :header="$t('auto.Monitor.3cab3678')" style="margin-top: 12px">
       {{ session.llm_summary }}
     </el-card>
 
-    <el-card v-if="hasExtracted" :header="$t('auto.Monitor.10.4ac114')" style="margin-top: 12px">
+    <el-card v-if="hasExtracted" :header="$t('auto.Monitor.4ac114e2')" style="margin-top: 12px">
       <div v-for="item in dataEntries(session.extracted_data)" :key="item.key" class="detail-item">
         <span class="detail-key">{{ item.key }}</span>
         <pre v-if="item.kind === 'block'" class="detail-block">{{ item.text }}</pre>
@@ -56,13 +56,13 @@
       </div>
     </el-card>
 
-    <el-card v-if="session" :header="$t('auto.Monitor.11.2b6fe6')" style="margin-top: 12px">
+    <el-card v-if="session" :header="$t('auto.Monitor.2b6fe614')" style="margin-top: 12px">
       <el-table :data="steps" v-loading="loading">
         <el-table-column type="expand">
           <template #default="{ row }">
             <div class="step-detail">
               <div v-if="row.submit_state" class="submit-ledger">
-                <span class="detail-key">{{ $t('auto.Monitor.26.7da5f2') }}</span>
+                <span class="detail-key">{{ $t('auto.Monitor.7da5f255') }}</span>
                 <el-tag size="small" :type="SUBMIT_COPY[row.submit_state]?.type || 'info'">{{ row.submit_state }}</el-tag>
                 <span class="detail-inline">{{ SUBMIT_COPY[row.submit_state]?.text || '未知提交态（服务端未给结论，按未提交对待）' }}</span>
                 <span v-if="row.text_hash" class="detail-hash">正文指纹 {{ row.text_hash }}</span>
@@ -82,36 +82,36 @@
           </template>
         </el-table-column>
         <el-table-column type="index" label="#" width="60" />
-        <el-table-column prop="action" :label="$t('auto.Monitor.12.c500cf')" width="130">
+        <el-table-column prop="action" :label="$t('auto.Monitor.c500cfab')" width="130">
           <template #default="{ row }">
             <span>{{ row.action }}</span>
-            <el-tag v-if="row.is_write" size="small" type="warning" class="write-tag">{{ $t('auto.Monitor.27.4d7dc6') }}</el-tag>
+            <el-tag v-if="row.is_write" size="small" type="warning" class="write-tag">{{ $t('auto.Monitor.4d7dc6c5') }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="target" :label="$t('auto.Monitor.13.73e825')" min-width="160" show-overflow-tooltip />
-        <el-table-column :label="$t('auto.Monitor.14.fe7509')" min-width="140" show-overflow-tooltip>
+        <el-table-column prop="target" :label="$t('auto.Monitor.73e82552')" min-width="160" show-overflow-tooltip />
+        <el-table-column :label="$t('auto.Monitor.fe7509e0')" min-width="140" show-overflow-tooltip>
           <template #default="{ row }">{{ row.value || '—' }}</template>
         </el-table-column>
-        <el-table-column prop="status" :label="$t('auto.Monitor.15.3fea7c')" width="110">
+        <el-table-column prop="status" :label="$t('auto.Monitor.3fea7ca7')" width="110">
           <template #default="{ row }">
             <el-tag :type="{ success: 'success', failed: 'danger', running: 'warning', skipped: 'info', pending: 'info' }[row.status] || 'info'">
               {{ row.status }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="duration_ms" :label="$t('auto.Monitor.5.39f137')" width="100">
+        <el-table-column prop="duration_ms" :label="$t('auto.Monitor.39f1374d')" width="100">
           <template #default="{ row }">{{ durationText(row.duration_ms) }}</template>
         </el-table-column>
-        <el-table-column prop="error_msg" :label="$t('auto.Monitor.8.7030ff')" min-width="200" show-overflow-tooltip />
+        <el-table-column prop="error_msg" :label="$t('auto.Monitor.7030ff64')" min-width="200" show-overflow-tooltip />
       </el-table>
     </el-card>
 
     <el-card v-if="session" style="margin-top: 12px">
       <template #header>
         <div style="display:flex;justify-content:space-between;align-items:center">
-          <span>{{ $t('auto.Monitor.28.c5d8a5') }}</span>
+          <span>{{ $t('auto.Monitor.c5d8a5e6') }}</span>
           <el-select v-model="logDirection" size="small" style="width: 110px" @change="loadLogs">
-            <el-option :label="$t('auto.Monitor.16.a8b0c2')" value="" />
+            <el-option :label="$t('auto.Monitor.a8b0c204')" value="" />
             <el-option label="command" value="command" />
             <el-option label="event" value="event" />
             <el-option label="judge" value="judge" />
@@ -120,16 +120,16 @@
       </template>
       <el-table :data="logs" size="small" max-height="420">
         <el-table-column prop="seq" label="seq" width="60" />
-        <el-table-column prop="direction" :label="$t('auto.Monitor.17.a465db')" width="90">
+        <el-table-column prop="direction" :label="$t('auto.Monitor.a465db53')" width="90">
           <template #default="{ row }">
             <el-tag size="small" :type="{ command: '', event: 'success', judge: 'warning' }[row.direction] || 'info'">{{ row.direction }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="action" :label="$t('auto.Monitor.12.c500cf')" width="130" />
-        <el-table-column prop="ok" :label="$t('auto.Monitor.18.dd4d36')" width="80">
+        <el-table-column prop="action" :label="$t('auto.Monitor.c500cfab')" width="130" />
+        <el-table-column prop="ok" :label="$t('auto.Monitor.dd4d3660')" width="80">
           <template #default="{ row }">{{ outcomeMark(row.ok) }}</template>
         </el-table-column>
-        <el-table-column prop="duration_ms" :label="$t('auto.Monitor.5.39f137')" width="80">
+        <el-table-column prop="duration_ms" :label="$t('auto.Monitor.39f1374d')" width="80">
           <template #default="{ row }">{{ durationText(row.duration_ms) }}</template>
         </el-table-column>
         <el-table-column label="payload" min-width="260" show-overflow-tooltip>
@@ -148,7 +148,7 @@
       <pre class="detail-block" :class="{ collapsed: !snapshotOpen }">{{ session.snapshot }}</pre>
     </el-card>
 
-    <el-card v-if="session?.final_screenshot_url" :header="$t('auto.Monitor.19.c92a83')" style="margin-top: 12px">
+    <el-card v-if="session?.final_screenshot_url" :header="$t('auto.Monitor.c92a834b')" style="margin-top: 12px">
       <el-image
         :src="session.final_screenshot_url"
         fit="contain"
@@ -190,11 +190,11 @@ const confirming = ref(false)
 // 四个态的文案必须各说各的话：把「闸门挂在别的进程」说成「没有待确认提交点」，
 // 用户会去改编排，而该改的是实例数（服务端 A10 分流的就是这一条）。
 const CONFIRM_COPY = {
-  'granted': { type: 'success', text: t('auto.Monitor.29.d6f867') },
-  'no_gate': { type: 'warning', text: t('auto.Monitor.30.be3339') },
-  'payload_mismatch': { type: 'error', text: t('auto.Monitor.31.40aad7') },
-  'gate_on_another_instance': { type: 'error', text: t('auto.Monitor.32.7561dc') },
-  'unknown': { type: 'error', text: t('auto.Monitor.33.0c94a2') },
+  'granted': { type: 'success', text: t('auto.Monitor.d6f8677f') },
+  'no_gate': { type: 'warning', text: t('auto.Monitor.be333951') },
+  'payload_mismatch': { type: 'error', text: t('auto.Monitor.40aad76e') },
+  'gate_on_another_instance': { type: 'error', text: t('auto.Monitor.7561dc99') },
+  'unknown': { type: 'error', text: t('auto.Monitor.0c94a2f1') },
 }
 
 const formatTime = (v) => {
@@ -219,10 +219,10 @@ const outcomeMark = (ok) => (ok === true ? '✓' : ok === false ? '✗' : '—')
 // 是否可能发生」，两者在「send 到达但回查未见」时必然分叉（status=failed 而提交已生效）。
 // 所以这一行不许并进状态标签里：把 failed 直接读成「没发出去」就会去重发，而重发＝双发。
 const SUBMIT_COPY = {
-  prepared: { type: 'info', text: t('auto.Monitor.34.5bacaa') },
-  sent: { type: 'warning', text: t('auto.Monitor.35.3c40c9') },
-  verified: { type: 'success', text: t('auto.Monitor.36.4d0e46') },
-  unattributed: { type: 'danger', text: t('auto.Monitor.37.36b7ee') },
+  prepared: { type: 'info', text: t('auto.Monitor.5bacaac9') },
+  sent: { type: 'warning', text: t('auto.Monitor.3c40c951') },
+  verified: { type: 'success', text: t('auto.Monitor.4d0e462f') },
+  unattributed: { type: 'danger', text: t('auto.Monitor.36b7ee82') },
 }
 
 const hasExtracted = computed(() => {
@@ -251,7 +251,7 @@ const describeValue = (val) => {
 const dataEntries = (obj) => {
   if (obj == null) return []
   const src = typeof obj === 'string' ? (() => { try { return JSON.parse(obj) } catch { return null } })() : obj
-  if (src == null || typeof src !== 'object') return [{ key: t('auto.Monitor.14.fe7509'), ...describeValue(obj) }]
+  if (src == null || typeof src !== 'object') return [{ key: t('auto.Monitor.fe7509e0'), ...describeValue(obj) }]
   return Object.entries(src).map(([key, val]) => ({ key, ...describeValue(val) }))
 }
 
@@ -261,9 +261,9 @@ const dataEntries = (obj) => {
 const stepDataGroups = (row) => {
   const groups = []
   const params = dataEntries(row.params)
-  if (params.length) groups.push({ title: t('auto.Monitor.38.163194'), entries: params })
+  if (params.length) groups.push({ title: t('auto.Monitor.1631942f'), entries: params })
   const result = dataEntries(row.result)
-  if (result.length) groups.push({ title: t('auto.Monitor.39.b8b78e'), entries: result })
+  if (result.length) groups.push({ title: t('auto.Monitor.b8b78ed8'), entries: result })
   return groups
 }
 
@@ -348,17 +348,17 @@ let gateLoading = false
 
 async function onStop() {
   try {
-    const res = await stopBrowserSession(sessionId.value, t('auto.Monitor.40.484b13'))
+    const res = await stopBrowserSession(sessionId.value, t('auto.Monitor.484b13f7'))
     const data = unpack(res)
     if (data?.stopped) {
-      ElMessage.success(t('auto.Monitor.41.8d1bcd'))
+      ElMessage.success(t('auto.Monitor.8d1bcd4b'))
     } else {
       // 服务端对同一条命令回答的是「没有在跑的执行协程」（200 + stopped:false）。
       // 把它播报成「请求已发送」，用户就会等一次永远不会来的收口——而这条会话仍按
       // created/active 占着并发闸（CountRunningByUser），下一次下发会被判「已有任务执行中」。
       // 既然没有协程在跑，轮询也等不来任何变化，一并停掉。
       stopPolling()
-      ElMessage.warning(t('auto.Monitor.42.6d363e'))
+      ElMessage.warning(t('auto.Monitor.6d363ebf'))
     }
   } catch {
     // 拦截器已经把服务端原因弹成 toast；这里接住它，只为了让停止失败不留下未捕获异常
@@ -371,7 +371,7 @@ async function onStop() {
 async function onConfirm() {
   const hash = gate.value?.payload_hash
   if (!hash) {
-    ElMessage.warning(t('auto.Monitor.43.68e8b9'))
+    ElMessage.warning(t('auto.Monitor.68e8b920'))
     load()
     return
   }
@@ -407,9 +407,9 @@ async function onExport() {
     a.download = `browser_session_${sessionId.value}_audit.json`
     a.click()
     URL.revokeObjectURL(a.href)
-    ElMessage.success(t('auto.Monitor.44.2f3c0f'))
+    ElMessage.success(t('auto.Monitor.2f3c0f75'))
   } catch {
-    ElMessage.error(t('auto.Monitor.45.dd51ab'))
+    ElMessage.error(t('auto.Monitor.dd51ab50'))
   }
 }
 

@@ -90,7 +90,7 @@
               @keydown.space.prevent="rating = n"
             >★</span>
           </div>
-          <textarea v-model="ratingComment" class="reason-input" rows="3" :aria-label="$t('auto.ChatWindow.1.c08e51')" ::placeholder="$t('auto.ChatWindow.2.7833c2')"></textarea>
+          <textarea v-model="ratingComment" class="reason-input" rows="3" :aria-label="$t('auto.ChatWindow.c08e511a')" ::placeholder="$t('auto.ChatWindow.7833c2f2')"></textarea>
           <div class="modal-actions">
             <button class="primary" @click="submitRating">{{ $t('提交') }}</button>
           </div>
@@ -158,7 +158,7 @@ const startTransferWaiting = () => {
   transferTimer = setTimeout(() => {
     messages.value.push({
       sender_type: 'system',
-      content: i18n.global.t(t('auto.ChatWindow.4.4a908c')),
+      content: i18n.global.t(t('auto.ChatWindow.4a908cd8')),
       created_at: new Date().toISOString()
     })
   }, 30000)
@@ -194,7 +194,7 @@ const initVisitorId = () => {
 const buildUiMessage = (m) => ({
   id: m.id,
   sender_type: m.sender_type,
-  sender_name: m.sender_name || t('auto.ChatWindow.5.e7dea7'),
+  sender_name: m.sender_name || t('auto.ChatWindow.e7dea7c4'),
   content: m.content,
   content_type: m.content_type,
   card: m.card,
@@ -231,11 +231,11 @@ const openSession = async (resume = true) => {
     }
     connectWebSocket();
   } catch (err) {
-    console.error(t('auto.ChatWindow.6.36ce96'), err)
+    console.error(t('auto.ChatWindow.36ce96e2'), err)
     initFailed.value = true
     messages.value.push({
       sender_type: 'system',
-      content: i18n.global.t(t('auto.ChatWindow.7.933543')),
+      content: i18n.global.t(t('auto.ChatWindow.933543aa')),
       created_at: new Date().toISOString()
     })
   } finally {
@@ -253,7 +253,7 @@ const loadHistory = async () => {
       messages.value.push(...real.map(buildUiMessage))
     }
   } catch (err) {
-    console.warn(t('auto.ChatWindow.8.d20f15'), err)
+    console.warn(t('auto.ChatWindow.d20f1527'), err)
   }
 }
 
@@ -285,14 +285,14 @@ const connectWebSocket = () => {
       clearTransferTimer()
       messages.value.push({
         sender_type: 'system',
-        content: i18n.global.t(t('auto.ChatWindow.9.d4b9b8')),
+        content: i18n.global.t(t('auto.ChatWindow.d4b9b8ed')),
         created_at: new Date().toISOString()
       })
     },
     onSessionClosed: (payload) => {
       messages.value.push({
         sender_type: 'system',
-        content: i18n.global.t(t('auto.ChatWindow.10.76a314')),
+        content: i18n.global.t(t('auto.ChatWindow.76a31478')),
         created_at: new Date().toISOString()
       })
       showRating.value = true
@@ -332,7 +332,7 @@ const onSend = async (payload) => {
   const userMsg = {
     id: Date.now(),
     sender_type: 'user',
-    sender_name: t('auto.ChatWindow.11.168152'),
+    sender_name: t('auto.ChatWindow.16815254'),
     content: text,
     content_type: attachment ? attachment.mediaType : 'text',
     media_url: attachment?.url || '',
@@ -374,7 +374,7 @@ const onSend = async (payload) => {
       typing.value = false
       messages.value.push({
         sender_type: 'system',
-        content: i18n.global.t(t('auto.ChatWindow.12.7ddc5f')),
+        content: i18n.global.t(t('auto.ChatWindow.7ddc5f62')),
         created_at: new Date().toISOString()
       })
       startTransferWaiting()
@@ -383,7 +383,7 @@ const onSend = async (payload) => {
     typing.value = false
     messages.value.push({
       sender_type: 'system',
-      content: i18n.global.t(t('auto.ChatWindow.13.3e2817')) + (err?.message || err),
+      content: i18n.global.t(t('auto.ChatWindow.3e281793')) + (err?.message || err),
       created_at: new Date().toISOString()
     })
   } finally {
@@ -400,9 +400,9 @@ const submitRating = async () => {
     showRating.value = false
     rating.value = 0
     ratingComment.value = ''
-    ElMessage.success(i18n.global.t(t('auto.ChatWindow.14.2f5b35')))
+    ElMessage.success(i18n.global.t(t('auto.ChatWindow.2f5b3571')))
   } catch (err) {
-    ElMessage.error(t('auto.ChatWindow.15.a474b5') + (err?.message || ''))
+    ElMessage.error(t('auto.ChatWindow.a474b583') + (err?.message || ''))
   }
 }
 
@@ -412,7 +412,7 @@ const loadOfflineSessions = async () => {
     const list = res?.data?.list || res?.list || []
     offlineSessions.value = list
   } catch (err) {
-    console.warn(t('auto.ChatWindow.16.b5fa93'), err)
+    console.warn(t('auto.ChatWindow.b5fa933e'), err)
   }
 }
 
@@ -429,13 +429,13 @@ const resumeSession = async (s) => {
   try {
     const res = await chatApi.exchangeSessionToken(s.session_id, effectiveChannelId.value, visitorId.value)
     const token = res?.data?.visitor_token || res?.visitor_token || ''
-    if (!token) throw new Error(t('auto.ChatWindow.17.4cd525'))
+    if (!token) throw new Error(t('auto.ChatWindow.4cd525cf'))
     visitorToken.value = token
   } catch (err) {
-    console.warn(t('auto.ChatWindow.18.ea7a8c'), err)
+    console.warn(t('auto.ChatWindow.ea7a8ced'), err)
     messages.value.push({
       sender_type: 'system',
-      content: i18n.global.t(t('auto.ChatWindow.19.d5f717')),
+      content: i18n.global.t(t('auto.ChatWindow.d5f717f1')),
       created_at: new Date().toISOString()
     })
     return

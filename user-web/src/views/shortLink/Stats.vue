@@ -14,11 +14,11 @@
     
     <div class="search-form">
       <el-form :inline="true" :model="searchForm" class="search-form-content">
-        <el-form-item ::label="$t('auto.Stats.1.e8fb33')">
-          <el-input v-model="searchForm.short_code" ::placeholder="$t('auto.Stats.2.0d8013')" clearable />
+        <el-form-item ::label="$t('auto.Stats.e8fb33e2')">
+          <el-input v-model="searchForm.short_code" ::placeholder="$t('auto.Stats.0d80133a')" clearable />
         </el-form-item>
-        <el-form-item ::label="$t('auto.Stats.3.7ad5dc')">
-          <el-input v-model="searchForm.original_url" ::placeholder="$t('auto.Stats.4.a20b88')" clearable />
+        <el-form-item ::label="$t('auto.Stats.7ad5dc73')">
+          <el-input v-model="searchForm.original_url" ::placeholder="$t('auto.Stats.a20b8828')" clearable />
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="handleSearch">
@@ -36,18 +36,18 @@
     
     <el-table :data="shortLinkList" border style="width: 100%" v-loading="loading">
       <el-table-column prop="id" label="ID" width="80" />
-      <el-table-column prop="short_code" ::label="$t('auto.Stats.1.e8fb33')" width="120" />
-      <el-table-column prop="original_url" ::label="$t('auto.Stats.3.7ad5dc')" min-width="200" show-overflow-tooltip />
-      <el-table-column prop="title" ::label="$t('auto.Stats.5.319eda')" min-width="150" show-overflow-tooltip />
-      <el-table-column prop="click_count" ::label="$t('auto.Stats.6.b5a704')" width="120" />
-      <el-table-column prop="status_str" ::label="$t('auto.Stats.7.1b8578')" width="100">
+      <el-table-column prop="short_code" ::label="$t('auto.Stats.e8fb33e2')" width="120" />
+      <el-table-column prop="original_url" ::label="$t('auto.Stats.7ad5dc73')" min-width="200" show-overflow-tooltip />
+      <el-table-column prop="title" ::label="$t('auto.Stats.319eda89')" min-width="150" show-overflow-tooltip />
+      <el-table-column prop="click_count" ::label="$t('auto.Stats.b5a7040e')" width="120" />
+      <el-table-column prop="status_str" ::label="$t('auto.Stats.1b857887')" width="100">
         <template #default="scope">
           <el-tag :type="getStatusType(scope.row)">
             {{ scope.row.status_str }}
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('auto.Stats.8.2b6bc0')" width="200" fixed="right">
+      <el-table-column :label="$t('auto.Stats.2b6bc0f2')" width="200" fixed="right">
         <template #default="scope">
           <el-button type="primary" size="small" @click="handleStats(scope.row)">
             <el-icon><DataAnalysis /></el-icon>
@@ -77,7 +77,7 @@
     
     <el-dialog
       v-model="statsDialogVisible"
-      :title="$t('auto.Stats.9.aa8158')"
+      :title="$t('auto.Stats.aa8158f3')"
       width="80%"
       top="5vh"
     >
@@ -88,7 +88,7 @@
               <el-card class="stats-card">
                 <div class="stats-item">
                   <div class="stats-value">{{ currentStats.total_clicks || 0 }}</div>
-                  <div class="stats-label">{{ $t('auto.Stats.14.f3d321') }}</div>
+                  <div class="stats-label">{{ $t('auto.Stats.f3d321e3') }}</div>
                 </div>
               </el-card>
             </el-col>
@@ -96,7 +96,7 @@
               <el-card class="stats-card">
                 <div class="stats-item">
                   <div class="stats-value">{{ currentStats.today_clicks || 0 }}</div>
-                  <div class="stats-label">{{ $t('auto.Stats.15.bee53f') }}</div>
+                  <div class="stats-label">{{ $t('auto.Stats.bee53f7b') }}</div>
                 </div>
               </el-card>
             </el-col>
@@ -104,7 +104,7 @@
               <el-card class="stats-card">
                 <div class="stats-item">
                   <div class="stats-value">{{ currentStats.yesterday_clicks || 0 }}</div>
-                  <div class="stats-label">{{ $t('auto.Stats.16.10ce7c') }}</div>
+                  <div class="stats-label">{{ $t('auto.Stats.10ce7cc2') }}</div>
                 </div>
               </el-card>
             </el-col>
@@ -112,7 +112,7 @@
               <el-card class="stats-card">
                 <div class="stats-item">
                   <div class="stats-value">{{ currentStats.avg_daily_clicks || 0 }}</div>
-                  <div class="stats-label">{{ $t('auto.Stats.17.271445') }}</div>
+                  <div class="stats-label">{{ $t('auto.Stats.27144593') }}</div>
                 </div>
               </el-card>
             </el-col>
@@ -123,13 +123,13 @@
           <el-row :gutter="20">
             <el-col :span="16">
               <el-card>
-                <div class="chart-title">{{ $t('auto.Stats.18.b5b95b') }}</div>
+                <div class="chart-title">{{ $t('auto.Stats.b5b95b2b') }}</div>
                 <div ref="trendChartRef" class="chart-container"></div>
               </el-card>
             </el-col>
             <el-col :span="8">
               <el-card>
-                <div class="chart-title">{{ $t('auto.Stats.19.c76b9b') }}</div>
+                <div class="chart-title">{{ $t('auto.Stats.c76b9b27') }}</div>
                 <div ref="deviceChartRef" class="chart-container"></div>
               </el-card>
             </el-col>
@@ -141,7 +141,7 @@
     
     <el-dialog
       v-model="allStatsDialogVisible"
-      :title="$t('auto.Stats.10.480c69')"
+      :title="$t('auto.Stats.480c698d')"
       width="80%"
       top="5vh"
     >
@@ -152,7 +152,7 @@
               <el-card class="stats-card">
                 <div class="stats-item">
                   <div class="stats-value">{{ allStats.total_clicks || 0 }}</div>
-                  <div class="stats-label">{{ $t('auto.Stats.14.f3d321') }}</div>
+                  <div class="stats-label">{{ $t('auto.Stats.f3d321e3') }}</div>
                 </div>
               </el-card>
             </el-col>
@@ -160,7 +160,7 @@
               <el-card class="stats-card">
                 <div class="stats-item">
                   <div class="stats-value">{{ allStats.today_clicks || 0 }}</div>
-                  <div class="stats-label">{{ $t('auto.Stats.15.bee53f') }}</div>
+                  <div class="stats-label">{{ $t('auto.Stats.bee53f7b') }}</div>
                 </div>
               </el-card>
             </el-col>
@@ -168,7 +168,7 @@
               <el-card class="stats-card">
                 <div class="stats-item">
                   <div class="stats-value">{{ allStats.total_links || 0 }}</div>
-                  <div class="stats-label">{{ $t('auto.Stats.20.3bbe5c') }}</div>
+                  <div class="stats-label">{{ $t('auto.Stats.3bbe5c0a') }}</div>
                 </div>
               </el-card>
             </el-col>
@@ -176,7 +176,7 @@
               <el-card class="stats-card">
                 <div class="stats-item">
                   <div class="stats-value">{{ allStats.active_links || 0 }}</div>
-                  <div class="stats-label">{{ $t('auto.Stats.21.1aee54') }}</div>
+                  <div class="stats-label">{{ $t('auto.Stats.1aee54f8') }}</div>
                 </div>
               </el-card>
             </el-col>
@@ -187,13 +187,13 @@
           <el-row :gutter="20">
             <el-col :span="16">
               <el-card>
-                <div class="chart-title">{{ $t('auto.Stats.18.b5b95b') }}</div>
+                <div class="chart-title">{{ $t('auto.Stats.b5b95b2b') }}</div>
                 <div ref="allTrendChartRef" class="chart-container"></div>
               </el-card>
             </el-col>
             <el-col :span="8">
               <el-card>
-                <div class="chart-title">{{ $t('auto.Stats.19.c76b9b') }}</div>
+                <div class="chart-title">{{ $t('auto.Stats.c76b9b27') }}</div>
                 <div ref="allDeviceChartRef" class="chart-container"></div>
               </el-card>
             </el-col>
@@ -205,22 +205,22 @@
     
     <el-dialog
       v-model="shareDialogVisible"
-      :title="$t('auto.Stats.11.7bae0c')"
+      :title="$t('auto.Stats.7bae0c6f')"
       width="500px"
     >
       <div v-loading="shareLoading" class="share-content">
         <el-form label-width="80px">
-          <el-form-item :label="$t('auto.Stats.12.74cf91')">
+          <el-form-item :label="$t('auto.Stats.74cf91f3')">
             <el-input v-model="shareData.short_url" readonly>
               <template #append>
-                <el-button @click="copyToClipboard(shareData.short_url)">{{ $t('auto.Stats.22.79d3ab') }}</el-button>
+                <el-button @click="copyToClipboard(shareData.short_url)">{{ $t('auto.Stats.79d3abe9') }}</el-button>
               </template>
             </el-input>
           </el-form-item>
-          <el-form-item :label="$t('auto.Stats.13.22b03c')">
+          <el-form-item :label="$t('auto.Stats.22b03c02')">
             <div class="qr-code-container">
-              <img v-if="shareData.qr_code" :src="shareData.qr_code" :alt="$t('auto.Stats.13.22b03c')" />
-              <div v-else class="qr-code-placeholder">{{ $t('auto.Stats.23.3db028') }}</div>
+              <img v-if="shareData.qr_code" :src="shareData.qr_code" :alt="$t('auto.Stats.22b03c02')" />
+              <div v-else class="qr-code-placeholder">{{ $t('auto.Stats.3db02883') }}</div>
             </div>
           </el-form-item>
         </el-form>
@@ -292,7 +292,7 @@ const fetchShortLinkList = async () => {
     shortLinkList.value = res.list || [];
     pagination.total = res.total || 0
   } catch (error) {
-    ElMessage.error(i18n.global.t(t('auto.Stats.24.049f09')))
+    ElMessage.error(i18n.global.t(t('auto.Stats.049f09dd')))
     console.error(error)
   } finally {
     loading.value = false
@@ -350,7 +350,7 @@ const handleStats = async (row) => {
     await nextTick();
     initCharts(res)
   } catch (error) {
-    ElMessage.error(i18n.global.t(t('auto.Stats.25.063dc7')))
+    ElMessage.error(i18n.global.t(t('auto.Stats.063dc79a')))
     console.error(error)
   } finally {
     statsLoading.value = false
@@ -377,7 +377,7 @@ const handleAllStats = async () => {
     await nextTick();
     initAllCharts(res)
   } catch (error) {
-    ElMessage.error(i18n.global.t(t('auto.Stats.25.063dc7')))
+    ElMessage.error(i18n.global.t(t('auto.Stats.063dc79a')))
     console.error(error)
   } finally {
     allStatsLoading.value = false
@@ -392,7 +392,7 @@ const handleShare = async (row) => {
     const res = await shortLinkApi.share(row.id)
     shareData.value = res;
   } catch (error) {
-    ElMessage.error(i18n.global.t(t('auto.Stats.26.0df764')))
+    ElMessage.error(i18n.global.t(t('auto.Stats.0df764a2')))
     console.error(error)
   } finally {
     shareLoading.value = false
@@ -402,9 +402,9 @@ const handleShare = async (row) => {
 const copyToClipboard = (text) => {
   if (navigator.clipboard) {
     navigator.clipboard.writeText(text).then(() => {
-      ElMessage.success(i18n.global.t(t('auto.Stats.27.20a495')))
+      ElMessage.success(i18n.global.t(t('auto.Stats.20a49536')))
     }).catch(() => {
-      ElMessage.error(i18n.global.t(t('auto.Stats.28.5154ae')))
+      ElMessage.error(i18n.global.t(t('auto.Stats.5154ae17')))
     })
   } else {
     const textarea = document.createElement('textarea');
@@ -413,7 +413,7 @@ const copyToClipboard = (text) => {
     textarea.select()
     document.execCommand('copy')
     document.body.removeChild(textarea)
-    ElMessage.success(i18n.global.t(t('auto.Stats.27.20a495')))
+    ElMessage.success(i18n.global.t(t('auto.Stats.20a49536')))
   }
 }
 
@@ -438,7 +438,7 @@ const initCharts = (data) => {
       trigger: 'axis'
     },
     legend: {
-      data: [t('auto.Stats.29.4461a6')]
+      data: [t('auto.Stats.4461a6d2')]
     },
     grid: {
       left: '3%',
@@ -456,7 +456,7 @@ const initCharts = (data) => {
     },
     series: [
       {
-        name: t('auto.Stats.29.4461a6'),
+        name: t('auto.Stats.4461a6d2'),
         type: 'line',
         stack: 'Total',
         smooth: true,
@@ -481,7 +481,7 @@ const initCharts = (data) => {
     },
     series: [
       {
-        name: t('auto.Stats.30.02f41e'),
+        name: t('auto.Stats.02f41e23'),
         type: 'pie',
         radius: ['50%', '70%'],
         avoidLabelOverlap: false,
@@ -528,7 +528,7 @@ const initAllCharts = (data) => {
       trigger: 'axis'
     },
     legend: {
-      data: [t('auto.Stats.29.4461a6')]
+      data: [t('auto.Stats.4461a6d2')]
     },
     grid: {
       left: '3%',
@@ -546,7 +546,7 @@ const initAllCharts = (data) => {
     },
     series: [
       {
-        name: t('auto.Stats.29.4461a6'),
+        name: t('auto.Stats.4461a6d2'),
         type: 'line',
         stack: 'Total',
         smooth: true,
@@ -571,7 +571,7 @@ const initAllCharts = (data) => {
     },
     series: [
       {
-        name: t('auto.Stats.30.02f41e'),
+        name: t('auto.Stats.02f41e23'),
         type: 'pie',
         radius: ['50%', '70%'],
         avoidLabelOverlap: false,

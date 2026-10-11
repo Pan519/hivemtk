@@ -3,8 +3,8 @@
     <el-card shadow="never">
       <template #header>
         <div class="card-header">
-          <span>{{ $t('auto.Connectors.18.476ab4') }}</span>
-          <el-button type="primary" size="small" @click="openCreate">{{ $t('auto.Connectors.19.080ac6') }}</el-button>
+          <span>{{ $t('auto.Connectors.476ab442') }}</span>
+          <el-button type="primary" size="small" @click="openCreate">{{ $t('auto.Connectors.080ac62c') }}</el-button>
         </div>
       </template>
 
@@ -12,70 +12,70 @@
         type="info"
         :closable="false"
         show-icon
-        :title="$t('auto.Connectors.1.d2f5df')"
+        :title="$t('auto.Connectors.d2f5df47')"
         style="margin-bottom: 12px"
       />
 
       <el-table v-loading="loading" :data="rows" border size="small">
-        <el-table-column prop="name" :label="$t('auto.Connectors.2.d7ec2d')" min-width="120" />
-        <el-table-column prop="type" :label="$t('auto.Connectors.3.226b09')" width="100" />
-        <el-table-column :label="$t('auto.Connectors.4.1abcfd')" width="80">
+        <el-table-column prop="name" :label="$t('auto.Connectors.d7ec2d3f')" min-width="120" />
+        <el-table-column prop="type" :label="$t('auto.Connectors.226b0912')" width="100" />
+        <el-table-column :label="$t('auto.Connectors.1abcfdd7')" width="80">
           <template #default="{ row }">
-            <el-tag v-if="hasCred(row)" type="success" size="small">{{ $t('auto.Connectors.20.3794b7') }}</el-tag>
-            <el-tag v-else type="info" size="small">{{ $t('auto.Connectors.21.3f37e9') }}</el-tag>
+            <el-tag v-if="hasCred(row)" type="success" size="small">{{ $t('auto.Connectors.3794b783') }}</el-tag>
+            <el-tag v-else type="info" size="small">{{ $t('auto.Connectors.3f37e954') }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.Connectors.5.3fea7c')" width="90">
+        <el-table-column :label="$t('auto.Connectors.3fea7ca7')" width="90">
           <template #default="{ row }">
             <el-tag :type="row.enabled ? 'success' : 'info'" size="small">
               {{ row.enabled ? '启用' : '停用' }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="last_status" :label="$t('auto.Connectors.6.34ac0a')" width="100" />
-        <el-table-column prop="last_summary" :label="$t('auto.Connectors.7.3ae146')" min-width="180" show-overflow-tooltip />
-        <el-table-column :label="$t('auto.Connectors.8.2b6bc0')" width="220" fixed="right">
+        <el-table-column prop="last_status" :label="$t('auto.Connectors.34ac0ac3')" width="100" />
+        <el-table-column prop="last_summary" :label="$t('auto.Connectors.3ae14696')" min-width="180" show-overflow-tooltip />
+        <el-table-column :label="$t('auto.Connectors.2b6bc0f2')" width="220" fixed="right">
           <template #default="{ row }">
-            <el-button size="small" type="primary" :loading="syncingId === row.id" @click="sync(row)">{{ $t('auto.Connectors.22.6a620e') }}</el-button>
-            <el-button size="small" @click="openEdit(row)">{{ $t('auto.Connectors.23.95b351') }}</el-button>
-            <el-button size="small" type="danger" @click="remove(row)">{{ $t('auto.Connectors.24.2f4aad') }}</el-button>
+            <el-button size="small" type="primary" :loading="syncingId === row.id" @click="sync(row)">{{ $t('auto.Connectors.6a620e3c') }}</el-button>
+            <el-button size="small" @click="openEdit(row)">{{ $t('auto.Connectors.95b351c8') }}</el-button>
+            <el-button size="small" type="danger" @click="remove(row)">{{ $t('auto.Connectors.2f4aaddd') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
     </el-card>
 
-    <el-dialog v-model="dialogVisible" ::title="$t('auto.Connectors.9.5591a2')" width="560px">
+    <el-dialog v-model="dialogVisible" ::title="$t('auto.Connectors.5591a231')" width="560px">
       <el-form label-width="110px">
-        <el-form-item :label="$t('auto.Connectors.3.226b09')">
+        <el-form-item :label="$t('auto.Connectors.226b0912')">
           <el-select v-model="form.type" style="width: 100%" :disabled="!!editId">
             <el-option v-for="t in types" :key="t" :value="t" :label="typeLabel(t)" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.Connectors.2.d7ec2d')">
-          <el-input v-model="form.name" maxlength="100" :placeholder="$t('auto.Connectors.10.bb46ae')" />
+        <el-form-item :label="$t('auto.Connectors.d7ec2d3f')">
+          <el-input v-model="form.name" maxlength="100" :placeholder="$t('auto.Connectors.bb46ae41')" />
         </el-form-item>
         <el-form-item label="Client ID">
-          <el-input v-model="form.client_id" :placeholder="$t('auto.Connectors.11.d8525c')" autocomplete="off" />
+          <el-input v-model="form.client_id" :placeholder="$t('auto.Connectors.d8525cf3')" autocomplete="off" />
         </el-form-item>
         <el-form-item label="API Key">
-          <el-input v-model="form.api_key" :placeholder="$t('auto.Connectors.12.2ac9ed')" show-password autocomplete="new-password" />
+          <el-input v-model="form.api_key" :placeholder="$t('auto.Connectors.2ac9ed5f')" show-password autocomplete="new-password" />
         </el-form-item>
-        <el-form-item v-if="form.type === 'ima'" :label="$t('auto.Connectors.13.c72e13')">
-          <el-input v-model="form.knowledge_base_id" :placeholder="$t('auto.Connectors.14.4297f6')" />
+        <el-form-item v-if="form.type === 'ima'" :label="$t('auto.Connectors.c72e13f9')">
+          <el-input v-model="form.knowledge_base_id" :placeholder="$t('auto.Connectors.4297f6c8')" />
         </el-form-item>
-        <el-form-item v-if="form.type === 'webhttp'" :label="$t('auto.Connectors.15.b42a03')">
+        <el-form-item v-if="form.type === 'webhttp'" :label="$t('auto.Connectors.b42a0344')">
           <el-input v-model="form.manifest_url" placeholder="https://.../manifest.json" />
         </el-form-item>
-        <el-form-item :label="$t('auto.Connectors.16.25431f')">
+        <el-form-item :label="$t('auto.Connectors.25431f2a')">
           <el-input-number v-model="form.interval_minutes" :min="0" :max="1440" /> 分钟（0=仅手动）
         </el-form-item>
-        <el-form-item :label="$t('auto.Connectors.17.7854b5')">
+        <el-form-item :label="$t('auto.Connectors.7854b52a')">
           <el-switch v-model="form.enabled" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="dialogVisible = false">{{ $t('auto.Connectors.25.625fb2') }}</el-button>
-        <el-button type="primary" :loading="saving" @click="save">{{ $t('auto.Connectors.26.be5fbb') }}</el-button>
+        <el-button @click="dialogVisible = false">{{ $t('auto.Connectors.625fb26b') }}</el-button>
+        <el-button type="primary" :loading="saving" @click="save">{{ $t('auto.Connectors.be5fbbe3') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -102,7 +102,7 @@ function defaultForm() {
   return { type: 'ima', name: '', client_id: '', api_key: '', knowledge_base_id: '', manifest_url: '', interval_minutes: 0, enabled: true }
 }
 
-const typeLabel = (t) => ({ ima: t('auto.Connectors.27.695f0c'), webhttp: t('auto.Connectors.28.33617f') }[t] || t)
+const typeLabel = (t) => ({ ima: t('auto.Connectors.695f0c38'), webhttp: t('auto.Connectors.33617f28') }[t] || t)
 const hasCred = (row) => {
   const m = row.config_masked || ''
   return m.includes('client_id') || m.includes('"api_key"')
@@ -157,11 +157,11 @@ const save = async () => {
   try {
     if (editId.value) await kbConnectorApi.update(editId.value, buildPayload())
     else await kbConnectorApi.create(buildPayload())
-    ElMessage.success(t('auto.Connectors.29.f8dfed'))
+    ElMessage.success(t('auto.Connectors.f8dfedcd'))
     dialogVisible.value = false
     await load()
   } catch (e) {
-    ElMessage.error(e?.response?.data?.message || t('auto.Connectors.30.6de920'))
+    ElMessage.error(e?.response?.data?.message || t('auto.Connectors.6de920b4'))
   } finally {
     saving.value = false
   }
@@ -171,19 +171,19 @@ const sync = async (row) => {
   syncingId.value = row.id
   try {
     const res = await kbConnectorApi.sync(row.id)
-    ElMessage.success(res?.message || t('auto.Connectors.31.02f667'))
+    ElMessage.success(res?.message || t('auto.Connectors.02f667de'))
     await load()
   } catch (e) {
-    ElMessage.error(e?.response?.data?.message || t('auto.Connectors.32.d61036'))
+    ElMessage.error(e?.response?.data?.message || t('auto.Connectors.d61036e7'))
   } finally {
     syncingId.value = null
   }
 }
 
 const remove = async (row) => {
-  await ElMessageBox.confirm(`删除连接器「${row.name}」？已导入的文档会保留在知识库。`, t('auto.Connectors.33.50eaf9'), { type: 'warning' })
+  await ElMessageBox.confirm(`删除连接器「${row.name}」？已导入的文档会保留在知识库。`, t('auto.Connectors.50eaf94d'), { type: 'warning' })
   await kbConnectorApi.remove(row.id)
-  ElMessage.success(t('auto.Connectors.34.5cc232'))
+  ElMessage.success(t('auto.Connectors.5cc23262'))
   await load()
 }
 

@@ -5,33 +5,33 @@
     <el-card shadow="never" class="setup-guide-card">
       <template #header>
         <div class="guide-header">
-          <span class="guide-title">{{ $t('auto.account.37.2a60fd') }}</span>
-          <el-tag effect="plain" size="small">{{ $t('auto.account.38.717738') }}</el-tag>
+          <span class="guide-title">{{ $t('auto.account.2a60fde4') }}</span>
+          <el-tag effect="plain" size="small">{{ $t('auto.account.7177383c') }}</el-tag>
         </div>
       </template>
 
       <el-steps :active="0" direction="horizontal" finish-status="success" simple>
-        <el-step :title="$t('auto.account.1.8dbf13')" :description="$t('auto.account.2.204d1d')" />
-        <el-step :title="$t('auto.account.3.5f8e77')" :description="$t('auto.account.4.ff5b77')" />
-        <el-step :title="$t('auto.account.5.77363f')" :description="$t('auto.account.6.17e4b6')" />
-        <el-step :title="$t('auto.account.7.a8d907')" :description="$t('auto.account.8.08049a')" />
+        <el-step :title="$t('auto.account.8dbf13a5')" :description="$t('auto.account.204d1d67')" />
+        <el-step :title="$t('auto.account.5f8e7728')" :description="$t('auto.account.ff5b7773')" />
+        <el-step :title="$t('auto.account.77363fbf')" :description="$t('auto.account.17e4b67c')" />
+        <el-step :title="$t('auto.account.a8d90732')" :description="$t('auto.account.08049a53')" />
       </el-steps>
 
       <el-collapse class="guide-collapse" accordion>
 
         <!-- Step 1: 创建 Bot -->
-        <el-collapse-item :title="$t('auto.account.9.df4224')" name="s1">
+        <el-collapse-item :title="$t('auto.account.df422480')" name="s1">
           <div class="guide-content">
             <ol>
-              <li>{{ $t('auto.account.39.694996') }}<code>@BotFather</code></li>
-              <li>{{ $t('auto.account.40.1535fc') }}<code>/newbot</code>{{ $t('auto.account.41.da97ca') }}</li>
-              <li>{{ $t('auto.account.40.1535fc') }}<code>/setdescription</code> <code>/setabouttext</code> <code>/setuserpic</code>{{ $t('auto.account.42.575b08') }}</li>
-              <li><strong>{{ $t('auto.account.43.d1c885') }}<code>/setjoingroups</code>{{ $t('auto.account.44.52478b') }}<code>Enable</code></strong>
-                <br>{{ $t('auto.account.45.c78f5d') }}</li>
-              <li><strong>{{ $t('auto.account.43.d1c885') }}<code>/setprivacy</code>{{ $t('auto.account.44.52478b') }}<code>Disable</code></strong>
-                <br>{{ $t('auto.account.46.b859e1') }}</li>
-              <li>{{ $t('auto.account.40.1535fc') }}<code>/token</code>{{ $t('auto.account.47.609af8') }}</li>
-              <li>{{ $t('auto.account.40.1535fc') }}<code>/mybots</code>{{ $t('auto.account.48.18613e') }}</li>
+              <li>{{ $t('auto.account.6949961b') }}<code>@BotFather</code></li>
+              <li>{{ $t('auto.account.1535fcfa') }}<code>/newbot</code>{{ $t('auto.account.da97ca90') }}</li>
+              <li>{{ $t('auto.account.1535fcfa') }}<code>/setdescription</code> <code>/setabouttext</code> <code>/setuserpic</code>{{ $t('auto.account.575b0896') }}</li>
+              <li><strong>{{ $t('auto.account.d1c88548') }}<code>/setjoingroups</code>{{ $t('auto.account.52478bc3') }}<code>Enable</code></strong>
+                <br>{{ $t('auto.account.c78f5dc8') }}</li>
+              <li><strong>{{ $t('auto.account.d1c88548') }}<code>/setprivacy</code>{{ $t('auto.account.52478bc3') }}<code>Disable</code></strong>
+                <br>{{ $t('auto.account.b859e187') }}</li>
+              <li>{{ $t('auto.account.1535fcfa') }}<code>/token</code>{{ $t('auto.account.609af849') }}</li>
+              <li>{{ $t('auto.account.1535fcfa') }}<code>/mybots</code>{{ $t('auto.account.18613ede') }}</li>
             </ol>
             <el-alert type="warning" :closable="false" show-icon>
               <template #title>
@@ -42,18 +42,18 @@
         </el-collapse-item>
 
         <!-- Step 2: 拉进群+权限 -->
-        <el-collapse-item :title="$t('auto.account.10.88a86b')" name="s2">
+        <el-collapse-item :title="$t('auto.account.88a86bbd')" name="s2">
           <div class="guide-content">
             <ol>
-              <li>{{ $t('auto.account.49.1f2c07') }}</li>
-              <li>{{ $t('auto.account.50.e95e7e') }}</li>
-              <li>{{ $t('auto.account.51.d25424') }}</li>
-              <li><strong>{{ $t('auto.account.52.38e808') }}</strong>
+              <li>{{ $t('auto.account.1f2c0718') }}</li>
+              <li>{{ $t('auto.account.e95e7e8d') }}</li>
+              <li>{{ $t('auto.account.d254245e') }}</li>
+              <li><strong>{{ $t('auto.account.38e8089d') }}</strong>
                 <ul>
-                  <li>✅ <code>can_invite_users</code>{{ $t('auto.account.53.8349fc') }}</li>
-                  <li>✅ <code>can_restrict_members</code>{{ $t('auto.account.54.3dc150') }}</li>
-                  <li>✅ <code>can_delete_messages</code>{{ $t('auto.account.55.565cae') }}</li>
-                  <li>✅ <code>can_send_messages</code>{{ $t('auto.account.56.4d1929') }}</li>
+                  <li>✅ <code>can_invite_users</code>{{ $t('auto.account.8349fc23') }}</li>
+                  <li>✅ <code>can_restrict_members</code>{{ $t('auto.account.3dc150ee') }}</li>
+                  <li>✅ <code>can_delete_messages</code>{{ $t('auto.account.565caed8') }}</li>
+                  <li>✅ <code>can_send_messages</code>{{ $t('auto.account.4d1929b7') }}</li>
                 </ul>
               </li>
             </ol>
@@ -66,53 +66,53 @@
         </el-collapse-item>
 
         <!-- Step 3: Webhook vs Polling -->
-        <el-collapse-item :title="$t('auto.account.11.9de605')" name="s3">
+        <el-collapse-item :title="$t('auto.account.9de60509')" name="s3">
           <div class="guide-content">
             <table class="guide-table">
               <thead>
-                <tr><th>{{ $t('auto.account.57.f0789e') }}</th><th>{{ $t('auto.account.58.62b37e') }}</th><th>{{ $t('auto.account.59.d68f38') }}</th><th>{{ $t('auto.account.60.c3318e') }}</th></tr>
+                <tr><th>{{ $t('auto.account.f0789e79') }}</th><th>{{ $t('auto.account.62b37e99') }}</th><th>{{ $t('auto.account.d68f381b') }}</th><th>{{ $t('auto.account.c3318eaa') }}</th></tr>
               </thead>
               <tbody>
-                <tr><td>🔗 Webhook</td><td>{{ $t('auto.account.61.5c9b49') }}</td><td>{{ $t('auto.account.62.b591a1') }}</td><td>{{ $t('auto.account.63.638cab') }}</td></tr>
-                <tr><td>🔄 Polling</td><td>{{ $t('auto.account.64.ef9f9b') }}</td><td>{{ $t('auto.account.65.7b051f') }}</td><td>{{ $t('auto.account.66.ceb143') }}</td></tr>
+                <tr><td>🔗 Webhook</td><td>{{ $t('auto.account.5c9b494a') }}</td><td>{{ $t('auto.account.b591a123') }}</td><td>{{ $t('auto.account.638cab54') }}</td></tr>
+                <tr><td>🔄 Polling</td><td>{{ $t('auto.account.ef9f9b2a') }}</td><td>{{ $t('auto.account.7b051f94') }}</td><td>{{ $t('auto.account.ceb1437f') }}</td></tr>
               </tbody>
             </table>
-            <p><strong>{{ $t('auto.account.67.afef8f') }}</strong>{{ $t('auto.account.68.d0db4e') }}<code>PUBLIC_BASE_URL</code>{{ $t('auto.account.69.90808b') }}<code>https://your-domain.com</code>{{ $t('auto.account.70.cab1e7') }}</p>
-            <p>{{ $t('auto.account.71.f16ed6') }}</p>
+            <p><strong>{{ $t('auto.account.afef8faf') }}</strong>{{ $t('auto.account.d0db4e3a') }}<code>PUBLIC_BASE_URL</code>{{ $t('auto.account.90808bb3') }}<code>https://your-domain.com</code>{{ $t('auto.account.cab1e7e9') }}</p>
+            <p>{{ $t('auto.account.f16ed611') }}</p>
           </div>
         </el-collapse-item>
 
         <!-- Step 4: 绑定智能体 -->
-        <el-collapse-item :title="$t('auto.account.12.e704fe')" name="s4">
+        <el-collapse-item :title="$t('auto.account.e704fe6c')" name="s4">
           <div class="guide-content">
-            <p>{{ $t('auto.account.72.f8d4a3') }}<strong>{{ $t('auto.account.73.e8f183') }}</strong>{{ $t('auto.account.74.165a45') }}<strong>{{ $t('auto.account.75.673c20') }}</strong>{{ $t('auto.account.76.072c27') }}</p>
-            <p>{{ $t('auto.account.77.691814') }}</p>
+            <p>{{ $t('auto.account.f8d4a30e') }}<strong>{{ $t('auto.account.e8f1834d') }}</strong>{{ $t('auto.account.165a45dc') }}<strong>{{ $t('auto.account.673c2033') }}</strong>{{ $t('auto.account.072c2726') }}</p>
+            <p>{{ $t('auto.account.691814a7') }}</p>
             <ul>
-              <li><code>hivemtk_bot</code>{{ $t('auto.account.78.427df6') }}</li>
-              <li><code>lovesanrenxing_bot</code>{{ $t('auto.account.79.6f22f2') }}</li>
-              <li>{{ $t('auto.account.80.ed6a16') }}</li>
+              <li><code>hivemtk_bot</code>{{ $t('auto.account.427df66d') }}</li>
+              <li><code>lovesanrenxing_bot</code>{{ $t('auto.account.6f22f2d2') }}</li>
+              <li>{{ $t('auto.account.ed6a16b9') }}</li>
             </ul>
           </div>
         </el-collapse-item>
 
         <!-- 常见问题 -->
-        <el-collapse-item :title="$t('auto.account.13.89a149')" name="s5">
+        <el-collapse-item :title="$t('auto.account.89a14970')" name="s5">
           <div class="guide-content">
             <div class="faq-item">
-              <strong>{{ $t('auto.account.81.de361f') }}</strong>
-              <p>{{ $t('auto.account.82.e7609b') }}</p>
+              <strong>{{ $t('auto.account.de361f70') }}</strong>
+              <p>{{ $t('auto.account.e7609bcc') }}</p>
             </div>
             <div class="faq-item">
-              <strong>{{ $t('auto.account.83.118bec') }}</strong>
-              <p>{{ $t('auto.account.84.9c0af4') }}</p>
+              <strong>{{ $t('auto.account.118bec06') }}</strong>
+              <p>{{ $t('auto.account.9c0af4eb') }}</p>
             </div>
             <div class="faq-item">
-              <strong>{{ $t('auto.account.85.cf2e5f') }}</strong>
-              <p>{{ $t('auto.account.86.b9c7ec') }}</p>
+              <strong>{{ $t('auto.account.cf2e5f66') }}</strong>
+              <p>{{ $t('auto.account.b9c7ec18') }}</p>
             </div>
             <div class="faq-item">
-              <strong>{{ $t('auto.account.87.2f228e') }}</strong>
-              <p>{{ $t('auto.account.88.4cab04') }}<br>{{ $t('auto.account.89.52b84d') }}<br>{{ $t('auto.account.90.1e60ad') }}</p>
+              <strong>{{ $t('auto.account.2f228e78') }}</strong>
+              <p>{{ $t('auto.account.4cab040a') }}<br>{{ $t('auto.account.52b84de5') }}<br>{{ $t('auto.account.1e60ad25') }}</p>
             </div>
           </div>
         </el-collapse-item>
@@ -125,7 +125,7 @@
         <div class="account-search">
           <el-input
             v-model="searchKeyword"
-            ::placeholder="$t('auto.account.14.9d9a5f')"
+            ::placeholder="$t('auto.account.9d9a5fe2')"
             prefix-icon="Search"
             clearable
             @clear="handleSearch"
@@ -142,16 +142,16 @@
 
         <div v-loading="loading" class="account-list">
           <el-table :data="filteredAccounts" style="width: 100%" border>
-            <el-table-column prop="account_name" ::label="$t('auto.account.15.5f0720')" min-width="160" />
+            <el-table-column prop="account_name" ::label="$t('auto.account.5f0720d4')" min-width="160" />
             <el-table-column prop="bot_token_masked" label="Bot Token" min-width="200" />
-            <el-table-column :label="$t('auto.account.16.fb7dd8')" width="130" align="center">
+            <el-table-column :label="$t('auto.account.fb7dd803')" width="130" align="center">
               <template #default="scope">
                 <el-tooltip v-if="scope.row.last_error_msg && (scope.row.last_error_msg.includes('401') || scope.row.last_error_msg.includes('404'))" placement="top">
-                  <template #content>{{ $t('auto.account.91.1d6537') }}<br/>{{ $t('auto.account.92.403e67') }}<br/>{{ $t('auto.account.93.374279') }}</template>
-                  <el-tag type="danger" effect="plain">{{ $t('auto.account.94.93fc3f') }}</el-tag>
+                  <template #content>{{ $t('auto.account.1d65374d') }}<br/>{{ $t('auto.account.403e67ff') }}<br/>{{ $t('auto.account.374279f0') }}</template>
+                  <el-tag type="danger" effect="plain">{{ $t('auto.account.93fc3f61') }}</el-tag>
                 </el-tooltip>
                 <el-tag v-else-if="scope.row.last_error_msg" type="warning" effect="plain">{{ scope.row.last_error_msg.includes('429') ? '限流中' : '有错误' }}</el-tag>
-                <el-tag v-else type="success" effect="plain">{{ $t('auto.account.95.fd6e80') }}</el-tag>
+                <el-tag v-else type="success" effect="plain">{{ $t('auto.account.fd6e80f1') }}</el-tag>
               </template>
             </el-table-column>
             <el-table-column prop="webhook_url" label="Webhook URL" min-width="240" show-overflow-tooltip />
@@ -162,35 +162,35 @@
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column :label="$t('auto.account.17.72fbb9')" width="110" align="center">
+            <el-table-column :label="$t('auto.account.72fbb9b5')" width="110" align="center">
               <template #default="scope">
                 <el-tag :type="scope.row.ai_agent_enabled ? 'success' : 'info'" effect="plain">
                   {{ scope.row.ai_agent_enabled ? '已启用' : '未启用' }}
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column :label="$t('auto.account.18.3fea7c')" width="100" align="center">
+            <el-table-column :label="$t('auto.account.3fea7ca7')" width="100" align="center">
               <template #default="scope">
                 <el-tag :type="scope.row.status === 1 ? 'success' : 'danger'" effect="plain">
                   {{ scope.row.status === 1 ? '正常' : '停用' }}
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="last_error_msg" :label="$t('auto.account.19.a2b83d')" min-width="180" show-overflow-tooltip />
-            <el-table-column :label="$t('auto.account.20.2b6bc0')" width="400" fixed="right">
+            <el-table-column prop="last_error_msg" :label="$t('auto.account.a2b83df0')" min-width="180" show-overflow-tooltip />
+            <el-table-column :label="$t('auto.account.2b6bc0f2')" width="400" fixed="right">
               <template #default="scope">
-                <el-button size="small" @click="handleEdit(scope.row)">{{ $t('auto.account.96.95b351') }}</el-button>
-                <el-button size="small" type="success" @click="handleRegisterWebhook(scope.row)">{{ $t('auto.account.97.fdb9b4') }}</el-button>
-                <el-button size="small" type="warning" @click="handleTestSend(scope.row)">{{ $t('auto.account.98.e1c652') }}</el-button>
-                <el-button size="small" type="primary" @click="openBindingDialog(scope.row)">{{ $t('auto.account.99.c9e87d') }}</el-button>
-                <el-button size="small" type="danger" @click="handleDelete(scope.row)">{{ $t('auto.account.100.2f4aad') }}</el-button>
+                <el-button size="small" @click="handleEdit(scope.row)">{{ $t('auto.account.95b351c8') }}</el-button>
+                <el-button size="small" type="success" @click="handleRegisterWebhook(scope.row)">{{ $t('auto.account.fdb9b44e') }}</el-button>
+                <el-button size="small" type="warning" @click="handleTestSend(scope.row)">{{ $t('auto.account.e1c652bc') }}</el-button>
+                <el-button size="small" type="primary" @click="openBindingDialog(scope.row)">{{ $t('auto.account.c9e87d56') }}</el-button>
+                <el-button size="small" type="danger" @click="handleDelete(scope.row)">{{ $t('auto.account.2f4aaddd') }}</el-button>
               </template>
             </el-table-column>
           </el-table>
         </div>
 
         <div v-if="!loading && filteredAccounts.length === 0" class="empty-data">
-          <el-empty :description="$t('auto.account.21.a4859a')" />
+          <el-empty :description="$t('auto.account.a4859af2')" />
         </div>
       </div>
     </div>
@@ -198,18 +198,18 @@
     
     <el-dialog
       v-model="dialogVisible"
-      ::title="$t('auto.account.22.e29c67')"
+      ::title="$t('auto.account.e29c67f9')"
       width="640px"
       :close-on-click-modal="false"
     >
       <el-form ref="accountFormRef" :model="accountForm" :rules="rules" label-width="140px">
-        <el-form-item :label="$t('auto.account.23.17327f')" prop="account_name">
-          <el-input v-model="accountForm.account_name" :placeholder="$t('auto.account.24.db1e20')" />
+        <el-form-item :label="$t('auto.account.17327f9c')" prop="account_name">
+          <el-input v-model="accountForm.account_name" :placeholder="$t('auto.account.db1e20cb')" />
         </el-form-item>
         <el-form-item label="Bot Token" prop="bot_token">
           <el-input
             v-model="accountForm.bot_token"
-            ::placeholder="$t('auto.account.25.af51a5')"
+            ::placeholder="$t('auto.account.af51a5d3')"
             type="password"
             show-password
           />
@@ -229,31 +229,31 @@
 
         <!-- ========== 以下为"编辑模式只读展示区"（创建模式不显示） ========== -->
         <template v-if="dialogType === 'edit'">
-          <el-divider content-position="left">{{ $t('auto.account.101.be6c19') }}</el-divider>
-          <el-form-item :label="$t('auto.account.26.735df6')">
-            <el-input ::model-value="$t('auto.account.27.8b7bb7')" disabled />
+          <el-divider content-position="left">{{ $t('auto.account.be6c194f') }}</el-divider>
+          <el-form-item :label="$t('auto.account.735df6da')">
+            <el-input ::model-value="$t('auto.account.8b7bb766')" disabled />
           </el-form-item>
           <el-form-item label="Webhook URL">
-            <el-input ::model-value="$t('auto.account.28.bd191d')" disabled>
+            <el-input ::model-value="$t('auto.account.bd191d58')" disabled>
               <template v-if="accountForm.webhook_url" #append>
-                <el-button @click="copyText(accountForm.webhook_url)">{{ $t('auto.account.102.79d3ab') }}</el-button>
+                <el-button @click="copyText(accountForm.webhook_url)">{{ $t('auto.account.79d3abe9') }}</el-button>
               </template>
             </el-input>
           </el-form-item>
           <el-form-item label="Webhook Secret">
-            <el-input ::model-value="$t('auto.account.29.623863')" disabled />
+            <el-input ::model-value="$t('auto.account.6238638a')" disabled />
           </el-form-item>
-          <el-form-item :label="$t('auto.account.30.d2ac77')">
+          <el-form-item :label="$t('auto.account.d2ac778b')">
             <el-tag :type="accountForm.webhook_enabled ? 'success' : 'info'" effect="plain">
               {{ accountForm.webhook_enabled ? '已注册' : '未注册' }}
             </el-tag>
           </el-form-item>
-          <el-form-item :label="$t('auto.account.31.a1194f')">
+          <el-form-item :label="$t('auto.account.a1194f7e')">
             <el-tag :type="accountForm.ai_agent_enabled ? 'success' : 'info'" effect="plain">
               {{ accountForm.ai_agent_enabled ? '已启用' : '未启用' }}
             </el-tag>
           </el-form-item>
-          <el-form-item :label="$t('auto.account.18.3fea7c')">
+          <el-form-item :label="$t('auto.account.3fea7ca7')">
             <el-tag :type="accountForm.status === 1 ? 'success' : 'danger'" effect="plain">
               {{ accountForm.status === 1 ? '正常' : '停用' }}
             </el-tag>
@@ -265,7 +265,7 @@
       </el-form>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="dialogVisible = false">{{ $t('auto.account.103.625fb2') }}</el-button>
+          <el-button @click="dialogVisible = false">{{ $t('auto.account.625fb26b') }}</el-button>
           <el-button type="primary" :loading="submitting" @click="submitForm">
             {{ dialogType === 'add' ? '创建（自动配置）' : '保存' }}
           </el-button>
@@ -274,19 +274,19 @@
     </el-dialog>
 
     
-    <el-dialog v-model="testDialogVisible" :title="$t('auto.account.32.880075')" width="500px">
+    <el-dialog v-model="testDialogVisible" :title="$t('auto.account.88007514')" width="500px">
       <el-form :model="testForm" label-width="100px">
-        <el-form-item :label="$t('auto.account.33.35f1ba')">
-          <el-input v-model.number="testForm.chat_id" :placeholder="$t('auto.account.34.3dc3ac')" />
+        <el-form-item :label="$t('auto.account.35f1ba0f')">
+          <el-input v-model.number="testForm.chat_id" :placeholder="$t('auto.account.3dc3ac43')" />
         </el-form-item>
-        <el-form-item :label="$t('auto.account.35.b87b77')">
-          <el-input v-model="testForm.text" type="textarea" :rows="3" :placeholder="$t('auto.account.36.2477fb')" />
+        <el-form-item :label="$t('auto.account.b87b7756')">
+          <el-input v-model="testForm.text" type="textarea" :rows="3" :placeholder="$t('auto.account.2477fb6a')" />
         </el-form-item>
       </el-form>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="testDialogVisible = false">{{ $t('auto.account.103.625fb2') }}</el-button>
-          <el-button type="primary" :loading="testing" @click="submitTestSend">{{ $t('auto.account.40.1535fc') }}</el-button>
+          <el-button @click="testDialogVisible = false">{{ $t('auto.account.625fb26b') }}</el-button>
+          <el-button type="primary" :loading="testing" @click="submitTestSend">{{ $t('auto.account.1535fcfa') }}</el-button>
         </span>
       </template>
     </el-dialog>
@@ -353,8 +353,8 @@ const fetchAccounts = async () => {
     const res = await listAccounts()
     accounts.value = (res && res.list) || []
   } catch (e) {
-    console.error(t('auto.account.104.071091'), e)
-    ElMessage.error(i18n.global.t(t('auto.account.105.2701a1')))
+    console.error(t('auto.account.07109179'), e)
+    ElMessage.error(i18n.global.t(t('auto.account.2701a199')))
   } finally {
     loading.value = false
   }
@@ -384,12 +384,12 @@ const showTestToken = computed(() => {
 })
 
 const rules = {
-  account_name: [{ required: true, message: i18n.global.t(t('auto.account.106.1f3797')), trigger: 'blur' }],
+  account_name: [{ required: true, message: i18n.global.t(t('auto.account.1f3797f1')), trigger: 'blur' }],
   bot_token: [
     {
       validator: (rule, value, callback) => {
         if (dialogType.value === 'add' && !value) {
-          return callback(new Error(t('auto.account.107.25d758')))
+          return callback(new Error(t('auto.account.25d7586d')))
         }
         if (value && !/^\d{6,10}:[A-Za-z0-9_-]{35}$/.test(value.trim())) {
           return callback(new Error('Token 格式不对：应为「数字:35位字母数字」，请到 @BotFather → /mybots → API Token 完整复制'))
@@ -442,7 +442,7 @@ const handleEdit = (row) => {
 const handleTestToken = async () => {
   const token = (accountForm.bot_token || '').trim()
   if (!token) {
-    ElMessage.warning(t('auto.account.108.8df062'))
+    ElMessage.warning(t('auto.account.8df062e2'))
     return
   }
   testingToken.value = true
@@ -470,8 +470,8 @@ const handleTestToken = async () => {
       ElMessage.error(`Token 无效: ${desc}`)
     }
   } catch (err) {
-    tokenTestResult.value = { ok: false, msg: t('auto.account.109.749733') }
-    ElMessage.error(t('auto.account.110.98d1ef') + err.message)
+    tokenTestResult.value = { ok: false, msg: t('auto.account.749733dd') }
+    ElMessage.error(t('auto.account.98d1eff6') + err.message)
   } finally {
     testingToken.value = false
   }
@@ -480,9 +480,9 @@ const handleTestToken = async () => {
 const copyText = async (text) => {
   try {
     await navigator.clipboard.writeText(text)
-    ElMessage.success(t('auto.account.111.4fb42e'))
+    ElMessage.success(t('auto.account.4fb42e6e'))
   } catch {
-    ElMessage.warning(t('auto.account.112.5268f8'))
+    ElMessage.warning(t('auto.account.5268f875'))
   }
 }
 
@@ -511,10 +511,10 @@ const submitForm = () => {
       }
       if (accountForm.id) {
         await updateAccount(accountForm.id, payload)
-        ElMessage.success(i18n.global.t(t('auto.account.113.55aa63')))
+        ElMessage.success(i18n.global.t(t('auto.account.55aa6366')))
       } else {
         const res = await createAccount(payload)
-        ElMessage.success(i18n.global.t(t('auto.account.114.464f3a')))
+        ElMessage.success(i18n.global.t(t('auto.account.464f3ad4')))
         // 创建成功后立刻刷新列表，展示后端自动填充的字段
         fetchAccounts()
       }
@@ -523,8 +523,8 @@ const submitForm = () => {
         fetchAccounts()
       }
     } catch (e) {
-      console.error(t('auto.account.115.4d5731'), e)
-      ElMessage.error(t('auto.account.116.78d235') + (e.message || e))
+      console.error(t('auto.account.4d57314a'), e)
+      ElMessage.error(t('auto.account.78d235cc') + (e.message || e))
     } finally {
       submitting.value = false
     }
@@ -532,18 +532,18 @@ const submitForm = () => {
 }
 
 const handleDelete = (row) => {
-  ElMessageBox.confirm(`确定要删除机器人 ${row.account_name} 吗？`, t('auto.account.117.900c70'), {
-    confirmButtonText: t('auto.account.118.38cf16'),
-    cancelButtonText: t('auto.account.103.625fb2'),
+  ElMessageBox.confirm(`确定要删除机器人 ${row.account_name} 吗？`, t('auto.account.900c70fa'), {
+    confirmButtonText: t('auto.account.38cf16f2'),
+    cancelButtonText: t('auto.account.625fb26b'),
     type: 'warning'
   })
     .then(async () => {
       try {
         await deleteAccount(row.id)
-        ElMessage.success(i18n.global.t(t('auto.account.119.0007d1')))
+        ElMessage.success(i18n.global.t(t('auto.account.0007d170')))
         fetchAccounts()
       } catch (e) {
-        ElMessage.error(t('auto.account.120.bc42bb') + (e.message || e))
+        ElMessage.error(t('auto.account.bc42bb8f') + (e.message || e))
       }
     })
     .catch(() => {})
@@ -553,7 +553,7 @@ const handleRegisterWebhook = (row) => {
   // 前置自检：给出可操作的提示，避免打到 Telegram 才收到晦涩报错
   const problems = []
   if (row.last_error_msg && row.last_error_msg.includes('401')) {
-    problems.push(t('auto.account.121.9f7c67'))
+    problems.push(t('auto.account.9f7c67cf'))
   }
   if (row.webhook_url && row.webhook_url.startsWith('http://')) {
     problems.push('Webhook URL 是 http:// 开头，Telegram 强制要求 https://，请在「编辑」里修改')
@@ -562,12 +562,12 @@ const handleRegisterWebhook = (row) => {
     problems.push('Webhook URL 为空：请先在「编辑」对话框填入（或等待后端自动推导完成后再点注册）')
   }
   if (problems.length) {
-    ElMessageBox.alert(problems.join('\n'), t('auto.account.122.223983'), { type: 'warning', confirmButtonText: t('auto.account.123.ce2695') })
+    ElMessageBox.alert(problems.join('\n'), t('auto.account.22398359'), { type: 'warning', confirmButtonText: t('auto.account.ce26955a') })
     return
   }
-  ElMessageBox.confirm(`确定要为机器人 ${row.account_name} 注册 Webhook 吗？`, t('auto.account.124.e83a25'), {
-    confirmButtonText: t('auto.account.118.38cf16'),
-    cancelButtonText: t('auto.account.103.625fb2'),
+  ElMessageBox.confirm(`确定要为机器人 ${row.account_name} 注册 Webhook 吗？`, t('auto.account.e83a256e'), {
+    confirmButtonText: t('auto.account.38cf16f2'),
+    cancelButtonText: t('auto.account.625fb26b'),
     type: 'info'
   })
     .then(async () => {
@@ -589,26 +589,26 @@ let currentTestAccountId = null
 const handleTestSend = (row) => {
   currentTestAccountId = row.id
   testForm.chat_id = null
-  testForm.text = t('auto.account.125.5ae844')
+  testForm.text = t('auto.account.5ae8445d')
   testDialogVisible.value = true
 }
 
 const submitTestSend = async () => {
   if (!testForm.chat_id) {
-    ElMessage.warning(i18n.global.t(t('auto.account.126.6d3eaa')))
+    ElMessage.warning(i18n.global.t(t('auto.account.6d3eaa82')))
     return
   }
   if (!testForm.text) {
-    ElMessage.warning(i18n.global.t(t('auto.account.127.fa967b')))
+    ElMessage.warning(i18n.global.t(t('auto.account.fa967bd0')))
     return
   }
   testing.value = true
   try {
     await testSend(currentTestAccountId, { chat_id: testForm.chat_id, text: testForm.text })
-    ElMessage.success(i18n.global.t(t('auto.account.128.9db9a7')))
+    ElMessage.success(i18n.global.t(t('auto.account.9db9a7e3')))
     testDialogVisible.value = false
   } catch (e) {
-    ElMessage.error(t('auto.account.129.9704ea') + (e.message || e))
+    ElMessage.error(t('auto.account.9704ea75') + (e.message || e))
   } finally {
     testing.value = false
   }

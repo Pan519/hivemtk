@@ -17,30 +17,30 @@
 
       
       <el-form :inline="true" :model="searchForm" class="search-form">
-        <el-form-item :label="$t('auto.List.1.9699a5')">
-          <el-input v-model="searchForm.keyword" :placeholder="$t('auto.List.2.976111')" clearable />
+        <el-form-item :label="$t('auto.List.9699a50e')">
+          <el-input v-model="searchForm.keyword" :placeholder="$t('auto.List.9761111c')" clearable />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.3.3fea7c')">
-          <el-select v-model="searchForm.is_active" :placeholder="$t('auto.List.4.708c9d')" clearable>
-            <el-option :label="$t('auto.List.5.83a991')" :value="true" />
-            <el-option :label="$t('auto.List.6.710ad0')" :value="false" />
+        <el-form-item :label="$t('auto.List.3fea7ca7')">
+          <el-select v-model="searchForm.is_active" :placeholder="$t('auto.List.708c9d6d')" clearable>
+            <el-option :label="$t('auto.List.83a991d7')" :value="true" />
+            <el-option :label="$t('auto.List.710ad08b')" :value="false" />
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="handleSearch">{{ $t('auto.List.29.e5f71f') }}</el-button>
-          <el-button @click="resetSearch">{{ $t('auto.List.30.4b9c32') }}</el-button>
+          <el-button type="primary" @click="handleSearch">{{ $t('auto.List.e5f71fc3') }}</el-button>
+          <el-button @click="resetSearch">{{ $t('auto.List.4b9c3271') }}</el-button>
         </el-form-item>
       </el-form>
 
       
       <el-table :data="tableData" style="width: 100%" v-loading="loading">
         <el-table-column prop="id" label="ID" width="80" />
-        <el-table-column prop="title" :label="$t('auto.List.7.32c65d')" min-width="200">
+        <el-table-column prop="title" :label="$t('auto.List.32c65d8d')" min-width="200">
           <template #default="scope">
             <span class="title-text">{{ scope.row.title }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="image_url" :label="$t('auto.List.8.20def7')" width="120">
+        <el-table-column prop="image_url" :label="$t('auto.List.20def794')" width="120">
           <template #default="scope">
             <el-image
               v-if="scope.row.image_url"
@@ -50,27 +50,27 @@
               fit="cover"
               style="width: 80px; height: 60px; border-radius: 4px;"
             />
-            <span v-else class="no-image">{{ $t('auto.List.31.5423e2') }}</span>
+            <span v-else class="no-image">{{ $t('auto.List.5423e287') }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="description" :label="$t('auto.List.9.3bdd08')" min-width="300">
+        <el-table-column prop="description" :label="$t('auto.List.3bdd08ad')" min-width="300">
           <template #default="scope">
             <el-tooltip :content="scope.row.description" placement="top">
               <div class="description-text">{{ scope.row.description }}</div>
             </el-tooltip>
           </template>
         </el-table-column>
-        <el-table-column prop="redirect_url" :label="$t('auto.List.10.dec2eb')" min-width="200">
+        <el-table-column prop="redirect_url" :label="$t('auto.List.dec2eb71')" min-width="200">
           <template #default="scope">
             <el-tooltip :content="scope.row.redirect_url" placement="top">
               <div class="redirect-url">{{ scope.row.redirect_url }}</div>
             </el-tooltip>
           </template>
         </el-table-column>
-        <el-table-column prop="view_count" :label="$t('auto.List.11.88bc4d')" width="100" />
-        <el-table-column prop="like_count" :label="$t('auto.List.12.4506d5')" width="100" />
-        <el-table-column prop="share_count" :label="$t('auto.List.13.34688e')" width="100" />
-        <el-table-column prop="is_active" :label="$t('auto.List.3.3fea7c')" width="100">
+        <el-table-column prop="view_count" :label="$t('auto.List.88bc4d7a')" width="100" />
+        <el-table-column prop="like_count" :label="$t('auto.List.4506d555')" width="100" />
+        <el-table-column prop="share_count" :label="$t('auto.List.34688e27')" width="100" />
+        <el-table-column prop="is_active" :label="$t('auto.List.3fea7ca7')" width="100">
           <template #default="scope">
             <el-switch
               v-model="scope.row.is_active"
@@ -80,12 +80,12 @@
             />
           </template>
         </el-table-column>
-        <el-table-column prop="created_at" :label="$t('auto.List.14.eca37c')" width="160">
+        <el-table-column prop="created_at" :label="$t('auto.List.eca37cb0')" width="160">
           <template #default="scope">
             {{ formatDate(scope.row.created_at) }}
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.15.2b6bc0')" width="280" fixed="right">
+        <el-table-column :label="$t('auto.List.2b6bc0f2')" width="280" fixed="right">
           <template #default="scope">
             <el-button size="small" type="primary" @click="handleEdit(scope.row)">
               编辑
@@ -102,7 +102,7 @@
           </template>
         </el-table-column>
         <template #empty>
-          <el-empty :description="$t('auto.List.16.21efd8')" />
+          <el-empty :description="$t('auto.List.21efd88b')" />
         </template>
       </el-table>
 
@@ -130,28 +130,28 @@
       <div class="dialog-content">
         <div class="form-section">
           <el-form :model="formData" label-width="100px" :rules="rules" ref="formRef">
-            <el-form-item :label="$t('auto.List.17.3944f2')" prop="title">
+            <el-form-item :label="$t('auto.List.3944f217')" prop="title">
               <el-input
                 v-model="formData.title"
-                :placeholder="$t('auto.List.18.3fd55a')"
+                :placeholder="$t('auto.List.3fd55a4e')"
                 maxlength="100"
                 show-word-limit
               />
             </el-form-item>
-            <el-form-item :label="$t('auto.List.19.9546fa')" prop="description">
+            <el-form-item :label="$t('auto.List.9546fa92')" prop="description">
               <el-input
                 v-model="formData.description"
-                :placeholder="$t('auto.List.20.705bdf')"
+                :placeholder="$t('auto.List.705bdfc9')"
                 type="textarea"
                 rows="4"
                 maxlength="500"
                 show-word-limit
               />
             </el-form-item>
-            <el-form-item :label="$t('auto.List.21.92b14d')" prop="image_url">
+            <el-form-item :label="$t('auto.List.92b14d1a')" prop="image_url">
               <el-input
                 v-model="formData.image_url"
-                :placeholder="$t('auto.List.22.3af187')"
+                :placeholder="$t('auto.List.3af187ba')"
                 maxlength="500"
                 show-word-limit
               />
@@ -164,18 +164,18 @@
                 />
               </div>
             </el-form-item>
-            <el-form-item :label="$t('auto.List.10.dec2eb')" prop="redirect_url">
+            <el-form-item :label="$t('auto.List.dec2eb71')" prop="redirect_url">
               <el-input
                 v-model="formData.redirect_url"
-                :placeholder="$t('auto.List.23.c63a53')"
+                :placeholder="$t('auto.List.c63a5309')"
                 maxlength="500"
                 show-word-limit
               />
             </el-form-item>
-            <el-form-item :label="$t('auto.List.24.0efb07')" prop="domain_pool_id">
+            <el-form-item :label="$t('auto.List.0efb0786')" prop="domain_pool_id">
               <el-select 
                 v-model="formData.domain_pool_id" 
-                :placeholder="$t('auto.List.25.8ee08e')" 
+                :placeholder="$t('auto.List.8ee08e9a')" 
                 clearable
                 style="width: 100%"
               >
@@ -190,15 +190,15 @@
                 </el-option>
               </el-select>
             </el-form-item>
-            <el-form-item :label="$t('auto.List.26.14d342')" prop="tags">
+            <el-form-item :label="$t('auto.List.14d34236')" prop="tags">
               <el-input 
                 v-model="formData.tags" 
-                :placeholder="$t('auto.List.27.dc1fb7')" 
+                :placeholder="$t('auto.List.dc1fb70f')" 
                 maxlength="255"
                 show-word-limit
               />
             </el-form-item>
-            <el-form-item :label="$t('auto.List.28.03c9e2')">
+            <el-form-item :label="$t('auto.List.03c9e27b')">
               <el-switch v-model="formData.is_active" />
             </el-form-item>
           </el-form>
@@ -208,8 +208,8 @@
         </div>
       </div>
       <template #footer>
-        <el-button @click="dialogVisible = false">{{ $t('auto.List.32.625fb2') }}</el-button>
-        <el-button type="primary" @click="handleSubmit">{{ $t('auto.List.33.e83a25') }}</el-button>
+        <el-button @click="dialogVisible = false">{{ $t('auto.List.625fb26b') }}</el-button>
+        <el-button type="primary" @click="handleSubmit">{{ $t('auto.List.e83a256e') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -284,28 +284,28 @@ const formData = reactive({
 
 const rules = {
   title: [
-    { required: true, message: i18n.global.t(t('auto.List.18.3fd55a')), trigger: 'blur' },
-    { min: 2, max: 100, message: i18n.global.t(t('auto.List.34.ea55d7')), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.List.3fd55a4e')), trigger: 'blur' },
+    { min: 2, max: 100, message: i18n.global.t(t('auto.List.ea55d740')), trigger: 'blur' }
   ],
   description: [
-    { required: true, message: i18n.global.t(t('auto.List.20.705bdf')), trigger: 'blur' },
-    { min: 5, max: 500, message: i18n.global.t(t('auto.List.35.ede4cf')), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.List.705bdfc9')), trigger: 'blur' },
+    { min: 5, max: 500, message: i18n.global.t(t('auto.List.ede4cfdc')), trigger: 'blur' }
   ],
   image_url: [
-    { required: true, message: i18n.global.t(t('auto.List.22.3af187')), trigger: 'blur' },
-    { type: 'url', message: i18n.global.t(t('auto.List.36.41368e')), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.List.3af187ba')), trigger: 'blur' },
+    { type: 'url', message: i18n.global.t(t('auto.List.41368ee8')), trigger: 'blur' }
   ],
   redirect_url: [
-    { required: true, message: i18n.global.t(t('auto.List.23.c63a53')), trigger: 'blur' },
-    { type: 'url', message: i18n.global.t(t('auto.List.37.a7f6ca')), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.List.c63a5309')), trigger: 'blur' },
+    { type: 'url', message: i18n.global.t(t('auto.List.a7f6ca3f')), trigger: 'blur' }
   ],
   tags: [
-    { max: 255, message: i18n.global.t(t('auto.List.38.cfd051')), trigger: 'blur' }
+    { max: 255, message: i18n.global.t(t('auto.List.cfd05181')), trigger: 'blur' }
   ]
 };
 
 const dialogTitle = computed(() => {
-  return currentCardId.value ? t('auto.List.39.4c2c1f') : t('auto.List.40.b1aed4')
+  return currentCardId.value ? t('auto.List.4c2c1f23') : t('auto.List.b1aed49c')
 });
 
 const loadData = async () => {
@@ -320,8 +320,8 @@ const loadData = async () => {
     tableData.value = res.list || [];
     pagination.total = res.total || 0
   } catch (error) {
-    ElMessage.error(i18n.global.t(t('auto.List.41.e05c1c')))
-    console.error(t('auto.List.42.80e979'), error)
+    ElMessage.error(i18n.global.t(t('auto.List.e05c1ca3')))
+    console.error(t('auto.List.80e9795e'), error)
   } finally {
     loading.value = false
   }
@@ -377,10 +377,10 @@ const handleCopyLink = async (row) => {
     const cardLink = `${window.location.origin}/kuaishou/card/${row.id}`;
     
     await navigator.clipboard.writeText(cardLink)
-    ElMessage.success(i18n.global.t(t('auto.List.43.deb26c')))
+    ElMessage.success(i18n.global.t(t('auto.List.deb26c26')))
   } catch (error) {
-    ElMessage.error(i18n.global.t(t('auto.List.44.da0ab5')))
-    console.error(t('auto.List.45.fbb8cb'), error)
+    ElMessage.error(i18n.global.t(t('auto.List.da0ab552')))
+    console.error(t('auto.List.fbb8cbdf'), error)
   }
 }
 
@@ -388,19 +388,19 @@ const handleDelete = async (row) => {
   try {
     await ElMessageBox.confirm(
       `确定要删除卡片「${row.title}」吗？`,
-      t('auto.List.46.50eaf9'),
+      t('auto.List.50eaf94d'),
       {
-        confirmButtonText: t('auto.List.47.38cf16'),
-        cancelButtonText: t('auto.List.32.625fb2'),
+        confirmButtonText: t('auto.List.38cf16f2'),
+        cancelButtonText: t('auto.List.625fb26b'),
         type: 'warning'
       }
     )
     const res = await kuaishouCardApi.deleteKuaishouCard(row.id)
-    ElMessage.success(i18n.global.t(t('auto.List.48.0007d1')));
+    ElMessage.success(i18n.global.t(t('auto.List.0007d170')));
     loadData()
   } catch (error) {
     if (error !== 'cancel') {
-      ElMessage.error(i18n.global.t(t('auto.List.49.acf066')))
+      ElMessage.error(i18n.global.t(t('auto.List.acf0664a')))
     }
   }
 }
@@ -413,7 +413,7 @@ const handleStatusChange = async (row) => {
     });
   } catch (error) {
     row.is_active = !row.is_active
-    ElMessage.error(i18n.global.t(t('auto.List.50.930442')))
+    ElMessage.error(i18n.global.t(t('auto.List.930442e2')))
   }
 }
 
@@ -430,12 +430,12 @@ const handleSubmit = async () => {
     } else {
       res = await kuaishouCardApi.createKuaishouCard(formData)
     }
-    ElMessage.success(currentCardId.value ? t('auto.List.51.55aa63') : t('auto.List.52.04a691'));
+    ElMessage.success(currentCardId.value ? t('auto.List.55aa6366') : t('auto.List.04a691b3'));
     dialogVisible.value = false
     loadData()
   } catch (error) {
     if (error === false) return
-    ElMessage.error(i18n.global.t(t('auto.List.53.5fa802')))
+    ElMessage.error(i18n.global.t(t('auto.List.5fa802be')))
   }
 }
 
@@ -465,8 +465,8 @@ const getDomainPoolList = async () => {
     const res = await domainPoolApi.getList({ page: 1, page_size: 100 })
     domainPoolOptions.value = res.list || [];
   } catch (error) {
-    ElMessage.error(i18n.global.t(t('auto.List.54.1be7af')))
-    console.error(t('auto.List.55.61abe0'), error)
+    ElMessage.error(i18n.global.t(t('auto.List.1be7af8d')))
+    console.error(t('auto.List.61abe0da'), error)
   }
 };
 

@@ -6,7 +6,7 @@
       type="error"
       :closable="false"
       show-icon
-      :title="$t('auto.LTCConfig.1.bb2d62')"
+      :title="$t('auto.LTCConfig.bb2d62c4')"
     >
       <div class="alert-body">
         <p>
@@ -30,7 +30,7 @@
         >
           <template #header>
             <div class="card-head">
-              <span>{{ $t('auto.LTCConfig.10.b5db5c') }}</span>
+              <span>{{ $t('auto.LTCConfig.b5db5cef') }}</span>
               <el-tag
                 :type="cfg.source === 'kv' ? 'success' : 'info'"
                 size="small"
@@ -42,8 +42,8 @@
           <div class="master-body">
             <el-switch
               v-model="cfg.enabled"
-              :active-text="$t('auto.LTCConfig.2.849320')"
-              :inactive-text="$t('auto.LTCConfig.3.d58a55')"
+              :active-text="$t('auto.LTCConfig.84932056')"
+              :inactive-text="$t('auto.LTCConfig.d58a55bc')"
             />
             <p class="hint">
               关掉时六个阶段全部拦在外面，无论各自那一项配的是什么。
@@ -60,7 +60,7 @@
         <el-card shadow="never">
           <template #header>
             <div class="card-head">
-              <span>{{ $t('auto.LTCConfig.11.bf242e') }}</span>
+              <span>{{ $t('auto.LTCConfig.bf242e90') }}</span>
               <span class="head-sub">归管路由合计 {{ cfg.guarded_total }} 条</span>
             </div>
           </template>
@@ -69,7 +69,7 @@
             size="small"
           >
             <el-table-column
-              :label="$t('auto.LTCConfig.4.d31633')"
+              :label="$t('auto.LTCConfig.d316330b')"
               width="120"
             >
               <template #default="{ row }">
@@ -77,7 +77,7 @@
               </template>
             </el-table-column>
             <el-table-column
-              :label="$t('auto.LTCConfig.5.a6beb9')"
+              :label="$t('auto.LTCConfig.a6beb974')"
               width="90"
             >
               <template #default="{ row }">
@@ -85,7 +85,7 @@
               </template>
             </el-table-column>
             <el-table-column
-              :label="$t('auto.LTCConfig.6.1d84af')"
+              :label="$t('auto.LTCConfig.1d84af3b')"
               width="150"
             >
               <template #default="{ row }">
@@ -98,14 +98,14 @@
               </template>
             </el-table-column>
             <el-table-column
-              :label="$t('auto.LTCConfig.7.cf6395')"
+              :label="$t('auto.LTCConfig.cf63954d')"
               width="110"
             >
               <template #default="{ row }">
                 {{ row.guarded }} 条
               </template>
             </el-table-column>
-            <el-table-column :label="$t('auto.LTCConfig.8.36bf47')">
+            <el-table-column :label="$t('auto.LTCConfig.36bf4729')">
               <template #default="{ row }">
                 <code>{{ row.stage }}</code>
               </template>
@@ -126,8 +126,8 @@
     >
       <template #header>
         <div class="card-head">
-          <span>{{ $t('auto.LTCConfig.12.e0de1c') }}</span>
-          <span class="head-sub">{{ $t('auto.LTCConfig.13.fc10ab') }}</span>
+          <span>{{ $t('auto.LTCConfig.e0de1c9a') }}</span>
+          <span class="head-sub">{{ $t('auto.LTCConfig.fc10abed') }}</span>
         </div>
       </template>
       <el-form
@@ -155,11 +155,11 @@
                 <span
                   v-if="!bounds[key].zero_legal"
                   class="zero-bad"
-                >{{ $t('auto.LTCConfig.14.03be92') }}</span>
+                >{{ $t('auto.LTCConfig.03be9251') }}</span>
                 <span
                   v-else
                   class="zero-ok"
-                >{{ $t('auto.LTCConfig.15.82c82b') }}</span>
+                >{{ $t('auto.LTCConfig.82c82bda') }}</span>
               </div>
             </el-form-item>
           </el-col>
@@ -174,7 +174,7 @@
     >
       <template #header>
         <div class="card-head">
-          <span>{{ $t('auto.LTCConfig.12.e0de1c') }}</span>
+          <span>{{ $t('auto.LTCConfig.e0de1c9a') }}</span>
         </div>
       </template>
       <p class="hint">
@@ -190,7 +190,7 @@
     >
       <template #header>
         <div class="card-head">
-          <span>{{ $t('auto.LTCConfig.16.04d6d7') }}</span>
+          <span>{{ $t('auto.LTCConfig.04d6d7e9') }}</span>
         </div>
       </template>
       <ul class="hints">
@@ -217,7 +217,7 @@
       type="warning"
       :closable="false"
       show-icon
-      ::title="$t('auto.LTCConfig.9.865f26')"
+      ::title="$t('auto.LTCConfig.865f2617')"
     />
 
     <div class="actions">
@@ -251,27 +251,27 @@ import { getLTCConfig, saveLTCConfig } from '@/api/ltcConfig'
 // 阶段键与中文名：顺序照后端 LTCKnownStages（销售流程顺序），
 // 键名照 ltc.config 的 JSON 字面量 —— 这两处错一处，保存就会被后端拒收。
 const STAGES = [
-  { stage: 'opportunity', label: t('auto.LTCConfig.17.55290e') },
-  { stage: 'outreach', label: t('auto.LTCConfig.18.301dd5') },
-  { stage: 'quote', label: t('auto.LTCConfig.19.00bae3') },
-  { stage: 'bill', label: t('auto.LTCConfig.20.a08c6e') },
-  { stage: 'payment', label: t('auto.LTCConfig.21.1755fc') },
-  { stage: 'collection', label: t('auto.LTCConfig.22.b01bde') }
+  { stage: 'opportunity', label: t('auto.LTCConfig.55290e55') },
+  { stage: 'outreach', label: t('auto.LTCConfig.301dd54b') },
+  { stage: 'quote', label: t('auto.LTCConfig.00bae3b9') },
+  { stage: 'bill', label: t('auto.LTCConfig.a08c6e69') },
+  { stage: 'payment', label: t('auto.LTCConfig.1755fc2a') },
+  { stage: 'collection', label: t('auto.LTCConfig.b01bde53') }
 ]
 
 const THRESHOLDS = [
-  { key: 'lead_score', label: t('auto.LTCConfig.23.fb1e8b') },
-  { key: 'confidence', label: t('auto.LTCConfig.24.94fa8e') },
-  { key: 'discount_percent', label: t('auto.LTCConfig.25.42cf7f') },
-  { key: 'win_probability', label: t('auto.LTCConfig.26.7ff868') }
+  { key: 'lead_score', label: t('auto.LTCConfig.fb1e8b62') },
+  { key: 'confidence', label: t('auto.LTCConfig.94fa8ea9') },
+  { key: 'discount_percent', label: t('auto.LTCConfig.42cf7fb6') },
+  { key: 'win_probability', label: t('auto.LTCConfig.7ff8686a') }
 ]
 
 const REASON_TEXT = {
-  active: t('auto.LTCConfig.27.456399'),
-  master_off: t('auto.LTCConfig.28.ea6e33'),
-  stage_off: t('auto.LTCConfig.29.9bff6a'),
-  degraded: t('auto.LTCConfig.30.3d8283'),
-  unknown_stage: t('auto.LTCConfig.31.2a1bfe')
+  active: t('auto.LTCConfig.45639999'),
+  master_off: t('auto.LTCConfig.ea6e3329'),
+  stage_off: t('auto.LTCConfig.9bff6a01'),
+  degraded: t('auto.LTCConfig.3d8283fb'),
+  unknown_stage: t('auto.LTCConfig.2a1bfefb')
 }
 
 const emptyCfg = () => ({
@@ -302,7 +302,7 @@ const saving = ref(false)
 const saveError = ref('')
 const saveNotice = ref({})
 
-const sourceText = computed(() => (cfg.source === 'kv' ? t('auto.LTCConfig.32.56f7a2') : t('auto.LTCConfig.33.c79870')))
+const sourceText = computed(() => (cfg.source === 'kv' ? t('auto.LTCConfig.56f7a2fe') : t('auto.LTCConfig.c7987057')))
 
 // 边界没到位之前不渲染阈值区：首帧 bounds 还是空对象，直接取 .max 会让整页白屏。
 const boundsReady = computed(() => thresholdKeys.every((k) => !!bounds.value[k]))
@@ -328,7 +328,7 @@ async function load() {
     Object.assign(cfg, emptyCfg(), data)
     bounds.value = data.threshold_bounds || {}
   } catch (err) {
-    saveError.value = t('auto.LTCConfig.34.4154d0') + (err?.message || t('auto.LTCConfig.35.974e74'))
+    saveError.value = t('auto.LTCConfig.4154d0e7') + (err?.message || t('auto.LTCConfig.974e7484'))
   } finally {
     loading.value = false
   }
@@ -354,12 +354,12 @@ async function onSave() {
       bounds.value = res.effective.threshold_bounds || {}
     }
     if (res?.persisted && !res?.audit_error) {
-      ElMessage.success(`已保存（${res.stored_bytes} 字节，开启阶段：${(res.stages_on || []).join('、') || t('auto.LTCConfig.36.d81bb2')}）`)
+      ElMessage.success(`已保存（${res.stored_bytes} 字节，开启阶段：${(res.stages_on || []).join('、') || t('auto.LTCConfig.d81bb206')}）`)
     }
   } catch (err) {
     // 后端把拒绝原因拼到了句子级（「阶段名 qoute 不认识」「lead_score 给 0 等于拆闸」…），
     // 原样铺出来，不要换成一句"参数错误"让运营在六个阶段名里猜。
-    saveError.value = err?.message || t('auto.LTCConfig.37.6de920')
+    saveError.value = err?.message || t('auto.LTCConfig.6de920b4')
   } finally {
     saving.value = false
   }

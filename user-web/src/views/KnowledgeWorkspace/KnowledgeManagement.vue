@@ -16,7 +16,7 @@
       </el-col>
       <el-col :span="4">
         <el-card class="stat-card">
-          <div class="stat-label">{{ $t('auto.KnowledgeManagement.44.b615f5') }}</div>
+          <div class="stat-label">{{ $t('auto.KnowledgeManagement.b615f5b2') }}</div>
           <div class="stat-value">{{ formatNumber(overview.total_tokens) }}</div>
         </el-card>
       </el-col>
@@ -71,22 +71,22 @@
     <el-card class="toolbar-card">
       <div class="toolbar">
         <div class="toolbar-left">
-          <el-select v-model="filter.product_id" ::placeholder="$t('auto.KnowledgeManagement.1.3c4a32')" clearable style="width: 200px" @change="handleSearch">
+          <el-select v-model="filter.product_id" ::placeholder="$t('auto.KnowledgeManagement.3c4a32d2')" clearable style="width: 200px" @change="handleSearch">
             <el-option v-for="p in productList" :key="p.id" :label="p.name" :value="p.id" />
           </el-select>
-          <el-select v-model="filter.embed_status" ::placeholder="$t('auto.KnowledgeManagement.2.38ea18')" clearable style="width: 130px" @change="handleSearch">
-            <el-option ::label="$t('auto.KnowledgeManagement.3.28eda9')" value="pending" />
-            <el-option ::label="$t('auto.KnowledgeManagement.4.bf5faf')" value="processing" />
-            <el-option ::label="$t('auto.KnowledgeManagement.5.0cd961')" value="indexed" />
-            <el-option ::label="$t('auto.KnowledgeManagement.6.f8d3ae')" value="failed" />
+          <el-select v-model="filter.embed_status" ::placeholder="$t('auto.KnowledgeManagement.38ea1827')" clearable style="width: 130px" @change="handleSearch">
+            <el-option ::label="$t('auto.KnowledgeManagement.28eda9eb')" value="pending" />
+            <el-option ::label="$t('auto.KnowledgeManagement.bf5faf5c')" value="processing" />
+            <el-option ::label="$t('auto.KnowledgeManagement.0cd961a6')" value="indexed" />
+            <el-option ::label="$t('auto.KnowledgeManagement.f8d3aedb')" value="failed" />
           </el-select>
-          <el-select v-model="filter.source_type" ::placeholder="$t('auto.KnowledgeManagement.7.cdb60d')" clearable style="width: 130px" @change="handleSearch">
-            <el-option ::label="$t('auto.KnowledgeManagement.8.e4e4c7')" value="upload" />
-            <el-option ::label="$t('auto.KnowledgeManagement.9.4ef890')" value="text" />
+          <el-select v-model="filter.source_type" ::placeholder="$t('auto.KnowledgeManagement.cdb60d14')" clearable style="width: 130px" @change="handleSearch">
+            <el-option ::label="$t('auto.KnowledgeManagement.e4e4c7ee')" value="upload" />
+            <el-option ::label="$t('auto.KnowledgeManagement.4ef890cb')" value="text" />
             <el-option label="URL" value="url" />
             <el-option label="OpenAPI" value="openapi" />
           </el-select>
-          <el-input v-model="filter.keyword" ::placeholder="$t('auto.KnowledgeManagement.10.fc2d3e')" clearable style="width: 200px" @keyup.enter="handleSearch" @clear="handleSearch" />
+          <el-input v-model="filter.keyword" ::placeholder="$t('auto.KnowledgeManagement.fc2d3e1d')" clearable style="width: 200px" @keyup.enter="handleSearch" @clear="handleSearch" />
           <el-button type="primary" @click="handleSearch">{{ $t('搜索') }}</el-button>
         </div>
         <div class="toolbar-right">
@@ -100,12 +100,12 @@
     <el-card>
       <el-table :data="documents" v-loading="loading" stripe>
         <el-table-column prop="id" label="ID" width="80" />
-        <el-table-column prop="title" ::label="$t('auto.KnowledgeManagement.11.319eda')" min-width="200" show-overflow-tooltip>
+        <el-table-column prop="title" ::label="$t('auto.KnowledgeManagement.319eda89')" min-width="200" show-overflow-tooltip>
           <template #default="{ row }">
             <el-link type="primary" :underline="false" @click="showDocumentDetail(row)">{{ row.title }}</el-link>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.KnowledgeManagement.12.de9210')" min-width="180" show-overflow-tooltip>
+        <el-table-column :label="$t('auto.KnowledgeManagement.de92100c')" min-width="180" show-overflow-tooltip>
           <template #default="{ row }">
             <el-tag
               v-if="getKBName(row.product_id)"
@@ -115,25 +115,25 @@
             >
               {{ getKBName(row.product_id) }}
             </el-tag>
-            <span v-else class="text-muted">{{ $t('auto.KnowledgeManagement.45.f64a38') }}</span>
+            <span v-else class="text-muted">{{ $t('auto.KnowledgeManagement.f64a3850') }}</span>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.KnowledgeManagement.13.26ca20')" width="100">
+        <el-table-column :label="$t('auto.KnowledgeManagement.26ca20b1')" width="100">
           <template #default="{ row }">
             <el-tag :type="sourceTypeTag(row.source_type)">{{ sourceTypeLabel(row.source_type) }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.KnowledgeManagement.14.d0771a')" prop="category" width="120" />
-        <el-table-column :label="$t('auto.KnowledgeManagement.15.fe4416')" width="100">
+        <el-table-column :label="$t('auto.KnowledgeManagement.d0771a42')" prop="category" width="120" />
+        <el-table-column :label="$t('auto.KnowledgeManagement.fe4416f2')" width="100">
           <template #default="{ row }">
             <el-switch :model-value="row.public_visible" size="small" @change="(v) => togglePublic(row, v)" />
           </template>
         </el-table-column>
-        <el-table-column prop="file_size" :label="$t('auto.KnowledgeManagement.16.58f966')" width="100">
+        <el-table-column prop="file_size" :label="$t('auto.KnowledgeManagement.58f96667')" width="100">
           <template #default="{ row }">{{ formatFileSize(row.file_size) }}</template>
         </el-table-column>
-        <el-table-column :label="$t('auto.KnowledgeManagement.17.8e4c78')" prop="chunk_count" width="80" />
-        <el-table-column :label="$t('auto.KnowledgeManagement.18.3fea7c')" width="180">
+        <el-table-column :label="$t('auto.KnowledgeManagement.8e4c786f')" prop="chunk_count" width="80" />
+        <el-table-column :label="$t('auto.KnowledgeManagement.3fea7ca7')" width="180">
           <template #default="{ row }">
             <el-tag :type="getEmbedStatusTagType(row.embed_status)" size="small">
               {{ getEmbedStatusLabel(row.embed_status) }}
@@ -144,14 +144,14 @@
             <el-progress v-if="row.embed_status === 'processing'" :percentage="row.embed_progress" :show-text="false" :stroke-width="4" style="margin-top: 4px" />
           </template>
         </el-table-column>
-        <el-table-column prop="created_at" :label="$t('auto.KnowledgeManagement.19.930a14')" width="170">
+        <el-table-column prop="created_at" :label="$t('auto.KnowledgeManagement.930a1402')" width="170">
           <template #default="{ row }">{{ formatDate(row.created_at) }}</template>
         </el-table-column>
-        <el-table-column :label="$t('auto.KnowledgeManagement.20.2b6bc0')" width="220" fixed="right">
+        <el-table-column :label="$t('auto.KnowledgeManagement.2b6bc0f2')" width="220" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" size="small" @click="showDocumentDetail(row)">{{ $t('auto.KnowledgeManagement.46.f26225') }}</el-button>
-            <el-button link type="primary" size="small" @click="handleReindex(row)">{{ $t('auto.KnowledgeManagement.47.be0ade') }}</el-button>
-            <el-button link type="danger" size="small" @click="handleDelete(row)">{{ $t('auto.KnowledgeManagement.48.2f4aad') }}</el-button>
+            <el-button link type="primary" size="small" @click="showDocumentDetail(row)">{{ $t('auto.KnowledgeManagement.f26225bd') }}</el-button>
+            <el-button link type="primary" size="small" @click="handleReindex(row)">{{ $t('auto.KnowledgeManagement.be0ade04') }}</el-button>
+            <el-button link type="danger" size="small" @click="handleDelete(row)">{{ $t('auto.KnowledgeManagement.2f4aaddd') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -168,23 +168,23 @@
     </el-card>
 
     
-    <el-dialog v-model="showImportDialog" :title="$t('auto.KnowledgeManagement.21.616c43')" width="640px" :close-on-click-modal="false">
+    <el-dialog v-model="showImportDialog" :title="$t('auto.KnowledgeManagement.616c43b6')" width="640px" :close-on-click-modal="false">
       <el-tabs v-model="importTab">
         
-        <el-tab-pane :label="$t('auto.KnowledgeManagement.22.481e03')" name="upload">
+        <el-tab-pane :label="$t('auto.KnowledgeManagement.481e034e')" name="upload">
           <el-form label-width="80px">
-            <el-form-item :label="$t('auto.KnowledgeManagement.23.a01543')" required>
-              <el-select v-model="importForm.product_id" :placeholder="$t('auto.KnowledgeManagement.24.cbf1cf')" style="width: 100%">
+            <el-form-item :label="$t('auto.KnowledgeManagement.a015434e')" required>
+              <el-select v-model="importForm.product_id" :placeholder="$t('auto.KnowledgeManagement.cbf1cfff')" style="width: 100%">
                 <el-option v-for="p in productList" :key="p.id" :label="p.name" :value="p.id" />
               </el-select>
             </el-form-item>
-            <el-form-item :label="$t('auto.KnowledgeManagement.25.32c65d')">
-              <el-input v-model="importForm.title" :placeholder="$t('auto.KnowledgeManagement.26.cb0559')" />
+            <el-form-item :label="$t('auto.KnowledgeManagement.32c65d8d')">
+              <el-input v-model="importForm.title" :placeholder="$t('auto.KnowledgeManagement.cb055970')" />
             </el-form-item>
-            <el-form-item :label="$t('auto.KnowledgeManagement.14.d0771a')">
-              <el-input v-model="importForm.category" :placeholder="$t('auto.KnowledgeManagement.27.7078c6')" />
+            <el-form-item :label="$t('auto.KnowledgeManagement.d0771a42')">
+              <el-input v-model="importForm.category" :placeholder="$t('auto.KnowledgeManagement.7078c6b1')" />
             </el-form-item>
-            <el-form-item :label="$t('auto.KnowledgeManagement.28.2a0c47')" required>
+            <el-form-item :label="$t('auto.KnowledgeManagement.2a0c4740')" required>
               <el-upload
                 ref="uploadRef"
                 :auto-upload="false"
@@ -195,9 +195,9 @@
                 drag
               >
                 <el-icon class="el-icon--upload"><upload-filled /></el-icon>
-                <div class="el-upload__text">{{ $t('auto.KnowledgeManagement.49.1ef03f') }}<em>{{ $t('auto.KnowledgeManagement.50.2c808b') }}</em></div>
+                <div class="el-upload__text">{{ $t('auto.KnowledgeManagement.1ef03f0d') }}<em>{{ $t('auto.KnowledgeManagement.2c808b02') }}</em></div>
                 <template #tip>
-                  <div class="el-upload__tip">{{ $t('auto.KnowledgeManagement.51.5e72ba') }}</div>
+                  <div class="el-upload__tip">{{ $t('auto.KnowledgeManagement.5e72ba40') }}</div>
                 </template>
               </el-upload>
             </el-form-item>
@@ -205,77 +205,77 @@
         </el-tab-pane>
 
         
-        <el-tab-pane :label="$t('auto.KnowledgeManagement.29.9f2448')" name="text">
+        <el-tab-pane :label="$t('auto.KnowledgeManagement.9f24480b')" name="text">
           <el-form label-width="80px">
-            <el-form-item :label="$t('auto.KnowledgeManagement.23.a01543')" required>
-              <el-select v-model="importForm.product_id" :placeholder="$t('auto.KnowledgeManagement.24.cbf1cf')" style="width: 100%">
+            <el-form-item :label="$t('auto.KnowledgeManagement.a015434e')" required>
+              <el-select v-model="importForm.product_id" :placeholder="$t('auto.KnowledgeManagement.cbf1cfff')" style="width: 100%">
                 <el-option v-for="p in productList" :key="p.id" :label="p.name" :value="p.id" />
               </el-select>
             </el-form-item>
-            <el-form-item :label="$t('auto.KnowledgeManagement.25.32c65d')">
-              <el-input v-model="importForm.title" :placeholder="$t('auto.KnowledgeManagement.30.bf1368')" />
+            <el-form-item :label="$t('auto.KnowledgeManagement.32c65d8d')">
+              <el-input v-model="importForm.title" :placeholder="$t('auto.KnowledgeManagement.bf13680e')" />
             </el-form-item>
-            <el-form-item :label="$t('auto.KnowledgeManagement.31.2d711b')" required>
-              <el-input v-model="importForm.content" type="textarea" :rows="10" :placeholder="$t('auto.KnowledgeManagement.32.1bbe65')" />
+            <el-form-item :label="$t('auto.KnowledgeManagement.2d711b09')" required>
+              <el-input v-model="importForm.content" type="textarea" :rows="10" :placeholder="$t('auto.KnowledgeManagement.1bbe6562')" />
             </el-form-item>
           </el-form>
         </el-tab-pane>
 
         
-        <el-tab-pane :label="$t('auto.KnowledgeManagement.33.e4d0e7')" name="url">
+        <el-tab-pane :label="$t('auto.KnowledgeManagement.e4d0e7cf')" name="url">
           <el-form label-width="80px">
-            <el-form-item :label="$t('auto.KnowledgeManagement.23.a01543')" required>
-              <el-select v-model="importForm.product_id" :placeholder="$t('auto.KnowledgeManagement.24.cbf1cf')" style="width: 100%">
+            <el-form-item :label="$t('auto.KnowledgeManagement.a015434e')" required>
+              <el-select v-model="importForm.product_id" :placeholder="$t('auto.KnowledgeManagement.cbf1cfff')" style="width: 100%">
                 <el-option v-for="p in productList" :key="p.id" :label="p.name" :value="p.id" />
               </el-select>
             </el-form-item>
             <el-form-item label="URL" required>
               <el-input v-model="importForm.url" placeholder="https://example.com/article" />
             </el-form-item>
-            <el-form-item :label="$t('auto.KnowledgeManagement.25.32c65d')">
-              <el-input v-model="importForm.title" :placeholder="$t('auto.KnowledgeManagement.34.72db5b')" />
+            <el-form-item :label="$t('auto.KnowledgeManagement.32c65d8d')">
+              <el-input v-model="importForm.title" :placeholder="$t('auto.KnowledgeManagement.72db5bb7')" />
             </el-form-item>
           </el-form>
         </el-tab-pane>
       </el-tabs>
       <template #footer>
-        <el-button @click="showImportDialog = false">{{ $t('auto.KnowledgeManagement.52.625fb2') }}</el-button>
-        <el-button type="primary" :loading="importing" @click="handleImport">{{ $t('auto.KnowledgeManagement.53.7d2ff4') }}</el-button>
+        <el-button @click="showImportDialog = false">{{ $t('auto.KnowledgeManagement.625fb26b') }}</el-button>
+        <el-button type="primary" :loading="importing" @click="handleImport">{{ $t('auto.KnowledgeManagement.7d2ff42c') }}</el-button>
       </template>
     </el-dialog>
 
     
     <el-dialog v-model="showDetailDialog" :title="`文档详情 - ${currentDoc?.title || ''}`" width="800px">
       <el-descriptions v-if="currentDoc" :column="2" border>
-        <el-descriptions-item :label="$t('auto.KnowledgeManagement.35.241db8')">{{ currentDoc.id }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.KnowledgeManagement.25.32c65d')">{{ currentDoc.title }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.KnowledgeManagement.13.26ca20')">{{ sourceTypeLabel(currentDoc.source_type) }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.KnowledgeManagement.14.d0771a')">{{ currentDoc.category || '-' }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.KnowledgeManagement.36.28b988')">{{ currentDoc.file_type }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.KnowledgeManagement.37.396b7d')">{{ formatFileSize(currentDoc.file_size) }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.KnowledgeManagement.17.8e4c78')">{{ currentDoc.chunk_count }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.KnowledgeManagement.241db80a')">{{ currentDoc.id }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.KnowledgeManagement.32c65d8d')">{{ currentDoc.title }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.KnowledgeManagement.26ca20b1')">{{ sourceTypeLabel(currentDoc.source_type) }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.KnowledgeManagement.d0771a42')">{{ currentDoc.category || '-' }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.KnowledgeManagement.28b988ce')">{{ currentDoc.file_type }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.KnowledgeManagement.396b7d3f')">{{ formatFileSize(currentDoc.file_size) }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.KnowledgeManagement.8e4c786f')">{{ currentDoc.chunk_count }}</el-descriptions-item>
         <el-descriptions-item label="Tokens">{{ currentDoc.total_tokens }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.KnowledgeManagement.38.5fa127')"><el-text type="info">{{ $t('auto.KnowledgeManagement.54.8f5c4b') }}</el-text></el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.KnowledgeManagement.39.e5852c')"><el-text type="info">{{ $t('auto.KnowledgeManagement.54.8f5c4b') }}</el-text></el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.KnowledgeManagement.18.3fea7c')">
+        <el-descriptions-item :label="$t('auto.KnowledgeManagement.5fa127fb')"><el-text type="info">{{ $t('auto.KnowledgeManagement.8f5c4bfd') }}</el-text></el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.KnowledgeManagement.e5852c46')"><el-text type="info">{{ $t('auto.KnowledgeManagement.8f5c4bfd') }}</el-text></el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.KnowledgeManagement.3fea7ca7')">
           <el-tag :type="embedStatusTag(currentDoc.embed_status)">{{ embedStatusLabel(currentDoc.embed_status) }}</el-tag>
         </el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.KnowledgeManagement.19.930a14')">{{ formatDate(currentDoc.created_at) }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.KnowledgeManagement.40.ddcad6')" :span="2">{{ currentDoc.last_index_at ? formatDate(currentDoc.last_index_at) : '-' }}</el-descriptions-item>
-        <el-descriptions-item v-if="currentDoc.error_msg" :label="$t('auto.KnowledgeManagement.41.4604d5')" :span="2">
+        <el-descriptions-item :label="$t('auto.KnowledgeManagement.930a1402')">{{ formatDate(currentDoc.created_at) }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.KnowledgeManagement.ddcad6fe')" :span="2">{{ currentDoc.last_index_at ? formatDate(currentDoc.last_index_at) : '-' }}</el-descriptions-item>
+        <el-descriptions-item v-if="currentDoc.error_msg" :label="$t('auto.KnowledgeManagement.4604d502')" :span="2">
           <el-text type="danger">{{ currentDoc.error_msg }}</el-text>
         </el-descriptions-item>
       </el-descriptions>
-      <el-divider content-position="left">{{ $t('auto.KnowledgeManagement.55.936d0a') }}</el-divider>
+      <el-divider content-position="left">{{ $t('auto.KnowledgeManagement.936d0acd') }}</el-divider>
       <el-table :data="chunks" max-height="300">
-        <el-table-column prop="chunk_index" :label="$t('auto.KnowledgeManagement.42.faaadc')" width="80" />
-        <el-table-column prop="content" :label="$t('auto.KnowledgeManagement.31.2d711b')" show-overflow-tooltip>
+        <el-table-column prop="chunk_index" :label="$t('auto.KnowledgeManagement.faaadc44')" width="80" />
+        <el-table-column prop="content" :label="$t('auto.KnowledgeManagement.2d711b09')" show-overflow-tooltip>
           <template #default="{ row }">
             <div class="chunk-preview">{{ truncateText(row.content, 200) }}</div>
           </template>
         </el-table-column>
         <el-table-column prop="token_count" label="Tokens" width="100" />
-        <el-table-column prop="char_count" :label="$t('auto.KnowledgeManagement.43.ab90c6')" width="100" />
+        <el-table-column prop="char_count" :label="$t('auto.KnowledgeManagement.ab90c616')" width="100" />
       </el-table>
     </el-dialog>
   </div>
@@ -342,7 +342,7 @@ const loadOverview = async () => {
     const res = await knowledgeAPI.getOverviewStats({ product_id: filter.product_id })
     if (res) overview.value = res
   } catch (e) {
-    console.error(t('auto.KnowledgeManagement.56.3af525'), e)
+    console.error(t('auto.KnowledgeManagement.3af52516'), e)
   }
 }
 
@@ -355,7 +355,7 @@ const loadProducts = async () => {
       productList.value = res.items
     }
   } catch (e) {
-    console.error(t('auto.KnowledgeManagement.57.4c46f3'), e)
+    console.error(t('auto.KnowledgeManagement.4c46f3b1'), e)
   }
 }
 
@@ -371,7 +371,7 @@ const loadKnowledgeTools = async () => {
     const res = await listTools({ category: 'knowledge' })
     knowledgeTools.value = res?.list || []
   } catch (e) {
-    console.error(t('auto.KnowledgeManagement.58.4c2421'), e)
+    console.error(t('auto.KnowledgeManagement.4c242168'), e)
   }
 }
 
@@ -404,7 +404,7 @@ const loadDocuments = async () => {
     documents.value = res?.items || []
     pagination.total = res?.total || 0
   } catch (e) {
-    ElMessage.error(t('auto.KnowledgeManagement.59.0bd887') + (e.message || ''))
+    ElMessage.error(t('auto.KnowledgeManagement.0bd8870a') + (e.message || ''))
   } finally {
     loading.value = false
   }
@@ -417,7 +417,7 @@ const handleSearch = () => {
 
 const handleFileChange = (file) => {
   if (file.size > 50 * 1024 * 1024) {
-    ElMessage.error(i18n.global.t(t('auto.KnowledgeManagement.60.444e8e')))
+    ElMessage.error(i18n.global.t(t('auto.KnowledgeManagement.444e8e2b')))
     return false
   }
   importForm.file = file.raw
@@ -427,19 +427,19 @@ const handleFileChange = (file) => {
 }
 
 const handleExceed = () => {
-  ElMessage.warning(i18n.global.t(t('auto.KnowledgeManagement.61.c4e4c6')))
+  ElMessage.warning(i18n.global.t(t('auto.KnowledgeManagement.c4e4c6d3')))
 }
 
 const handleImport = async () => {
   if (!importForm.product_id) {
-    ElMessage.error(i18n.global.t(t('auto.KnowledgeManagement.62.3b8e12')))
+    ElMessage.error(i18n.global.t(t('auto.KnowledgeManagement.3b8e12b1')))
     return
   }
   importing.value = true
   try {
     if (importTab.value === 'upload') {
       if (!importForm.file) {
-        ElMessage.error(i18n.global.t(t('auto.KnowledgeManagement.63.9febf3')))
+        ElMessage.error(i18n.global.t(t('auto.KnowledgeManagement.9febf311')))
         importing.value = false
         return
       }
@@ -451,7 +451,7 @@ const handleImport = async () => {
       await knowledgeAPI.importUpload(fd)
     } else if (importTab.value === 'text') {
       if (!importForm.content) {
-        ElMessage.error(i18n.global.t(t('auto.KnowledgeManagement.64.a11cc7')))
+        ElMessage.error(i18n.global.t(t('auto.KnowledgeManagement.a11cc7a6')))
         importing.value = false
         return
       }
@@ -463,7 +463,7 @@ const handleImport = async () => {
       })
     } else if (importTab.value === 'url') {
       if (!importForm.url) {
-        ElMessage.error(i18n.global.t(t('auto.KnowledgeManagement.65.70015f')))
+        ElMessage.error(i18n.global.t(t('auto.KnowledgeManagement.70015f25')))
         importing.value = false
         return
       }
@@ -474,13 +474,13 @@ const handleImport = async () => {
         category: importForm.category
       })
     }
-    ElMessage.success(i18n.global.t(t('auto.KnowledgeManagement.66.d7da6b')))
+    ElMessage.success(i18n.global.t(t('auto.KnowledgeManagement.d7da6b79')))
     showImportDialog.value = false
     resetImportForm()
     loadAll()
     startPolling()
   } catch (e) {
-    ElMessage.error(t('auto.KnowledgeManagement.67.45332d') + (e.message || ''))
+    ElMessage.error(t('auto.KnowledgeManagement.45332d13') + (e.message || ''))
   } finally {
     importing.value = false
   }
@@ -502,30 +502,30 @@ const showDocumentDetail = async (row) => {
     const res = await knowledgeAPI.getDocumentChunks(row.id)
     chunks.value = (res?.items || []).slice(0, 20)
   } catch (e) {
-    console.error(t('auto.KnowledgeManagement.68.313c64'), e)
+    console.error(t('auto.KnowledgeManagement.313c64c6'), e)
   }
 }
 
 const handleReindex = async (row) => {
   try {
-    await ElMessageBox.confirm(`确认重建文档「${row.title}」的索引吗?`, t('auto.KnowledgeManagement.47.be0ade'), { type: 'warning' })
+    await ElMessageBox.confirm(`确认重建文档「${row.title}」的索引吗?`, t('auto.KnowledgeManagement.be0ade04'), { type: 'warning' })
     await knowledgeAPI.reindexDocument(row.id, { product_id: filter.product_id })
-    ElMessage.success(i18n.global.t(t('auto.KnowledgeManagement.69.02522d')))
+    ElMessage.success(i18n.global.t(t('auto.KnowledgeManagement.02522de8')))
     loadDocuments()
     startPolling()
   } catch (e) {
-    if (e !== 'cancel') ElMessage.error(t('auto.KnowledgeManagement.70.51f9bf') + (e.message || ''))
+    if (e !== 'cancel') ElMessage.error(t('auto.KnowledgeManagement.51f9bf55') + (e.message || ''))
   }
 }
 
 const handleDelete = async (row) => {
   try {
-    await ElMessageBox.confirm(`确认删除文档「${row.title}」吗?将同时删除其所有分段`, t('auto.KnowledgeManagement.71.f28f9f'), { type: 'warning' })
+    await ElMessageBox.confirm(`确认删除文档「${row.title}」吗?将同时删除其所有分段`, t('auto.KnowledgeManagement.f28f9fb9'), { type: 'warning' })
     await knowledgeAPI.deleteDocument(row.id, { product_id: filter.product_id })
-    ElMessage.success(i18n.global.t(t('auto.KnowledgeManagement.72.0007d1')))
+    ElMessage.success(i18n.global.t(t('auto.KnowledgeManagement.0007d170')))
     loadAll()
   } catch (e) {
-    if (e !== 'cancel') ElMessage.error(t('auto.KnowledgeManagement.73.ad23f0') + (e.message || ''))
+    if (e !== 'cancel') ElMessage.error(t('auto.KnowledgeManagement.ad23f072') + (e.message || ''))
   }
 }
 
@@ -566,9 +566,9 @@ const togglePublic = async (row, visible) => {
   try {
     await http.patch(`/api/knowledge/documents/${row.id}/public-visibility`, { visible })
     row.public_visible = visible
-    ElMessage.success(visible ? t('auto.KnowledgeManagement.74.a61e5b') : t('auto.KnowledgeManagement.75.87c6e1'))
+    ElMessage.success(visible ? t('auto.KnowledgeManagement.a61e5b7f') : t('auto.KnowledgeManagement.87c6e157'))
   } catch (e) {
-    ElMessage.error(e?.message || t('auto.KnowledgeManagement.76.5fa802'))
+    ElMessage.error(e?.message || t('auto.KnowledgeManagement.5fa802be'))
   }
 };
 

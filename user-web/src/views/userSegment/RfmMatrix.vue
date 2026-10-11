@@ -3,25 +3,25 @@
     <el-row :gutter="16" class="stats-row">
       <el-col :span="6">
         <el-card class="stat-card">
-          <div class="stat-label">{{ $t('auto.RfmMatrix.4.5b005d') }}</div>
+          <div class="stat-label">{{ $t('auto.RfmMatrix.5b005db2') }}</div>
           <div class="stat-value">{{ stats.total }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="stat-card success">
-          <div class="stat-label">{{ $t('auto.RfmMatrix.5.2bafca') }}</div>
+          <div class="stat-label">{{ $t('auto.RfmMatrix.2bafcaef') }}</div>
           <div class="stat-value">{{ stats.highValue }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="stat-card primary">
-          <div class="stat-label">{{ $t('auto.RfmMatrix.6.fe32de') }}</div>
+          <div class="stat-label">{{ $t('auto.RfmMatrix.fe32def4') }}</div>
           <div class="stat-value">{{ stats.active }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="stat-card danger">
-          <div class="stat-label">{{ $t('auto.RfmMatrix.7.4b6cdc') }}</div>
+          <div class="stat-label">{{ $t('auto.RfmMatrix.4b6cdce2') }}</div>
           <div class="stat-value">{{ stats.churnRisk }}</div>
         </el-card>
       </el-col>
@@ -30,25 +30,25 @@
     <el-card>
       <template #header>
         <div class="card-header">
-          <span>{{ $t('auto.RfmMatrix.8.40308c') }}</span>
+          <span>{{ $t('auto.RfmMatrix.40308ce9') }}</span>
           <el-button-group>
-            <el-button @click="exportToReach">{{ $t('auto.RfmMatrix.9.5e09e6') }}</el-button>
-            <el-button type="primary" @click="saveSegment">{{ $t('auto.RfmMatrix.10.d2fb06') }}</el-button>
+            <el-button @click="exportToReach">{{ $t('auto.RfmMatrix.5e09e687') }}</el-button>
+            <el-button type="primary" @click="saveSegment">{{ $t('auto.RfmMatrix.d2fb06de') }}</el-button>
           </el-button-group>
         </div>
       </template>
       <div ref="matrixRef" class="matrix" />
       <el-table :data="segments" class="segments-table">
-        <el-table-column prop="name" :label="$t('auto.RfmMatrix.1.33429b')" />
+        <el-table-column prop="name" :label="$t('auto.RfmMatrix.33429b82')" />
         <el-table-column prop="recency" label="R" width="80" />
         <el-table-column prop="frequency" label="F" width="80" />
         <el-table-column prop="monetary" label="M" width="100" />
-        <el-table-column prop="count" :label="$t('auto.RfmMatrix.2.3640d2')" width="100" />
+        <el-table-column prop="count" :label="$t('auto.RfmMatrix.3640d278')" width="100" />
         <el-table-column prop="revenue" label="GMV" width="120" />
-        <el-table-column :label="$t('auto.RfmMatrix.3.2b6bc0')" width="160" fixed="right">
+        <el-table-column :label="$t('auto.RfmMatrix.2b6bc0f2')" width="160" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" @click="viewDetail(row)">{{ $t('auto.RfmMatrix.11.f26225') }}</el-button>
-            <el-button link type="primary" @click="reachSegment(row)">{{ $t('auto.RfmMatrix.12.8097e4') }}</el-button>
+            <el-button link type="primary" @click="viewDetail(row)">{{ $t('auto.RfmMatrix.f26225bd') }}</el-button>
+            <el-button link type="primary" @click="reachSegment(row)">{{ $t('auto.RfmMatrix.8097e436') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -104,13 +104,13 @@ async function saveSegment() {
     const hv = (segments.value || []).filter((d) => d.recency >= 4 && d.frequency >= 4);
     await http.post('/api/user-segments', {
       name: `RFM高价值客群 ${new Date().toLocaleDateString()}`,
-      description: t('auto.RfmMatrix.13.05741a'),
+      description: t('auto.RfmMatrix.05741a7f'),
       rules: { type: 'rfm_snapshot', matrix: hv, saved_at: new Date().toISOString() },
       trigger: 'static'
     })
-    ElMessage.success(t('auto.RfmMatrix.14.221b31'))
+    ElMessage.success(t('auto.RfmMatrix.221b31cc'))
   } catch (e) {
-    ElMessage.error(e?.message || t('auto.RfmMatrix.15.6de920'))
+    ElMessage.error(e?.message || t('auto.RfmMatrix.6de920b4'))
   } finally {
     saving.value = false
   }

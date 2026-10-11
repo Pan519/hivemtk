@@ -5,11 +5,11 @@
       <div class="header-content">
         <div>
           <h2>{{ $t('销售意图识别') }}</h2>
-          <p class="subtitle">{{ $t('auto.List.46.b51044') }}</p>
+          <p class="subtitle">{{ $t('auto.List.b5104421') }}</p>
         </div>
         <div class="header-actions">
           <el-tooltip
-            ::content="$t('auto.List.1.e8cf41')"
+            ::content="$t('auto.List.e8cf410c')"
             placement="bottom"
             :show-after="200"
           >
@@ -17,8 +17,8 @@
               v-model="intentEnabled"
               :loading="configLoading"
               inline-prompt
-              :active-text="$t('auto.List.2.7854b5')"
-              :inactive-text="$t('auto.List.3.b15d91')"
+              :active-text="$t('auto.List.7854b52a')"
+              :inactive-text="$t('auto.List.b15d9127')"
               style="margin-right: 12px"
               @change="onToggleIntent"
             />
@@ -51,51 +51,51 @@
       <el-form :model="testForm" label-width="90px">
         <el-row :gutter="16">
           <el-col :span="12">
-            <el-form-item :label="$t('auto.List.4.3f61de')">
-              <el-input v-model="testForm.customer_id" :placeholder="$t('auto.List.5.c08094')" clearable />
+            <el-form-item :label="$t('auto.List.3f61dec5')">
+              <el-input v-model="testForm.customer_id" :placeholder="$t('auto.List.c080949d')" clearable />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item :label="$t('auto.List.6.498128')">
-              <el-select v-model="testForm.platform" :placeholder="$t('auto.List.7.32c3da')" clearable style="width: 100%">
-                <el-option :label="$t('auto.List.8.cfbf6f')" value="wechat" />
-                <el-option :label="$t('auto.List.9.277a98')" value="douyin" />
-                <el-option :label="$t('auto.List.10.ae26bb')" value="xiaohongshu" />
-                <el-option :label="$t('auto.List.11.f32c0a')" value="kuaishou" />
+            <el-form-item :label="$t('auto.List.4981287f')">
+              <el-select v-model="testForm.platform" :placeholder="$t('auto.List.32c3da83')" clearable style="width: 100%">
+                <el-option :label="$t('auto.List.cfbf6f4c')" value="wechat" />
+                <el-option :label="$t('auto.List.277a984f')" value="douyin" />
+                <el-option :label="$t('auto.List.ae26bb04')" value="xiaohongshu" />
+                <el-option :label="$t('auto.List.f32c0a2a')" value="kuaishou" />
                 <el-option label="WhatsApp" value="whatsapp" />
                 <el-option label="Telegram" value="telegram" />
               </el-select>
             </el-form-item>
           </el-col>
         </el-row>
-        <el-form-item :label="$t('auto.List.12.50f198')">
-          <el-input v-model="testForm.context" :placeholder="$t('auto.List.13.b0f349')" clearable />
+        <el-form-item :label="$t('auto.List.50f198f0')">
+          <el-input v-model="testForm.context" :placeholder="$t('auto.List.b0f349c4')" clearable />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.14.80ded0')">
+        <el-form-item :label="$t('auto.List.80ded089')">
           <el-input
             v-model="testForm.message"
             type="textarea"
             :rows="3"
-            :placeholder="$t('auto.List.15.ac27ae')"
+            :placeholder="$t('auto.List.ac27ae19')"
           />
         </el-form-item>
         <el-form-item>
           <el-button type="primary" :loading="recognizing" @click="runRecognize">
             <el-icon><Aim /></el-icon> 开始识别
           </el-button>
-          <el-button type="success" :loading="batchLoading" @click="runBatchRecognize">{{ $t('auto.List.47.ab0467') }}</el-button>
+          <el-button type="success" :loading="batchLoading" @click="runBatchRecognize">{{ $t('auto.List.ab0467e1') }}</el-button>
         </el-form-item>
       </el-form>
 
       <template v-if="recognizeResult">
-        <el-divider content-position="left">{{ $t('auto.List.48.fcf276') }}</el-divider>
+        <el-divider content-position="left">{{ $t('auto.List.fcf276af') }}</el-divider>
         <el-descriptions :column="2" border>
-          <el-descriptions-item :label="$t('auto.List.16.766c07')">
+          <el-descriptions-item :label="$t('auto.List.766c070f')">
             <el-tag :type="getIntentTagType(recognizeResult.intent_type)">
               {{ recognizeResult.intent_name || intentNameMap[recognizeResult.intent_type] || recognizeResult.intent_type || '-' }}
             </el-tag>
           </el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.17.8f3599')">
+          <el-descriptions-item :label="$t('auto.List.8f3599b6')">
             <el-progress
               :percentage="Math.round((recognizeResult.confidence || 0) * 100)"
               :color="getConfidenceColor(recognizeResult.confidence_level)"
@@ -104,26 +104,26 @@
               style="width: 220px"
             />
           </el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.18.eebd3f')">
+          <el-descriptions-item :label="$t('auto.List.eebd3f23')">
             <el-tag :type="getConfidenceTagType(recognizeResult.confidence_level)" size="small" effect="plain">
               {{ recognizeResult.confidence_level || '-' }}
             </el-tag>
           </el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.19.6fcade')">
+          <el-descriptions-item :label="$t('auto.List.6fcade01')">
             <el-tag :type="recognizeResult.method === 'llm' ? 'danger' : 'info'" size="small" effect="plain">
               {{ recognizeResult.method === 'llm' ? 'LLM 模型' : '规则匹配' }}
             </el-tag>
           </el-descriptions-item>
-          <el-descriptions-item v-if="recognizeResult.platform" :label="$t('auto.List.6.498128')">
+          <el-descriptions-item v-if="recognizeResult.platform" :label="$t('auto.List.4981287f')">
             {{ recognizeResult.platform }}
           </el-descriptions-item>
-          <el-descriptions-item v-if="recognizeResult.latency_ms" :label="$t('auto.List.20.39f137')">
+          <el-descriptions-item v-if="recognizeResult.latency_ms" :label="$t('auto.List.39f1374d')">
             {{ recognizeResult.latency_ms }} ms
           </el-descriptions-item>
         </el-descriptions>
 
         <template v-if="recognizeResult.entities && Object.keys(recognizeResult.entities).length">
-          <el-divider content-position="left">{{ $t('auto.List.49.d3d9ad') }}</el-divider>
+          <el-divider content-position="left">{{ $t('auto.List.d3d9ad96') }}</el-divider>
           <div class="entity-list">
             <el-tag v-for="(val, key) in recognizeResult.entities" :key="key" effect="plain" class="entity-tag">
               {{ key }}: {{ val }}
@@ -135,20 +135,20 @@
       <template v-if="batchResults.length">
         <el-divider content-position="left">批量识别结果（{{ batchResults.length }} 条）</el-divider>
         <el-table :data="batchResults" stripe size="small" max-height="320">
-          <el-table-column :label="$t('auto.List.21.932ccc')" min-width="200" show-overflow-tooltip>
+          <el-table-column :label="$t('auto.List.932ccc57')" min-width="200" show-overflow-tooltip>
             <template #default="{ row }">{{ row.message || row.raw_text }}</template>
           </el-table-column>
-          <el-table-column :label="$t('auto.List.22.764aca')" width="120">
+          <el-table-column :label="$t('auto.List.764aca4e')" width="120">
             <template #default="{ row }">
               <el-tag :type="getIntentTagType(row.intent_type)" size="small">
                 {{ row.intent_name || intentNameMap[row.intent_type] || row.intent_type }}
               </el-tag>
             </template>
           </el-table-column>
-          <el-table-column :label="$t('auto.List.17.8f3599')" width="100">
+          <el-table-column :label="$t('auto.List.8f3599b6')" width="100">
             <template #default="{ row }">{{ Math.round((row.confidence || 0) * 100) }}%</template>
           </el-table-column>
-          <el-table-column :label="$t('auto.List.23.ea340b')" width="80">
+          <el-table-column :label="$t('auto.List.ea340b9d')" width="80">
             <template #default="{ row }">
               <el-tag :type="getMethodTagType(row.method)" size="small" effect="plain">
                 {{ getMethodLabel(row.method) }}
@@ -164,25 +164,25 @@
       <el-col :span="6">
         <el-card shadow="hover" class="stat-card">
           <div class="stat-value">{{ statsData.total || 0 }}</div>
-          <div class="stat-label">{{ $t('auto.List.50.2616b1') }}</div>
+          <div class="stat-label">{{ $t('auto.List.2616b1f3') }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card shadow="hover" class="stat-card stat-purchase">
           <div class="stat-value">{{ statsData.purchase || 0 }}</div>
-          <div class="stat-label">{{ $t('auto.List.51.ce092e') }}</div>
+          <div class="stat-label">{{ $t('auto.List.ce092ef3') }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card shadow="hover" class="stat-card stat-inquiry">
           <div class="stat-value">{{ statsData.price_inquiry || 0 }}</div>
-          <div class="stat-label">{{ $t('auto.List.52.be446c') }}</div>
+          <div class="stat-label">{{ $t('auto.List.be446cfe') }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card shadow="hover" class="stat-card stat-objection">
           <div class="stat-value">{{ objectionTotal }}</div>
-          <div class="stat-label">{{ $t('auto.List.53.ec0ea0') }}</div>
+          <div class="stat-label">{{ $t('auto.List.ec0ea0bd') }}</div>
         </el-card>
       </el-col>
     </el-row>
@@ -193,8 +193,8 @@
         <el-card shadow="never">
           <template #header>
             <div class="card-header">
-              <span>{{ $t('auto.List.54.549a89') }}</span>
-              <el-button link type="primary" size="small" @click="loadStats">{{ $t('auto.List.55.694fc5') }}</el-button>
+              <span>{{ $t('auto.List.549a894b') }}</span>
+              <el-button link type="primary" size="small" @click="loadStats">{{ $t('auto.List.694fc5ef') }}</el-button>
             </div>
           </template>
           <div class="intent-distribution" v-loading="statsLoading">
@@ -211,7 +211,7 @@
                 <span class="dist-count">{{ item.count }}</span>
               </div>
             </template>
-            <el-empty v-else :description="$t('auto.List.24.a3b437')" :image-size="80" />
+            <el-empty v-else :description="$t('auto.List.a3b437c9')" :image-size="80" />
           </div>
         </el-card>
       </el-col>
@@ -221,27 +221,27 @@
         <el-card shadow="never">
           <template #header>
             <div class="card-header">
-              <span>{{ $t('auto.List.56.2ca96e') }}</span>
+              <span>{{ $t('auto.List.2ca96e39') }}</span>
               <div class="header-controls">
-                <el-select v-model="filterIntentType" :placeholder="$t('auto.List.25.c212e9')" clearable size="small" style="width: 160px" @change="onFilterChange">
+                <el-select v-model="filterIntentType" :placeholder="$t('auto.List.c212e922')" clearable size="small" style="width: 160px" @change="onFilterChange">
                   <el-option v-for="d in intentDict" :key="d.type" :label="d.name" :value="d.type" />
                 </el-select>
-                <el-button size="small" type="primary" @click="loadRecent">{{ $t('auto.List.57.bee912') }}</el-button>
+                <el-button size="small" type="primary" @click="loadRecent">{{ $t('auto.List.bee912d7') }}</el-button>
               </div>
             </div>
           </template>
           <el-table :data="recentList" v-loading="recentLoading" stripe size="small" style="width: 100%">
-            <el-table-column :label="$t('auto.List.26.b87b77')" min-width="180" show-overflow-tooltip>
+            <el-table-column :label="$t('auto.List.b87b7756')" min-width="180" show-overflow-tooltip>
               <template #default="{ row }">{{ row.message || row.raw_text }}</template>
             </el-table-column>
-            <el-table-column :label="$t('auto.List.27.c6d069')" width="120">
+            <el-table-column :label="$t('auto.List.c6d069c9')" width="120">
               <template #default="{ row }">
                 <el-tag :type="getIntentTagType(row.intent_type)" size="small">
                   {{ intentNameMap[row.intent_type] || row.intent_type }}
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column :label="$t('auto.List.17.8f3599')" width="130">
+            <el-table-column :label="$t('auto.List.8f3599b6')" width="130">
               <template #default="{ row }">
                 <el-progress
                   :percentage="Math.round((row.confidence || 0) * 100)"
@@ -251,17 +251,17 @@
                 />
               </template>
             </el-table-column>
-            <el-table-column :label="$t('auto.List.6.498128')" width="90">
+            <el-table-column :label="$t('auto.List.4981287f')" width="90">
               <template #default="{ row }">
                 <el-tag v-if="row.platform" size="small" effect="plain">{{ getChannelLabel(row.platform) }}</el-tag>
                 <span v-else>-</span>
               </template>
             </el-table-column>
-            <el-table-column :label="$t('auto.List.28.19fcb9')" width="150">
+            <el-table-column :label="$t('auto.List.19fcb9eb')" width="150">
               <template #default="{ row }">{{ formatTime(row.created_at) }}</template>
             </el-table-column>
             <template #empty>
-              <el-empty :description="$t('auto.List.29.b9db84')" :image-size="80" />
+              <el-empty :description="$t('auto.List.b9db8476')" :image-size="80" />
             </template>
           </el-table>
           <div class="pagination-container" v-if="recentPagination.total > 0">
@@ -283,16 +283,16 @@
     <el-card shadow="never" class="test-card">
       <template #header>
         <div class="card-header">
-          <span><el-icon><MagicStick /></el-icon>{{ $t('auto.List.58.902eda') }}</span>
+          <span><el-icon><MagicStick /></el-icon>{{ $t('auto.List.902eda12') }}</span>
           <el-button link type="primary" @click="fillFineExample">{{ $t('填入示例') }}</el-button>
         </div>
       </template>
       <el-form :model="fineForm" label-width="90px" inline>
-        <el-form-item :label="$t('auto.List.14.80ded0')">
-          <el-input v-model="fineForm.message" type="textarea" :rows="2" :placeholder="$t('auto.List.30.c8be06')" style="width: 460px" />
+        <el-form-item :label="$t('auto.List.80ded089')">
+          <el-input v-model="fineForm.message" type="textarea" :rows="2" :placeholder="$t('auto.List.c8be063c')" style="width: 460px" />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.4.3f61de')">
-          <el-input v-model="fineForm.customer_id" :placeholder="$t('auto.List.31.c20cba')" clearable style="width: 180px" />
+        <el-form-item :label="$t('auto.List.3f61dec5')">
+          <el-input v-model="fineForm.customer_id" :placeholder="$t('auto.List.c20cba89')" clearable style="width: 180px" />
         </el-form-item>
         <el-form-item>
           <el-button type="primary" :loading="fineLoading" @click="runRecognizeFine">
@@ -301,15 +301,15 @@
         </el-form-item>
       </el-form>
       <template v-if="fineResult">
-        <el-divider content-position="left">{{ $t('auto.List.59.20d4ea') }}</el-divider>
+        <el-divider content-position="left">{{ $t('auto.List.20d4ea2c') }}</el-divider>
         <el-descriptions :column="2" border>
-          <el-descriptions-item :label="$t('auto.List.32.d196c7')">
+          <el-descriptions-item :label="$t('auto.List.d196c728')">
             <el-tag type="primary" effect="dark">{{ fineResult.major || '-' }}</el-tag>
           </el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.33.815e21')">
+          <el-descriptions-item :label="$t('auto.List.815e210d')">
             <el-tag effect="plain">{{ fineResult.minor || '-' }}</el-tag>
           </el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.17.8f3599')">
+          <el-descriptions-item :label="$t('auto.List.8f3599b6')">
             <el-progress
               :percentage="Math.round((fineResult.confidence || 0) * 100)"
               :color="(fineResult.confidence || 0) >= 0.7 ? '#10B981' : '#F59E0B'"
@@ -317,18 +317,18 @@
               style="width: 220px"
             />
           </el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.23.ea340b')">
+          <el-descriptions-item :label="$t('auto.List.ea340b9d')">
             <el-tag :type="getFineMethodType(fineResult.method)" size="small">
               {{ getFineMethodLabel(fineResult.method) }}
             </el-tag>
           </el-descriptions-item>
-          <el-descriptions-item v-if="fineResult.llm_model" :label="$t('auto.List.34.c82b0d')">
+          <el-descriptions-item v-if="fineResult.llm_model" :label="$t('auto.List.c82b0d96')">
             <el-tag size="small" effect="plain">{{ fineResult.llm_model }}</el-tag>
           </el-descriptions-item>
-          <el-descriptions-item v-if="fineResult.latency_ms" :label="$t('auto.List.20.39f137')">
+          <el-descriptions-item v-if="fineResult.latency_ms" :label="$t('auto.List.39f1374d')">
             {{ fineResult.latency_ms }} ms
           </el-descriptions-item>
-          <el-descriptions-item v-if="fineResult.reasoning" :label="$t('auto.List.35.633fb3')" :span="2">
+          <el-descriptions-item v-if="fineResult.reasoning" :label="$t('auto.List.633fb3ff')" :span="2">
             {{ fineResult.reasoning }}
           </el-descriptions-item>
         </el-descriptions>
@@ -341,43 +341,43 @@
         <div class="card-header">
           <span>精细意图识别日志（最近 {{ fineLogs.length }} 条）</span>
           <div class="header-controls">
-            <el-select v-model="filterFineMajor" :placeholder="$t('auto.List.36.30ad2a')" clearable size="small" style="width: 160px" @change="loadFineLogs">
+            <el-select v-model="filterFineMajor" :placeholder="$t('auto.List.30ad2af2')" clearable size="small" style="width: 160px" @change="loadFineLogs">
               <el-option v-for="m in fineMajorOptions" :key="m" :label="m" :value="m" />
             </el-select>
-            <el-button size="small" type="primary" @click="loadFineLogs">{{ $t('auto.List.57.bee912') }}</el-button>
+            <el-button size="small" type="primary" @click="loadFineLogs">{{ $t('auto.List.bee912d7') }}</el-button>
           </div>
         </div>
       </template>
       <el-table :data="fineLogs" v-loading="fineLogsLoading" stripe size="small">
-        <el-table-column :label="$t('auto.List.26.b87b77')" min-width="200" show-overflow-tooltip>
+        <el-table-column :label="$t('auto.List.b87b7756')" min-width="200" show-overflow-tooltip>
           <template #default="{ row }">{{ row.message || '-' }}</template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.32.d196c7')" width="120">
+        <el-table-column :label="$t('auto.List.d196c728')" width="120">
           <template #default="{ row }">
             <el-tag type="primary" size="small" effect="plain">{{ row.intent_major || '-' }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.33.815e21')" width="160" show-overflow-tooltip>
+        <el-table-column :label="$t('auto.List.815e210d')" width="160" show-overflow-tooltip>
           <template #default="{ row }">{{ row.intent_minor || '-' }}</template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.17.8f3599')" width="100">
+        <el-table-column :label="$t('auto.List.8f3599b6')" width="100">
           <template #default="{ row }">{{ Math.round((row.confidence || 0) * 100) }}%</template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.23.ea340b')" width="80">
+        <el-table-column :label="$t('auto.List.ea340b9d')" width="80">
           <template #default="{ row }">
             <el-tag :type="getFineMethodType(row.method)" size="small" effect="plain">
               {{ getFineMethodLabel(row.method) }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.20.39f137')" width="80">
+        <el-table-column :label="$t('auto.List.39f1374d')" width="80">
           <template #default="{ row }">{{ row.latency_ms || 0 }}ms</template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.28.19fcb9')" width="150">
+        <el-table-column :label="$t('auto.List.19fcb9eb')" width="150">
           <template #default="{ row }">{{ formatTime(row.timestamp || row.created_at) }}</template>
         </el-table-column>
         <template #empty>
-          <el-empty :description="$t('auto.List.37.04c99b')" :image-size="80" />
+          <el-empty :description="$t('auto.List.04c99b5a')" :image-size="80" />
         </template>
       </el-table>
     </el-card>
@@ -387,18 +387,18 @@
       <template #header>
         <div class="card-header">
           <span>意图词典（{{ intentDict.length }} 类）</span>
-          <el-input v-model="dictKeyword" :placeholder="$t('auto.List.38.f12a40')" clearable size="small" style="width: 220px" />
+          <el-input v-model="dictKeyword" :placeholder="$t('auto.List.f12a4026')" clearable size="small" style="width: 220px" />
         </div>
       </template>
       <el-table :data="filteredDict" stripe size="small">
-        <el-table-column :label="$t('auto.List.22.764aca')" width="130">
+        <el-table-column :label="$t('auto.List.764aca4e')" width="130">
           <template #default="{ row }">
             <el-tag :type="getIntentTagType(row.type)" size="small">{{ row.name }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="type" :label="$t('auto.List.39.45235f')" width="180" />
-        <el-table-column prop="description" :label="$t('auto.List.40.f411d0')" min-width="180" show-overflow-tooltip />
-        <el-table-column :label="$t('auto.List.41.9699a5')" min-width="260">
+        <el-table-column prop="type" :label="$t('auto.List.45235f6c')" width="180" />
+        <el-table-column prop="description" :label="$t('auto.List.f411d0f1')" min-width="180" show-overflow-tooltip />
+        <el-table-column :label="$t('auto.List.9699a50e')" min-width="260">
           <template #default="{ row }">
             <el-tag v-for="kw in (row.keywords || []).slice(0, 6)" :key="kw" size="small" effect="plain" style="margin: 2px">
               {{ kw }}
@@ -406,7 +406,7 @@
             <span v-if="(row.keywords || []).length > 6" class="more-tag">等 {{ row.keywords.length }} 个</span>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.42.1a63ac')" min-width="220" show-overflow-tooltip>
+        <el-table-column :label="$t('auto.List.1a63ac23')" min-width="220" show-overflow-tooltip>
           <template #default="{ row }">
             {{ (row.examples || []).join(' / ') }}
           </template>
@@ -415,9 +415,9 @@
     </el-card>
 
     <!-- 词表配置对话框 -->
-    <el-dialog v-model="keywordOverrideVisible" :title="$t('auto.List.43.24690f')" width="720px">
+    <el-dialog v-model="keywordOverrideVisible" :title="$t('auto.List.24690feb')" width="720px">
       <el-alert
-        :title="$t('auto.List.44.38a2e6')"
+        :title="$t('auto.List.38a2e6dc')"
         type="info"
         :closable="false"
         show-icon
@@ -425,7 +425,7 @@
       />
       <div v-if="keywordOverrideLoading" style="text-align: center; padding: 40px">
         <el-icon class="is-loading" :size="32"><Loading /></el-icon>
-        <p style="margin-top: 12px; color: #909399">{{ $t('auto.List.60.26b5bd') }}</p>
+        <p style="margin-top: 12px; color: #909399">{{ $t('auto.List.26b5bd49') }}</p>
       </div>
       <div v-else>
         <div v-for="intent in keywordOverrideIntents" :key="intent.type" style="margin-bottom: 20px">
@@ -453,18 +453,18 @@
           <div style="display: flex; gap: 8px">
             <el-input
               v-model="keywordInput[intent.type]"
-              :placeholder="$t('auto.List.45.5b5c82')"
+              :placeholder="$t('auto.List.5b5c82bd')"
               size="small"
               style="flex: 1"
               @keyup.enter="addKeyword(intent.type)"
             />
-            <el-button size="small" @click="addKeyword(intent.type)">{{ $t('auto.List.61.b58c75') }}</el-button>
+            <el-button size="small" @click="addKeyword(intent.type)">{{ $t('auto.List.b58c7549') }}</el-button>
           </div>
         </div>
       </div>
       <template #footer>
-        <el-button @click="keywordOverrideVisible = false">{{ $t('auto.List.62.625fb2') }}</el-button>
-        <el-button type="primary" :loading="keywordOverrideSaving" @click="saveKeywordOverride">{{ $t('auto.List.63.be5fbb') }}</el-button>
+        <el-button @click="keywordOverrideVisible = false">{{ $t('auto.List.625fb26b') }}</el-button>
+        <el-button type="primary" :loading="keywordOverrideSaving" @click="saveKeywordOverride">{{ $t('auto.List.be5fbbe3') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -479,7 +479,7 @@ import { ElMessage } from 'element-plus'
 import { Aim, MagicStick, Refresh, Loading, EditPen } from '@element-plus/icons-vue'
 import { intentApi } from '@/api/intentRecognition.js'
 import { getChannelLabel } from '@/constants/channel'
-const RECOGNIZE_METHOD = { llm: 'LLM', rule: t('auto.List.64.b0fae0'), keyword: t('auto.List.41.9699a5'), bert: 'BERT', hybrid: t('auto.List.65.41ce13') };
+const RECOGNIZE_METHOD = { llm: 'LLM', rule: t('auto.List.b0fae043'), keyword: t('auto.List.9699a50e'), bert: 'BERT', hybrid: t('auto.List.41ce131a') };
 const RECOGNIZE_METHOD_TAG = { llm: 'danger', rule: 'info', keyword: 'success', bert: 'warning', hybrid: 'primary' }
 const getMethodLabel = (m) => RECOGNIZE_METHOD[m] || m || '-'
 // 兜底必须是 el-tag 的合法 type：空串会触发
@@ -517,7 +517,7 @@ const fineMajorOptions = [
   'consult', 'price_inquiry', 'objection', 'after_sale',
   'complaint', 'churn', 'intent_buy', 'ask_product'
 ];
-const FINE_METHOD_LABEL = { rule: t('auto.List.64.b0fae0'), llm: 'LLM', hybrid: t('auto.List.66.2e5edb') }
+const FINE_METHOD_LABEL = { rule: t('auto.List.b0fae043'), llm: 'LLM', hybrid: t('auto.List.2e5edb3c') }
 const FINE_METHOD_TAG = { rule: 'success', llm: 'danger', hybrid: 'warning' }
 const getFineMethodLabel = (m) => FINE_METHOD_LABEL[m] || m || '-'
 const getFineMethodType = (m) => FINE_METHOD_TAG[m] || 'info'
@@ -541,7 +541,7 @@ const loadIntentConfig = async () => {
     }
   } catch (e) {
     intentEnabled.value = true;
-    ElMessage.warning(t('auto.List.67.2c5ca9') + (e.message || t('auto.List.68.974e74')))
+    ElMessage.warning(t('auto.List.2c5ca90b') + (e.message || t('auto.List.974e7484')))
   } finally {
     configLoading.value = false
   }
@@ -557,10 +557,10 @@ const onToggleIntent = async (val) => {
         updated_by: res.updated_by || ''
       }
     }
-    ElMessage.success(`意图识别已${val ? t('auto.List.2.7854b5') : t('auto.List.3.b15d91')}，业务链路立即生效`)
+    ElMessage.success(`意图识别已${val ? t('auto.List.7854b52a') : t('auto.List.b15d9127')}，业务链路立即生效`)
   } catch (e) {
     intentEnabled.value = !val;
-    ElMessage.error(t('auto.List.69.d0759f') + (e.message || t('auto.List.68.974e74')))
+    ElMessage.error(t('auto.List.d0759f5f') + (e.message || t('auto.List.974e7484')))
   } finally {
     configLoading.value = false
   }
@@ -592,7 +592,7 @@ const openKeywordOverride = async () => {
       keywordOverrideDraft.value = JSON.parse(JSON.stringify(res))
     }
   } catch (e) {
-    ElMessage.error(t('auto.List.70.4c832b') + (e.message || t('auto.List.68.974e74')))
+    ElMessage.error(t('auto.List.4c832b12') + (e.message || t('auto.List.974e7484')))
   } finally {
     keywordOverrideLoading.value = false
   }
@@ -623,10 +623,10 @@ const saveKeywordOverride = async () => {
   keywordOverrideSaving.value = true
   try {
     await intentApi.updateKeywordOverride({ override: keywordOverrideDraft.value })
-    ElMessage.success(t('auto.List.71.4e023c'))
+    ElMessage.success(t('auto.List.4e023cee'))
     keywordOverrideVisible.value = false
   } catch (e) {
-    ElMessage.error(t('auto.List.72.036fe2') + (e.message || t('auto.List.68.974e74')))
+    ElMessage.error(t('auto.List.036fe2d5') + (e.message || t('auto.List.974e7484')))
   } finally {
     keywordOverrideSaving.value = false
   }
@@ -737,7 +737,7 @@ const loadStats = async () => {
       statsData.value = {}
     }
   } catch (e) {
-    ElMessage.error(t('auto.List.73.4f0b6e') + (e.message || t('auto.List.68.974e74')))
+    ElMessage.error(t('auto.List.4f0b6e2e') + (e.message || t('auto.List.974e7484')))
   } finally {
     statsLoading.value = false
   }
@@ -760,7 +760,7 @@ const loadRecent = async () => {
     recentList.value = res?.list || (Array.isArray(res) ? res : []);
     recentPagination.value.total = res?.total || recentList.value.length
   } catch (e) {
-    ElMessage.error(t('auto.List.74.b32725') + (e.message || t('auto.List.68.974e74')))
+    ElMessage.error(t('auto.List.b3272552') + (e.message || t('auto.List.974e7484')))
   } finally {
     recentLoading.value = false
   }
@@ -771,7 +771,7 @@ const loadDict = async () => {
     const res = await intentApi.getDict()
     intentDict.value = Array.isArray(res) ? res : (res?.list || [])
   } catch (e) {
-    ElMessage.error(t('auto.List.75.a48487') + (e.message || t('auto.List.68.974e74')))
+    ElMessage.error(t('auto.List.a48487c4') + (e.message || t('auto.List.974e7484')))
   }
 }
 
@@ -786,18 +786,18 @@ const refreshAll = async () => {
 
 const fillExample = () => {
   const examples = [
-    t('auto.List.76.ce57ca'),
-    t('auto.List.77.ea54a8'),
-    t('auto.List.78.164802'),
-    t('auto.List.79.ed2ed6'),
-    t('auto.List.80.c1a0cf')
+    t('auto.List.ce57caf7'),
+    t('auto.List.ea54a824'),
+    t('auto.List.16480225'),
+    t('auto.List.ed2ed676'),
+    t('auto.List.c1a0cf45')
   ]
   testForm.value.message = examples[Math.floor(Math.random() * examples.length)]
 }
 
 const runRecognize = async () => {
   if (!testForm.value.message || !testForm.value.message.trim()) {
-    ElMessage.warning(i18n.global.t(t('auto.List.81.f6acdc')))
+    ElMessage.warning(i18n.global.t(t('auto.List.f6acdcf7')))
     return
   }
   recognizing.value = true
@@ -811,10 +811,10 @@ const runRecognize = async () => {
     if (testForm.value.platform) data.platform = testForm.value.platform
     const res = await intentApi.recognize(data)
     recognizeResult.value = res
-    ElMessage.success(i18n.global.t(t('auto.List.82.483f84')))
+    ElMessage.success(i18n.global.t(t('auto.List.483f84a1')))
     loadRecent()
   } catch (e) {
-    ElMessage.error(t('auto.List.83.a3ebed') + (e.message || t('auto.List.68.974e74')))
+    ElMessage.error(t('auto.List.a3ebed4c') + (e.message || t('auto.List.974e7484')))
   } finally {
     recognizing.value = false
   }
@@ -823,7 +823,7 @@ const runRecognize = async () => {
 const runBatchRecognize = async () => {
   const lines = (testForm.value.message || '').split('\n').map(s => s.trim()).filter(Boolean);
   if (lines.length === 0) {
-    ElMessage.warning(i18n.global.t(t('auto.List.84.41c20d')))
+    ElMessage.warning(i18n.global.t(t('auto.List.41c20d3b')))
     return
   }
   batchLoading.value = true
@@ -836,7 +836,7 @@ const runBatchRecognize = async () => {
     ElMessage.success(`批量识别完成，共 ${batchResults.value.length} 条`)
     loadRecent()
   } catch (e) {
-    ElMessage.error(t('auto.List.85.09d30f') + (e.message || t('auto.List.68.974e74')))
+    ElMessage.error(t('auto.List.09d30f6a') + (e.message || t('auto.List.974e7484')))
   } finally {
     batchLoading.value = false
   }
@@ -844,19 +844,19 @@ const runBatchRecognize = async () => {
 
 const fillFineExample = () => {
   const examples = [
-    t('auto.List.86.d9158d'),
-    t('auto.List.87.770412'),
-    t('auto.List.88.191b56'),
-    t('auto.List.89.75f259'),
-    t('auto.List.90.5ed1ee'),
-    t('auto.List.91.e4dd37')
+    t('auto.List.d9158db5'),
+    t('auto.List.77041251'),
+    t('auto.List.191b56b0'),
+    t('auto.List.75f25947'),
+    t('auto.List.5ed1ee42'),
+    t('auto.List.e4dd3704')
   ]
   fineForm.value.message = examples[Math.floor(Math.random() * examples.length)]
 };
 
 const runRecognizeFine = async () => {
   if (!fineForm.value.message || !fineForm.value.message.trim()) {
-    ElMessage.warning(i18n.global.t(t('auto.List.81.f6acdc')))
+    ElMessage.warning(i18n.global.t(t('auto.List.f6acdcf7')))
     return
   }
   fineLoading.value = true
@@ -866,10 +866,10 @@ const runRecognizeFine = async () => {
     if (fineForm.value.customer_id) data.customer_id = fineForm.value.customer_id
     const res = await intentApi.recognizeFine(data)
     fineResult.value = res
-    ElMessage.success(i18n.global.t(t('auto.List.92.489a81')))
+    ElMessage.success(i18n.global.t(t('auto.List.489a8195')))
     loadFineLogs()
   } catch (e) {
-    ElMessage.error(t('auto.List.93.3569c4') + (e.message || t('auto.List.68.974e74')))
+    ElMessage.error(t('auto.List.3569c4dd') + (e.message || t('auto.List.974e7484')))
   } finally {
     fineLoading.value = false
   }
@@ -883,7 +883,7 @@ const loadFineLogs = async () => {
     const res = await intentApi.getLogs(params)
     fineLogs.value = Array.isArray(res) ? res : (res?.list || [])
   } catch (e) {
-    ElMessage.error(t('auto.List.94.aa7ea4') + (e.message || t('auto.List.68.974e74')))
+    ElMessage.error(t('auto.List.aa7ea496') + (e.message || t('auto.List.974e7484')))
     fineLogs.value = []
   } finally {
     fineLogsLoading.value = false

@@ -54,70 +54,70 @@
 
     <el-tabs v-model="activeTab" @tab-change="onTabChange">
       
-      <el-tab-pane ::label="$t('auto.List.1.f52737')" name="backup">
+      <el-tab-pane ::label="$t('auto.List.f5273794')" name="backup">
         <el-card>
           <div class="filter-bar">
-            <el-input v-model="searchKeyword" ::placeholder="$t('auto.List.2.f6cd07')" clearable style="width: 220px" />
-            <el-select v-model="filterType" ::placeholder="$t('auto.List.3.46041e')" clearable style="width: 150px">
-              <el-option ::label="$t('auto.List.4.ea46a3')" value="full" />
-              <el-option ::label="$t('auto.List.5.d4b04d')" value="incremental" />
-              <el-option ::label="$t('auto.List.6.a2d10b')" value="differential" />
+            <el-input v-model="searchKeyword" ::placeholder="$t('auto.List.f6cd07b1')" clearable style="width: 220px" />
+            <el-select v-model="filterType" ::placeholder="$t('auto.List.46041e44')" clearable style="width: 150px">
+              <el-option ::label="$t('auto.List.ea46a347')" value="full" />
+              <el-option ::label="$t('auto.List.d4b04d75')" value="incremental" />
+              <el-option ::label="$t('auto.List.a2d10b79')" value="differential" />
             </el-select>
-            <el-select v-model="filterStatus" ::placeholder="$t('auto.List.7.1b8578')" clearable style="width: 150px">
-              <el-option ::label="$t('auto.List.8.3a3efe')" value="pending" />
-              <el-option ::label="$t('auto.List.9.936560')" value="running" />
-              <el-option ::label="$t('auto.List.10.c98dc1')" value="completed" />
-              <el-option ::label="$t('auto.List.11.f8d3ae')" value="failed" />
+            <el-select v-model="filterStatus" ::placeholder="$t('auto.List.1b857887')" clearable style="width: 150px">
+              <el-option ::label="$t('auto.List.3a3efebb')" value="pending" />
+              <el-option ::label="$t('auto.List.9365602e')" value="running" />
+              <el-option ::label="$t('auto.List.c98dc133')" value="completed" />
+              <el-option ::label="$t('auto.List.f8d3aedb')" value="failed" />
             </el-select>
           </div>
 
           <el-table :data="filteredBackups" v-loading="loading" stripe>
             <el-table-column prop="id" label="ID" width="80" />
-            <el-table-column prop="backup_name" ::label="$t('auto.List.12.517d97')" min-width="200" show-overflow-tooltip />
-            <el-table-column prop="backup_type" ::label="$t('auto.List.13.a0ee25')" width="120" align="center">
+            <el-table-column prop="backup_name" ::label="$t('auto.List.517d9787')" min-width="200" show-overflow-tooltip />
+            <el-table-column prop="backup_type" ::label="$t('auto.List.a0ee2507')" width="120" align="center">
               <template #default="{ row }">
                 <el-tag :type="getTypeTag(row.backup_type)" size="small">
                   {{ getTypeText(row.backup_type) }}
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="status" :label="$t('auto.List.14.3fea7c')" width="120" align="center">
+            <el-table-column prop="status" :label="$t('auto.List.3fea7ca7')" width="120" align="center">
               <template #default="{ row }">
                 <el-tag :type="getStatusType(row.status)" size="small">
                   {{ getStatusText(row.status) }}
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="file_size" :label="$t('auto.List.15.396b7d')" width="120" align="right">
+            <el-table-column prop="file_size" :label="$t('auto.List.396b7d3f')" width="120" align="right">
               <template #default="{ row }">
                 {{ formatSize(row.file_size) }}
               </template>
             </el-table-column>
-            <el-table-column prop="started_at" :label="$t('auto.List.16.592c59')" min-width="170">
+            <el-table-column prop="started_at" :label="$t('auto.List.592c5958')" min-width="170">
               <template #default="{ row }">
                 {{ formatTime(row.started_at) }}
               </template>
             </el-table-column>
-            <el-table-column prop="completed_at" :label="$t('auto.List.17.7cbadb')" min-width="170">
+            <el-table-column prop="completed_at" :label="$t('auto.List.7cbadbbe')" min-width="170">
               <template #default="{ row }">
                 {{ formatTime(row.completed_at) }}
               </template>
             </el-table-column>
-            <el-table-column prop="error_message" :label="$t('auto.List.18.4604d5')" min-width="180" show-overflow-tooltip />
-            <el-table-column :label="$t('auto.List.19.2b6bc0')" width="220" fixed="right">
+            <el-table-column prop="error_message" :label="$t('auto.List.4604d502')" min-width="180" show-overflow-tooltip />
+            <el-table-column :label="$t('auto.List.2b6bc0f2')" width="220" fixed="right">
               <template #default="{ row }">
-                <el-button link type="primary" @click="viewDetail(row)">{{ $t('auto.List.40.f26225') }}</el-button>
+                <el-button link type="primary" @click="viewDetail(row)">{{ $t('auto.List.f26225bd') }}</el-button>
                 <el-button
                   link
                   type="success"
                   :disabled="row.status !== 'completed'"
                   @click="openRestoreDialog(row)"
-                >{{ $t('auto.List.41.c7db6d') }}</el-button>
-                <el-button link type="danger" @click="doDeleteBackup(row)">{{ $t('auto.List.42.2f4aad') }}</el-button>
+                >{{ $t('auto.List.c7db6d4f') }}</el-button>
+                <el-button link type="danger" @click="doDeleteBackup(row)">{{ $t('auto.List.2f4aaddd') }}</el-button>
               </template>
             </el-table-column>
             <template #empty>
-              <el-empty :description="$t('auto.List.20.1f00e1')" />
+              <el-empty :description="$t('auto.List.1f00e1f0')" />
             </template>
           </el-table>
 
@@ -135,42 +135,42 @@
       </el-tab-pane>
 
       
-      <el-tab-pane :label="$t('auto.List.21.078ebd')" name="restore">
+      <el-tab-pane :label="$t('auto.List.078ebd10')" name="restore">
         <el-card>
           <div class="filter-bar">
-            <el-input v-model="restoreKeyword" :placeholder="$t('auto.List.22.8d67fe')" clearable style="width: 220px" />
-            <el-select v-model="restoreStatus" :placeholder="$t('auto.List.14.3fea7c')" clearable style="width: 150px">
-              <el-option :label="$t('auto.List.23.6139a6')" value="pending" />
-              <el-option :label="$t('auto.List.24.fb852f')" value="running" />
-              <el-option :label="$t('auto.List.25.fad522')" value="completed" />
-              <el-option :label="$t('auto.List.26.acd5cb')" value="failed" />
+            <el-input v-model="restoreKeyword" :placeholder="$t('auto.List.8d67fe82')" clearable style="width: 220px" />
+            <el-select v-model="restoreStatus" :placeholder="$t('auto.List.3fea7ca7')" clearable style="width: 150px">
+              <el-option :label="$t('auto.List.6139a699')" value="pending" />
+              <el-option :label="$t('auto.List.fb852fc6')" value="running" />
+              <el-option :label="$t('auto.List.fad5222c')" value="completed" />
+              <el-option :label="$t('auto.List.acd5cb84')" value="failed" />
             </el-select>
           </div>
 
           <el-table :data="filteredRestores" v-loading="restoreLoading" stripe>
             <el-table-column prop="id" label="ID" width="80" />
-            <el-table-column prop="backup_id" :label="$t('auto.List.27.d10569')" width="100" />
-            <el-table-column prop="backup_name" :label="$t('auto.List.28.77b9ec')" min-width="220" show-overflow-tooltip />
-            <el-table-column prop="status" :label="$t('auto.List.14.3fea7c')" width="120" align="center">
+            <el-table-column prop="backup_id" :label="$t('auto.List.d105690c')" width="100" />
+            <el-table-column prop="backup_name" :label="$t('auto.List.77b9ecc8')" min-width="220" show-overflow-tooltip />
+            <el-table-column prop="status" :label="$t('auto.List.3fea7ca7')" width="120" align="center">
               <template #default="{ row }">
                 <el-tag :type="getStatusType(row.status)" size="small">
                   {{ getStatusText(row.status) }}
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="restored_at" :label="$t('auto.List.16.592c59')" min-width="170">
+            <el-table-column prop="restored_at" :label="$t('auto.List.592c5958')" min-width="170">
               <template #default="{ row }">
                 {{ formatTime(row.restored_at) }}
               </template>
             </el-table-column>
-            <el-table-column prop="error_message" :label="$t('auto.List.18.4604d5')" min-width="220" show-overflow-tooltip />
-            <el-table-column :label="$t('auto.List.19.2b6bc0')" width="100" fixed="right">
+            <el-table-column prop="error_message" :label="$t('auto.List.4604d502')" min-width="220" show-overflow-tooltip />
+            <el-table-column :label="$t('auto.List.2b6bc0f2')" width="100" fixed="right">
               <template #default="{ row }">
-                <el-button link type="primary" @click="viewRestoreDetail(row)">{{ $t('auto.List.40.f26225') }}</el-button>
+                <el-button link type="primary" @click="viewRestoreDetail(row)">{{ $t('auto.List.f26225bd') }}</el-button>
               </template>
             </el-table-column>
             <template #empty>
-              <el-empty :description="$t('auto.List.29.da0245')" />
+              <el-empty :description="$t('auto.List.da024546')" />
             </template>
           </el-table>
 
@@ -189,63 +189,63 @@
     </el-tabs>
 
     
-    <el-dialog v-model="createVisible" :title="$t('auto.List.30.a4006e')" width="520px">
+    <el-dialog v-model="createVisible" :title="$t('auto.List.a4006e5c')" width="520px">
       <el-form :model="createForm" :rules="createRules" ref="createFormRef" label-width="100px">
-        <el-form-item :label="$t('auto.List.28.77b9ec')" prop="backup_name">
-          <el-input v-model="createForm.backup_name" :placeholder="$t('auto.List.31.1e66d8')" />
+        <el-form-item :label="$t('auto.List.77b9ecc8')" prop="backup_name">
+          <el-input v-model="createForm.backup_name" :placeholder="$t('auto.List.1e66d8d9')" />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.32.8c61c9')" prop="backup_type">
+        <el-form-item :label="$t('auto.List.8c61c92b')" prop="backup_type">
           <el-select v-model="createForm.backup_type" style="width: 100%">
-            <el-option :label="$t('auto.List.33.6d68bd')" value="full" />
-            <el-option :label="$t('auto.List.34.432138')" value="incremental" />
-            <el-option :label="$t('auto.List.35.b23a91')" value="differential" />
+            <el-option :label="$t('auto.List.6d68bd54')" value="full" />
+            <el-option :label="$t('auto.List.43213875')" value="incremental" />
+            <el-option :label="$t('auto.List.b23a912b')" value="differential" />
           </el-select>
         </el-form-item>
         <el-alert type="info" :closable="false" show-icon>
-          <template #title>{{ $t('auto.List.43.bcbabc') }}</template>
+          <template #title>{{ $t('auto.List.bcbabc37') }}</template>
         </el-alert>
       </el-form>
       <template #footer>
-        <el-button @click="createVisible = false">{{ $t('auto.List.44.625fb2') }}</el-button>
-        <el-button type="primary" :loading="creating" @click="submitCreate">{{ $t('auto.List.45.68c4a9') }}</el-button>
+        <el-button @click="createVisible = false">{{ $t('auto.List.625fb26b') }}</el-button>
+        <el-button type="primary" :loading="creating" @click="submitCreate">{{ $t('auto.List.68c4a94d') }}</el-button>
       </template>
     </el-dialog>
 
     
-    <el-dialog v-model="restoreVisible" :title="$t('auto.List.36.554d49')" width="520px">
+    <el-dialog v-model="restoreVisible" :title="$t('auto.List.554d4999')" width="520px">
       <el-descriptions :column="1" border v-if="restoreTarget">
-        <el-descriptions-item :label="$t('auto.List.27.d10569')">{{ restoreTarget.id }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.List.28.77b9ec')">{{ restoreTarget.backup_name }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.List.32.8c61c9')">{{ getTypeText(restoreTarget.backup_type) }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.List.15.396b7d')">{{ formatSize(restoreTarget.file_size) }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.List.17.7cbadb')">{{ formatTime(restoreTarget.completed_at) }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.d105690c')">{{ restoreTarget.id }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.77b9ecc8')">{{ restoreTarget.backup_name }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.8c61c92b')">{{ getTypeText(restoreTarget.backup_type) }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.396b7d3f')">{{ formatSize(restoreTarget.file_size) }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.7cbadbbe')">{{ formatTime(restoreTarget.completed_at) }}</el-descriptions-item>
       </el-descriptions>
       <el-alert type="warning" :closable="false" show-icon style="margin-top: 12px">
-        <template #title>{{ $t('auto.List.46.6aa245') }}</template>
+        <template #title>{{ $t('auto.List.6aa24539') }}</template>
       </el-alert>
       <template #footer>
-        <el-button @click="restoreVisible = false">{{ $t('auto.List.44.625fb2') }}</el-button>
-        <el-button type="primary" :loading="restoring" @click="submitRestore">{{ $t('auto.List.47.841e5e') }}</el-button>
+        <el-button @click="restoreVisible = false">{{ $t('auto.List.625fb26b') }}</el-button>
+        <el-button type="primary" :loading="restoring" @click="submitRestore">{{ $t('auto.List.841e5e89') }}</el-button>
       </template>
     </el-dialog>
 
     
-    <el-dialog v-model="detailVisible" :title="$t('auto.List.37.4f9230')" width="600px">
+    <el-dialog v-model="detailVisible" :title="$t('auto.List.4f9230d0')" width="600px">
       <el-descriptions :column="1" border v-if="detailRecord">
-        <el-descriptions-item :label="$t('auto.List.27.d10569')">{{ detailRecord.id }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.List.28.77b9ec')">{{ detailRecord.backup_name }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.List.32.8c61c9')">{{ getTypeText(detailRecord.backup_type) }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.List.14.3fea7c')">
+        <el-descriptions-item :label="$t('auto.List.d105690c')">{{ detailRecord.id }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.77b9ecc8')">{{ detailRecord.backup_name }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.8c61c92b')">{{ getTypeText(detailRecord.backup_type) }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.3fea7ca7')">
           <el-tag :type="getStatusType(detailRecord.status)" size="small">
             {{ getStatusText(detailRecord.status) }}
           </el-tag>
         </el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.List.38.de6104')">{{ detailRecord.file_path || '-' }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.List.15.396b7d')">{{ formatSize(detailRecord.file_size) }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.List.39.95a43e')">{{ detailRecord.created_by || '系统' }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.List.16.592c59')">{{ formatTime(detailRecord.started_at) }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.List.17.7cbadb')">{{ formatTime(detailRecord.completed_at) }}</el-descriptions-item>
-        <el-descriptions-item v-if="detailRecord.error_message" :label="$t('auto.List.18.4604d5')">
+        <el-descriptions-item :label="$t('auto.List.de6104ca')">{{ detailRecord.file_path || '-' }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.396b7d3f')">{{ formatSize(detailRecord.file_size) }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.95a43eaa')">{{ detailRecord.created_by || '系统' }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.592c5958')">{{ formatTime(detailRecord.started_at) }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.7cbadbbe')">{{ formatTime(detailRecord.completed_at) }}</el-descriptions-item>
+        <el-descriptions-item v-if="detailRecord.error_message" :label="$t('auto.List.4604d502')">
           <span class="error-text">{{ detailRecord.error_message }}</span>
         </el-descriptions-item>
       </el-descriptions>
@@ -298,7 +298,7 @@ const createForm = reactive({
   backup_type: 'full'
 })
 const createRules = {
-  backup_type: [{ required: true, message: i18n.global.t(t('auto.List.48.43ebf3')), trigger: 'change' }]
+  backup_type: [{ required: true, message: i18n.global.t(t('auto.List.43ebf364')), trigger: 'change' }]
 }
 
 const restoreVisible = ref(false);
@@ -341,7 +341,7 @@ const filteredRestores = computed(() => {
 })
 
 const getTypeText = (type) => {
-  const map = { full: t('auto.List.49.c60ad6'), incremental: t('auto.List.50.36daeb'), differential: t('auto.List.51.5fdfba') }
+  const map = { full: t('auto.List.c60ad696'), incremental: t('auto.List.36daebe0'), differential: t('auto.List.5fdfbade') }
   return map[type] || type || '-'
 }
 const getTypeTag = (type) => {
@@ -383,7 +383,7 @@ const loadData = async () => {
     backups.value = data.list || []
     pagination.total = data.total || 0
   } catch (e) {
-    ElMessage.error(i18n.global.t(t('auto.List.52.e29ece')))
+    ElMessage.error(i18n.global.t(t('auto.List.e29eced0')))
     backups.value = []
   } finally {
     loading.value = false
@@ -401,7 +401,7 @@ const loadRestores = async () => {
     restores.value = data.list || []
     restorePagination.total = data.total || 0
   } catch (e) {
-    ElMessage.error(i18n.global.t(t('auto.List.53.b9ab2b')))
+    ElMessage.error(i18n.global.t(t('auto.List.b9ab2bdf')))
     restores.value = []
   } finally {
     restoreLoading.value = false
@@ -428,11 +428,11 @@ const submitCreate = async () => {
         backup_name: createForm.backup_name,
         backup_type: createForm.backup_type
       })
-      ElMessage.success(i18n.global.t(t('auto.List.54.72f163')))
+      ElMessage.success(i18n.global.t(t('auto.List.72f1633b')))
       createVisible.value = false
       await loadData()
     } catch (e) {
-      ElMessage.error(e?.message || t('auto.List.55.c33cb5'))
+      ElMessage.error(e?.message || t('auto.List.c33cb565'))
     } finally {
       creating.value = false
     }
@@ -449,12 +449,12 @@ const submitRestore = async () => {
   restoring.value = true
   try {
     await callRestoreApi({ backup_id: restoreTarget.value.id })
-    ElMessage.success(i18n.global.t(t('auto.List.56.c74008')))
+    ElMessage.success(i18n.global.t(t('auto.List.c740083a')))
     restoreVisible.value = false
     activeTab.value = 'restore'
     await loadRestores()
   } catch (e) {
-    ElMessage.error(e?.message || t('auto.List.57.2e827d'))
+    ElMessage.error(e?.message || t('auto.List.2e827d23'))
   } finally {
     restoring.value = false
   }
@@ -464,14 +464,14 @@ const doDeleteBackup = async (row) => {
   try {
     await ElMessageBox.confirm(
       `确定删除备份 "${row.backup_name}"？删除后不可恢复`,
-      t('auto.List.58.900c70'),
+      t('auto.List.900c70fa'),
       { type: 'warning' }
     )
     await deleteBackup(row.id)
-    ElMessage.success(i18n.global.t(t('auto.List.59.0007d1')))
+    ElMessage.success(i18n.global.t(t('auto.List.0007d170')))
     await loadData()
   } catch (e) {
-    if (e !== 'cancel' && e !== 'close') ElMessage.error(i18n.global.t(t('auto.List.60.acf066')))
+    if (e !== 'cancel' && e !== 'close') ElMessage.error(i18n.global.t(t('auto.List.acf0664a')))
   }
 }
 

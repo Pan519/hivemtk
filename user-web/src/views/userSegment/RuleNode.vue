@@ -7,15 +7,15 @@
       </el-tag>
       <el-button size="small" @click="addChild('and')">+ AND</el-button>
       <el-button size="small" @click="addChild('or')">+ OR</el-button>
-      <el-button size="small" @click="addChild('condition')">{{ $t('auto.RuleNode.4.52fa34') }}</el-button>
-      <el-button size="small" type="danger" @click="$emit('remove')">{{ $t('auto.RuleNode.5.2f4aad') }}</el-button>
+      <el-button size="small" @click="addChild('condition')">{{ $t('auto.RuleNode.52fa34e1') }}</el-button>
+      <el-button size="small" type="danger" @click="$emit('remove')">{{ $t('auto.RuleNode.2f4aaddd') }}</el-button>
     </div>
 
     <!-- 叶子条件节点：field op value 三元组，缺 field 时 compileNode 会返回 null -->
     <div v-else class="rule-condition">
       <el-input
         :model-value="node.field"
-        :placeholder="$t('auto.RuleNode.1.56dc8c')"
+        :placeholder="$t('auto.RuleNode.56dc8ce0')"
         style="width: 200px"
         size="small"
         @update:model-value="patch('field', $event)"
@@ -25,12 +25,12 @@
       </el-select>
       <el-input
         :model-value="node.value"
-        :placeholder="$t('auto.RuleNode.2.1e562e')"
+        :placeholder="$t('auto.RuleNode.1e562eeb')"
         style="width: 180px"
         size="small"
         @update:model-value="patch('value', $event)"
       />
-      <el-button size="small" type="danger" @click="$emit('remove')">{{ $t('auto.RuleNode.5.2f4aad') }}</el-button>
+      <el-button size="small" type="danger" @click="$emit('remove')">{{ $t('auto.RuleNode.2f4aaddd') }}</el-button>
     </div>
 
     <div v-if="node.type === 'and' || node.type === 'or'" class="rule-children">
@@ -43,7 +43,7 @@
         @update="patchChild(i, $event)"
         @remove="removeChild(i)"
       />
-      <el-empty v-if="!children.length" :description="$t('auto.RuleNode.3.d75153')" :image-size="40" />
+      <el-empty v-if="!children.length" :description="$t('auto.RuleNode.d751531e')" :image-size="40" />
     </div>
   </div>
 </template>

@@ -6,8 +6,8 @@
       type="warning"
       show-icon
       :closable="false"
-      :title="$t('auto.List.1.2ed4cc')"
-      :description="$t('auto.List.2.b79c1c')"
+      :title="$t('auto.List.2ed4cce4')"
+      :description="$t('auto.List.b79c1c3d')"
     />
     <el-alert
       v-if="!me"
@@ -15,14 +15,14 @@
       type="info"
       show-icon
       :closable="false"
-      :title="$t('auto.List.3.d5e452')"
-      :description="$t('auto.List.4.86595b')"
+      :title="$t('auto.List.d5e452f2')"
+      :description="$t('auto.List.86595bca')"
     />
 
     <el-card shadow="never">
       <template #header>
         <div class="card-header">
-          <span>{{ $t('auto.List.41.d6784e') }}</span>
+          <span>{{ $t('auto.List.d6784ee5') }}</span>
           <div class="header-actions">
             <el-button
               :disabled="!me"
@@ -32,7 +32,7 @@
             </el-button>
             <el-tooltip
               :disabled="canExportSet"
-              :content="$t('auto.List.5.2cbb4f')"
+              :content="$t('auto.List.2cbb4f80')"
               placement="bottom"
             >
               <span>
@@ -84,14 +84,14 @@
         inline
         class="mb-12"
       >
-        <el-form-item :label="$t('auto.List.6.26ca20')">
+        <el-form-item :label="$t('auto.List.26ca20b1')">
           <el-select
             v-model="filter.source"
             class="filter-select"
             multiple
             clearable
             collapse-tags
-            :placeholder="$t('auto.List.7.99b7a3')"
+            :placeholder="$t('auto.List.99b7a390')"
             @change="reload"
           >
             <el-option
@@ -102,14 +102,14 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.List.8.3fea7c')">
+        <el-form-item :label="$t('auto.List.3fea7ca7')">
           <el-select
             v-model="filter.status"
             class="filter-select"
             multiple
             clearable
             collapse-tags
-            :placeholder="$t('auto.List.9.1ea5af')"
+            :placeholder="$t('auto.List.1ea5afaf')"
             @change="reload"
           >
             <el-option
@@ -120,14 +120,14 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.List.10.edbe83')">
+        <el-form-item :label="$t('auto.List.edbe837c')">
           <el-select
             v-model="filter.label"
             class="filter-select"
             multiple
             clearable
             collapse-tags
-            :placeholder="$t('auto.List.11.a01449')"
+            :placeholder="$t('auto.List.a01449b0')"
             @change="reload"
           >
             <el-option
@@ -138,12 +138,12 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.List.12.d8fc33')">
+        <el-form-item :label="$t('auto.List.d8fc331e')">
           <el-select
             v-model="filter.fix_layer"
             class="filter-select"
             clearable
-            :placeholder="$t('auto.List.13.214840')"
+            :placeholder="$t('auto.List.214840fa')"
             @change="reload"
           >
             <el-option
@@ -162,7 +162,7 @@
         stripe
       >
         <el-table-column
-          :label="$t('auto.List.6.26ca20')"
+          :label="$t('auto.List.26ca20b1')"
           width="110"
         >
           <template #default="{ row }">
@@ -175,7 +175,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          :label="$t('auto.List.14.498bd0')"
+          :label="$t('auto.List.498bd05e')"
           min-width="260"
         >
           <template #default="{ row }">
@@ -195,7 +195,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          :label="$t('auto.List.15.8f3599')"
+          :label="$t('auto.List.8f3599b6')"
           width="150"
         >
           <template #default="{ row }">
@@ -208,7 +208,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          :label="$t('auto.List.8.3fea7c')"
+          :label="$t('auto.List.3fea7ca7')"
           width="100"
         >
           <template #default="{ row }">
@@ -216,7 +216,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          :label="$t('auto.List.16.ffda23')"
+          :label="$t('auto.List.ffda2390')"
           width="200"
         >
           <template #default="{ row }">
@@ -239,7 +239,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          :label="$t('auto.List.17.badc15')"
+          :label="$t('auto.List.badc1567')"
           width="120"
         >
           <template #default="{ row }">
@@ -253,7 +253,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          :label="$t('auto.List.18.2b6bc0')"
+          :label="$t('auto.List.2b6bc0f2')"
           width="180"
           fixed="right"
         >
@@ -283,7 +283,7 @@
 
     <el-drawer
       v-model="detail.visible"
-      :title="$t('auto.List.19.dab392')"
+      :title="$t('auto.List.dab39256')"
       size="42%"
     >
       <el-skeleton
@@ -307,7 +307,7 @@
 
     <el-drawer
       v-model="mark.visible"
-      :title="$t('auto.List.20.0bc59d')"
+      :title="$t('auto.List.0bc59d5d')"
       size="46%"
     >
       <el-alert
@@ -323,13 +323,13 @@
         border
         class="mb-12"
       >
-        <el-descriptions-item :label="$t('auto.List.21.9cacfc')">
+        <el-descriptions-item :label="$t('auto.List.9cacfcb4')">
           {{ mark.row?.query_text || '—' }}
         </el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.List.22.a98b82')">
+        <el-descriptions-item :label="$t('auto.List.a98b8260')">
           {{ mark.row?.answer_text || '—' }}
         </el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.List.23.49a47c')">
+        <el-descriptions-item :label="$t('auto.List.49a47cdb')">
           {{ mark.row?.mark_reason || '—' }}
         </el-descriptions-item>
       </el-descriptions>
@@ -338,10 +338,10 @@
         label-position="top"
         @submit.prevent
       >
-        <el-form-item :label="$t('auto.List.10.edbe83')">
+        <el-form-item :label="$t('auto.List.edbe837c')">
           <el-select
             v-model="mark.label"
-            :placeholder="$t('auto.List.24.c9c71a')"
+            :placeholder="$t('auto.List.c9c71aa3')"
             class="full"
           >
             <el-option
@@ -352,14 +352,14 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.List.25.cd64ff')">
+        <el-form-item :label="$t('auto.List.cd64ff54')">
           <el-input
             v-model="mark.note"
             type="textarea"
             :rows="3"
             maxlength="2000"
             show-word-limit
-            :placeholder="$t('auto.List.26.fd3a48')"
+            :placeholder="$t('auto.List.fd3a48da')"
           />
         </el-form-item>
       </el-form>
@@ -384,7 +384,7 @@
 
     <el-drawer
       v-model="create.visible"
-      :title="$t('auto.List.27.045a60')"
+      :title="$t('auto.List.045a601e')"
       size="46%"
     >
       <el-alert
@@ -399,41 +399,41 @@
         label-position="top"
         @submit.prevent
       >
-        <el-form-item :label="$t('auto.List.28.a45b37')">
+        <el-form-item :label="$t('auto.List.a45b37bd')">
           <el-input
             v-model="create.form.session_id"
-            :placeholder="$t('auto.List.29.ccfb57')"
+            :placeholder="$t('auto.List.ccfb572e')"
           />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.30.2e4b80')">
+        <el-form-item :label="$t('auto.List.2e4b8097')">
           <el-input
             v-model="create.form.message_id"
-            :placeholder="$t('auto.List.31.1e7b1d')"
+            :placeholder="$t('auto.List.1e7b1d71')"
           />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.32.764aca')">
+        <el-form-item :label="$t('auto.List.764aca4e')">
           <el-input v-model="create.form.intent_type" />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.21.9cacfc')">
+        <el-form-item :label="$t('auto.List.9cacfcb4')">
           <el-input
             v-model="create.form.query_text"
             type="textarea"
             :rows="2"
-            :placeholder="$t('auto.List.33.537b39')"
+            :placeholder="$t('auto.List.537b39a8')"
           />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.22.a98b82')">
+        <el-form-item :label="$t('auto.List.a98b8260')">
           <el-input
             v-model="create.form.answer_text"
             type="textarea"
             :rows="3"
-            :placeholder="$t('auto.List.34.14cdc5')"
+            :placeholder="$t('auto.List.14cdc5be')"
           />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.35.1c3e6f')">
+        <el-form-item :label="$t('auto.List.1c3e6f11')">
           <el-input
             v-model="create.form.reason"
-            :placeholder="$t('auto.List.36.c6075e')"
+            :placeholder="$t('auto.List.c6075e30')"
           />
         </el-form-item>
       </el-form>
@@ -450,7 +450,7 @@
 
     <el-drawer
       v-model="exported.visible"
-      :title="$t('auto.List.37.b85ec4')"
+      :title="$t('auto.List.b85ec488')"
       size="42%"
     >
       <el-descriptions
@@ -458,13 +458,13 @@
         border
         class="mb-12"
       >
-        <el-descriptions-item :label="$t('auto.List.38.c0c78e')">
+        <el-descriptions-item :label="$t('auto.List.c0c78e5e')">
           {{ exported.set?.eval_set_id }}
         </el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.List.39.a6f7f1')">
+        <el-descriptions-item :label="$t('auto.List.a6f7f135')">
           {{ exported.set?.count }}
         </el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.List.40.bdfd7a')">
+        <el-descriptions-item :label="$t('auto.List.bdfd7aab')">
           {{ formatTime(exported.set?.exported_at) }}
         </el-descriptions-item>
       </el-descriptions>
@@ -512,9 +512,9 @@ import {
 // **显示用**的：值域来自 taxonomy，命中就译、没命中就原样显示英文枚举值。
 
 const SOURCE_LABELS = {
-  low_confidence: t('auto.List.42.0c4305'),
-  zero_hit: t('auto.List.43.8732b9'),
-  manual: t('auto.List.44.9fcf7b')
+  low_confidence: t('auto.List.0c4305ae'),
+  zero_hit: t('auto.List.8732b9ba'),
+  manual: t('auto.List.9fcf7ba3')
 }
 const SOURCE_TAG_TYPES = {
   low_confidence: 'warning',
@@ -522,27 +522,27 @@ const SOURCE_TAG_TYPES = {
   manual: 'info'
 }
 const STATUS_LABELS = {
-  pending: t('auto.List.45.5a7f3f'),
-  labeled: t('auto.List.46.f36e8a'),
-  exported: t('auto.List.47.5c51c3'),
-  dismissed: t('auto.List.48.50239f')
+  pending: t('auto.List.5a7f3fe1'),
+  labeled: t('auto.List.f36e8a36'),
+  exported: t('auto.List.5c51c3b8'),
+  dismissed: t('auto.List.50239f4f')
 }
 const LABEL_NAMES = {
-  kb_missing: t('auto.List.49.27de62'),
-  kb_stale: t('auto.List.50.2167b7'),
-  retrieve_miss: t('auto.List.51.df4c6e'),
-  retrieve_wrong: t('auto.List.52.5ae0bd'),
-  generation_wrong: t('auto.List.53.e739d3'),
-  generation_style: t('auto.List.54.626c87'),
-  intent_misjudge: t('auto.List.55.811e60')
+  kb_missing: t('auto.List.27de62bf'),
+  kb_stale: t('auto.List.2167b799'),
+  retrieve_miss: t('auto.List.df4c6e70'),
+  retrieve_wrong: t('auto.List.5ae0bd55'),
+  generation_wrong: t('auto.List.e739d3ab'),
+  generation_style: t('auto.List.626c87bc'),
+  intent_misjudge: t('auto.List.811e6025')
 }
 const LAYER_LABELS = {
-  knowledge: t('auto.List.56.7e4333'),
-  retrieval: t('auto.List.57.8bedce'),
-  generation: t('auto.List.58.4dfe70'),
-  intent: t('auto.List.59.ef84bd')
+  knowledge: t('auto.List.7e433388'),
+  retrieval: t('auto.List.8bedce4e'),
+  generation: t('auto.List.4dfe7036'),
+  intent: t('auto.List.ef84bdf4')
 }
-const ACTION_LABELS = { label: t('auto.List.60.567503'), dismiss: t('auto.List.61.bd9fcf') }
+const ACTION_LABELS = { label: t('auto.List.56750306'), dismiss: t('auto.List.bd9fcf46') }
 
 // STATS_POLL_MS：已判率是本卡北极星，值班要的是"打开时看到的是此刻的数"。
 // 30s 与待办中心同档；更短只是把读接口打成压力源。
@@ -585,11 +585,11 @@ const create = reactive({
 })
 const exported = reactive({ visible: false, set: null })
 
-const sourceLabel = (s) => SOURCE_LABELS[s] || s || t('auto.List.62.36cead')
+const sourceLabel = (s) => SOURCE_LABELS[s] || s || t('auto.List.36cead0e')
 const sourceTagType = (s) => SOURCE_TAG_TYPES[s] || 'info'
-const statusLabel = (s) => STATUS_LABELS[s] || s || t('auto.List.63.903b25')
+const statusLabel = (s) => STATUS_LABELS[s] || s || t('auto.List.903b25f6')
 const labelName = (l) => LABEL_NAMES[l] || l
-const layerLabel = (l) => LAYER_LABELS[l] || l || t('auto.List.64.23ac2b')
+const layerLabel = (l) => LAYER_LABELS[l] || l || t('auto.List.23ac2b69')
 const actionLabel = (a) => ACTION_LABELS[a] || a
 const statusCount = (s) => Number(stats.by_status?.[s]) || 0
 const layerCount = (l) => Number(stats.by_fix_layer?.[l]) || 0
@@ -714,7 +714,7 @@ async function openDetail(row) {
     const data = await badCaseApi.get(row.id)
     detail.text = JSON.stringify(data ?? row, null, 2)
   } catch (err) {
-    detail.error = err?.message || t('auto.List.65.f87e6e')
+    detail.error = err?.message || t('auto.List.f87e6e7c')
   } finally {
     detail.loading = false
   }
@@ -733,7 +733,7 @@ async function submitLabel() {
   mark.error = ''
   try {
     await badCaseApi.label(mark.row.id, mark.label, mark.note)
-    ElMessage.success(t('auto.List.66.086beb'))
+    ElMessage.success(t('auto.List.086beb61'))
     mark.visible = false
     refresh()
   } catch (err) {
@@ -741,14 +741,14 @@ async function submitLabel() {
     if (status === 409) {
       // 两个人同时开着这一条：后提交的那个必被 CAS 挡下。这句"当前状态不允许"要让人读到，
       // 并把队列刷回来 —— 别人的结论该出现在界面上，而不是让人再点一次替自己盖章。
-      ElMessage.warning(err.message || t('auto.List.67.236864'))
+      ElMessage.warning(err.message || t('auto.List.236864f5'))
       mark.visible = false
       refresh()
     } else {
       // 其余一律留在抽屉里说一句话：400 是"类目或依据这条腿没齐"（界面已经替人挡过一轮），
       // 401 是会话在这期间过期了，5xx 是底座的事 —— 三种都不该表现成
       // "点了没反应，刷新看看"，那会让人以为是自己手慢。
-      mark.error = err.message || t('auto.List.68.a669be')
+      mark.error = err.message || t('auto.List.a669be16')
     }
   } finally {
     mark.submitting = false
@@ -758,27 +758,27 @@ async function submitLabel() {
 async function dismissRow(row) {
   let value
   try {
-    ({ value } = await ElMessageBox.prompt(t('auto.List.69.be5cf5'), t('auto.List.70.895b38'), {
+    ({ value } = await ElMessageBox.prompt(t('auto.List.be5cf584'), t('auto.List.895b38e3'), {
       inputType: 'textarea',
-      inputPlaceholder: t('auto.List.71.6e1e4a'),
-      inputValidator: (v) => (hasDismissReason(v) ? true : t('auto.List.72.9c365d')),
-      confirmButtonText: t('auto.List.61.bd9fcf'),
-      cancelButtonText: t('auto.List.73.5f4112')
+      inputPlaceholder: t('auto.List.6e1e4a41'),
+      inputValidator: (v) => (hasDismissReason(v) ? true : t('auto.List.9c365dd0')),
+      confirmButtonText: t('auto.List.bd9fcf46'),
+      cancelButtonText: t('auto.List.5f411223')
     }))
   } catch {
     return // 点了返回
   }
   try {
     await badCaseApi.dismiss(row.id, value)
-    ElMessage.success(t('auto.List.48.50239f'))
+    ElMessage.success(t('auto.List.50239f4f'))
     refresh()
   } catch (err) {
     if (Number(err?.status) === 409) {
       // 已经被别人判掉了：撤销这条路此刻不存在。刷新后看到的是当前那一行，不是猜。
-      ElMessage.warning(err.message || t('auto.List.74.ca87dc'))
+      ElMessage.warning(err.message || t('auto.List.ca87dc8f'))
       refresh()
     } else {
-      ElMessage.error(err.message || t('auto.List.75.a8301a'))
+      ElMessage.error(err.message || t('auto.List.a8301ae8'))
     }
   }
 }
@@ -798,13 +798,13 @@ async function submitCreate() {
   create.error = ''
   try {
     await badCaseApi.create({ ...create.form })
-    ElMessage.success(t('auto.List.76.a6d2ff'))
+    ElMessage.success(t('auto.List.a6d2ffb7'))
     create.visible = false
     refresh()
   } catch (err) {
     // 409 = 同一个 message_id 已经记过（幂等键撞上）。那句"已存在"是结果而不是失败，
     // 但在这里必须让人看见 —— 否则坐席会以为补录没成功而再点一次。
-    create.error = err?.message || t('auto.List.77.6af607')
+    create.error = err?.message || t('auto.List.6af607b4')
   }
   create.submitting = false
 }
@@ -823,8 +823,8 @@ async function doExport() {
     // 这一竖的调用是静默的（导出按钮点下去不该由网关弹一句"服务异常"），
     // 所以三种结果都得由这里说话 —— 尤其 409：那句"没有可导出的样本"是业务结论，
     // 说成失败会让人再点一次，说成没事会让人以为已经导走了。
-    if (status === 409) ElMessage.warning(t('auto.List.78.428ab6'))
-    else ElMessage.error(err.message || t('auto.List.79.dd51ab'))
+    if (status === 409) ElMessage.warning(t('auto.List.428ab66c'))
+    else ElMessage.error(err.message || t('auto.List.dd51ab50'))
   } finally {
     exporting.value = false
   }

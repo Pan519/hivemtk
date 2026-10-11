@@ -76,7 +76,7 @@
           type="textarea"
           :rows="4"
           readonly
-          :placeholder="$t('auto.Execution.1.d81bb2')"
+          :placeholder="$t('auto.Execution.d81bb206')"
         />
       </el-card>
 
@@ -124,7 +124,7 @@
             </div>
           </el-timeline-item>
         </el-timeline>
-        <el-empty v-else ::description="$t('auto.Execution.2.f11e35')" />
+        <el-empty v-else ::description="$t('auto.Execution.f11e3595')" />
       </el-card>
     </div>
   </div>
@@ -192,7 +192,7 @@ const loadData = async () => {
     execution.value = execResult?.data || execResult || {}
     nodeExecutions.value = nodesResult?.data || nodesResult?.list || []
   } catch (e) {
-    ElMessage.error(t('auto.Execution.3.4bbdce') + (e?.message || ''))
+    ElMessage.error(t('auto.Execution.4bbdceb5') + (e?.message || ''))
   } finally {
     loading.value = false
   }
@@ -200,15 +200,15 @@ const loadData = async () => {
 
 const handleStop = async () => {
   try {
-    await ElMessageBox.confirm(t('auto.Execution.4.298ad0'), t('auto.Execution.5.f945b0'), { type: 'warning' })
+    await ElMessageBox.confirm(t('auto.Execution.298ad07a'), t('auto.Execution.f945b045'), { type: 'warning' })
     await workflowOrchestratorApi.stopExecution(executionId.value)
-    ElMessage.success(t('auto.Execution.6.829778'))
+    ElMessage.success(t('auto.Execution.82977854'))
     loadData()
   } catch (_) { /* 忽略：清理/存储/恢复类 best-effort 操作 */ }
 };
 
 const statusType = (s) => ({ running: 'primary', completed: 'success', failed: 'danger', terminated: 'warning', pending: 'info' }[s] || 'info');
-const statusText = (s) => ({ running: t('auto.Execution.7.d679ae'), completed: t('auto.Execution.8.fad522'), failed: t('auto.Execution.9.acd5cb'), terminated: t('auto.Execution.10.255412'), pending: t('auto.Execution.11.65dd9e') }[s] || s)
+const statusText = (s) => ({ running: t('auto.Execution.d679aea3'), completed: t('auto.Execution.fad5222c'), failed: t('auto.Execution.acd5cb84'), terminated: t('auto.Execution.2554120a'), pending: t('auto.Execution.65dd9ef1') }[s] || s)
 const timelineColor = (s) => ({ running: 'primary', completed: 'success', failed: 'danger', terminated: 'warning', pending: 'info' }[s] || 'gray')
 const formatTime = (t) => {
   if (!t) return ''

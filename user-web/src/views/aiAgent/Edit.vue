@@ -32,38 +32,38 @@
         </template>
         <el-row :gutter="20">
           <el-col :span="12">
-            <el-form-item :label="$t('auto.Edit.1.a708d3')" prop="agent_code">
-              <el-input v-model="form.agent_code" :placeholder="$t('auto.Edit.2.9b4fcd')" :disabled="isEdit" />
+            <el-form-item :label="$t('auto.Edit.a708d3ec')" prop="agent_code">
+              <el-input v-model="form.agent_code" :placeholder="$t('auto.Edit.9b4fcd69')" :disabled="isEdit" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item :label="$t('auto.Edit.3.63ecdf')" prop="name">
-              <el-input v-model="form.name" :placeholder="$t('auto.Edit.4.2272d5')" />
+            <el-form-item :label="$t('auto.Edit.63ecdffc')" prop="name">
+              <el-input v-model="form.name" :placeholder="$t('auto.Edit.2272d5c4')" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item :label="$t('auto.Edit.5.40d4da')" prop="agent_type">
+            <el-form-item :label="$t('auto.Edit.40d4da9a')" prop="agent_type">
               <el-select v-model="form.agent_type" style="width: 100%">
-                <el-option :label="$t('auto.Edit.6.facb6b')" value="sales" />
-                <el-option :label="$t('auto.Edit.7.afaab1')" value="customer_service" />
-                <el-option :label="$t('auto.Edit.8.bac247')" value="hybrid" />
+                <el-option :label="$t('auto.Edit.facb6bff')" value="sales" />
+                <el-option :label="$t('auto.Edit.afaab1c7')" value="customer_service" />
+                <el-option :label="$t('auto.Edit.bac24769')" value="hybrid" />
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item :label="$t('auto.Edit.9.28a44c')" prop="agent_mode">
+            <el-form-item :label="$t('auto.Edit.28a44ceb')" prop="agent_mode">
               <el-select v-model="form.agent_mode" style="width: 100%">
-                <el-option :label="$t('auto.Edit.10.635fa1')" value="passive" />
-                <el-option :label="$t('auto.Edit.11.691800')" value="active" />
+                <el-option :label="$t('auto.Edit.635fa101')" value="passive" />
+                <el-option :label="$t('auto.Edit.691800b3')" value="active" />
               </el-select>
-              <div class="form-tip">{{ $t('auto.Edit.66.c5821b') }}</div>
+              <div class="form-tip">{{ $t('auto.Edit.c5821b6a') }}</div>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item :label="$t('auto.Edit.12.673c20')">
+            <el-form-item :label="$t('auto.Edit.673c2033')">
               <el-select
                 v-model="form.asset_bundle_id"
-                :placeholder="$t('auto.Edit.13.3fc8e5')"
+                :placeholder="$t('auto.Edit.3fc8e54d')"
                 clearable
                 filterable
                 style="width: 100%"
@@ -78,17 +78,17 @@
                   <span style="float: right; color: #8492a6; font-size: 12px">{{ b.industry || '' }}</span>
                 </el-option>
               </el-select>
-              <div class="form-tip">{{ $t('auto.Edit.67.34fb9a') }}</div>
+              <div class="form-tip">{{ $t('auto.Edit.34fb9abc') }}</div>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item :label="$t('auto.Edit.14.21aa15')">
-              <el-input v-model="form.avatar" :placeholder="$t('auto.Edit.15.1ff94e')" />
+            <el-form-item :label="$t('auto.Edit.21aa156d')">
+              <el-input v-model="form.avatar" :placeholder="$t('auto.Edit.1ff94e3a')" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item :label="$t('auto.Edit.16.573278')" prop="internal_language">
-              <el-select v-model="form.internal_language" :placeholder="$t('auto.Edit.17.5c0be5')" style="width: 100%">
+            <el-form-item :label="$t('auto.Edit.573278b4')" prop="internal_language">
+              <el-select v-model="form.internal_language" :placeholder="$t('auto.Edit.5c0be50b')" style="width: 100%">
                 <el-option
                   v-for="lang in internalLanguageOptions"
                   :key="lang.value"
@@ -96,12 +96,12 @@
                   :value="lang.value"
                 />
               </el-select>
-              <div class="form-tip">{{ $t('auto.Edit.68.ff8ccf') }}</div>
+              <div class="form-tip">{{ $t('auto.Edit.ff8ccf25') }}</div>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item :label="$t('auto.Edit.18.129d05')" prop="target_language">
-              <el-select v-model="form.target_language" :placeholder="$t('auto.Edit.19.c91ca0')" clearable style="width: 100%">
+            <el-form-item :label="$t('auto.Edit.129d0594')" prop="target_language">
+              <el-select v-model="form.target_language" :placeholder="$t('auto.Edit.c91ca080')" clearable style="width: 100%">
                 <el-option
                   v-for="lang in targetLanguageOptions"
                   :key="lang.value"
@@ -109,12 +109,12 @@
                   :value="lang.value"
                 />
               </el-select>
-              <div class="form-tip">{{ $t('auto.Edit.69.7caf6c') }}</div>
+              <div class="form-tip">{{ $t('auto.Edit.7caf6cbc') }}</div>
             </el-form-item>
           </el-col>
           <el-col :span="24">
-            <el-form-item :label="$t('auto.Edit.20.3bdd08')">
-              <el-input v-model="form.description" type="textarea" :rows="2" :placeholder="$t('auto.Edit.21.8a648a')" />
+            <el-form-item :label="$t('auto.Edit.3bdd08ad')">
+              <el-input v-model="form.description" type="textarea" :rows="2" :placeholder="$t('auto.Edit.8a648af0')" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -123,26 +123,26 @@
       
       <el-card shadow="never" class="section-card">
         <template #header>
-          <div class="card-title"><el-icon><UserFilled /></el-icon>{{ $t('auto.Edit.70.d4ffdd') }}</div>
+          <div class="card-title"><el-icon><UserFilled /></el-icon>{{ $t('auto.Edit.d4ffddff') }}</div>
         </template>
-        <el-form-item :label="$t('auto.Edit.22.5749e0')" prop="persona">
+        <el-form-item :label="$t('auto.Edit.5749e0cf')" prop="persona">
           <el-input
             v-model="form.persona"
             type="textarea"
             :rows="4"
-            :placeholder="$t('auto.Edit.23.7d36b6')"
+            :placeholder="$t('auto.Edit.7d36b648')"
           />
         </el-form-item>
-        <el-form-item :label="$t('auto.Edit.24.cbdb6b')">
+        <el-form-item :label="$t('auto.Edit.cbdb6bc9')">
           <el-input
             v-model="form.system_prompt"
             type="textarea"
             :rows="4"
-            :placeholder="$t('auto.Edit.25.2d9aef')"
+            :placeholder="$t('auto.Edit.2d9aef22')"
           />
         </el-form-item>
-        <el-form-item :label="$t('auto.Edit.26.45eddf')">
-          <el-input v-model="form.greeting" :placeholder="$t('auto.Edit.27.55c6ec')" />
+        <el-form-item :label="$t('auto.Edit.45eddfac')">
+          <el-input v-model="form.greeting" :placeholder="$t('auto.Edit.55c6ec1e')" />
         </el-form-item>
       </el-card>
 
@@ -156,7 +156,7 @@
             </el-button>
           </div>
         </template>
-        <el-form-item :label="$t('auto.Edit.28.7f2c76')">
+        <el-form-item :label="$t('auto.Edit.7f2c76c6')">
           <el-tree-select
             v-model="form.kb_ids"
             :data="kbTree"
@@ -171,10 +171,10 @@
             clearable
             filterable
             :default-expand-all="false"
-            :placeholder="$t('auto.Edit.29.76bfbd')"
+            :placeholder="$t('auto.Edit.76bfbd15')"
             style="width: 100%"
             :render-after-expand="false"
-            ::empty-text="$t('auto.Edit.30.9e348e')"
+            ::empty-text="$t('auto.Edit.9e348ebf')"
           />
           <div class="form-tip">
             树形结构按 RAG / FAQ / SOP 三个顶层分组。挂载知识库后，对话中自动应用该 KB 下所有文档 / FAQ / SOP 模板。
@@ -183,13 +183,13 @@
         </el-form-item>
         <el-row :gutter="20">
           <el-col :span="8">
-            <el-form-item :label="$t('auto.Edit.31.572770')">
+            <el-form-item :label="$t('auto.Edit.57277094')">
               <el-select
                 v-model="form.rag_product_ids"
                 multiple
                 filterable
                 clearable
-                :placeholder="$t('auto.Edit.32.270bdc')"
+                :placeholder="$t('auto.Edit.270bdca7')"
                 style="width: 100%"
               >
                 <el-option
@@ -202,13 +202,13 @@
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item :label="$t('auto.Edit.33.e93654')">
+            <el-form-item :label="$t('auto.Edit.e93654a7')">
               <el-select
                 v-model="form.faq_entry_ids"
                 multiple
                 filterable
                 clearable
-                :placeholder="$t('auto.Edit.32.270bdc')"
+                :placeholder="$t('auto.Edit.270bdca7')"
                 style="width: 100%"
               >
                 <el-option
@@ -221,13 +221,13 @@
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item :label="$t('auto.Edit.34.79e06e')">
+            <el-form-item :label="$t('auto.Edit.79e06e2b')">
               <el-select
                 v-model="form.sop_template_ids"
                 multiple
                 filterable
                 clearable
-                :placeholder="$t('auto.Edit.32.270bdc')"
+                :placeholder="$t('auto.Edit.270bdca7')"
                 style="width: 100%"
               >
                 <el-option
@@ -245,15 +245,15 @@
       
       <el-card shadow="never" class="section-card">
         <template #header>
-          <div class="card-title"><el-icon><Connection /></el-icon>{{ $t('auto.Edit.71.2932d0') }}</div>
+          <div class="card-title"><el-icon><Connection /></el-icon>{{ $t('auto.Edit.2932d0e1') }}</div>
         </template>
-        <el-form-item :label="$t('auto.Edit.35.9a78fb')">
+        <el-form-item :label="$t('auto.Edit.9a78fb76')">
           <el-select
             v-model="form.sop_ids"
             multiple
             filterable
             clearable
-            :placeholder="$t('auto.Edit.36.6354b2')"
+            :placeholder="$t('auto.Edit.6354b294')"
             style="width: 100%"
           >
             <el-option
@@ -269,15 +269,15 @@
       
       <el-card shadow="never" class="section-card">
         <template #header>
-          <div class="card-title"><el-icon><ChatLineSquare /></el-icon>{{ $t('auto.Edit.72.6399cc') }}</div>
+          <div class="card-title"><el-icon><ChatLineSquare /></el-icon>{{ $t('auto.Edit.6399cc72') }}</div>
         </template>
-        <el-form-item :label="$t('auto.Edit.37.d49563')">
+        <el-form-item :label="$t('auto.Edit.d49563bf')">
           <el-select
             v-model="form.script_library_ids"
             multiple
             filterable
             clearable
-            :placeholder="$t('auto.Edit.38.57869c')"
+            :placeholder="$t('auto.Edit.57869ce4')"
             style="width: 100%"
           >
             <el-option
@@ -293,11 +293,11 @@
       
       <el-card shadow="never" class="section-card">
         <template #header>
-          <div class="card-title"><el-icon><Cpu /></el-icon>{{ $t('auto.Edit.73.742a08') }}</div>
+          <div class="card-title"><el-icon><Cpu /></el-icon>{{ $t('auto.Edit.742a0835') }}</div>
         </template>
         <el-row :gutter="20">
           <el-col :span="12">
-            <el-form-item :label="$t('auto.Edit.39.248d0f')">
+            <el-form-item :label="$t('auto.Edit.248d0fb8')">
               <el-select v-model="form.llm_model" style="width: 100%">
                 <el-option label="gpt-4o-mini" value="gpt-4o-mini" />
                 <el-option label="gpt-4o" value="gpt-4o" />
@@ -311,12 +311,12 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item :label="$t('auto.Edit.40.b20b40')">
+            <el-form-item :label="$t('auto.Edit.b20b409f')">
               <el-input-number v-model="form.max_tokens" :min="100" :max="8192" :step="100" style="width: 100%" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item :label="$t('auto.Edit.41.c9bf0b')">
+            <el-form-item :label="$t('auto.Edit.c9bf0b88')">
               <el-slider v-model="form.temperature" :min="0" :max="2" :step="0.1" show-input />
             </el-form-item>
           </el-col>
@@ -326,12 +326,12 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item :label="$t('auto.Edit.42.b8f0c7')">
+            <el-form-item :label="$t('auto.Edit.b8f0c714')">
               <el-slider v-model="form.frequency_penalty" :min="-2" :max="2" :step="0.1" show-input />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item :label="$t('auto.Edit.43.ca5ae4')">
+            <el-form-item :label="$t('auto.Edit.ca5ae49a')">
               <el-slider v-model="form.presence_penalty" :min="-2" :max="2" :step="0.1" show-input />
             </el-form-item>
           </el-col>
@@ -341,31 +341,31 @@
       
       <el-card shadow="never" class="section-card">
         <template #header>
-          <div class="card-title"><el-icon><Open /></el-icon>{{ $t('auto.Edit.74.8a79d6') }}</div>
+          <div class="card-title"><el-icon><Open /></el-icon>{{ $t('auto.Edit.8a79d656') }}</div>
         </template>
         <el-row :gutter="20">
           <el-col :span="8">
-            <el-form-item :label="$t('auto.Edit.44.9a39a6')">
+            <el-form-item :label="$t('auto.Edit.9a39a697')">
               <el-switch v-model="form.enable_rag" />
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item :label="$t('auto.Edit.45.b45459')">
+            <el-form-item :label="$t('auto.Edit.b4545948')">
               <el-switch v-model="form.enable_script_match" />
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item :label="$t('auto.Edit.46.cf9838')">
+            <el-form-item :label="$t('auto.Edit.cf983876')">
               <el-switch v-model="form.enable_humanize_polish" />
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item :label="$t('auto.Edit.47.8d8c65')">
+            <el-form-item :label="$t('auto.Edit.8d8c65e0')">
               <el-switch v-model="form.enable_content_audit" />
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item :label="$t('auto.Edit.48.655e22')">
+            <el-form-item :label="$t('auto.Edit.655e227e')">
               <el-switch v-model="form.enable_playbook" />
             </el-form-item>
           </el-col>
@@ -375,7 +375,7 @@
       
       <el-card shadow="never" class="section-card">
         <template #header>
-          <div class="card-title"><el-icon><Setting /></el-icon>{{ $t('auto.Edit.75.4bcc78') }}</div>
+          <div class="card-title"><el-icon><Setting /></el-icon>{{ $t('auto.Edit.4bcc788b') }}</div>
         </template>
         <el-row :gutter="20">
           <el-col :span="8">
@@ -384,12 +384,12 @@
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item :label="$t('auto.Edit.49.bd493e')">
+            <el-form-item :label="$t('auto.Edit.bd493e1b')">
               <el-slider v-model="form.confidence_threshold" :min="0" :max="1" :step="0.05" show-input />
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item :label="$t('auto.Edit.50.755a7c')">
+            <el-form-item :label="$t('auto.Edit.755a7cad')">
               <el-input-number v-model="form.max_ai_consecutive" :min="1" :max="50" :step="1" style="width: 100%" />
             </el-form-item>
           </el-col>
@@ -398,7 +398,7 @@
 
       
       <div class="footer-actions">
-        <el-button @click="goBack">{{ $t('auto.Edit.76.625fb2') }}</el-button>
+        <el-button @click="goBack">{{ $t('auto.Edit.625fb26b') }}</el-button>
         <el-button type="primary" :loading="saving" @click="onSave">
           <el-icon><Check /></el-icon>
           {{ isEdit ? '保存更新' : '创建智能体' }}
@@ -407,20 +407,20 @@
     </el-form>
 
     
-    <el-dialog v-model="testDialogVisible" :title="$t('auto.Edit.51.353e8d')" width="760px" top="6vh">
+    <el-dialog v-model="testDialogVisible" :title="$t('auto.Edit.353e8df4')" width="760px" top="6vh">
       <el-form :model="testForm" label-width="90px">
-        <el-form-item :label="$t('auto.Edit.52.72fbb9')">
+        <el-form-item :label="$t('auto.Edit.72fbb9b5')">
           <el-input :model-value="form.name || form.agent_code" disabled />
         </el-form-item>
-        <el-form-item :label="$t('auto.Edit.53.1c2ecf')">
-          <el-input v-model="testForm.customer_id" :placeholder="$t('auto.Edit.54.7bfb0d')" />
+        <el-form-item :label="$t('auto.Edit.1c2ecf70')">
+          <el-input v-model="testForm.customer_id" :placeholder="$t('auto.Edit.7bfb0d81')" />
         </el-form-item>
-        <el-form-item :label="$t('auto.Edit.55.b87b77')" required>
+        <el-form-item :label="$t('auto.Edit.b87b7756')" required>
           <el-input
             v-model="testForm.message"
             type="textarea"
             :rows="3"
-            :placeholder="$t('auto.Edit.56.cc633c')"
+            :placeholder="$t('auto.Edit.cc633c28')"
           />
         </el-form-item>
         <el-form-item>
@@ -428,20 +428,20 @@
             <el-icon><VideoPlay /></el-icon>
             执行测试
           </el-button>
-          <el-button @click="testResult = null">{{ $t('auto.Edit.77.7e61ac') }}</el-button>
+          <el-button @click="testResult = null">{{ $t('auto.Edit.7e61acdd') }}</el-button>
         </el-form-item>
       </el-form>
 
       <template v-if="testResult">
-        <el-divider content-position="left">{{ $t('auto.Edit.78.c6c9da') }}</el-divider>
+        <el-divider content-position="left">{{ $t('auto.Edit.c6c9da2b') }}</el-divider>
         <el-descriptions :column="2" border size="small">
-          <el-descriptions-item :label="$t('auto.Edit.57.fab08d')" :span="2">
+          <el-descriptions-item :label="$t('auto.Edit.fab08d35')" :span="2">
             <div class="reply-box">{{ testResult.reply || '-' }}</div>
           </el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.Edit.39.248d0f')">{{ testResult.llm_model || '-' }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.Edit.58.7f62c0')">{{ testResult.latency_ms || 0 }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.Edit.59.8f5f4e')">{{ testResult.cost_tokens || 0 }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.Edit.60.39e5fb')">
+          <el-descriptions-item :label="$t('auto.Edit.248d0fb8')">{{ testResult.llm_model || '-' }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.Edit.7f62c087')">{{ testResult.latency_ms || 0 }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.Edit.8f5f4e35')">{{ testResult.cost_tokens || 0 }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.Edit.39e5fbd5')">
             <el-tag :type="testResult.transferred_to_human ? 'warning' : 'success'" size="small">
               {{ testResult.transferred_to_human ? '是' : '否' }}
             </el-tag>
@@ -449,20 +449,20 @@
           </el-descriptions-item>
         </el-descriptions>
 
-        <div class="chain-title">{{ $t('auto.Edit.79.cda843') }}</div>
+        <div class="chain-title">{{ $t('auto.Edit.cda843b5') }}</div>
         <el-table :data="testResult.steps || []" stripe size="small" border>
           <el-table-column type="index" label="#" width="50" align="center" />
-          <el-table-column prop="step" :label="$t('auto.Edit.61.52b365')" min-width="160" show-overflow-tooltip />
-          <el-table-column :label="$t('auto.Edit.62.3fea7c')" width="90" align="center">
+          <el-table-column prop="step" :label="$t('auto.Edit.52b36576')" min-width="160" show-overflow-tooltip />
+          <el-table-column :label="$t('auto.Edit.3fea7ca7')" width="90" align="center">
             <template #default="{ row }">
               <el-tag :type="getStepStatusType(row.status)" size="small">{{ row.status || '-' }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column :label="$t('auto.Edit.58.7f62c0')" width="100" align="center">
+          <el-table-column :label="$t('auto.Edit.7f62c087')" width="100" align="center">
             <template #default="{ row }">{{ row.latency_ms || 0 }}</template>
           </el-table-column>
-          <el-table-column prop="detail" :label="$t('auto.Edit.63.f26225')" min-width="200" show-overflow-tooltip />
-          <el-table-column prop="error" :label="$t('auto.Edit.64.7030ff')" min-width="160" show-overflow-tooltip>
+          <el-table-column prop="detail" :label="$t('auto.Edit.f26225bd')" min-width="200" show-overflow-tooltip />
+          <el-table-column prop="error" :label="$t('auto.Edit.7030ff64')" min-width="160" show-overflow-tooltip>
             <template #default="{ row }">
               <span v-if="row.error" class="error-text">{{ row.error }}</span>
               <span v-else>-</span>
@@ -470,7 +470,7 @@
           </el-table-column>
         </el-table>
       </template>
-      <el-empty v-else-if="!testing" :description="$t('auto.Edit.65.5910a5')" :image-size="80" />
+      <el-empty v-else-if="!testing" :description="$t('auto.Edit.5910a5ed')" :image-size="80" />
     </el-dialog>
   </div>
 </template>
@@ -562,17 +562,17 @@ const form = reactive(getDefaultForm())
 
 const rules = {
   agent_code: [
-    { required: true, message: i18n.global.t(t('auto.Edit.80.f817e5')), trigger: 'blur' },
-    { pattern: /^[a-zA-Z0-9_-]+$/, message: i18n.global.t(t('auto.Edit.81.2777ef')), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.Edit.f817e581')), trigger: 'blur' },
+    { pattern: /^[a-zA-Z0-9_-]+$/, message: i18n.global.t(t('auto.Edit.2777ef66')), trigger: 'blur' }
   ],
   name: [
-    { required: true, message: i18n.global.t(t('auto.Edit.4.2272d5')), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.Edit.2272d5c4')), trigger: 'blur' }
   ],
   agent_type: [
-    { required: true, message: i18n.global.t(t('auto.Edit.82.0251af')), trigger: 'change' }
+    { required: true, message: i18n.global.t(t('auto.Edit.0251affb')), trigger: 'change' }
   ],
   persona: [
-    { required: true, message: i18n.global.t(t('auto.Edit.83.984951')), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.Edit.984951e8')), trigger: 'blur' }
   ]
 };
 
@@ -593,7 +593,7 @@ const loadRagProducts = async () => {
     const res = await ragProductConfigAPI.getRagProducts({ page: 1, page_size: 100 })
     ragProductOptions.value = res?.items || res?.list || []
   } catch (e) {
-    console.warn(t('auto.Edit.84.f33732'), e?.message);
+    console.warn(t('auto.Edit.f3373253'), e?.message);
   }
 };
 
@@ -602,7 +602,7 @@ const loadSopOptions = async () => {
     const res = await sopApi.list({ page: 1, page_size: 100 })
     sopOptions.value = res?.list || res?.items || []
   } catch (e) {
-    console.warn(t('auto.Edit.85.c6f24a'), e?.message)
+    console.warn(t('auto.Edit.c6f24ae2'), e?.message)
   }
 }
 
@@ -611,7 +611,7 @@ const loadScriptOptions = async () => {
     const res = await getScriptTemplateList({ page: 1, page_size: 100 })
     scriptOptions.value = res?.list || res?.items || []
   } catch (e) {
-    console.warn(t('auto.Edit.86.2b96b2'), e?.message)
+    console.warn(t('auto.Edit.2b96b20e'), e?.message)
   }
 }
 
@@ -620,7 +620,7 @@ const loadAssetBundles = async () => {
     const res = await listBundles({ page: 1, page_size: 200, status: 'active' })
     assetBundleOptions.value = res?.list || res?.items || []
   } catch (e) {
-    console.warn(t('auto.Edit.87.b1e8a6'), e?.message)
+    console.warn(t('auto.Edit.b1e8a62a'), e?.message)
   }
 }
 
@@ -629,7 +629,7 @@ const loadFaqOptions = async () => {
     const res = await faqApi.list({ page: 1, page_size: 200 })
     faqOptions.value = res?.list || []
   } catch (e) {
-    console.warn(t('auto.Edit.88.db4e4c'), e?.message)
+    console.warn(t('auto.Edit.db4e4c72'), e?.message)
   }
 }
 
@@ -638,7 +638,7 @@ const loadSopTemplateOptions = async () => {
     const res = await sopTemplateApi.list({ page: 1, page_size: 100 })
     sopTemplateOptions.value = res?.list || []
   } catch (e) {
-    console.warn(t('auto.Edit.89.3a1ee2'), e?.message)
+    console.warn(t('auto.Edit.3a1ee2d2'), e?.message)
   }
 }
 
@@ -675,13 +675,13 @@ const buildKBTree = async () => {
       tree.push({ id: 'kb-type-sop', label: `SOP 模板库 (${sopChildren.length})`, children: sopChildren, isLeaf: false, disabled: true, kb_type: 'sop' })
     }
     if (tree.length === 0) {
-      tree.push({ id: 'kb-empty', label: t('auto.Edit.90.6f7142'), isLeaf: true, disabled: true });
+      tree.push({ id: 'kb-empty', label: t('auto.Edit.6f714237'), isLeaf: true, disabled: true });
     }
     kbTree.value = tree
     return tree
   } catch (e) {
-    console.warn(t('auto.Edit.91.fc9815'), e?.message)
-    kbTree.value = [{ id: 'kb-error', label: t('auto.Edit.92.c4fa9b') + (e?.message || t('auto.Edit.93.974e74')), isLeaf: true, disabled: true }]
+    console.warn(t('auto.Edit.fc9815d2'), e?.message)
+    kbTree.value = [{ id: 'kb-error', label: t('auto.Edit.c4fa9b74') + (e?.message || t('auto.Edit.974e7484')), isLeaf: true, disabled: true }]
     return []
   } finally {
     loadingKB.value = false
@@ -701,7 +701,7 @@ const loadAgentKBBindings = async () => {
     const list = res?.list || res?.items || (Array.isArray(res) ? res : [])
     form.kb_ids = list.map((it) => it.kb_id ?? it.id)
   } catch (e) {
-    console.warn(t('auto.Edit.94.0d5a9d'), e?.message)
+    console.warn(t('auto.Edit.0d5a9dd4'), e?.message)
     form.kb_ids = []
   }
 };
@@ -723,7 +723,7 @@ const loadAgentDetail = async () => {
       form.target_language = res.target_language || ''
     }
   } catch (e) {
-    ElMessage.error(t('auto.Edit.95.6ad039') + (e.message || t('auto.Edit.93.974e74')))
+    ElMessage.error(t('auto.Edit.6ad039e9') + (e.message || t('auto.Edit.974e7484')))
     goBack()
   } finally {
     pageLoading.value = false
@@ -734,7 +734,7 @@ const onSave = async () => {
   if (!formRef.value) return
   await formRef.value.validate(async (valid) => {
     if (!valid) {
-      ElMessage.warning(i18n.global.t(t('auto.Edit.96.341de0')))
+      ElMessage.warning(i18n.global.t(t('auto.Edit.341de0e4')))
       return
     }
     saving.value = true
@@ -777,9 +777,9 @@ const onSave = async () => {
         try {
           await replaceAgentKBs(agentId.value, form.kb_ids.map(String))
         } catch (kbErr) {
-          console.warn(t('auto.Edit.97.3a622c'), kbErr?.message)
+          console.warn(t('auto.Edit.3a622cb6'), kbErr?.message)
         }
-        ElMessage.success(i18n.global.t(t('auto.Edit.98.8baf0b')))
+        ElMessage.success(i18n.global.t(t('auto.Edit.8baf0b46')))
       } else {
         const created = await createAgent(data)
         const newId = created?.id || created?.ID;
@@ -787,14 +787,14 @@ const onSave = async () => {
           try {
             await replaceAgentKBs(newId, form.kb_ids.map(String))
           } catch (kbErr) {
-            console.warn(t('auto.Edit.99.047a0f'), kbErr?.message)
+            console.warn(t('auto.Edit.047a0ffb'), kbErr?.message)
           }
         }
-        ElMessage.success(i18n.global.t(t('auto.Edit.100.0cca28')))
+        ElMessage.success(i18n.global.t(t('auto.Edit.0cca28cd')))
       }
       goBack()
     } catch (e) {
-      ElMessage.error(t('auto.Edit.101.78d235') + (e.message || t('auto.Edit.93.974e74')))
+      ElMessage.error(t('auto.Edit.78d235cc') + (e.message || t('auto.Edit.974e7484')))
     } finally {
       saving.value = false
     }
@@ -807,11 +807,11 @@ const goBack = () => {
 
 const openTestDialog = () => {
   if (isEdit.value && !form.id) {
-    ElMessage.warning(i18n.global.t(t('auto.Edit.102.573b39')))
+    ElMessage.warning(i18n.global.t(t('auto.Edit.573b391d')))
     return
   }
   if (!isEdit.value) {
-    ElMessage.warning(i18n.global.t(t('auto.Edit.103.f4521c')))
+    ElMessage.warning(i18n.global.t(t('auto.Edit.f4521c3e')))
     return
   }
   testForm.value = { customer_id: '', message: '' }
@@ -821,7 +821,7 @@ const openTestDialog = () => {
 
 const runTest = async () => {
   if (!testForm.value.message || !testForm.value.message.trim()) {
-    ElMessage.warning(i18n.global.t(t('auto.Edit.104.fa967b')))
+    ElMessage.warning(i18n.global.t(t('auto.Edit.fa967bd0')))
     return
   }
   testing.value = true
@@ -833,9 +833,9 @@ const runTest = async () => {
     }
     const res = await testAgent(agentId.value, data)
     testResult.value = res
-    ElMessage.success(i18n.global.t(t('auto.Edit.105.2afc98')))
+    ElMessage.success(i18n.global.t(t('auto.Edit.2afc9835')))
   } catch (e) {
-    ElMessage.error(t('auto.Edit.106.4b3cb9') + (e.message || t('auto.Edit.93.974e74')))
+    ElMessage.error(t('auto.Edit.4b3cb9fe') + (e.message || t('auto.Edit.974e7484')))
   } finally {
     testing.value = false
   }

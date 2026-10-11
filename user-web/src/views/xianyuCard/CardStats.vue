@@ -9,15 +9,15 @@
             <el-date-picker
               v-model="dateRange"
               type="daterange"
-              :range-separator="$t('auto.CardStats.1.981cbe')"
-              :start-placeholder="$t('auto.CardStats.2.b44c0f')"
-              :end-placeholder="$t('auto.CardStats.3.1d468b')"
+              :range-separator="$t('auto.CardStats.981cbe31')"
+              :start-placeholder="$t('auto.CardStats.b44c0f33')"
+              :end-placeholder="$t('auto.CardStats.1d468be9')"
               @change="handleDateChange"
             />
-            <el-select v-model="groupBy" ::placeholder="$t('auto.CardStats.4.bf8db0')" @change="handleGroupByChange">
-              <el-option ::label="$t('auto.CardStats.5.4eb3b0')" value="day" />
-              <el-option ::label="$t('auto.CardStats.6.787456')" value="week" />
-              <el-option ::label="$t('auto.CardStats.7.31019b')" value="month" />
+            <el-select v-model="groupBy" ::placeholder="$t('auto.CardStats.bf8db0fe')" @change="handleGroupByChange">
+              <el-option ::label="$t('auto.CardStats.4eb3b00e')" value="day" />
+              <el-option ::label="$t('auto.CardStats.7874566d')" value="week" />
+              <el-option ::label="$t('auto.CardStats.31019b33')" value="month" />
             </el-select>
             <el-button type="primary" @click="refreshData">{{ $t('刷新') }}</el-button>
           </div>
@@ -27,16 +27,16 @@
       
       <div class="card-info" v-if="cardInfo">
         <el-descriptions :column="3" border>
-          <el-descriptions-item :label="$t('auto.CardStats.8.3944f2')">{{ cardInfo.title }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.CardStats.9.3bdd08')">{{ cardInfo.description }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.CardStats.10.3fea7c')">
+          <el-descriptions-item :label="$t('auto.CardStats.3944f217')">{{ cardInfo.title }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.CardStats.3bdd08ad')">{{ cardInfo.description }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.CardStats.3fea7ca7')">
             <el-tag :type="cardInfo.is_active ? 'success' : 'danger'">
               {{ cardInfo.is_active ? '激活' : '禁用' }}
             </el-tag>
           </el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.CardStats.11.eca37c')">{{ cardInfo.created_at }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.CardStats.12.7e6ff5')">{{ cardInfo.view_count || 0 }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.CardStats.13.d28bf8')">{{ cardInfo.click_count || 0 }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.CardStats.eca37cb0')">{{ cardInfo.created_at }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.CardStats.7e6ff5a0')">{{ cardInfo.view_count || 0 }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.CardStats.d28bf874')">{{ cardInfo.click_count || 0 }}</el-descriptions-item>
         </el-descriptions>
       </div>
 
@@ -47,7 +47,7 @@
             <el-card class="stats-card">
               <div class="stats-item">
                 <div class="stats-value">{{ formatNumber(statsData.total_views) }}</div>
-                <div class="stats-label">{{ $t('auto.CardStats.15.88bc4d') }}</div>
+                <div class="stats-label">{{ $t('auto.CardStats.88bc4d7a') }}</div>
               </div>
             </el-card>
           </el-col>
@@ -55,7 +55,7 @@
             <el-card class="stats-card">
               <div class="stats-item">
                 <div class="stats-value">{{ formatNumber(statsData.total_clicks) }}</div>
-                <div class="stats-label">{{ $t('auto.CardStats.16.2c85f0') }}</div>
+                <div class="stats-label">{{ $t('auto.CardStats.2c85f0c8') }}</div>
               </div>
             </el-card>
           </el-col>
@@ -63,7 +63,7 @@
             <el-card class="stats-card">
               <div class="stats-item">
                 <div class="stats-value">{{ formatNumber(statsData.total_shares) }}</div>
-                <div class="stats-label">{{ $t('auto.CardStats.17.34688e') }}</div>
+                <div class="stats-label">{{ $t('auto.CardStats.34688e27') }}</div>
               </div>
             </el-card>
           </el-col>
@@ -71,7 +71,7 @@
             <el-card class="stats-card">
               <div class="stats-item">
                 <div class="stats-value">{{ formatPercent(statsData.click_rate) }}</div>
-                <div class="stats-label">{{ $t('auto.CardStats.18.e6867b') }}</div>
+                <div class="stats-label">{{ $t('auto.CardStats.e6867bb9') }}</div>
               </div>
             </el-card>
           </el-col>
@@ -83,13 +83,13 @@
         <el-row :gutter="20">
           <el-col :span="12">
             <el-card>
-              <div class="chart-title">{{ $t('auto.CardStats.20.72995d') }}</div>
+              <div class="chart-title">{{ $t('auto.CardStats.72995d12') }}</div>
               <div ref="viewsChart" class="chart"></div>
             </el-card>
           </el-col>
           <el-col :span="12">
             <el-card>
-              <div class="chart-title">{{ $t('auto.CardStats.21.d0b945') }}</div>
+              <div class="chart-title">{{ $t('auto.CardStats.d0b94533') }}</div>
               <div ref="clicksChart" class="chart"></div>
             </el-card>
           </el-col>
@@ -99,18 +99,18 @@
       
       <div class="detail-table">
         <el-card>
-          <div class="table-title">{{ $t('auto.CardStats.22.331e29') }}</div>
+          <div class="table-title">{{ $t('auto.CardStats.331e29b7') }}</div>
           <el-table :data="detailData" style="width: 100%" v-loading="loading">
-            <el-table-column prop="date" :label="$t('auto.CardStats.14.4ff1e7')" width="120" />
-            <el-table-column prop="views" :label="$t('auto.CardStats.15.88bc4d')" width="100" />
-            <el-table-column prop="clicks" :label="$t('auto.CardStats.16.2c85f0')" width="100" />
-            <el-table-column prop="shares" :label="$t('auto.CardStats.17.34688e')" width="100" />
-            <el-table-column prop="click_rate" :label="$t('auto.CardStats.18.e6867b')" width="100">
+            <el-table-column prop="date" :label="$t('auto.CardStats.4ff1e74e')" width="120" />
+            <el-table-column prop="views" :label="$t('auto.CardStats.88bc4d7a')" width="100" />
+            <el-table-column prop="clicks" :label="$t('auto.CardStats.2c85f0c8')" width="100" />
+            <el-table-column prop="shares" :label="$t('auto.CardStats.34688e27')" width="100" />
+            <el-table-column prop="click_rate" :label="$t('auto.CardStats.e6867bb9')" width="100">
               <template #default="scope">
                 {{ formatPercent(scope.row.click_rate) }}
               </template>
             </el-table-column>
-            <el-table-column prop="unique_visitors" :label="$t('auto.CardStats.19.cf0848')" width="100" />
+            <el-table-column prop="unique_visitors" :label="$t('auto.CardStats.cf0848d0')" width="100" />
           </el-table>
           
           
@@ -185,7 +185,7 @@ const clicksChart = ref(null)
 const formatNumber = (num) => {
   if (!num) return '0'
   if (num >= 10000) {
-    return (num / 10000).toFixed(1) + t('auto.CardStats.23.9d0320')
+    return (num / 10000).toFixed(1) + t('auto.CardStats.9d032066')
   }
   return num.toString()
 };
@@ -213,7 +213,7 @@ const initCharts = () => {
     },
     yAxis: {
       type: 'value',
-      name: t('auto.CardStats.15.88bc4d')
+      name: t('auto.CardStats.88bc4d7a')
     },
     series: [{
       data: chartData.views,
@@ -240,7 +240,7 @@ const initCharts = () => {
     },
     yAxis: {
       type: 'value',
-      name: t('auto.CardStats.16.2c85f0')
+      name: t('auto.CardStats.2c85f0c8')
     },
     series: [{
       data: chartData.clicks,
@@ -262,7 +262,7 @@ const fetchCardInfo = async () => {
     const res = await getXianyuCard(cardId.value)
     cardInfo.value = res;
   } catch (error) {
-    ElMessage.error(i18n.global.t(t('auto.CardStats.24.eea2ec')))
+    ElMessage.error(i18n.global.t(t('auto.CardStats.eea2ec18')))
     console.error(error)
   }
 };
@@ -292,7 +292,7 @@ const fetchStats = async () => {
       initCharts()
     }
   } catch (error) {
-    ElMessage.error(i18n.global.t(t('auto.CardStats.25.063dc7')))
+    ElMessage.error(i18n.global.t(t('auto.CardStats.063dc79a')))
     console.error(error)
   } finally {
     loading.value = false

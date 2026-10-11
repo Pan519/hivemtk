@@ -6,8 +6,8 @@
       type="info"
       show-icon
       :closable="false"
-      :title="$t('auto.Detail.1.d5e452')"
-      :description="$t('auto.Detail.2.56d017')"
+      :title="$t('auto.Detail.d5e452f2')"
+      :description="$t('auto.Detail.56d017af')"
     />
     <el-alert
       v-if="loadError"
@@ -15,8 +15,8 @@
       :type="loadError === 404 ? 'info' : 'warning'"
       show-icon
       :closable="false"
-      ::title="$t('auto.Detail.3.6dd3ac')"
-      ::description="$t('auto.Detail.4.a3d4e3')"
+      ::title="$t('auto.Detail.6dd3ac65')"
+      ::description="$t('auto.Detail.a3d4e31e')"
     />
 
     <el-card
@@ -33,7 +33,7 @@
             >
               ← 返回列表
             </el-button>
-            <span>{{ $t('auto.Detail.25.2ccc34') }}</span>
+            <span>{{ $t('auto.Detail.2ccc34f0') }}</span>
             <el-tag
               v-if="draft"
               size="small"
@@ -73,19 +73,19 @@
           border
           class="mb-12"
         >
-          <el-descriptions-item :label="$t('auto.Detail.5.421db1')">
+          <el-descriptions-item :label="$t('auto.Detail.421db104')">
             <span class="mono">{{ draft.id }}</span>
           </el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.Detail.6.3fea7c')">
+          <el-descriptions-item :label="$t('auto.Detail.3fea7ca7')">
             {{ STATUS_LABELS[draft.status] || draft.status }}
           </el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.Detail.7.ff0b20')">
+          <el-descriptions-item :label="$t('auto.Detail.ff0b2077')">
             <span class="mono">{{ draft.customer_id }}</span>
           </el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.Detail.8.2fa2f0')">
+          <el-descriptions-item :label="$t('auto.Detail.2fa2f036')">
             <span class="mono">{{ draft.owner_id || '—' }}</span>
           </el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.Detail.9.a01543')">
+          <el-descriptions-item :label="$t('auto.Detail.a015434e')">
             {{ draft.product_name }}
             <el-tag
               v-if="draft.category"
@@ -96,55 +96,55 @@
               {{ draft.category }}
             </el-tag>
           </el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.Detail.10.8f3599')">
+          <el-descriptions-item :label="$t('auto.Detail.8f3599b6')">
             {{ pct(draft.confidence) }}
           </el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.Detail.11.0bf60b')">
+          <el-descriptions-item :label="$t('auto.Detail.0bf60b32')">
             {{ draft.quantity }}
           </el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.Detail.12.cd49be')">
+          <el-descriptions-item :label="$t('auto.Detail.cd49bed7')">
             {{ money(draft.unit_price) }} × {{ draft.quantity }} = <b>{{ money(draft.total_amount) }}</b>
           </el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.Detail.13.26ca20')">
+          <el-descriptions-item :label="$t('auto.Detail.26ca20b1')">
             {{ draft.source }}
           </el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.Detail.14.ca1a5e')">
+          <el-descriptions-item :label="$t('auto.Detail.ca1a5eb0')">
             <span class="mono">{{ draft.intent_id || '—' }}</span>
           </el-descriptions-item>
           <el-descriptions-item
             :span="2"
-            :label="$t('auto.Detail.15.cbf24d')"
+            :label="$t('auto.Detail.cbf24d07')"
           >
             {{ draft.source_text || '—' }}
           </el-descriptions-item>
           <el-descriptions-item
             :span="2"
-            :label="$t('auto.Detail.16.2432b5')"
+            :label="$t('auto.Detail.2432b575')"
           >
             {{ draft.note || '—' }}
           </el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.Detail.17.d9ac92')">
+          <el-descriptions-item :label="$t('auto.Detail.d9ac9228')">
             {{ formatTime(draft.created_at) }}
           </el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.Detail.18.851824')">
+          <el-descriptions-item :label="$t('auto.Detail.85182498')">
             <span :class="{ overdue: isExpiredSoon(draft) }">{{ formatTime(draft.expires_at) }}</span>
           </el-descriptions-item>
           <el-descriptions-item
             v-if="draft.order_id"
-            :label="$t('auto.Detail.19.7b5da5')"
+            :label="$t('auto.Detail.7b5da549')"
           >
             <span class="mono">{{ draft.order_id }}</span>
           </el-descriptions-item>
           <el-descriptions-item
             v-if="draft.confirmed_at"
-            :label="$t('auto.Detail.20.df713d')"
+            :label="$t('auto.Detail.df713dfb')"
           >
             {{ formatTime(draft.confirmed_at) }}
           </el-descriptions-item>
           <el-descriptions-item
             v-if="draft.cancel_reason"
             :span="2"
-            :label="$t('auto.Detail.21.48ac07')"
+            :label="$t('auto.Detail.48ac07ce')"
           >
             {{ draft.cancel_reason }}
           </el-descriptions-item>
@@ -165,7 +165,7 @@
         >
           <template #header>
             <div class="card-header">
-              <span>{{ $t('auto.Detail.26.3475fe') }}</span>
+              <span>{{ $t('auto.Detail.3475fef2') }}</span>
               <el-button
                 type="primary"
                 :disabled="!me || !dirty"
@@ -181,21 +181,21 @@
             label-width="96px"
             @submit.prevent
           >
-            <el-form-item :label="$t('auto.Detail.22.c6afa0')">
+            <el-form-item :label="$t('auto.Detail.c6afa029')">
               <el-input
                 v-model="form.product_name"
                 maxlength="200"
-                :placeholder="$t('auto.Detail.23.847e06')"
+                :placeholder="$t('auto.Detail.847e06c4')"
               />
             </el-form-item>
-            <el-form-item :label="$t('auto.Detail.11.0bf60b')">
+            <el-form-item :label="$t('auto.Detail.0bf60b32')">
               <el-input-number
                 v-model="form.quantity"
                 :min="1"
                 :max="999999"
               />
             </el-form-item>
-            <el-form-item :label="$t('auto.Detail.24.da4abd')">
+            <el-form-item :label="$t('auto.Detail.da4abd3e')">
               <el-input-number
                 v-model="form.unit_price"
                 :min="0"
@@ -203,7 +203,7 @@
                 :step="1"
               />
             </el-form-item>
-            <el-form-item :label="$t('auto.Detail.16.2432b5')">
+            <el-form-item :label="$t('auto.Detail.2432b575')">
               <el-input
                 v-model="form.note"
                 type="textarea"
@@ -238,7 +238,7 @@ import { useUserStore } from '@/stores/user'
 // 置灰按钮会被读成「我权限不够」，而真原因是这条已经不需要人再处理了。
 
 const STATUS_TAGS = { pending: 'warning', confirmed: 'success', cancelled: 'info', expired: 'danger' }
-const STATUS_LABELS = { pending: t('auto.Detail.27.2a2772'), confirmed: t('auto.Detail.28.4113e7'), cancelled: t('auto.Detail.29.2111cc'), expired: t('auto.Detail.30.4d5ccd') }
+const STATUS_LABELS = { pending: t('auto.Detail.2a2772fa'), confirmed: t('auto.Detail.4113e726'), cancelled: t('auto.Detail.2111ccbb'), expired: t('auto.Detail.4d5ccd01') }
 
 const route = useRoute()
 const router = useRouter()
@@ -300,7 +300,7 @@ function isExpiredSoon(d) {
 function terminalHint(d) {
   if (d.status === 'confirmed') return `这条已确认成单${d.order_id ? `（订单 ${d.order_id}）` : ''}，草稿侧不可再改。`
   if (d.status === 'cancelled') return `这条已取消${d.cancel_reason ? `：${d.cancel_reason}` : ''}，不可再操作。`
-  if (d.status === 'expired') return t('auto.Detail.31.40d4fd')
+  if (d.status === 'expired') return t('auto.Detail.40d4fde3')
   return ''
 }
 
@@ -335,8 +335,8 @@ async function doConfirm() {
   try {
     await ElMessageBox.confirm(
       `确认把「${draft.value.product_name}」×${draft.value.quantity} 转成正式订单？确认后草稿不可再改。`,
-      t('auto.Detail.32.9308e4'),
-      { confirmButtonText: t('auto.Detail.32.9308e4'), cancelButtonText: t('auto.Detail.33.abe78b'), type: 'warning' }
+      t('auto.Detail.9308e46c'),
+      { confirmButtonText: t('auto.Detail.9308e46c'), cancelButtonText: t('auto.Detail.abe78b4f'), type: 'warning' }
     )
   } catch {
     return
@@ -365,13 +365,13 @@ async function doCancel() {
   try {
     ({ value: reason } = await ElMessageBox.prompt(
       `取消「${draft.value.product_name}」这张草稿，必须给理由`,
-      t('auto.Detail.34.027c28'),
+      t('auto.Detail.027c28a4'),
       {
         inputType: 'textarea',
-        inputPlaceholder: t('auto.Detail.35.c5fe89'),
-        inputValidator: (v) => (v && v.trim() ? true : t('auto.Detail.36.6210e8')),
-        confirmButtonText: t('auto.Detail.34.027c28'),
-        cancelButtonText: t('auto.Detail.37.5f4112')
+        inputPlaceholder: t('auto.Detail.c5fe8915'),
+        inputValidator: (v) => (v && v.trim() ? true : t('auto.Detail.6210e80c')),
+        confirmButtonText: t('auto.Detail.027c28a4'),
+        cancelButtonText: t('auto.Detail.5f411223')
       }
     ))
   } catch {
@@ -380,7 +380,7 @@ async function doCancel() {
   acting.value = 'cancel'
   try {
     await orderDraftApi.cancel(draftId.value, reason.trim())
-    ElMessage.success(t('auto.Detail.29.2111cc'))
+    ElMessage.success(t('auto.Detail.2111ccbb'))
     await load()
   } catch (err) {
     if (err?.status === 404 || err?.status === 409) await load()
@@ -404,7 +404,7 @@ async function doEdit() {
     const fresh = await orderDraftApi.edit(draftId.value, updates)
     draft.value = fresh
     fillForm(fresh)
-    ElMessage.success(t('auto.Detail.38.20feaf'))
+    ElMessage.success(t('auto.Detail.20feaf96'))
   } catch (err) {
     // 400（校验）由拦截器原样弹后端文案；409（同客户同产品 pending 撞车 / 已过态）回读落态。
     if (err?.status === 404 || err?.status === 409) await load()

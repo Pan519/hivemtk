@@ -3,25 +3,25 @@
     <el-row :gutter="16" class="stats-row">
       <el-col :span="6">
         <el-card class="stat-card">
-          <div class="stat-label">{{ $t('auto.BulkMatrix.14.03d4ea') }}</div>
+          <div class="stat-label">{{ $t('auto.BulkMatrix.03d4eaea') }}</div>
           <div class="stat-value">{{ stats.sent }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="stat-card success">
-          <div class="stat-label">{{ $t('auto.BulkMatrix.15.77642d') }}</div>
+          <div class="stat-label">{{ $t('auto.BulkMatrix.77642ddb') }}</div>
           <div class="stat-value">{{ stats.delivered }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="stat-card primary">
-          <div class="stat-label">{{ $t('auto.BulkMatrix.16.8ad629') }}</div>
+          <div class="stat-label">{{ $t('auto.BulkMatrix.8ad629e5') }}</div>
           <div class="stat-value">{{ stats.read }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="stat-card danger">
-          <div class="stat-label">{{ $t('auto.BulkMatrix.17.acd5cb') }}</div>
+          <div class="stat-label">{{ $t('auto.BulkMatrix.acd5cb84') }}</div>
           <div class="stat-value">{{ stats.failed }}</div>
         </el-card>
       </el-col>
@@ -30,54 +30,54 @@
     <el-card>
       <template #header>
         <div class="card-header">
-          <span>{{ $t('auto.BulkMatrix.18.aec4c3') }}</span>
-          <el-button type="primary" @click="showPreview = true">{{ $t('auto.BulkMatrix.19.94ce5f') }}</el-button>
+          <span>{{ $t('auto.BulkMatrix.aec4c309') }}</span>
+          <el-button type="primary" @click="showPreview = true">{{ $t('auto.BulkMatrix.94ce5fa4') }}</el-button>
         </div>
       </template>
       <el-form :model="form" label-width="120px">
-        <el-form-item :label="$t('auto.BulkMatrix.1.adac24')">
+        <el-form-item :label="$t('auto.BulkMatrix.adac24db')">
           <el-select v-model="form.templateId" filterable>
             <el-option v-for="t in templates" :key="t.id" :label="t.name" :value="t.id" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.BulkMatrix.2.723c9d')">
+        <el-form-item :label="$t('auto.BulkMatrix.723c9db6')">
           <el-select v-model="form.audienceType">
-            <el-option :label="$t('auto.BulkMatrix.3.41ae5f')" value="all" />
-            <el-option :label="$t('auto.BulkMatrix.4.46ee3c')" value="segment" />
-            <el-option :label="$t('auto.BulkMatrix.5.6682c6')" value="clue" />
-            <el-option :label="$t('auto.BulkMatrix.6.4d9223')" value="csv" />
+            <el-option :label="$t('auto.BulkMatrix.41ae5f15')" value="all" />
+            <el-option :label="$t('auto.BulkMatrix.46ee3cfc')" value="segment" />
+            <el-option :label="$t('auto.BulkMatrix.6682c6da')" value="clue" />
+            <el-option :label="$t('auto.BulkMatrix.4d92234d')" value="csv" />
           </el-select>
         </el-form-item>
-        <el-form-item v-if="form.audienceType === 'segment'" :label="$t('auto.BulkMatrix.7.8ce5b5')">
+        <el-form-item v-if="form.audienceType === 'segment'" :label="$t('auto.BulkMatrix.8ce5b596')">
           <el-select v-model="form.segmentId" filterable>
             <el-option v-for="s in segments" :key="s.id" :label="s.name" :value="s.id" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.BulkMatrix.8.5a1914')">
+        <el-form-item :label="$t('auto.BulkMatrix.5a191445')">
           <el-input-number v-model="form.ratePerMinute" :min="1" :max="100" />
-          <span style="margin-left: 8px; color: #94A3B8">{{ $t('auto.BulkMatrix.20.1cf0da') }}</span>
+          <span style="margin-left: 8px; color: #94A3B8">{{ $t('auto.BulkMatrix.1cf0da1a') }}</span>
         </el-form-item>
-        <el-form-item :label="$t('auto.BulkMatrix.9.a05577')">
+        <el-form-item :label="$t('auto.BulkMatrix.a0557795')">
           <el-input v-model="form.variablesJson" type="textarea" :rows="4" placeholder='{"customer.name": "张三", "order.id": "ORD-001"}' />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" :loading="sending" @click="send">{{ $t('auto.BulkMatrix.21.48ad8a') }}</el-button>
+          <el-button type="primary" :loading="sending" @click="send">{{ $t('auto.BulkMatrix.48ad8ac5') }}</el-button>
         </el-form-item>
       </el-form>
     </el-card>
 
     <el-card class="progress-card">
-      <template #header><span>{{ $t('auto.BulkMatrix.22.558452') }}</span></template>
+      <template #header><span>{{ $t('auto.BulkMatrix.55845271') }}</span></template>
       <el-progress :percentage="progress" :status="progressStatus" />
       <el-table :data="progressList" max-height="200">
-        <el-table-column prop="phone" :label="$t('auto.BulkMatrix.10.9f9d36')" width="160" />
-        <el-table-column prop="status" :label="$t('auto.BulkMatrix.11.3fea7c')" width="100">
+        <el-table-column prop="phone" :label="$t('auto.BulkMatrix.9f9d3632')" width="160" />
+        <el-table-column prop="status" :label="$t('auto.BulkMatrix.3fea7ca7')" width="100">
           <template #default="{ row }">
             <el-tag :type="statusType(row.status)">{{ row.status }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="messageId" :label="$t('auto.BulkMatrix.12.795e00')" width="200" />
-        <el-table-column prop="error" :label="$t('auto.BulkMatrix.13.7030ff')" show-overflow-tooltip />
+        <el-table-column prop="messageId" :label="$t('auto.BulkMatrix.795e002a')" width="200" />
+        <el-table-column prop="error" :label="$t('auto.BulkMatrix.7030ff64')" show-overflow-tooltip />
       </el-table>
     </el-card>
   </div>
@@ -135,10 +135,10 @@ function statusType(status) {
 }
 
 async function send() {
-  if (!form.value.templateId) return ElMessage.warning(t('auto.BulkMatrix.23.9af823'))
+  if (!form.value.templateId) return ElMessage.warning(t('auto.BulkMatrix.9af823fd'))
   let variables;
   try { variables = JSON.parse(form.value.variablesJson) } catch (e) {
-    return ElMessage.error(t('auto.BulkMatrix.24.4e94fa'))
+    return ElMessage.error(t('auto.BulkMatrix.4e94fa9e'))
   }
   sending.value = true
   progressStatus.value = ''
@@ -149,7 +149,7 @@ async function send() {
       rate_per_minute: form.value.ratePerMinute,
       variables
     })
-    ElMessage.success(t('auto.BulkMatrix.25.e2486b') + job.id)
+    ElMessage.success(t('auto.BulkMatrix.e2486bbe') + job.id)
     pollProgress(job.id)
   } finally {
     sending.value = false
@@ -166,7 +166,7 @@ async function pollProgress(jobId) {
       if (p.status === 'done' || p.status === 'failed') {
         clearInterval(timer)
         progressStatus.value = p.status === 'done' ? 'success' : 'exception'
-        ElMessage[p.status === 'done' ? 'success' : 'error'](`任务${p.status === 'done' ? t('auto.BulkMatrix.26.769d88') : t('auto.BulkMatrix.17.acd5cb')}`)
+        ElMessage[p.status === 'done' ? 'success' : 'error'](`任务${p.status === 'done' ? t('auto.BulkMatrix.769d88e4') : t('auto.BulkMatrix.acd5cb84')}`)
       }
     } catch (_) {
       clearInterval(timer)

@@ -2,29 +2,29 @@
   <div class="custom-dashboard">
     <el-row :gutter="12" class="toolbar">
       <el-col :span="12">
-        <span class="title">{{ $t('auto.Builder.6.cc57bc') }}</span>
+        <span class="title">{{ $t('auto.Builder.cc57bc1c') }}</span>
       </el-col>
       <el-col :span="12" style="text-align: right">
-        <el-button @click="addBlock">{{ $t('auto.Builder.7.fa4d93') }}</el-button>
-        <el-button type="primary" @click="save">{{ $t('auto.Builder.1.8e9a08') }}</el-button>
+        <el-button @click="addBlock">{{ $t('auto.Builder.fa4d93eb') }}</el-button>
+        <el-button type="primary" @click="save">{{ $t('auto.Builder.8e9a0817') }}</el-button>
       </el-col>
     </el-row>
 
     <el-row :gutter="12">
       <el-col :span="6">
         <el-card class="palette">
-          <template #header><span>{{ $t('auto.Builder.8.ff885d') }}</span>  <el-dialog v-model="saveDialogVisible" :title="$t('auto.Builder.1.8e9a08')" width="420px">
+          <template #header><span>{{ $t('auto.Builder.ff885d24') }}</span>  <el-dialog v-model="saveDialogVisible" :title="$t('auto.Builder.8e9a0817')" width="420px">
     <el-form label-width="80px">
-      <el-form-item :label="$t('auto.Builder.2.cd2a09')">
-        <el-input v-model="saveName" :placeholder="$t('auto.Builder.3.921185')" maxlength="60" @keyup.enter="confirmSave" />
+      <el-form-item :label="$t('auto.Builder.cd2a0970')">
+        <el-input v-model="saveName" :placeholder="$t('auto.Builder.92118559')" maxlength="60" @keyup.enter="confirmSave" />
       </el-form-item>
-      <el-form-item :label="$t('auto.Builder.4.e541f2')">
-        <el-switch v-model="screenPublic" :active-text="$t('auto.Builder.5.d68c91')" />
+      <el-form-item :label="$t('auto.Builder.e541f2f3')">
+        <el-switch v-model="screenPublic" :active-text="$t('auto.Builder.d68c9102')" />
       </el-form-item>
     </el-form>
     <template #footer>
-      <el-button @click="saveDialogVisible = false">{{ $t('auto.Builder.9.625fb2') }}</el-button>
-      <el-button type="primary" :loading="saving" @click="confirmSave">{{ $t('auto.Builder.10.be5fbb') }}</el-button>
+      <el-button @click="saveDialogVisible = false">{{ $t('auto.Builder.625fb26b') }}</el-button>
+      <el-button type="primary" :loading="saving" @click="confirmSave">{{ $t('auto.Builder.be5fbbe3') }}</el-button>
     </template>
   </el-dialog>
 </template>
@@ -67,21 +67,21 @@
       </el-col>
     </el-row>
   <!-- el-dialog 原先与根 div 平级，使本组件有两个根节点（fragment）。路由层的
-       <Transition>{{ $t('auto.Builder.11.165949') }}<Transition>
+       <Transition>{{ $t('auto.Builder.1659498a') }}<Transition>
        renders non-element root node that cannot be animated"（实测 17 条）。
        它带 append-to-body（teleport 到 body），所以挪进根 div 内视觉与行为完全不变。 -->
-  <el-dialog v-model="saveDialogVisible" :title="$t('auto.Builder.1.8e9a08')" width="420px" append-to-body>
+  <el-dialog v-model="saveDialogVisible" :title="$t('auto.Builder.8e9a0817')" width="420px" append-to-body>
     <el-form label-width="80px">
-      <el-form-item :label="$t('auto.Builder.2.cd2a09')">
-        <el-input v-model="saveName" :placeholder="$t('auto.Builder.3.921185')" maxlength="60" @keyup.enter="confirmSave" />
+      <el-form-item :label="$t('auto.Builder.cd2a0970')">
+        <el-input v-model="saveName" :placeholder="$t('auto.Builder.92118559')" maxlength="60" @keyup.enter="confirmSave" />
       </el-form-item>
-      <el-form-item :label="$t('auto.Builder.4.e541f2')">
-        <el-switch v-model="screenPublic" :active-text="$t('auto.Builder.5.d68c91')" />
+      <el-form-item :label="$t('auto.Builder.e541f2f3')">
+        <el-switch v-model="screenPublic" :active-text="$t('auto.Builder.d68c9102')" />
       </el-form-item>
     </el-form>
     <template #footer>
-      <el-button @click="saveDialogVisible = false">{{ $t('auto.Builder.9.625fb2') }}</el-button>
-      <el-button type="primary" :loading="saving" @click="confirmSave">{{ $t('auto.Builder.10.be5fbb') }}</el-button>
+      <el-button @click="saveDialogVisible = false">{{ $t('auto.Builder.625fb26b') }}</el-button>
+      <el-button type="primary" :loading="saving" @click="confirmSave">{{ $t('auto.Builder.be5fbbe3') }}</el-button>
     </template>
   </el-dialog>
   </div>
@@ -98,12 +98,12 @@ import { safeInit } from '@/utils/echarts'
 import { http } from '@/utils/request'
 
 const blockTypes = [
-  { type: 'line', label: t('auto.Builder.12.0beb47'), icon: markRaw(TrendCharts) },
-  { type: 'bar', label: t('auto.Builder.13.f7fedc'), icon: markRaw(DataLine) },
-  { type: 'pie', label: t('auto.Builder.14.d5e33d'), icon: markRaw(PieChart) },
-  { type: 'kpi', label: t('auto.Builder.15.cd6590'), icon: markRaw(Document) },
-  { type: 'funnel', label: t('auto.Builder.16.be4e6e'), icon: markRaw(Histogram) },
-  { type: 'map', label: t('auto.Builder.17.823ea4'), icon: markRaw(LocationInformation) }
+  { type: 'line', label: t('auto.Builder.0beb478b'), icon: markRaw(TrendCharts) },
+  { type: 'bar', label: t('auto.Builder.f7fedcd0'), icon: markRaw(DataLine) },
+  { type: 'pie', label: t('auto.Builder.d5e33db7'), icon: markRaw(PieChart) },
+  { type: 'kpi', label: t('auto.Builder.cd65901b'), icon: markRaw(Document) },
+  { type: 'funnel', label: t('auto.Builder.be4e6e85'), icon: markRaw(Histogram) },
+  { type: 'map', label: t('auto.Builder.823ea45c'), icon: markRaw(LocationInformation) }
 ]
 
 const { t } = useI18n()
@@ -130,7 +130,7 @@ function onDrop(e) {
     height: 240,
     data: { value: Math.floor(Math.random() * 1000) }
   })
-  ElMessage.success(t('auto.Builder.18.c26b25'))
+  ElMessage.success(t('auto.Builder.c26b251e'))
 }
 
 function resolveChart(type) {
@@ -141,7 +141,7 @@ function resolveChart(type) {
     kpi: markRaw({ template: '<div class="kpi">{{ data.value }}</div>' }),
     funnel: defineAsyncComponent(() => loadChart(type)),
     map: defineAsyncComponent(() => loadChart(type))
-  }[type] || markRaw({ template: t('auto.Builder.19.1622dc') }))
+  }[type] || markRaw({ template: t('auto.Builder.1622dc9b') }))
 }
 
 import { defineAsyncComponent } from 'vue'
@@ -179,7 +179,7 @@ async function save() {
     // R5-4：本页面内 ElMessageBox.prompt 触发 Vue 挂载崩溃（parent.provides undefined），
     // 改用 confirm + 自动命名绕开；名称含时间戳保证可辨识
     const autoName = `看板-${new Date().toISOString().slice(0, 16).replace('T', ' ')}`
-    await ElMessageBox.confirm(`保存为「${autoName}」？（公开投屏语义，保存后即可通过公开链接访问）`, t('auto.Builder.1.8e9a08'), { type: 'info' })
+    await ElMessageBox.confirm(`保存为「${autoName}」？（公开投屏语义，保存后即可通过公开链接访问）`, t('auto.Builder.8e9a0817'), { type: 'info' })
     await http.post('/api/dashboards', {
       name: autoName,
       layout: { blocks: blocks.value },
@@ -194,7 +194,7 @@ async function save() {
       // 非 HTTP 错误（如 JSON 序列化失败）兜底提示；HTTP 错误由拦截器统一 toast
       if (!String(e).includes('Request failed')) {
         localStorage.setItem('r5_save_err', JSON.stringify({msg: e?.message || String(e), stack: e?.stack || ''}))
-        ElMessage.error(t('auto.Builder.20.78d235') + (e?.message || e))
+        ElMessage.error(t('auto.Builder.78d235cc') + (e?.message || e))
       }
     }
   }

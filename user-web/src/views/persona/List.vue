@@ -3,7 +3,7 @@
     <el-card class="header-card">
       <div>
         <h2>{{ $t('销冠能力画像') }}</h2>
-        <p class="subtitle">{{ $t('auto.List.12.80f54f') }}</p>
+        <p class="subtitle">{{ $t('auto.List.80f54f9e') }}</p>
       </div>
       <el-button type="primary" @click="loadStaffs">
         <el-icon><Refresh /></el-icon>
@@ -20,7 +20,7 @@
               <el-input
                 v-model="search"
                 size="small"
-                ::placeholder="$t('auto.List.1.55011c')"
+                ::placeholder="$t('auto.List.55011c44')"
                 style="width: 180px"
                 clearable
               />
@@ -35,8 +35,8 @@
             height="500"
           >
             <el-table-column prop="id" label="ID" width="80" />
-            <el-table-column prop="name" :label="$t('auto.List.2.60d045')" min-width="120" />
-            <el-table-column :label="$t('auto.List.3.4bcb44')" width="100" align="center">
+            <el-table-column prop="name" :label="$t('auto.List.60d0458a')" min-width="120" />
+            <el-table-column :label="$t('auto.List.4bcb44ce')" width="100" align="center">
               <template #default="{ row }">
                 <el-tag :type="scoreTagType(row.overall_score || row.overallScore)">
                   {{ Math.round(row.overall_score || row.overallScore || 0) }}
@@ -73,33 +73,33 @@
             <el-row :gutter="20" class="overview-row">
               <el-col :span="8">
                 <div class="overview-card">
-                  <div class="overview-label">{{ $t('auto.List.13.00dc6d') }}</div>
+                  <div class="overview-label">{{ $t('auto.List.00dc6d8e') }}</div>
                   <div class="overview-value" :style="{ color: scoreColorValue(currentReport.overall_score) }">
                     {{ Math.round(currentReport.overall_score || 0) }}
                   </div>
-                  <div class="overview-tip">{{ $t('auto.List.14.f32efb') }}</div>
+                  <div class="overview-tip">{{ $t('auto.List.f32efbf5') }}</div>
                 </div>
               </el-col>
               <el-col :span="8">
                 <div class="overview-card">
-                  <div class="overview-label">{{ $t('auto.List.15.78bf74') }}</div>
+                  <div class="overview-label">{{ $t('auto.List.78bf7443') }}</div>
                   <div class="overview-value">{{ (currentReport.items || []).length }}</div>
-                  <div class="overview-tip">{{ $t('auto.List.16.e1c1d5') }}</div>
+                  <div class="overview-tip">{{ $t('auto.List.e1c1d541') }}</div>
                 </div>
               </el-col>
               <el-col :span="8">
                 <div class="overview-card">
-                  <div class="overview-label">{{ $t('auto.List.17.b683c8') }}</div>
+                  <div class="overview-label">{{ $t('auto.List.b683c82e') }}</div>
                   <div class="overview-value time-text">
                     {{ formatTime(currentReport.generated_at) }}
                   </div>
-                  <div class="overview-tip">{{ $t('auto.List.18.2be0dc') }}</div>
+                  <div class="overview-tip">{{ $t('auto.List.2be0dc43') }}</div>
                 </div>
               </el-col>
             </el-row>
 
             <div class="radar-section">
-              <h4>{{ $t('auto.List.19.90ed3e') }}</h4>
+              <h4>{{ $t('auto.List.90ed3e2b') }}</h4>
               <div class="radar-chart">
                 <svg :viewBox="`0 0 ${svgSize} ${svgSize}`" width="100%" :style="{ maxWidth: svgSize + 'px', margin: '0 auto', display: 'block' }">
                   
@@ -150,15 +150,15 @@
             </div>
 
             <div class="items-section">
-              <h4>{{ $t('auto.List.20.d47c9d') }}</h4>
+              <h4>{{ $t('auto.List.d47c9d1c') }}</h4>
               <el-table :data="currentReport.items || []" stripe>
-                <el-table-column prop="name" :label="$t('auto.List.4.120419')" min-width="140" />
-                <el-table-column prop="tag" :label="$t('auto.List.5.14d342')" width="120">
+                <el-table-column prop="name" :label="$t('auto.List.120419a5')" min-width="140" />
+                <el-table-column prop="tag" :label="$t('auto.List.14d34236')" width="120">
                   <template #default="{ row }">
                     <el-tag size="small">{{ row.tag }}</el-tag>
                   </template>
                 </el-table-column>
-                <el-table-column :label="$t('auto.List.6.ad9619')" width="200">
+                <el-table-column :label="$t('auto.List.ad96194e')" width="200">
                   <template #default="{ row }">
                     <el-progress
                       :percentage="Math.round(row.score || 0)"
@@ -167,8 +167,8 @@
                     />
                   </template>
                 </el-table-column>
-                <el-table-column prop="sample" :label="$t('auto.List.7.c1ce23')" width="100" align="center" />
-                <el-table-column :label="$t('auto.List.8.009051')" width="100" align="center">
+                <el-table-column prop="sample" :label="$t('auto.List.c1ce23bf')" width="100" align="center" />
+                <el-table-column :label="$t('auto.List.009051c5')" width="100" align="center">
                   <template #default="{ row }">
                     <el-tag v-if="row.trend === 'up'" type="success" size="small">
                       <el-icon><CaretTop /></el-icon>{{ getTrendLabel(row.trend) }}
@@ -186,10 +186,10 @@
 
             
             <div v-if="compareMode" class="compare-section">
-              <h4>{{ $t('auto.List.21.d1666a') }}</h4>
+              <h4>{{ $t('auto.List.d1666a24') }}</h4>
               <el-select
                 v-model="compareStaffId"
-                :placeholder="$t('auto.List.9.426bdb')"
+                :placeholder="$t('auto.List.426bdb55')"
                 filterable
                 clearable
                 style="width: 240px; margin-bottom: 15px"
@@ -246,16 +246,16 @@
                   />
                 </svg>
                 <div class="compare-legend">
-                  <span><span class="legend-dot" style="background: #4F46E5"></span>{{ $t('auto.List.22.acf238') }}</span>
-                  <span><span class="legend-dot" style="background: #F59E0B"></span>{{ $t('auto.List.23.7f74c0') }}</span>
+                  <span><span class="legend-dot" style="background: #4F46E5"></span>{{ $t('auto.List.acf23879') }}</span>
+                  <span><span class="legend-dot" style="background: #F59E0B"></span>{{ $t('auto.List.7f74c0a6') }}</span>
                 </div>
               </div>
             </div>
           </template>
-          <el-empty v-else :description="$t('auto.List.10.5d24ae')" />
+          <el-empty v-else :description="$t('auto.List.5d24ae02')" />
         </el-card>
         <el-card v-else>
-          <el-empty :description="$t('auto.List.11.e4c114')" />
+          <el-empty :description="$t('auto.List.e4c1145f')" />
         </el-card>
       </el-col>
     </el-row>
@@ -337,7 +337,7 @@ const loadStaffs = async () => {
       selectStaff(list[0])
     }
   } catch (e) {
-    ElMessage.error(i18n.global.t(t('auto.List.24.c2c7ec')))
+    ElMessage.error(i18n.global.t(t('auto.List.c2c7ecba')))
     staffs.value = []
   } finally {
     loadingStaffs.value = false
@@ -360,7 +360,7 @@ const loadReport = async () => {
     const res = await getPersonaReport(id)
     currentReport.value = res
   } catch (e) {
-    ElMessage.error(t('auto.List.25.12ea67') + (e?.message || ''))
+    ElMessage.error(t('auto.List.12ea6737') + (e?.message || ''))
     currentReport.value = null;
   } finally {
     loadingReport.value = false
@@ -376,7 +376,7 @@ const loadCompareReport = async () => {
     const res = await getPersonaReport(compareStaffId.value)
     compareReport.value = res
   } catch (e) {
-    ElMessage.error(i18n.global.t(t('auto.List.26.a097ce')))
+    ElMessage.error(i18n.global.t(t('auto.List.a097ceeb')))
     compareReport.value = null
   }
 }

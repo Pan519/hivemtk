@@ -3,8 +3,8 @@
     <el-card class="header-card" shadow="never">
       <div class="header-content">
         <div>
-          <h2>{{ $t('auto.Index.1.e571cd') }}</h2>
-          <p class="subtitle">{{ $t('auto.Index.2.a4ea7b') }}</p>
+          <h2>{{ $t('auto.Index.e571cd55') }}</h2>
+          <p class="subtitle">{{ $t('auto.Index.a4ea7b25') }}</p>
         </div>
       </div>
     </el-card>
@@ -13,8 +13,8 @@
       <el-col :span="8">
         <el-card shadow="hover" class="entry-card" @click="$router.push('/faq/list')">
           <div class="entry-icon"><el-icon><Notebook /></el-icon></div>
-          <div class="entry-title">{{ $t('auto.Index.3.c7b1da') }}</div>
-          <div class="entry-desc">{{ $t('auto.Index.4.5a1a28') }}</div>
+          <div class="entry-title">{{ $t('auto.Index.c7b1daf0') }}</div>
+          <div class="entry-desc">{{ $t('auto.Index.5a1a28d6') }}</div>
           <el-button type="primary" plain>
             进入
             <el-icon class="el-icon--right"><ArrowRight /></el-icon>
@@ -24,8 +24,8 @@
       <el-col :span="8">
         <el-card shadow="hover" class="entry-card">
           <div class="entry-icon"><el-icon><Aim /></el-icon></div>
-          <div class="entry-title">{{ $t('auto.Index.5.c50cce') }}</div>
-          <div class="entry-desc">{{ $t('auto.Index.6.9dc6c4') }}</div>
+          <div class="entry-title">{{ $t('auto.Index.c50cce7e') }}</div>
+          <div class="entry-desc">{{ $t('auto.Index.9dc6c47a') }}</div>
           <el-button type="primary" plain @click="$router.push('/faq/list')">
             打开
             <el-icon class="el-icon--right"><ArrowRight /></el-icon>
@@ -35,8 +35,8 @@
       <el-col :span="8">
         <el-card shadow="hover" class="entry-card">
           <div class="entry-icon"><el-icon><Connection /></el-icon></div>
-          <div class="entry-title">{{ $t('auto.Index.7.629702') }}</div>
-          <div class="entry-desc">{{ $t('auto.Index.8.6067dc') }}</div>
+          <div class="entry-title">{{ $t('auto.Index.62970284') }}</div>
+          <div class="entry-desc">{{ $t('auto.Index.6067dc79') }}</div>
           <el-button type="primary" plain @click="$router.push('/aiAgent/list')">
             去绑定
             <el-icon class="el-icon--right"><ArrowRight /></el-icon>

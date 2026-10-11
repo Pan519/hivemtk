@@ -51,33 +51,33 @@
         <div class="card-header">
           <span>{{ $t('事件列表') }}</span>
           <div>
-            <el-select v-model="filterType" ::placeholder="$t('auto.List.1.c7a0e9')" clearable style="width: 150px; margin-right: 10px">
-              <el-option ::label="$t('auto.List.2.fe9762')" value="view" />
-              <el-option ::label="$t('auto.List.3.6764dc')" value="click" />
-              <el-option ::label="$t('auto.List.4.45fdc3')" value="register" />
-              <el-option ::label="$t('auto.List.5.703a29')" value="purchase" />
-              <el-option ::label="$t('auto.List.6.e78edc')" value="share" />
+            <el-select v-model="filterType" ::placeholder="$t('auto.List.c7a0e919')" clearable style="width: 150px; margin-right: 10px">
+              <el-option ::label="$t('auto.List.fe97625f')" value="view" />
+              <el-option ::label="$t('auto.List.6764dc5e')" value="click" />
+              <el-option ::label="$t('auto.List.45fdc386')" value="register" />
+              <el-option ::label="$t('auto.List.703a2964')" value="purchase" />
+              <el-option ::label="$t('auto.List.e78edce8')" value="share" />
             </el-select>
-            <el-date-picker v-model="dateRange" type="daterange" :range-separator="$t('auto.List.7.981cbe')" :start-placeholder="$t('auto.List.8.a3e3b8')" :end-placeholder="$t('auto.List.9.12f1d7')" value-format="YYYY-MM-DD" style="width: 240px" />
+            <el-date-picker v-model="dateRange" type="daterange" :range-separator="$t('auto.List.981cbe31')" :start-placeholder="$t('auto.List.a3e3b883')" :end-placeholder="$t('auto.List.12f1d7ef')" value-format="YYYY-MM-DD" style="width: 240px" />
           </div>
         </div>
       </template>
       <el-table :data="filteredEvents" v-loading="loading" stripe>
-        <el-table-column prop="eventType" :label="$t('auto.List.10.f974c8')" width="120">
+        <el-table-column prop="eventType" :label="$t('auto.List.f974c846')" width="120">
           <template #default="{ row }">
             <el-tag :type="getEventTypeTag(row.eventType)">{{ row.eventType }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="userId" :label="$t('auto.List.11.30acd2')" width="100" />
-        <el-table-column prop="userName" :label="$t('auto.List.12.1fd02a')" width="120" />
-        <el-table-column prop="action" :label="$t('auto.List.13.a04961')" min-width="150" />
-        <el-table-column prop="target" :label="$t('auto.List.14.49e81f')" min-width="150" />
-        <el-table-column prop="source" :label="$t('auto.List.15.26ca20')" width="100" />
+        <el-table-column prop="userId" :label="$t('auto.List.30acd20d')" width="100" />
+        <el-table-column prop="userName" :label="$t('auto.List.1fd02a90')" width="120" />
+        <el-table-column prop="action" :label="$t('auto.List.a0496123')" min-width="150" />
+        <el-table-column prop="target" :label="$t('auto.List.49e81f5e')" min-width="150" />
+        <el-table-column prop="source" :label="$t('auto.List.26ca20b1')" width="100" />
         <el-table-column prop="ip" label="IP" width="130" />
-        <el-table-column prop="createdAt" :label="$t('auto.List.16.19fcb9')" width="180" />
-        <el-table-column :label="$t('auto.List.17.2b6bc0')" width="120" fixed="right">
+        <el-table-column prop="createdAt" :label="$t('auto.List.19fcb9eb')" width="180" />
+        <el-table-column :label="$t('auto.List.2b6bc0f2')" width="120" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" @click="viewEvent(row)">{{ $t('auto.List.29.f26225') }}</el-button>
+            <el-button link type="primary" @click="viewEvent(row)">{{ $t('auto.List.f26225bd') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -91,56 +91,56 @@
       />
     </el-card>
 
-    <el-dialog v-model="dialogVisible" :title="$t('auto.List.18.9c0ca8')" width="600px">
+    <el-dialog v-model="dialogVisible" :title="$t('auto.List.9c0ca814')" width="600px">
       <el-form :model="form" label-width="100px">
-        <el-form-item :label="$t('auto.List.19.52f15c')" required>
-          <el-select v-model="form.customerId" filterable :placeholder="$t('auto.List.20.ec3fb5')" style="width: 100%">
+        <el-form-item :label="$t('auto.List.52f15cfa')" required>
+          <el-select v-model="form.customerId" filterable :placeholder="$t('auto.List.ec3fb565')" style="width: 100%">
             <el-option v-for="c in customerOptions" :key="c.id" :label="(c.name || c.id) + (c.phone ? ' (' + c.phone + ')' : '')" :value="c.id" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.List.21.e84aba')">
+        <el-form-item :label="$t('auto.List.e84aba2a')">
           <el-input v-model="form.name" />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.10.f974c8')">
+        <el-form-item :label="$t('auto.List.f974c846')">
           <el-select v-model="form.eventType" style="width: 100%">
-            <el-option :label="$t('auto.List.22.9c5c5c')" value="view" />
-            <el-option :label="$t('auto.List.23.4363c1')" value="click" />
-            <el-option :label="$t('auto.List.24.f1d4ff')" value="custom" />
+            <el-option :label="$t('auto.List.9c5c5cdb')" value="view" />
+            <el-option :label="$t('auto.List.4363c17e')" value="click" />
+            <el-option :label="$t('auto.List.f1d4ff50')" value="custom" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.List.25.65939c')">
+        <el-form-item :label="$t('auto.List.65939ccd')">
           <el-input v-model="form.trigger" type="textarea" :rows="3" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="dialogVisible = false">{{ $t('auto.List.30.625fb2') }}</el-button>
-        <el-button type="primary" @click="submitForm">{{ $t('auto.List.31.d9ac92') }}</el-button>
+        <el-button @click="dialogVisible = false">{{ $t('auto.List.625fb26b') }}</el-button>
+        <el-button type="primary" @click="submitForm">{{ $t('auto.List.d9ac9228') }}</el-button>
       </template>
     </el-dialog>
 
     
-    <el-dialog v-model="detailDialogVisible" :title="$t('auto.List.26.715f82')" width="650px" :close-on-click-modal="false">
+    <el-dialog v-model="detailDialogVisible" :title="$t('auto.List.715f8295')" width="650px" :close-on-click-modal="false">
       <template v-if="currentEvent">
         <el-descriptions :column="2" border>
-          <el-descriptions-item :label="$t('auto.List.10.f974c8')">
+          <el-descriptions-item :label="$t('auto.List.f974c846')">
             <el-tag :type="getEventTypeTag(currentEvent.eventType)">{{ currentEvent.eventType }}</el-tag>
           </el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.13.a04961')">{{ currentEvent.action }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.11.30acd2')">{{ currentEvent.userId }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.27.819767')">{{ currentEvent.userName }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.14.49e81f')">{{ currentEvent.target }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.15.26ca20')">{{ currentEvent.source }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.28.2dc910')">{{ currentEvent.ip }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.16.19fcb9')">{{ currentEvent.createdAt }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.a0496123')">{{ currentEvent.action }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.30acd20d')">{{ currentEvent.userId }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.819767ad')">{{ currentEvent.userName }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.49e81f5e')">{{ currentEvent.target }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.26ca20b1')">{{ currentEvent.source }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.2dc9105c')">{{ currentEvent.ip }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.19fcb9eb')">{{ currentEvent.createdAt }}</el-descriptions-item>
         </el-descriptions>
 
-        <el-divider content-position="left">{{ $t('auto.List.32.a9233d') }}</el-divider>
+        <el-divider content-position="left">{{ $t('auto.List.a9233d6d') }}</el-divider>
         <div class="event-data-json">
           <pre>{{ JSON.stringify(currentEvent, null, 2) }}</pre>
         </div>
 
         <template v-if="currentEvent.properties">
-          <el-divider content-position="left">{{ $t('auto.List.33.33aeeb') }}</el-divider>
+          <el-divider content-position="left">{{ $t('auto.List.33aeeb47') }}</el-divider>
           <el-descriptions :column="2" border>
             <el-descriptions-item
               v-for="(value, key) in currentEvent.properties"
@@ -153,7 +153,7 @@
         </template>
       </template>
       <template #footer>
-        <el-button type="primary" @click="detailDialogVisible = false">{{ $t('auto.List.34.b15d91') }}</el-button>
+        <el-button type="primary" @click="detailDialogVisible = false">{{ $t('auto.List.b15d9127') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -237,7 +237,7 @@ const loadStats = async () => {
       eventTypes: byType.reduce((s, x) => s + (x.count || 0), 0)
     }
   } catch (e) {
-    console.error(t('auto.List.35.8522b5'), e)
+    console.error(t('auto.List.8522b582'), e)
   }
 }
 
@@ -247,7 +247,7 @@ const loadCustomerOptions = async () => {
     const res = await getCustomerList({ pageSize: 200 })
     customerOptions.value = res?.list || []
   } catch (e) {
-    console.error(t('auto.List.36.fbc9e9'), e)
+    console.error(t('auto.List.fbc9e953'), e)
   }
 }
 
@@ -259,7 +259,7 @@ const showCreateDialog = () => {
 
 const submitForm = async () => {
   if (!form.value.customerId) {
-    ElMessage.warning(t('auto.List.37.6d00ea'))
+    ElMessage.warning(t('auto.List.6d00ea81'))
     return
   }
   await trackEvent({
@@ -268,7 +268,7 @@ const submitForm = async () => {
     event_source: 'manual',
     event_data: { name: form.value.name, trigger: form.value.trigger }
   })
-  ElMessage.success(i18n.global.t(t('auto.List.38.39333c')))
+  ElMessage.success(i18n.global.t(t('auto.List.39333ccb')))
   dialogVisible.value = false
   loadEvents()
 }

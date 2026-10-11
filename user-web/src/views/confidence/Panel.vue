@@ -11,7 +11,7 @@
       <el-col :span="6">
         <el-card>
           <div class="stat-item">
-            <div class="stat-label">{{ $t('auto.Panel.35.cd4534') }}</div>
+            <div class="stat-label">{{ $t('auto.Panel.cd45341a') }}</div>
             <div class="stat-value">{{ stats.totalSignals }}</div>
           </div>
         </el-card>
@@ -44,13 +44,13 @@
 
     <el-tabs v-model="activeTab" class="content-tabs">
       
-      <el-tab-pane ::label="$t('auto.Panel.1.4b70a8')" name="signals">
+      <el-tab-pane ::label="$t('auto.Panel.4b70a808')" name="signals">
         <el-card>
           <template #header>
             <div class="card-header">
-              <span>{{ $t('auto.Panel.36.f64e29') }}</span>
+              <span>{{ $t('auto.Panel.f64e29c3') }}</span>
               <div>
-                <el-input v-model="signalSearch" ::placeholder="$t('auto.Panel.2.f95a4f')" clearable style="width: 200px" @change="loadSignals" />
+                <el-input v-model="signalSearch" ::placeholder="$t('auto.Panel.f95a4fd0')" clearable style="width: 200px" @change="loadSignals" />
                 <el-button @click="loadSignals" style="margin-left: 10px">
                   <el-icon><Refresh /></el-icon>
                   {{ $t('刷新') }}
@@ -60,50 +60,50 @@
           </template>
           <el-table :data="signals" v-loading="signalsLoading" stripe>
             <el-table-column prop="id" label="ID" width="80" />
-            <el-table-column prop="session_id" :label="$t('auto.Panel.3.427bc5')" width="160" />
-            <el-table-column prop="intent_conf" :label="$t('auto.Panel.4.489a1e')" width="100">
+            <el-table-column prop="session_id" :label="$t('auto.Panel.427bc5b3')" width="160" />
+            <el-table-column prop="intent_conf" :label="$t('auto.Panel.489a1e59')" width="100">
               <template #default="{ row }">
                 <el-tag :type="confTagType(row.intent_conf)">{{ (row.intent_conf || 0).toFixed(3) }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="entity_comp" :label="$t('auto.Panel.5.b05bf9')" width="100">
+            <el-table-column prop="entity_comp" :label="$t('auto.Panel.b05bf9dd')" width="100">
               <template #default="{ row }">
                 {{ (row.entity_comp || 0).toFixed(3) }}
               </template>
             </el-table-column>
-            <el-table-column prop="ctx_relev" :label="$t('auto.Panel.6.a3845a')" width="100">
+            <el-table-column prop="ctx_relev" :label="$t('auto.Panel.a3845ae4')" width="100">
               <template #default="{ row }">
                 {{ (row.ctx_relev || 0).toFixed(3) }}
               </template>
             </el-table-column>
-            <el-table-column prop="rag_qual" :label="$t('auto.Panel.7.a378ad')" width="100">
+            <el-table-column prop="rag_qual" :label="$t('auto.Panel.a378ad7d')" width="100">
               <template #default="{ row }">
                 {{ (row.rag_qual || 0).toFixed(3) }}
               </template>
             </el-table-column>
-            <el-table-column prop="llm_entropy" :label="$t('auto.Panel.8.6fa147')" width="100">
+            <el-table-column prop="llm_entropy" :label="$t('auto.Panel.6fa1479e')" width="100">
               <template #default="{ row }">
                 {{ (row.llm_entropy || 0).toFixed(3) }}
               </template>
             </el-table-column>
-            <el-table-column prop="aggregated_score" :label="$t('auto.Panel.9.32c847')" width="110">
+            <el-table-column prop="aggregated_score" :label="$t('auto.Panel.32c84783')" width="110">
               <template #default="{ row }">
                 <el-tag :type="confTagType(row.aggregated_score)" effect="dark">
                   {{ (row.aggregated_score || 0).toFixed(3) }}
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="threshold" :label="$t('auto.Panel.10.052c00')" width="100">
+            <el-table-column prop="threshold" :label="$t('auto.Panel.052c0059')" width="100">
               <template #default="{ row }">
                 {{ (row.threshold || 0).toFixed(3) }}
               </template>
             </el-table-column>
-            <el-table-column :label="$t('auto.Panel.11.5fd3a1')" width="100">
+            <el-table-column :label="$t('auto.Panel.5fd3a15c')" width="100">
               <template #default="{ row }">
                 <el-tag :type="decisionTagType(row.decision)">{{ decisionLabel(row.decision) }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="calculated_at" :label="$t('auto.Panel.12.d7172b')" width="170">
+            <el-table-column prop="calculated_at" :label="$t('auto.Panel.d7172bd0')" width="170">
               <template #default="{ row }">
                 {{ formatTime(row.calculated_at) }}
               </template>
@@ -124,11 +124,11 @@
       </el-tab-pane>
 
       
-      <el-tab-pane :label="$t('auto.Panel.13.8c11c0')" name="calibrations">
+      <el-tab-pane :label="$t('auto.Panel.8c11c09d')" name="calibrations">
         <el-card>
           <template #header>
             <div class="card-header">
-              <span>{{ $t('auto.Panel.37.6f3127') }}</span>
+              <span>{{ $t('auto.Panel.6f312756') }}</span>
               <el-button @click="loadCalibrations">
                 <el-icon><Refresh /></el-icon>
                 刷新
@@ -137,21 +137,21 @@
           </template>
           <el-table :data="calibrations" v-loading="calibrationsLoading" stripe>
             <el-table-column prop="id" label="ID" width="80" />
-            <el-table-column prop="scenario" :label="$t('auto.Panel.14.c93165')" width="160" />
-            <el-table-column prop="temperature" :label="$t('auto.Panel.15.d04592')" width="120">
+            <el-table-column prop="scenario" :label="$t('auto.Panel.c931653c')" width="160" />
+            <el-table-column prop="temperature" :label="$t('auto.Panel.d0459262')" width="120">
               <template #default="{ row }">
                 {{ (row.temperature || 0).toFixed(4) }}
               </template>
             </el-table-column>
-            <el-table-column prop="ece" :label="$t('auto.Panel.16.50d812')" width="180">
+            <el-table-column prop="ece" :label="$t('auto.Panel.50d812f1')" width="180">
               <template #default="{ row }">
                 <el-tag :type="row.ece < 0.05 ? 'success' : row.ece < 0.1 ? 'warning' : 'danger'">
                   {{ (row.ece || 0).toFixed(4) }}
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="sample_count" :label="$t('auto.Panel.17.c1ce23')" width="100" />
-            <el-table-column prop="calculated_at" :label="$t('auto.Panel.12.d7172b')" width="170">
+            <el-table-column prop="sample_count" :label="$t('auto.Panel.c1ce23bf')" width="100" />
+            <el-table-column prop="calculated_at" :label="$t('auto.Panel.d7172bd0')" width="170">
               <template #default="{ row }">
                 {{ formatTime(row.calculated_at) }}
               </template>
@@ -161,11 +161,11 @@
       </el-tab-pane>
 
       
-      <el-tab-pane :label="$t('auto.Panel.18.ef01b5')" name="policies">
+      <el-tab-pane :label="$t('auto.Panel.ef01b5cc')" name="policies">
         <el-card>
           <template #header>
             <div class="card-header">
-              <span>{{ $t('auto.Panel.38.833b71') }}</span>
+              <span>{{ $t('auto.Panel.833b71ac') }}</span>
               <el-button type="primary" @click="showPolicyDialog()">
                 <el-icon><Plus /></el-icon>
                 新建策略
@@ -174,31 +174,31 @@
           </template>
           <el-table :data="policies" v-loading="policiesLoading" stripe>
             <el-table-column prop="id" label="ID" width="80" />
-            <el-table-column prop="name" :label="$t('auto.Panel.19.27bf5b')" />
-            <el-table-column prop="scenario" :label="$t('auto.Panel.20.62b37e')" width="160" />
-            <el-table-column prop="base_threshold" :label="$t('auto.Panel.21.288144')" width="100">
+            <el-table-column prop="name" :label="$t('auto.Panel.27bf5b30')" />
+            <el-table-column prop="scenario" :label="$t('auto.Panel.62b37e99')" width="160" />
+            <el-table-column prop="base_threshold" :label="$t('auto.Panel.288144fc')" width="100">
               <template #default="{ row }">
                 {{ (row.base_threshold || 0).toFixed(3) }}
               </template>
             </el-table-column>
-            <el-table-column prop="vip_threshold" :label="$t('auto.Panel.22.ef619e')" width="100">
+            <el-table-column prop="vip_threshold" :label="$t('auto.Panel.ef619eb7')" width="100">
               <template #default="{ row }">
                 {{ (row.vip_threshold || 0).toFixed(3) }}
               </template>
             </el-table-column>
-            <el-table-column prop="transfer_low" :label="$t('auto.Panel.23.78c0aa')" width="100">
+            <el-table-column prop="transfer_low" :label="$t('auto.Panel.78c0aa63')" width="100">
               <template #default="{ row }">
                 {{ (row.transfer_low || 0).toFixed(3) }}
               </template>
             </el-table-column>
-            <el-table-column prop="is_active" :label="$t('auto.Panel.24.7854b5')" width="80">
+            <el-table-column prop="is_active" :label="$t('auto.Panel.7854b52a')" width="80">
               <template #default="{ row }">
                 <el-switch :model-value="row.is_active" disabled />
               </template>
             </el-table-column>
-            <el-table-column :label="$t('auto.Panel.25.2b6bc0')" width="160" fixed="right">
+            <el-table-column :label="$t('auto.Panel.2b6bc0f2')" width="160" fixed="right">
               <template #default="{ row }">
-                <el-button size="small" @click="showPolicyDialog(row)">{{ $t('auto.Panel.39.95b351') }}</el-button>
+                <el-button size="small" @click="showPolicyDialog(row)">{{ $t('auto.Panel.95b351c8') }}</el-button>
                 <el-button size="small" type="primary" @click="togglePolicy(row)">
                   {{ row.is_active ? '禁用' : '启用' }}
                 </el-button>
@@ -210,42 +210,42 @@
     </el-tabs>
 
     
-    <el-dialog v-model="policyDialogVisible" ::title="$t('auto.Panel.26.9ad05b')" width="640px">
+    <el-dialog v-model="policyDialogVisible" ::title="$t('auto.Panel.9ad05b10')" width="640px">
       <el-form :model="editingPolicy" label-width="120px">
-        <el-form-item :label="$t('auto.Panel.19.27bf5b')" required>
-          <el-input v-model="editingPolicy.name" :placeholder="$t('auto.Panel.27.5a6dae')" />
+        <el-form-item :label="$t('auto.Panel.27bf5b30')" required>
+          <el-input v-model="editingPolicy.name" :placeholder="$t('auto.Panel.5a6dae3f')" />
         </el-form-item>
-        <el-form-item :label="$t('auto.Panel.20.62b37e')">
-          <el-select v-model="editingPolicy.scenario" :placeholder="$t('auto.Panel.28.8a5227')" style="width: 100%">
-            <el-option :label="$t('auto.Panel.29.e9d2f7')" value="ecommerce_high_value" />
-            <el-option :label="$t('auto.Panel.30.9340e2')" value="ecommerce_low_value" />
-            <el-option :label="$t('auto.Panel.31.39ad72')" value="saas_sales" />
-            <el-option :label="$t('auto.Panel.32.ea8dc9')" value="customer_service" />
-            <el-option :label="$t('auto.Panel.33.eee699')" value="all" />
+        <el-form-item :label="$t('auto.Panel.62b37e99')">
+          <el-select v-model="editingPolicy.scenario" :placeholder="$t('auto.Panel.8a5227bf')" style="width: 100%">
+            <el-option :label="$t('auto.Panel.e9d2f754')" value="ecommerce_high_value" />
+            <el-option :label="$t('auto.Panel.9340e22d')" value="ecommerce_low_value" />
+            <el-option :label="$t('auto.Panel.39ad7278')" value="saas_sales" />
+            <el-option :label="$t('auto.Panel.ea8dc9e6')" value="customer_service" />
+            <el-option :label="$t('auto.Panel.eee6996d')" value="all" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.Panel.21.288144')">
+        <el-form-item :label="$t('auto.Panel.288144fc')">
           <el-input-number v-model="editingPolicy.base_threshold" :min="0" :max="1" :step="0.01" />
-          <span class="form-tip">{{ $t('auto.Panel.40.51ea7f') }}</span>
+          <span class="form-tip">{{ $t('auto.Panel.51ea7fe1') }}</span>
         </el-form-item>
-        <el-form-item :label="$t('auto.Panel.22.ef619e')">
+        <el-form-item :label="$t('auto.Panel.ef619eb7')">
           <el-input-number v-model="editingPolicy.vip_threshold" :min="0" :max="1" :step="0.01" />
-          <span class="form-tip">{{ $t('auto.Panel.41.2782f2') }}</span>
+          <span class="form-tip">{{ $t('auto.Panel.2782f2f6') }}</span>
         </el-form-item>
-        <el-form-item :label="$t('auto.Panel.23.78c0aa')">
+        <el-form-item :label="$t('auto.Panel.78c0aa63')">
           <el-input-number v-model="editingPolicy.transfer_low" :min="0" :max="1" :step="0.01" />
-          <span class="form-tip">{{ $t('auto.Panel.42.76744b') }}</span>
+          <span class="form-tip">{{ $t('auto.Panel.76744b44') }}</span>
         </el-form-item>
-        <el-form-item :label="$t('auto.Panel.24.7854b5')">
+        <el-form-item :label="$t('auto.Panel.7854b52a')">
           <el-switch v-model="editingPolicy.is_active" />
         </el-form-item>
-        <el-form-item :label="$t('auto.Panel.34.2432b5')">
+        <el-form-item :label="$t('auto.Panel.2432b575')">
           <el-input v-model="editingPolicy.remark" type="textarea" :rows="2" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="policyDialogVisible = false">{{ $t('auto.Panel.43.625fb2') }}</el-button>
-        <el-button type="primary" @click="savePolicy">{{ $t('auto.Panel.44.be5fbb') }}</el-button>
+        <el-button @click="policyDialogVisible = false">{{ $t('auto.Panel.625fb26b') }}</el-button>
+        <el-button type="primary" @click="savePolicy">{{ $t('auto.Panel.be5fbbe3') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -292,7 +292,7 @@ async function loadSignals() {
     signals.value = res?.list || res?.data?.list || []
     signalTotal.value = res?.total || res?.data?.total || 0
   } catch (e) {
-    ElMessage.error(t('auto.Panel.45.2c4696') + (e?.message || e))
+    ElMessage.error(t('auto.Panel.2c469676') + (e?.message || e))
   } finally {
     signalsLoading.value = false
   }
@@ -321,7 +321,7 @@ async function loadCalibrations() {
     const res = await getConfidenceCalibrations({ page: 1, page_size: 50 })
     calibrations.value = res?.list || res?.data?.list || []
   } catch (e) {
-    ElMessage.error(t('auto.Panel.46.793f31') + (e?.message || e))
+    ElMessage.error(t('auto.Panel.793f31d9') + (e?.message || e))
   } finally {
     calibrationsLoading.value = false
   }
@@ -335,7 +335,7 @@ async function loadPolicies() {
     const res = await getThresholdPolicies({ page: 1, page_size: 100 })
     policies.value = res?.list || res?.data?.list || []
   } catch (e) {
-    ElMessage.error(t('auto.Panel.47.8fb5fa') + (e?.message || e))
+    ElMessage.error(t('auto.Panel.8fb5fa03') + (e?.message || e))
   } finally {
     policiesLoading.value = false
   }
@@ -371,22 +371,22 @@ function showPolicyDialog(row) {
 }
 async function savePolicy() {
   if (!editingPolicy.value.name) {
-    ElMessage.warning(i18n.global.t(t('auto.Panel.48.f3e19e')))
+    ElMessage.warning(i18n.global.t(t('auto.Panel.f3e19e79')))
     return
   }
   try {
     await upsertThresholdPolicy(editingPolicy.value)
-    ElMessage.success(i18n.global.t(t('auto.Panel.49.3b1083')))
+    ElMessage.success(i18n.global.t(t('auto.Panel.3b108349')))
     policyDialogVisible.value = false
     await loadPolicies()
   } catch (e) {
-    ElMessage.error(t('auto.Panel.50.78d235') + (e?.message || e))
+    ElMessage.error(t('auto.Panel.78d235cc') + (e?.message || e))
   }
 }
 async function togglePolicy(row) {
-  const action = row.is_active ? t('auto.Panel.51.710ad0') : t('auto.Panel.24.7854b5')
+  const action = row.is_active ? t('auto.Panel.710ad08b') : t('auto.Panel.7854b52a')
   try {
-    await ElMessageBox.confirm(`确认要${action}策略「${row.name}」？`, t('auto.Panel.52.02d981'), { type: 'warning' })
+    await ElMessageBox.confirm(`确认要${action}策略「${row.name}」？`, t('auto.Panel.02d9819d'), { type: 'warning' })
     await upsertThresholdPolicy({ ...row, is_active: !row.is_active })
     ElMessage.success(`${action}成功`)
     await loadPolicies()
@@ -403,7 +403,7 @@ function confTagType(v) {
   return 'danger'
 }
 function decisionLabel(d) {
-  return { auto_reply: t('auto.Panel.53.922a77'), llm_fallback: 'LLM 兜底', review_queue: t('auto.Panel.54.3d1469'), transfer: t('auto.Panel.55.c7b8f4') }[d] || d || '-'
+  return { auto_reply: t('auto.Panel.922a7731'), llm_fallback: 'LLM 兜底', review_queue: t('auto.Panel.3d14695b'), transfer: t('auto.Panel.c7b8f4b7') }[d] || d || '-'
 }
 function decisionTagType(d) {
   // 兜底不能用空串：el-tag 的 type 合法值只有 primary/success/info/warning/danger，

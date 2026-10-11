@@ -3,8 +3,8 @@
     <el-card shadow="never">
       <template #header>
         <div class="card-header">
-          <span>{{ $t('auto.PusherConfig.13.e417fe') }}</span>
-          <el-button type="primary" @click="openDialog()">{{ $t('auto.PusherConfig.14.4fd331') }}</el-button>
+          <span>{{ $t('auto.PusherConfig.e417fec6') }}</span>
+          <el-button type="primary" @click="openDialog()">{{ $t('auto.PusherConfig.4fd331ab') }}</el-button>
         </div>
       </template>
 
@@ -15,12 +15,12 @@
       </el-alert>
 
       <el-table :data="list" border stripe size="small">
-        <el-table-column prop="platform" :label="$t('auto.PusherConfig.1.6c1b19')" width="120">
+        <el-table-column prop="platform" :label="$t('auto.PusherConfig.6c1b19dd')" width="120">
           <template #default="{ row }">
             <el-tag size="small" :type="platformTag(row.platform)">{{ row.platform }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.PusherConfig.2.f74c1d')" width="160">
+        <el-table-column :label="$t('auto.PusherConfig.f74c1da4')" width="160">
           <template #default="{ row }">
             <el-progress
               :percentage="row.daily_limit > 0 ? Math.min(100, Math.round((row.used_today / row.daily_limit) * 100)) : 0"
@@ -29,16 +29,16 @@
             />
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.PusherConfig.3.3fea7c')" width="100">
+        <el-table-column :label="$t('auto.PusherConfig.3fea7ca7')" width="100">
           <template #default="{ row }">
             <el-tag :type="row.active ? 'success' : 'info'" size="small">{{ row.active ? '启用' : '停用' }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="updated_at" :label="$t('auto.PusherConfig.4.a001a2')" width="180" />
-        <el-table-column :label="$t('auto.PusherConfig.5.2b6bc0')" width="180" fixed="right">
+        <el-table-column prop="updated_at" :label="$t('auto.PusherConfig.a001a226')" width="180" />
+        <el-table-column :label="$t('auto.PusherConfig.2b6bc0f2')" width="180" fixed="right">
           <template #default="{ row }">
-            <el-button size="small" @click="openDialog(row)">{{ $t('auto.PusherConfig.15.95b351') }}</el-button>
-            <el-button size="small" type="danger" @click="remove(row)">{{ $t('auto.PusherConfig.16.2f4aad') }}</el-button>
+            <el-button size="small" @click="openDialog(row)">{{ $t('auto.PusherConfig.95b351c8') }}</el-button>
+            <el-button size="small" type="danger" @click="remove(row)">{{ $t('auto.PusherConfig.2f4aaddd') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -57,18 +57,18 @@
     </el-card>
 
     <!-- Dialog -->
-    <el-dialog v-model="dialogVisible" ::title="$t('auto.PusherConfig.6.13e924')" width="560px">
+    <el-dialog v-model="dialogVisible" ::title="$t('auto.PusherConfig.13e924dd')" width="560px">
       <el-form :model="form" label-width="100px">
-        <el-form-item :label="$t('auto.PusherConfig.7.498128')" required>
+        <el-form-item :label="$t('auto.PusherConfig.4981287f')" required>
           <el-select v-model="form.platform" :disabled="isEdit" style="width:100%">
-            <el-option :label="$t('auto.PusherConfig.8.32cc42')" value="baidu" />
+            <el-option :label="$t('auto.PusherConfig.32cc42d3')" value="baidu" />
             <el-option label="Google (Indexing API)" value="google" />
             <el-option label="IndexNow (Bing/Yandex/Naver)" value="indexnow" />
-            <el-option :label="$t('auto.PusherConfig.9.357b88')" value="toutiao" />
-            <el-option :label="$t('auto.PusherConfig.10.852a9b')" value="shenma" />
+            <el-option :label="$t('auto.PusherConfig.357b882b')" value="toutiao" />
+            <el-option :label="$t('auto.PusherConfig.852a9b74')" value="shenma" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.PusherConfig.11.dc861f')">
+        <el-form-item :label="$t('auto.PusherConfig.dc861ff4')">
           <el-input
             v-model="form.config_json_text"
             type="textarea"
@@ -76,17 +76,17 @@
             placeholder='{"site":"example.com","token":"xxx"}'
           />
         </el-form-item>
-        <el-form-item :label="$t('auto.PusherConfig.2.f74c1d')">
+        <el-form-item :label="$t('auto.PusherConfig.f74c1da4')">
           <el-input-number v-model="form.daily_limit" :min="0" :max="100000" />
-          <span style="margin-left:8px;color:#999">{{ $t('auto.PusherConfig.17.125aaa') }}</span>
+          <span style="margin-left:8px;color:#999">{{ $t('auto.PusherConfig.125aaae8') }}</span>
         </el-form-item>
-        <el-form-item :label="$t('auto.PusherConfig.12.7854b5')">
+        <el-form-item :label="$t('auto.PusherConfig.7854b52a')">
           <el-switch v-model="form.active" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="dialogVisible = false">{{ $t('auto.PusherConfig.18.625fb2') }}</el-button>
-        <el-button type="primary" @click="save">{{ $t('auto.PusherConfig.19.be5fbb') }}</el-button>
+        <el-button @click="dialogVisible = false">{{ $t('auto.PusherConfig.625fb26b') }}</el-button>
+        <el-button type="primary" @click="save">{{ $t('auto.PusherConfig.be5fbbe3') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -157,19 +157,19 @@ async function save() {
     } else {
       await geoApi.createPusher(payload)
     }
-    ElMessage.success(t('auto.PusherConfig.20.f8dfed'))
+    ElMessage.success(t('auto.PusherConfig.f8dfedcd'))
     dialogVisible.value = false
     load()
   } catch (e) {
-    ElMessage.error(e?.response?.data?.message || t('auto.PusherConfig.21.6de920'))
+    ElMessage.error(e?.response?.data?.message || t('auto.PusherConfig.6de920b4'))
   }
 }
 
 async function remove(row) {
   try {
-    await ElMessageBox.confirm(`确认删除 ${row.platform} ?`, t('auto.PusherConfig.22.900c70'), { type: 'warning' })
+    await ElMessageBox.confirm(`确认删除 ${row.platform} ?`, t('auto.PusherConfig.900c70fa'), { type: 'warning' })
     await geoApi.deletePusher(row.id)
-    ElMessage.success(t('auto.PusherConfig.23.5cc232'))
+    ElMessage.success(t('auto.PusherConfig.5cc23262'))
     load()
   } catch (e) { /* 忽略异常：失败时保持既有状态，不打断用户 */ }
 }

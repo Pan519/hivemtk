@@ -6,8 +6,8 @@
       type="warning"
       show-icon
       :closable="false"
-      :title="$t('auto.List.1.7cb976')"
-      :description="$t('auto.List.2.62ae72')"
+      :title="$t('auto.List.7cb976b4')"
+      :description="$t('auto.List.62ae7280')"
     />
     <el-alert
       v-if="!me"
@@ -15,15 +15,15 @@
       type="info"
       show-icon
       :closable="false"
-      :title="$t('auto.List.3.d5e452')"
-      :description="$t('auto.List.4.a0545c')"
+      :title="$t('auto.List.d5e452f2')"
+      :description="$t('auto.List.a0545ce9')"
     />
 
     <el-card shadow="never">
       <template #header>
         <div class="card-header">
           <div class="header-left">
-            <span>{{ $t('auto.List.19.83861e') }}</span>
+            <span>{{ $t('auto.List.83861e99') }}</span>
             <el-tag
               v-if="stats.mode"
               size="small"
@@ -54,13 +54,13 @@
         >
           {{ k }} <b>{{ n }}</b>
         </span>
-        <span class="counts-at">{{ $t('auto.List.20.d3edc1') }}</span>
+        <span class="counts-at">{{ $t('auto.List.d3edc108') }}</span>
       </div>
       <div
         v-else-if="stats.assembled === false"
         class="counts"
       >
-        <span class="count-chip">{{ $t('auto.List.21.4efc6e') }}</span>
+        <span class="count-chip">{{ $t('auto.List.4efc6e8a') }}</span>
       </div>
       <el-alert
         v-if="stats.warning"
@@ -75,23 +75,23 @@
         inline
         class="mb-12"
       >
-        <el-form-item :label="$t('auto.List.5.2296bd')">
+        <el-form-item :label="$t('auto.List.2296bd83')">
           <el-select
             v-model="filter.owner"
             class="filter-select"
             @change="reload"
           >
             <el-option
-              :label="$t('auto.List.6.b54b96')"
+              :label="$t('auto.List.b54b96d1')"
               value="pool"
             />
             <el-option
-              :label="$t('auto.List.7.2bc855')"
+              :label="$t('auto.List.2bc85533')"
               value="me"
             />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.List.8.a6f7f1')">
+        <el-form-item :label="$t('auto.List.a6f7f135')">
           <el-select
             v-model="filter.limit"
             class="filter-select"
@@ -113,7 +113,7 @@
         stripe
       >
         <el-table-column
-          :label="$t('auto.List.9.a01543')"
+          :label="$t('auto.List.a015434e')"
           min-width="200"
         >
           <template #default="{ row }">
@@ -135,7 +135,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          :label="$t('auto.List.10.ff0b20')"
+          :label="$t('auto.List.ff0b2077')"
           width="140"
         >
           <template #default="{ row }">
@@ -143,12 +143,12 @@
           </template>
         </el-table-column>
         <el-table-column
-          :label="$t('auto.List.11.0bf60b')"
+          :label="$t('auto.List.0bf60b32')"
           width="70"
           prop="quantity"
         />
         <el-table-column
-          :label="$t('auto.List.12.da4abd')"
+          :label="$t('auto.List.da4abd3e')"
           width="100"
         >
           <template #default="{ row }">
@@ -156,7 +156,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          :label="$t('auto.List.13.6ffe81')"
+          :label="$t('auto.List.6ffe81e2')"
           width="110"
         >
           <template #default="{ row }">
@@ -164,7 +164,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          :label="$t('auto.List.14.8f3599')"
+          :label="$t('auto.List.8f3599b6')"
           width="80"
         >
           <template #default="{ row }">
@@ -172,7 +172,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          :label="$t('auto.List.15.3fea7c')"
+          :label="$t('auto.List.3fea7ca7')"
           width="90"
         >
           <template #default="{ row }">
@@ -185,12 +185,12 @@
           </template>
         </el-table-column>
         <el-table-column
-          :label="$t('auto.List.16.26ca20')"
+          :label="$t('auto.List.26ca20b1')"
           width="90"
           prop="source"
         />
         <el-table-column
-          :label="$t('auto.List.17.851824')"
+          :label="$t('auto.List.85182498')"
           width="170"
         >
           <template #default="{ row }">
@@ -198,7 +198,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          :label="$t('auto.List.18.2b6bc0')"
+          :label="$t('auto.List.2b6bc0f2')"
           width="200"
           fixed="right"
         >
@@ -279,7 +279,7 @@ const stats = reactive({ mode: '', store: '', assembled: undefined, counts: null
 const filter = reactive({ owner: 'pool', limit: 50 })
 
 const STATUS_TAGS = { pending: 'warning', confirmed: 'success', cancelled: 'info', expired: 'danger' }
-const STATUS_LABELS = { pending: t('auto.List.22.2a2772'), confirmed: t('auto.List.23.4113e7'), cancelled: t('auto.List.24.2111cc'), expired: t('auto.List.25.4d5ccd') }
+const STATUS_LABELS = { pending: t('auto.List.2a2772fa'), confirmed: t('auto.List.4113e726'), cancelled: t('auto.List.2111ccbb'), expired: t('auto.List.4d5ccd01') }
 
 const statusTag = (s) => STATUS_TAGS[s] || 'info'
 const statusLabel = (s) => STATUS_LABELS[s] || s
@@ -365,8 +365,8 @@ async function confirmDraft(row) {
   try {
     await ElMessageBox.confirm(
       `确认把「${row.product_name}」×${row.quantity} 转成正式订单？确认后草稿不可再改。`,
-      t('auto.List.26.9308e4'),
-      { confirmButtonText: t('auto.List.26.9308e4'), cancelButtonText: t('auto.List.27.abe78b'), type: 'warning' }
+      t('auto.List.9308e46c'),
+      { confirmButtonText: t('auto.List.9308e46c'), cancelButtonText: t('auto.List.abe78b4f'), type: 'warning' }
     )
   } catch {
     return
@@ -396,13 +396,13 @@ async function cancelDraft(row) {
   try {
     ({ value: reason } = await ElMessageBox.prompt(
       `取消「${row.product_name}」这张草稿，必须给理由`,
-      t('auto.List.28.027c28'),
+      t('auto.List.027c28a4'),
       {
         inputType: 'textarea',
-        inputPlaceholder: t('auto.List.29.c5fe89'),
-        inputValidator: (v) => (v && v.trim() ? true : t('auto.List.30.6210e8')),
-        confirmButtonText: t('auto.List.28.027c28'),
-        cancelButtonText: t('auto.List.31.5f4112')
+        inputPlaceholder: t('auto.List.c5fe8915'),
+        inputValidator: (v) => (v && v.trim() ? true : t('auto.List.6210e80c')),
+        confirmButtonText: t('auto.List.027c28a4'),
+        cancelButtonText: t('auto.List.5f411223')
       }
     ))
   } catch {
@@ -410,7 +410,7 @@ async function cancelDraft(row) {
   }
   try {
     await orderDraftApi.cancel(row.id, reason.trim())
-    ElMessage.success(t('auto.List.24.2111cc'))
+    ElMessage.success(t('auto.List.2111ccbb'))
     refresh()
   } catch (err) {
     if (err?.status === 404 || err?.status === 409) refresh()

@@ -10,30 +10,30 @@
       
       <el-table :data="jobList" style="width: 100%" v-loading="loading">
         <el-table-column prop="id" label="ID" width="80" />
-        <el-table-column prop="name" :label="$t('auto.Jobs.1.78caf7')" />
-        <el-table-column prop="total" :label="$t('auto.Jobs.2.9ed7d3')" width="100" />
-        <el-table-column prop="sent" :label="$t('auto.Jobs.3.93d159')" width="100" />
-        <el-table-column prop="failed" :label="$t('auto.Jobs.4.249f7b')" width="100" />
-        <el-table-column prop="status" :label="$t('auto.Jobs.5.3fea7c')" width="100">
+        <el-table-column prop="name" :label="$t('auto.Jobs.78caf711')" />
+        <el-table-column prop="total" :label="$t('auto.Jobs.9ed7d3ad')" width="100" />
+        <el-table-column prop="sent" :label="$t('auto.Jobs.93d15922')" width="100" />
+        <el-table-column prop="failed" :label="$t('auto.Jobs.249f7b07')" width="100" />
+        <el-table-column prop="status" :label="$t('auto.Jobs.3fea7ca7')" width="100">
           <template #default="scope">
             <el-tag :type="getStatusType(scope.row.status)">
               {{ getStatusText(scope.row.status) }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="scheduleTime" :label="$t('auto.Jobs.6.f0c9d2')" width="180">
+        <el-table-column prop="scheduleTime" :label="$t('auto.Jobs.f0c9d29d')" width="180">
           <template #default="scope">
             {{ scope.row.scheduleTime || '-' }}
           </template>
         </el-table-column>
-        <el-table-column prop="createdAt" :label="$t('auto.Jobs.7.eca37c')" width="180" />
-        <el-table-column :label="$t('auto.Jobs.8.2b6bc0')" width="250">
+        <el-table-column prop="createdAt" :label="$t('auto.Jobs.eca37cb0')" width="180" />
+        <el-table-column :label="$t('auto.Jobs.2b6bc0f2')" width="250">
           <template #default="scope">
-            <el-button size="small" @click="handleView(scope.row)">{{ $t('auto.Jobs.24.607e7a') }}</el-button>
-            <el-button size="small" type="warning" @click="handlePause(scope.row)" v-if="scope.row.status === 'running'">{{ $t('auto.Jobs.25.8d63ef') }}</el-button>
-            <el-button size="small" type="success" @click="handleResume(scope.row)" v-if="scope.row.status === 'paused'">{{ $t('auto.Jobs.26.27ca56') }}</el-button>
-            <el-button size="small" type="danger" @click="handleStop(scope.row)" v-if="scope.row.status === 'running' || scope.row.status === 'paused'">{{ $t('auto.Jobs.27.095e93') }}</el-button>
-            <el-button size="small" type="danger" @click="handleDelete(scope.row)" v-if="scope.row.status === 'completed' || scope.row.status === 'failed'">{{ $t('auto.Jobs.28.2f4aad') }}</el-button>
+            <el-button size="small" @click="handleView(scope.row)">{{ $t('auto.Jobs.607e7a4f') }}</el-button>
+            <el-button size="small" type="warning" @click="handlePause(scope.row)" v-if="scope.row.status === 'running'">{{ $t('auto.Jobs.8d63ef38') }}</el-button>
+            <el-button size="small" type="success" @click="handleResume(scope.row)" v-if="scope.row.status === 'paused'">{{ $t('auto.Jobs.27ca568b') }}</el-button>
+            <el-button size="small" type="danger" @click="handleStop(scope.row)" v-if="scope.row.status === 'running' || scope.row.status === 'paused'">{{ $t('auto.Jobs.095e938e') }}</el-button>
+            <el-button size="small" type="danger" @click="handleDelete(scope.row)" v-if="scope.row.status === 'completed' || scope.row.status === 'failed'">{{ $t('auto.Jobs.2f4aaddd') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -52,14 +52,14 @@
     </el-card>
 
     
-    <el-dialog v-model="dialogVisible" :title="$t('auto.Jobs.9.6ef95f')" width="600px" :before-close="handleDialogClose">
+    <el-dialog v-model="dialogVisible" :title="$t('auto.Jobs.6ef95fe9')" width="600px" :before-close="handleDialogClose">
       <el-form :model="formData" label-width="100px" :rules="rules" ref="formRef">
-        <el-form-item :label="$t('auto.Jobs.1.78caf7')" prop="name">
-          <el-input v-model="formData.name" :placeholder="$t('auto.Jobs.10.64615c')" maxlength="100" show-word-limit />
+        <el-form-item :label="$t('auto.Jobs.78caf711')" prop="name">
+          <el-input v-model="formData.name" :placeholder="$t('auto.Jobs.64615c10')" maxlength="100" show-word-limit />
         </el-form-item>
         
-        <el-form-item :label="$t('auto.Jobs.11.2b1806')" prop="draftId">
-          <el-select v-model="formData.draftId" :placeholder="$t('auto.Jobs.12.03b81b')">
+        <el-form-item :label="$t('auto.Jobs.2b1806df')" prop="draftId">
+          <el-select v-model="formData.draftId" :placeholder="$t('auto.Jobs.03b81bb8')">
             <el-option
               v-for="draft in draftOptions"
               :key="draft.id"
@@ -69,20 +69,20 @@
           </el-select>
         </el-form-item>
         
-        <el-form-item :label="$t('auto.Jobs.13.d93365')" v-if="selectedDraft">
+        <el-form-item :label="$t('auto.Jobs.d9336549')" v-if="selectedDraft">
           <div class="content-preview">{{ selectedDraft.content }}</div>
         </el-form-item>
         
-        <el-form-item :label="$t('auto.Jobs.14.8290e9')" prop="phoneList">
+        <el-form-item :label="$t('auto.Jobs.8290e940')" prop="phoneList">
           <div class="phone-input-section">
             <el-input
               v-model="tempPhone"
-              :placeholder="$t('auto.Jobs.15.6e4f4b')"
+              :placeholder="$t('auto.Jobs.6e4f4b33')"
               maxlength="11"
               @keyup.enter="addPhone"
             >
               <template #append>
-                <el-button @click="addPhone">{{ $t('auto.Jobs.29.b58c75') }}</el-button>
+                <el-button @click="addPhone">{{ $t('auto.Jobs.b58c7549') }}</el-button>
               </template>
             </el-input>
           </div>
@@ -104,27 +104,27 @@
               type="file"
               accept=".csv,.txt"
               style="display: none"
-              :aria-label="$t('auto.Jobs.16.77f431')"
+              :aria-label="$t('auto.Jobs.77f4314d')"
               @change="handleFileChange"
             />
             <!-- 链接态按钮要用独立的 link prop（见 components/AgentBindingDialog.vue:44 等既有写法），
                  type 的合法值是 default/primary/success/warning/info/danger/text/空串，不含 link；
                  写 type="link" 会触发 prop 校验告警并回落到 default，链接外观失效。 -->
-            <el-button link size="small" @click="handleBatchUpload">{{ $t('auto.Jobs.30.c3202e') }}</el-button>
-            <span class="tips-text">{{ $t('auto.Jobs.31.21fe0c') }}</span>
+            <el-button link size="small" @click="handleBatchUpload">{{ $t('auto.Jobs.c3202e4a') }}</el-button>
+            <span class="tips-text">{{ $t('auto.Jobs.21fe0ce8') }}</span>
           </div>
         </el-form-item>
         
-        <el-form-item :label="$t('auto.Jobs.17.6aa351')">
-          <el-radio v-model="formData.sendType" label="immediate">{{ $t('auto.Jobs.32.1176c5') }}</el-radio>
-          <el-radio v-model="formData.sendType" label="schedule">{{ $t('auto.Jobs.33.74e5c0') }}</el-radio>
+        <el-form-item :label="$t('auto.Jobs.6aa351f5')">
+          <el-radio v-model="formData.sendType" label="immediate">{{ $t('auto.Jobs.1176c5b5') }}</el-radio>
+          <el-radio v-model="formData.sendType" label="schedule">{{ $t('auto.Jobs.74e5c0d5') }}</el-radio>
         </el-form-item>
         
-        <el-form-item :label="$t('auto.Jobs.18.4d9f36')" v-if="formData.sendType === 'schedule'" prop="scheduleTime">
+        <el-form-item :label="$t('auto.Jobs.4d9f36eb')" v-if="formData.sendType === 'schedule'" prop="scheduleTime">
           <el-date-picker
             v-model="formData.scheduleTime"
             type="datetime"
-            :placeholder="$t('auto.Jobs.19.828c82')"
+            :placeholder="$t('auto.Jobs.828c82fa')"
             value-format="YYYY-MM-DD HH:mm:ss"
             :disabled-date="disabledBeforeToday"
           />
@@ -133,41 +133,41 @@
       
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="handleDialogClose">{{ $t('auto.Jobs.34.625fb2') }}</el-button>
-          <el-button type="primary" @click="handleSubmit">{{ $t('auto.Jobs.35.38cf16') }}</el-button>
+          <el-button @click="handleDialogClose">{{ $t('auto.Jobs.625fb26b') }}</el-button>
+          <el-button type="primary" @click="handleSubmit">{{ $t('auto.Jobs.38cf16f2') }}</el-button>
         </span>
       </template>
     </el-dialog>
 
     
-    <el-dialog v-model="detailVisible" :title="$t('auto.Jobs.20.4a98bf')" width="700px">
+    <el-dialog v-model="detailVisible" :title="$t('auto.Jobs.4a98bf0c')" width="700px">
       <el-descriptions :column="1" border>
-        <el-descriptions-item :label="$t('auto.Jobs.1.78caf7')">{{ currentJob?.name }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.Jobs.2.9ed7d3')">{{ currentJob?.total }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.Jobs.3.93d159')">{{ currentJob?.sent }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.Jobs.4.249f7b')">{{ currentJob?.failed }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.Jobs.5.3fea7c')">
+        <el-descriptions-item :label="$t('auto.Jobs.78caf711')">{{ currentJob?.name }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.Jobs.9ed7d3ad')">{{ currentJob?.total }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.Jobs.93d15922')">{{ currentJob?.sent }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.Jobs.249f7b07')">{{ currentJob?.failed }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.Jobs.3fea7ca7')">
           <el-tag :type="getStatusType(currentJob?.status)">
             {{ getStatusText(currentJob?.status) }}
           </el-tag>
         </el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.Jobs.6.f0c9d2')">{{ currentJob?.scheduleTime || '-' }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.Jobs.7.eca37c')">{{ currentJob?.createdAt }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.Jobs.f0c9d29d')">{{ currentJob?.scheduleTime || '-' }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.Jobs.eca37cb0')">{{ currentJob?.createdAt }}</el-descriptions-item>
       </el-descriptions>
       
       <div class="job-detail-list" v-if="jobDetails.length > 0">
-        <h3>{{ $t('auto.Jobs.36.4865e7') }}</h3>
+        <h3>{{ $t('auto.Jobs.4865e72a') }}</h3>
         <el-table :data="jobDetails" style="width: 100%">
-          <el-table-column prop="phone" :label="$t('auto.Jobs.21.8098e2')" width="150" />
-          <el-table-column prop="status" :label="$t('auto.Jobs.5.3fea7c')" width="100">
+          <el-table-column prop="phone" :label="$t('auto.Jobs.8098e2b4')" width="150" />
+          <el-table-column prop="status" :label="$t('auto.Jobs.3fea7ca7')" width="100">
             <template #default="scope">
               <el-tag :type="getStatusType(scope.row.status)">
                 {{ getStatusText(scope.row.status) }}
               </el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="sendTime" :label="$t('auto.Jobs.22.63b34d')" width="180" />
-          <el-table-column prop="errorMsg" :label="$t('auto.Jobs.23.4604d5')" show-overflow-tooltip />
+          <el-table-column prop="sendTime" :label="$t('auto.Jobs.63b34d09')" width="180" />
+          <el-table-column prop="errorMsg" :label="$t('auto.Jobs.4604d502')" show-overflow-tooltip />
         </el-table>
       </div>
     </el-dialog>
@@ -216,18 +216,18 @@ const tempPhone = ref('');
 
 const rules = {
   name: [
-    { required: true, message: i18n.global.t(t('auto.Jobs.10.64615c')), trigger: 'blur' },
-    { min: 1, max: 100, message: i18n.global.t(t('auto.Jobs.37.01ecdf')), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.Jobs.64615c10')), trigger: 'blur' },
+    { min: 1, max: 100, message: i18n.global.t(t('auto.Jobs.01ecdfb1')), trigger: 'blur' }
   ],
   draftId: [
-    { required: true, message: i18n.global.t(t('auto.Jobs.12.03b81b')), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.Jobs.03b81bb8')), trigger: 'blur' }
   ],
   phoneList: [
-    { required: true, message: i18n.global.t(t('auto.Jobs.38.f31966')), trigger: 'blur' },
-    { min: 1, message: i18n.global.t(t('auto.Jobs.38.f31966')), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.Jobs.f319668c')), trigger: 'blur' },
+    { min: 1, message: i18n.global.t(t('auto.Jobs.f319668c')), trigger: 'blur' }
   ],
   scheduleTime: [
-    { required: true, message: i18n.global.t(t('auto.Jobs.39.88824a')), trigger: 'change' }
+    { required: true, message: i18n.global.t(t('auto.Jobs.88824ad0')), trigger: 'change' }
   ]
 };
 
@@ -244,13 +244,13 @@ const getStatusType = (status) => {
 
 const getStatusText = (status) => {
   const statusMap = {
-    pending: t('auto.Jobs.40.6139a6'),
-    running: t('auto.Jobs.41.46e386'),
-    paused: t('auto.Jobs.42.a2d930'),
-    completed: t('auto.Jobs.43.fad522'),
-    failed: t('auto.Jobs.44.1c83d7')
+    pending: t('auto.Jobs.6139a699'),
+    running: t('auto.Jobs.46e38679'),
+    paused: t('auto.Jobs.a2d930fd'),
+    completed: t('auto.Jobs.fad5222c'),
+    failed: t('auto.Jobs.1c83d797')
   }
-  return statusMap[status] || t('auto.Jobs.45.1622dc')
+  return statusMap[status] || t('auto.Jobs.1622dc9b')
 };
 
 const disabledBeforeToday = (time) => {
@@ -262,7 +262,7 @@ const getDraftOptions = async () => {
     const response = await smsApi.getDraftList({ page: 1, limit: 100 })
     draftOptions.value = response.list || [];
   } catch (error) {
-    ElMessage.error(i18n.global.t(t('auto.Jobs.46.6adbf4')))
+    ElMessage.error(i18n.global.t(t('auto.Jobs.6adbf4da')))
   }
 };
 
@@ -277,7 +277,7 @@ const getJobList = async () => {
     jobList.value = response.list || [];
     total.value = response.total || 0
   } catch (error) {
-    ElMessage.error(i18n.global.t(t('auto.Jobs.47.f71ace')))
+    ElMessage.error(i18n.global.t(t('auto.Jobs.f71aceaf')))
   } finally {
     loading.value = false
   }
@@ -298,17 +298,17 @@ const resetForm = () => {
 const addPhone = () => {
   const phone = tempPhone.value.trim()
   if (!phone) {
-    ElMessage.warning(i18n.global.t(t('auto.Jobs.15.6e4f4b')))
+    ElMessage.warning(i18n.global.t(t('auto.Jobs.6e4f4b33')))
     return
   }
   
   if (!/^1[3-9]\d{9}$/.test(phone)) {
-    ElMessage.warning(i18n.global.t(t('auto.Jobs.48.a32ab5')))
+    ElMessage.warning(i18n.global.t(t('auto.Jobs.a32ab517')))
     return
   }
   
   if (formData.phoneList.includes(phone)) {
-    ElMessage.warning(i18n.global.t(t('auto.Jobs.49.d94262')))
+    ElMessage.warning(i18n.global.t(t('auto.Jobs.d9426204')))
     return
   }
   
@@ -373,11 +373,11 @@ const handleFileChange = (event) => {
     }
 
     if (messages.length > 0) {
-      ElMessageBox.alert(DOMPurify.sanitize(messages.join('<br>')), t('auto.Jobs.50.658043'), {
+      ElMessageBox.alert(DOMPurify.sanitize(messages.join('<br>')), t('auto.Jobs.65804308'), {
         dangerouslyUseHTMLString: true
       })
     } else {
-      ElMessage.warning(i18n.global.t(t('auto.Jobs.51.220948')))
+      ElMessage.warning(i18n.global.t(t('auto.Jobs.220948f2')))
     }
   }
   reader.readAsText(file)
@@ -412,13 +412,13 @@ const handleSubmit = async () => {
     }
     
     await smsApi.createJob(jobData)
-    ElMessage.success(i18n.global.t(t('auto.Jobs.52.3799bd')))
+    ElMessage.success(i18n.global.t(t('auto.Jobs.3799bdae')))
     
     dialogVisible.value = false
     getJobList()
   } catch (error) {
     if (error !== false) {
-      ElMessage.error(t('auto.Jobs.53.a05f79') + (error.message || t('auto.Jobs.54.974e74')))
+      ElMessage.error(t('auto.Jobs.a05f79f3') + (error.message || t('auto.Jobs.974e7484')))
     }
   }
 };
@@ -436,60 +436,60 @@ const handleView = async (row) => {
     }
     detailVisible.value = true
   } catch (error) {
-    ElMessage.error(i18n.global.t(t('auto.Jobs.55.b1e725')))
+    ElMessage.error(i18n.global.t(t('auto.Jobs.b1e72534')))
   }
 };
 
 const handlePause = async (row) => {
   try {
     await smsApi.pauseJob(row.id)
-    ElMessage.success(i18n.global.t(t('auto.Jobs.56.60833e')))
+    ElMessage.success(i18n.global.t(t('auto.Jobs.60833eaa')))
     getJobList()
   } catch (error) {
-    ElMessage.error(i18n.global.t(t('auto.Jobs.57.fcc066')))
+    ElMessage.error(i18n.global.t(t('auto.Jobs.fcc066a3')))
   }
 };
 
 const handleResume = async (row) => {
   try {
     await smsApi.resumeJob(row.id)
-    ElMessage.success(i18n.global.t(t('auto.Jobs.58.8dbf03')))
+    ElMessage.success(i18n.global.t(t('auto.Jobs.8dbf03ae')))
     getJobList()
   } catch (error) {
-    ElMessage.error(i18n.global.t(t('auto.Jobs.59.d8cb5a')))
+    ElMessage.error(i18n.global.t(t('auto.Jobs.d8cb5a1b')))
   }
 };
 
 const handleStop = async (row) => {
   try {
-    await ElMessageBox.confirm(t('auto.Jobs.60.344da8'), t('auto.Jobs.61.fb79c8'), {
-      confirmButtonText: t('auto.Jobs.35.38cf16'),
-      cancelButtonText: t('auto.Jobs.34.625fb2'),
+    await ElMessageBox.confirm(t('auto.Jobs.344da85c'), t('auto.Jobs.fb79c8d6'), {
+      confirmButtonText: t('auto.Jobs.38cf16f2'),
+      cancelButtonText: t('auto.Jobs.625fb26b'),
       type: 'warning'
     })
     await smsApi.stopJob(row.id)
-    ElMessage.success(i18n.global.t(t('auto.Jobs.62.b20399')))
+    ElMessage.success(i18n.global.t(t('auto.Jobs.b20399d6')))
     getJobList()
   } catch (error) {
     if (error !== 'cancel') {
-      ElMessage.error(i18n.global.t(t('auto.Jobs.63.ad89cb')))
+      ElMessage.error(i18n.global.t(t('auto.Jobs.ad89cba9')))
     }
   }
 };
 
 const handleDelete = async (row) => {
   try {
-    await ElMessageBox.confirm(t('auto.Jobs.64.0c217b'), t('auto.Jobs.65.631cd2'), {
-      confirmButtonText: t('auto.Jobs.35.38cf16'),
-      cancelButtonText: t('auto.Jobs.34.625fb2'),
+    await ElMessageBox.confirm(t('auto.Jobs.0c217b5b'), t('auto.Jobs.631cd220'), {
+      confirmButtonText: t('auto.Jobs.38cf16f2'),
+      cancelButtonText: t('auto.Jobs.625fb26b'),
       type: 'warning'
     })
     await smsApi.deleteJob(row.id)
-    ElMessage.success(i18n.global.t(t('auto.Jobs.66.4aa7ab')))
+    ElMessage.success(i18n.global.t(t('auto.Jobs.4aa7ab36')))
     getJobList()
   } catch (error) {
     if (error !== 'cancel') {
-      ElMessage.error(i18n.global.t(t('auto.Jobs.67.0a70cd')))
+      ElMessage.error(i18n.global.t(t('auto.Jobs.0a70cd06')))
     }
   }
 };

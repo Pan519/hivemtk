@@ -3,77 +3,77 @@
     <el-card shadow="never">
       <template #header>
         <div class="card-header">
-          <span>{{ $t('auto.MyAssets.22.de43bf') }}</span>
+          <span>{{ $t('auto.MyAssets.de43bfaf') }}</span>
           <div>
-            <el-button type="primary" @click="$router.push('/asset-market')">{{ $t('auto.MyAssets.23.47a140') }}</el-button>
-            <el-button @click="openCreate">{{ $t('auto.MyAssets.19.591538') }}</el-button>
-            <el-button @click="$router.push('/asset-market/sync-log')">{{ $t('auto.MyAssets.24.e1be44') }}</el-button>
+            <el-button type="primary" @click="$router.push('/asset-market')">{{ $t('auto.MyAssets.47a140b5') }}</el-button>
+            <el-button @click="openCreate">{{ $t('auto.MyAssets.59153818') }}</el-button>
+            <el-button @click="$router.push('/asset-market/sync-log')">{{ $t('auto.MyAssets.e1be449f') }}</el-button>
           </div>
         </div>
       </template>
 
       <el-form inline class="mb-12">
-        <el-form-item :label="$t('auto.MyAssets.1.226b09')">
-          <el-select v-model="filter.asset_type" clearable :placeholder="$t('auto.MyAssets.2.a8b0c2')" @change="fetchList">
-            <el-option :label="$t('auto.MyAssets.3.5ce3a1')" value="agent_persona" />
-            <el-option :label="$t('auto.MyAssets.4.655e22')" value="sales_script" />
-            <el-option :label="$t('auto.MyAssets.5.ec6455')" value="ab_test_plan" />
-            <el-option :label="$t('auto.MyAssets.6.228526')" value="marketing_workflow" />
-            <el-option :label="$t('auto.MyAssets.7.112acd')" value="industry_sop" />
+        <el-form-item :label="$t('auto.MyAssets.226b0912')">
+          <el-select v-model="filter.asset_type" clearable :placeholder="$t('auto.MyAssets.a8b0c204')" @change="fetchList">
+            <el-option :label="$t('auto.MyAssets.5ce3a11b')" value="agent_persona" />
+            <el-option :label="$t('auto.MyAssets.655e227e')" value="sales_script" />
+            <el-option :label="$t('auto.MyAssets.ec64559a')" value="ab_test_plan" />
+            <el-option :label="$t('auto.MyAssets.228526dc')" value="marketing_workflow" />
+            <el-option :label="$t('auto.MyAssets.112acd54')" value="industry_sop" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.MyAssets.8.26ca20')">
-          <el-select v-model="filter.source" clearable :placeholder="$t('auto.MyAssets.2.a8b0c2')" @change="fetchList">
-            <el-option :label="$t('auto.MyAssets.9.fb102c')" value="purchased" />
-            <el-option :label="$t('auto.MyAssets.10.e75b8f')" value="manual" />
+        <el-form-item :label="$t('auto.MyAssets.26ca20b1')">
+          <el-select v-model="filter.source" clearable :placeholder="$t('auto.MyAssets.a8b0c204')" @change="fetchList">
+            <el-option :label="$t('auto.MyAssets.fb102c8f')" value="purchased" />
+            <el-option :label="$t('auto.MyAssets.e75b8f8b')" value="manual" />
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-input v-model="filter.keyword" :placeholder="$t('auto.MyAssets.11.aa68f0')" clearable @keyup.enter="fetchList" />
+          <el-input v-model="filter.keyword" :placeholder="$t('auto.MyAssets.aa68f080')" clearable @keyup.enter="fetchList" />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="fetchList">{{ $t('auto.MyAssets.25.bee912') }}</el-button>
+          <el-button type="primary" @click="fetchList">{{ $t('auto.MyAssets.bee912d7') }}</el-button>
         </el-form-item>
       </el-form>
 
       <el-table :data="list" v-loading="loading" stripe>
-        <el-table-column prop="name" :label="$t('auto.MyAssets.12.d7ec2d')" min-width="160" />
-        <el-table-column prop="asset_type" :label="$t('auto.MyAssets.1.226b09')" width="140" />
-        <el-table-column prop="industry" :label="$t('auto.MyAssets.13.6adafe')" width="90" />
-        <el-table-column prop="version" :label="$t('auto.MyAssets.14.fe2df0')" width="90" />
-        <el-table-column prop="source" :label="$t('auto.MyAssets.8.26ca20')" width="100">
+        <el-table-column prop="name" :label="$t('auto.MyAssets.d7ec2d3f')" min-width="160" />
+        <el-table-column prop="asset_type" :label="$t('auto.MyAssets.226b0912')" width="140" />
+        <el-table-column prop="industry" :label="$t('auto.MyAssets.6adafe27')" width="90" />
+        <el-table-column prop="version" :label="$t('auto.MyAssets.fe2df04a')" width="90" />
+        <el-table-column prop="source" :label="$t('auto.MyAssets.26ca20b1')" width="100">
           <template #default="{ row }">
             <el-tag size="small" :type="getSourceTagType(row.source)">
               {{ getSourceLabel(row.source) }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.MyAssets.15.3fea7c')" width="90">
+        <el-table-column :label="$t('auto.MyAssets.3fea7ca7')" width="90">
           <template #default="{ row }">
             <el-tag :type="getEnabledTagType(row.is_active ? 1 : 0)" size="small">
               {{ row.is_active ? '启用' : '停用' }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="use_count" :label="$t('auto.MyAssets.16.194df9')" width="100" />
-        <el-table-column prop="synced_at" :label="$t('auto.MyAssets.17.88e76f')" width="170" />
-        <el-table-column :label="$t('auto.MyAssets.18.2b6bc0')" width="280" fixed="right">
+        <el-table-column prop="use_count" :label="$t('auto.MyAssets.194df98d')" width="100" />
+        <el-table-column prop="synced_at" :label="$t('auto.MyAssets.88e76fc4')" width="170" />
+        <el-table-column :label="$t('auto.MyAssets.2b6bc0f2')" width="280" fixed="right">
           <template #default="{ row }">
             <el-button
               v-if="row.source === 'purchased' || row.source === 'synced'"
               link
               type="primary"
               @click="handleSync(row)"
-            >{{ $t('auto.MyAssets.26.6a620e') }}</el-button>
-            <el-button link type="primary" @click="viewDetail(row)">{{ $t('auto.MyAssets.27.607e7a') }}</el-button>
+            >{{ $t('auto.MyAssets.6a620e3c') }}</el-button>
+            <el-button link type="primary" @click="viewDetail(row)">{{ $t('auto.MyAssets.607e7a4f') }}</el-button>
             <el-button
               v-if="row.source === 'purchased' || row.source === 'synced'"
               link
               type="warning"
               @click="handleReport(row)"
-            >{{ $t('auto.MyAssets.28.28fcf9') }}</el-button>
+            >{{ $t('auto.MyAssets.28fcf95e') }}</el-button>
             <el-button link @click="toggle(row)">{{ row.is_active ? '停用' : '启用' }}</el-button>
-            <el-button link type="danger" @click="remove(row)">{{ $t('auto.MyAssets.29.2f4aad') }}</el-button>
+            <el-button link type="danger" @click="remove(row)">{{ $t('auto.MyAssets.2f4aaddd') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -88,36 +88,36 @@
       />
     </el-card>
 
-    <el-dialog v-model="createVisible" :title="$t('auto.MyAssets.19.591538')" width="720px">
+    <el-dialog v-model="createVisible" :title="$t('auto.MyAssets.59153818')" width="720px">
       <el-form label-width="100px">
-        <el-form-item :label="$t('auto.MyAssets.12.d7ec2d')" required>
+        <el-form-item :label="$t('auto.MyAssets.d7ec2d3f')" required>
           <el-input v-model="form.name" />
         </el-form-item>
-        <el-form-item :label="$t('auto.MyAssets.1.226b09')" required>
+        <el-form-item :label="$t('auto.MyAssets.226b0912')" required>
           <el-select v-model="form.asset_type" style="width: 100%">
-            <el-option :label="$t('auto.MyAssets.3.5ce3a1')" value="agent_persona" />
-            <el-option :label="$t('auto.MyAssets.4.655e22')" value="sales_script" />
-            <el-option :label="$t('auto.MyAssets.5.ec6455')" value="ab_test_plan" />
-            <el-option :label="$t('auto.MyAssets.6.228526')" value="marketing_workflow" />
-            <el-option :label="$t('auto.MyAssets.7.112acd')" value="industry_sop" />
+            <el-option :label="$t('auto.MyAssets.5ce3a11b')" value="agent_persona" />
+            <el-option :label="$t('auto.MyAssets.655e227e')" value="sales_script" />
+            <el-option :label="$t('auto.MyAssets.ec64559a')" value="ab_test_plan" />
+            <el-option :label="$t('auto.MyAssets.228526dc')" value="marketing_workflow" />
+            <el-option :label="$t('auto.MyAssets.112acd54')" value="industry_sop" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.MyAssets.13.6adafe')" required>
+        <el-form-item :label="$t('auto.MyAssets.6adafe27')" required>
           <el-select v-model="form.industry" style="width: 100%">
             <el-option v-for="i in industries" :key="i" :label="i" :value="i" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.MyAssets.20.e77523')" required>
+        <el-form-item :label="$t('auto.MyAssets.e77523d0')" required>
           <el-input v-model="form.dataText" type="textarea" :rows="12" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="createVisible = false">{{ $t('auto.MyAssets.30.625fb2') }}</el-button>
-        <el-button type="primary" @click="submitCreate">{{ $t('auto.MyAssets.31.d9ac92') }}</el-button>
+        <el-button @click="createVisible = false">{{ $t('auto.MyAssets.625fb26b') }}</el-button>
+        <el-button type="primary" @click="submitCreate">{{ $t('auto.MyAssets.d9ac9228') }}</el-button>
       </template>
     </el-dialog>
 
-    <el-drawer v-model="detailVisible" :title="$t('auto.MyAssets.21.f508a4')" size="50%">
+    <el-drawer v-model="detailVisible" :title="$t('auto.MyAssets.f508a46b')" size="50%">
       <pre class="json-preview">{{ detailText }}</pre>
     </el-drawer>
   </div>
@@ -150,7 +150,7 @@ const filter = ref({ asset_type: '', source: '', keyword: '', page: 1, size: 20 
 const createVisible = ref(false)
 const detailVisible = ref(false)
 const detailText = ref('')
-const form = ref({ name: '', asset_type: 'agent_persona', industry: t('auto.MyAssets.32.1b39e3'), dataText: '' })
+const form = ref({ name: '', asset_type: 'agent_persona', industry: t('auto.MyAssets.1b39e345'), dataText: '' })
 
 const sourceLabel = (s) => getSourceLabel(s)
 
@@ -168,13 +168,13 @@ const fetchList = async () => {
 
 const handleSync = async (row) => {
   await syncAsset({ asset_id: row.asset_id })
-  ElMessage.success(t('auto.MyAssets.33.52b85c'))
+  ElMessage.success(t('auto.MyAssets.52b85c91'))
   fetchList()
 }
 
 const handleReport = async (row) => {
   await reportUsage({ asset_id: row.asset_id })
-  ElMessage.success(t('auto.MyAssets.34.d4d5c1'))
+  ElMessage.success(t('auto.MyAssets.d4d5c12f'))
   fetchList()
 }
 
@@ -187,18 +187,18 @@ const viewDetail = async (row) => {
 
 const toggle = async (row) => {
   await toggleLocalAsset(row.id, !row.is_active)
-  ElMessage.success(t('auto.MyAssets.35.33130f'))
+  ElMessage.success(t('auto.MyAssets.33130f5c'))
   fetchList()
 }
 
 const remove = async (row) => {
   try {
-    await ElMessageBox.confirm(`确认删除「${row.name}」？`, t('auto.MyAssets.29.2f4aad'), { type: 'warning' })
+    await ElMessageBox.confirm(`确认删除「${row.name}」？`, t('auto.MyAssets.2f4aaddd'), { type: 'warning' })
   } catch {
     return
   }
   await deleteLocalAsset(row.id)
-  ElMessage.success(t('auto.MyAssets.36.5cc232'))
+  ElMessage.success(t('auto.MyAssets.5cc23262'))
   fetchList()
 }
 
@@ -206,16 +206,16 @@ const openCreate = () => {
   form.value = {
     name: '',
     asset_type: 'agent_persona',
-    industry: t('auto.MyAssets.32.1b39e3'),
+    industry: t('auto.MyAssets.1b39e345'),
     dataText: JSON.stringify(
       {
         schema_version: '1.0',
         asset_type: 'agent_persona',
-        name: t('auto.MyAssets.37.f037ec'),
-        industry: t('auto.MyAssets.32.1b39e3'),
+        name: t('auto.MyAssets.f037ec10'),
+        industry: t('auto.MyAssets.1b39e345'),
         version: '1.0.0',
-        system_prompt: t('auto.MyAssets.38.1ee51d'),
-        persona: { tone: t('auto.MyAssets.39.a7ad35'), expertise: [t('auto.MyAssets.40.a74ccc')] }
+        system_prompt: t('auto.MyAssets.1ee51d9e'),
+        persona: { tone: t('auto.MyAssets.a7ad35ac'), expertise: [t('auto.MyAssets.a74ccc6e')] }
       },
       null,
       2
@@ -241,7 +241,7 @@ const submitCreate = async () => {
     industry: form.value.industry,
     data
   })
-  ElMessage.success(t('auto.MyAssets.41.04a691'))
+  ElMessage.success(t('auto.MyAssets.04a691b3'))
   createVisible.value = false
   fetchList()
 }

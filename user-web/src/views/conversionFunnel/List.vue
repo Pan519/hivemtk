@@ -3,42 +3,42 @@
     <el-card class="page-card">
       <div class="page-header">
         <div>
-          <h2 class="page-title">{{ $t('auto.List.15.233d6b') }}</h2>
-          <p class="page-sub">{{ $t('auto.List.16.73619d') }}</p>
+          <h2 class="page-title">{{ $t('auto.List.233d6b00') }}</h2>
+          <p class="page-sub">{{ $t('auto.List.73619d48') }}</p>
         </div>
-        <el-button type="primary" @click="loadAll">{{ $t('auto.List.17.694fc5') }}</el-button>
+        <el-button type="primary" @click="loadAll">{{ $t('auto.List.694fc5ef') }}</el-button>
       </div>
 
       <el-row :gutter="16" class="summary-row">
         <el-col :span="6">
-          <el-statistic :title="$t('auto.List.1.fe5c7b')" :value="summary.totalEnter" />
+          <el-statistic :title="$t('auto.List.fe5c7b05')" :value="summary.totalEnter" />
         </el-col>
         <el-col :span="6">
-          <el-statistic :title="$t('auto.List.2.043c17')" :value="summary.totalConvert" />
+          <el-statistic :title="$t('auto.List.043c174c')" :value="summary.totalConvert" />
         </el-col>
         <el-col :span="6">
-          <el-statistic :title="$t('auto.List.3.85117a')" :value="summary.overallRate" suffix="%" />
+          <el-statistic :title="$t('auto.List.85117a42')" :value="summary.overallRate" suffix="%" />
         </el-col>
         <el-col :span="6">
-          <el-statistic :title="$t('auto.List.4.f28963')" :value="summary.avgLossRate" suffix="%" />
+          <el-statistic :title="$t('auto.List.f2896345')" :value="summary.avgLossRate" suffix="%" />
         </el-col>
       </el-row>
 
       <el-row :gutter="16" class="chart-row">
         <el-col :span="14">
-          <el-card shadow="never" :header="$t('auto.List.5.d9d6b8')">
+          <el-card shadow="never" :header="$t('auto.List.d9d6b8f2')">
             <div ref="funnelChart" class="chart-box"></div>
           </el-card>
         </el-col>
         <el-col :span="10">
-          <el-card shadow="never" :header="$t('auto.List.6.2c3348')">
+          <el-card shadow="never" :header="$t('auto.List.2c3348b2')">
             <el-table :data="stageTable" stripe>
-              <el-table-column prop="name" :label="$t('auto.List.7.d31633')" />
-              <el-table-column prop="count" :label="$t('auto.List.8.0bf60b')" />
-              <el-table-column :label="$t('auto.List.9.989e84')">
+              <el-table-column prop="name" :label="$t('auto.List.d316330b')" />
+              <el-table-column prop="count" :label="$t('auto.List.0bf60b32')" />
+              <el-table-column :label="$t('auto.List.989e84a4')">
                 <template #default="{ row }">{{ (row.rate || 0).toFixed(1) }}%</template>
               </el-table-column>
-              <el-table-column :label="$t('auto.List.10.f620ee')">
+              <el-table-column :label="$t('auto.List.f620ee32')">
                 <template #default="{ row }">{{ (row.dropRate || 0).toFixed(1) }}%</template>
               </el-table-column>
             </el-table>
@@ -46,26 +46,26 @@
         </el-col>
       </el-row>
 
-      <el-card shadow="never" :header="$t('auto.List.11.46524c')" class="loss-card">
+      <el-card shadow="never" :header="$t('auto.List.46524ca7')" class="loss-card">
         <el-form inline>
-          <el-form-item :label="$t('auto.List.12.dddb3a')">
-            <el-select v-model="selectedStage" :placeholder="$t('auto.List.12.dddb3a')" @change="loadLoss">
+          <el-form-item :label="$t('auto.List.dddb3a68')">
+            <el-select v-model="selectedStage" :placeholder="$t('auto.List.dddb3a68')" @change="loadLoss">
               <el-option v-for="s in stageTable" :key="s.stage" :label="s.name" :value="s.stage" />
             </el-select>
           </el-form-item>
-          <el-button type="primary" @click="loadLoss">{{ $t('auto.List.18.bee912') }}</el-button>
+          <el-button type="primary" @click="loadLoss">{{ $t('auto.List.bee912d7') }}</el-button>
         </el-form>
         <el-descriptions v-if="loss" :column="3" border>
-          <el-descriptions-item :label="$t('auto.List.7.d31633')">{{ loss.name }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.8.0bf60b')">{{ loss.count }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.9.989e84')">{{ (loss.rate || 0).toFixed(1) }}%</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.13.101693')">{{ loss.avgDuration.toFixed(1) }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.d316330b')">{{ loss.name }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.0bf60b32')">{{ loss.count }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.989e84a4')">{{ (loss.rate || 0).toFixed(1) }}%</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.101693d7')">{{ loss.avgDuration.toFixed(1) }}</el-descriptions-item>
         </el-descriptions>
         <el-table v-if="loss && loss.topSources.length" :data="loss.topSources" stripe class="src-table">
-          <el-table-column :label="$t('auto.List.14.928659')">
+          <el-table-column :label="$t('auto.List.92865962')">
             <template #default="{ row }">{{ getChannelLabel(row.source) }}</template>
           </el-table-column>
-          <el-table-column prop="count" :label="$t('auto.List.8.0bf60b')" />
+          <el-table-column prop="count" :label="$t('auto.List.0bf60b32')" />
         </el-table>
       </el-card>
     </el-card>

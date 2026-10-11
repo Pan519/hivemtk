@@ -3,37 +3,37 @@
     <el-card class="card">
       <template #header>
         <div class="card-header">
-          <span>{{ $t('auto.DingtalkAppAccount.17.1ef4b3') }}</span>
-          <el-button type="primary" @click="openCreate">{{ $t('auto.DingtalkAppAccount.18.34374b') }}</el-button>
+          <span>{{ $t('auto.DingtalkAppAccount.1ef4b354') }}</span>
+          <el-button type="primary" @click="openCreate">{{ $t('auto.DingtalkAppAccount.34374b71') }}</el-button>
         </div>
       </template>
 
       <el-table :data="tableData" v-loading="loading" border stripe>
         <el-table-column prop="id" label="ID" width="70" />
-        <el-table-column prop="account_name" :label="$t('auto.DingtalkAppAccount.1.d7ec2d')" min-width="120" />
+        <el-table-column prop="account_name" :label="$t('auto.DingtalkAppAccount.d7ec2d3f')" min-width="120" />
         <el-table-column prop="app_key" label="AppKey" min-width="130" show-overflow-tooltip />
         <el-table-column prop="agent_id" label="AgentId" min-width="100" show-overflow-tooltip />
-        <el-table-column :label="$t('auto.DingtalkAppAccount.2.ab343c')" width="100" align="center">
+        <el-table-column :label="$t('auto.DingtalkAppAccount.ab343c20')" width="100" align="center">
           <template #default="{ row }">
             <el-tag :type="row.inbound_enabled ? 'success' : 'info'" size="small">
               {{ row.inbound_enabled ? '已启用' : '未启用' }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.DingtalkAppAccount.3.c9e87d')" min-width="120" show-overflow-tooltip>
+        <el-table-column :label="$t('auto.DingtalkAppAccount.c9e87d56')" min-width="120" show-overflow-tooltip>
           <template #default="{ row }">
             <el-tag :type="row.ai_agent_id ? 'success' : 'info'" size="small">
               {{ row.ai_agent_id || '未绑定' }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.DingtalkAppAccount.4.2b6bc0')" width="320" fixed="right">
+        <el-table-column :label="$t('auto.DingtalkAppAccount.2b6bc0f2')" width="320" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" @click="openTest(row)">{{ $t('auto.DingtalkAppAccount.19.db06c7') }}</el-button>
-            <el-button link type="primary" @click="openBind(row)">{{ $t('auto.DingtalkAppAccount.3.c9e87d') }}</el-button>
-            <el-button link type="primary" @click="copyCallbackUrl(row)">{{ $t('auto.DingtalkAppAccount.20.e73c73') }}</el-button>
-            <el-button link type="primary" @click="openEdit(row)">{{ $t('auto.DingtalkAppAccount.21.95b351') }}</el-button>
-            <el-button link type="danger" @click="handleDelete(row)">{{ $t('auto.DingtalkAppAccount.22.2f4aad') }}</el-button>
+            <el-button link type="primary" @click="openTest(row)">{{ $t('auto.DingtalkAppAccount.db06c78d') }}</el-button>
+            <el-button link type="primary" @click="openBind(row)">{{ $t('auto.DingtalkAppAccount.c9e87d56') }}</el-button>
+            <el-button link type="primary" @click="copyCallbackUrl(row)">{{ $t('auto.DingtalkAppAccount.e73c73c1') }}</el-button>
+            <el-button link type="primary" @click="openEdit(row)">{{ $t('auto.DingtalkAppAccount.95b351c8') }}</el-button>
+            <el-button link type="danger" @click="handleDelete(row)">{{ $t('auto.DingtalkAppAccount.2f4aaddd') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -51,49 +51,49 @@
     </el-card>
 
     
-    <el-dialog v-model="dialogVisible" ::title="$t('auto.DingtalkAppAccount.5.ab3ad6')" width="680px">
+    <el-dialog v-model="dialogVisible" ::title="$t('auto.DingtalkAppAccount.ab3ad6e0')" width="680px">
       <el-form :model="form" label-width="150px">
-        <el-form-item :label="$t('auto.DingtalkAppAccount.1.d7ec2d')" prop="account_name">
-          <el-input v-model="form.account_name" :placeholder="$t('auto.DingtalkAppAccount.6.17327f')" />
+        <el-form-item :label="$t('auto.DingtalkAppAccount.d7ec2d3f')" prop="account_name">
+          <el-input v-model="form.account_name" :placeholder="$t('auto.DingtalkAppAccount.17327f9c')" />
         </el-form-item>
         <el-form-item label="AppKey" prop="app_key">
-          <el-input v-model="form.app_key" :placeholder="$t('auto.DingtalkAppAccount.7.57ba6e')" />
+          <el-input v-model="form.app_key" :placeholder="$t('auto.DingtalkAppAccount.57ba6e91')" />
         </el-form-item>
         <el-form-item label="AppSecret" prop="app_secret">
-          <el-input v-model="form.app_secret" type="password" show-password :placeholder="$t('auto.DingtalkAppAccount.8.a9798e')" />
+          <el-input v-model="form.app_secret" type="password" show-password :placeholder="$t('auto.DingtalkAppAccount.a9798ef9')" />
         </el-form-item>
         <el-form-item label="AgentId" prop="agent_id">
-          <el-input v-model="form.agent_id" :placeholder="$t('auto.DingtalkAppAccount.9.93abc0')" />
+          <el-input v-model="form.agent_id" :placeholder="$t('auto.DingtalkAppAccount.93abc007')" />
         </el-form-item>
 
-        <el-divider content-position="left">{{ $t('auto.DingtalkAppAccount.23.f96de9') }}</el-divider>
-        <el-form-item :label="$t('auto.DingtalkAppAccount.10.ecbc51')" prop="token">
-          <el-input v-model="form.token" :placeholder="$t('auto.DingtalkAppAccount.11.8b7ea3')" />
-          <div class="form-hint">{{ $t('auto.DingtalkAppAccount.24.61e4a5') }}</div>
+        <el-divider content-position="left">{{ $t('auto.DingtalkAppAccount.f96de929') }}</el-divider>
+        <el-form-item :label="$t('auto.DingtalkAppAccount.ecbc51e8')" prop="token">
+          <el-input v-model="form.token" :placeholder="$t('auto.DingtalkAppAccount.8b7ea3f3')" />
+          <div class="form-hint">{{ $t('auto.DingtalkAppAccount.61e4a51f') }}</div>
         </el-form-item>
-        <el-form-item :label="$t('auto.DingtalkAppAccount.12.67f586')" prop="aes_key">
-          <el-input v-model="form.aes_key" :placeholder="$t('auto.DingtalkAppAccount.13.ea4845')" />
+        <el-form-item :label="$t('auto.DingtalkAppAccount.67f58612')" prop="aes_key">
+          <el-input v-model="form.aes_key" :placeholder="$t('auto.DingtalkAppAccount.ea4845bc')" />
         </el-form-item>
-        <el-form-item :label="$t('auto.DingtalkAppAccount.14.5c7f1a')" v-if="dialogMode === 'edit'">
+        <el-form-item :label="$t('auto.DingtalkAppAccount.5c7f1a99')" v-if="dialogMode === 'edit'">
           <el-input :model-value="callbackUrl(form.id)" readonly>
             <template #append>
-              <el-button @click="copyText(callbackUrl(form.id))">{{ $t('auto.DingtalkAppAccount.25.79d3ab') }}</el-button>
+              <el-button @click="copyText(callbackUrl(form.id))">{{ $t('auto.DingtalkAppAccount.79d3abe9') }}</el-button>
             </template>
           </el-input>
-          <div class="form-hint">{{ $t('auto.DingtalkAppAccount.26.5e2eda') }}</div>
+          <div class="form-hint">{{ $t('auto.DingtalkAppAccount.5e2eda38') }}</div>
         </el-form-item>
-        <el-form-item :label="$t('auto.DingtalkAppAccount.2.ab343c')">
+        <el-form-item :label="$t('auto.DingtalkAppAccount.ab343c20')">
           <el-switch v-model="form.inbound_enabled" />
-          <span class="form-hint-inline">{{ $t('auto.DingtalkAppAccount.27.b51e0d') }}</span>
+          <span class="form-hint-inline">{{ $t('auto.DingtalkAppAccount.b51e0d8e') }}</span>
         </el-form-item>
-        <el-form-item :label="$t('auto.DingtalkAppAccount.15.eed590')">
-          <el-input v-model="form.ai_agent_id" :placeholder="$t('auto.DingtalkAppAccount.16.231dd0')" />
-          <div class="form-hint">{{ $t('auto.DingtalkAppAccount.28.fc6d37') }}</div>
+        <el-form-item :label="$t('auto.DingtalkAppAccount.eed5907c')">
+          <el-input v-model="form.ai_agent_id" :placeholder="$t('auto.DingtalkAppAccount.231dd00b')" />
+          <div class="form-hint">{{ $t('auto.DingtalkAppAccount.fc6d37d8') }}</div>
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="dialogVisible = false">{{ $t('auto.DingtalkAppAccount.29.625fb2') }}</el-button>
-        <el-button type="primary" :loading="saving" @click="submit">{{ $t('auto.DingtalkAppAccount.30.be5fbb') }}</el-button>
+        <el-button @click="dialogVisible = false">{{ $t('auto.DingtalkAppAccount.625fb26b') }}</el-button>
+        <el-button type="primary" :loading="saving" @click="submit">{{ $t('auto.DingtalkAppAccount.be5fbbe3') }}</el-button>
       </template>
     </el-dialog>
 
@@ -162,7 +162,7 @@ async function loadData() {
     tableData.value = arr
     total.value = res && res.total != null ? res.total : arr.length
   } catch (e) {
-    ElMessage.error(t('auto.DingtalkAppAccount.31.c4fa9b') + (e.message || e))
+    ElMessage.error(t('auto.DingtalkAppAccount.c4fa9b74') + (e.message || e))
   } finally {
     loading.value = false
   }
@@ -206,7 +206,7 @@ async function openEdit(row) {
     })
     dialogVisible.value = true
   } catch (e) {
-    ElMessage.error(t('auto.DingtalkAppAccount.32.db870b') + (e.message || e))
+    ElMessage.error(t('auto.DingtalkAppAccount.db870bff') + (e.message || e))
   }
 }
 
@@ -228,11 +228,11 @@ async function submit() {
     } else {
       await createDingtalkApp(payload)
     }
-    ElMessage.success(t('auto.DingtalkAppAccount.33.3b1083'))
+    ElMessage.success(t('auto.DingtalkAppAccount.3b108349'))
     dialogVisible.value = false
     loadData()
   } catch (e) {
-    ElMessage.error(t('auto.DingtalkAppAccount.34.78d235') + (e.message || e))
+    ElMessage.error(t('auto.DingtalkAppAccount.78d235cc') + (e.message || e))
   } finally {
     saving.value = false
   }
@@ -240,25 +240,25 @@ async function submit() {
 
 async function handleDelete(row) {
   try {
-    await ElMessageBox.confirm(`确认删除账号「${row.account_name}」？`, t('auto.DingtalkAppAccount.35.02d981'), { type: 'warning' })
+    await ElMessageBox.confirm(`确认删除账号「${row.account_name}」？`, t('auto.DingtalkAppAccount.02d9819d'), { type: 'warning' })
   } catch {
     return
   }
   try {
     await deleteDingtalkApp(row.id)
-    ElMessage.success(t('auto.DingtalkAppAccount.36.5cc232'))
+    ElMessage.success(t('auto.DingtalkAppAccount.5cc23262'))
     loadData()
   } catch (e) {
-    ElMessage.error(t('auto.DingtalkAppAccount.37.bc42bb') + (e.message || e))
+    ElMessage.error(t('auto.DingtalkAppAccount.bc42bb8f') + (e.message || e))
   }
 }
 
 async function openTest(row) {
   try {
     const res = await testDingtalkApp(row.id)
-    ElMessage.success(t('auto.DingtalkAppAccount.38.24f202') + (res?.ok ? 'AppKey/AppSecret/Token 齐全' : 'OK'))
+    ElMessage.success(t('auto.DingtalkAppAccount.24f2022c') + (res?.ok ? 'AppKey/AppSecret/Token 齐全' : 'OK'))
   } catch (e) {
-    ElMessage.error(t('auto.DingtalkAppAccount.39.4b3cb9') + (e.message || e))
+    ElMessage.error(t('auto.DingtalkAppAccount.4b3cb9fe') + (e.message || e))
   }
 }
 
@@ -275,8 +275,8 @@ function onBindSaved() {
 function copyText(text) {
   if (!text) return
   navigator.clipboard.writeText(text).then(
-    () => ElMessage.success(t('auto.DingtalkAppAccount.40.4fb42e')),
-    () => ElMessage.error(t('auto.DingtalkAppAccount.41.41da1c'))
+    () => ElMessage.success(t('auto.DingtalkAppAccount.4fb42e6e')),
+    () => ElMessage.error(t('auto.DingtalkAppAccount.41da1ca4'))
   )
 }
 

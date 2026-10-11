@@ -3,7 +3,7 @@
     <el-card>
       <template #header>
         <div class="card-header">
-          <span>{{ $t('auto.RagProductManagement.31.99d896') }}</span>
+          <span>{{ $t('auto.RagProductManagement.99d89602') }}</span>
           <el-button 
             type="primary" 
             @click="showCreateDialog"
@@ -18,21 +18,21 @@
         style="width: 100%"
         v-loading="loading"
       >
-        <el-table-column prop="name" :label="$t('auto.RagProductManagement.1.ff6855')" width="150"></el-table-column>
-        <el-table-column prop="category" :label="$t('auto.RagProductManagement.2.383a6d')" width="100">
+        <el-table-column prop="name" :label="$t('auto.RagProductManagement.ff685527')" width="150"></el-table-column>
+        <el-table-column prop="category" :label="$t('auto.RagProductManagement.383a6d16')" width="100">
           <template #default="{ row }">
             <el-tag :type="getCategoryTagType(row.category)">
               {{ getCategoryLabel(row.category) }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="llm_model" :label="$t('auto.RagProductManagement.3.248d0f')" width="150"></el-table-column>
-        <el-table-column prop="temperature" :label="$t('auto.RagProductManagement.4.723e54')" width="100">
+        <el-table-column prop="llm_model" :label="$t('auto.RagProductManagement.248d0fb8')" width="150"></el-table-column>
+        <el-table-column prop="temperature" :label="$t('auto.RagProductManagement.723e5470')" width="100">
           <template #default="{ row }">
             {{ row.temperature.toFixed(2) }}
           </template>
         </el-table-column>
-        <el-table-column prop="max_tokens" :label="$t('auto.RagProductManagement.5.b20b40')" width="100">
+        <el-table-column prop="max_tokens" :label="$t('auto.RagProductManagement.b20b409f')" width="100">
           <template #default="{ row }">
             {{ row.max_tokens }}
           </template>
@@ -42,22 +42,22 @@
             {{ row.top_p.toFixed(2) }}
           </template>
         </el-table-column>
-        <el-table-column prop="description" :label="$t('auto.RagProductManagement.6.3bdd08')" show-overflow-tooltip></el-table-column>
-        <el-table-column :label="$t('auto.RagProductManagement.7.3fea7c')" width="100">
+        <el-table-column prop="description" :label="$t('auto.RagProductManagement.3bdd08ad')" show-overflow-tooltip></el-table-column>
+        <el-table-column :label="$t('auto.RagProductManagement.3fea7ca7')" width="100">
           <template #default="{ row }">
             <el-tag :type="row.is_active ? 'success' : 'info'">
               {{ row.is_active ? '激活' : '未激活' }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.RagProductManagement.8.eca37c')" width="180">
+        <el-table-column :label="$t('auto.RagProductManagement.eca37cb0')" width="180">
           <template #default="{ row }">
             {{ formatDate(row.created_at) }}
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.RagProductManagement.9.2b6bc0')" width="200">
+        <el-table-column :label="$t('auto.RagProductManagement.2b6bc0f2')" width="200">
           <template #default="{ row }">
-            <el-button size="small" @click="editProduct(row)">{{ $t('auto.RagProductManagement.32.95b351') }}</el-button>
+            <el-button size="small" @click="editProduct(row)">{{ $t('auto.RagProductManagement.95b351c8') }}</el-button>
             <el-button 
               size="small" 
               :type="row.is_active ? 'warning' : 'success'"
@@ -65,7 +65,7 @@
             >
               {{ row.is_active ? '停用' : '激活' }}
             </el-button>
-            <el-button size="small" type="danger" @click="deleteProduct(row.id)">{{ $t('auto.RagProductManagement.33.2f4aad') }}</el-button>
+            <el-button size="small" type="danger" @click="deleteProduct(row.id)">{{ $t('auto.RagProductManagement.2f4aaddd') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -95,32 +95,32 @@
         ref="formRef"
         label-width="100px"
       >
-        <el-form-item :label="$t('auto.RagProductManagement.1.ff6855')" prop="name">
+        <el-form-item :label="$t('auto.RagProductManagement.ff685527')" prop="name">
           <el-input 
             v-model="form.name" 
-            :placeholder="$t('auto.RagProductManagement.10.448ab9')"
+            :placeholder="$t('auto.RagProductManagement.448ab9f6')"
             :disabled="!!form.id"
           ></el-input>
         </el-form-item>
         
-        <el-form-item :label="$t('auto.RagProductManagement.11.8d5425')" prop="category">
+        <el-form-item :label="$t('auto.RagProductManagement.8d542597')" prop="category">
           <el-input 
             v-model="form.category" 
-            :placeholder="$t('auto.RagProductManagement.12.0bae2a')"
+            :placeholder="$t('auto.RagProductManagement.0bae2a00')"
             style="width: 100%;"
           ></el-input>
         </el-form-item>
         
-        <el-form-item :label="$t('auto.RagProductManagement.3.248d0f')">
+        <el-form-item :label="$t('auto.RagProductManagement.248d0fb8')">
           <el-input 
             v-model="form.llm_model" 
-            :placeholder="$t('auto.RagProductManagement.13.4b2878')"
+            :placeholder="$t('auto.RagProductManagement.4b287899')"
           ></el-input>
         </el-form-item>
         
         <el-row :gutter="20">
           <el-col :span="12">
-            <el-form-item :label="$t('auto.RagProductManagement.4.723e54')" prop="temperature">
+            <el-form-item :label="$t('auto.RagProductManagement.723e5470')" prop="temperature">
               <el-slider
                 v-model="form.temperature"
                 :min="0"
@@ -131,7 +131,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item :label="$t('auto.RagProductManagement.14.19c9a1')" prop="top_p">
+            <el-form-item :label="$t('auto.RagProductManagement.19c9a101')" prop="top_p">
               <el-slider
                 v-model="form.top_p"
                 :min="0"
@@ -145,7 +145,7 @@
         
         <el-row :gutter="20">
           <el-col :span="12">
-            <el-form-item :label="$t('auto.RagProductManagement.15.195143')" prop="max_tokens">
+            <el-form-item :label="$t('auto.RagProductManagement.1951437c')" prop="max_tokens">
               <el-input-number
                 v-model="form.max_tokens"
                 :min="1"
@@ -155,7 +155,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item :label="$t('auto.RagProductManagement.16.b8f0c7')" prop="frequency_penalty">
+            <el-form-item :label="$t('auto.RagProductManagement.b8f0c714')" prop="frequency_penalty">
               <el-slider
                 v-model="form.frequency_penalty"
                 :min="-2"
@@ -167,7 +167,7 @@
           </el-col>
         </el-row>
         
-        <el-form-item :label="$t('auto.RagProductManagement.17.ca5ae4')" prop="presence_penalty">
+        <el-form-item :label="$t('auto.RagProductManagement.ca5ae49a')" prop="presence_penalty">
           <el-slider
             v-model="form.presence_penalty"
             :min="-2"
@@ -177,75 +177,75 @@
           />
         </el-form-item>
         
-        <el-divider content-position="left">{{ $t('auto.RagProductManagement.34.bd540b') }}</el-divider>
+        <el-divider content-position="left">{{ $t('auto.RagProductManagement.bd540b21') }}</el-divider>
 
         
-        <el-divider content-position="left">{{ $t('auto.RagProductManagement.35.13ada8') }}</el-divider>
+        <el-divider content-position="left">{{ $t('auto.RagProductManagement.13ada8a6') }}</el-divider>
         <el-form-item label="API BaseURL">
-          <el-input v-model="form.llm_provider_config.base_url" :placeholder="$t('auto.RagProductManagement.18.dd75d3')" />
+          <el-input v-model="form.llm_provider_config.base_url" :placeholder="$t('auto.RagProductManagement.dd75d37f')" />
         </el-form-item>
         <el-form-item label="API Key">
           <el-input v-model="form.llm_provider_config.api_key" type="password" show-password placeholder="sk-..." />
         </el-form-item>
-        <el-form-item :label="$t('auto.RagProductManagement.19.8000f1')">
-          <el-input v-model="form.llm_provider_config.model" :placeholder="$t('auto.RagProductManagement.20.b67062')" />
+        <el-form-item :label="$t('auto.RagProductManagement.8000f187')">
+          <el-input v-model="form.llm_provider_config.model" :placeholder="$t('auto.RagProductManagement.b67062ae')" />
         </el-form-item>
 
         
-        <el-divider content-position="left">{{ $t('auto.RagProductManagement.36.830192') }}</el-divider>
+        <el-divider content-position="left">{{ $t('auto.RagProductManagement.8301928d') }}</el-divider>
         <el-form-item label="API BaseURL">
-          <el-input v-model="form.embedding_provider_config.base_url" :placeholder="$t('auto.RagProductManagement.21.7a18dd')" />
+          <el-input v-model="form.embedding_provider_config.base_url" :placeholder="$t('auto.RagProductManagement.7a18dd60')" />
         </el-form-item>
         <el-form-item label="API Key">
           <el-input v-model="form.embedding_provider_config.api_key" type="password" show-password placeholder="sk-..." />
         </el-form-item>
-        <el-form-item :label="$t('auto.RagProductManagement.19.8000f1')">
-          <el-input v-model="form.embedding_provider_config.model" :placeholder="$t('auto.RagProductManagement.22.8a31b1')" />
+        <el-form-item :label="$t('auto.RagProductManagement.8000f187')">
+          <el-input v-model="form.embedding_provider_config.model" :placeholder="$t('auto.RagProductManagement.8a31b178')" />
         </el-form-item>
-        <el-form-item :label="$t('auto.RagProductManagement.23.f29c54')">
+        <el-form-item :label="$t('auto.RagProductManagement.f29c543f')">
           <el-input-number v-model="form.embedding_provider_config.dimension" :min="256" :max="4096" :step="128" />
         </el-form-item>
-        <el-form-item :label="$t('auto.RagProductManagement.24.7854b5')">
+        <el-form-item :label="$t('auto.RagProductManagement.7854b52a')">
           <el-switch v-model="form.embedding_provider_config.enabled" />
         </el-form-item>
 
         
-        <el-divider content-position="left">{{ $t('auto.RagProductManagement.37.980d3e') }}</el-divider>
+        <el-divider content-position="left">{{ $t('auto.RagProductManagement.980d3ebd') }}</el-divider>
         <el-form-item label="API BaseURL">
-          <el-input v-model="form.rerank_provider_config.base_url" :placeholder="$t('auto.RagProductManagement.21.7a18dd')" />
+          <el-input v-model="form.rerank_provider_config.base_url" :placeholder="$t('auto.RagProductManagement.7a18dd60')" />
         </el-form-item>
         <el-form-item label="API Key">
           <el-input v-model="form.rerank_provider_config.api_key" type="password" show-password placeholder="sk-..." />
         </el-form-item>
-        <el-form-item :label="$t('auto.RagProductManagement.19.8000f1')">
-          <el-input v-model="form.rerank_provider_config.model" :placeholder="$t('auto.RagProductManagement.25.742fab')" />
+        <el-form-item :label="$t('auto.RagProductManagement.8000f187')">
+          <el-input v-model="form.rerank_provider_config.model" :placeholder="$t('auto.RagProductManagement.742fab31')" />
         </el-form-item>
-        <el-form-item :label="$t('auto.RagProductManagement.24.7854b5')">
+        <el-form-item :label="$t('auto.RagProductManagement.7854b52a')">
           <el-switch v-model="form.rerank_provider_config.enabled" />
         </el-form-item>
 
-        <el-form-item :label="$t('auto.RagProductManagement.26.d4469a')">
+        <el-form-item :label="$t('auto.RagProductManagement.d4469a80')">
           <el-input 
             v-model="form.description" 
             type="textarea"
             :rows="3"
-            :placeholder="$t('auto.RagProductManagement.27.43d4d5')"
+            :placeholder="$t('auto.RagProductManagement.43d4d58b')"
           ></el-input>
         </el-form-item>
         
-        <el-form-item :label="$t('auto.RagProductManagement.28.ffecc9')">
+        <el-form-item :label="$t('auto.RagProductManagement.ffecc9f0')">
           <el-switch
             v-model="form.is_active"
-            :active-text="$t('auto.RagProductManagement.29.83a991')"
-            :inactive-text="$t('auto.RagProductManagement.30.d70e9b')"
+            :active-text="$t('auto.RagProductManagement.83a991d7')"
+            :inactive-text="$t('auto.RagProductManagement.d70e9bdf')"
           />
         </el-form-item>
       </el-form>
       
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="dialogVisible = false">{{ $t('auto.RagProductManagement.38.625fb2') }}</el-button>
-          <el-button type="primary" @click="submitForm">{{ $t('auto.RagProductManagement.39.38cf16') }}</el-button>
+          <el-button @click="dialogVisible = false">{{ $t('auto.RagProductManagement.625fb26b') }}</el-button>
+          <el-button type="primary" @click="submitForm">{{ $t('auto.RagProductManagement.38cf16f2') }}</el-button>
         </span>
       </template>
     </el-dialog>
@@ -286,31 +286,31 @@ const form = reactive({
 
 const rules = {
   name: [
-    { required: true, message: i18n.global.t(t('auto.RagProductManagement.10.448ab9')), trigger: 'blur' },
-    { min: 1, max: 50, message: i18n.global.t(t('auto.RagProductManagement.40.9d2c3e')), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.RagProductManagement.448ab9f6')), trigger: 'blur' },
+    { min: 1, max: 50, message: i18n.global.t(t('auto.RagProductManagement.9d2c3eb1')), trigger: 'blur' }
   ],
   category: [
-    { required: true, message: i18n.global.t(t('auto.RagProductManagement.41.bd663c')), trigger: 'change' }
+    { required: true, message: i18n.global.t(t('auto.RagProductManagement.bd663c8f')), trigger: 'change' }
   ],
   temperature: [
-    { required: true, message: i18n.global.t(t('auto.RagProductManagement.42.c82179')), trigger: 'blur' },
-    { type: 'number', min: 0, max: 2, message: i18n.global.t(t('auto.RagProductManagement.43.a7261f')), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.RagProductManagement.c82179bc')), trigger: 'blur' },
+    { type: 'number', min: 0, max: 2, message: i18n.global.t(t('auto.RagProductManagement.a7261fc0')), trigger: 'blur' }
   ],
   max_tokens: [
-    { required: true, message: i18n.global.t(t('auto.RagProductManagement.44.1478c2')), trigger: 'blur' },
-    { type: 'number', min: 1, max: 4096, message: i18n.global.t(t('auto.RagProductManagement.45.8c5493')), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.RagProductManagement.1478c29c')), trigger: 'blur' },
+    { type: 'number', min: 1, max: 4096, message: i18n.global.t(t('auto.RagProductManagement.8c549316')), trigger: 'blur' }
   ],
   top_p: [
-    { required: true, message: i18n.global.t(t('auto.RagProductManagement.46.eb8cd2')), trigger: 'blur' },
+    { required: true, message: i18n.global.t(t('auto.RagProductManagement.eb8cd2cd')), trigger: 'blur' },
     { type: 'number', min: 0, max: 1, message: i18n.global.t('Top-P值必须在 0 到 1 之间'), trigger: 'blur' }
   ],
   frequency_penalty: [
-    { required: true, message: i18n.global.t(t('auto.RagProductManagement.47.85fd7a')), trigger: 'blur' },
-    { type: 'number', min: -2, max: 2, message: i18n.global.t(t('auto.RagProductManagement.48.b53b46')), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.RagProductManagement.85fd7ab0')), trigger: 'blur' },
+    { type: 'number', min: -2, max: 2, message: i18n.global.t(t('auto.RagProductManagement.b53b46a4')), trigger: 'blur' }
   ],
   presence_penalty: [
-    { required: true, message: i18n.global.t(t('auto.RagProductManagement.49.97a4f9')), trigger: 'blur' },
-    { type: 'number', min: -2, max: 2, message: i18n.global.t(t('auto.RagProductManagement.50.f08ec4')), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.RagProductManagement.97a4f99a')), trigger: 'blur' },
+    { type: 'number', min: -2, max: 2, message: i18n.global.t(t('auto.RagProductManagement.f08ec47c')), trigger: 'blur' }
   ]
 }
 
@@ -321,7 +321,7 @@ const pagination = reactive({
 })
 
 const dialogTitle = computed(() => {
-  return form.id ? t('auto.RagProductManagement.51.0098e1') : t('auto.RagProductManagement.52.127cb7')
+  return form.id ? t('auto.RagProductManagement.0098e149') : t('auto.RagProductManagement.127cb7d7')
 })
 
 onMounted(() => {
@@ -329,12 +329,12 @@ onMounted(() => {
 })
 
 const CATEGORY_LABELS = {
-  agent_persona: t('auto.RagProductManagement.53.a7cb56'),
-  sales_script: t('auto.RagProductManagement.54.b72326'),
-  knowledge: t('auto.RagProductManagement.55.7e4333'),
-  prompt: t('auto.RagProductManagement.56.47b7af'),
-  workflow: t('auto.RagProductManagement.57.228526'),
-  tool: t('auto.RagProductManagement.58.20dce2')
+  agent_persona: t('auto.RagProductManagement.a7cb5642'),
+  sales_script: t('auto.RagProductManagement.b7232614'),
+  knowledge: t('auto.RagProductManagement.7e433388'),
+  prompt: t('auto.RagProductManagement.47b7af95'),
+  workflow: t('auto.RagProductManagement.228526dc'),
+  tool: t('auto.RagProductManagement.20dce2c6')
 };
 const getCategoryLabel = (c) => CATEGORY_LABELS[c] || c || '-'
 const getCategoryTagType = (category) => {
@@ -362,7 +362,7 @@ const loadProducts = async () => {
     products.value = response.items || [];
     pagination.total = response.total || 0
   } catch (error) {
-    ElMessage.error(t('auto.RagProductManagement.59.24b6c3') + error.message)
+    ElMessage.error(t('auto.RagProductManagement.24b6c3d3') + error.message)
   } finally {
     loading.value = false
   }
@@ -386,11 +386,11 @@ const editProduct = (product) => {
 const toggleActive = async (product) => {
   try {
     await ElMessageBox.confirm(
-      `确认${product.is_active ? t('auto.RagProductManagement.60.5c56a8') : t('auto.RagProductManagement.29.83a991')}该RAG产品吗？`,
-      t('auto.RagProductManagement.61.02d981'),
+      `确认${product.is_active ? t('auto.RagProductManagement.5c56a889') : t('auto.RagProductManagement.83a991d7')}该RAG产品吗？`,
+      t('auto.RagProductManagement.02d9819d'),
       {
-        confirmButtonText: t('auto.RagProductManagement.39.38cf16'),
-        cancelButtonText: t('auto.RagProductManagement.38.625fb2'),
+        confirmButtonText: t('auto.RagProductManagement.38cf16f2'),
+        cancelButtonText: t('auto.RagProductManagement.625fb26b'),
         type: 'warning'
       }
     )
@@ -401,29 +401,29 @@ const toggleActive = async (product) => {
     }
     
     await ragProductConfigAPI.updateRagProduct(product.id, updatedProduct)
-    ElMessage.success(`${product.is_active ? t('auto.RagProductManagement.60.5c56a8') : t('auto.RagProductManagement.29.83a991')}成功`)
+    ElMessage.success(`${product.is_active ? t('auto.RagProductManagement.5c56a889') : t('auto.RagProductManagement.83a991d7')}成功`)
     loadProducts()
   } catch (error) {
     if (error !== 'cancel') {
-      ElMessage.error(t('auto.RagProductManagement.62.be4a60') + error.message)
+      ElMessage.error(t('auto.RagProductManagement.be4a600c') + error.message)
     }
   }
 }
 
 const deleteProduct = async (id) => {
   try {
-    await ElMessageBox.confirm(t('auto.RagProductManagement.63.ef5cba'), t('auto.RagProductManagement.61.02d981'), {
-      confirmButtonText: t('auto.RagProductManagement.39.38cf16'),
-      cancelButtonText: t('auto.RagProductManagement.38.625fb2'),
+    await ElMessageBox.confirm(t('auto.RagProductManagement.ef5cba3a'), t('auto.RagProductManagement.02d9819d'), {
+      confirmButtonText: t('auto.RagProductManagement.38cf16f2'),
+      cancelButtonText: t('auto.RagProductManagement.625fb26b'),
       type: 'warning'
     })
     
     await ragProductConfigAPI.deleteRagProduct(id)
-    ElMessage.success(i18n.global.t(t('auto.RagProductManagement.64.0007d1')))
+    ElMessage.success(i18n.global.t(t('auto.RagProductManagement.0007d170')))
     loadProducts()
   } catch (error) {
     if (error !== 'cancel') {
-      ElMessage.error(t('auto.RagProductManagement.65.ad23f0') + error.message)
+      ElMessage.error(t('auto.RagProductManagement.ad23f072') + error.message)
     }
   }
 }
@@ -456,17 +456,17 @@ const submitForm = async () => {
     
     if (form.id) {
       await ragProductConfigAPI.updateRagProduct(form.id, { ...form });
-      ElMessage.success(i18n.global.t(t('auto.RagProductManagement.66.55aa63')))
+      ElMessage.success(i18n.global.t(t('auto.RagProductManagement.55aa6366')))
     } else {
       await ragProductConfigAPI.createRagProduct({ ...form });
-      ElMessage.success(i18n.global.t(t('auto.RagProductManagement.67.04a691')))
+      ElMessage.success(i18n.global.t(t('auto.RagProductManagement.04a691b3')))
     }
     
     dialogVisible.value = false
     loadProducts()
   } catch (error) {
     if (error?.message) {
-      ElMessage.error(t('auto.RagProductManagement.68.931ce4') + error.message)
+      ElMessage.error(t('auto.RagProductManagement.931ce4df') + error.message)
     }
   }
 }

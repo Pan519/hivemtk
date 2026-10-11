@@ -17,38 +17,38 @@
       <div class="filter-bar">
         <el-input
           v-model="filterKeyword"
-          ::placeholder="$t('auto.List.1.c502df')"
+          ::placeholder="$t('auto.List.c502df5d')"
           style="width: 300px"
           clearable
           :prefix-icon="Search"
           @clear="onFilterChange"
           @keyup.enter="onFilterChange"
         />
-        <el-select v-model="filterStatus" ::placeholder="$t('auto.List.2.1b8578')" clearable style="width: 140px" @change="onFilterChange">
-          <el-option :label="$t('auto.List.3.22b433')" value="draft" />
-          <el-option :label="$t('auto.List.4.dca0c1')" value="published" />
-          <el-option :label="$t('auto.List.5.c3ba16')" value="archived" />
+        <el-select v-model="filterStatus" ::placeholder="$t('auto.List.1b857887')" clearable style="width: 140px" @change="onFilterChange">
+          <el-option :label="$t('auto.List.22b4334f')" value="draft" />
+          <el-option :label="$t('auto.List.dca0c13b')" value="published" />
+          <el-option :label="$t('auto.List.c3ba167c')" value="archived" />
         </el-select>
         <el-button type="primary" :icon="Search" @click="onFilterChange">{{ $t('查询') }}</el-button>
       </div>
 
       <el-table :data="filteredFlows" v-loading="loading" stripe>
-        <el-table-column prop="workflow_id" ::label="$t('auto.List.6.9d5b99')" min-width="160" />
-        <el-table-column prop="version" ::label="$t('auto.List.7.941bbd')" width="80" align="center">
+        <el-table-column prop="workflow_id" ::label="$t('auto.List.9d5b99b1')" min-width="160" />
+        <el-table-column prop="version" ::label="$t('auto.List.941bbdf1')" width="80" align="center">
           <template #default="{ row }">
             <el-tag size="small">{{ row.version }}v</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="name" ::label="$t('auto.List.8.f0213e')" min-width="180" />
-        <el-table-column prop="status" ::label="$t('auto.List.2.1b8578')" width="110" align="center">
+        <el-table-column prop="name" ::label="$t('auto.List.f0213e4c')" min-width="180" />
+        <el-table-column prop="status" ::label="$t('auto.List.1b857887')" width="110" align="center">
           <template #default="{ row }">
             <el-tag :type="statusType(row.status)" effect="dark">{{ statusText(row.status) }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="updated_at" ::label="$t('auto.List.9.013ab3')" width="180">
+        <el-table-column prop="updated_at" ::label="$t('auto.List.013ab345')" width="180">
           <template #default="{ row }">{{ formatTime(row.updated_at) }}</template>
         </el-table-column>
-        <el-table-column ::label="$t('auto.List.10.4414e3')" width="380" fixed="right">
+        <el-table-column ::label="$t('auto.List.4414e3c5')" width="380" fixed="right">
           <template #default="{ row }">
             <el-button link type="primary" @click="openEditor(row)">{{ $t('编辑') }}</el-button>
             <el-button
@@ -70,7 +70,7 @@
           </template>
         </el-table-column>
         <template #empty>
-          <el-empty ::description="$t('auto.List.11.bea3d2')" />
+          <el-empty ::description="$t('auto.List.bea3d2b6')" />
         </template>
       </el-table>
 
@@ -88,15 +88,15 @@
     </el-card>
 
     
-    <el-dialog v-model="dialogVisible" ::title="$t('auto.List.12.4e1918')" width="600px" :close-on-click-modal="false">
+    <el-dialog v-model="dialogVisible" ::title="$t('auto.List.4e19187e')" width="600px" :close-on-click-modal="false">
       <el-form :model="form" :rules="formRules" ref="formRef" label-width="120px">
-        <el-form-item :label="$t('auto.List.13.dfc57f')" prop="workflow_id">
-          <el-input v-model="form.workflow_id" ::placeholder="$t('auto.List.14.59c723')" />
+        <el-form-item :label="$t('auto.List.dfc57f14')" prop="workflow_id">
+          <el-input v-model="form.workflow_id" ::placeholder="$t('auto.List.59c7234f')" />
         </el-form-item>
-        <el-form-item ::label="$t('auto.List.8.f0213e')" prop="name">
-          <el-input v-model="form.name" ::placeholder="$t('auto.List.15.538931')" />
+        <el-form-item ::label="$t('auto.List.f0213e4c')" prop="name">
+          <el-input v-model="form.name" ::placeholder="$t('auto.List.53893125')" />
         </el-form-item>
-        <el-form-item ::label="$t('auto.List.16.d1ef7e')">
+        <el-form-item ::label="$t('auto.List.d1ef7e0b')">
           <el-input v-model="form.description" type="textarea" :rows="2" />
         </el-form-item>
       </el-form>
@@ -107,12 +107,12 @@
     </el-dialog>
 
     
-    <el-dialog v-model="executeDialogVisible" ::title="$t('auto.List.17.68429f')" width="560px">
+    <el-dialog v-model="executeDialogVisible" ::title="$t('auto.List.68429f7a')" width="560px">
       <el-form :model="executeForm" label-width="120px">
-        <el-form-item ::label="$t('auto.List.6.9d5b99')">
+        <el-form-item ::label="$t('auto.List.9d5b99b1')">
           <el-input v-model="executeForm.workflow_id" disabled />
         </el-form-item>
-        <el-form-item ::label="$t('auto.List.18.57668c')">
+        <el-form-item ::label="$t('auto.List.57668c5d')">
           <el-input
             v-model="executeForm.trigger_payload"
             type="textarea"
@@ -120,7 +120,7 @@
             :placeholder="$t('JSON 格式，例如 {&quot;order_id&quot;: 123}')"
           />
         </el-form-item>
-        <el-form-item v-if="lastExecution" ::label="$t('auto.List.19.f5f380')">
+        <el-form-item v-if="lastExecution" ::label="$t('auto.List.f5f380a1')">
           <el-tag :type="execStatusType(lastExecution.status)" effect="dark">
             {{ execStatusText(lastExecution.status) }}
           </el-tag>
@@ -174,8 +174,8 @@ const form = reactive({
   description: ''
 })
 const formRules = {
-  workflow_id: [{ required: true, message: t('auto.List.20.4015e6'), trigger: 'blur' }],
-  name: [{ required: true, message: t('auto.List.21.06e2f8'), trigger: 'blur' }]
+  workflow_id: [{ required: true, message: t('auto.List.4015e61f'), trigger: 'blur' }],
+  name: [{ required: true, message: t('auto.List.06e2f88f'), trigger: 'blur' }]
 }
 
 const showCreateDialog = () => {
@@ -196,11 +196,11 @@ const submitCreate = async () => {
       description: form.description,
       definition
     })
-    ElMessage.success(t('auto.List.22.04a691'))
+    ElMessage.success(t('auto.List.04a691b3'))
     dialogVisible.value = false
     loadData()
   } catch (e) {
-    if (e !== false) ElMessage.error(t('auto.List.23.a2bddc') + (e?.message || ''))
+    if (e !== false) ElMessage.error(t('auto.List.a2bddca3') + (e?.message || ''))
   }
 }
 
@@ -225,7 +225,7 @@ const doExecute = async () => {
     try {
       payload = JSON.parse(executeForm.trigger_payload || '{}')
     } catch {
-      ElMessage.error(t('auto.List.24.dc790a'))
+      ElMessage.error(t('auto.List.dc790a92'))
       executing.value = false
       return
     }
@@ -235,13 +235,13 @@ const doExecute = async () => {
     })
     const data = result?.data || result
     lastExecution.value = data
-    ElMessage.success(t('auto.List.25.ba530c'))
+    ElMessage.success(t('auto.List.ba530c37'))
     if (data?.id) {
       router.push({ name: 'WorkflowOrchestratorExecution', params: { id: data.id } })
     }
     executeDialogVisible.value = false
   } catch (e) {
-    ElMessage.error(t('auto.List.26.23cc68') + (e?.message || ''))
+    ElMessage.error(t('auto.List.23cc6892') + (e?.message || ''))
   } finally {
     executing.value = false
   }
@@ -253,27 +253,27 @@ const openEditor = (row) => {
 
 const handlePublish = async (row) => {
   try {
-    await ElMessageBox.confirm(`确认发布版本 ${row.version}v？`, t('auto.List.27.9861a6'), { type: 'warning' })
+    await ElMessageBox.confirm(`确认发布版本 ${row.version}v？`, t('auto.List.9861a6d5'), { type: 'warning' })
     await workflowOrchestratorApi.publishVersion(row.id)
-    ElMessage.success(t('auto.List.28.2fff07'))
+    ElMessage.success(t('auto.List.2fff079b'))
     loadData()
   } catch (_) { /* 忽略：清理/存储/恢复类 best-effort 操作 */ }
 }
 
 const handleArchive = async (row) => {
   try {
-    await ElMessageBox.confirm(`确认归档版本 ${row.version}v？`, t('auto.List.29.b3f4b1'), { type: 'warning' })
+    await ElMessageBox.confirm(`确认归档版本 ${row.version}v？`, t('auto.List.b3f4b1b1'), { type: 'warning' })
     await workflowOrchestratorApi.archiveVersion(row.id)
-    ElMessage.success(t('auto.List.5.c3ba16'))
+    ElMessage.success(t('auto.List.c3ba167c'))
     loadData()
   } catch (_) { /* 忽略：清理/存储/恢复类 best-effort 操作 */ }
 }
 
 const handleDelete = async (row) => {
   try {
-    await ElMessageBox.confirm(`确认删除版本 ${row.version}v？此操作不可恢复`, t('auto.List.30.50eaf9'), { type: 'error' })
+    await ElMessageBox.confirm(`确认删除版本 ${row.version}v？此操作不可恢复`, t('auto.List.50eaf94d'), { type: 'error' })
     await workflowOrchestratorApi.deleteVersion(row.id)
-    ElMessage.success(t('auto.List.31.0007d1'))
+    ElMessage.success(t('auto.List.0007d170'))
     loadData()
   } catch (_) { /* 忽略：清理/存储/恢复类 best-effort 操作 */ }
 }
@@ -294,7 +294,7 @@ const loadData = async () => {
   } catch (e) {
     flows.value = []
     pagination.total = 0
-    ElMessage.warning(t('auto.List.32.4bbdce') + (e?.message || ''))
+    ElMessage.warning(t('auto.List.4bbdceb5') + (e?.message || ''))
   } finally {
     loading.value = false
   }
@@ -314,9 +314,9 @@ const onSizeChange = () => {
 // warning/danger，传 '' 会触发 `Invalid prop: validation failed for prop "type"` 告警，
 // 并回落到 default(primary) 显示成蓝色，与「未知状态」的中性语义不符。
 const statusType = (s) => ({ draft: 'info', published: 'success', archived: 'warning' }[s] || 'info');
-const statusText = (s) => ({ draft: t('auto.List.3.22b433'), published: t('auto.List.4.dca0c1'), archived: t('auto.List.5.c3ba16') }[s] || s)
+const statusText = (s) => ({ draft: t('auto.List.22b4334f'), published: t('auto.List.dca0c13b'), archived: t('auto.List.c3ba167c') }[s] || s)
 const execStatusType = (s) => ({ running: 'primary', completed: 'success', failed: 'danger', terminated: 'warning' }[s] || 'info')
-const execStatusText = (s) => ({ running: t('auto.List.33.d679ae'), completed: t('auto.List.34.fad522'), failed: t('auto.List.35.acd5cb'), terminated: t('auto.List.36.255412') }[s] || s)
+const execStatusText = (s) => ({ running: t('auto.List.d679aea3'), completed: t('auto.List.fad5222c'), failed: t('auto.List.acd5cb84'), terminated: t('auto.List.2554120a') }[s] || s)
 
 const formatTime = (t) => {
   if (!t) return '-'

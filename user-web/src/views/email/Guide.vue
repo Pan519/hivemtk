@@ -2,14 +2,14 @@
   <div class="guide-container">
     <h1 class="guide-title">{{ $t('邮件营销使用指南') }}</h1>
     <div class="guide-intro">
-      <p>{{ $t('auto.Guide.10.90485c') }}</p>
+      <p>{{ $t('auto.Guide.90485ce8') }}</p>
     </div>
 
     <el-steps :active="activeStep" finish-status="success" align-center class="steps-container">
-      <el-step ::title="$t('auto.Guide.1.22d452')" :description="$t('auto.Guide.2.b0ec48')" />
-      <el-step ::title="$t('auto.Guide.3.5c9b35')" :description="$t('auto.Guide.4.654ea9')" />
-      <el-step ::title="$t('auto.Guide.5.2dc0a5')" :description="$t('auto.Guide.6.7706ff')" />
-      <el-step ::title="$t('auto.Guide.7.a9bac7')" :description="$t('auto.Guide.8.16a610')" />
+      <el-step ::title="$t('auto.Guide.22d45263')" :description="$t('auto.Guide.b0ec481c')" />
+      <el-step ::title="$t('auto.Guide.5c9b35b5')" :description="$t('auto.Guide.654ea942')" />
+      <el-step ::title="$t('auto.Guide.2dc0a534')" :description="$t('auto.Guide.7706ff4a')" />
+      <el-step ::title="$t('auto.Guide.a9bac747')" :description="$t('auto.Guide.16a61025')" />
     </el-steps>
 
     <el-row :gutter="20" class="step-cards">
@@ -27,10 +27,10 @@
       </el-col>
     </el-row>
 
-    <el-alert ::title="$t('auto.Guide.9.d29c3d')" type="info" :closable="false" show-icon class="faq">
-      <p><strong>{{ $t('auto.Guide.11.2ae552') }}</strong>{{ $t('auto.Guide.12.ff52b6') }}</p>
-      <p><strong>{{ $t('auto.Guide.13.0ffcfb') }}</strong> {{ $t('建议使用企业域名邮箱，避免营销话术，并合理设置发送频率。') }}</p>
-      <p><strong>{{ $t('auto.Guide.14.8d4e89') }}</strong> {{ $t('适当增加任务并发数，但需避免触发反垃圾邮件规则。') }}</p>
+    <el-alert ::title="$t('auto.Guide.d29c3db7')" type="info" :closable="false" show-icon class="faq">
+      <p><strong>{{ $t('auto.Guide.2ae55257') }}</strong>{{ $t('auto.Guide.ff52b658') }}</p>
+      <p><strong>{{ $t('auto.Guide.0ffcfb20') }}</strong> {{ $t('建议使用企业域名邮箱，避免营销话术，并合理设置发送频率。') }}</p>
+      <p><strong>{{ $t('auto.Guide.8d4e899f') }}</strong> {{ $t('适当增加任务并发数，但需避免触发反垃圾邮件规则。') }}</p>
     </el-alert>
   </div>
 </template>
@@ -50,41 +50,41 @@ const activeStep = ref(0)
 const steps = [
   {
     title: i18n.global.t('1. 配置 SMTP'),
-    description: t('auto.Guide.15.5ce3b2'),
+    description: t('auto.Guide.5ce3b2a3'),
     details: [
-      t('auto.Guide.16.fccb5b'),
-      t('auto.Guide.17.2b193a'),
-      t('auto.Guide.18.7019e4')
+      t('auto.Guide.fccb5b3b'),
+      t('auto.Guide.2b193a89'),
+      t('auto.Guide.7019e40c')
     ],
     path: '/email/smtp'
   },
   {
     title: i18n.global.t('2. 收件人列表'),
-    description: t('auto.Guide.19.3ed4dd'),
+    description: t('auto.Guide.3ed4dd13'),
     details: [
-      t('auto.Guide.20.ddcd34'),
-      t('auto.Guide.21.f4dd36'),
-      t('auto.Guide.22.b8a79f')
+      t('auto.Guide.ddcd34d4'),
+      t('auto.Guide.f4dd3671'),
+      t('auto.Guide.b8a79f22')
     ],
     path: '/email/list'
   },
   {
     title: i18n.global.t('3. 编写草稿'),
-    description: t('auto.Guide.6.7706ff'),
+    description: t('auto.Guide.7706ff4a'),
     details: [
-      t('auto.Guide.23.a28521'),
-      t('auto.Guide.24.1b4f19'),
-      t('auto.Guide.25.81b926')
+      t('auto.Guide.a28521ae'),
+      t('auto.Guide.1b4f194c'),
+      t('auto.Guide.81b9269a')
     ],
     path: '/email/drafts'
   },
   {
     title: i18n.global.t('4. 发送任务'),
-    description: t('auto.Guide.26.3978ef'),
+    description: t('auto.Guide.3978ef5d'),
     details: [
-      t('auto.Guide.27.8d0988'),
-      t('auto.Guide.28.ef8d53'),
-      t('auto.Guide.29.2cfd19')
+      t('auto.Guide.8d0988e5'),
+      t('auto.Guide.ef8d53db'),
+      t('auto.Guide.2cfd19a6')
     ],
     path: '/email/jobs'
   }

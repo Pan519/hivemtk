@@ -1,51 +1,51 @@
 <template>
   <div class="sales-cockpit">
-    <PageHeader :title="$t('auto.Index.1.a97d88')" :subtitle="$t('auto.Index.2.a47a3b')" />
+    <PageHeader :title="$t('auto.Index.a97d888c')" :subtitle="$t('auto.Index.a47a3b55')" />
 
     
     <el-row :gutter="20">
       <el-col :span="6">
         <el-card class="capability-card">
           <div class="capability-icon">🤖</div>
-          <div class="capability-name">{{ $t('auto.Index.19.2778e1') }}</div>
+          <div class="capability-name">{{ $t('auto.Index.2778e177') }}</div>
           <div class="capability-stat">
             <span class="big-num">{{ cockpit.react.totalRuns }}</span>
-            <span class="unit">{{ $t('auto.Index.20.bb24ac') }}</span>
+            <span class="unit">{{ $t('auto.Index.bb24ac91') }}</span>
           </div>
-          <div class="capability-meta">{{ $t('auto.Index.21.ef320c') }}</div>
+          <div class="capability-meta">{{ $t('auto.Index.ef320c72') }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="capability-card">
           <div class="capability-icon">📋</div>
-          <div class="capability-name">{{ $t('auto.Index.22.a191ae') }}</div>
+          <div class="capability-name">{{ $t('auto.Index.a191ae48') }}</div>
           <div class="capability-stat">
             <span class="big-num">{{ cockpit.sop.executions }}</span>
-            <span class="unit">{{ $t('auto.Index.23.46e386') }}</span>
+            <span class="unit">{{ $t('auto.Index.46e38679') }}</span>
           </div>
-          <div class="capability-meta">{{ $t('auto.Index.24.be6e40') }}</div>
+          <div class="capability-meta">{{ $t('auto.Index.be6e407f') }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="capability-card">
           <div class="capability-icon">🔍</div>
-          <div class="capability-name">{{ $t('auto.Index.25.423e78') }}</div>
+          <div class="capability-name">{{ $t('auto.Index.423e787a') }}</div>
           <div class="capability-stat">
             <span class="big-num">{{ cockpit.rag.queries }}</span>
-            <span class="unit">{{ $t('auto.Index.26.68ea25') }}</span>
+            <span class="unit">{{ $t('auto.Index.68ea25aa') }}</span>
           </div>
-          <div class="capability-meta">{{ $t('auto.Index.27.eae9c4') }}</div>
+          <div class="capability-meta">{{ $t('auto.Index.eae9c4a4') }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="capability-card">
           <div class="capability-icon">📡</div>
-          <div class="capability-name">{{ $t('auto.Index.28.58dfae') }}</div>
+          <div class="capability-name">{{ $t('auto.Index.58dfae26') }}</div>
           <div class="capability-stat">
             <span class="big-num">{{ cockpit.reach.sentToday }}</span>
-            <span class="unit">{{ $t('auto.Index.29.ec5058') }}</span>
+            <span class="unit">{{ $t('auto.Index.ec5058b2') }}</span>
           </div>
-          <div class="capability-meta">{{ $t('auto.Index.30.07dc3a') }}</div>
+          <div class="capability-meta">{{ $t('auto.Index.07dc3a35') }}</div>
         </el-card>
       </el-col>
     </el-row>
@@ -120,18 +120,18 @@
 
     <el-row :gutter="20" class="mt-20">
       <el-col :span="12">
-        <el-card :header="$t('auto.Index.3.bb42b1')">
+        <el-card :header="$t('auto.Index.bb42b17e')">
           <div ref="intentChart" style="height: 300px;"></div>
         </el-card>
       </el-col>
       <el-col :span="12">
-        <el-card :header="$t('auto.Index.4.306bd4')">
+        <el-card :header="$t('auto.Index.306bd4f8')">
           <el-table :data="cockpit.llmRoutes" stripe>
-            <el-table-column prop="scenario" :label="$t('auto.Index.5.c93165')" />
-            <el-table-column prop="primary" :label="$t('auto.Index.6.ac51ee')" />
-            <el-table-column prop="fallback" :label="$t('auto.Index.7.2cf8d0')" />
+            <el-table-column prop="scenario" :label="$t('auto.Index.c931653c')" />
+            <el-table-column prop="primary" :label="$t('auto.Index.ac51ee10')" />
+            <el-table-column prop="fallback" :label="$t('auto.Index.2cf8d0b3')" />
             <el-table-column prop="qps" label="QPS" />
-            <el-table-column prop="errorRate" :label="$t('auto.Index.8.0c8524')" />
+            <el-table-column prop="errorRate" :label="$t('auto.Index.0c8524d7')" />
           </el-table>
         </el-card>
       </el-col>
@@ -140,30 +140,30 @@
     
     <el-row :gutter="20" class="mt-20">
       <el-col :span="12">
-        <el-card :header="$t('auto.Index.9.47af0a')">
+        <el-card :header="$t('auto.Index.47af0a86')">
           <el-table :data="cockpit.channelHealth" stripe>
-            <el-table-column prop="channel" :label="$t('auto.Index.10.ebee05')" />
-            <el-table-column prop="qpsLimit" :label="$t('auto.Index.11.e90619')" />
-            <el-table-column prop="qpsUsed" :label="$t('auto.Index.12.0cdb5e')" />
-            <el-table-column :label="$t('auto.Index.13.3fea7c')">
+            <el-table-column prop="channel" :label="$t('auto.Index.ebee0533')" />
+            <el-table-column prop="qpsLimit" :label="$t('auto.Index.e9061939')" />
+            <el-table-column prop="qpsUsed" :label="$t('auto.Index.0cdb5ef2')" />
+            <el-table-column :label="$t('auto.Index.3fea7ca7')">
               <template #default="{ row }">
                 <el-tag :type="row.qpsUsed / row.qpsLimit > 0.8 ? 'warning' : 'success'">
                   {{ row.qpsUsed / row.qpsLimit > 0.8 ? '繁忙' : '正常' }}
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="errorRate" :label="$t('auto.Index.8.0c8524')" />
+            <el-table-column prop="errorRate" :label="$t('auto.Index.0c8524d7')" />
           </el-table>
         </el-card>
       </el-col>
       <el-col :span="12">
-        <el-card :header="$t('auto.Index.14.4e1818')">
+        <el-card :header="$t('auto.Index.4e1818fb')">
           <el-table :data="cockpit.topTools" stripe>
             <el-table-column type="index" label="#" width="50" />
-            <el-table-column prop="name" :label="$t('auto.Index.15.20dce2')" />
-            <el-table-column prop="category" :label="$t('auto.Index.16.d0771a')" />
-            <el-table-column prop="calls" :label="$t('auto.Index.17.00d5bd')" />
-            <el-table-column prop="avgLatency" :label="$t('auto.Index.18.a1df2e')" />
+            <el-table-column prop="name" :label="$t('auto.Index.20dce2c6')" />
+            <el-table-column prop="category" :label="$t('auto.Index.d0771a42')" />
+            <el-table-column prop="calls" :label="$t('auto.Index.00d5bdf1')" />
+            <el-table-column prop="avgLatency" :label="$t('auto.Index.a1df2e5f')" />
           </el-table>
         </el-card>
       </el-col>
@@ -199,9 +199,9 @@ const cockpit = ref({
  * 每率 {rate, numerator, denominator}。分子分母摆出来，AC① 对账直接可比。
  */
 const ltc = ref({
-  closureText: '—', closureMeta: t('auto.Index.31.fb4ca1'),
-  collectionText: '—', collectionMeta: t('auto.Index.31.fb4ca1'),
-  overdueText: '—', overdueMeta: t('auto.Index.31.fb4ca1')
+  closureText: '—', closureMeta: t('auto.Index.fb4ca1cf'),
+  collectionText: '—', collectionMeta: t('auto.Index.fb4ca1cf'),
+  overdueText: '—', overdueMeta: t('auto.Index.fb4ca1cf')
 })
 
 function fmtRate(v) {
@@ -231,9 +231,9 @@ async function loadLtcRates() {
   } catch (err) {
     console.error('load ltc rates failed:', err)
     ltc.value = {
-      closureText: '—', closureMeta: t('auto.Index.32.866b79'),
-      collectionText: '—', collectionMeta: t('auto.Index.32.866b79'),
-      overdueText: '—', overdueMeta: t('auto.Index.32.866b79')
+      closureText: '—', closureMeta: t('auto.Index.866b795e'),
+      collectionText: '—', collectionMeta: t('auto.Index.866b795e'),
+      overdueText: '—', overdueMeta: t('auto.Index.866b795e')
     }
   }
 }
@@ -272,7 +272,7 @@ function adaptCockpit(src) {
 
   // 意图分布 → echarts pie [{name, value}]
   const intentDistribution = (s.intentDistribution || []).map(r => ({
-    name: r.intent || t('auto.Index.33.ecf7eb'),
+    name: r.intent || t('auto.Index.ecf7ebb5'),
     value: Number(r.cnt || 0)
   }))
 

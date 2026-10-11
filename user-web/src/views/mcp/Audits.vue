@@ -4,8 +4,8 @@
       <template #header>
         <div class="card-header">
           <el-tabs v-model="tab" style="flex: 1">
-            <el-tab-pane :label="$t('auto.Audits.1.3d4100')" name="call" />
-            <el-tab-pane :label="$t('auto.Audits.2.b5b410')" name="admin" />
+            <el-tab-pane :label="$t('auto.Audits.3d4100b2')" name="call" />
+            <el-tab-pane :label="$t('auto.Audits.b5b410cc')" name="admin" />
           </el-tabs>
           <div v-if="tab === 'call'" class="filters">
             <el-input
@@ -18,56 +18,56 @@
             />
             <el-input
               v-model="filters.tool"
-              :placeholder="$t('auto.Audits.3.7da405')"
+              :placeholder="$t('auto.Audits.7da4055a')"
               clearable
               size="small"
               style="width: 160px"
               @change="load"
             />
-            <el-select v-model="filters.event" :placeholder="$t('auto.Audits.4.10b276')" clearable size="small" style="width: 130px" @change="load">
-              <el-option :label="$t('auto.Audits.5.850b4e')" value="call" />
-              <el-option :label="$t('auto.Audits.6.3476d2')" value="list" />
-              <el-option :label="$t('auto.Audits.7.c0a3c7')" value="auth" />
+            <el-select v-model="filters.event" :placeholder="$t('auto.Audits.10b2761d')" clearable size="small" style="width: 130px" @change="load">
+              <el-option :label="$t('auto.Audits.850b4e4d')" value="call" />
+              <el-option :label="$t('auto.Audits.3476d2d4')" value="list" />
+              <el-option :label="$t('auto.Audits.c0a3c7a5')" value="auth" />
             </el-select>
-            <el-select v-model="filters.allowed" :placeholder="$t('auto.Audits.8.5ad7f5')" clearable size="small" style="width: 110px" @change="load">
-              <el-option :label="$t('auto.Audits.9.c6bc47')" :value="1" />
-              <el-option :label="$t('auto.Audits.10.c87187')" :value="0" />
+            <el-select v-model="filters.allowed" :placeholder="$t('auto.Audits.5ad7f5a8')" clearable size="small" style="width: 110px" @change="load">
+              <el-option :label="$t('auto.Audits.c6bc4767')" :value="1" />
+              <el-option :label="$t('auto.Audits.c87187d0')" :value="0" />
             </el-select>
             <el-date-picker
               v-model="filters.range"
               type="datetimerange"
               size="small"
               style="width: 320px"
-              :start-placeholder="$t('auto.Audits.11.592c59')"
-              :end-placeholder="$t('auto.Audits.12.f78277')"
+              :start-placeholder="$t('auto.Audits.592c5958')"
+              :end-placeholder="$t('auto.Audits.f782779e')"
               value-format="YYYY-MM-DDTHH:mm:ssZ"
               @change="load"
             />
-            <el-button type="primary" size="small" @click="load">{{ $t('auto.Audits.30.694fc5') }}</el-button>
-            <el-button size="small" @click="exportCSV('mcp/audits/export', 'mcp-call-audits')">{{ $t('auto.Audits.31.1add12') }}</el-button>
+            <el-button type="primary" size="small" @click="load">{{ $t('auto.Audits.694fc5ef') }}</el-button>
+            <el-button size="small" @click="exportCSV('mcp/audits/export', 'mcp-call-audits')">{{ $t('auto.Audits.1add12ff') }}</el-button>
           </div>
           <div v-else class="filters">
-            <el-select v-model="adminFilters.action" :placeholder="$t('auto.Audits.13.c500cf')" clearable filterable size="small" style="width: 180px" @change="loadAdmin">
+            <el-select v-model="adminFilters.action" :placeholder="$t('auto.Audits.c500cfab')" clearable filterable size="small" style="width: 180px" @change="loadAdmin">
               <el-option v-for="a in actions" :key="a" :label="a" :value="a" />
             </el-select>
-            <el-select v-model="adminFilters.target_type" :placeholder="$t('auto.Audits.14.b14494')" clearable size="small" style="width: 120px" @change="loadAdmin">
-              <el-option :label="$t('auto.Audits.15.94171c')" value="credential" />
-              <el-option :label="$t('auto.Audits.16.cdb81c')" value="key" />
+            <el-select v-model="adminFilters.target_type" :placeholder="$t('auto.Audits.b1449413')" clearable size="small" style="width: 120px" @change="loadAdmin">
+              <el-option :label="$t('auto.Audits.94171ce2')" value="credential" />
+              <el-option :label="$t('auto.Audits.cdb81cf6')" value="key" />
               <el-option label="Skill" value="skill" />
             </el-select>
-            <el-input v-model="adminFilters.operator" :placeholder="$t('auto.Audits.17.f9ac4b')" clearable size="small" style="width: 120px" @change="loadAdmin" />
+            <el-input v-model="adminFilters.operator" :placeholder="$t('auto.Audits.f9ac4b2a')" clearable size="small" style="width: 120px" @change="loadAdmin" />
             <el-date-picker
               v-model="adminFilters.range"
               type="datetimerange"
               size="small"
               style="width: 320px"
-              :start-placeholder="$t('auto.Audits.11.592c59')"
-              :end-placeholder="$t('auto.Audits.12.f78277')"
+              :start-placeholder="$t('auto.Audits.592c5958')"
+              :end-placeholder="$t('auto.Audits.f782779e')"
               value-format="YYYY-MM-DDTHH:mm:ssZ"
               @change="loadAdmin"
             />
-            <el-button type="primary" size="small" @click="loadAdmin">{{ $t('auto.Audits.30.694fc5') }}</el-button>
-            <el-button size="small" @click="exportCSV('mcp/admin-audits/export', 'mcp-admin-audits')">{{ $t('auto.Audits.31.1add12') }}</el-button>
+            <el-button type="primary" size="small" @click="loadAdmin">{{ $t('auto.Audits.694fc5ef') }}</el-button>
+            <el-button size="small" @click="exportCSV('mcp/admin-audits/export', 'mcp-admin-audits')">{{ $t('auto.Audits.1add12ff') }}</el-button>
           </div>
         </div>
       </template>
@@ -78,47 +78,47 @@
           type="info"
           :closable="false"
           show-icon
-          :title="$t('auto.Audits.18.15007d')"
+          :title="$t('auto.Audits.15007d3c')"
           style="margin-bottom: 12px"
         />
         <el-table v-loading="loading" :data="rows" border size="small">
-          <el-table-column prop="created_at" :label="$t('auto.Audits.19.19fcb9')" width="170">
+          <el-table-column prop="created_at" :label="$t('auto.Audits.19fcb9eb')" width="170">
             <template #default="{ row }">{{ fmtTime(row.created_at) }}</template>
           </el-table-column>
           <el-table-column prop="client_id" label="Client ID" width="150" />
-          <el-table-column :label="$t('auto.Audits.4.10b276')" width="90">
+          <el-table-column :label="$t('auto.Audits.10b2761d')" width="90">
             <template #default="{ row }">
-              <el-tag v-if="row.event === 'auth'" type="danger" size="small">{{ $t('auto.Audits.7.c0a3c7') }}</el-tag>
-              <el-tag v-else-if="row.event === 'list'" type="info" size="small">{{ $t('auto.Audits.32.569756') }}</el-tag>
-              <el-tag v-else size="small">{{ $t('auto.Audits.33.97d29d') }}</el-tag>
+              <el-tag v-if="row.event === 'auth'" type="danger" size="small">{{ $t('auto.Audits.c0a3c7a5') }}</el-tag>
+              <el-tag v-else-if="row.event === 'list'" type="info" size="small">{{ $t('auto.Audits.56975625') }}</el-tag>
+              <el-tag v-else size="small">{{ $t('auto.Audits.97d29d84') }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="method" :label="$t('auto.Audits.20.ea340b')" width="100" />
-          <el-table-column prop="tool" :label="$t('auto.Audits.21.20dce2')" min-width="140" />
-          <el-table-column :label="$t('auto.Audits.22.02b66e')" width="70">
+          <el-table-column prop="method" :label="$t('auto.Audits.ea340b9d')" width="100" />
+          <el-table-column prop="tool" :label="$t('auto.Audits.20dce2c6')" min-width="140" />
+          <el-table-column :label="$t('auto.Audits.02b66eb5')" width="70">
             <template #default="{ row }">
               <span v-if="row.key_id" class="mono">#{{ row.key_id }}</span>
               <span v-else class="muted">—</span>
             </template>
           </el-table-column>
-          <el-table-column :label="$t('auto.Audits.8.5ad7f5')" width="110">
+          <el-table-column :label="$t('auto.Audits.5ad7f5a8')" width="110">
             <template #default="{ row }">
-              <el-tag v-if="row.event === 'auth'" type="danger" size="small">{{ $t('auto.Audits.34.7173f8') }}</el-tag>
-              <el-tag v-else-if="row.allowed && row.ok" type="success" size="small">{{ $t('auto.Audits.35.330363') }}</el-tag>
-              <el-tag v-else-if="row.allowed" type="warning" size="small">{{ $t('auto.Audits.36.acd5cb') }}</el-tag>
-              <el-tag v-else type="danger" size="small">{{ $t('auto.Audits.37.a8a1bf') }}</el-tag>
+              <el-tag v-if="row.event === 'auth'" type="danger" size="small">{{ $t('auto.Audits.7173f809') }}</el-tag>
+              <el-tag v-else-if="row.allowed && row.ok" type="success" size="small">{{ $t('auto.Audits.330363df') }}</el-tag>
+              <el-tag v-else-if="row.allowed" type="warning" size="small">{{ $t('auto.Audits.acd5cb84') }}</el-tag>
+              <el-tag v-else type="danger" size="small">{{ $t('auto.Audits.a8a1bf23') }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column :label="$t('auto.Audits.23.39f137')" width="80">
+          <el-table-column :label="$t('auto.Audits.39f1374d')" width="80">
             <template #default="{ row }">{{ row.event === 'auth' ? '—' : row.latency_ms + 'ms' }}</template>
           </el-table-column>
-          <el-table-column prop="ip" :label="$t('auto.Audits.24.11c50d')" width="130" />
-          <el-table-column prop="args_hash" :label="$t('auto.Audits.25.436c61')" width="150">
+          <el-table-column prop="ip" :label="$t('auto.Audits.11c50da4')" width="130" />
+          <el-table-column prop="args_hash" :label="$t('auto.Audits.436c61c7')" width="150">
             <template #default="{ row }">
               <code class="mono">{{ row.args_hash || '—' }}</code>
             </template>
           </el-table-column>
-          <el-table-column prop="error_msg" :label="$t('auto.Audits.26.7030ff')" min-width="160" show-overflow-tooltip />
+          <el-table-column prop="error_msg" :label="$t('auto.Audits.7030ff64')" min-width="160" show-overflow-tooltip />
         </el-table>
         <el-pagination
           v-model:current-page="page"
@@ -137,31 +137,31 @@
           type="info"
           :closable="false"
           show-icon
-          :title="$t('auto.Audits.27.78ff2a')"
+          :title="$t('auto.Audits.78ff2ae1')"
           style="margin-bottom: 12px"
         />
         <el-table v-loading="adminLoading" :data="adminRows" border size="small">
-          <el-table-column prop="created_at" :label="$t('auto.Audits.19.19fcb9')" width="170">
+          <el-table-column prop="created_at" :label="$t('auto.Audits.19fcb9eb')" width="170">
             <template #default="{ row }">{{ fmtTime(row.created_at) }}</template>
           </el-table-column>
-          <el-table-column prop="action" :label="$t('auto.Audits.13.c500cf')" width="170">
+          <el-table-column prop="action" :label="$t('auto.Audits.c500cfab')" width="170">
             <template #default="{ row }">
               <el-tag size="small" :type="actionTagType(row.action)">{{ row.action }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column :label="$t('auto.Audits.14.b14494')" width="90">
+          <el-table-column :label="$t('auto.Audits.b1449413')" width="90">
             <template #default="{ row }">
               {{ { credential: '凭证', key: '密钥', skill: 'Skill' }[row.target_type] || row.target_type }} #{{ row.target_id }}
             </template>
           </el-table-column>
-          <el-table-column prop="target_label" :label="$t('auto.Audits.28.14d342')" min-width="140" show-overflow-tooltip>
+          <el-table-column prop="target_label" :label="$t('auto.Audits.14d34236')" min-width="140" show-overflow-tooltip>
             <template #default="{ row }">{{ row.target_label || '—' }}</template>
           </el-table-column>
-          <el-table-column prop="operator_username" :label="$t('auto.Audits.17.f9ac4b')" width="110">
+          <el-table-column prop="operator_username" :label="$t('auto.Audits.f9ac4b2a')" width="110">
             <template #default="{ row }">{{ row.operator_username || '—' }}</template>
           </el-table-column>
-          <el-table-column prop="ip" :label="$t('auto.Audits.24.11c50d')" width="130" />
-          <el-table-column prop="detail" :label="$t('auto.Audits.29.f26225')" min-width="240" show-overflow-tooltip>
+          <el-table-column prop="ip" :label="$t('auto.Audits.11c50da4')" width="130" />
+          <el-table-column prop="detail" :label="$t('auto.Audits.f26225bd')" min-width="240" show-overflow-tooltip>
             <template #default="{ row }">
               <code class="mono">{{ row.detail || '—' }}</code>
             </template>
@@ -285,7 +285,7 @@ const exportCSV = async (path, name) => {
     a.click()
     URL.revokeObjectURL(url)
   } catch (e) {
-    ElMessage.error(t('auto.Audits.38.bccb12') + e.message)
+    ElMessage.error(t('auto.Audits.bccb121f') + e.message)
   }
 }
 

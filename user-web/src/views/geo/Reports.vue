@@ -4,20 +4,20 @@
     
     <el-card shadow="never" class="filter-card">
       <el-form :inline="true" :model="filter">
-        <el-form-item :label="$t('auto.Reports.1.786622')">
+        <el-form-item :label="$t('auto.Reports.7866226e')">
           <el-date-picker
             v-model="dateRange"
             type="daterange"
-            :range-separator="$t('auto.Reports.2.981cbe')"
-            :start-placeholder="$t('auto.Reports.3.b44c0f')"
-            :end-placeholder="$t('auto.Reports.4.1d468b')"
+            :range-separator="$t('auto.Reports.981cbe31')"
+            :start-placeholder="$t('auto.Reports.b44c0f33')"
+            :end-placeholder="$t('auto.Reports.1d468be9')"
             value-format="YYYY-MM-DD"
             style="width: 260px"
           />
         </el-form-item>
         <el-form-item>
           <el-button type="primary" :loading="loading" @click="loadAll">
-            <el-icon><Search /></el-icon><span>{{ $t('auto.Reports.11.bee912') }}</span>
+            <el-icon><Search /></el-icon><span>{{ $t('auto.Reports.bee912d7') }}</span>
           </el-button>
         </el-form-item>
       </el-form>
@@ -35,53 +35,53 @@
 
     
     <el-card shadow="never" class="cost-card">
-      <template #header><span class="card-title">{{ $t('auto.Reports.12.ec4f72') }}</span></template>
+      <template #header><span class="card-title">{{ $t('auto.Reports.ec4f72f4') }}</span></template>
       <el-table v-loading="costLoading" :data="costRows" stripe style="width: 100%">
         <el-table-column prop="provider" label="Provider" width="140" />
         <el-table-column prop="model" label="Model" min-width="180" show-overflow-tooltip />
-        <el-table-column prop="call_count" :label="$t('auto.Reports.5.00d5bd')" width="110" align="right" />
-        <el-table-column :label="$t('auto.Reports.6.bb2ee5')" width="120" align="right">
+        <el-table-column prop="call_count" :label="$t('auto.Reports.00d5bdf1')" width="110" align="right" />
+        <el-table-column :label="$t('auto.Reports.bb2ee5a5')" width="120" align="right">
           <template #default="{ row }">{{ formatInt(row.input_tokens) }}</template>
         </el-table-column>
-        <el-table-column :label="$t('auto.Reports.7.599b49')" width="120" align="right">
+        <el-table-column :label="$t('auto.Reports.599b493f')" width="120" align="right">
           <template #default="{ row }">{{ formatInt(row.output_tokens) }}</template>
         </el-table-column>
-        <el-table-column prop="cost_cny" :label="$t('auto.Reports.8.21f58d')" width="120" align="right">
+        <el-table-column prop="cost_cny" :label="$t('auto.Reports.21f58d0d')" width="120" align="right">
           <template #default="{ row }">¥{{ formatNum(row.cost_cny) }}</template>
         </el-table-column>
-        <el-table-column prop="cost_usd" :label="$t('auto.Reports.9.326d04')" width="120" align="right">
+        <el-table-column prop="cost_usd" :label="$t('auto.Reports.326d0431')" width="120" align="right">
           <template #default="{ row }">${{ formatNum(row.cost_usd) }}</template>
         </el-table-column>
       </el-table>
-      <el-empty v-if="!costRows.length && !costLoading" :description="$t('auto.Reports.10.c901b2')" :image-size="60" />
+      <el-empty v-if="!costRows.length && !costLoading" :description="$t('auto.Reports.c901b245')" :image-size="60" />
     </el-card>
 
     
     <el-card shadow="never" class="roi-card">
-      <template #header><span class="card-title">{{ $t('auto.Reports.13.e5f086') }}</span></template>
+      <template #header><span class="card-title">{{ $t('auto.Reports.e5f086c3') }}</span></template>
       <div v-loading="roiLoading">
         <el-row :gutter="16" class="roi-row">
           <el-col :xs="12" :sm="6">
             <div class="roi-item">
-              <div class="roi-label">{{ $t('auto.Reports.14.7f6f35') }}</div>
+              <div class="roi-label">{{ $t('auto.Reports.7f6f35c4') }}</div>
               <div class="roi-value">{{ formatInt(roi.total_calls) }}</div>
             </div>
           </el-col>
           <el-col :xs="12" :sm="6">
             <div class="roi-item">
-              <div class="roi-label">{{ $t('auto.Reports.15.2e6e98') }}</div>
+              <div class="roi-label">{{ $t('auto.Reports.2e6e983e') }}</div>
               <div class="roi-value">{{ formatInt((roi.total_input_tokens || 0) + (roi.total_output_tokens || 0)) }}</div>
             </div>
           </el-col>
           <el-col :xs="12" :sm="6">
             <div class="roi-item">
-              <div class="roi-label">{{ $t('auto.Reports.16.14f577') }}</div>
+              <div class="roi-label">{{ $t('auto.Reports.14f577d7') }}</div>
               <div class="roi-value">¥{{ formatNum(roi.total_cost_cny) }}</div>
             </div>
           </el-col>
           <el-col :xs="12" :sm="6">
             <div class="roi-item highlight">
-              <div class="roi-label">{{ $t('auto.Reports.17.4d11c8') }}</div>
+              <div class="roi-label">{{ $t('auto.Reports.4d11c891') }}</div>
               <div class="roi-value">${{ formatNum(roi.avg_cost_per_call_usd) }}</div>
             </div>
           </el-col>
@@ -111,12 +111,12 @@ const roi = ref({})
 const filter = reactive({})
 
 const summaryCards = computed(() => [
-  { key: 'articles', label: t('auto.Reports.18.7e906e'), value: formatInt(summary.value.total_articles) },
-  { key: 'keywords', label: t('auto.Reports.19.3d00cf'), value: formatInt(summary.value.total_keywords) },
-  { key: 'optimizations', label: t('auto.Reports.20.11473f'), value: formatInt(summary.value.total_optimizations) },
-  { key: 'verifications', label: t('auto.Reports.21.a2b3a7'), value: formatInt(summary.value.total_verifications) },
+  { key: 'articles', label: t('auto.Reports.7e906ec5'), value: formatInt(summary.value.total_articles) },
+  { key: 'keywords', label: t('auto.Reports.3d00cf50'), value: formatInt(summary.value.total_keywords) },
+  { key: 'optimizations', label: t('auto.Reports.11473fd8'), value: formatInt(summary.value.total_optimizations) },
+  { key: 'verifications', label: t('auto.Reports.a2b3a7a4'), value: formatInt(summary.value.total_verifications) },
   { key: 'api_calls', label: 'API 调用', value: formatInt(summary.value.total_api_calls) },
-  { key: 'total_cost', label: t('auto.Reports.22.78d4d4'), value: '¥' + formatNum(summary.value.total_cost_cny), cls: 'cost' }
+  { key: 'total_cost', label: t('auto.Reports.78d4d47c'), value: '¥' + formatNum(summary.value.total_cost_cny), cls: 'cost' }
 ])
 
 const formatInt = (n) => {
@@ -147,7 +147,7 @@ const loadSummary = async () => {
     const res = await geoApi.getReport(dateParams())
     summary.value = res || {}
   } catch (e) {
-    ElMessage.error(e.message || t('auto.Reports.23.bb1cb7'))
+    ElMessage.error(e.message || t('auto.Reports.bb1cb73f'))
     summary.value = {}
   } finally {
     loading.value = false
@@ -160,7 +160,7 @@ const loadCosts = async () => {
     const res = await geoApi.getAPICosts(dateParams())
     costRows.value = res?.list || res?.items || res || []
   } catch (e) {
-    ElMessage.error(e.message || t('auto.Reports.24.635307'))
+    ElMessage.error(e.message || t('auto.Reports.63530739'))
     costRows.value = []
   } finally {
     costLoading.value = false

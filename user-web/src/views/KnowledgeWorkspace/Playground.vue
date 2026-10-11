@@ -1,7 +1,7 @@
 <template>
   <div class="playground-page">
     <el-alert
-      ::title="$t('auto.Playground.1.05a06f')"
+      ::title="$t('auto.Playground.05a06f61')"
       type="info"
       :closable="false"
       show-icon
@@ -16,34 +16,34 @@
       <el-col :span="8">
         <el-card>
           <template #header>
-            <span>{{ $t('auto.Playground.21.78d2eb') }}</span>
+            <span>{{ $t('auto.Playground.78d2eb3d') }}</span>
           </template>
           <el-form :model="form" label-width="100px">
-            <el-form-item :label="$t('auto.Playground.2.a01543')" required>
-              <el-select v-model="form.product_id" :placeholder="$t('auto.Playground.3.cbf1cf')" style="width: 100%">
+            <el-form-item :label="$t('auto.Playground.a015434e')" required>
+              <el-select v-model="form.product_id" :placeholder="$t('auto.Playground.cbf1cfff')" style="width: 100%">
                 <el-option v-for="p in productList" :key="p.id" :label="p.name" :value="p.id" />
               </el-select>
             </el-form-item>
-            <el-form-item :label="$t('auto.Playground.4.c8ddfe')" required>
+            <el-form-item :label="$t('auto.Playground.c8ddfe05')" required>
               <el-input
                 v-model="form.query"
                 type="textarea"
                 :rows="4"
-                :placeholder="$t('auto.Playground.5.71393e')"
+                :placeholder="$t('auto.Playground.71393e9c')"
               />
             </el-form-item>
             <el-form-item label="Top K">
               <el-slider v-model="form.top_k" :min="1" :max="50" show-stops :marks="{ 5: '5', 10: '10', 20: '20', 50: '50' }" />
             </el-form-item>
-            <el-form-item :label="$t('auto.Playground.6.2980ca')">
+            <el-form-item :label="$t('auto.Playground.2980caa0')">
               <el-slider v-model="form.similarity_threshold" :min="0" :max="1" :step="0.05" :format-tooltip="(v) => v.toFixed(2)" />
               <div class="threshold-hint">仅返回相似度 ≥ {{ form.similarity_threshold.toFixed(2) }} 的分段</div>
             </el-form-item>
-            <el-form-item :label="$t('auto.Playground.7.4716d8')">
-              <el-input v-model="form.filter_category" :placeholder="$t('auto.Playground.8.cbec3e')" clearable />
+            <el-form-item :label="$t('auto.Playground.4716d8d4')">
+              <el-input v-model="form.filter_category" :placeholder="$t('auto.Playground.cbec3ea5')" clearable />
             </el-form-item>
-            <el-form-item :label="$t('auto.Playground.9.5276f7')">
-              <el-select v-model="form.tags" multiple filterable allow-create :placeholder="$t('auto.Playground.10.26ff57')" style="width: 100%">
+            <el-form-item :label="$t('auto.Playground.5276f72e')">
+              <el-select v-model="form.tags" multiple filterable allow-create :placeholder="$t('auto.Playground.26ff573c')" style="width: 100%">
                 <el-option v-for="t in tagOptions" :key="t" :label="t" :value="t" />
               </el-select>
             </el-form-item>
@@ -53,8 +53,8 @@
               </el-button>
             </el-form-item>
             <el-form-item>
-              <el-checkbox v-model="form.use_three_tier">{{ $t('auto.Playground.22.31ce2f') }}</el-checkbox>
-              <el-checkbox v-model="form.use_rerank">{{ $t('auto.Playground.23.2eeeab') }}</el-checkbox>
+              <el-checkbox v-model="form.use_three_tier">{{ $t('auto.Playground.31ce2f52') }}</el-checkbox>
+              <el-checkbox v-model="form.use_rerank">{{ $t('auto.Playground.2eeeabdf') }}</el-checkbox>
             </el-form-item>
           </el-form>
         </el-card>
@@ -62,7 +62,7 @@
         
         <el-card style="margin-top: 16px">
           <template #header>
-            <span>{{ $t('auto.Playground.24.c4e86d') }}</span>
+            <span>{{ $t('auto.Playground.c4e86d88') }}</span>
           </template>
           <div class="template-list">
             <el-tag
@@ -80,7 +80,7 @@
         <el-card v-loading="searching">
           <template #header>
             <div class="card-header">
-              <span>{{ $t('auto.Playground.25.abb88a') }}</span>
+              <span>{{ $t('auto.Playground.abb88af2') }}</span>
               <div v-if="result" class="result-stats">
                 <el-tag size="small" type="info">命中 {{ result.total }} 条</el-tag>
                 <!-- el-tag 的 type 合法值只有 primary/success/info/warning/danger。
@@ -98,27 +98,27 @@
           
           <el-row v-if="result" :gutter="12" class="metric-row">
             <el-col :span="6">
-              <el-statistic :title="$t('auto.Playground.11.da21e8')" :value="result.max_score" :precision="3" />
+              <el-statistic :title="$t('auto.Playground.da21e885')" :value="result.max_score" :precision="3" />
             </el-col>
             <el-col :span="6">
-              <el-statistic :title="$t('auto.Playground.12.e31d50')" :value="result.min_score" :precision="3" />
+              <el-statistic :title="$t('auto.Playground.e31d509e')" :value="result.min_score" :precision="3" />
             </el-col>
             <el-col :span="6">
-              <el-statistic :title="$t('auto.Playground.13.356987')" :value="result.avg_score" :precision="3" />
+              <el-statistic :title="$t('auto.Playground.3569877e')" :value="result.avg_score" :precision="3" />
             </el-col>
             <el-col :span="6">
-              <el-statistic :title="$t('auto.Playground.14.1b68d8')" :value="result.total" />
+              <el-statistic :title="$t('auto.Playground.1b68d85a')" :value="result.total" />
             </el-col>
           </el-row>
 
-          <el-empty v-if="!result" :description="$t('auto.Playground.15.e297d5')" />
-          <div v-else-if="result.chunks.length === 0" class="no-hit">{{ $t('auto.Playground.26.5d4d6d') }}</div>
+          <el-empty v-if="!result" :description="$t('auto.Playground.e297d57f')" />
+          <div v-else-if="result.chunks.length === 0" class="no-hit">{{ $t('auto.Playground.5d4d6d01') }}</div>
           <div v-else class="chunks-list">
             <div v-for="(c, idx) in result.chunks" :key="c.chunk_id" class="chunk-card">
               <div class="chunk-header">
                 <div class="chunk-meta">
                   <el-tag size="small" :type="getScoreType(c.score)">#{{ idx + 1 }} {{ c.score.toFixed(3) }}</el-tag>
-                  <el-tag v-if="c.from_cache" size="small" type="success">{{ $t('auto.Playground.27.e80c31') }}</el-tag>
+                  <el-tag v-if="c.from_cache" size="small" type="success">{{ $t('auto.Playground.e80c310e') }}</el-tag>
                   <el-tag size="small" type="info">{{ c.source || 'L2' }}</el-tag>
                   <el-text size="small" type="info">chunk_id: {{ c.chunk_id }} | doc_id: {{ c.document_id }}</el-text>
                 </div>
@@ -134,7 +134,7 @@
                       <el-icon><CircleClose /></el-icon> 不相关
                     </el-button>
                   </el-button-group>
-                  <el-button size="small" link type="primary" @click="goChunkEdit(c.document_id, c.chunk_id)">{{ $t('auto.Playground.28.87d4fe') }}</el-button>
+                  <el-button size="small" link type="primary" @click="goChunkEdit(c.document_id, c.chunk_id)">{{ $t('auto.Playground.87d4fe2d') }}</el-button>
                 </div>
               </div>
               <div v-if="c.title" class="chunk-title">{{ c.title }}</div>
@@ -154,15 +154,15 @@
         
         <el-card v-if="result && result.debug_info" style="margin-top: 16px">
           <template #header>
-            <span>{{ $t('auto.Playground.29.a9cfab') }}</span>
+            <span>{{ $t('auto.Playground.a9cfab55') }}</span>
           </template>
           <el-descriptions :column="2" border size="small">
-            <el-descriptions-item :label="$t('auto.Playground.16.212553')">{{ result.debug_info.product_id }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.Playground.2125533e')">{{ result.debug_info.product_id }}</el-descriptions-item>
             <el-descriptions-item label="Top K">{{ result.debug_info.top_k }}</el-descriptions-item>
-            <el-descriptions-item :label="$t('auto.Playground.17.e0de1c')">{{ result.debug_info.threshold }}</el-descriptions-item>
-            <el-descriptions-item :label="$t('auto.Playground.18.dd0941')">{{ result.debug_info.use_three_tier ? '开启' : '关闭' }}</el-descriptions-item>
-            <el-descriptions-item :label="$t('auto.Playground.19.f98237')">{{ result.debug_info.use_rerank ? '开启' : '关闭' }}</el-descriptions-item>
-            <el-descriptions-item :label="$t('auto.Playground.20.bee912')">{{ result.query }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.Playground.e0de1c9a')">{{ result.debug_info.threshold }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.Playground.dd09412e')">{{ result.debug_info.use_three_tier ? '开启' : '关闭' }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.Playground.f982377d')">{{ result.debug_info.use_rerank ? '开启' : '关闭' }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.Playground.bee912d7')">{{ result.query }}</el-descriptions-item>
           </el-descriptions>
         </el-card>
       </el-col>
@@ -188,13 +188,13 @@ const { t } = useI18n()
 const searching = ref(false)
 const productList = ref([])
 const result = ref(null)
-const tagOptions = ref(['FAQ', t('auto.Playground.2.a01543'), t('auto.Playground.30.59bd68'), t('auto.Playground.31.b7824d'), t('auto.Playground.32.61a3ec')])
+const tagOptions = ref(['FAQ', t('auto.Playground.a015434e'), t('auto.Playground.59bd6897'), t('auto.Playground.b7824d5c'), t('auto.Playground.61a3ec66')])
 const templates = [
-  t('auto.Playground.33.23daa6'),
-  t('auto.Playground.34.0591b7'),
-  t('auto.Playground.35.50a572'),
-  t('auto.Playground.36.4fa5a2'),
-  t('auto.Playground.37.e9868e')
+  t('auto.Playground.23daa6aa'),
+  t('auto.Playground.0591b740'),
+  t('auto.Playground.50a572de'),
+  t('auto.Playground.4fa5a2bf'),
+  t('auto.Playground.e9868e22')
 ]
 
 const feedbacks = reactive({})
@@ -218,13 +218,13 @@ const loadProducts = async () => {
     if (Array.isArray(res)) productList.value = res
     else if (res?.items) productList.value = res.items
   } catch (e) {
-    console.error(t('auto.Playground.38.4c46f3'), e)
+    console.error(t('auto.Playground.4c46f3b1'), e)
   }
 }
 
 const handleSearch = async () => {
   if (!canSearch.value) {
-    ElMessage.warning(i18n.global.t(t('auto.Playground.39.8bae35')))
+    ElMessage.warning(i18n.global.t(t('auto.Playground.8bae35a9')))
     return
   }
   searching.value = true
@@ -244,7 +244,7 @@ const handleSearch = async () => {
       ElMessage.success(`检索完成,共 ${res.total} 条结果`)
     }
   } catch (e) {
-    ElMessage.error(t('auto.Playground.40.203e28') + (e.message || ''))
+    ElMessage.error(t('auto.Playground.203e2876') + (e.message || ''))
   } finally {
     searching.value = false
   }
@@ -260,10 +260,10 @@ const submitFeedback = async (chunk, rating) => {
       rating: rating
     })
     feedbacks[chunk.chunk_id] = rating
-    const labels = { 1: t('auto.Playground.41.ec0bce'), 0: t('auto.Playground.42.2ab01e'), '-1': t('auto.Playground.43.354101') }
+    const labels = { 1: t('auto.Playground.ec0bce08'), 0: t('auto.Playground.2ab01e41'), '-1': t('auto.Playground.3541012e') }
     ElMessage.success(`已记录反馈: ${labels[rating] || rating}`)
   } catch (e) {
-    ElMessage.error(t('auto.Playground.44.b6c398') + (e.message || ''))
+    ElMessage.error(t('auto.Playground.b6c39803') + (e.message || ''))
   }
 }
 

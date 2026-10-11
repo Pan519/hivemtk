@@ -3,22 +3,22 @@
 
     
     <el-card shadow="never" class="input-card">
-      <template #header><span class="card-title">{{ $t('auto.ContentOptimize.9.c543e5') }}</span></template>
+      <template #header><span class="card-title">{{ $t('auto.ContentOptimize.c543e5c9') }}</span></template>
       <el-form :model="form" label-width="92px">
         <el-row :gutter="16">
           <el-col :xs="24" :sm="12">
-            <el-form-item :label="$t('auto.ContentOptimize.1.6eee2d')">
+            <el-form-item :label="$t('auto.ContentOptimize.6eee2d7f')">
               <el-radio-group v-model="form.source">
-                <el-radio value="textarea">{{ $t('auto.ContentOptimize.10.28db28') }}</el-radio>
-                <el-radio value="article">{{ $t('auto.ContentOptimize.11.ababd8') }}</el-radio>
+                <el-radio value="textarea">{{ $t('auto.ContentOptimize.28db289c') }}</el-radio>
+                <el-radio value="article">{{ $t('auto.ContentOptimize.ababd8e2') }}</el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
           <el-col v-if="form.source === 'article'" :xs="24" :sm="12">
-            <el-form-item :label="$t('auto.ContentOptimize.2.e546ab')">
+            <el-form-item :label="$t('auto.ContentOptimize.e546ab36')">
               <el-select
                 v-model="form.article_id"
-                :placeholder="$t('auto.ContentOptimize.3.281009')"
+                :placeholder="$t('auto.ContentOptimize.281009e1')"
                 filterable
                 clearable
                 style="width: 100%"
@@ -34,22 +34,22 @@
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="12">
-            <el-form-item :label="$t('auto.ContentOptimize.4.4e8713')">
-              <el-input v-model="form.brand_name" :placeholder="$t('auto.ContentOptimize.5.a08eb5')" clearable />
+            <el-form-item :label="$t('auto.ContentOptimize.4e871349')">
+              <el-input v-model="form.brand_name" :placeholder="$t('auto.ContentOptimize.a08eb519')" clearable />
             </el-form-item>
           </el-col>
         </el-row>
-        <el-form-item v-if="form.source === 'textarea'" :label="$t('auto.ContentOptimize.6.ad531b')">
+        <el-form-item v-if="form.source === 'textarea'" :label="$t('auto.ContentOptimize.ad531b52')">
           <el-input
             v-model="form.content"
             type="textarea"
             :rows="10"
-            :placeholder="$t('auto.ContentOptimize.7.966236')"
+            :placeholder="$t('auto.ContentOptimize.966236d0')"
           />
         </el-form-item>
         <el-form-item>
           <el-button type="primary" :loading="optimizing" @click="handleOptimize">
-            <el-icon><MagicStick /></el-icon><span>{{ $t('auto.ContentOptimize.12.c34e3d') }}</span>
+            <el-icon><MagicStick /></el-icon><span>{{ $t('auto.ContentOptimize.c34e3d47') }}</span>
           </el-button>
           <el-button :loading="scoringBefore" :disabled="!originalContent" @click="handleScore('before')">
             优化前评分
@@ -62,7 +62,7 @@
     <el-card v-if="optimizedContent || originalContent" shadow="never" class="compare-card">
       <template #header>
         <div class="card-header">
-          <span class="card-title">{{ $t('auto.ContentOptimize.13.a11e70') }}</span>
+          <span class="card-title">{{ $t('auto.ContentOptimize.a11e706f') }}</span>
           <div class="score-bar">
             <el-tag type="info">优化前：{{ scoreBefore?.total ?? '—' }}</el-tag>
             <el-icon class="arrow"><Right /></el-icon>
@@ -73,7 +73,7 @@
       <el-row :gutter="16">
         <el-col :xs="24" :md="12">
           <div class="compare-col">
-            <div class="col-title">{{ $t('auto.ContentOptimize.14.e5729e') }}</div>
+            <div class="col-title">{{ $t('auto.ContentOptimize.e5729e94') }}</div>
             <div class="compare-text original">{{ originalContent || '—' }}</div>
           </div>
         </el-col>
@@ -81,7 +81,7 @@
           <div class="compare-col">
             <div class="col-title">
               优化后
-              <el-button v-if="optimizedContent" link type="primary" @click="copyOptimized">{{ $t('auto.ContentOptimize.15.79d3ab') }}</el-button>
+              <el-button v-if="optimizedContent" link type="primary" @click="copyOptimized">{{ $t('auto.ContentOptimize.79d3abe9') }}</el-button>
             </div>
             <div v-loading="optimizing" class="compare-text optimized">{{ optimizedContent || '—' }}</div>
           </div>
@@ -95,7 +95,7 @@
             优化后评分
           </el-button>
         </div>
-        <el-empty v-if="!suggestions.length" :description="$t('auto.ContentOptimize.8.a7ecab')" :image-size="60" />
+        <el-empty v-if="!suggestions.length" :description="$t('auto.ContentOptimize.a7ecab40')" :image-size="60" />
         <ul v-else class="suggest-list">
           <li v-for="(s, i) in suggestions" :key="i">{{ s }}</li>
         </ul>
@@ -149,13 +149,13 @@ const onArticleChange = async (id) => {
     const res = await geoApi.getArticleByID(id)
     form.content = res?.content || res?.article || ''
   } catch (e) {
-    ElMessage.error(e.message || t('auto.ContentOptimize.16.aaff45'))
+    ElMessage.error(e.message || t('auto.ContentOptimize.aaff4555'))
   }
 }
 
 const handleOptimize = async () => {
   if (!form.content.trim()) {
-    ElMessage.warning(t('auto.ContentOptimize.17.ce22a5'))
+    ElMessage.warning(t('auto.ContentOptimize.ce22a5ea'))
     return
   }
   optimizing.value = true
@@ -170,9 +170,9 @@ const handleOptimize = async () => {
     optimizedContent.value = res?.optimized_content || res?.content || ''
     const raw = res?.suggestions || '';
     suggestions.value = Array.isArray(raw) ? raw : String(raw).split('\n').map((s) => s.trim()).filter(Boolean)
-    ElMessage.success(t('auto.ContentOptimize.18.ee7d46'))
+    ElMessage.success(t('auto.ContentOptimize.ee7d46a4'))
   } catch (e) {
-    ElMessage.error(e.message || t('auto.ContentOptimize.19.2d8b51'))
+    ElMessage.error(e.message || t('auto.ContentOptimize.2d8b51bb'))
   } finally {
     optimizing.value = false
   }
@@ -181,7 +181,7 @@ const handleOptimize = async () => {
 const handleScore = async (stage) => {
   const content = stage === 'before' ? form.content : optimizedContent.value
   if (!content) {
-    ElMessage.warning(t('auto.ContentOptimize.20.5ff123'))
+    ElMessage.warning(t('auto.ContentOptimize.5ff123ce'))
     return
   }
   const loading = stage === 'before' ? scoringBefore : scoringAfter
@@ -190,9 +190,9 @@ const handleScore = async (stage) => {
     const res = await geoApi.scoreContent({ content, brand_name: form.brand_name, keyword: '' })
     if (stage === 'before') scoreBefore.value = res
     else scoreAfter.value = res
-    ElMessage.success(t('auto.ContentOptimize.21.4ea68d'))
+    ElMessage.success(t('auto.ContentOptimize.4ea68d92'))
   } catch (e) {
-    ElMessage.error(e.message || t('auto.ContentOptimize.22.324f39'))
+    ElMessage.error(e.message || t('auto.ContentOptimize.324f3961'))
   } finally {
     loading.value = false
   }
@@ -201,9 +201,9 @@ const handleScore = async (stage) => {
 const copyOptimized = async () => {
   try {
     await navigator.clipboard.writeText(optimizedContent.value)
-    ElMessage.success(t('auto.ContentOptimize.23.4fb42e'))
+    ElMessage.success(t('auto.ContentOptimize.4fb42e6e'))
   } catch {
-    ElMessage.error(t('auto.ContentOptimize.24.5154ae'))
+    ElMessage.error(t('auto.ContentOptimize.5154ae17'))
   }
 }
 

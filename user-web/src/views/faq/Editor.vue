@@ -6,10 +6,10 @@
         <div>
           <h2>{{ isEdit ? '编辑 FAQ' : '创建 FAQ' }}</h2>
           <p class="subtitle" v-if="isEdit">FAQ ID：{{ faqId }} · 修改后保存生效</p>
-          <p class="subtitle" v-else>{{ $t('auto.Editor.14.8ae443') }}</p>
+          <p class="subtitle" v-else>{{ $t('auto.Editor.8ae4430a') }}</p>
         </div>
         <div class="header-actions">
-          <el-button @click="goBack">{{ $t('auto.Editor.15.adcd1d') }}</el-button>
+          <el-button @click="goBack">{{ $t('auto.Editor.adcd1dd7') }}</el-button>
         </div>
       </div>
     </el-card>
@@ -29,30 +29,30 @@
             FAQ 内容
           </div>
         </template>
-        <el-form-item :label="$t('auto.Editor.1.5dc99f')" prop="question">
+        <el-form-item :label="$t('auto.Editor.5dc99f6e')" prop="question">
           <el-input
             v-model="form.question"
             type="textarea"
             :rows="2"
-            :placeholder="$t('auto.Editor.2.40bae0')"
+            :placeholder="$t('auto.Editor.40bae09f')"
           />
         </el-form-item>
-        <el-form-item :label="$t('auto.Editor.3.dbacf3')" prop="answer">
+        <el-form-item :label="$t('auto.Editor.dbacf318')" prop="answer">
           <el-input
             v-model="form.answer"
             type="textarea"
             :rows="4"
-            :placeholder="$t('auto.Editor.4.fddf8d')"
+            :placeholder="$t('auto.Editor.fddf8dea')"
           />
         </el-form-item>
-        <el-form-item :label="$t('auto.Editor.5.9699a5')" prop="keywords">
+        <el-form-item :label="$t('auto.Editor.9699a50e')" prop="keywords">
           <el-input
             v-model="form.keywordsInput"
-            :placeholder="$t('auto.Editor.6.9667af')"
+            :placeholder="$t('auto.Editor.9667af9d')"
           />
-          <div class="form-tip">{{ $t('auto.Editor.16.20986a') }}</div>
+          <div class="form-tip">{{ $t('auto.Editor.20986ab8') }}</div>
         </el-form-item>
-        <el-form-item v-if="form.keywords && form.keywords.length" :label="$t('auto.Editor.7.645dbc')">
+        <el-form-item v-if="form.keywords && form.keywords.length" :label="$t('auto.Editor.645dbc55')">
           <div class="keyword-preview">
             <el-tag v-for="k in form.keywords" :key="k" size="small" type="info" effect="plain" closable @close="removeKeyword(k)">
               {{ k }}
@@ -71,24 +71,24 @@
         </template>
         <el-row :gutter="20">
           <el-col :span="12">
-            <el-form-item :label="$t('auto.Editor.8.e50e8a')">
+            <el-form-item :label="$t('auto.Editor.e50e8a3f')">
               <el-select
                 v-model="form.category"
                 filterable
                 allow-create
                 clearable
-                :placeholder="$t('auto.Editor.9.704203')"
+                :placeholder="$t('auto.Editor.704203ba')"
                 style="width: 100%"
               >
                 <el-option v-for="c in presetCategories" :key="c" :label="c" :value="c" />
               </el-select>
-              <div class="form-tip">{{ $t('auto.Editor.17.4de8f8') }}</div>
+              <div class="form-tip">{{ $t('auto.Editor.4de8f80e') }}</div>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item :label="$t('auto.Editor.10.852551')">
-              <el-input v-model="form.intent" :placeholder="$t('auto.Editor.11.f56009')" />
-              <div class="form-tip">{{ $t('auto.Editor.18.231c22') }}</div>
+            <el-form-item :label="$t('auto.Editor.85255185')">
+              <el-input v-model="form.intent" :placeholder="$t('auto.Editor.f5600972')" />
+              <div class="form-tip">{{ $t('auto.Editor.231c2296') }}</div>
             </el-form-item>
           </el-col>
         </el-row>
@@ -104,7 +104,7 @@
         </template>
         <el-row :gutter="20">
           <el-col :span="12">
-            <el-form-item :label="$t('auto.Editor.12.44c611')">
+            <el-form-item :label="$t('auto.Editor.44c6114c')">
               <el-slider
                 v-model="form.confidence"
                 :min="0"
@@ -113,13 +113,13 @@
                 show-input
                 :show-input-controls="false"
               />
-              <div class="form-tip">{{ $t('auto.Editor.19.a35e18') }}</div>
+              <div class="form-tip">{{ $t('auto.Editor.a35e18ec') }}</div>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item :label="$t('auto.Editor.13.7854b5')">
+            <el-form-item :label="$t('auto.Editor.7854b52a')">
               <el-switch v-model="form.enabled" />
-              <div class="form-tip">{{ $t('auto.Editor.20.bfd59d') }}</div>
+              <div class="form-tip">{{ $t('auto.Editor.bfd59db5') }}</div>
             </el-form-item>
           </el-col>
         </el-row>
@@ -127,7 +127,7 @@
 
       
       <div class="footer-actions">
-        <el-button @click="goBack">{{ $t('auto.Editor.21.625fb2') }}</el-button>
+        <el-button @click="goBack">{{ $t('auto.Editor.625fb26b') }}</el-button>
         <el-button type="primary" :loading="saving" @click="onSave">
           <el-icon><Check /></el-icon>
           {{ isEdit ? '保存更新' : '创建 FAQ' }}
@@ -183,10 +183,10 @@ const form = reactive(getDefaultForm())
 
 const rules = {
   question: [
-    { required: true, message: t(t('auto.Editor.22.73fb82')), trigger: 'blur' }
+    { required: true, message: t(t('auto.Editor.73fb8249')), trigger: 'blur' }
   ],
   answer: [
-    { required: true, message: t(t('auto.Editor.23.6a34fc')), trigger: 'blur' }
+    { required: true, message: t(t('auto.Editor.6a34fc28')), trigger: 'blur' }
   ]
 };
 
@@ -214,7 +214,7 @@ const loadDetail = async () => {
       form.enabled = res.enabled !== false
     }
   } catch (e) {
-    ElMessage.error(t('auto.Editor.24.de5e3b') + (e.message || t('auto.Editor.25.974e74')))
+    ElMessage.error(t('auto.Editor.de5e3b6d') + (e.message || t('auto.Editor.974e7484')))
     goBack()
   } finally {
     pageLoading.value = false
@@ -225,7 +225,7 @@ const onSave = async () => {
   if (!formRef.value) return
   await formRef.value.validate(async (valid) => {
     if (!valid) {
-      ElMessage.warning(t(t('auto.Editor.26.341de0')))
+      ElMessage.warning(t(t('auto.Editor.341de0e4')))
       return
     }
     const fromInput = parseKeywords(form.keywordsInput);
@@ -250,7 +250,7 @@ const onSave = async () => {
       }
       goBack()
     } catch (e) {
-      ElMessage.error(t('auto.Editor.27.78d235') + (e.message || t('auto.Editor.25.974e74')))
+      ElMessage.error(t('auto.Editor.78d235cc') + (e.message || t('auto.Editor.974e7484')))
     } finally {
       saving.value = false
     }

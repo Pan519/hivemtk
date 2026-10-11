@@ -21,8 +21,8 @@
       @row-dblclick="handleEditDraft"
     >
       <el-table-column type="selection" width="55" />
-      <el-table-column prop="subject" ::label="$t('auto.Drafts.1.d8b085')" min-width="200" />
-      <el-table-column ::label="$t('auto.Drafts.2.4414e3')" width="300" fixed="right">
+      <el-table-column prop="subject" ::label="$t('auto.Drafts.d8b08566')" min-width="200" />
+      <el-table-column ::label="$t('auto.Drafts.4414e3c5')" width="300" fixed="right">
         <template #default="scope">
           <el-button size="small" @click="handleEditDraft(scope.row)">{{ $t('编辑') }}</el-button>
           <el-button size="small" type="danger" @click="handleDeleteDraft(scope.row.id)">{{ $t('删除') }}</el-button>
@@ -32,13 +32,13 @@
     </el-table>
 
     <div v-else class="empty-drafts">
-      <el-empty :description="$t('auto.Drafts.3.f34818')" />
+      <el-empty :description="$t('auto.Drafts.f34818d8')" />
     </div>
 
     
     <el-dialog 
       v-model="dialogVisible"
-      ::title="$t('auto.Drafts.4.e5815c')"
+      ::title="$t('auto.Drafts.e5815c01')"
       width="70%"
       :before-close="handleClose"
     >
@@ -47,12 +47,12 @@
       </p>
       
       <el-form ref="draftFormRef" :model="draftForm" :rules="formRules" label-width="80px">
-        <el-form-item :label="$t('auto.Drafts.5.9970ad')" prop="subject">
-          <el-input v-model="draftForm.subject" :placeholder="$t('auto.Drafts.6.4f3c61')" />
+        <el-form-item :label="$t('auto.Drafts.9970ad07')" prop="subject">
+          <el-input v-model="draftForm.subject" :placeholder="$t('auto.Drafts.4f3c61a3')" />
         </el-form-item>
 
         
-        <el-form-item :label="$t('auto.Drafts.7.2d711b')" prop="content">
+        <el-form-item :label="$t('auto.Drafts.2d711b09')" prop="content">
           
           <SimpleEditor
             v-model="draftForm.content"
@@ -65,8 +65,8 @@
       </el-form>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="dialogVisible = false">{{ $t('auto.Drafts.8.625fb2') }}</el-button>
-          <el-button type="primary" @click="submitDraft">{{ $t('auto.Drafts.9.4d7ea6') }}</el-button>
+          <el-button @click="dialogVisible = false">{{ $t('auto.Drafts.625fb26b') }}</el-button>
+          <el-button type="primary" @click="submitDraft">{{ $t('auto.Drafts.4d7ea6df') }}</el-button>
         </span>
       </template>
     </el-dialog>
@@ -110,11 +110,11 @@ const sendForm = reactive({
 
 const formRules = {
   subject: [
-    { required: true, message: i18n.global.t(t('auto.Drafts.6.4f3c61')), trigger: 'blur' },
-    { max: 100, message: i18n.global.t(t('auto.Drafts.10.dcc9a7')), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.Drafts.4f3c61a3')), trigger: 'blur' },
+    { max: 100, message: i18n.global.t(t('auto.Drafts.dcc9a7c1')), trigger: 'blur' }
   ],
   content: [
-    { required: true, message: i18n.global.t(t('auto.Drafts.11.61a258')), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.Drafts.61a2580c')), trigger: 'blur' }
   ]
 };
 
@@ -132,8 +132,8 @@ const fetchDrafts = async () => {
     const response = await emailApi.getDrafts()
     drafts.value = response.list || [];
   } catch (error) {
-    console.error(t('auto.Drafts.12.88b6b3'), error)
-    ElMessage.error(i18n.global.t(t('auto.Drafts.13.6adbf4')))
+    console.error(t('auto.Drafts.88b6b30d'), error)
+    ElMessage.error(i18n.global.t(t('auto.Drafts.6adbf4da')))
   }
 };
 
@@ -165,28 +165,28 @@ const handleEditDraft = async (row) => {
     })
     dialogVisible.value = true
   } catch (error) {
-    console.error(t('auto.Drafts.14.9f9509'), error)
-    ElMessage.error(i18n.global.t(t('auto.Drafts.15.249f21')))
+    console.error(t('auto.Drafts.9f9509a7'), error)
+    ElMessage.error(i18n.global.t(t('auto.Drafts.249f2141')))
   }
 };
 
 const handleDeleteDraft = (id) => {
   ElMessageBox.confirm(
-    t('auto.Drafts.16.f44c0b'),
-    t('auto.Drafts.17.900c70'),
+    t('auto.Drafts.f44c0b5a'),
+    t('auto.Drafts.900c70fa'),
     {
-      confirmButtonText: t('auto.Drafts.18.38cf16'),
-      cancelButtonText: t('auto.Drafts.8.625fb2'),
+      confirmButtonText: t('auto.Drafts.38cf16f2'),
+      cancelButtonText: t('auto.Drafts.625fb26b'),
       type: 'warning'
     }
   ).then(async () => {
     try {
       const response = await emailApi.deleteDraft(id)
-      ElMessage.success(i18n.global.t(t('auto.Drafts.19.341f75')));
+      ElMessage.success(i18n.global.t(t('auto.Drafts.341f75ac')));
       fetchDrafts();
     } catch (error) {
-      console.error(t('auto.Drafts.20.ca35b2'), error)
-      ElMessage.error(i18n.global.t(t('auto.Drafts.21.c1cf61')))
+      console.error(t('auto.Drafts.ca35b261'), error)
+      ElMessage.error(i18n.global.t(t('auto.Drafts.c1cf611c')))
     }
   }).catch(() => {})
 };
@@ -210,12 +210,12 @@ const submitDraft = () => {
           response = await emailApi.updateDraft(draftData.id, draftData);
         }
 
-        ElMessage.success(dialogType.value === 'create' ? t('auto.Drafts.22.831675') : t('auto.Drafts.23.b7773a'));
+        ElMessage.success(dialogType.value === 'create' ? t('auto.Drafts.83167530') : t('auto.Drafts.b7773a7e'));
         dialogVisible.value = false
         fetchDrafts();
       } catch (error) {
-        console.error(t('auto.Drafts.24.e26168'), error)
-        ElMessage.error(i18n.global.t(t('auto.Drafts.25.d9f436')))
+        console.error(t('auto.Drafts.e261688a'), error)
+        ElMessage.error(i18n.global.t(t('auto.Drafts.d9f436fc')))
       }
     }
   })
@@ -225,7 +225,7 @@ const handlePreview = (file) => {
   if (file.url) {
     window.open(file.url, '_blank')
   } else {
-    ElMessage.warning(i18n.global.t(t('auto.Drafts.26.e14782')))
+    ElMessage.warning(i18n.global.t(t('auto.Drafts.e147828f')))
   }
 };
 
@@ -257,11 +257,11 @@ const submitSend = async () => {
       };
       let res  = await emailApi.sendEmail(sendData)
 
-      ElMessage.success(t('auto.Drafts.27.6f7526') + (res.total || 0));
+      ElMessage.success(t('auto.Drafts.6f752656') + (res.total || 0));
       sendDialogVisible.value = false
     } catch (error) {
-      console.error(t('auto.Drafts.28.df52ee'), error)
-      ElMessage.error(i18n.global.t(t('auto.Drafts.29.c1355a')))
+      console.error(t('auto.Drafts.df52ee1a'), error)
+      ElMessage.error(i18n.global.t(t('auto.Drafts.c1355a5d')))
     }
   }
 

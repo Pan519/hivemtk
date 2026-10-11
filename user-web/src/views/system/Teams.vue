@@ -4,7 +4,7 @@
       <template #header>
         <div class="card-header">
           <span>{{ isPlatform ? '团队管理（租户）' : '我的团队' }}</span>
-          <el-button v-if="isPlatform" type="primary" size="small" @click="openCreate">{{ $t('auto.Teams.23.8e10ee') }}</el-button>
+          <el-button v-if="isPlatform" type="primary" size="small" @click="openCreate">{{ $t('auto.Teams.8e10eedb') }}</el-button>
         </div>
       </template>
 
@@ -21,16 +21,16 @@
       <!-- 团队管理员：本团队信息 + 订阅账单卡 -->
       <template v-if="!isPlatform">
         <el-descriptions v-if="myTeam" :column="3" border size="small" style="margin-bottom: 12px">
-          <el-descriptions-item :label="$t('auto.Teams.1.6ce21a')">{{ myTeam.name }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.Teams.2.ff2206')">{{ myTeam.plan }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.Teams.3.fc4a05')">{{ myTeam.brand_name || '—' }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.Teams.4.2432b5')" :span="3">{{ myTeam.remark || '—' }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.Teams.6ce21a3c')">{{ myTeam.name }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.Teams.ff22063c')">{{ myTeam.plan }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.Teams.fc4a0583')">{{ myTeam.brand_name || '—' }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.Teams.2432b575')" :span="3">{{ myTeam.remark || '—' }}</el-descriptions-item>
         </el-descriptions>
-        <el-descriptions v-if="myBilling" :column="3" border size="small" style="margin-bottom: 12px" :title="$t('auto.Teams.5.82aded')">
-          <el-descriptions-item :label="$t('auto.Teams.6.ce717a')">{{ myBilling.subscription?.plan_code || '未订阅' }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.Teams.7.22e888')">{{ fmtTime(myBilling.subscription?.ends_at) }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.Teams.8.d7550f')">{{ myBilling.subscription?.auto_renew ? '是' : '否' }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.Teams.9.4c8ac5')" :span="3">
+        <el-descriptions v-if="myBilling" :column="3" border size="small" style="margin-bottom: 12px" :title="$t('auto.Teams.82aded13')">
+          <el-descriptions-item :label="$t('auto.Teams.ce717abb')">{{ myBilling.subscription?.plan_code || '未订阅' }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.Teams.22e888c2')">{{ fmtTime(myBilling.subscription?.ends_at) }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.Teams.d7550fbb')">{{ myBilling.subscription?.auto_renew ? '是' : '否' }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.Teams.4c8ac590')" :span="3">
             <template v-if="(myBilling.records || []).length">
               <el-tag
                 v-for="r in myBilling.records.slice(0, 5)"
@@ -40,48 +40,48 @@
                 style="margin-right: 6px"
               >¥{{ (r.amount_cents / 100).toFixed(2) }}（{{ { pending: '应收', paid: '已收', void: '作废' }[r.status] }}）</el-tag>
             </template>
-            <span v-else class="muted">{{ $t('auto.Teams.24.a151e3') }}</span>
+            <span v-else class="muted">{{ $t('auto.Teams.a151e3de') }}</span>
           </el-descriptions-item>
         </el-descriptions>
       </template>
 
       <el-table v-if="isPlatform" v-loading="loading" :data="rows" border size="small">
         <el-table-column prop="id" label="ID" width="60" />
-        <el-table-column prop="name" :label="$t('auto.Teams.1.6ce21a')" min-width="140" />
-        <el-table-column :label="$t('auto.Teams.2.ff2206')" width="100">
+        <el-table-column prop="name" :label="$t('auto.Teams.6ce21a3c')" min-width="140" />
+        <el-table-column :label="$t('auto.Teams.ff22063c')" width="100">
           <template #default="{ row }">
             <el-tag size="small" :type="row.plan === 'enterprise' ? 'warning' : row.plan === 'pro' ? 'success' : 'info'">
               {{ row.plan }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.Teams.10.3fea7c')" width="90">
+        <el-table-column :label="$t('auto.Teams.3fea7ca7')" width="90">
           <template #default="{ row }">
             <el-tag :type="row.status === 'active' ? 'success' : 'info'" size="small">
               {{ row.status === 'active' ? '启用' : '停用' }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.Teams.11.81bf43')" width="100">
+        <el-table-column :label="$t('auto.Teams.81bf43d2')" width="100">
           <template #default="{ row }">
             <span v-if="row.owner_user_id">用户 #{{ row.owner_user_id }}</span>
-            <span v-else class="muted">{{ $t('auto.Teams.25.7598f1') }}</span>
+            <span v-else class="muted">{{ $t('auto.Teams.7598f152') }}</span>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.Teams.12.eb9d06')" width="90">
+        <el-table-column :label="$t('auto.Teams.eb9d06af')" width="90">
           <template #default="{ row }">
             <el-tag size="small" type="info">{{ row.member_count ?? 0 }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="remark" :label="$t('auto.Teams.4.2432b5')" min-width="140" show-overflow-tooltip />
-        <el-table-column prop="created_at" :label="$t('auto.Teams.13.eca37c')" width="160">
+        <el-table-column prop="remark" :label="$t('auto.Teams.2432b575')" min-width="140" show-overflow-tooltip />
+        <el-table-column prop="created_at" :label="$t('auto.Teams.eca37cb0')" width="160">
           <template #default="{ row }">{{ fmtTime(row.created_at) }}</template>
         </el-table-column>
-        <el-table-column :label="$t('auto.Teams.14.2b6bc0')" width="240" fixed="right">
+        <el-table-column :label="$t('auto.Teams.2b6bc0f2')" width="240" fixed="right">
           <template #default="{ row }">
-            <el-button size="small" type="primary" plain @click="openMembers(row)">{{ $t('auto.Teams.26.ab5dea') }}</el-button>
-            <el-button size="small" @click="openEdit(row)">{{ $t('auto.Teams.27.95b351') }}</el-button>
-            <el-button size="small" type="danger" @click="remove(row)">{{ $t('auto.Teams.28.2f4aad') }}</el-button>
+            <el-button size="small" type="primary" plain @click="openMembers(row)">{{ $t('auto.Teams.ab5dea29') }}</el-button>
+            <el-button size="small" @click="openEdit(row)">{{ $t('auto.Teams.95b351c8') }}</el-button>
+            <el-button size="small" type="danger" @click="remove(row)">{{ $t('auto.Teams.2f4aaddd') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -98,88 +98,88 @@
     </el-card>
 
     <!-- 新建/编辑弹窗 -->
-    <el-dialog v-model="dialogVisible" ::title="$t('auto.Teams.15.f9b0ed')" width="480px">
+    <el-dialog v-model="dialogVisible" ::title="$t('auto.Teams.f9b0ed4d')" width="480px">
       <el-form label-width="100px">
-        <el-form-item :label="$t('auto.Teams.1.6ce21a')">
-          <el-input v-model="form.name" maxlength="100" :placeholder="$t('auto.Teams.16.6bc959')" />
+        <el-form-item :label="$t('auto.Teams.6ce21a3c')">
+          <el-input v-model="form.name" maxlength="100" :placeholder="$t('auto.Teams.6bc959ff')" />
         </el-form-item>
-        <el-form-item :label="$t('auto.Teams.2.ff2206')">
+        <el-form-item :label="$t('auto.Teams.ff22063c')">
           <el-radio-group v-model="form.plan">
             <el-radio value="free">free</el-radio>
             <el-radio value="pro">pro</el-radio>
             <el-radio value="enterprise">enterprise</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item v-if="editing" :label="$t('auto.Teams.10.3fea7c')">
+        <el-form-item v-if="editing" :label="$t('auto.Teams.3fea7ca7')">
           <el-radio-group v-model="form.status">
-            <el-radio value="active">{{ $t('auto.Teams.29.7854b5') }}</el-radio>
-            <el-radio value="disabled">{{ $t('auto.Teams.30.5c56a8') }}</el-radio>
+            <el-radio value="active">{{ $t('auto.Teams.7854b52a') }}</el-radio>
+            <el-radio value="disabled">{{ $t('auto.Teams.5c56a889') }}</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item :label="$t('auto.Teams.11.81bf43')">
-          <el-input v-model="form.owner_user_id" :placeholder="$t('auto.Teams.17.142d4e')" style="width: 200px" />
+        <el-form-item :label="$t('auto.Teams.81bf43d2')">
+          <el-input v-model="form.owner_user_id" :placeholder="$t('auto.Teams.142d4e16')" style="width: 200px" />
         </el-form-item>
-        <el-form-item :label="$t('auto.Teams.4.2432b5')">
+        <el-form-item :label="$t('auto.Teams.2432b575')">
           <el-input v-model="form.remark" maxlength="200" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="dialogVisible = false">{{ $t('auto.Teams.31.625fb2') }}</el-button>
-        <el-button type="primary" :loading="saving" @click="doSave">{{ $t('auto.Teams.32.be5fbb') }}</el-button>
+        <el-button @click="dialogVisible = false">{{ $t('auto.Teams.625fb26b') }}</el-button>
+        <el-button type="primary" :loading="saving" @click="doSave">{{ $t('auto.Teams.be5fbbe3') }}</el-button>
       </template>
     </el-dialog>
 
     <!-- 成员抽屉 -->
     <el-drawer v-model="membersVisible" :title="`成员管理 — ${current.name || ''}`" size="680px">
       <div style="margin-bottom: 12px; display: flex; gap: 8px">
-        <el-input v-model="moveUserId" :placeholder="$t('auto.Teams.18.919d7a')" style="width: 220px" size="small" />
-        <el-button type="primary" size="small" :loading="moving" @click="doMove">{{ $t('auto.Teams.33.3b0ad5') }}</el-button>
+        <el-input v-model="moveUserId" :placeholder="$t('auto.Teams.919d7a15')" style="width: 220px" size="small" />
+        <el-button type="primary" size="small" :loading="moving" @click="doMove">{{ $t('auto.Teams.3b0ad53a') }}</el-button>
       </div>
       <div style="margin-bottom: 16px">
         <div style="margin-bottom: 8px; display: flex; align-items: center; gap: 8px">
-          <span style="font-weight: 600">{{ $t('auto.Teams.19.fee0b6') }}</span>
-          <el-button size="small" type="primary" plain @click="generateInvite">{{ $t('auto.Teams.34.1edb8b') }}</el-button>
+          <span style="font-weight: 600">{{ $t('auto.Teams.fee0b675') }}</span>
+          <el-button size="small" type="primary" plain @click="generateInvite">{{ $t('auto.Teams.1edb8b29') }}</el-button>
         </div>
         <el-table v-if="invites.length" :data="invites" border size="small">
-          <el-table-column :label="$t('auto.Teams.19.fee0b6')" min-width="140">
+          <el-table-column :label="$t('auto.Teams.fee0b675')" min-width="140">
             <template #default="{ row }"><code>{{ row.code }}</code></template>
           </el-table-column>
-          <el-table-column :label="$t('auto.Teams.20.580f52')" width="100">
+          <el-table-column :label="$t('auto.Teams.580f5201')" width="100">
             <template #default="{ row }">{{ row.used_count }}/{{ row.max_uses || '∞' }}</template>
           </el-table-column>
-          <el-table-column :label="$t('auto.Teams.10.3fea7c')" width="80">
+          <el-table-column :label="$t('auto.Teams.3fea7ca7')" width="80">
             <template #default="{ row }">
               <el-tag :type="row.status === 'active' ? 'success' : 'info'" size="small">
                 {{ row.status === 'active' ? '可用' : '停用' }}
               </el-tag>
             </template>
           </el-table-column>
-          <el-table-column :label="$t('auto.Teams.14.2b6bc0')" width="100">
+          <el-table-column :label="$t('auto.Teams.2b6bc0f2')" width="100">
             <template #default="{ row }">
-              <el-button v-if="row.status === 'active'" size="small" type="warning" plain @click="disableInvite(row)">{{ $t('auto.Teams.30.5c56a8') }}</el-button>
+              <el-button v-if="row.status === 'active'" size="small" type="warning" plain @click="disableInvite(row)">{{ $t('auto.Teams.5c56a889') }}</el-button>
             </template>
           </el-table-column>
         </el-table>
-        <div v-else class="muted">{{ $t('auto.Teams.35.2ab7d3') }}</div>
+        <div v-else class="muted">{{ $t('auto.Teams.2ab7d3a2') }}</div>
       </div>
       <el-table v-loading="membersLoading" :data="members" border size="small">
         <el-table-column prop="id" label="ID" width="60" />
-        <el-table-column prop="username" :label="$t('auto.Teams.21.819767')" min-width="120" />
-        <el-table-column :label="$t('auto.Teams.22.464f3d')" width="140">
+        <el-table-column prop="username" :label="$t('auto.Teams.819767ad')" min-width="120" />
+        <el-table-column :label="$t('auto.Teams.464f3d4e')" width="140">
           <template #default="{ row }">
-            <el-tag v-if="row.role === 'team_admin'" type="warning" size="small">{{ $t('auto.Teams.36.00cd0a') }}</el-tag>
-            <el-tag v-else-if="row.role === 'admin'" type="danger" size="small">{{ $t('auto.Teams.37.fc79d4') }}</el-tag>
+            <el-tag v-if="row.role === 'team_admin'" type="warning" size="small">{{ $t('auto.Teams.00cd0a37') }}</el-tag>
+            <el-tag v-else-if="row.role === 'admin'" type="danger" size="small">{{ $t('auto.Teams.fc79d47e') }}</el-tag>
             <el-tag v-else size="small">{{ row.role }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.Teams.10.3fea7c')" width="80">
+        <el-table-column :label="$t('auto.Teams.3fea7ca7')" width="80">
           <template #default="{ row }">
             <el-tag :type="row.enabled && row.status === 1 ? 'success' : 'info'" size="small">
               {{ row.enabled && row.status === 1 ? '正常' : '禁用' }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.Teams.14.2b6bc0')" width="180" fixed="right">
+        <el-table-column :label="$t('auto.Teams.2b6bc0f2')" width="180" fixed="right">
           <template #default="{ row }">
             <el-button
               v-if="row.role === 'user'"
@@ -187,12 +187,12 @@
               type="warning"
               plain
               @click="setRole(row, 'team_admin')"
-            >{{ $t('auto.Teams.38.8fe415') }}</el-button>
+            >{{ $t('auto.Teams.8fe415bc') }}</el-button>
             <el-button
               v-else-if="row.role === 'team_admin'"
               size="small"
               @click="setRole(row, 'user')"
-            >{{ $t('auto.Teams.39.e7fda1') }}</el-button>
+            >{{ $t('auto.Teams.e7fda1d8') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -309,11 +309,11 @@ const doSave = async () => {
     } else {
       await teamAdminApi.create(payload)
     }
-    ElMessage.success(t('auto.Teams.40.f8dfed'))
+    ElMessage.success(t('auto.Teams.f8dfedcd'))
     dialogVisible.value = false
     await load()
   } catch (e) {
-    ElMessage.error(e?.response?.data?.message || t('auto.Teams.41.6de920'))
+    ElMessage.error(e?.response?.data?.message || t('auto.Teams.6de920b4'))
   } finally {
     saving.value = false
   }
@@ -322,15 +322,15 @@ const doSave = async () => {
 const remove = async (row) => {
   await ElMessageBox.confirm(
     `确认删除团队「${row.name}」？仅空团队可删除（有成员时会被拒绝）；默认团队不可删除。`,
-    t('auto.Teams.42.50eaf9'),
+    t('auto.Teams.50eaf94d'),
     { type: 'warning' }
   )
   try {
     await teamAdminApi.remove(row.id)
-    ElMessage.success(t('auto.Teams.43.5cc232'))
+    ElMessage.success(t('auto.Teams.5cc23262'))
     await load()
   } catch (e) {
-    ElMessage.error(e?.response?.data?.message || t('auto.Teams.44.acf066'))
+    ElMessage.error(e?.response?.data?.message || t('auto.Teams.acf0664a'))
   }
 }
 
@@ -371,10 +371,10 @@ const generateInvite = async () => {
   const teamID = isPlatform.value ? current.value.id : null
   if (isPlatform.value && !teamID) return
   const { value } = await ElMessageBox.prompt(
-    t('auto.Teams.45.0e5c2c'), t('auto.Teams.34.1edb8b'), {
+    t('auto.Teams.0e5c2c1d'), t('auto.Teams.1edb8b29'), {
       inputPlaceholder: '7',
       inputPattern: /^\d*$/,
-      inputErrorMessage: t('auto.Teams.46.de66a2')
+      inputErrorMessage: t('auto.Teams.de66a286')
     }).catch(() => ({ value: null }))
   if (value === null) return
   const days = Number(value) || 0
@@ -386,7 +386,7 @@ const generateInvite = async () => {
     ElMessage.success(`邀请码已生成：${code}`)
     await loadInvites()
   } catch (e) {
-    ElMessage.error(e?.response?.data?.message || t('auto.Teams.47.7f7de8'))
+    ElMessage.error(e?.response?.data?.message || t('auto.Teams.7f7de8a2'))
   }
 }
 
@@ -397,44 +397,44 @@ const disableInvite = async (row) => {
     } else {
       await http.post(`/api/team/invite-codes/${row.id}/disable`)
     }
-    ElMessage.success(t('auto.Teams.48.69b0f6'))
+    ElMessage.success(t('auto.Teams.69b0f684'))
     await loadInvites()
   } catch (e) {
-    ElMessage.error(e?.response?.data?.message || t('auto.Teams.49.5fa802'))
+    ElMessage.error(e?.response?.data?.message || t('auto.Teams.5fa802be'))
   }
 }
 
 const setRole = async (row, role) => {
-  const label = role === 'team_admin' ? t('auto.Teams.38.8fe415') : t('auto.Teams.50.e1394d')
-  await ElMessageBox.confirm(`确认将用户「${row.username}」${label}？`, t('auto.Teams.51.e83a25'), { type: 'warning' })
+  const label = role === 'team_admin' ? t('auto.Teams.8fe415bc') : t('auto.Teams.e1394dd3')
+  await ElMessageBox.confirm(`确认将用户「${row.username}」${label}？`, t('auto.Teams.e83a256e'), { type: 'warning' })
   try {
     if (isPlatform.value) {
       await teamAdminApi.setMemberRole(current.value.id, row.id, role)
     } else {
       await myTeamApi.setMemberRole(row.id, role)
     }
-    ElMessage.success(t('auto.Teams.52.1b9209'))
+    ElMessage.success(t('auto.Teams.1b92092d'))
     await loadMembers()
     if (!isPlatform.value) await load()
   } catch (e) {
-    ElMessage.error(e?.response?.data?.message || t('auto.Teams.49.5fa802'))
+    ElMessage.error(e?.response?.data?.message || t('auto.Teams.5fa802be'))
   }
 }
 
 const doMove = async () => {
   const uid = Number(moveUserId.value)
   if (!uid) {
-    ElMessage.warning(t('auto.Teams.53.db6704'))
+    ElMessage.warning(t('auto.Teams.db670474'))
     return
   }
   moving.value = true
   try {
     await teamAdminApi.moveMember(current.value.id, uid)
-    ElMessage.success(t('auto.Teams.54.eb55d7'))
+    ElMessage.success(t('auto.Teams.eb55d76c'))
     moveUserId.value = ''
     await loadMembers()
   } catch (e) {
-    ElMessage.error(e?.response?.data?.message || t('auto.Teams.55.c63bd0'))
+    ElMessage.error(e?.response?.data?.message || t('auto.Teams.c63bd074'))
   } finally {
     moving.value = false
   }

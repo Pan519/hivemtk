@@ -4,7 +4,7 @@
       <div class="error-code">404</div>
       <div class="error-message">
         <h1>{{ $t('页面不存在') }}</h1>
-        <p>{{ $t('auto.NotFound.1.7eb477') }}</p>
+        <p>{{ $t('auto.NotFound.7eb47786') }}</p>
         <el-button type="primary" @click="goBack">
           <el-icon><ArrowLeft /></el-icon>
           {{ $t('返回上一页') }}

@@ -5,10 +5,10 @@
       <div class="page-header">
         <div class="header-text">
           <h2>{{ $t('线索统计') }}</h2>
-          <p class="subtitle">{{ $t('auto.Statistics.11.f82d51') }}</p>
+          <p class="subtitle">{{ $t('auto.Statistics.f82d51af') }}</p>
         </div>
         <div class="header-actions">
-          <el-select v-model="dateRange" type="daterange" :range-separator="$t('auto.Statistics.1.981cbe')" :start-placeholder="$t('auto.Statistics.2.a3e3b8')" :end-placeholder="$t('auto.Statistics.3.12f1d7')" value-format="YYYY-MM-DD" style="width: 280px" @change="fetchAll" />
+          <el-select v-model="dateRange" type="daterange" :range-separator="$t('auto.Statistics.981cbe31')" :start-placeholder="$t('auto.Statistics.a3e3b883')" :end-placeholder="$t('auto.Statistics.12f1d7ef')" value-format="YYYY-MM-DD" style="width: 280px" @change="fetchAll" />
           <el-button @click="fetchAll">
             <el-icon><Refresh /></el-icon>刷新
           </el-button>
@@ -24,7 +24,7 @@
             <el-icon :size="22"><DataLine /></el-icon>
           </div>
           <div class="stat-body">
-            <div class="stat-label">{{ $t('auto.Statistics.12.fa01bc') }}</div>
+            <div class="stat-label">{{ $t('auto.Statistics.fa01bc43') }}</div>
             <div class="stat-value">{{ summary.total || 0 }}</div>
           </div>
         </el-card>
@@ -35,7 +35,7 @@
             <el-icon :size="22"><CircleCheck /></el-icon>
           </div>
           <div class="stat-body">
-            <div class="stat-label">{{ $t('auto.Statistics.7.876caf') }}</div>
+            <div class="stat-label">{{ $t('auto.Statistics.876caf44') }}</div>
             <div class="stat-value">{{ summary.verified || 0 }}</div>
             <div class="stat-extra">验证率 {{ summary.verifyRate || 0 }}%</div>
           </div>
@@ -47,7 +47,7 @@
             <el-icon :size="22"><Warning /></el-icon>
           </div>
           <div class="stat-body">
-            <div class="stat-label">{{ $t('auto.Statistics.8.b928ea') }}</div>
+            <div class="stat-label">{{ $t('auto.Statistics.b928ea24') }}</div>
             <div class="stat-value">{{ summary.unverified || 0 }}</div>
           </div>
         </el-card>
@@ -58,7 +58,7 @@
             <el-icon :size="22"><Plus /></el-icon>
           </div>
           <div class="stat-body">
-            <div class="stat-label">{{ $t('auto.Statistics.13.b42e42') }}</div>
+            <div class="stat-label">{{ $t('auto.Statistics.b42e4297') }}</div>
             <div class="stat-value">{{ summary.thisMonth || 0 }}</div>
           </div>
         </el-card>
@@ -71,10 +71,10 @@
         <el-card class="chart-card" shadow="never">
           <template #header>
             <div class="card-header">
-              <span>{{ $t('auto.Statistics.14.a5bd88') }}</span>
+              <span>{{ $t('auto.Statistics.a5bd8810') }}</span>
               <el-radio-group v-model="trendType" size="small" @change="renderTrend">
-                <el-radio-button label="line">{{ $t('auto.Statistics.15.0beb47') }}</el-radio-button>
-                <el-radio-button label="bar">{{ $t('auto.Statistics.16.f7fedc') }}</el-radio-button>
+                <el-radio-button label="line">{{ $t('auto.Statistics.0beb478b') }}</el-radio-button>
+                <el-radio-button label="bar">{{ $t('auto.Statistics.f7fedcd0') }}</el-radio-button>
               </el-radio-group>
             </div>
           </template>
@@ -84,7 +84,7 @@
       <el-col :xs="24" :lg="10">
         <el-card class="chart-card" shadow="never">
           <template #header>
-            <span>{{ $t('auto.Statistics.17.c55647') }}</span>
+            <span>{{ $t('auto.Statistics.c5564732') }}</span>
           </template>
           <div ref="sourceRef" class="chart-box"></div>
         </el-card>
@@ -95,7 +95,7 @@
       <el-col :xs="24" :lg="12">
         <el-card class="chart-card" shadow="never">
           <template #header>
-            <span>{{ $t('auto.Statistics.18.d6bcd9') }}</span>
+            <span>{{ $t('auto.Statistics.d6bcd913') }}</span>
           </template>
           <div ref="typeRef" class="chart-box"></div>
         </el-card>
@@ -103,7 +103,7 @@
       <el-col :xs="24" :lg="12">
         <el-card class="chart-card" shadow="never">
           <template #header>
-            <span>{{ $t('auto.Statistics.19.2702b7') }}</span>
+            <span>{{ $t('auto.Statistics.2702b750') }}</span>
           </template>
           <div ref="verifyRef" class="chart-box"></div>
         </el-card>
@@ -113,20 +113,20 @@
     
     <el-card class="table-card" shadow="never">
       <template #header>
-        <span>{{ $t('auto.Statistics.20.1da4cb') }}</span>
+        <span>{{ $t('auto.Statistics.1da4cbf0') }}</span>
       </template>
-      <el-table :data="typeStats" v-loading="loading" stripe ::empty-text="$t('auto.Statistics.4.16c826')">
-        <el-table-column prop="type" :label="$t('auto.Statistics.5.1cc291')" min-width="140">
+      <el-table :data="typeStats" v-loading="loading" stripe ::empty-text="$t('auto.Statistics.16c826cd')">
+        <el-table-column prop="type" :label="$t('auto.Statistics.1cc291d3')" min-width="140">
           <template #default="{ row }">
             <el-tag size="small">{{ getClueType(row.type) }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="total" :label="$t('auto.Statistics.6.9ed7d3')" min-width="100" align="center" />
-        <el-table-column prop="verify_total" :label="$t('auto.Statistics.7.876caf')" min-width="100" align="center" />
-        <el-table-column prop="unverified" :label="$t('auto.Statistics.8.b928ea')" min-width="100" align="center">
+        <el-table-column prop="total" :label="$t('auto.Statistics.9ed7d3ad')" min-width="100" align="center" />
+        <el-table-column prop="verify_total" :label="$t('auto.Statistics.876caf44')" min-width="100" align="center" />
+        <el-table-column prop="unverified" :label="$t('auto.Statistics.b928ea24')" min-width="100" align="center">
           <template #default="{ row }">{{ (row.total || 0) - (row.verify_total || 0) }}</template>
         </el-table-column>
-        <el-table-column :label="$t('auto.Statistics.9.ea53fd')" min-width="220">
+        <el-table-column :label="$t('auto.Statistics.ea53fdf7')" min-width="220">
           <template #default="{ row }">
             <el-progress
               :percentage="row.total ? Math.round(((row.verify_total || 0) * 1000) / row.total) / 10 : 0"
@@ -135,7 +135,7 @@
             />
           </template>
         </el-table-column>
-        <el-table-column prop="today" :label="$t('auto.Statistics.10.b29a54')" min-width="100" align="center" />
+        <el-table-column prop="today" :label="$t('auto.Statistics.b29a54ea')" min-width="100" align="center" />
       </el-table>
     </el-card>
   </div>
@@ -201,7 +201,7 @@ const fetchAll = async () => {
     await nextTick()
     renderAll()
   } catch (e) {
-    ElMessage.warning(t('auto.Statistics.21.a48d14'))
+    ElMessage.warning(t('auto.Statistics.a48d1444'))
     summary.value = { total: 0, verified: 0, unverified: 0, verifyRate: 0, thisMonth: 0 }
     typeStats.value = []
     sourceStats.value = []
@@ -331,8 +331,8 @@ const renderVerify = () => {
         type: 'pie',
         radius: ['40%', '70%'],
         data: [
-          { name: t('auto.Statistics.7.876caf'), value: verified, itemStyle: { color: '#10B981' } },
-          { name: t('auto.Statistics.8.b928ea'), value: unverified, itemStyle: { color: '#F59E0B' } }
+          { name: t('auto.Statistics.876caf44'), value: verified, itemStyle: { color: '#10B981' } },
+          { name: t('auto.Statistics.b928ea24'), value: unverified, itemStyle: { color: '#F59E0B' } }
         ],
         label: { formatter: '{b}\n{d}%' }
       }

@@ -9,15 +9,15 @@
             <el-date-picker
               v-model="dateRange"
               type="daterange"
-              :range-separator="$t('auto.CardStats.1.981cbe')"
-              :start-placeholder="$t('auto.CardStats.2.b44c0f')"
-              :end-placeholder="$t('auto.CardStats.3.1d468b')"
+              :range-separator="$t('auto.CardStats.981cbe31')"
+              :start-placeholder="$t('auto.CardStats.b44c0f33')"
+              :end-placeholder="$t('auto.CardStats.1d468be9')"
               @change="handleDateChange"
             />
-            <el-select v-model="groupBy" ::placeholder="$t('auto.CardStats.4.bf8db0')" @change="handleGroupByChange">
-              <el-option ::label="$t('auto.CardStats.5.4eb3b0')" value="day" />
-              <el-option ::label="$t('auto.CardStats.6.787456')" value="week" />
-              <el-option ::label="$t('auto.CardStats.7.31019b')" value="month" />
+            <el-select v-model="groupBy" ::placeholder="$t('auto.CardStats.bf8db0fe')" @change="handleGroupByChange">
+              <el-option ::label="$t('auto.CardStats.4eb3b00e')" value="day" />
+              <el-option ::label="$t('auto.CardStats.7874566d')" value="week" />
+              <el-option ::label="$t('auto.CardStats.31019b33')" value="month" />
             </el-select>
             <el-button type="primary" @click="refreshData">{{ $t('刷新') }}</el-button>
           </div>
@@ -37,15 +37,15 @@
           </el-col>
           <el-col :span="18">
             <el-descriptions :column="2" border>
-              <el-descriptions-item :label="$t('auto.CardStats.8.883016')">{{ cardInfo.id }}</el-descriptions-item>
-              <el-descriptions-item :label="$t('auto.CardStats.9.32c65d')">{{ cardInfo.title }}</el-descriptions-item>
-              <el-descriptions-item :label="$t('auto.CardStats.10.3fea7c')">
+              <el-descriptions-item :label="$t('auto.CardStats.8830162c')">{{ cardInfo.id }}</el-descriptions-item>
+              <el-descriptions-item :label="$t('auto.CardStats.32c65d8d')">{{ cardInfo.title }}</el-descriptions-item>
+              <el-descriptions-item :label="$t('auto.CardStats.3fea7ca7')">
                 <el-tag :type="cardInfo.is_active ? 'success' : 'danger'">
                   {{ cardInfo.is_active ? '激活' : '禁用' }}
                 </el-tag>
               </el-descriptions-item>
-              <el-descriptions-item :label="$t('auto.CardStats.11.eca37c')">{{ cardInfo.created_at }}</el-descriptions-item>
-              <el-descriptions-item :label="$t('auto.CardStats.12.3bdd08')" :span="2">{{ cardInfo.description }}</el-descriptions-item>
+              <el-descriptions-item :label="$t('auto.CardStats.eca37cb0')">{{ cardInfo.created_at }}</el-descriptions-item>
+              <el-descriptions-item :label="$t('auto.CardStats.3bdd08ad')" :span="2">{{ cardInfo.description }}</el-descriptions-item>
             </el-descriptions>
           </el-col>
         </el-row>
@@ -58,7 +58,7 @@
             <el-card class="stats-card">
               <div class="stats-item">
                 <div class="stats-value">{{ formatNumber(cardStats.viewCount) }}</div>
-                <div class="stats-label">{{ $t('auto.CardStats.17.7e6ff5') }}</div>
+                <div class="stats-label">{{ $t('auto.CardStats.7e6ff5a0') }}</div>
               </div>
             </el-card>
           </el-col>
@@ -72,7 +72,7 @@
             <el-card>
               <template #header>
                 <div class="card-header">
-                  <span>{{ $t('auto.CardStats.18.8205ea') }}</span>
+                  <span>{{ $t('auto.CardStats.8205ea14') }}</span>
                 </div>
               </template>
               <div ref="visitTrendChart" class="chart-container"></div>
@@ -88,20 +88,20 @@
             <el-card>
               <template #header>
                 <div class="card-header">
-                  <span>{{ $t('auto.CardStats.19.73378a') }}</span>
+                  <span>{{ $t('auto.CardStats.73378a1f') }}</span>
                 </div>
               </template>
               <el-table :data="(cardStats.recentActivity || []).filter(item => item.action === 'view')" style="width: 100%">
-                <el-table-column prop="username" :label="$t('auto.CardStats.13.1fd02a')" />
-                <el-table-column prop="action" :label="$t('auto.CardStats.14.2b6bc0')">
+                <el-table-column prop="username" :label="$t('auto.CardStats.1fd02a90')" />
+                <el-table-column prop="action" :label="$t('auto.CardStats.2b6bc0f2')">
                   <template #default="scope">
                     <el-tag :type="getActionType(scope.row.action)">
                       {{ getActionText(scope.row.action) }}
                     </el-tag>
                   </template>
                 </el-table-column>
-                <el-table-column prop="ip_address" :label="$t('auto.CardStats.15.2dc910')" />
-                <el-table-column prop="created_at" :label="$t('auto.CardStats.16.19fcb9')">
+                <el-table-column prop="ip_address" :label="$t('auto.CardStats.2dc9105c')" />
+                <el-table-column prop="created_at" :label="$t('auto.CardStats.19fcb9eb')">
                   <template #default="scope">
                     {{ formatDate(scope.row.created_at) }}
                   </template>
@@ -153,7 +153,7 @@ const fetchCardInfo = async () => {
     const res = await getDouyinCard(cardId.value)
     cardInfo.value = res;
   } catch (error) {
-    ElMessage.error(i18n.global.t(t('auto.CardStats.20.eea2ec')))
+    ElMessage.error(i18n.global.t(t('auto.CardStats.eea2ec18')))
     console.error(error)
   }
 };
@@ -177,7 +177,7 @@ const fetchCardStats = async () => {
       updateCharts()
     });
   } catch (error) {
-    ElMessage.error(i18n.global.t(t('auto.CardStats.21.063dc7')))
+    ElMessage.error(i18n.global.t(t('auto.CardStats.063dc79a')))
     console.error(error)
   } finally {
     loading.value = false
@@ -192,7 +192,7 @@ const updateCharts = () => {
   visitChartInstance = safeInit(visitTrendChart.value)
   const visitOption = {
     title: {
-      text: t('auto.CardStats.22.771eef'),
+      text: t('auto.CardStats.771eefa9'),
       left: 'center'
     },
     tooltip: {
@@ -207,7 +207,7 @@ const updateCharts = () => {
     },
     series: [
       {
-        name: t('auto.CardStats.23.88bc4d'),
+        name: t('auto.CardStats.88bc4d7a'),
         type: 'line',
         data: (cardStats.dailyStats || []).map(item => item.view),
         smooth: true
@@ -266,7 +266,7 @@ const getActionType = (action) => {
 
 const getActionText = (action) => {
   const actionMap = {
-    view: t('auto.CardStats.24.9c5c5c')
+    view: t('auto.CardStats.9c5c5cdb')
   }
   return actionMap[action] || action
 };

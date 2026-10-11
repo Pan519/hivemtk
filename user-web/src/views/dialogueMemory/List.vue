@@ -5,7 +5,7 @@
       <div class="header-content">
         <div>
           <h2>{{ $t('对话记忆') }}</h2>
-          <p class="subtitle">{{ $t('auto.List.23.cb3995') }}</p>
+          <p class="subtitle">{{ $t('auto.List.cb399555') }}</p>
         </div>
         <div class="header-actions">
           <el-button @click="refreshAll" :loading="loading">
@@ -52,7 +52,7 @@
           <div class="header-controls">
             <el-input
               v-model="filterCustomerID"
-              ::placeholder="$t('auto.List.1.ca3542')"
+              ::placeholder="$t('auto.List.ca35429c')"
               clearable
               size="small"
               style="width: 200px"
@@ -64,7 +64,7 @@
         </div>
       </template>
       <el-table :data="memoryList" v-loading="listLoading" stripe>
-        <el-table-column :label="$t('auto.List.2.ff0b20')" min-width="160">
+        <el-table-column :label="$t('auto.List.ff0b2077')" min-width="160">
           <template #default="{ row }">
             <div class="customer-cell">
               <span class="customer-name">{{ row.customer_name || row.customer_id || '-' }}</span>
@@ -72,38 +72,38 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.3.ce092e')" width="100">
+        <el-table-column :label="$t('auto.List.ce092ef3')" width="100">
           <template #default="{ row }">
             <el-tag :type="getIntentType(row.intent_level || row.purchase_intent)" size="small">
               {{ getIntentLabel(row.intent_level || row.purchase_intent) }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.4.342cea')" width="90" align="center">
+        <el-table-column :label="$t('auto.List.342ceac9')" width="90" align="center">
           <template #default="{ row }">{{ row.message_count || 0 }}</template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.5.19b1dc')" width="90" align="center">
+        <el-table-column :label="$t('auto.List.19b1dcbd')" width="90" align="center">
           <template #default="{ row }">{{ (row.objections || []).length }}</template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.6.507e6a')" width="90" align="center">
+        <el-table-column :label="$t('auto.List.507e6a9e')" width="90" align="center">
           <template #default="{ row }">
             <el-tag size="small" effect="plain">{{ keyFactsCount(row.key_facts) }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.7.6a07e0')" width="90" align="center">
+        <el-table-column :label="$t('auto.List.6a07e0de')" width="90" align="center">
           <template #default="{ row }">{{ (row.sop_history || []).length }}</template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.8.7f2846')" width="160">
+        <el-table-column :label="$t('auto.List.7f2846ef')" width="160">
           <template #default="{ row }">{{ formatTime(row.last_active_at || row.updated_at) }}</template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.9.2b6bc0')" width="160" fixed="right">
+        <el-table-column :label="$t('auto.List.2b6bc0f2')" width="160" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" size="small" @click="viewDetail(row)">{{ $t('auto.List.24.fddda3') }}</el-button>
-            <el-button link type="success" size="small" @click="buildContext(row)">{{ $t('auto.List.25.d956fe') }}</el-button>
+            <el-button link type="primary" size="small" @click="viewDetail(row)">{{ $t('auto.List.fddda381') }}</el-button>
+            <el-button link type="success" size="small" @click="buildContext(row)">{{ $t('auto.List.d956fe85') }}</el-button>
           </template>
         </el-table-column>
         <template #empty>
-          <el-empty :description="$t('auto.List.10.85149b')" />
+          <el-empty :description="$t('auto.List.85149b0c')" />
         </template>
       </el-table>
       <div class="pagination-container" v-if="pagination.total > 0">
@@ -124,20 +124,20 @@
          Vue 每次渲染都报 "Runtime directive used on component with non-element root node"），
          且它从声明起就从未被赋 true，是死状态。弹窗内的短消息/长期记忆分区各自有
          shortLoading / longLoading 转圈，删掉不影响任何可见行为。 -->
-    <el-dialog v-model="detailVisible" :title="$t('auto.List.11.f9b256')" width="920px" top="5vh">
+    <el-dialog v-model="detailVisible" :title="$t('auto.List.f9b25632')" width="920px" top="5vh">
       <template v-if="currentMemory">
         
         <el-descriptions :column="3" border size="small">
-          <el-descriptions-item :label="$t('auto.List.12.3f61de')">{{ currentMemory.customer_id || '-' }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.13.79559f')">{{ currentMemory.customer_name || '-' }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.3.ce092e')">
+          <el-descriptions-item :label="$t('auto.List.3f61dec5')">{{ currentMemory.customer_id || '-' }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.79559f4b')">{{ currentMemory.customer_name || '-' }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.ce092ef3')">
             <el-tag :type="getIntentType(currentMemory.intent_level || currentMemory.purchase_intent)" size="small">
               {{ getIntentLabel(currentMemory.intent_level || currentMemory.purchase_intent) }}
             </el-tag>
           </el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.4.342cea')">{{ currentMemory.message_count || 0 }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.5.19b1dc')">{{ (currentMemory.objections || []).length }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.8.7f2846')">{{ formatTime(currentMemory.last_active_at || currentMemory.updated_at) }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.342ceac9')">{{ currentMemory.message_count || 0 }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.19b1dcbd')">{{ (currentMemory.objections || []).length }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.7f2846ef')">{{ formatTime(currentMemory.last_active_at || currentMemory.updated_at) }}</el-descriptions-item>
         </el-descriptions>
 
         <div class="context-bar">
@@ -150,14 +150,14 @@
             type="textarea"
             :rows="4"
             readonly
-            :placeholder="$t('auto.List.14.65e5d2')"
+            :placeholder="$t('auto.List.65e5d282')"
             class="context-text"
           />
         </div>
 
         <el-tabs v-model="activeTab" class="detail-tabs">
           
-          <el-tab-pane :label="$t('auto.List.15.3932ef')" name="short">
+          <el-tab-pane :label="$t('auto.List.3932efb8')" name="short">
             <div class="message-stream" v-loading="shortLoading">
               <template v-if="shortMessages.length">
                 <div v-for="(msg, idx) in shortMessages" :key="idx" :class="['message-item', msg.role]">
@@ -172,22 +172,22 @@
                   </div>
                 </div>
               </template>
-              <el-empty v-else :description="$t('auto.List.16.2f0723')" :image-size="80" />
+              <el-empty v-else :description="$t('auto.List.2f0723b1')" :image-size="80" />
             </div>
           </el-tab-pane>
 
           
-          <el-tab-pane :label="$t('auto.List.17.de49f7')" name="long">
+          <el-tab-pane :label="$t('auto.List.de49f7bf')" name="long">
             <div v-loading="longLoading">
               <template v-if="longTermText">
                 <el-alert :title="longTermText" type="info" :closable="false" show-icon />
               </template>
-              <el-empty v-else :description="$t('auto.List.18.40bdff')" :image-size="80" />
+              <el-empty v-else :description="$t('auto.List.40bdffd4')" :image-size="80" />
             </div>
           </el-tab-pane>
 
           
-          <el-tab-pane :label="$t('auto.List.6.507e6a')" name="facts">
+          <el-tab-pane :label="$t('auto.List.507e6a9e')" name="facts">
             <template v-if="keyFactsList.length">
               <el-descriptions :column="2" border size="small">
                 <el-descriptions-item v-for="item in keyFactsList" :key="item.key" :label="item.key">
@@ -195,7 +195,7 @@
                 </el-descriptions-item>
               </el-descriptions>
             </template>
-            <el-empty v-else :description="$t('auto.List.19.2e89e2')" :image-size="80" />
+            <el-empty v-else :description="$t('auto.List.2e89e2f5')" :image-size="80" />
           </el-tab-pane>
 
           
@@ -213,23 +213,23 @@
                 </el-timeline-item>
               </el-timeline>
             </template>
-            <el-empty v-else :description="$t('auto.List.20.c0974a')" :image-size="80" />
+            <el-empty v-else :description="$t('auto.List.c0974a9d')" :image-size="80" />
           </el-tab-pane>
 
           
-          <el-tab-pane :label="$t('auto.List.3.ce092e')" name="purchase">
+          <el-tab-pane :label="$t('auto.List.ce092ef3')" name="purchase">
             <div class="intent-block">
               <div class="intent-current">
-                <span class="label">{{ $t('auto.List.26.507a08') }}</span>
+                <span class="label">{{ $t('auto.List.507a08c7') }}</span>
                 <el-tag :type="getIntentType(currentMemory.intent_level || currentMemory.purchase_intent)" size="large">
                   {{ getIntentLabel(currentMemory.intent_level || currentMemory.purchase_intent) }}
                 </el-tag>
               </div>
-              <el-divider content-position="left">{{ $t('auto.List.27.98003c') }}</el-divider>
+              <el-divider content-position="left">{{ $t('auto.List.98003c87') }}</el-divider>
               <el-radio-group v-model="intentLevel" @change="updateIntent">
-                <el-radio-button value="high">{{ $t('auto.List.28.2601e2') }}</el-radio-button>
-                <el-radio-button value="medium">{{ $t('auto.List.29.af4713') }}</el-radio-button>
-                <el-radio-button value="low">{{ $t('auto.List.30.b20283') }}</el-radio-button>
+                <el-radio-button value="high">{{ $t('auto.List.2601e297') }}</el-radio-button>
+                <el-radio-button value="medium">{{ $t('auto.List.af47139e') }}</el-radio-button>
+                <el-radio-button value="low">{{ $t('auto.List.b202837c') }}</el-radio-button>
               </el-radio-group>
             </div>
           </el-tab-pane>
@@ -250,7 +250,7 @@
                 </el-tag>
               </div>
             </template>
-            <el-empty v-else :description="$t('auto.List.21.727aad')" :image-size="80" />
+            <el-empty v-else :description="$t('auto.List.727aad8b')" :image-size="80" />
           </el-tab-pane>
 
           
@@ -267,7 +267,7 @@
                 </el-timeline-item>
               </el-timeline>
             </template>
-            <el-empty v-else :description="$t('auto.List.22.53f73b')" :image-size="80" />
+            <el-empty v-else :description="$t('auto.List.53f73bba')" :image-size="80" />
           </el-tab-pane>
         </el-tabs>
       </template>
@@ -338,8 +338,8 @@ const getIntentType = (level) => {
 }
 
 const getIntentLabel = (level) => {
-  const map = { high: t('auto.List.28.2601e2'), medium: t('auto.List.29.af4713'), low: t('auto.List.30.b20283') }
-  return map[level] || t('auto.List.31.0ebf4f')
+  const map = { high: t('auto.List.2601e297'), medium: t('auto.List.af47139e'), low: t('auto.List.b202837c') }
+  return map[level] || t('auto.List.0ebf4ff5')
 }
 
 const getIntentTagType = (type) => {
@@ -353,13 +353,13 @@ const getIntentTagType = (type) => {
 
 const getIntentName = (type) => {
   const map = {
-    price_inquiry: t('auto.List.32.be446c'), purchase: t('auto.List.3.ce092e'),
-    objection_price: t('auto.List.33.6347cc'), objection_need: t('auto.List.34.01b833'),
-    objection_trust: t('auto.List.35.62d02b'), objection_competitor: t('auto.List.36.8180b6'),
-    objection_timing: t('auto.List.37.4742a9'), ask_product: t('auto.List.38.516a44'),
-    ask_service: t('auto.List.39.62588a'), after_sale: t('auto.List.40.ab76fc'),
-    churn: t('auto.List.41.b0be74'), social: t('auto.List.42.7a0b74'), greeting: t('auto.List.43.3f7b30'),
-    complaint: t('auto.List.44.e19d1d'), unknown: t('auto.List.45.1622dc')
+    price_inquiry: t('auto.List.be446cfe'), purchase: t('auto.List.ce092ef3'),
+    objection_price: t('auto.List.6347cc6c'), objection_need: t('auto.List.01b833c2'),
+    objection_trust: t('auto.List.62d02b6a'), objection_competitor: t('auto.List.8180b6b4'),
+    objection_timing: t('auto.List.4742a993'), ask_product: t('auto.List.516a448c'),
+    ask_service: t('auto.List.62588a03'), after_sale: t('auto.List.ab76fcea'),
+    churn: t('auto.List.b0be7490'), social: t('auto.List.7a0b7413'), greeting: t('auto.List.3f7b3053'),
+    complaint: t('auto.List.e19d1d1a'), unknown: t('auto.List.1622dc9b')
   }
   return map[type] || type
 }
@@ -371,10 +371,10 @@ const getRoleType = (role) => {
 }
 
 const getRoleLabel = (role) => {
-  if (role === 'user' || role === 'customer') return t('auto.List.2.ff0b20')
+  if (role === 'user' || role === 'customer') return t('auto.List.ff0b2077')
   if (role === 'assistant' || role === 'ai' || role === 'bot') return 'AI'
-  if (role === 'system') return t('auto.List.46.8a8b89')
-  return role || t('auto.List.45.1622dc')
+  if (role === 'system') return t('auto.List.8a8b895f')
+  return role || t('auto.List.1622dc9b')
 }
 
 const formatTime = (t) => {
@@ -402,7 +402,7 @@ const loadList = async () => {
     memoryList.value = res?.list || [];
     pagination.value.total = res?.total || 0
   } catch (e) {
-    ElMessage.error(t('auto.List.47.94ca59') + (e.message || t('auto.List.48.974e74')))
+    ElMessage.error(t('auto.List.94ca5958') + (e.message || t('auto.List.974e7484')))
   } finally {
     listLoading.value = false
   }
@@ -437,7 +437,7 @@ const loadShortMessages = async (customerId) => {
     const res = await memoryApi.getShortTerm({ customer_id: customerId, limit: 50 })
     shortMessages.value = Array.isArray(res) ? res : (res?.list || (res?.messages || []))
   } catch (e) {
-    ElMessage.error(t('auto.List.49.667534') + (e.message || t('auto.List.48.974e74')))
+    ElMessage.error(t('auto.List.667534fc') + (e.message || t('auto.List.974e7484')))
     shortMessages.value = []
   } finally {
     shortLoading.value = false
@@ -462,7 +462,7 @@ const loadLongTerm = async (customerId) => {
       longTermText.value = res?.long_term_summary || ''
     }
   } catch (e) {
-    ElMessage.error(t('auto.List.50.b871d6') + (e.message || t('auto.List.48.974e74')))
+    ElMessage.error(t('auto.List.b871d6a4') + (e.message || t('auto.List.974e7484')))
     longTermText.value = ''
   } finally {
     longLoading.value = false
@@ -471,7 +471,7 @@ const loadLongTerm = async (customerId) => {
 
 const buildContext = async (row) => {
   if (!row?.customer_id) {
-    ElMessage.warning(i18n.global.t(t('auto.List.51.330056')))
+    ElMessage.warning(i18n.global.t(t('auto.List.3300566c')))
     return
   }
   contextLoading.value = true
@@ -482,9 +482,9 @@ const buildContext = async (row) => {
     } else {
       contextText.value = JSON.stringify(res, null, 2)
     }
-    ElMessage.success(i18n.global.t(t('auto.List.52.cb7059')))
+    ElMessage.success(i18n.global.t(t('auto.List.cb70593c')))
   } catch (e) {
-    ElMessage.error(t('auto.List.53.0f2820') + (e.message || t('auto.List.48.974e74')))
+    ElMessage.error(t('auto.List.0f282066') + (e.message || t('auto.List.974e7484')))
   } finally {
     contextLoading.value = false
   }
@@ -492,7 +492,7 @@ const buildContext = async (row) => {
 
 const updateIntent = async (level) => {
   if (!currentMemory.value?.customer_id) {
-    ElMessage.warning(i18n.global.t(t('auto.List.51.330056')))
+    ElMessage.warning(i18n.global.t(t('auto.List.3300566c')))
     return
   }
   try {
@@ -502,10 +502,10 @@ const updateIntent = async (level) => {
     })
     currentMemory.value.intent_level = level
     currentMemory.value.purchase_intent = level
-    ElMessage.success(i18n.global.t(t('auto.List.54.11da4e')))
+    ElMessage.success(i18n.global.t(t('auto.List.11da4e6b')))
     loadList()
   } catch (e) {
-    ElMessage.error(t('auto.List.55.87ef41') + (e.message || t('auto.List.48.974e74')))
+    ElMessage.error(t('auto.List.87ef41fc') + (e.message || t('auto.List.974e7484')))
   }
 }
 

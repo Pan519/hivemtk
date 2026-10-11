@@ -54,19 +54,19 @@
 
     <el-card>
       <div class="filter-bar">
-        <el-input v-model="searchKeyword" ::placeholder="$t('auto.List.1.f5230c')" clearable style="width: 220px" />
-        <el-select v-model="filterRisk" ::placeholder="$t('auto.List.2.4a708d')" clearable style="width: 150px">
-          <el-option ::label="$t('auto.List.3.b85811')" value="high" />
-          <el-option ::label="$t('auto.List.4.bd9256')" value="medium" />
-          <el-option ::label="$t('auto.List.5.c81e7d')" value="low" />
-          <el-option ::label="$t('auto.List.6.60a04b')" value="none" />
+        <el-input v-model="searchKeyword" ::placeholder="$t('auto.List.f5230ca0')" clearable style="width: 220px" />
+        <el-select v-model="filterRisk" ::placeholder="$t('auto.List.4a708dbe')" clearable style="width: 150px">
+          <el-option ::label="$t('auto.List.b85811ac')" value="high" />
+          <el-option ::label="$t('auto.List.bd9256ac')" value="medium" />
+          <el-option ::label="$t('auto.List.c81e7dbe')" value="low" />
+          <el-option ::label="$t('auto.List.60a04b41')" value="none" />
         </el-select>
         <el-date-picker
           v-model="dateRange"
           type="daterange"
-          :range-separator="$t('auto.List.7.981cbe')"
-          :start-placeholder="$t('auto.List.8.b44c0f')"
-          :end-placeholder="$t('auto.List.9.1d468b')"
+          :range-separator="$t('auto.List.981cbe31')"
+          :start-placeholder="$t('auto.List.b44c0f33')"
+          :end-placeholder="$t('auto.List.1d468be9')"
           value-format="YYYY-MM-DD"
         />
         <el-button @click="loadData">
@@ -77,52 +77,52 @@
 
       <el-table :data="filteredAudits" v-loading="loading" stripe>
         <el-table-column prop="id" label="ID" width="80" />
-        <el-table-column prop="audit_name" ::label="$t('auto.List.10.3ff797')" min-width="180" show-overflow-tooltip />
-        <el-table-column prop="risk_level" ::label="$t('auto.List.2.4a708d')" width="110" align="center">
+        <el-table-column prop="audit_name" ::label="$t('auto.List.3ff797d8')" min-width="180" show-overflow-tooltip />
+        <el-table-column prop="risk_level" ::label="$t('auto.List.4a708dbe')" width="110" align="center">
           <template #default="{ row }">
             <el-tag :type="getRiskType(row.risk_level)" size="small">
               {{ getRiskText(row.risk_level) }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="total_checks" :label="$t('auto.List.11.b71f3e')" width="100" align="center" />
-        <el-table-column prop="passed" :label="$t('auto.List.12.23c1f3')" width="90" align="center">
+        <el-table-column prop="total_checks" :label="$t('auto.List.b71f3e5d')" width="100" align="center" />
+        <el-table-column prop="passed" :label="$t('auto.List.23c1f399')" width="90" align="center">
           <template #default="{ row }">
             <span class="pass-count">{{ row.passed || 0 }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="failed" :label="$t('auto.List.13.acd5cb')" width="90" align="center">
+        <el-table-column prop="failed" :label="$t('auto.List.acd5cb84')" width="90" align="center">
           <template #default="{ row }">
             <span class="fail-count">{{ row.failed || 0 }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="warnings" :label="$t('auto.List.14.900c70')" width="90" align="center">
+        <el-table-column prop="warnings" :label="$t('auto.List.900c70fa')" width="90" align="center">
           <template #default="{ row }">
             <span class="warn-count">{{ row.warnings || 0 }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="score" :label="$t('auto.List.15.108db1')" width="100" align="center">
+        <el-table-column prop="score" :label="$t('auto.List.108db12e')" width="100" align="center">
           <template #default="{ row }">
             <span :class="getScoreClass(row.score)">{{ row.score ?? '-' }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="started_at" :label="$t('auto.List.16.592c59')" min-width="170">
+        <el-table-column prop="started_at" :label="$t('auto.List.592c5958')" min-width="170">
           <template #default="{ row }">
             {{ formatTime(row.started_at) }}
           </template>
         </el-table-column>
-        <el-table-column prop="finished_at" :label="$t('auto.List.17.7cbadb')" min-width="170">
+        <el-table-column prop="finished_at" :label="$t('auto.List.7cbadbbe')" min-width="170">
           <template #default="{ row }">
             {{ formatTime(row.finished_at) }}
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.18.2b6bc0')" width="100" fixed="right">
+        <el-table-column :label="$t('auto.List.2b6bc0f2')" width="100" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" @click="viewDetail(row)">{{ $t('auto.List.30.f26225') }}</el-button>
+            <el-button link type="primary" @click="viewDetail(row)">{{ $t('auto.List.f26225bd') }}</el-button>
           </template>
         </el-table-column>
         <template #empty>
-          <el-empty :description="$t('auto.List.19.79c058')" />
+          <el-empty :description="$t('auto.List.79c05840')" />
         </template>
       </el-table>
 
@@ -139,48 +139,48 @@
     </el-card>
 
     
-    <el-dialog v-model="detailVisible" :title="$t('auto.List.20.3ffbfd')" width="780px">
+    <el-dialog v-model="detailVisible" :title="$t('auto.List.3ffbfd96')" width="780px">
       <div v-if="detailRecord">
         <el-descriptions :column="2" border>
-          <el-descriptions-item :label="$t('auto.List.21.9211b5')">{{ detailRecord.id }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.22.366355')">{{ detailRecord.audit_name }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.23.25eb6b')">
+          <el-descriptions-item :label="$t('auto.List.9211b59b')">{{ detailRecord.id }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.3663554f')">{{ detailRecord.audit_name }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.25eb6ba3')">
             <el-tag :type="getRiskType(detailRecord.risk_level)" size="small">
               {{ getRiskText(detailRecord.risk_level) }}
             </el-tag>
           </el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.15.108db1')">
+          <el-descriptions-item :label="$t('auto.List.108db12e')">
             <span :class="getScoreClass(detailRecord.score)">{{ detailRecord.score ?? '-' }}</span>
           </el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.24.85bfd1')">{{ detailRecord.total_checks || 0 }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.25.bf98ae')">
+          <el-descriptions-item :label="$t('auto.List.85bfd198')">{{ detailRecord.total_checks || 0 }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.bf98aeb0')">
             <span class="pass-count">{{ detailRecord.passed || 0 }}</span> /
             <span class="fail-count">{{ detailRecord.failed || 0 }}</span> /
             <span class="warn-count">{{ detailRecord.warnings || 0 }}</span>
           </el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.16.592c59')">{{ formatTime(detailRecord.started_at) }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.17.7cbadb')">{{ formatTime(detailRecord.finished_at) }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.592c5958')">{{ formatTime(detailRecord.started_at) }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.7cbadbbe')">{{ formatTime(detailRecord.finished_at) }}</el-descriptions-item>
         </el-descriptions>
 
-        <h3 class="section-title">{{ $t('auto.List.31.600adc') }}</h3>
+        <h3 class="section-title">{{ $t('auto.List.600adc3a') }}</h3>
         <el-table :data="detailItems" v-loading="detailLoading" max-height="360" border>
-          <el-table-column prop="name" :label="$t('auto.List.11.b71f3e')" min-width="180" />
-          <el-table-column prop="category" :label="$t('auto.List.26.383a6d')" width="120" />
-          <el-table-column prop="level" :label="$t('auto.List.27.e78e4b')" width="100" align="center">
+          <el-table-column prop="name" :label="$t('auto.List.b71f3e5d')" min-width="180" />
+          <el-table-column prop="category" :label="$t('auto.List.383a6d16')" width="120" />
+          <el-table-column prop="level" :label="$t('auto.List.e78e4b2d')" width="100" align="center">
             <template #default="{ row }">
               <el-tag :type="getRiskType(row.level)" size="small">
                 {{ getRiskText(row.level) }}
               </el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="result" :label="$t('auto.List.28.5ad7f5')" width="100" align="center">
+          <el-table-column prop="result" :label="$t('auto.List.5ad7f5a8')" width="100" align="center">
             <template #default="{ row }">
               <el-tag :type="getResultType(row.result)" size="small">
                 {{ getResultText(row.result) }}
               </el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="message" :label="$t('auto.List.29.f411d0')" min-width="220" show-overflow-tooltip />
+          <el-table-column prop="message" :label="$t('auto.List.f411d0f1')" min-width="220" show-overflow-tooltip />
         </el-table>
       </div>
     </el-dialog>
@@ -237,15 +237,15 @@ const filteredAudits = computed(() => {
 })
 
 const getRiskText = (level) => {
-  const map = { high: t('auto.List.32.4433e7'), medium: t('auto.List.33.8a8992'), low: t('auto.List.34.b56976'), none: t('auto.List.35.e6044a') }
-  return map[level] || level || t('auto.List.36.1622dc')
+  const map = { high: t('auto.List.4433e710'), medium: t('auto.List.8a8992d1'), low: t('auto.List.b5697638'), none: t('auto.List.e6044ad7') }
+  return map[level] || level || t('auto.List.1622dc9b')
 }
 const getRiskType = (level) => {
   const map = { high: 'danger', medium: 'warning', low: 'success', none: 'info' }
   return map[level] || 'info'
 }
 const getResultText = (result) => {
-  const map = { pass: t('auto.List.12.23c1f3'), fail: t('auto.List.13.acd5cb'), warning: t('auto.List.14.900c70') }
+  const map = { pass: t('auto.List.23c1f399'), fail: t('auto.List.acd5cb84'), warning: t('auto.List.900c70fa') }
   return map[result] || result || '-'
 }
 const getResultType = (result) => {
@@ -281,7 +281,7 @@ const loadData = async () => {
     audits.value = list
     pagination.total = data.total || list.length || 0
   } catch (e) {
-    ElMessage.error(i18n.global.t(t('auto.List.37.ea1926')))
+    ElMessage.error(i18n.global.t(t('auto.List.ea1926d8')))
     audits.value = []
   } finally {
     loading.value = false
@@ -292,10 +292,10 @@ const runAudit = async () => {
   running.value = true
   try {
     await runSecurityAudit({ audit_name: `manual_audit_${Date.now()}` })
-    ElMessage.success(i18n.global.t(t('auto.List.38.d704a7')))
+    ElMessage.success(i18n.global.t(t('auto.List.d704a79d')))
     await loadData()
   } catch (e) {
-    ElMessage.error(e?.message || t('auto.List.39.ede84e'))
+    ElMessage.error(e?.message || t('auto.List.ede84ea6'))
   } finally {
     running.value = false
   }
@@ -314,7 +314,7 @@ const viewDetail = async (row) => {
       detailItems.value = data.items || data.checks || data.findings || data.results || []
     }
   } catch (e) {
-    ElMessage.warning(i18n.global.t(t('auto.List.40.d839b5')));
+    ElMessage.warning(i18n.global.t(t('auto.List.d839b531')));
   } finally {
     detailLoading.value = false
   }

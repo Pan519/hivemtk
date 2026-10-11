@@ -3,16 +3,16 @@
     <h2>{{ isEdit ? '编辑任务' : '新建任务' }}</h2>
     <el-alert v-if="taskLoadError" type="error" :closable="false" show-icon style="max-width: 860px; margin-bottom: 12px">
       <template #title>这条任务读不到，下面摊开的是空白默认值而不是它的内容：{{ taskLoadError }}</template>
-      <el-button size="small" style="margin-top: 6px" @click="router.push('/browser-automation/tasks')">{{ $t('auto.Editor.44.90e22f') }}</el-button>
+      <el-button size="small" style="margin-top: 6px" @click="router.push('/browser-automation/tasks')">{{ $t('auto.Editor.90e22f5e') }}</el-button>
     </el-alert>
     <el-form :model="form" label-width="120px" style="max-width: 860px">
-      <el-form-item :label="$t('auto.Editor.1.d7ec2d')" required>
+      <el-form-item :label="$t('auto.Editor.d7ec2d3f')" required>
         <el-input v-model="form.name" maxlength="256" />
       </el-form-item>
-      <el-form-item :label="$t('auto.Editor.2.3bdd08')">
+      <el-form-item :label="$t('auto.Editor.3bdd08ad')">
         <el-input v-model="form.description" type="textarea" :rows="2" />
       </el-form-item>
-      <el-form-item :label="$t('auto.Editor.3.498128')" required>
+      <el-form-item :label="$t('auto.Editor.4981287f')" required>
         <el-select v-model="form.platform" style="width: 220px" @change="onPlatformChange">
           <el-option v-for="p in platforms" :key="p.identifier" :value="p.identifier"
             :label="platformLabel(p)" :disabled="false" />
@@ -21,116 +21,116 @@
           {{ platformLabel(currentPlatform) }} 暂不支持发评论（接口未公开/待 M3）
         </span>
       </el-form-item>
-      <el-form-item :label="$t('auto.Editor.4.3451af')" required>
+      <el-form-item :label="$t('auto.Editor.3451af95')" required>
         <el-input v-model="form.url" placeholder="https://..." />
       </el-form-item>
-      <el-form-item :label="$t('auto.Editor.5.bb763c')">
+      <el-form-item :label="$t('auto.Editor.bb763c9e')">
         <el-select v-model="form.task_type" style="width: 200px">
-          <el-option :label="$t('auto.Editor.6.6efc0a')" value="one_shot" />
-          <el-option :label="$t('auto.Editor.7.108e55')" value="loop" />
-          <el-option :label="$t('auto.Editor.8.39fd49')" value="cron" />
-          <el-option :label="$t('auto.Editor.9.1644d2')" value="workflow" />
+          <el-option :label="$t('auto.Editor.6efc0a31')" value="one_shot" />
+          <el-option :label="$t('auto.Editor.108e55cc')" value="loop" />
+          <el-option :label="$t('auto.Editor.39fd497c')" value="cron" />
+          <el-option :label="$t('auto.Editor.1644d259')" value="workflow" />
         </el-select>
       </el-form-item>
-      <el-form-item :label="$t('auto.Editor.10.94fa6c')">
+      <el-form-item :label="$t('auto.Editor.94fa6c8c')">
         <el-radio-group v-model="form.brain_mode">
-          <el-radio :value="false">{{ $t('auto.Editor.45.c32706') }}</el-radio>
-          <el-radio :value="true">{{ $t('auto.Editor.46.a3f0b3') }}</el-radio>
+          <el-radio :value="false">{{ $t('auto.Editor.c32706dd') }}</el-radio>
+          <el-radio :value="true">{{ $t('auto.Editor.a3f0b34c') }}</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item v-if="form.brain_mode" :label="$t('auto.Editor.11.0f80fa')" required>
-        <el-input v-model="form.brain_goal" type="textarea" :rows="3" :placeholder="$t('auto.Editor.12.069485')" />
+      <el-form-item v-if="form.brain_mode" :label="$t('auto.Editor.0f80fa06')" required>
+        <el-input v-model="form.brain_goal" type="textarea" :rows="3" :placeholder="$t('auto.Editor.06948500')" />
       </el-form-item>
 
       <template v-if="!form.brain_mode">
         <el-form-item>
-          <el-button size="small" type="primary" plain @click="applyPreset">{{ $t('auto.Editor.47.7be2a0') }}</el-button>
-          <span class="preset-hint">{{ $t('auto.Editor.48.67368e') }}</span>
+          <el-button size="small" type="primary" plain @click="applyPreset">{{ $t('auto.Editor.7be2a0d2') }}</el-button>
+          <span class="preset-hint">{{ $t('auto.Editor.67368ee6') }}</span>
         </el-form-item>
-        <el-form-item :label="$t('auto.Editor.13.08bb8d')">
+        <el-form-item :label="$t('auto.Editor.08bb8d1a')">
           <div class="steps-editor">
             <div v-for="(step, i) in form.steps" :key="i" class="step-row">
               <span class="step-index">{{ i + 1 }}</span>
-              <el-select v-model="step.action" style="width: 160px" :placeholder="$t('auto.Editor.14.c500cf')">
+              <el-select v-model="step.action" style="width: 160px" :placeholder="$t('auto.Editor.c500cfab')">
                 <el-option v-for="a in actions" :key="a.value" :label="a.label" :value="a.value" />
               </el-select>
               <el-input v-if="['open_tab','click','type','extract','query'].includes(step.action)" v-model="step.target"
-                ::placeholder="$t('auto.Editor.15.32eeaa')" style="width: 240px" />
-              <el-input v-if="step.action === 'type'" v-model="step.value" :placeholder="$t('auto.Editor.16.ec47d2')" style="width: 180px" />
-              <el-input v-if="step.action === 'post_comment'" v-model="step.value" :placeholder="$t('auto.Editor.17.74ad1b')" style="width: 220px" />
-              <el-input v-if="step.action === 'wait'" v-model.number="step.ms" :placeholder="$t('auto.Editor.18.21157c')" style="width: 100px" />
+                ::placeholder="$t('auto.Editor.32eeaa14')" style="width: 240px" />
+              <el-input v-if="step.action === 'type'" v-model="step.value" :placeholder="$t('auto.Editor.ec47d2d3')" style="width: 180px" />
+              <el-input v-if="step.action === 'post_comment'" v-model="step.value" :placeholder="$t('auto.Editor.74ad1b47')" style="width: 220px" />
+              <el-input v-if="step.action === 'wait'" v-model.number="step.ms" :placeholder="$t('auto.Editor.21157cbf')" style="width: 100px" />
               <el-input v-if="step.action === 'wait_for_selector'" v-model="step.selector" placeholder="selector" style="width: 160px" />
-              <el-input v-if="step.action === 'wait_for_selector'" v-model.number="step.timeout_ms" :placeholder="$t('auto.Editor.19.f24257')" style="width: 100px" />
+              <el-input v-if="step.action === 'wait_for_selector'" v-model.number="step.timeout_ms" :placeholder="$t('auto.Editor.f2425799')" style="width: 100px" />
               <el-select v-if="step.action === 'scroll'" v-model="step.direction" style="width: 90px">
                 <el-option v-for="d in ['up','down','left','right']" :key="d" :label="d" :value="d" />
               </el-select>
               <el-input v-if="step.action === 'scroll'" v-model.number="step.amount" placeholder="px" style="width: 90px" />
               <el-select v-if="step.action === 'assert'" v-model="step.assert_kind" style="width: 150px">
-                <el-option :label="$t('auto.Editor.20.483913')" value="contains_text" />
-                <el-option :label="$t('auto.Editor.21.b11d22')" value="selector_exists" />
+                <el-option :label="$t('auto.Editor.483913ba')" value="contains_text" />
+                <el-option :label="$t('auto.Editor.b11d229b')" value="selector_exists" />
               </el-select>
-              <el-input v-if="step.action === 'assert'" v-model="step.value" :placeholder="$t('auto.Editor.22.e275b0')" style="width: 180px" />
-              <el-input v-if="step.action === 'click_near'" v-model="step.anchor" :placeholder="$t('auto.Editor.23.0f59a9')" style="width: 160px" />
-              <el-input v-if="step.action === 'click_near'" v-model="step.button_text" :placeholder="$t('auto.Editor.24.9fc706')" style="width: 110px" />
+              <el-input v-if="step.action === 'assert'" v-model="step.value" :placeholder="$t('auto.Editor.e275b00b')" style="width: 180px" />
+              <el-input v-if="step.action === 'click_near'" v-model="step.anchor" :placeholder="$t('auto.Editor.0f59a92c')" style="width: 160px" />
+              <el-input v-if="step.action === 'click_near'" v-model="step.button_text" :placeholder="$t('auto.Editor.9fc706dc')" style="width: 110px" />
               <el-select v-if="step.action === 'query'" v-model="step.query_kind" style="width: 130px">
-                <el-option :label="$t('auto.Editor.25.58dd5d')" value="text" />
-                <el-option :label="$t('auto.Editor.26.6f2851')" value="exists" />
-                <el-option :label="$t('auto.Editor.27.b33303')" value="count" />
-                <el-option :label="$t('auto.Editor.28.427977')" value="attr" />
+                <el-option :label="$t('auto.Editor.58dd5d21')" value="text" />
+                <el-option :label="$t('auto.Editor.6f28517a')" value="exists" />
+                <el-option :label="$t('auto.Editor.b333034d')" value="count" />
+                <el-option :label="$t('auto.Editor.4279779b')" value="attr" />
               </el-select>
-              <el-input v-if="step.action === 'query' && step.query_kind === 'attr'" v-model="step.attribute" :placeholder="$t('auto.Editor.29.3088f3')" style="width: 150px" />
-              <el-checkbox v-model="step.continue_on_error" :label="$t('auto.Editor.30.5753fe')" />
-              <el-checkbox v-model="step.is_write" :label="$t('auto.Editor.31.a6abfd')">
-                <span class="step-write-hint">{{ $t('auto.Editor.49.1c68e6') }}</span>
+              <el-input v-if="step.action === 'query' && step.query_kind === 'attr'" v-model="step.attribute" :placeholder="$t('auto.Editor.3088f3bf')" style="width: 150px" />
+              <el-checkbox v-model="step.continue_on_error" :label="$t('auto.Editor.5753feb2')" />
+              <el-checkbox v-model="step.is_write" :label="$t('auto.Editor.a6abfd3f')">
+                <span class="step-write-hint">{{ $t('auto.Editor.1c68e60c') }}</span>
               </el-checkbox>
               <el-input-number v-model="step.retry_count" :min="0" :max="10" size="small" style="width: 90px" />
               <el-button size="small" type="danger" icon="Delete" circle @click="removeStep(i)" />
             </div>
-            <el-button size="small" icon="Plus" @click="addStep">{{ $t('auto.Editor.50.7a3f6a') }}</el-button>
+            <el-button size="small" icon="Plus" @click="addStep">{{ $t('auto.Editor.7a3f6a9e') }}</el-button>
           </div>
         </el-form-item>
       </template>
 
-      <el-form-item v-if="form.task_type === 'cron'" :label="$t('auto.Editor.32.3ef44e')" required>
-        <el-input v-model="form.cron_expr" :placeholder="$t('auto.Editor.33.121826')" style="width: 260px" />
-        <el-select v-model="form.cron_tz" clearable :placeholder="$t('auto.Editor.34.8c4afe')" style="width: 200px; margin-left: 12px">
+      <el-form-item v-if="form.task_type === 'cron'" :label="$t('auto.Editor.3ef44e76')" required>
+        <el-input v-model="form.cron_expr" :placeholder="$t('auto.Editor.12182670')" style="width: 260px" />
+        <el-select v-model="form.cron_tz" clearable :placeholder="$t('auto.Editor.8c4afed5')" style="width: 200px; margin-left: 12px">
           <el-option v-for="tz in TIMEZONES" :key="tz" :label="tz" :value="tz" />
         </el-select>
         <div class="form-hint" style="margin-left: 0; width: 100%">
           <template v-if="existingTrigger">已有触发器 #{{ existingTrigger.id }}（{{ existingTrigger.cron_expr }}{{ existingTrigger.enabled ? '' : '，已停用' }}），保存会连着它一起改</template>
-          <template v-else>{{ $t('auto.Editor.51.f103cc') }}</template>
+          <template v-else>{{ $t('auto.Editor.f103cc60') }}</template>
           <div v-if="!cronRunnable" class="form-warn">
             任务还不是可执行状态（新建默认是草稿）：触发器照常排程，但到点会被执行入口拒掉、不产生会话——发布后才会真跑
           </div>
         </div>
       </el-form-item>
 
-      <el-form-item :label="$t('auto.Editor.35.2dbd74')">
+      <el-form-item :label="$t('auto.Editor.2dbd74ad')">
         <el-input-number v-model="form.loop_count" :min="1" :max="1000" />
       </el-form-item>
-      <el-form-item :label="$t('auto.Editor.36.3e61e1')">
+      <el-form-item :label="$t('auto.Editor.3e61e130')">
         <el-input-number v-model="form.delay_ms" :min="0" :max="60000" :step="500" />
       </el-form-item>
-      <el-form-item :label="$t('auto.Editor.37.1815af')">
+      <el-form-item :label="$t('auto.Editor.1815aff0')">
         <el-input-number v-model="form.timeout_sec" :min="10" :max="3600" :step="10" />
       </el-form-item>
 
-      <el-form-item :label="$t('auto.Editor.38.72e451')">
+      <el-form-item :label="$t('auto.Editor.72e45157')">
         <el-switch v-model="form.retry_on_fail" />
         <template v-if="form.retry_on_fail">
           <el-input-number v-model="form.retry_delay_sec" :min="30" :max="86400" :step="30" style="margin-left: 12px" />
-          <span style="margin: 0 8px">{{ $t('auto.Editor.52.437f0e') }}</span>
+          <span style="margin: 0 8px">{{ $t('auto.Editor.437f0e4c') }}</span>
           <el-input-number v-model="form.max_retry_times" :min="1" :max="10" />
-          <span style="margin-left: 8px">{{ $t('auto.Editor.53.7229ec') }}</span>
+          <span style="margin-left: 8px">{{ $t('auto.Editor.7229ecc6') }}</span>
         </template>
       </el-form-item>
 
-      <el-form-item :label="$t('auto.Editor.39.9fdb4c')">
+      <el-form-item :label="$t('auto.Editor.9fdb4c26')">
         <el-switch v-model="form.require_confirm" />
         <template v-if="form.require_confirm">
-          <span style="margin: 0 8px">{{ $t('auto.Editor.54.2d3869') }}</span>
+          <span style="margin: 0 8px">{{ $t('auto.Editor.2d386948') }}</span>
           <el-input-number v-model="form.confirm_wait_sec" :min="1" :max="900" :step="30" />
-          <span class="form-hint">{{ $t('auto.Editor.55.9901a6') }}</span>
+          <span class="form-hint">{{ $t('auto.Editor.9901a628') }}</span>
         </template>
         <div class="form-hint" style="margin-left: 0; width: 100%">
           开启后不可逆提交点前挂起，需在监控页点「确认放行」才真正发出（超时/中断则中止且不提交）。
@@ -139,19 +139,19 @@
         </div>
       </el-form-item>
 
-      <el-form-item v-if="form.task_type === 'workflow'" :label="$t('auto.Editor.40.26fa91')">
-        <el-select v-model="form.depends_on_task_id" clearable :placeholder="$t('auto.Editor.41.1678d3')" style="width: 300px">
+      <el-form-item v-if="form.task_type === 'workflow'" :label="$t('auto.Editor.26fa91a7')">
+        <el-select v-model="form.depends_on_task_id" clearable :placeholder="$t('auto.Editor.1678d35f')" style="width: 300px">
           <el-option v-for="t in depOptions" :key="t.id" :label="depLabel(t)" :value="t.id" />
         </el-select>
         <el-select v-if="form.depends_on_task_id" v-model="form.depends_on_mode" style="width: 160px; margin-left: 12px">
-          <el-option :label="$t('auto.Editor.42.60140f')" value="all_done" />
-          <el-option :label="$t('auto.Editor.43.9f5146')" value="any_success" />
+          <el-option :label="$t('auto.Editor.60140fc3')" value="all_done" />
+          <el-option :label="$t('auto.Editor.9f5146ab')" value="any_success" />
         </el-select>
       </el-form-item>
 
       <el-form-item>
-        <el-button type="primary" :loading="saving" @click="save">{{ $t('auto.Editor.56.be5fbb') }}</el-button>
-        <el-button @click="$router.back()">{{ $t('auto.Editor.57.625fb2') }}</el-button>
+        <el-button type="primary" :loading="saving" @click="save">{{ $t('auto.Editor.be5fbbe3') }}</el-button>
+        <el-button @click="$router.back()">{{ $t('auto.Editor.625fb26b') }}</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -182,17 +182,17 @@ const TIMEZONES = ['Asia/Shanghai', 'Asia/Tokyo', 'Europe/London', 'America/New_
 const RUNNABLE_STATUS = ['ready', 'paused', 'done', 'failed']
 
 const actions = [
-  { value: 'open_tab', label: t('auto.Editor.58.8230e5') }, { value: 'click', label: t('auto.Editor.59.4363c1') },
-  { value: 'type', label: t('auto.Editor.60.e47d59') }, { value: 'click_near', label: t('auto.Editor.61.8b411f') }, { value: 'post_comment', label: t('auto.Editor.62.7433c6') },
-  { value: 'snapshot', label: t('auto.Editor.63.612529') },
-  { value: 'markdown', label: t('auto.Editor.64.13940c') }, { value: 'screenshot', label: t('auto.Editor.65.369abf') },
-  { value: 'wait', label: t('auto.Editor.66.879792') }, { value: 'wait_for_selector', label: t('auto.Editor.67.ab5b8d') },
-  { value: 'scroll', label: t('auto.Editor.68.c76c60') }, { value: 'extract', label: t('auto.Editor.69.407cf7') },
-  { value: 'assert', label: t('auto.Editor.70.67920e') }, { value: 'query', label: t('auto.Editor.71.c8bfce') },
-  { value: 'close_tab', label: t('auto.Editor.72.4c00e9') },
+  { value: 'open_tab', label: t('auto.Editor.8230e577') }, { value: 'click', label: t('auto.Editor.4363c17e') },
+  { value: 'type', label: t('auto.Editor.e47d59b1') }, { value: 'click_near', label: t('auto.Editor.8b411f11') }, { value: 'post_comment', label: t('auto.Editor.7433c6c8') },
+  { value: 'snapshot', label: t('auto.Editor.61252965') },
+  { value: 'markdown', label: t('auto.Editor.13940c80') }, { value: 'screenshot', label: t('auto.Editor.369abff3') },
+  { value: 'wait', label: t('auto.Editor.87979227') }, { value: 'wait_for_selector', label: t('auto.Editor.ab5b8d19') },
+  { value: 'scroll', label: t('auto.Editor.c76c6020') }, { value: 'extract', label: t('auto.Editor.407cf79d') },
+  { value: 'assert', label: t('auto.Editor.67920e82') }, { value: 'query', label: t('auto.Editor.c8bfcec1') },
+  { value: 'close_tab', label: t('auto.Editor.4c00e9df') },
 ]
 
-const platformNames = { xiaohongshu: t('auto.Editor.73.ae26bb'), douyin: t('auto.Editor.74.277a98'), xianyu: t('auto.Editor.75.9d4865') }
+const platformNames = { xiaohongshu: t('auto.Editor.ae26bb04'), douyin: t('auto.Editor.277a984f'), xianyu: t('auto.Editor.9d4865ba') }
 const platformLabel = (p) => platformNames[p?.identifier] || p?.identifier || p
 const currentPlatform = computed(() => platforms.value.find((p) => p.identifier === form.value.platform))
 
@@ -282,10 +282,10 @@ async function ensureDepOption() {
   if (!id || readyTasks.value.some((t) => t.id === id)) return
   try {
     const t = unpack(await getBrowserTask(id))
-    depOption.value = t ? { id: t.id, name: t.name, status: t.status } : { id, name: t('auto.Editor.76.7f3077'), status: '' }
+    depOption.value = t ? { id: t.id, name: t.name, status: t.status } : { id, name: t('auto.Editor.7f3077af'), status: '' }
   } catch {
     // 读不到本身就是一条要显出来的信息：默默不显示，等于替用户把这条依赖藏了
-    depOption.value = { id, name: t('auto.Editor.77.1afab3'), status: '' }
+    depOption.value = { id, name: t('auto.Editor.1afab3c1'), status: '' }
   }
 }
 
@@ -389,7 +389,7 @@ async function save() {
       router.push('/browser-automation/tasks')
       return
     }
-    ElMessage.success(t('auto.Editor.78.f8dfed'))
+    ElMessage.success(t('auto.Editor.f8dfedcd'))
     router.push('/browser-automation/tasks')
   } catch (e) {
     ElMessage.error(String(e?.message || e))

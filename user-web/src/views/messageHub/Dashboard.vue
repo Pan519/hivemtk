@@ -7,30 +7,30 @@
     <el-row :gutter="16" class="stats-row">
       <el-col :span="6">
         <el-card class="stat-card">
-          <div class="stat-label">{{ $t('auto.Dashboard.10.059c43') }}</div>
+          <div class="stat-label">{{ $t('auto.Dashboard.059c4358') }}</div>
           <div class="stat-value">{{ stats.total }}</div>
           <div class="stat-sub">{{ rangeLabel }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="stat-card success">
-          <div class="stat-label">{{ $t('auto.Dashboard.11.1535fc') }}</div>
+          <div class="stat-label">{{ $t('auto.Dashboard.1535fcfa') }}</div>
           <div class="stat-value">{{ stats.outbound }}</div>
-          <div class="stat-sub">{{ $t('auto.Dashboard.12.2d24a4') }}</div>
+          <div class="stat-sub">{{ $t('auto.Dashboard.2d24a4e7') }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="stat-card warning">
-          <div class="stat-label">{{ $t('auto.Dashboard.13.15e923') }}</div>
+          <div class="stat-label">{{ $t('auto.Dashboard.15e9238b') }}</div>
           <div class="stat-value">{{ stats.inbound }}</div>
-          <div class="stat-sub">{{ $t('auto.Dashboard.14.6e06e4') }}</div>
+          <div class="stat-sub">{{ $t('auto.Dashboard.6e06e418') }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="stat-card danger">
-          <div class="stat-label">{{ $t('auto.Dashboard.15.894a10') }}</div>
+          <div class="stat-label">{{ $t('auto.Dashboard.894a101e') }}</div>
           <div class="stat-value">{{ stats.unread }}</div>
-          <div class="stat-sub">{{ $t('auto.Dashboard.16.cf15b8') }}</div>
+          <div class="stat-sub">{{ $t('auto.Dashboard.cf15b89d') }}</div>
         </el-card>
       </el-col>
     </el-row>
@@ -54,9 +54,9 @@
             <span>方向与消息类型（{{ rangeLabel }}）</span>
           </template>
           <el-table :data="distributionRows" class="dist-table" size="small">
-            <el-table-column prop="dim" :label="$t('auto.Dashboard.1.f29c54')" width="90" />
-            <el-table-column prop="label" :label="$t('auto.Dashboard.2.adf91a')" />
-            <el-table-column prop="count" :label="$t('auto.Dashboard.3.a6f7f1')" width="80" align="right" />
+            <el-table-column prop="dim" :label="$t('auto.Dashboard.f29c543f')" width="90" />
+            <el-table-column prop="label" :label="$t('auto.Dashboard.adf91a3e')" />
+            <el-table-column prop="count" :label="$t('auto.Dashboard.a6f7f135')" width="80" align="right" />
           </el-table>
         </el-card>
       </el-col>
@@ -79,19 +79,19 @@
       </template>
       <el-table :data="dlqList" v-loading="loading" size="small">
         <el-table-column prop="id" label="ID" width="80" />
-        <el-table-column :label="$t('auto.Dashboard.4.ebee05')" width="120">
+        <el-table-column :label="$t('auto.Dashboard.ebee0533')" width="120">
           <template #default="{ row }">{{ getChannelLabel(row.platform) }}</template>
         </el-table-column>
-        <el-table-column :label="$t('auto.Dashboard.5.a465db')" width="100">
+        <el-table-column :label="$t('auto.Dashboard.a465db53')" width="100">
           <template #default="{ row }">{{ directionLabel(row.direction) }}</template>
         </el-table-column>
-        <el-table-column prop="retries" :label="$t('auto.Dashboard.6.d5f413')" width="100" />
-        <el-table-column prop="error" :label="$t('auto.Dashboard.7.7030ff')" min-width="180" show-overflow-tooltip />
-        <el-table-column prop="failedAt" :label="$t('auto.Dashboard.8.4a65dc')" width="180" />
-        <el-table-column :label="$t('auto.Dashboard.9.2b6bc0')" width="120" fixed="right">
+        <el-table-column prop="retries" :label="$t('auto.Dashboard.d5f41392')" width="100" />
+        <el-table-column prop="error" :label="$t('auto.Dashboard.7030ff64')" min-width="180" show-overflow-tooltip />
+        <el-table-column prop="failedAt" :label="$t('auto.Dashboard.4a65dc6a')" width="180" />
+        <el-table-column :label="$t('auto.Dashboard.2b6bc0f2')" width="120" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" @click="retryOne(row)">{{ $t('auto.Dashboard.17.132c5c') }}</el-button>
-            <el-button link type="danger" @click="dropOne(row)">{{ $t('auto.Dashboard.18.b0ef90') }}</el-button>
+            <el-button link type="primary" @click="retryOne(row)">{{ $t('auto.Dashboard.132c5cdc') }}</el-button>
+            <el-button link type="danger" @click="dropOne(row)">{{ $t('auto.Dashboard.b0ef9048') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -135,22 +135,22 @@ let chart = null
 
 const rangeLabel = `最近 ${WINDOW_HOURS} 小时`
 const refreshSeconds = REFRESH_MS / 1000
-const emptyChartHint = t('auto.Dashboard.19.e785be')
+const emptyChartHint = t('auto.Dashboard.e785be33')
 
 const DIRECTION_LABELS = {
-  inbound: t('auto.Dashboard.13.15e923'),
-  outbound: t('auto.Dashboard.11.1535fc')
+  inbound: t('auto.Dashboard.15e9238b'),
+  outbound: t('auto.Dashboard.1535fcfa')
 }
 const MSG_TYPE_LABELS = {
-  text: t('auto.Dashboard.20.97d076'),
-  image: t('auto.Dashboard.21.20def7'),
-  file: t('auto.Dashboard.22.2a0c47'),
-  audio: t('auto.Dashboard.23.48df35'),
-  video: t('auto.Dashboard.24.7fcf42'),
-  link: t('auto.Dashboard.25.bfe68d'),
-  card: t('auto.Dashboard.26.d87f21'),
-  location: t('auto.Dashboard.27.d4d2a6'),
-  event: t('auto.Dashboard.28.722829')
+  text: t('auto.Dashboard.97d07614'),
+  image: t('auto.Dashboard.20def794'),
+  file: t('auto.Dashboard.2a0c4740'),
+  audio: t('auto.Dashboard.48df356f'),
+  video: t('auto.Dashboard.7fcf42ed'),
+  link: t('auto.Dashboard.bfe68d58'),
+  card: t('auto.Dashboard.d87f215d'),
+  location: t('auto.Dashboard.d4d2a668'),
+  event: t('auto.Dashboard.722829f6')
 }
 
 const directionLabel = (value) => DIRECTION_LABELS[value] || value
@@ -169,13 +169,13 @@ const hasPlatformRows = computed(() => platformRows.value.length > 0)
 
 const distributionRows = computed(() => [
   ...toRows(stats.value.by_direction).map((r) => ({
-    dim: t('auto.Dashboard.5.a465db'),
+    dim: t('auto.Dashboard.a465db53'),
     key: r.key,
     label: directionLabel(r.key),
     count: r.count
   })),
   ...toRows(stats.value.by_msg_type).map((r) => ({
-    dim: t('auto.Dashboard.29.6d0071'),
+    dim: t('auto.Dashboard.6d00710a'),
     key: r.key,
     label: MSG_TYPE_LABELS[r.key] || r.key,
     count: r.count
@@ -197,10 +197,10 @@ function renderChart() {
         data: rows.map((r) => getChannelLabel(r.key)),
         axisLabel: { interval: 0, rotate: rows.length > 6 ? 30 : 0 }
       },
-      yAxis: { type: 'value', name: t('auto.Dashboard.3.a6f7f1'), minInterval: 1 },
+      yAxis: { type: 'value', name: t('auto.Dashboard.a6f7f135'), minInterval: 1 },
       series: [
         {
-          name: t('auto.Dashboard.30.b36585'),
+          name: t('auto.Dashboard.b36585f7'),
           type: 'bar',
           barMaxWidth: 36,
           data: rows.map((r) => r.count),
@@ -227,13 +227,13 @@ async function load() {
     if (s.status === 'fulfilled' && s.value) {
       stats.value = { ...stats.value, ...s.value }
     } else {
-      failures.push(t('auto.Dashboard.31.d7656a'))
+      failures.push(t('auto.Dashboard.d7656a65'))
     }
     if (dlq.status === 'fulfilled') {
       dlqList.value = Array.isArray(dlq.value?.list) ? dlq.value.list : []
       dlqTotal.value = Number(dlq.value?.total) || 0
     } else {
-      failures.push(t('auto.Dashboard.32.3dead6'))
+      failures.push(t('auto.Dashboard.3dead64c'))
     }
     // 读不到就把"读到的是上一次的数"说在明面上：静默保留旧值看起来就像当前读数。
     loadError.value = failures.length
@@ -247,7 +247,7 @@ async function load() {
 
 function failReason(...settled) {
   const rejected = settled.find((r) => r && r.status === 'rejected')
-  return rejected?.reason?.message || t('auto.Dashboard.33.f50bf4')
+  return rejected?.reason?.message || t('auto.Dashboard.f50bf418')
 }
 
 async function batchRetry() {

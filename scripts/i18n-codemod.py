@@ -25,7 +25,7 @@ LOCALES = ["zh"]
 
 
 def gen_key(base: str, text: str, seq: int) -> str:
-    h = hashlib.md5(text.encode("utf-8")).hexdigest()[:6]
+    h = hashlib.md5(text.encode("utf-8")).hexdigest()[:8]
     return f"auto.{base}.{seq}.{h}"
 
 

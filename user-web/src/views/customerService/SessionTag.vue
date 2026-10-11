@@ -15,59 +15,59 @@
       <template #header>
         <div class="card-header">
           <el-space>
-            <el-select v-model="filterGroup" ::placeholder="$t('auto.SessionTag.1.2809a0')" clearable style="width: 180px">
+            <el-select v-model="filterGroup" ::placeholder="$t('auto.SessionTag.2809a00e')" clearable style="width: 180px">
               <el-option v-for="g in groups" :key="g" :label="g" :value="g" />
             </el-select>
-            <el-input v-model="search" ::placeholder="$t('auto.SessionTag.2.24731a')" clearable style="width: 220px" />
+            <el-input v-model="search" ::placeholder="$t('auto.SessionTag.24731aed')" clearable style="width: 220px" />
           </el-space>
         </div>
       </template>
 
       <el-table :data="filtered" v-loading="loading" stripe>
-        <el-table-column prop="name" :label="$t('auto.SessionTag.3.14d342')" min-width="140">
+        <el-table-column prop="name" :label="$t('auto.SessionTag.14d34236')" min-width="140">
           <template #default="{ row }">
             <el-tag :color="row.color" effect="dark" style="color: #fff">
               {{ row.name }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="code" :label="$t('auto.SessionTag.4.45235f')" min-width="140" />
-        <el-table-column prop="group" :label="$t('auto.SessionTag.5.829abe')" width="140" />
-        <el-table-column prop="description" :label="$t('auto.SessionTag.6.f411d0')" min-width="200" show-overflow-tooltip />
-        <el-table-column prop="sort_order" :label="$t('auto.SessionTag.7.c360e9')" width="80" align="center" />
-        <el-table-column :label="$t('auto.SessionTag.8.2b6bc0')" width="180" fixed="right">
+        <el-table-column prop="code" :label="$t('auto.SessionTag.45235f6c')" min-width="140" />
+        <el-table-column prop="group" :label="$t('auto.SessionTag.829abe5a')" width="140" />
+        <el-table-column prop="description" :label="$t('auto.SessionTag.f411d0f1')" min-width="200" show-overflow-tooltip />
+        <el-table-column prop="sort_order" :label="$t('auto.SessionTag.c360e994')" width="80" align="center" />
+        <el-table-column :label="$t('auto.SessionTag.2b6bc0f2')" width="180" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" @click="openEdit(row)">{{ $t('auto.SessionTag.14.95b351') }}</el-button>
-            <el-button link type="danger" @click="handleDelete(row)">{{ $t('auto.SessionTag.15.2f4aad') }}</el-button>
+            <el-button link type="primary" @click="openEdit(row)">{{ $t('auto.SessionTag.95b351c8') }}</el-button>
+            <el-button link type="danger" @click="handleDelete(row)">{{ $t('auto.SessionTag.2f4aaddd') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
     </el-card>
 
-    <el-dialog v-model="dialogVisible" ::title="$t('auto.SessionTag.9.334671')" width="480px">
+    <el-dialog v-model="dialogVisible" ::title="$t('auto.SessionTag.334671d0')" width="480px">
       <el-form :model="form" label-width="100px">
-        <el-form-item :label="$t('auto.SessionTag.10.0718bf')" required>
+        <el-form-item :label="$t('auto.SessionTag.0718bfa1')" required>
           <el-input v-model="form.name" />
         </el-form-item>
-        <el-form-item :label="$t('auto.SessionTag.4.45235f')" required>
-          <el-input v-model="form.code" :disabled="isEdit" :placeholder="$t('auto.SessionTag.11.ac684d')" />
+        <el-form-item :label="$t('auto.SessionTag.45235f6c')" required>
+          <el-input v-model="form.code" :disabled="isEdit" :placeholder="$t('auto.SessionTag.ac684da7')" />
         </el-form-item>
-        <el-form-item :label="$t('auto.SessionTag.5.829abe')">
-          <el-input v-model="form.group" :placeholder="$t('auto.SessionTag.12.525acd')" />
+        <el-form-item :label="$t('auto.SessionTag.829abe5a')">
+          <el-input v-model="form.group" :placeholder="$t('auto.SessionTag.525acdad')" />
         </el-form-item>
-        <el-form-item :label="$t('auto.SessionTag.13.6b36c6')">
+        <el-form-item :label="$t('auto.SessionTag.6b36c6f7')">
           <el-color-picker v-model="form.color" />
         </el-form-item>
-        <el-form-item :label="$t('auto.SessionTag.6.f411d0')">
+        <el-form-item :label="$t('auto.SessionTag.f411d0f1')">
           <el-input v-model="form.description" type="textarea" :rows="2" />
         </el-form-item>
-        <el-form-item :label="$t('auto.SessionTag.7.c360e9')">
+        <el-form-item :label="$t('auto.SessionTag.c360e994')">
           <el-input-number v-model="form.sort" :min="0" :max="999" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="dialogVisible = false">{{ $t('auto.SessionTag.16.625fb2') }}</el-button>
-        <el-button type="primary" @click="submit">{{ $t('auto.SessionTag.17.be5fbb') }}</el-button>
+        <el-button @click="dialogVisible = false">{{ $t('auto.SessionTag.625fb26b') }}</el-button>
+        <el-button type="primary" @click="submit">{{ $t('auto.SessionTag.be5fbbe3') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -125,7 +125,7 @@ const load = async () => {
     const data = res || []
     tags.value = Array.isArray(data) ? data : data.list || []
   } catch (e) {
-    ElMessage.error(i18n.global.t(t('auto.SessionTag.18.d895f9')))
+    ElMessage.error(i18n.global.t(t('auto.SessionTag.d895f912')))
     tags.value = []
   } finally {
     loading.value = false
@@ -148,7 +148,7 @@ const openEdit = (row) => {
 
 const submit = async () => {
   if (!form.name || !form.code) {
-    ElMessage.warning(i18n.global.t(t('auto.SessionTag.19.c327e3')))
+    ElMessage.warning(i18n.global.t(t('auto.SessionTag.c327e3e0')))
     return
   }
   const payload = {
@@ -162,26 +162,26 @@ const submit = async () => {
   try {
     if (isEdit.value) {
       await updateSessionTag(form.id, payload)
-      ElMessage.success(i18n.global.t(t('auto.SessionTag.20.1b9209')))
+      ElMessage.success(i18n.global.t(t('auto.SessionTag.1b92092d')))
     } else {
       await createSessionTag(payload)
-      ElMessage.success(i18n.global.t(t('auto.SessionTag.21.2d4c5d')))
+      ElMessage.success(i18n.global.t(t('auto.SessionTag.2d4c5dcc')))
     }
     dialogVisible.value = false
     await load()
   } catch (e) {
-    ElMessage.error(e?.message || t('auto.SessionTag.22.5fa802'))
+    ElMessage.error(e?.message || t('auto.SessionTag.5fa802be'))
   }
 }
 
 const handleDelete = async (row) => {
   try {
-    await ElMessageBox.confirm(`确定删除标签 "${row.name}"？`, t('auto.SessionTag.23.e83a25'), { type: 'warning' })
+    await ElMessageBox.confirm(`确定删除标签 "${row.name}"？`, t('auto.SessionTag.e83a256e'), { type: 'warning' })
     await deleteSessionTag(row.id)
-    ElMessage.success(i18n.global.t(t('auto.SessionTag.24.0007d1')))
+    ElMessage.success(i18n.global.t(t('auto.SessionTag.0007d170')))
     await load()
   } catch (e) {
-    if (e !== 'cancel' && e !== 'close') ElMessage.error(i18n.global.t(t('auto.SessionTag.25.acf066')))
+    if (e !== 'cancel' && e !== 'close') ElMessage.error(i18n.global.t(t('auto.SessionTag.acf0664a')))
   }
 }
 

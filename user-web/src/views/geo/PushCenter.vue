@@ -10,10 +10,10 @@
             :status="status.remain > 100 ? 'success' : status.remain > 20 ? 'warning' : 'exception'"
           />
           <div class="plat-detail">
-            <el-tag v-if="status.registered" type="success">{{ $t('auto.PushCenter.2.19f13a') }}</el-tag>
-            <el-tag v-else type="info">{{ $t('auto.PushCenter.3.0e6fe5') }}</el-tag>
+            <el-tag v-if="status.registered" type="success">{{ $t('auto.PushCenter.19f13a7c') }}</el-tag>
+            <el-tag v-else type="info">{{ $t('auto.PushCenter.0e6fe5bc') }}</el-tag>
             <span v-if="status.remain >= 0">剩余 {{ status.remain }}</span>
-            <span v-else>{{ $t('auto.PushCenter.4.bac375') }}</span>
+            <span v-else>{{ $t('auto.PushCenter.bac375d8') }}</span>
           </div>
         </el-card>
       </el-col>
@@ -22,22 +22,22 @@
     <el-card shadow="never" style="margin-top:16px">
       <template #header>
         <div class="card-header">
-          <span>{{ $t('auto.PushCenter.5.2fcaef') }}</span>
+          <span>{{ $t('auto.PushCenter.2fcaefca') }}</span>
         </div>
       </template>
       <el-input
         v-model="urlsText"
         type="textarea"
         :rows="4"
-        :placeholder="$t('auto.PushCenter.1.9af24e')"
+        :placeholder="$t('auto.PushCenter.9af24eca')"
       />
       <div style="margin-top:8px">
         <el-checkbox-group v-model="selectedPlatforms">
-          <el-checkbox value="baidu">{{ $t('auto.PushCenter.6.a3f4a5') }}</el-checkbox>
+          <el-checkbox value="baidu">{{ $t('auto.PushCenter.a3f4a5b0') }}</el-checkbox>
           <el-checkbox value="indexnow">IndexNow (Bing/Yandex/Naver)</el-checkbox>
           <el-checkbox value="google">Google</el-checkbox>
         </el-checkbox-group>
-        <el-button type="primary" @click="push" style="margin-left:12px">{{ $t('auto.PushCenter.7.48aa9b') }}</el-button>
+        <el-button type="primary" @click="push" style="margin-left:12px">{{ $t('auto.PushCenter.48aa9bc8') }}</el-button>
       </div>
     </el-card>
   </div>
@@ -63,10 +63,10 @@ async function push() {
   if (!urls.length) return
   try {
     await geoApi.pushUrls({ urls, platforms: selectedPlatforms.value })
-    ElMessage.success(t('auto.PushCenter.8.3aefb5'))
+    ElMessage.success(t('auto.PushCenter.3aefb579'))
     urlsText.value = ''
     loadQuota()
-  } catch (e) { ElMessage.error(t('auto.PushCenter.9.3b6ba0')) }
+  } catch (e) { ElMessage.error(t('auto.PushCenter.3b6ba072')) }
 }
 onMounted(loadQuota)
 </script>

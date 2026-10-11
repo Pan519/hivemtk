@@ -27,21 +27,21 @@
         <span>{{ $t('操作历史') }}</span>
       </template>
       <el-table :data="histories" v-loading="loading" stripe>
-        <el-table-column prop="tool" :label="$t('auto.List.1.20dce2')" width="150" />
-        <el-table-column prop="target" :label="$t('auto.List.2.73e825')" min-width="200" />
-        <el-table-column prop="totalCount" :label="$t('auto.List.3.9ed7d3')" width="100" />
-        <el-table-column prop="successCount" :label="$t('auto.List.4.330363')" width="100" />
-        <el-table-column prop="failedCount" :label="$t('auto.List.5.acd5cb')" width="100" />
-        <el-table-column prop="status" :label="$t('auto.List.6.3fea7c')" width="120">
+        <el-table-column prop="tool" :label="$t('auto.List.20dce2c6')" width="150" />
+        <el-table-column prop="target" :label="$t('auto.List.73e82552')" min-width="200" />
+        <el-table-column prop="totalCount" :label="$t('auto.List.9ed7d3ad')" width="100" />
+        <el-table-column prop="successCount" :label="$t('auto.List.330363df')" width="100" />
+        <el-table-column prop="failedCount" :label="$t('auto.List.acd5cb84')" width="100" />
+        <el-table-column prop="status" :label="$t('auto.List.3fea7ca7')" width="120">
           <template #default="{ row }">
             <el-tag :type="getStatusType(row.status)">{{ getStatusText(row.status) }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="createdAt" :label="$t('auto.List.7.70b363')" width="180" />
-        <el-table-column :label="$t('auto.List.8.2b6bc0')" width="150" fixed="right">
+        <el-table-column prop="createdAt" :label="$t('auto.List.70b3635a')" width="180" />
+        <el-table-column :label="$t('auto.List.2b6bc0f2')" width="150" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" @click="viewDetail(row)">{{ $t('auto.List.34.f26225') }}</el-button>
-            <el-button link type="danger" v-if="row.status === 'running'" @click="cancelTask(row)">{{ $t('auto.List.35.625fb2') }}</el-button>
+            <el-button link type="primary" @click="viewDetail(row)">{{ $t('auto.List.f26225bd') }}</el-button>
+            <el-button link type="danger" v-if="row.status === 'running'" @click="cancelTask(row)">{{ $t('auto.List.625fb26b') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -49,56 +49,56 @@
 
     <el-dialog v-model="dialogVisible" :title="currentTool?.name" width="800px">
       <el-form :model="form" label-width="120px">
-        <el-form-item :label="$t('auto.List.9.de9cc3')">
+        <el-form-item :label="$t('auto.List.de9cc3dd')">
           <el-input :value="currentTool?.name" disabled />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.10.a094e5')">
+        <el-form-item :label="$t('auto.List.a094e5b7')">
           <el-radio-group v-model="form.source">
-            <el-radio label="all">{{ $t('auto.List.36.a8b0c2') }}</el-radio>
-            <el-radio label="filter">{{ $t('auto.List.37.c2fe62') }}</el-radio>
-            <el-radio label="import">{{ $t('auto.List.38.8d9a07') }}</el-radio>
+            <el-radio label="all">{{ $t('auto.List.a8b0c204') }}</el-radio>
+            <el-radio label="filter">{{ $t('auto.List.c2fe6253') }}</el-radio>
+            <el-radio label="import">{{ $t('auto.List.8d9a071e') }}</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item :label="$t('auto.List.11.5148fc')" v-if="form.source === 'filter'">
+        <el-form-item :label="$t('auto.List.5148fcc0')" v-if="form.source === 'filter'">
           <el-input v-model="form.filter" type="textarea" :rows="3" placeholder='{"status": "active", "created_at": ">2024-01-01"}' />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.12.7499f4')" v-if="form.source === 'import'">
+        <el-form-item :label="$t('auto.List.7499f450')" v-if="form.source === 'import'">
           <el-upload action="/api/batch/import" :show-file-list="false">
-            <el-button>{{ $t('auto.List.39.fd7e0c') }}</el-button>
+            <el-button>{{ $t('auto.List.fd7e0c99') }}</el-button>
           </el-upload>
         </el-form-item>
-        <el-form-item :label="$t('auto.List.13.716c8a')">
+        <el-form-item :label="$t('auto.List.716c8aba')">
           <el-input v-model="form.params" type="textarea" :rows="4" placeholder='{"action": "send_message", "template": "welcome"}' />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.14.874469')">
+        <el-form-item :label="$t('auto.List.874469c9')">
           <el-switch v-model="form.dryRun" />
-          <span class="form-tip">{{ $t('auto.List.40.8e80c2') }}</span>
+          <span class="form-tip">{{ $t('auto.List.8e80c218') }}</span>
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="dialogVisible = false">{{ $t('auto.List.35.625fb2') }}</el-button>
-        <el-button @click="preview">{{ $t('auto.List.41.645dbc') }}</el-button>
-        <el-button type="primary" @click="execute">{{ $t('auto.List.42.1a6aa2') }}</el-button>
+        <el-button @click="dialogVisible = false">{{ $t('auto.List.625fb26b') }}</el-button>
+        <el-button @click="preview">{{ $t('auto.List.645dbc55') }}</el-button>
+        <el-button type="primary" @click="execute">{{ $t('auto.List.1a6aa24e') }}</el-button>
       </template>
     </el-dialog>
 
     
-    <el-dialog v-model="previewVisible" :title="$t('auto.List.15.c66881')" width="900px" :close-on-click-modal="false">
+    <el-dialog v-model="previewVisible" :title="$t('auto.List.c66881bc')" width="900px" :close-on-click-modal="false">
       <div v-loading="previewLoading">
         <div class="preview-summary" v-if="!previewLoading">
           <el-row :gutter="20">
             <el-col :span="8">
-              <el-statistic :title="$t('auto.List.16.625daf')" :value="previewSummary.total" />
+              <el-statistic :title="$t('auto.List.625dafe9')" :value="previewSummary.total" />
             </el-col>
             <el-col :span="8">
-              <el-statistic :title="$t('auto.List.17.6f4fa8')" :value="previewSummary.success">
+              <el-statistic :title="$t('auto.List.6f4fa8ce')" :value="previewSummary.success">
                 <template #suffix>
                   <el-icon color="#10B981"><component :is="'Check'" /></el-icon>
                 </template>
               </el-statistic>
             </el-col>
             <el-col :span="8">
-              <el-statistic :title="$t('auto.List.18.18fcd5')" :value="previewSummary.failed">
+              <el-statistic :title="$t('auto.List.18fcd54b')" :value="previewSummary.failed">
                 <template #suffix>
                   <el-icon color="#EF4444"><component :is="'Close'" /></el-icon>
                 </template>
@@ -108,7 +108,7 @@
         </div>
 
         <div class="preview-errors" v-if="previewSummary.errors.length > 0">
-          <h4>{{ $t('auto.List.43.18e60c') }}</h4>
+          <h4>{{ $t('auto.List.18e60ca5') }}</h4>
           <el-alert
             v-for="(err, idx) in previewSummary.errors"
             :key="idx"
@@ -121,53 +121,53 @@
         </div>
 
         <el-table :data="previewData" style="margin-top: 20px" v-if="previewData.length > 0">
-          <el-table-column type="index" :label="$t('auto.List.19.faaadc')" width="60" />
-          <el-table-column prop="target" :label="$t('auto.List.2.73e825')" min-width="200" />
-          <el-table-column prop="action" :label="$t('auto.List.8.2b6bc0')" width="150" />
-          <el-table-column prop="status" :label="$t('auto.List.20.8136c5')" width="120">
+          <el-table-column type="index" :label="$t('auto.List.faaadc44')" width="60" />
+          <el-table-column prop="target" :label="$t('auto.List.73e82552')" min-width="200" />
+          <el-table-column prop="action" :label="$t('auto.List.2b6bc0f2')" width="150" />
+          <el-table-column prop="status" :label="$t('auto.List.8136c57c')" width="120">
             <template #default="{ row }">
               <el-tag :type="getPreviewStatusTagType(row.status)" size="small">
                 {{ getPreviewStatusLabel(row.status) }}
               </el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="message" :label="$t('auto.List.21.2432b5')" show-overflow-tooltip min-width="200" />
+          <el-table-column prop="message" :label="$t('auto.List.2432b575')" show-overflow-tooltip min-width="200" />
         </el-table>
 
-        <el-empty v-if="!previewLoading && previewData.length === 0" :description="$t('auto.List.22.65fa2e')" />
+        <el-empty v-if="!previewLoading && previewData.length === 0" :description="$t('auto.List.65fa2e1a')" />
       </div>
 
       <template #footer>
-        <el-button @click="previewVisible = false">{{ $t('auto.List.44.b15d91') }}</el-button>
-        <el-button type="primary" @click="execute">{{ $t('auto.List.45.d575bf') }}</el-button>
+        <el-button @click="previewVisible = false">{{ $t('auto.List.b15d9127') }}</el-button>
+        <el-button type="primary" @click="execute">{{ $t('auto.List.d575bfd2') }}</el-button>
       </template>
     </el-dialog>
 
     
-    <el-dialog v-model="detailDialogVisible" :title="$t('auto.List.23.5288a9')" width="800px">
+    <el-dialog v-model="detailDialogVisible" :title="$t('auto.List.5288a978')" width="800px">
       <div v-loading="detailLoading">
         <template v-if="taskDetail">
           <el-descriptions :column="2" border>
-            <el-descriptions-item :label="$t('auto.List.24.3a3778')">{{ taskDetail.id }}</el-descriptions-item>
-            <el-descriptions-item :label="$t('auto.List.25.ac6116')">{{ taskDetail.tool }}</el-descriptions-item>
-            <el-descriptions-item :label="$t('auto.List.2.73e825')">{{ taskDetail.target}}</el-descriptions-item>
-            <el-descriptions-item :label="$t('auto.List.6.3fea7c')">
+            <el-descriptions-item :label="$t('auto.List.3a3778f2')">{{ taskDetail.id }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.List.ac6116b2')">{{ taskDetail.tool }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.List.73e82552')">{{ taskDetail.target}}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.List.3fea7ca7')">
               <el-tag :type="getStatusType(taskDetail.status)">{{ getStatusText(taskDetail.status) }}</el-tag>
             </el-descriptions-item>
-            <el-descriptions-item :label="$t('auto.List.7.70b363')">{{ taskDetail.createdAt }}</el-descriptions-item>
-            <el-descriptions-item :label="$t('auto.List.26.7cbadb')">{{ taskDetail.finishedAt}}</el-descriptions-item>
-            <el-descriptions-item :label="$t('auto.List.27.8887e3')">{{ taskDetail.totalCount }}</el-descriptions-item>
-            <el-descriptions-item :label="$t('auto.List.28.7586c6')">
+            <el-descriptions-item :label="$t('auto.List.70b3635a')">{{ taskDetail.createdAt }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.List.7cbadbbe')">{{ taskDetail.finishedAt}}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.List.8887e33b')">{{ taskDetail.totalCount }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.List.7586c67e')">
               <span style="color: #10B981">{{ taskDetail.successCount }}</span>
             </el-descriptions-item>
-            <el-descriptions-item :label="$t('auto.List.29.21a0bb')">
+            <el-descriptions-item :label="$t('auto.List.21a0bbc2')">
               <span style="color: #EF4444">{{ taskDetail.failedCount }}</span>
             </el-descriptions-item>
-            <el-descriptions-item :label="$t('auto.List.30.fea070')">{{ taskDetail.skippedCount || 0 }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.List.fea07017')">{{ taskDetail.skippedCount || 0 }}</el-descriptions-item>
           </el-descriptions>
 
           <div v-if="taskDetail.errorMessage" style="margin-top: 20px">
-            <h4>{{ $t('auto.List.46.4604d5') }}</h4>
+            <h4>{{ $t('auto.List.4604d502') }}</h4>
             <el-alert
               :title="taskDetail.errorMessage"
               type="error"
@@ -177,19 +177,19 @@
           </div>
 
           <div v-if="taskDetail.errorDetails && taskDetail.errorDetails.length > 0" style="margin-top: 20px">
-            <h4>{{ $t('auto.List.47.71f623') }}</h4>
+            <h4>{{ $t('auto.List.71f62364') }}</h4>
             <el-table :data="taskDetail.errorDetails" stripe max-height="300">
-              <el-table-column type="index" :label="$t('auto.List.19.faaadc')" width="60" />
-              <el-table-column prop="target" :label="$t('auto.List.2.73e825')" min-width="150" />
-              <el-table-column prop="error" :label="$t('auto.List.31.2fc597')" min-width="250" show-overflow-tooltip />
-              <el-table-column prop="time" :label="$t('auto.List.32.19fcb9')" width="170" />
+              <el-table-column type="index" :label="$t('auto.List.faaadc44')" width="60" />
+              <el-table-column prop="target" :label="$t('auto.List.73e82552')" min-width="150" />
+              <el-table-column prop="error" :label="$t('auto.List.2fc597a3')" min-width="250" show-overflow-tooltip />
+              <el-table-column prop="time" :label="$t('auto.List.19fcb9eb')" width="170" />
             </el-table>
           </div>
         </template>
-        <el-empty v-if="!detailLoading && !taskDetail" :description="$t('auto.List.33.e10f76')" />
+        <el-empty v-if="!detailLoading && !taskDetail" :description="$t('auto.List.e10f7697')" />
       </div>
       <template #footer>
-        <el-button @click="detailDialogVisible = false">{{ $t('auto.List.44.b15d91') }}</el-button>
+        <el-button @click="detailDialogVisible = false">{{ $t('auto.List.b15d9127') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -206,7 +206,7 @@ import { getBatchTools, runBatch, getBatchHistories, cancelBatch, previewBatch, 
 import { toList } from '@/utils/list.js'
 import { PASS_FAIL_STATUS, getStatusLabel, getStatusTagType } from '@/constants/status';
 
-const getPreviewStatusLabel = (s) => getStatusLabel(s, PASS_FAIL_STATUS) === t('auto.List.4.330363') ? t('auto.List.48.596149') : (getStatusLabel(s, PASS_FAIL_STATUS) || s || '-');
+const getPreviewStatusLabel = (s) => getStatusLabel(s, PASS_FAIL_STATUS) === t('auto.List.330363df') ? t('auto.List.596149b3') : (getStatusLabel(s, PASS_FAIL_STATUS) || s || '-');
 const getPreviewStatusTagType = (s) => getStatusTagType(s, PASS_FAIL_STATUS)
 
 const { t } = useI18n()
@@ -228,15 +228,15 @@ const previewData = ref([])
 const previewSummary = ref({ total: 0, success: 0, failed: 0, errors: [] })
 
 const getStatusType = (s) => ({ running: 'warning', success: 'success', failed: 'danger', partial: 'warning' }[s])
-const getStatusText = (s) => ({ running: t('auto.List.49.46e386'), success: t('auto.List.50.769d88'), failed: t('auto.List.5.acd5cb'), partial: t('auto.List.51.983b68') }[s] || s)
+const getStatusText = (s) => ({ running: t('auto.List.46e38679'), success: t('auto.List.769d88e4'), failed: t('auto.List.acd5cb84'), partial: t('auto.List.983b6813') }[s] || s)
 
 const loadTools = async () => {
   const res = await getBatchTools()
   tools.value = res || [
-    { name: t('auto.List.52.3182c7'), description: t('auto.List.53.17fb37'), color: '#4F46E5', icon: 'ChatLineRound', usedCount: 0 },
-    { name: t('auto.List.54.be8c0a'), description: 'Excel/CSV 批量导入', color: '#10B981', icon: 'Document', usedCount: 0 },
-    { name: t('auto.List.55.52140d'), description: t('auto.List.56.05e713'), color: '#F59E0B', icon: 'Promotion', usedCount: 0 },
-    { name: t('auto.List.57.b2879b'), description: t('auto.List.58.9ceef4'), color: '#EF4444', icon: 'User', usedCount: 0 }
+    { name: t('auto.List.3182c77a'), description: t('auto.List.17fb37fa'), color: '#4F46E5', icon: 'ChatLineRound', usedCount: 0 },
+    { name: t('auto.List.be8c0ab0'), description: 'Excel/CSV 批量导入', color: '#10B981', icon: 'Document', usedCount: 0 },
+    { name: t('auto.List.52140dcf'), description: t('auto.List.05e71378'), color: '#F59E0B', icon: 'Promotion', usedCount: 0 },
+    { name: t('auto.List.b2879bce'), description: t('auto.List.9ceef428'), color: '#EF4444', icon: 'User', usedCount: 0 }
   ]
 }
 
@@ -274,7 +274,7 @@ const preview = async () => {
       errors: data.errors || []
     }
   } catch (error) {
-    ElMessage.error(t('auto.List.59.943ad7') + (error?.message || error))
+    ElMessage.error(t('auto.List.943ad7a2') + (error?.message || error))
     previewVisible.value = false
   } finally {
     previewLoading.value = false
@@ -282,17 +282,17 @@ const preview = async () => {
 }
 
 const execute = async () => {
-  const loading = ElMessage({ message: i18n.global.t(t('auto.List.60.c380d7')), type: 'info', duration: 0 })
+  const loading = ElMessage({ message: i18n.global.t(t('auto.List.c380d742')), type: 'info', duration: 0 })
   try {
     await runBatch({ tool: currentTool.value.name, ...form.value })
     loading.close()
-    ElMessage.success(i18n.global.t(t('auto.List.61.b29706')))
+    ElMessage.success(i18n.global.t(t('auto.List.b29706e5')))
     dialogVisible.value = false
     previewVisible.value = false
     loadHistories()
   } catch (error) {
     loading.close()
-    ElMessage.error(i18n.global.t(t('auto.List.62.1c83d7')))
+    ElMessage.error(i18n.global.t(t('auto.List.1c83d797')))
   }
 }
 
@@ -311,12 +311,12 @@ const viewDetail = async (row) => {
 
 const cancelTask = async (row) => {
   try {
-    await ElMessageBox.confirm(t('auto.List.63.1fed38'), t('auto.List.64.e83a25'), { type: 'warning' })
+    await ElMessageBox.confirm(t('auto.List.1fed3850'), t('auto.List.e83a256e'), { type: 'warning' })
     await cancelBatch(row.id)
-    ElMessage.success(i18n.global.t(t('auto.List.65.2111cc')))
+    ElMessage.success(i18n.global.t(t('auto.List.2111ccbb')))
     loadHistories()
   } catch (e) {
-    if (e !== 'cancel') ElMessage.error(i18n.global.t(t('auto.List.66.482e85')))
+    if (e !== 'cancel') ElMessage.error(i18n.global.t(t('auto.List.482e8539')))
   }
 }
 

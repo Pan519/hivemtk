@@ -1,17 +1,17 @@
 <template>
   <div class="page">
-    <h2>{{ $t('auto.Status.8.18da72') }}</h2>
+    <h2>{{ $t('auto.Status.18da720b') }}</h2>
 
     <el-card style="margin-top: 12px">
       <el-space direction="vertical" alignment="flex-start" :size="12" style="width: 100%">
         <el-space>
-          <el-button :loading="loading" @click="load">{{ $t('auto.Status.9.694fc5') }}</el-button>
-          <el-button type="warning" @click="onResetToken">{{ $t('auto.Status.10.d206bc') }}</el-button>
+          <el-button :loading="loading" @click="load">{{ $t('auto.Status.694fc5ef') }}</el-button>
+          <el-button type="warning" @click="onResetToken">{{ $t('auto.Status.d206bc52') }}</el-button>
         </el-space>
 
         <el-alert v-if="!loading && hosts.length === 0" type="warning" :closable="false" show-icon
-          :title="$t('auto.Status.1.b2cc27')">
-          <p>{{ $t('auto.Status.11.2205da') }}</p>
+          :title="$t('auto.Status.b2cc2752')">
+          <p>{{ $t('auto.Status.2205da00') }}</p>
           <HostInstallGuide />
         </el-alert>
 
@@ -20,27 +20,27 @@
         </div>
 
         <el-table v-if="hosts.length" :data="hosts" border>
-          <el-table-column prop="user_id" :label="$t('auto.Status.2.e53376')" width="120" />
-          <el-table-column prop="version" :label="$t('auto.Status.3.fc2aac')" width="120" />
-          <el-table-column prop="pid" :label="$t('auto.Status.4.841d1a')" width="120" />
-          <el-table-column :label="$t('auto.Status.5.3fea7c')" width="130">
+          <el-table-column prop="user_id" :label="$t('auto.Status.e53376fa')" width="120" />
+          <el-table-column prop="version" :label="$t('auto.Status.fc2aac38')" width="120" />
+          <el-table-column prop="pid" :label="$t('auto.Status.841d1ad2')" width="120" />
+          <el-table-column :label="$t('auto.Status.3fea7ca7')" width="130">
             <template #default="{ row }">
-              <el-tag v-if="row.online && row.servable" type="success">{{ $t('auto.Status.12.d2d888') }}</el-tag>
-              <el-tag v-else-if="row.online" type="danger">{{ $t('auto.Status.13.6544ae') }}</el-tag>
-              <el-tag v-else type="info">{{ $t('auto.Status.14.3842ba') }}</el-tag>
+              <el-tag v-if="row.online && row.servable" type="success">{{ $t('auto.Status.d2d88849') }}</el-tag>
+              <el-tag v-else-if="row.online" type="danger">{{ $t('auto.Status.6544aee4') }}</el-tag>
+              <el-tag v-else type="info">{{ $t('auto.Status.3842ba4c') }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column :label="$t('auto.Status.6.b2f3fe')" min-width="180">
+          <el-table-column :label="$t('auto.Status.b2f3fed4')" min-width="180">
             <template #default="{ row }">
               <span v-if="row.last_cmd_ok_at">{{ formatTime(row.last_cmd_ok_at) }}</span>
-              <el-text v-else type="warning">{{ $t('auto.Status.15.6b5c63') }}</el-text>
+              <el-text v-else type="warning">{{ $t('auto.Status.6b5c6387') }}</el-text>
             </template>
           </el-table-column>
-          <el-table-column :label="$t('auto.Status.7.f1e31a')" min-width="220">
+          <el-table-column :label="$t('auto.Status.f1e31a8f')" min-width="220">
             <template #default="{ row }">
-              <span v-if="!row.online">{{ $t('auto.Status.16.055404') }}</span>
-              <span v-else-if="!row.servable">{{ $t('auto.Status.17.8f71e7') }}</span>
-              <span v-else>{{ $t('auto.Status.18.80364e') }}</span>
+              <span v-if="!row.online">{{ $t('auto.Status.0554045b') }}</span>
+              <span v-else-if="!row.servable">{{ $t('auto.Status.8f71e78d') }}</span>
+              <span v-else>{{ $t('auto.Status.80364e5c') }}</span>
             </template>
           </el-table-column>
         </el-table>
@@ -99,8 +99,8 @@ async function onResetToken() {
   let go = true
   try {
     await ElMessageBox.confirm(
-      t('auto.Status.19.6c62b6'),
-      t('auto.Status.10.d206bc'), { type: 'warning' },
+      t('auto.Status.6c62b66d'),
+      t('auto.Status.d206bc52'), { type: 'warning' },
     )
   } catch { go = false } // 用户取消不是失败
   if (!go) return
@@ -109,7 +109,7 @@ async function onResetToken() {
     const data = unpack(res)
     await ElMessageBox.alert(
       `新 token：<code style="user-select:all">${data?.token || ''}</code><br/>请将其填入本机 ~/.hivemtk/nm_host.conf 的 token= 行，然后重启 Host 进程`,
-      t('auto.Status.20.0642b7'), { dangerouslyUseHTMLString: true },
+      t('auto.Status.0642b7b0'), { dangerouslyUseHTMLString: true },
     )
   } catch (e) {
     ElMessage.error(`重置失败：${String(e?.message || e)}`)

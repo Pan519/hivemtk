@@ -4,8 +4,8 @@
     <el-card class="header-card" shadow="never">
       <div class="header-content">
         <div>
-          <h2>{{ $t('auto.Market.13.0a638b') }}</h2>
-          <p class="subtitle">{{ $t('auto.Market.14.ab0f3e') }}</p>
+          <h2>{{ $t('auto.Market.0a638b21') }}</h2>
+          <p class="subtitle">{{ $t('auto.Market.ab0f3e86') }}</p>
         </div>
         <div class="header-stats">
           <el-tag type="info" size="large">
@@ -19,20 +19,20 @@
     
     <el-card shadow="never" class="filter-card">
       <el-form :inline="true" :model="filter" @submit.prevent>
-        <el-form-item :label="$t('auto.Market.1.9699a5')">
+        <el-form-item :label="$t('auto.Market.9699a50e')">
           <el-input
             v-model="filter.keyword"
-            :placeholder="$t('auto.Market.2.ca75e9')"
+            :placeholder="$t('auto.Market.ca75e9db')"
             clearable
             style="width: 220px"
             @keyup.enter="onSearch"
             @clear="onSearch"
           />
         </el-form-item>
-        <el-form-item :label="$t('auto.Market.3.d54920')">
+        <el-form-item :label="$t('auto.Market.d54920fa')">
           <el-select
             v-model="filter.category"
-            :placeholder="$t('auto.Market.4.4f9a05')"
+            :placeholder="$t('auto.Market.4f9a050f')"
             clearable
             style="width: 180px"
             @change="onSearch"
@@ -50,7 +50,7 @@
             <el-icon><Search /></el-icon>
             搜索
           </el-button>
-          <el-button @click="resetFilter">{{ $t('auto.Market.15.4b9c32') }}</el-button>
+          <el-button @click="resetFilter">{{ $t('auto.Market.4b9c3271') }}</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -59,7 +59,7 @@
     <div class="template-grid" v-loading="loading">
       <el-empty
         v-if="!loading && filteredTemplates.length === 0"
-        :description="$t('auto.Market.5.5c9a55')"
+        :description="$t('auto.Market.5c9a5577')"
       />
       <el-card
         v-for="tpl in filteredTemplates"
@@ -82,7 +82,7 @@
         <p class="tpl-desc">{{ tpl.description }}</p>
 
         <div class="tpl-scenarios">
-          <span class="scenario-label">{{ $t('auto.Market.16.fa272f') }}</span>
+          <span class="scenario-label">{{ $t('auto.Market.fa272f67') }}</span>
           <el-tag
             v-for="sc in tpl.scenarios"
             :key="sc"
@@ -97,17 +97,17 @@
 
         <div class="tpl-stats">
           <div class="stat-item">
-            <span class="stat-label">{{ $t('auto.Market.17.764aca') }}</span>
+            <span class="stat-label">{{ $t('auto.Market.764aca4e') }}</span>
             <el-tag size="small" type="warning">{{ tpl.intent }}</el-tag>
           </div>
           <div class="stat-item">
-            <span class="stat-label">{{ $t('auto.Market.18.d31633') }}</span>
+            <span class="stat-label">{{ $t('auto.Market.d316330b') }}</span>
             <el-tag size="small" type="info">{{ tpl.stage }}</el-tag>
           </div>
         </div>
 
         <div class="tpl-preview">
-          <div class="preview-label">{{ $t('auto.Market.19.b638e6') }}</div>
+          <div class="preview-label">{{ $t('auto.Market.b638e662') }}</div>
           <pre class="preview-content">{{ truncate(tpl.template, 140) }}</pre>
         </div>
 
@@ -147,29 +147,29 @@
     
     <el-dialog
       v-model="detailVisible"
-      ::title="$t('auto.Market.6.013c0e')"
+      ::title="$t('auto.Market.013c0e71')"
       width="720px"
       :close-on-click-modal="false"
     >
       <template v-if="currentTpl">
         <el-descriptions :column="2" border>
-          <el-descriptions-item :label="$t('auto.Market.7.9118f5')">{{ currentTpl.code }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.Market.3.d54920')">
+          <el-descriptions-item :label="$t('auto.Market.9118f5d2')">{{ currentTpl.code }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.Market.d54920fa')">
             {{ getCategoryLabel(currentTpl.category) }}
           </el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.Market.8.269f95')">{{ currentTpl.intent }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.Market.9.73c766')">{{ currentTpl.stage }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.Market.10.ee8ecb')">{{ currentTpl.priority }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.Market.11.23d4eb')">{{ (currentTpl.confidence * 100).toFixed(0) }}%</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.Market.12.3bdd08')" :span="2">
+          <el-descriptions-item :label="$t('auto.Market.269f953b')">{{ currentTpl.intent }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.Market.73c7662e')">{{ currentTpl.stage }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.Market.ee8ecb9e')">{{ currentTpl.priority }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.Market.23d4eb1b')">{{ (currentTpl.confidence * 100).toFixed(0) }}%</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.Market.3bdd08ad')" :span="2">
             {{ currentTpl.description }}
           </el-descriptions-item>
         </el-descriptions>
 
-        <h4 style="margin-top: 16px">{{ $t('auto.Market.20.7bcd31') }}</h4>
+        <h4 style="margin-top: 16px">{{ $t('auto.Market.7bcd316c') }}</h4>
         <pre class="full-template">{{ currentTpl.template }}</pre>
 
-        <h4 style="margin-top: 16px">{{ $t('auto.Market.21.ebbcc1') }}</h4>
+        <h4 style="margin-top: 16px">{{ $t('auto.Market.ebbcc1d2') }}</h4>
         <ul class="vars-list">
           <li v-for="(v, idx) in currentTpl.vars" :key="idx">
             <code v-text="'{{' + v.name + '}}'"></code> - {{ v.desc }}
@@ -178,7 +178,7 @@
       </template>
 
       <template #footer>
-        <el-button @click="detailVisible = false">{{ $t('auto.Market.22.b15d91') }}</el-button>
+        <el-button @click="detailVisible = false">{{ $t('auto.Market.b15d9127') }}</el-button>
         <el-button
           v-if="currentTpl && !currentTpl.imported"
           type="primary"
@@ -216,8 +216,8 @@ const { t } = useI18n()
 const builtInTemplates = ref([
   {
     code: 'pre_sale_followup',
-    name: t('auto.Market.23.82939b'),
-    description: t('auto.Market.24.141506'),
+    name: t('auto.Market.82939b77'),
+    description: t('auto.Market.14150688'),
     category: 'presale',
     // icon 是 Vue 组件对象。builtInTemplates 是深响应 ref（下面还要就地写 t.imported，
     // 不能改用 shallowRef，否则模板 :116 的 v-if="tpl.imported" 会失去响应性），
@@ -232,7 +232,7 @@ const builtInTemplates = ref([
     confidence: 0.85,
     imported: false,
     _importing: false,
-    scenarios: [t('auto.Market.25.a90015'), t('auto.Market.26.725965'), t('auto.Market.27.2d9990')],
+    scenarios: [t('auto.Market.a9001500'), t('auto.Market.725965cf'), t('auto.Market.2d999029')],
     template: `您好 {{customer_name}}，感谢您对{{product_name}}的关注！
 我是{{agent_name}}，专注于为{{industry}}客户提供解决方案。
 
@@ -243,19 +243,19 @@ const builtInTemplates = ref([
 
 请问您方便本周{{time_slot}}安排一次 15 分钟的线上沟通吗？`,
     vars: [
-      { name: 'customer_name', desc: t('auto.Market.28.d1bdc4') },
-      { name: 'product_name', desc: t('auto.Market.29.ff6855') },
-      { name: 'agent_name', desc: t('auto.Market.30.907f27') },
-      { name: 'industry', desc: t('auto.Market.31.71d93c') },
-      { name: 'topic', desc: t('auto.Market.32.faf193') },
-      { name: 'case_count', desc: t('auto.Market.33.bfe258') },
-      { name: 'time_slot', desc: t('auto.Market.34.c2b7ca') }
+      { name: 'customer_name', desc: t('auto.Market.d1bdc43e') },
+      { name: 'product_name', desc: t('auto.Market.ff685527') },
+      { name: 'agent_name', desc: t('auto.Market.907f275f') },
+      { name: 'industry', desc: t('auto.Market.71d93c20') },
+      { name: 'topic', desc: t('auto.Market.faf1939e') },
+      { name: 'case_count', desc: t('auto.Market.bfe25887') },
+      { name: 'time_slot', desc: t('auto.Market.c2b7ca1d') }
     ]
   },
   {
     code: 'aftersale_service',
-    name: t('auto.Market.35.3508de'),
-    description: t('auto.Market.36.aa747f'),
+    name: t('auto.Market.3508dec9'),
+    description: t('auto.Market.aa747f7d'),
     category: 'aftersale',
     icon: markRaw(Service),
     color: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
@@ -265,7 +265,7 @@ const builtInTemplates = ref([
     confidence: 0.9,
     imported: false,
     _importing: false,
-    scenarios: [t('auto.Market.37.4cd514'), t('auto.Market.38.296a31'), t('auto.Market.39.e80c6e')],
+    scenarios: [t('auto.Market.4cd514f9'), t('auto.Market.296a3154'), t('auto.Market.e80c6e86')],
     template: `{{customer_name}}您好，我是售后客服{{agent_name}}。
 
 您反馈的{{issue_type}}问题，工单号 #{{ticket_id}}，我们已收到。
@@ -277,19 +277,19 @@ const builtInTemplates = ref([
 如有任何疑问，请直接回复本消息，我会第一时间跟进。
 您也可以拨打 400-xxx-xxxx 转工单号查询进度。`,
     vars: [
-      { name: 'customer_name', desc: t('auto.Market.28.d1bdc4') },
-      { name: 'agent_name', desc: t('auto.Market.30.907f27') },
-      { name: 'issue_type', desc: t('auto.Market.40.d5a57c') },
-      { name: 'ticket_id', desc: t('auto.Market.41.769eb3') },
-      { name: 'handler', desc: t('auto.Market.42.4c8c9d') },
-      { name: 'eta', desc: t('auto.Market.43.5d4fd2') },
-      { name: 'compensation', desc: t('auto.Market.44.ca4f8f') }
+      { name: 'customer_name', desc: t('auto.Market.d1bdc43e') },
+      { name: 'agent_name', desc: t('auto.Market.907f275f') },
+      { name: 'issue_type', desc: t('auto.Market.d5a57c1c') },
+      { name: 'ticket_id', desc: t('auto.Market.769eb37b') },
+      { name: 'handler', desc: t('auto.Market.4c8c9d4f') },
+      { name: 'eta', desc: t('auto.Market.5d4fd27b') },
+      { name: 'compensation', desc: t('auto.Market.ca4f8f5d') }
     ]
   },
   {
     code: 'festival_marketing',
-    name: t('auto.Market.45.544297'),
-    description: t('auto.Market.46.a007b7'),
+    name: t('auto.Market.54429779'),
+    description: t('auto.Market.a007b75b'),
     category: 'marketing',
     icon: markRaw(Present),
     color: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
@@ -299,7 +299,7 @@ const builtInTemplates = ref([
     confidence: 0.75,
     imported: false,
     _importing: false,
-    scenarios: [t('auto.Market.47.506fb9'), t('auto.Market.48.d920c6'), t('auto.Market.49.92a663')],
+    scenarios: [t('auto.Market.506fb97d'), t('auto.Market.d920c676'), t('auto.Market.92a663d9')],
     template: `🎉 {{festival_name}} 限时特惠！
 
 亲爱的{{customer_name}}：
@@ -315,18 +315,18 @@ const builtInTemplates = ref([
 
 祝您和家人{{festival_name}}快乐！`,
     vars: [
-      { name: 'festival_name', desc: t('auto.Market.50.a07520') },
-      { name: 'customer_name', desc: t('auto.Market.28.d1bdc4') },
-      { name: 'threshold', desc: t('auto.Market.51.13d6df') },
-      { name: 'discount', desc: t('auto.Market.52.2fc887') },
-      { name: 'coupon_code', desc: t('auto.Market.53.390c08') },
-      { name: 'deadline', desc: t('auto.Market.54.468c54') }
+      { name: 'festival_name', desc: t('auto.Market.a0752060') },
+      { name: 'customer_name', desc: t('auto.Market.d1bdc43e') },
+      { name: 'threshold', desc: t('auto.Market.13d6dffc') },
+      { name: 'discount', desc: t('auto.Market.2fc887d1') },
+      { name: 'coupon_code', desc: t('auto.Market.390c08e7') },
+      { name: 'deadline', desc: t('auto.Market.468c5447') }
     ]
   },
   {
     code: 'holiday_greeting',
-    name: t('auto.Market.55.ffc9c1'),
-    description: t('auto.Market.56.2083e7'),
+    name: t('auto.Market.ffc9c1d2'),
+    description: t('auto.Market.2083e7b0'),
     category: 'marketing',
     icon: markRaw(Sunny),
     color: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
@@ -336,7 +336,7 @@ const builtInTemplates = ref([
     confidence: 0.7,
     imported: false,
     _importing: false,
-    scenarios: [t('auto.Market.57.1e61a8'), t('auto.Market.58.81f041'), t('auto.Market.59.6da69c')],
+    scenarios: [t('auto.Market.1e61a8c7'), t('auto.Market.81f04166'), t('auto.Market.6da69cab')],
     template: `🌕 {{customer_name}}，{{holiday_name}}快乐！
 
 值此{{holiday_name}}佳节，{{company_name}}全体员工
@@ -350,16 +350,16 @@ const builtInTemplates = ref([
 
 ——{{company_name}}`,
     vars: [
-      { name: 'customer_name', desc: t('auto.Market.28.d1bdc4') },
-      { name: 'holiday_name', desc: t('auto.Market.50.a07520') },
-      { name: 'company_name', desc: t('auto.Market.60.079627') },
-      { name: 'tip', desc: t('auto.Market.61.1fe1bd') }
+      { name: 'customer_name', desc: t('auto.Market.d1bdc43e') },
+      { name: 'holiday_name', desc: t('auto.Market.a0752060') },
+      { name: 'company_name', desc: t('auto.Market.079627c1') },
+      { name: 'tip', desc: t('auto.Market.1fe1bd24') }
     ]
   },
   {
     code: 'new_customer_conversion',
-    name: t('auto.Market.62.da4d37'),
-    description: t('auto.Market.63.20bd1c'),
+    name: t('auto.Market.da4d371c'),
+    description: t('auto.Market.20bd1c40'),
     category: 'presale',
     icon: markRaw(UserFilled),
     color: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
@@ -369,7 +369,7 @@ const builtInTemplates = ref([
     confidence: 0.8,
     imported: false,
     _importing: false,
-    scenarios: [t('auto.Market.64.78e92e'), t('auto.Market.65.d8eca8'), t('auto.Market.66.8500cb')],
+    scenarios: [t('auto.Market.78e92e80'), t('auto.Market.d8eca889'), t('auto.Market.8500cb80')],
     template: `Hi {{customer_name}}，欢迎加入{{product_name}}！
 
 我们注意到您已经完成了第{{step}}/4 步：
@@ -386,14 +386,14 @@ const builtInTemplates = ref([
 
 有任何问题随时找我，我是{{agent_name}}。`,
     vars: [
-      { name: 'customer_name', desc: t('auto.Market.28.d1bdc4') },
-      { name: 'product_name', desc: t('auto.Market.67.c6afa0') },
-      { name: 'step', desc: t('auto.Market.68.01a858') },
-      { name: 'progress_bar', desc: t('auto.Market.69.e2e33e') },
-      { name: 'next_step', desc: t('auto.Market.70.95d760') },
-      { name: 'discount', desc: t('auto.Market.71.65e9d3') },
-      { name: 'next_action', desc: t('auto.Market.72.38e09d') },
-      { name: 'agent_name', desc: t('auto.Market.30.907f27') }
+      { name: 'customer_name', desc: t('auto.Market.d1bdc43e') },
+      { name: 'product_name', desc: t('auto.Market.c6afa029') },
+      { name: 'step', desc: t('auto.Market.01a85850') },
+      { name: 'progress_bar', desc: t('auto.Market.e2e33e2c') },
+      { name: 'next_step', desc: t('auto.Market.95d760ff') },
+      { name: 'discount', desc: t('auto.Market.65e9d3aa') },
+      { name: 'next_action', desc: t('auto.Market.38e09d96') },
+      { name: 'agent_name', desc: t('auto.Market.907f275f') }
     ]
   }
 ]);
@@ -404,9 +404,9 @@ const detailVisible = ref(false)
 const currentTpl = ref(null)
 
 const categories = [
-  { value: 'presale', label: t('auto.Market.73.63d2ec') },
-  { value: 'aftersale', label: t('auto.Market.74.59bd68') },
-  { value: 'marketing', label: t('auto.Market.75.916801') }
+  { value: 'presale', label: t('auto.Market.63d2ec80') },
+  { value: 'aftersale', label: t('auto.Market.59bd6897') },
+  { value: 'marketing', label: t('auto.Market.916801e9') }
 ]
 
 const filteredTemplates = computed(() => {
@@ -455,7 +455,7 @@ const loadImportedState = async () => {
       t.imported = importedCodes.has(t.code)
     })
   } catch (e) {
-    console.warn(t('auto.Market.76.e51224'), e)
+    console.warn(t('auto.Market.e5122446'), e)
   }
 };
 
@@ -490,7 +490,7 @@ const onImport = async (tpl) => {
       detailVisible.value = false
     }
   } catch (e) {
-    ElMessage.error(t('auto.Market.77.013db1') + (e?.message || t('auto.Market.78.974e74')))
+    ElMessage.error(t('auto.Market.013db1b1') + (e?.message || t('auto.Market.974e7484')))
   } finally {
     tpl._importing = false
   }

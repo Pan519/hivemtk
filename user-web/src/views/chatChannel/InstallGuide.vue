@@ -3,8 +3,8 @@
     <el-card class="header-card" shadow="never">
       <div class="header-content">
         <div>
-          <h2>{{ $t('auto.InstallGuide.6.60657a') }}</h2>
-          <p class="subtitle">{{ $t('auto.InstallGuide.7.dbba14') }}</p>
+          <h2>{{ $t('auto.InstallGuide.60657ab3') }}</h2>
+          <p class="subtitle">{{ $t('auto.InstallGuide.dbba14b6') }}</p>
         </div>
         <div class="header-actions">
           <el-button @click="$router.back()">
@@ -24,9 +24,9 @@
       <el-col :xs="24" :md="14">
         <el-card shadow="never">
           <template #header>
-            <span>{{ $t('auto.InstallGuide.8.db7d4e') }}</span>
+            <span>{{ $t('auto.InstallGuide.db7d4eab') }}</span>
           </template>
-          <el-empty v-if="channels.length === 0" :description="$t('auto.InstallGuide.1.cff997')">
+          <el-empty v-if="channels.length === 0" :description="$t('auto.InstallGuide.cff99714')">
             <el-button type="primary" @click="$router.push({ name: 'ChatChannelCreate' })">
               前往创建
             </el-button>
@@ -42,8 +42,8 @@
               <div class="channel-info">
                 <div class="channel-name">
                   {{ ch.channel_name }}
-                  <el-tag v-if="ch.status === 'active'" type="success" size="small">{{ $t('auto.InstallGuide.9.7854b5') }}</el-tag>
-                  <el-tag v-else type="info" size="small">{{ $t('auto.InstallGuide.10.710ad0') }}</el-tag>
+                  <el-tag v-if="ch.status === 'active'" type="success" size="small">{{ $t('auto.InstallGuide.7854b52a') }}</el-tag>
+                  <el-tag v-else type="info" size="small">{{ $t('auto.InstallGuide.710ad08b') }}</el-tag>
                 </div>
                 <div class="channel-meta">
                   AppKey: <code>{{ ch.app_key }}</code>
@@ -56,7 +56,7 @@
         <el-card v-if="selected" shadow="never" class="code-card">
           <template #header>
             <div class="code-header">
-              <span>{{ $t('auto.InstallGuide.11.c178a5') }}</span>
+              <span>{{ $t('auto.InstallGuide.c178a5f7') }}</span>
               <el-button link type="primary" @click="copyEmbed">
                 <el-icon><CopyDocument /></el-icon>
                 复制全部
@@ -72,15 +72,15 @@
 
         <el-card v-if="selected" shadow="never" class="code-card">
           <template #header>
-            <span>{{ $t('auto.InstallGuide.12.e67c78') }}</span>
+            <span>{{ $t('auto.InstallGuide.e67c783f') }}</span>
           </template>
           <el-form label-width="120px">
-            <el-form-item :label="$t('auto.InstallGuide.2.acb354')">
+            <el-form-item :label="$t('auto.InstallGuide.acb35449')">
               <el-input
                 v-model="originInput"
                 type="textarea"
                 :rows="4"
-                :placeholder="$t('auto.InstallGuide.3.3f312c')"
+                :placeholder="$t('auto.InstallGuide.3f312ce6')"
               />
             </el-form-item>
             <el-form-item>
@@ -90,7 +90,7 @@
               <el-button @click="originInput = originsToText(selected?.allowed_origins)">
                 重置
               </el-button>
-              <span class="hint">{{ $t('auto.InstallGuide.13.4601a6') }}</span>
+              <span class="hint">{{ $t('auto.InstallGuide.4601a6b2') }}</span>
             </el-form-item>
           </el-form>
         </el-card>
@@ -100,7 +100,7 @@
       <el-col :xs="24" :md="10">
         <el-card shadow="never" class="preview-card">
           <template #header>
-            <span>{{ $t('auto.InstallGuide.14.2f586b') }}</span>
+            <span>{{ $t('auto.InstallGuide.2f586bd4') }}</span>
           </template>
           <div class="preview-frame">
             <div class="preview-mock-browser">
@@ -111,16 +111,16 @@
                 <span class="url">https://your-website.com</span>
               </div>
               <div class="browser-content">
-                <p class="mock-line">{{ $t('auto.InstallGuide.15.3d8659') }}</p>
-                <p class="mock-line">{{ $t('auto.InstallGuide.16.7bd993') }}</p>
-                <p class="mock-line">{{ $t('auto.InstallGuide.17.a5c837') }}</p>
+                <p class="mock-line">{{ $t('auto.InstallGuide.3d8659a4') }}</p>
+                <p class="mock-line">{{ $t('auto.InstallGuide.7bd9935a') }}</p>
+                <p class="mock-line">{{ $t('auto.InstallGuide.a5c837e8') }}</p>
                 
                 <div
                   v-if="selected"
                   class="widget-button"
                   role="button"
                   tabindex="0"
-                  :aria-label="$t('auto.InstallGuide.4.e11be7')"
+                  :aria-label="$t('auto.InstallGuide.e11be779')"
                   :class="['pos-' + (selected.widget_position || 'bottom-right')]"
                   :style="{ backgroundColor: selected.widget_color || '#4F46E5' }"
                   @click="previewOpen = !previewOpen"
@@ -136,10 +136,10 @@
                     <el-icon class="close-btn" @click="previewOpen = false"><Close /></el-icon>
                   </div>
                   <div class="window-body">
-                    <p>{{ $t('auto.InstallGuide.18.6fef08') }}</p>
+                    <p>{{ $t('auto.InstallGuide.6fef08a0') }}</p>
                   </div>
                   <div class="window-input">
-                    <el-input v-model="previewInput" :placeholder="$t('auto.InstallGuide.5.17533c')" size="small" />
+                    <el-input v-model="previewInput" :placeholder="$t('auto.InstallGuide.17533c5b')" size="small" />
                   </div>
                 </div>
               </div>
@@ -149,7 +149,7 @@
 
         <el-card shadow="never" class="test-card">
           <template #header>
-            <span>{{ $t('auto.InstallGuide.19.46f4c0') }}</span>
+            <span>{{ $t('auto.InstallGuide.46f4c0e7') }}</span>
           </template>
           <el-button type="primary" :loading="testing" @click="onTestConnection">
             <el-icon><Connection /></el-icon>
@@ -233,7 +233,7 @@ const loadChannels = async () => {
       onChannelChange(channels.value[0].channel_id)
     }
   } catch (err) {
-    ElMessage.error(t('auto.InstallGuide.20.c4fa9b') + (err?.message || err))
+    ElMessage.error(t('auto.InstallGuide.c4fa9b74') + (err?.message || err))
   } finally {
     loading.value = false
   }
@@ -247,7 +247,7 @@ const onChannelChange = async (channelId) => {
     originInput.value = originsToText(res?.allowed_origins)
     testResult.value = null
   } catch (err) {
-    ElMessage.error(t('auto.InstallGuide.21.52397f') + (err?.message || err))
+    ElMessage.error(t('auto.InstallGuide.52397fba') + (err?.message || err))
   }
 }
 
@@ -255,9 +255,9 @@ const copyEmbed = async () => {
   if (!embedSnippet.value) return
   try {
     await navigator.clipboard.writeText(embedSnippet.value)
-    ElMessage.success(i18n.global.t(t('auto.InstallGuide.22.4fb42e')))
+    ElMessage.success(i18n.global.t(t('auto.InstallGuide.4fb42e6e')))
   } catch {
-    ElMessage.error(i18n.global.t(t('auto.InstallGuide.23.41da1c')))
+    ElMessage.error(i18n.global.t(t('auto.InstallGuide.41da1ca4')))
   }
 }
 
@@ -270,16 +270,16 @@ const onSaveOrigins = async () => {
   try {
     await ElMessageBox.confirm(
       `将白名单更新为 ${origins.length} 个 origin？`,
-      t('auto.InstallGuide.24.58030d'),
+      t('auto.InstallGuide.58030d6e'),
       { type: 'warning' }
     )
     originSaving.value = true
     await updateChannel(selected.value.channel_id, { allowed_origins: origins })
-    ElMessage.success(i18n.global.t(t('auto.InstallGuide.25.3b1083')))
+    ElMessage.success(i18n.global.t(t('auto.InstallGuide.3b108349')))
     await onChannelChange(selected.value.channel_id)
   } catch (err) {
     if (err !== 'cancel') {
-      ElMessage.error(t('auto.InstallGuide.26.78d235') + (err?.message || err))
+      ElMessage.error(t('auto.InstallGuide.78d235cc') + (err?.message || err))
     }
   } finally {
     originSaving.value = false
@@ -295,10 +295,10 @@ const onTestConnection = async () => {
     if (resp && resp.channel_id) {
       testResult.value = { ok: true, message: `连接成功 · ${resp.channel_name || ''}` }
     } else {
-      testResult.value = { ok: false, message: i18n.global.t(t('auto.InstallGuide.27.4857b2')) }
+      testResult.value = { ok: false, message: i18n.global.t(t('auto.InstallGuide.4857b299')) }
     }
   } catch (err) {
-    testResult.value = { ok: false, message: i18n.global.t(t('auto.InstallGuide.28.4d5cd5')) + (err?.message || err) }
+    testResult.value = { ok: false, message: i18n.global.t(t('auto.InstallGuide.4d5cd54a')) + (err?.message || err) }
   } finally {
     testing.value = false
   }

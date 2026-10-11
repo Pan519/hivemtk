@@ -3,7 +3,7 @@
     <el-card class="header-card">
       <div>
         <h2>{{ $t('客户旅程大屏') }}</h2>
-        <p class="subtitle">{{ $t('auto.Dashboard.14.0507a2') }}</p>
+        <p class="subtitle">{{ $t('auto.Dashboard.0507a262') }}</p>
       </div>
       <div class="header-actions">
         <el-tag size="large" type="info" effect="plain">
@@ -11,8 +11,8 @@
         </el-tag>
         <el-switch
           v-model="autoRefresh"
-          :active-text="$t('auto.Dashboard.1.891db2')"
-          :inactive-text="$t('auto.Dashboard.2.2a3e7f')"
+          :active-text="$t('auto.Dashboard.891db237')"
+          :inactive-text="$t('auto.Dashboard.2a3e7f5c')"
           @change="toggleAutoRefresh"
         />
         <el-button type="primary" :icon="Refresh" @click="loadOverview" :loading="loading">
@@ -103,24 +103,24 @@
         <el-card class="detail-card">
           <template #header>
             <div class="card-header">
-              <span>{{ $t('auto.Dashboard.15.ff4fc7') }}</span>
+              <span>{{ $t('auto.Dashboard.ff4fc759') }}</span>
             </div>
           </template>
           <el-table :data="stagesMeta" stripe max-height="400">
-            <el-table-column prop="label" :label="$t('auto.Dashboard.3.d31633')" width="100" />
-            <el-table-column prop="description" :label="$t('auto.Dashboard.4.f411d0')" min-width="160" show-overflow-tooltip />
-            <el-table-column prop="default_followup" :label="$t('auto.Dashboard.5.36f762')" width="120" />
-            <el-table-column prop="owner_role" :label="$t('auto.Dashboard.6.7e5609')" width="100" align="center">
+            <el-table-column prop="label" :label="$t('auto.Dashboard.d316330b')" width="100" />
+            <el-table-column prop="description" :label="$t('auto.Dashboard.f411d0f1')" min-width="160" show-overflow-tooltip />
+            <el-table-column prop="default_followup" :label="$t('auto.Dashboard.36f76222')" width="120" />
+            <el-table-column prop="owner_role" :label="$t('auto.Dashboard.7e56098a')" width="100" align="center">
               <template #default="{ row }">
                 <el-tag size="small" :type="getRoleTagType(row.owner_role)">
                   {{ getRoleLabel(row.owner_role) }}
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column :label="$t('auto.Dashboard.7.fa7e98')" width="80" align="center">
+            <el-table-column :label="$t('auto.Dashboard.fa7e984d')" width="80" align="center">
               <template #default="{ row }">
-                <el-tag v-if="row.allow_ai_handle" type="success" size="small">{{ $t('auto.Dashboard.16.e6a5c3') }}</el-tag>
-                <el-tag v-else type="info" size="small">{{ $t('auto.Dashboard.17.a2415b') }}</el-tag>
+                <el-tag v-if="row.allow_ai_handle" type="success" size="small">{{ $t('auto.Dashboard.e6a5c367') }}</el-tag>
+                <el-tag v-else type="info" size="small">{{ $t('auto.Dashboard.a2415bed') }}</el-tag>
               </template>
             </el-table-column>
           </el-table>
@@ -131,14 +131,14 @@
         <el-card class="detail-card">
           <template #header>
             <div class="card-header">
-              <span>{{ $t('auto.Dashboard.18.9519b3') }}</span>
+              <span>{{ $t('auto.Dashboard.9519b3c2') }}</span>
             </div>
           </template>
           <div v-loading="loading">
             <el-table :data="overview?.stages || []" stripe max-height="400">
-              <el-table-column prop="label" :label="$t('auto.Dashboard.3.d31633')" min-width="120" />
-              <el-table-column prop="count" :label="$t('auto.Dashboard.8.d185a8')" width="100" align="center" />
-              <el-table-column :label="$t('auto.Dashboard.9.c909e6')" width="200">
+              <el-table-column prop="label" :label="$t('auto.Dashboard.d316330b')" min-width="120" />
+              <el-table-column prop="count" :label="$t('auto.Dashboard.d185a803')" width="100" align="center" />
+              <el-table-column :label="$t('auto.Dashboard.c909e6eb')" width="200">
                 <template #default="{ row }">
                   <el-progress
                     :percentage="Math.round(row.rate)"
@@ -147,7 +147,7 @@
                   />
                 </template>
               </el-table-column>
-              <el-table-column :label="$t('auto.Dashboard.10.97cb75')" width="120" align="center">
+              <el-table-column :label="$t('auto.Dashboard.97cb75c8')" width="120" align="center">
                 <template #default="{ row }">
                   {{ row.avg_stay_hours.toFixed(0) }}h
                 </template>
@@ -166,7 +166,7 @@
             <el-icon style="color: #10B981"><Bell /></el-icon>
             实时旅程事件流
           </span>
-          <span class="card-tip">{{ $t('auto.Dashboard.19.840704') }}</span>
+          <span class="card-tip">{{ $t('auto.Dashboard.84070467') }}</span>
         </div>
       </template>
       <el-timeline>
@@ -190,13 +190,13 @@
             </div>
           </el-card>
         </el-timeline-item>
-        <el-empty v-if="recentEvents.length === 0" :description="$t('auto.Dashboard.11.0b95b8')" />
+        <el-empty v-if="recentEvents.length === 0" :description="$t('auto.Dashboard.0b95b87c')" />
       </el-timeline>
     </el-card>
 
     <el-dialog v-model="stageDialog" :title="`${selectedStageLabel} · 客户明细`" width="600px">
-      <el-table v-loading="stageLoading" :data="stageCustomers" stripe max-height="420" :empty-text="$t('auto.Dashboard.12.21e5fa')">
-        <el-table-column prop="customer_id" :label="$t('auto.Dashboard.13.1c2ecf')" />
+      <el-table v-loading="stageLoading" :data="stageCustomers" stripe max-height="420" :empty-text="$t('auto.Dashboard.21e5fa38')">
+        <el-table-column prop="customer_id" :label="$t('auto.Dashboard.1c2ecf70')" />
       </el-table>
     </el-dialog>
   </div>
@@ -286,7 +286,7 @@ const selectStage = async (stage) => {
     const ids = (res && res.customer_ids) || []
     stageCustomers.value = ids.map((id) => ({ customer_id: id }))
   } catch (e) {
-    ElMessage.error(t('auto.Dashboard.20.d86a49') + (e && e.message ? e.message : ''))
+    ElMessage.error(t('auto.Dashboard.d86a4919') + (e && e.message ? e.message : ''))
   } finally {
     stageLoading.value = false
   }
@@ -304,7 +304,7 @@ const loadOverview = async () => {
     stagesMeta.value = Array.isArray(stagesData) ? stagesData : stagesData.list || []
     lastUpdate.value = new Date().toLocaleTimeString('zh-CN', { hour12: false })
   } catch (e) {
-    ElMessage.error(t('auto.Dashboard.21.f51c3b') + (e?.message || ''))
+    ElMessage.error(t('auto.Dashboard.f51c3be2') + (e?.message || ''))
   } finally {
     loading.value = false
   }
@@ -315,13 +315,13 @@ const toggleAutoRefresh = (val) => {
     refreshTimer = setInterval(() => {
       loadOverview()
     }, 30000);
-    ElMessage.success(i18n.global.t(t('auto.Dashboard.22.e2f71a')))
+    ElMessage.success(i18n.global.t(t('auto.Dashboard.e2f71ac6')))
   } else {
     if (refreshTimer) {
       clearInterval(refreshTimer)
       refreshTimer = null
     }
-    ElMessage.info(i18n.global.t(t('auto.Dashboard.23.b61e77')))
+    ElMessage.info(i18n.global.t(t('auto.Dashboard.b61e7729')))
   }
 }
 

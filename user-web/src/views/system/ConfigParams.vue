@@ -8,7 +8,7 @@
             <div class="stat-icon stat-icon--total"><el-icon :size="24"><Setting /></el-icon></div>
             <div class="stat-body">
               <div class="stat-value">{{ stats.total }}</div>
-              <div class="stat-label">{{ $t('auto.ConfigParams.15.76da33') }}</div>
+              <div class="stat-label">{{ $t('auto.ConfigParams.76da3343') }}</div>
             </div>
           </div>
         </el-card>
@@ -19,7 +19,7 @@
             <div class="stat-icon stat-icon--group"><el-icon :size="24"><Files /></el-icon></div>
             <div class="stat-body">
               <div class="stat-value">{{ stats.groupCount }}</div>
-              <div class="stat-label">{{ $t('auto.ConfigParams.16.0b6e19') }}</div>
+              <div class="stat-label">{{ $t('auto.ConfigParams.0b6e1935') }}</div>
             </div>
           </div>
         </el-card>
@@ -30,7 +30,7 @@
             <div class="stat-icon stat-icon--modified"><el-icon :size="24"><Warning /></el-icon></div>
             <div class="stat-body">
               <div class="stat-value">{{ stats.modified }}</div>
-              <div class="stat-label">{{ $t('auto.ConfigParams.17.2b689f') }}</div>
+              <div class="stat-label">{{ $t('auto.ConfigParams.2b689f7b') }}</div>
             </div>
           </div>
         </el-card>
@@ -41,7 +41,7 @@
             <div class="stat-icon stat-icon--readonly"><el-icon :size="24"><Lock /></el-icon></div>
             <div class="stat-body">
               <div class="stat-value">{{ stats.readonly }}</div>
-              <div class="stat-label">{{ $t('auto.ConfigParams.11.85541b') }}</div>
+              <div class="stat-label">{{ $t('auto.ConfigParams.85541bd9') }}</div>
             </div>
           </div>
         </el-card>
@@ -55,7 +55,7 @@
         <el-card shadow="hover" class="group-card">
           <template #header>
             <div class="card-header">
-              <span>{{ $t('auto.ConfigParams.18.2f5914') }}</span>
+              <span>{{ $t('auto.ConfigParams.2f591405') }}</span>
               <el-button text size="small" @click="loadAll">
                 <el-icon><Refresh /></el-icon>
               </el-button>
@@ -100,7 +100,7 @@
               <div class="header-actions">
                 <el-input
                   v-model="keyword"
-                  :placeholder="$t('auto.ConfigParams.1.175d62')"
+                  :placeholder="$t('auto.ConfigParams.175d6212')"
                   clearable
                   size="default"
                   style="width: 260px"
@@ -125,7 +125,7 @@
             :data="filteredList"
             stripe
             border
-            :empty-text="$t('auto.ConfigParams.2.eb5b7e')"
+            :empty-text="$t('auto.ConfigParams.eb5b7e6f')"
             style="width: 100%"
             :header-cell-style="{ background: '#fafafa' }"
           >
@@ -134,30 +134,30 @@
                 <code class="param-key">{{ row.key }}</code>
               </template>
             </el-table-column>
-            <el-table-column prop="name" :label="$t('auto.ConfigParams.3.d7ec2d')" min-width="140" show-overflow-tooltip />
-            <el-table-column prop="description" :label="$t('auto.ConfigParams.4.3bdd08')" min-width="220" show-overflow-tooltip />
-            <el-table-column :label="$t('auto.ConfigParams.5.226b09')" width="90" align="center">
+            <el-table-column prop="name" :label="$t('auto.ConfigParams.d7ec2d3f')" min-width="140" show-overflow-tooltip />
+            <el-table-column prop="description" :label="$t('auto.ConfigParams.3bdd08ad')" min-width="220" show-overflow-tooltip />
+            <el-table-column :label="$t('auto.ConfigParams.226b0912')" width="90" align="center">
               <template #default="{ row }">
                 <el-tag :type="typeTagColor(row.type)" size="small">{{ row.type }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column :label="$t('auto.ConfigParams.6.e52c27')" min-width="180" show-overflow-tooltip>
+            <el-table-column :label="$t('auto.ConfigParams.e52c2701')" min-width="180" show-overflow-tooltip>
               <template #default="{ row }">
                 <div class="val-cell">
                   <span class="val-current" :class="{ 'val-changed': !isDefault(row) }">
                     {{ formatValue(row, row.value) }}
                   </span>
-                  <el-tag v-if="!isDefault(row)" type="warning" size="small" effect="plain" class="changed-badge">{{ $t('auto.ConfigParams.17.2b689f') }}</el-tag>
-                  <el-tag v-if="row.readonly" type="info" size="small" effect="plain">{{ $t('auto.ConfigParams.11.85541b') }}</el-tag>
+                  <el-tag v-if="!isDefault(row)" type="warning" size="small" effect="plain" class="changed-badge">{{ $t('auto.ConfigParams.2b689f7b') }}</el-tag>
+                  <el-tag v-if="row.readonly" type="info" size="small" effect="plain">{{ $t('auto.ConfigParams.85541bd9') }}</el-tag>
                 </div>
               </template>
             </el-table-column>
-            <el-table-column :label="$t('auto.ConfigParams.7.225f3e')" min-width="140" show-overflow-tooltip>
+            <el-table-column :label="$t('auto.ConfigParams.225f3ed0')" min-width="140" show-overflow-tooltip>
               <template #default="{ row }">
                 <span class="val-default">{{ formatValue(row, row.default_value) }}</span>
               </template>
             </el-table-column>
-            <el-table-column :label="$t('auto.ConfigParams.8.df0116')" width="170" show-overflow-tooltip>
+            <el-table-column :label="$t('auto.ConfigParams.df011658')" width="170" show-overflow-tooltip>
               <template #default="{ row }">
                 <span v-if="row.min !== undefined || row.max !== undefined || row.step !== undefined" class="range-cell">
                   <template v-if="row.min !== undefined && row.max !== undefined">[{{ row.min }}, {{ row.max }}]</template>
@@ -168,7 +168,7 @@
                 <span v-else class="muted">-</span>
               </template>
             </el-table-column>
-            <el-table-column :label="$t('auto.ConfigParams.9.2b6bc0')" width="160" fixed="right" align="center">
+            <el-table-column :label="$t('auto.ConfigParams.2b6bc0f2')" width="160" fixed="right" align="center">
               <template #default="{ row }">
                 <el-button link type="primary" size="small" :disabled="row.readonly" @click="openEdit(row)">
                   <el-icon><Edit /></el-icon>编辑
@@ -193,22 +193,22 @@
     >
       <div v-if="editing" class="edit-body">
         <el-descriptions :column="2" border size="small" class="edit-desc">
-          <el-descriptions-item :label="$t('auto.ConfigParams.10.829abe')">{{ editing.group }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.ConfigParams.5.226b09')">
+          <el-descriptions-item :label="$t('auto.ConfigParams.829abe5a')">{{ editing.group }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.ConfigParams.226b0912')">
             <el-tag :type="typeTagColor(editing.type)" size="small">{{ editing.type }}</el-tag>
           </el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.ConfigParams.3.d7ec2d')" :span="2">{{ editing.name }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.ConfigParams.4.3bdd08')" :span="2">{{ editing.description || '-' }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.ConfigParams.7.225f3e')">{{ formatValue(editing, editing.default_value) }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.ConfigParams.11.85541b')">
+          <el-descriptions-item :label="$t('auto.ConfigParams.d7ec2d3f')" :span="2">{{ editing.name }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.ConfigParams.3bdd08ad')" :span="2">{{ editing.description || '-' }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.ConfigParams.225f3ed0')">{{ formatValue(editing, editing.default_value) }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.ConfigParams.85541bd9')">
             <el-tag :type="editing.readonly ? 'info' : 'success'" size="small">{{ editing.readonly ? '是' : '否' }}</el-tag>
           </el-descriptions-item>
-          <el-descriptions-item v-if="editing.min !== undefined" :label="$t('auto.ConfigParams.12.c322ed')">{{ editing.min }}</el-descriptions-item>
-          <el-descriptions-item v-if="editing.max !== undefined" :label="$t('auto.ConfigParams.13.5da893')">{{ editing.max }}</el-descriptions-item>
+          <el-descriptions-item v-if="editing.min !== undefined" :label="$t('auto.ConfigParams.c322edb8')">{{ editing.min }}</el-descriptions-item>
+          <el-descriptions-item v-if="editing.max !== undefined" :label="$t('auto.ConfigParams.5da89314')">{{ editing.max }}</el-descriptions-item>
         </el-descriptions>
 
         <div class="edit-field">
-          <div class="edit-field__label">{{ $t('auto.ConfigParams.6.e52c27') }}</div>
+          <div class="edit-field__label">{{ $t('auto.ConfigParams.e52c2701') }}</div>
 
           
           <template v-if="isBoolType(editing.type)">
@@ -237,7 +237,7 @@
                 size="default"
                 style="width:140px"
               />
-              <span v-if="editing.type === 'duration'" class="unit-label">{{ $t('auto.ConfigParams.19.0c1fec') }}</span>
+              <span v-if="editing.type === 'duration'" class="unit-label">{{ $t('auto.ConfigParams.0c1fec65') }}</span>
             </div>
             <el-input-number
               v-else
@@ -267,7 +267,7 @@
       </div>
 
       <template #footer>
-        <el-button @click="editDialogVisible = false">{{ $t('auto.ConfigParams.20.625fb2') }}</el-button>
+        <el-button @click="editDialogVisible = false">{{ $t('auto.ConfigParams.625fb26b') }}</el-button>
         <el-button
           type="warning"
           :disabled="editValueUnchanged || editError"
@@ -280,12 +280,12 @@
     </el-dialog>
 
     
-    <el-drawer v-model="auditDrawerVisible" :title="$t('auto.ConfigParams.14.1a4f7e')" size="640px">
+    <el-drawer v-model="auditDrawerVisible" :title="$t('auto.ConfigParams.1a4f7e4c')" size="640px">
       <template v-if="auditLoading">
         <div class="drawer-loading"><el-icon class="is-loading" :size="28"><Loading /></el-icon></div>
       </template>
       <template v-else>
-        <div v-if="auditList.length === 0" class="drawer-empty">{{ $t('auto.ConfigParams.21.420df5') }}</div>
+        <div v-if="auditList.length === 0" class="drawer-empty">{{ $t('auto.ConfigParams.420df559') }}</div>
         <el-timeline v-else class="audit-timeline">
           <el-timeline-item
             v-for="(item, idx) in auditList"
@@ -326,22 +326,22 @@ import * as configParamsApi from '@/api/configParams'
 const SEED_GROUPS = [
   { key: 'agent_llm',    label: 'AI 大模型',      count: 16 },
   { key: 'agent_tool',   label: 'AI 工具',        count: 5  },
-  { key: 'bridge',       label: t('auto.ConfigParams.22.6f605e'),       count: 8  },
-  { key: 'cache',        label: t('auto.ConfigParams.23.e1b848'),       count: 6  },
-  { key: 'channelgw',    label: t('auto.ConfigParams.24.d0a403'),       count: 5  },
-  { key: 'confidence',   label: t('auto.ConfigParams.25.bd493e'),     count: 7  },
-  { key: 'inbox_sales',  label: t('auto.ConfigParams.26.61c3c5'),       count: 4  },
-  { key: 'knowledge',    label: t('auto.ConfigParams.27.7e4333'),         count: 12 },
-  { key: 'middleware',   label: t('auto.ConfigParams.28.3cbfec'),         count: 2  },
-  { key: 'misc',         label: t('auto.ConfigParams.29.5a0afc'),           count: 18 },
-  { key: 'pagination',   label: t('auto.ConfigParams.30.386262'),           count: 3  },
-  { key: 'sales',        label: t('auto.ConfigParams.31.7f0dc5'),           count: 2  },
-  { key: 'session',      label: t('auto.ConfigParams.32.9a834e'),           count: 5  },
-  { key: 'smart_cs',     label: t('auto.ConfigParams.33.60144f'),       count: 3  },
-  { key: 'telemetry',    label: t('auto.ConfigParams.34.673866'),           count: 4  },
-  { key: 'wechat',       label: t('auto.ConfigParams.35.cfbf6f'),           count: 3  },
-  { key: 'wecom',        label: t('auto.ConfigParams.36.ff17b9'),       count: 2  },
-  { key: 'workflow',     label: t('auto.ConfigParams.37.228526'),         count: 4  }
+  { key: 'bridge',       label: t('auto.ConfigParams.6f605ef2'),       count: 8  },
+  { key: 'cache',        label: t('auto.ConfigParams.e1b848a0'),       count: 6  },
+  { key: 'channelgw',    label: t('auto.ConfigParams.d0a40345'),       count: 5  },
+  { key: 'confidence',   label: t('auto.ConfigParams.bd493e1b'),     count: 7  },
+  { key: 'inbox_sales',  label: t('auto.ConfigParams.61c3c50c'),       count: 4  },
+  { key: 'knowledge',    label: t('auto.ConfigParams.7e433388'),         count: 12 },
+  { key: 'middleware',   label: t('auto.ConfigParams.3cbfec33'),         count: 2  },
+  { key: 'misc',         label: t('auto.ConfigParams.5a0afc9d'),           count: 18 },
+  { key: 'pagination',   label: t('auto.ConfigParams.3862626c'),           count: 3  },
+  { key: 'sales',        label: t('auto.ConfigParams.7f0dc5e3'),           count: 2  },
+  { key: 'session',      label: t('auto.ConfigParams.9a834e9a'),           count: 5  },
+  { key: 'smart_cs',     label: t('auto.ConfigParams.60144fa9'),       count: 3  },
+  { key: 'telemetry',    label: t('auto.ConfigParams.673866d9'),           count: 4  },
+  { key: 'wechat',       label: t('auto.ConfigParams.cfbf6f4c'),           count: 3  },
+  { key: 'wecom',        label: t('auto.ConfigParams.ff17b9f9'),       count: 2  },
+  { key: 'workflow',     label: t('auto.ConfigParams.228526dc'),         count: 4  }
 ];
 
 const { t } = useI18n()
@@ -389,7 +389,7 @@ async function loadAll() {
     const list = Array.isArray(res) ? res : (res && Array.isArray(res.list) ? res.list : [])
     allParams.value = list
   } catch (e) {
-    ElMessage.error(t('auto.ConfigParams.38.648a6f'))
+    ElMessage.error(t('auto.ConfigParams.648a6f89'))
   } finally {
     loading.value = false
   }
@@ -405,7 +405,7 @@ async function loadGroup(groupKey) {
     const g = groups.value.find((x) => x.key === groupKey);
     if (g) g.count = list.length
   } catch (e) {
-    ElMessage.error(t('auto.ConfigParams.39.8f3fec'))
+    ElMessage.error(t('auto.ConfigParams.8f3fec9f'))
   } finally {
     loading.value = false
   }
@@ -502,7 +502,7 @@ const editValueUnchanged = computed(() => {
 
 function openEdit(row) {
   if (row.readonly) {
-    ElMessage.warning(t('auto.ConfigParams.40.4f06a1'))
+    ElMessage.warning(t('auto.ConfigParams.4f06a13f'))
     return
   }
   editing.value = { ...row }
@@ -524,7 +524,7 @@ function validateEdit() {
   const p = editing.value
   if (isNumericType(p.type)) {
     const n = Number(editValueNum.value)
-    if (!Number.isFinite(n)) { editError.value = t('auto.ConfigParams.41.ab91a6'); return false }
+    if (!Number.isFinite(n)) { editError.value = t('auto.ConfigParams.ab91a62d'); return false }
     if (p.min !== undefined && n < Number(p.min)) { editError.value = `不能小于最小值 ${p.min}`; return false }
     if (p.max !== undefined && n > Number(p.max)) { editError.value = `不能大于最大值 ${p.max}`; return false }
   }
@@ -551,9 +551,9 @@ async function confirmEdit() {
     const target = allParams.value.find((x) => x.group === p.group && x.key === p.key);
     if (target) target.value = submitValue
     editDialogVisible.value = false
-    ElMessage.success(t('auto.ConfigParams.42.2540b1'))
+    ElMessage.success(t('auto.ConfigParams.2540b10c'))
   } catch (e) {
-    ElMessage.error(t('auto.ConfigParams.43.78d235') + (e.message || t('auto.ConfigParams.44.974e74')))
+    ElMessage.error(t('auto.ConfigParams.78d235cc') + (e.message || t('auto.ConfigParams.974e7484')))
   } finally {
     saving.value = false
   }
@@ -562,19 +562,19 @@ async function confirmEdit() {
 const resettingGroup = ref(false);
 
 async function handleResetOne(row) {
-  if (isDefault(row)) { ElMessage.info(t('auto.ConfigParams.45.84c35e')); return }
+  if (isDefault(row)) { ElMessage.info(t('auto.ConfigParams.84c35ec7')); return }
   try {
     await ElMessageBox.confirm(
       `确定要将「${row.key}」重置为默认值吗？`,
-      t('auto.ConfigParams.46.80cfc3'),
-      { confirmButtonText: t('auto.ConfigParams.47.4b9c32'), cancelButtonText: t('auto.ConfigParams.20.625fb2'), type: 'warning' }
+      t('auto.ConfigParams.80cfc33c'),
+      { confirmButtonText: t('auto.ConfigParams.4b9c3271'), cancelButtonText: t('auto.ConfigParams.625fb26b'), type: 'warning' }
     )
     row._resetting = true
     await configParamsApi.reset(row.group, row.key)
     row.value = row.default_value
-    ElMessage.success(t('auto.ConfigParams.48.da92ad'))
+    ElMessage.success(t('auto.ConfigParams.da92ad8f'))
   } catch (e) {
-    if (e !== 'cancel') ElMessage.error(t('auto.ConfigParams.49.5281aa') + (e.message || t('auto.ConfigParams.44.974e74')))
+    if (e !== 'cancel') ElMessage.error(t('auto.ConfigParams.5281aaaa') + (e.message || t('auto.ConfigParams.974e7484')))
   } finally {
     row._resetting = false
   }
@@ -582,19 +582,19 @@ async function handleResetOne(row) {
 
 async function handleBulkReset() {
   const count = groupModifiedCount.value
-  if (count === 0) { ElMessage.info(t('auto.ConfigParams.50.63a47c')); return }
+  if (count === 0) { ElMessage.info(t('auto.ConfigParams.63a47c93')); return }
   try {
     await ElMessageBox.confirm(
       `即将重置分组「${currentGroup.value}」下 ${count} 条已修改的参数，全部恢复为默认值。此操作不可撤销。`,
       `重置整组（${count} 条）`,
-      { confirmButtonText: t('auto.ConfigParams.51.781d2f'), cancelButtonText: t('auto.ConfigParams.20.625fb2'), type: 'warning' }
+      { confirmButtonText: t('auto.ConfigParams.781d2f22'), cancelButtonText: t('auto.ConfigParams.625fb26b'), type: 'warning' }
     )
     resettingGroup.value = true
     await configParamsApi.bulkReset(currentGroup.value)
     await loadGroup(currentGroup.value);
     ElMessage.success(`已重置 ${count} 条参数`)
   } catch (e) {
-    if (e !== 'cancel') ElMessage.error(t('auto.ConfigParams.52.cbb56d') + (e.message || t('auto.ConfigParams.44.974e74')))
+    if (e !== 'cancel') ElMessage.error(t('auto.ConfigParams.cbb56d54') + (e.message || t('auto.ConfigParams.974e7484')))
   } finally {
     resettingGroup.value = false
   }
@@ -616,7 +616,7 @@ async function loadAuditLogs() {
     auditList.value = Array.isArray(res) ? res : (res && Array.isArray(res.list) ? res.list : [])
   } catch (e) {
     auditList.value = []
-    ElMessage.error(t('auto.ConfigParams.53.73026b'))
+    ElMessage.error(t('auto.ConfigParams.73026bb9'))
   } finally {
     auditLoading.value = false
   }

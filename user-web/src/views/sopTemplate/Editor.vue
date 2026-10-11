@@ -6,10 +6,10 @@
         <div>
           <h2>{{ isEdit ? '编辑 SOP 模板' : '创建 SOP 模板' }}</h2>
           <p class="subtitle" v-if="isEdit">模板 ID：{{ templateId }} · 修改后保存生效</p>
-          <p class="subtitle" v-else>{{ $t('auto.Editor.13.7eff07') }}</p>
+          <p class="subtitle" v-else>{{ $t('auto.Editor.7eff0774') }}</p>
         </div>
         <div class="header-actions">
-          <el-button @click="goBack">{{ $t('auto.Editor.14.adcd1d') }}</el-button>
+          <el-button @click="goBack">{{ $t('auto.Editor.adcd1dd7') }}</el-button>
         </div>
       </div>
     </el-card>
@@ -31,18 +31,18 @@
         </template>
         <el-row :gutter="20">
           <el-col :span="12">
-            <el-form-item :label="$t('auto.Editor.1.a5d1c5')" prop="name">
-              <el-input v-model="form.name" :placeholder="$t('auto.Editor.2.1dc183')" />
+            <el-form-item :label="$t('auto.Editor.a5d1c511')" prop="name">
+              <el-input v-model="form.name" :placeholder="$t('auto.Editor.1dc18383')" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item :label="$t('auto.Editor.3.764aca')" prop="intent">
+            <el-form-item :label="$t('auto.Editor.764aca4e')" prop="intent">
               <el-select
                 v-model="form.intent"
                 filterable
                 allow-create
                 clearable
-                :placeholder="$t('auto.Editor.4.3814c5')"
+                :placeholder="$t('auto.Editor.3814c5cd')"
                 style="width: 100%"
               >
                 <el-option v-for="i in presetIntents" :key="i" :label="i" :value="i" />
@@ -50,16 +50,16 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item :label="$t('auto.Editor.5.d31633')" prop="stage">
-              <el-select v-model="form.stage" :placeholder="$t('auto.Editor.6.c25adf')" style="width: 100%">
+            <el-form-item :label="$t('auto.Editor.d316330b')" prop="stage">
+              <el-select v-model="form.stage" :placeholder="$t('auto.Editor.c25adff4')" style="width: 100%">
                 <el-option v-for="s in stageOptions" :key="s.value" :label="s.label" :value="s.value" />
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item :label="$t('auto.Editor.7.ee8ecb')">
+            <el-form-item :label="$t('auto.Editor.ee8ecb9e')">
               <el-input-number v-model="form.priority" :min="-100" :max="100" :step="1" style="width: 100%" />
-              <div class="form-tip">{{ $t('auto.Editor.15.7a8f8b') }}</div>
+              <div class="form-tip">{{ $t('auto.Editor.7a8f8b16') }}</div>
             </el-form-item>
           </el-col>
         </el-row>
@@ -73,7 +73,7 @@
             模板内容（Go text/template）
           </div>
         </template>
-        <el-form-item :label="$t('auto.Editor.8.e5e2fd')" prop="template">
+        <el-form-item :label="$t('auto.Editor.e5e2fd1c')" prop="template">
           <el-input
             v-model="form.template"
             type="textarea"
@@ -84,16 +84,16 @@
             变量使用 <code v-pre>{{.var_name}}</code> 格式；保存后会在 Layer1 命中时用真实变量替换
           </div>
         </el-form-item>
-        <el-form-item :label="$t('auto.Editor.9.5fec0d')">
+        <el-form-item :label="$t('auto.Editor.5fec0da4')">
           <el-input
             v-model="form.vars"
             type="textarea"
             :rows="3"
             placeholder='JSON 格式：{"var_name": {"desc": "描述", "example": "示例"}}'
           />
-          <div class="form-tip">{{ $t('auto.Editor.16.ff58df') }}</div>
+          <div class="form-tip">{{ $t('auto.Editor.ff58df81') }}</div>
         </el-form-item>
-        <el-form-item v-if="varsList.length" :label="$t('auto.Editor.10.ebf8e2')">
+        <el-form-item v-if="varsList.length" :label="$t('auto.Editor.ebf8e213')">
           <div class="var-preview">
             <el-tag v-for="v in varsList" :key="v.key" size="small" type="info" effect="plain" class="var-tag">
               <span class="var-name" v-pre>{{.</span><span class="var-name">{{ v.key }}</span><span class="var-name" v-pre>}}</span>
@@ -113,7 +113,7 @@
         </template>
         <el-row :gutter="20">
           <el-col :span="12">
-            <el-form-item :label="$t('auto.Editor.11.8f3599')">
+            <el-form-item :label="$t('auto.Editor.8f3599b6')">
               <el-slider
                 v-model="form.confidence"
                 :min="0"
@@ -122,13 +122,13 @@
                 show-input
                 :show-input-controls="false"
               />
-              <div class="form-tip">{{ $t('auto.Editor.17.a2a69c') }}</div>
+              <div class="form-tip">{{ $t('auto.Editor.a2a69cf8') }}</div>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item :label="$t('auto.Editor.12.7854b5')">
+            <el-form-item :label="$t('auto.Editor.7854b52a')">
               <el-switch v-model="form.enabled" />
-              <div class="form-tip">{{ $t('auto.Editor.18.a1e515') }}</div>
+              <div class="form-tip">{{ $t('auto.Editor.a1e51532') }}</div>
             </el-form-item>
           </el-col>
         </el-row>
@@ -136,7 +136,7 @@
 
       
       <div class="footer-actions">
-        <el-button @click="goBack">{{ $t('auto.Editor.19.625fb2') }}</el-button>
+        <el-button @click="goBack">{{ $t('auto.Editor.625fb26b') }}</el-button>
         <el-button type="primary" :loading="saving" @click="onSave">
           <el-icon><Check /></el-icon>
           {{ isEdit ? '保存更新' : '创建模板' }}
@@ -192,16 +192,16 @@ const form = reactive(getDefaultForm())
 
 const rules = {
   name: [
-    { required: true, message: t(t('auto.Editor.20.8f21b9')), trigger: 'blur' }
+    { required: true, message: t(t('auto.Editor.8f21b986')), trigger: 'blur' }
   ],
   intent: [
-    { required: true, message: t(t('auto.Editor.21.dfc9bf')), trigger: 'change' }
+    { required: true, message: t(t('auto.Editor.dfc9bf0b')), trigger: 'change' }
   ],
   stage: [
-    { required: true, message: t(t('auto.Editor.22.a9fe88')), trigger: 'change' }
+    { required: true, message: t(t('auto.Editor.a9fe8847')), trigger: 'change' }
   ],
   template: [
-    { required: true, message: t(t('auto.Editor.23.73536b')), trigger: 'blur' }
+    { required: true, message: t(t('auto.Editor.73536b73')), trigger: 'blur' }
   ]
 };
 
@@ -229,7 +229,7 @@ const loadDetail = async () => {
       form.enabled = res.enabled !== false
     }
   } catch (e) {
-    ElMessage.error(t('auto.Editor.24.0dfd38') + (e.message || t('auto.Editor.25.974e74')))
+    ElMessage.error(t('auto.Editor.0dfd38c9') + (e.message || t('auto.Editor.974e7484')))
     goBack()
   } finally {
     pageLoading.value = false
@@ -240,7 +240,7 @@ const onSave = async () => {
   if (!formRef.value) return
   await formRef.value.validate(async (valid) => {
     if (!valid) {
-      ElMessage.warning(t(t('auto.Editor.26.341de0')))
+      ElMessage.warning(t(t('auto.Editor.341de0e4')))
       return
     }
     saving.value = true
@@ -257,14 +257,14 @@ const onSave = async () => {
       }
       if (isEdit.value) {
         await sopTemplateApi.update(templateId.value, data)
-        ElMessage.success(t(t('auto.Editor.27.b846b3')))
+        ElMessage.success(t(t('auto.Editor.b846b32f')))
       } else {
         await sopTemplateApi.create(data)
-        ElMessage.success(t(t('auto.Editor.28.49c62b')))
+        ElMessage.success(t(t('auto.Editor.49c62b01')))
       }
       goBack()
     } catch (e) {
-      ElMessage.error(t('auto.Editor.29.78d235') + (e.message || t('auto.Editor.25.974e74')))
+      ElMessage.error(t('auto.Editor.78d235cc') + (e.message || t('auto.Editor.974e7484')))
     } finally {
       saving.value = false
     }

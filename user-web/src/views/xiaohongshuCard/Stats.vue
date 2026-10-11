@@ -46,23 +46,23 @@
     
     <el-card class="filter-card">
       <el-form :model="filterForm" inline>
-        <el-form-item ::label="$t('auto.Stats.1.3690ef')">
+        <el-form-item ::label="$t('auto.Stats.3690ef9b')">
           <el-date-picker
             v-model="filterForm.dateRange"
             type="daterange"
-            :range-separator="$t('auto.Stats.2.981cbe')"
-            :start-placeholder="$t('auto.Stats.3.b44c0f')"
-            :end-placeholder="$t('auto.Stats.4.1d468b')"
+            :range-separator="$t('auto.Stats.981cbe31')"
+            :start-placeholder="$t('auto.Stats.b44c0f33')"
+            :end-placeholder="$t('auto.Stats.1d468be9')"
             format="YYYY-MM-DD"
             value-format="YYYY-MM-DD"
             @change="handleDateChange"
           />
         </el-form-item>
-        <el-form-item ::label="$t('auto.Stats.5.bf8db0')">
-          <el-select v-model="filterForm.groupBy" ::placeholder="$t('auto.Stats.6.e59c18')" @change="handleGroupByChange">
-            <el-option ::label="$t('auto.Stats.7.4eb3b0')" value="day" />
-            <el-option ::label="$t('auto.Stats.8.787456')" value="week" />
-            <el-option ::label="$t('auto.Stats.9.31019b')" value="month" />
+        <el-form-item ::label="$t('auto.Stats.bf8db0fe')">
+          <el-select v-model="filterForm.groupBy" ::placeholder="$t('auto.Stats.e59c18b1')" @change="handleGroupByChange">
+            <el-option ::label="$t('auto.Stats.4eb3b00e')" value="day" />
+            <el-option ::label="$t('auto.Stats.7874566d')" value="week" />
+            <el-option ::label="$t('auto.Stats.31019b33')" value="month" />
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -91,10 +91,10 @@
             <span>{{ $t('热门卡片') }}</span>
           </div>
           <el-table :data="overallStats.top_cards" stripe style="width: 100%">
-            <el-table-column prop="title" ::label="$t('auto.Stats.10.319eda')" min-width="150" show-overflow-tooltip />
-            <el-table-column prop="author" ::label="$t('auto.Stats.11.be3447')" width="100" />
-            <el-table-column prop="view_count" ::label="$t('auto.Stats.12.4b63a3')" width="80" />
-            <el-table-column ::label="$t('auto.Stats.13.4414e3')" width="100" fixed="right">
+            <el-table-column prop="title" ::label="$t('auto.Stats.319eda89')" min-width="150" show-overflow-tooltip />
+            <el-table-column prop="author" ::label="$t('auto.Stats.be344731')" width="100" />
+            <el-table-column prop="view_count" ::label="$t('auto.Stats.4b63a3c5')" width="80" />
+            <el-table-column ::label="$t('auto.Stats.4414e3c5')" width="100" fixed="right">
               <template #default="scope">
                 <el-button size="small" type="primary" @click="goToCardStats(scope.row.id)">{{ $t('统计') }}</el-button>
               </template>
@@ -105,19 +105,19 @@
       <el-col :span="12">
         <el-card class="table-card">
           <div class="table-header">
-            <span>{{ $t('auto.Stats.18.73378a') }}</span>
+            <span>{{ $t('auto.Stats.73378a1f') }}</span>
           </div>
           <el-table :data="overallStats.recent_activities.filter(item => item.action_type === 'view')" stripe style="width: 100%">
-            <el-table-column prop="card_title" :label="$t('auto.Stats.14.3944f2')" min-width="150" show-overflow-tooltip />
-            <el-table-column prop="action_type" :label="$t('auto.Stats.15.de9cc3')" width="100">
+            <el-table-column prop="card_title" :label="$t('auto.Stats.3944f217')" min-width="150" show-overflow-tooltip />
+            <el-table-column prop="action_type" :label="$t('auto.Stats.de9cc3dd')" width="100">
               <template #default="scope">
                 <el-tag :type="getActionType(scope.row.action_type)">
                   {{ getActionText(scope.row.action_type) }}
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="user_ip" :label="$t('auto.Stats.16.cd75fe')" width="120" />
-            <el-table-column prop="created_at" :label="$t('auto.Stats.17.19fcb9')" width="180">
+            <el-table-column prop="user_ip" :label="$t('auto.Stats.cd75fe8f')" width="120" />
+            <el-table-column prop="created_at" :label="$t('auto.Stats.19fcb9eb')" width="180">
               <template #default="scope">
                 {{ formatTime(scope.row.created_at) }}
               </template>
@@ -196,7 +196,7 @@ const fetchOverallStats = async () => {
       updateCharts()
     });
   } catch (error) {
-    ElMessage.error(i18n.global.t(t('auto.Stats.19.063dc7')))
+    ElMessage.error(i18n.global.t(t('auto.Stats.063dc79a')))
     console.error(error)
   } finally {
     loading.value = false
@@ -225,7 +225,7 @@ const updateCharts = () => {
     viewChart.value = safeInit(viewChartDom)
     const viewOption = {
       title: {
-        text: t('auto.Stats.20.8205ea'),
+        text: t('auto.Stats.8205ea14'),
         left: 'center'
       },
       tooltip: {
@@ -240,7 +240,7 @@ const updateCharts = () => {
       },
       series: [
         {
-          name: t('auto.Stats.21.88bc4d'),
+          name: t('auto.Stats.88bc4d7a'),
           type: 'line',
           data: overallStats.view_trend.map(item => item.count),
           smooth: true,
@@ -289,7 +289,7 @@ const getActionType = (type) => {
 
 const getActionText = (type) => {
   const textMap = {
-    view: t('auto.Stats.22.9c5c5c')
+    view: t('auto.Stats.9c5c5cdb')
   }
   return textMap[type] || type
 }

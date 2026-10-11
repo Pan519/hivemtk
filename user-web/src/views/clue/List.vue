@@ -5,7 +5,7 @@
       <div class="page-header">
         <div class="header-text">
           <h2>{{ $t('线索列表') }}</h2>
-          <p class="subtitle">{{ $t('auto.List.31.19f53c') }}</p>
+          <p class="subtitle">{{ $t('auto.List.19f53c26') }}</p>
         </div>
         <div class="header-actions">
           <el-button @click="fetchCluelist">
@@ -24,25 +24,25 @@
     <el-row :gutter="16" class="stats-row">
       <el-col :xs="12" :sm="6">
         <el-card class="stat-card" shadow="never">
-          <div class="stat-label">{{ $t('auto.List.32.fa01bc') }}</div>
+          <div class="stat-label">{{ $t('auto.List.fa01bc43') }}</div>
           <div class="stat-value">{{ stats.total || cluetotal || 0 }}</div>
         </el-card>
       </el-col>
       <el-col :xs="12" :sm="6">
         <el-card class="stat-card" shadow="never">
-          <div class="stat-label">{{ $t('auto.List.7.876caf') }}</div>
+          <div class="stat-label">{{ $t('auto.List.876caf44') }}</div>
           <div class="stat-value" style="color: #10B981">{{ stats.verified || 0 }}</div>
         </el-card>
       </el-col>
       <el-col :xs="12" :sm="6">
         <el-card class="stat-card" shadow="never">
-          <div class="stat-label">{{ $t('auto.List.8.b928ea') }}</div>
+          <div class="stat-label">{{ $t('auto.List.b928ea24') }}</div>
           <div class="stat-value" style="color: #F59E0B">{{ stats.unverified || 0 }}</div>
         </el-card>
       </el-col>
       <el-col :xs="12" :sm="6">
         <el-card class="stat-card" shadow="never">
-          <div class="stat-label">{{ $t('auto.List.33.b29a54') }}</div>
+          <div class="stat-label">{{ $t('auto.List.b29a54ea') }}</div>
           <div class="stat-value" style="color: #4F46E5">{{ stats.today || 0 }}</div>
         </el-card>
       </el-col>
@@ -51,33 +51,33 @@
     
     <el-card class="filter-card" shadow="never">
       <el-form :inline="true" :model="filterForm" class="filter-form">
-        <el-form-item :label="$t('auto.List.1.cfb5f1')">
+        <el-form-item :label="$t('auto.List.cfb5f18c')">
           <el-input
             v-model="filterForm.keyword"
-            :placeholder="$t('auto.List.2.cebd95')"
+            :placeholder="$t('auto.List.cebd95a0')"
             clearable
             style="width: 240px"
             @keyup.enter="handleSearch"
           />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.3.1cc291')">
-          <el-select v-model="filterForm.type" :placeholder="$t('auto.List.4.c079e7')" clearable style="width: 160px">
+        <el-form-item :label="$t('auto.List.1cc291d3')">
+          <el-select v-model="filterForm.type" :placeholder="$t('auto.List.c079e7d5')" clearable style="width: 160px">
             <el-option v-for="t in clueTypeMap" :key="t.value" :label="t.label" :value="String(t.value)" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.List.5.644603')">
-          <el-select v-model="filterForm.verified" :placeholder="$t('auto.List.6.a8b0c2')" clearable style="width: 140px">
-            <el-option :label="$t('auto.List.7.876caf')" :value="1" />
-            <el-option :label="$t('auto.List.8.b928ea')" :value="0" />
+        <el-form-item :label="$t('auto.List.644603e5')">
+          <el-select v-model="filterForm.verified" :placeholder="$t('auto.List.a8b0c204')" clearable style="width: 140px">
+            <el-option :label="$t('auto.List.876caf44')" :value="1" />
+            <el-option :label="$t('auto.List.b928ea24')" :value="0" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.List.9.19fcb9')">
+        <el-form-item :label="$t('auto.List.19fcb9eb')">
           <el-date-picker
             v-model="dateRange"
             type="daterange"
-            :range-separator="$t('auto.List.10.981cbe')"
-            :start-placeholder="$t('auto.List.11.a3e3b8')"
-            :end-placeholder="$t('auto.List.12.12f1d7')"
+            :range-separator="$t('auto.List.981cbe31')"
+            :start-placeholder="$t('auto.List.a3e3b883')"
+            :end-placeholder="$t('auto.List.12f1d7ef')"
             value-format="YYYY-MM-DD"
             style="width: 280px"
           />
@@ -99,45 +99,45 @@
         :data="filteredList"
         v-loading="loading"
         stripe
-        ::empty-text="$t('auto.List.13.086bbe')"
+        ::empty-text="$t('auto.List.086bbe59')"
       >
         <el-table-column prop="id" label="ID" width="80" />
-        <el-table-column prop="name" :label="$t('auto.List.14.d7ec2d')" min-width="140" show-overflow-tooltip />
-        <el-table-column prop="account" :label="$t('auto.List.15.7035c6')" min-width="160" show-overflow-tooltip />
-        <el-table-column :label="$t('auto.List.16.226b09')" min-width="100">
+        <el-table-column prop="name" :label="$t('auto.List.d7ec2d3f')" min-width="140" show-overflow-tooltip />
+        <el-table-column prop="account" :label="$t('auto.List.7035c62f')" min-width="160" show-overflow-tooltip />
+        <el-table-column :label="$t('auto.List.226b0912')" min-width="100">
           <template #default="{ row }">
             <el-tag size="small">{{ getClueType(row.type) }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="city" :label="$t('auto.List.17.f7d29d')" min-width="100" show-overflow-tooltip />
-        <el-table-column prop="address" :label="$t('auto.List.18.765048')" min-width="180" show-overflow-tooltip />
-        <el-table-column :label="$t('auto.List.19.26ca20')" min-width="120" show-overflow-tooltip>
+        <el-table-column prop="city" :label="$t('auto.List.f7d29dfa')" min-width="100" show-overflow-tooltip />
+        <el-table-column prop="address" :label="$t('auto.List.7650487a')" min-width="180" show-overflow-tooltip />
+        <el-table-column :label="$t('auto.List.26ca20b1')" min-width="120" show-overflow-tooltip>
           <template #default="{ row }">
             <el-tag :type="getChannelTagType(row.source)" effect="plain" size="small">
               {{ getChannelLabel(row.source) || row.source || '-' }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.5.644603')" min-width="100" align="center">
+        <el-table-column :label="$t('auto.List.644603e5')" min-width="100" align="center">
           <template #default="{ row }">
             <el-tag :type="(row.is_verify ?? row.verified) >= 1 ? 'success' : 'info'" size="small">
               {{ (row.is_verify ?? row.verified) >= 1 ? '已验证' : '未验证' }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="created_at" :label="$t('auto.List.20.eca37c')" min-width="170" show-overflow-tooltip>
+        <el-table-column prop="created_at" :label="$t('auto.List.eca37cb0')" min-width="170" show-overflow-tooltip>
           <template #default="{ row }">{{ formatTime(row.created_at || row.createdAt) }}</template>
         </el-table-column>
-        <el-table-column prop="last_follow_at" :label="$t('auto.List.21.3ed5b8')" min-width="170" show-overflow-tooltip>
+        <el-table-column prop="last_follow_at" :label="$t('auto.List.3ed5b8a2')" min-width="170" show-overflow-tooltip>
           <template #default="{ row }">{{ formatTime(row.last_follow_at || row.lastFollowAt) }}</template>
         </el-table-column>
-        <el-table-column prop="assignee" :label="$t('auto.List.22.3b22c9')" min-width="120" show-overflow-tooltip />
-        <el-table-column :label="$t('auto.List.23.2b6bc0')" min-width="200" fixed="right">
+        <el-table-column prop="assignee" :label="$t('auto.List.3b22c931')" min-width="120" show-overflow-tooltip />
+        <el-table-column :label="$t('auto.List.2b6bc0f2')" min-width="200" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" size="small" @click="viewClue(row)">{{ $t('auto.List.34.607e7a') }}</el-button>
-            <el-button link type="primary" size="small" @click="assignClue(row)">{{ $t('auto.List.35.e39de3') }}</el-button>
-            <el-button link type="warning" size="small" @click="editClue(row)">{{ $t('auto.List.36.95b351') }}</el-button>
-            <el-button link type="danger" size="small" @click="deleteClue(row)">{{ $t('auto.List.37.2f4aad') }}</el-button>
+            <el-button link type="primary" size="small" @click="viewClue(row)">{{ $t('auto.List.607e7a4f') }}</el-button>
+            <el-button link type="primary" size="small" @click="assignClue(row)">{{ $t('auto.List.e39de337') }}</el-button>
+            <el-button link type="warning" size="small" @click="editClue(row)">{{ $t('auto.List.95b351c8') }}</el-button>
+            <el-button link type="danger" size="small" @click="deleteClue(row)">{{ $t('auto.List.2f4aaddd') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -156,18 +156,18 @@
     </el-card>
 
     
-    <el-dialog v-model="importDialogVisible" ::title="$t('auto.List.24.9b7bd1')" width="600px">
+    <el-dialog v-model="importDialogVisible" ::title="$t('auto.List.9b7bd118')" width="600px">
       <el-form ref="importFormRef" :model="importForm" label-width="80px">
-        <el-form-item ::label="$t('auto.List.25.4d6ae6')" prop="type">
-          <el-select v-model="importForm.type" ::placeholder="$t('auto.List.26.24487a')" value-key="value" @change="handleTypeChange" style="width: 100%">
+        <el-form-item ::label="$t('auto.List.4d6ae67f')" prop="type">
+          <el-select v-model="importForm.type" ::placeholder="$t('auto.List.24487a58')" value-key="value" @change="handleTypeChange" style="width: 100%">
             <el-option v-for="item in clueTypeMap" :key="String(item.value)" :label="item.label" :value="String(item.value)"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item ::label="$t('auto.List.27.512165')" prop="content">
+        <el-form-item ::label="$t('auto.List.512165ef')" prop="content">
           <el-input
             type="textarea"
             v-model="importForm.content"
-            ::placeholder="$t('auto.List.28.3db0df')"
+            ::placeholder="$t('auto.List.3db0dfe7')"
             :rows="10"
             class="import-textarea"
             @input="handleTextareaInput"
@@ -181,18 +181,18 @@
     </el-dialog>
 
     
-    <el-dialog v-model="detailVisible" :title="$t('auto.List.29.f0e268')" width="640px">
+    <el-dialog v-model="detailVisible" :title="$t('auto.List.f0e2686b')" width="640px">
       <el-descriptions v-if="current" :column="2" border>
         <el-descriptions-item label="ID">{{ current.id }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.List.14.d7ec2d')">{{ current.name }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.List.15.7035c6')">{{ current.account }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.List.16.226b09')">{{ getClueType(current.type) }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.List.17.f7d29d')">{{ current.city || '-' }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.List.18.765048')">{{ current.address || '-' }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.List.19.26ca20')">{{ getChannelLabel(current.source) || current.source || '-' }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.List.30.cd8992')">{{ (current.is_verify ?? current.verified) >= 1 ? '已验证' : '未验证' }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.List.20.eca37c')">{{ formatTime(current.created_at || current.createdAt) }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.List.22.3b22c9')">{{ current.assignee || '-' }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.d7ec2d3f')">{{ current.name }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.7035c62f')">{{ current.account }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.226b0912')">{{ getClueType(current.type) }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.f7d29dfa')">{{ current.city || '-' }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.7650487a')">{{ current.address || '-' }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.26ca20b1')">{{ getChannelLabel(current.source) || current.source || '-' }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.cd8992b6')">{{ (current.is_verify ?? current.verified) >= 1 ? '已验证' : '未验证' }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.eca37cb0')">{{ formatTime(current.created_at || current.createdAt) }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.3b22c931')">{{ current.assignee || '-' }}</el-descriptions-item>
       </el-descriptions>
     </el-dialog>
   </div>
@@ -291,7 +291,7 @@ const fetchCluelist = async () => {
     cluetotal.value = res.total || 0
     refreshStats()
   } catch (error) {
-    console.error(t('auto.List.38.0c1897'), error)
+    console.error(t('auto.List.0c189758'), error)
     cluelist.value = []
     cluetotal.value = 0
   } finally {
@@ -314,18 +314,18 @@ const deleteClue = async (clue) => {
   try {
     await ElMessageBox.confirm(
       `确定要删除线索 ${clue.name} 吗？`,
-      t('auto.List.39.900c70'),
-      { confirmButtonText: t('auto.List.40.38cf16'), cancelButtonText: t('auto.List.41.625fb2'), type: 'warning' }
+      t('auto.List.900c70fa'),
+      { confirmButtonText: t('auto.List.38cf16f2'), cancelButtonText: t('auto.List.625fb26b'), type: 'warning' }
     )
   } catch {
     return
   }
   try {
     await clueApi.delete(clue.id)
-    ElMessage.success(i18n.global.t(t('auto.List.42.22ea51')))
+    ElMessage.success(i18n.global.t(t('auto.List.22ea51a4')))
     fetchCluelist()
   } catch (e) {
-    ElMessage.error(i18n.global.t(t('auto.List.43.acf066')))
+    ElMessage.error(i18n.global.t(t('auto.List.acf0664a')))
   }
 }
 
@@ -334,10 +334,10 @@ const viewClue = (row) => {
   detailVisible.value = true
 }
 const assignClue = (row) => {
-  ElMessage.info(i18n.global.t(t('auto.List.44.ecaf35')) + (row.name || row.id))
+  ElMessage.info(i18n.global.t(t('auto.List.ecaf351f')) + (row.name || row.id))
 }
 const editClue = (row) => {
-  ElMessage.info(i18n.global.t(t('auto.List.45.3c685a')) + (row.name || row.id))
+  ElMessage.info(i18n.global.t(t('auto.List.3c685a52')) + (row.name || row.id))
 }
 
 const detailVisible = ref(false);
@@ -354,11 +354,11 @@ const openImportDialog = () => {
 
 const submitImport = async () => {
   if (!importForm.value.type) {
-    ElMessage.error(i18n.global.t(t('auto.List.46.bd144b')))
+    ElMessage.error(i18n.global.t(t('auto.List.bd144be3')))
     return
   }
   if (!importForm.value.content) {
-    ElMessage.error(i18n.global.t(t('auto.List.47.0183aa')))
+    ElMessage.error(i18n.global.t(t('auto.List.0183aa26')))
     return
   }
   const lines = importForm.value.content.split('\n')
@@ -379,7 +379,7 @@ const submitImport = async () => {
     })
   }
   if (clues.length === 0) {
-    ElMessage.warning(i18n.global.t(t('auto.List.48.a0779b')))
+    ElMessage.warning(i18n.global.t(t('auto.List.a0779b51')))
     return
   }
   try {
@@ -389,8 +389,8 @@ const submitImport = async () => {
     importForm.value = { type: '', content: '' }
     fetchCluelist()
   } catch (error) {
-    console.error(t('auto.List.49.43326d'), error)
-    ElMessage.error(i18n.global.t(t('auto.List.50.4451a3')))
+    console.error(t('auto.List.43326d5b'), error)
+    ElMessage.error(i18n.global.t(t('auto.List.4451a3ca')))
   }
 }
 

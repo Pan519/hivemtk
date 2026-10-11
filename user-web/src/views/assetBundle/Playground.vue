@@ -4,29 +4,29 @@
     <el-card class="header-card" shadow="never">
       <el-row :gutter="20">
         <el-col :span="6">
-          <el-form-item :label="$t('auto.Playground.1.69847d')" label-width="80px">
+          <el-form-item :label="$t('auto.Playground.69847d0a')" label-width="80px">
             <el-input v-model="bundle.asset_id" placeholder="hive_sales_vape_cn_001" :disabled="isEdit" />
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item :label="$t('auto.Playground.2.0acf6d')" label-width="90px">
-            <el-input v-model="bundle.title" :placeholder="$t('auto.Playground.3.8774f1')" />
+          <el-form-item :label="$t('auto.Playground.0acf6dc2')" label-width="90px">
+            <el-input v-model="bundle.title" :placeholder="$t('auto.Playground.8774f184')" />
           </el-form-item>
         </el-col>
         <el-col :span="4">
-          <el-form-item :label="$t('auto.Playground.4.fe2df0')" label-width="60px">
+          <el-form-item :label="$t('auto.Playground.fe2df04a')" label-width="60px">
             <el-input v-model="bundle.version" placeholder="1.0.0" />
           </el-form-item>
         </el-col>
         <el-col :span="4">
-          <el-form-item :label="$t('auto.Playground.5.6adafe')" label-width="60px">
-            <el-input v-model="bundle.industry" :placeholder="$t('auto.Playground.6.4529df')" />
+          <el-form-item :label="$t('auto.Playground.6adafe27')" label-width="60px">
+            <el-input v-model="bundle.industry" :placeholder="$t('auto.Playground.4529dfda')" />
           </el-form-item>
         </el-col>
         <el-col :span="4">
           <div class="header-actions">
-            <el-button type="primary" :loading="saving" @click="handleSave">{{ $t('auto.Playground.15.afcc3e') }}</el-button>
-            <el-button v-if="bundle.id" type="success" @click="handlePublish">{{ $t('auto.Playground.16.e822c2') }}</el-button>
+            <el-button type="primary" :loading="saving" @click="handleSave">{{ $t('auto.Playground.afcc3e34') }}</el-button>
+            <el-button v-if="bundle.id" type="success" @click="handlePublish">{{ $t('auto.Playground.e822c24e') }}</el-button>
           </div>
         </el-col>
       </el-row>
@@ -38,8 +38,8 @@
         <el-card class="left-panel" shadow="never">
           <template #header>
             <div class="panel-header">
-              <span>{{ $t('auto.Playground.17.709de7') }}</span>
-              <el-button type="primary" size="small" @click="addMessage('user')">{{ $t('auto.Playground.18.581c38') }}</el-button>
+              <span>{{ $t('auto.Playground.709de71c') }}</span>
+              <el-button type="primary" size="small" @click="addMessage('user')">{{ $t('auto.Playground.581c3818') }}</el-button>
             </div>
           </template>
 
@@ -54,9 +54,9 @@
                 <el-tag :type="roleTagType(msg.role)" size="small">
                   {{ roleLabel(msg.role) }}
                 </el-tag>
-                <span v-if="idx === 0 && msg.role === 'system'" class="hint">{{ $t('auto.Playground.19.1bac12') }}</span>
-                <span v-else-if="msg.role === 'user'" class="hint">{{ $t('auto.Playground.20.d5eb2e') }}</span>
-                <span v-else-if="msg.role === 'assistant'" class="hint">{{ $t('auto.Playground.21.26ff4a') }}</span>
+                <span v-if="idx === 0 && msg.role === 'system'" class="hint">{{ $t('auto.Playground.1bac1244') }}</span>
+                <span v-else-if="msg.role === 'user'" class="hint">{{ $t('auto.Playground.d5eb2ea7') }}</span>
+                <span v-else-if="msg.role === 'assistant'" class="hint">{{ $t('auto.Playground.26ff4a38') }}</span>
                 <div class="message-actions">
                   <el-button
                     v-if="idx > 0"
@@ -76,7 +76,7 @@
                     type="danger"
                     link
                     @click="removeMessage(idx)"
-                  >{{ $t('auto.Playground.22.2f4aad') }}</el-button>
+                  >{{ $t('auto.Playground.2f4aaddd') }}</el-button>
                 </div>
               </div>
               <el-input
@@ -90,9 +90,9 @@
           </div>
 
           <div class="add-pair-row">
-            <el-button @click="addMessage('user')">{{ $t('auto.Playground.23.e043f7') }}</el-button>
-            <el-button @click="addMessage('assistant')">{{ $t('auto.Playground.24.9ce2e5') }}</el-button>
-            <el-button @click="addMessage('system')">{{ $t('auto.Playground.25.cf57fd') }}</el-button>
+            <el-button @click="addMessage('user')">{{ $t('auto.Playground.e043f744') }}</el-button>
+            <el-button @click="addMessage('assistant')">{{ $t('auto.Playground.9ce2e580') }}</el-button>
+            <el-button @click="addMessage('system')">{{ $t('auto.Playground.cf57fdb0') }}</el-button>
           </div>
         </el-card>
       </el-col>
@@ -102,24 +102,24 @@
         <el-card class="right-panel" shadow="never">
           <template #header>
             <div class="panel-header">
-              <span>{{ $t('auto.Playground.26.02ba7a') }}</span>
+              <span>{{ $t('auto.Playground.02ba7a39') }}</span>
             </div>
           </template>
 
           
           <div class="config-section">
-            <div class="section-title">{{ $t('auto.Playground.27.d20472') }}</div>
+            <div class="section-title">{{ $t('auto.Playground.d20472c2') }}</div>
             <el-form label-width="120px" size="small">
-              <el-form-item :label="$t('auto.Playground.7.610269')">
+              <el-form-item :label="$t('auto.Playground.610269e4')">
                 <el-input v-model="sandbox.endpoint" placeholder="http://localhost:11434/v1/chat/completions" />
               </el-form-item>
-              <el-form-item :label="$t('auto.Playground.8.0e0f4d')">
+              <el-form-item :label="$t('auto.Playground.0e0f4df3')">
                 <el-input v-model="sandbox.model" placeholder="qwen2.5:7b" />
               </el-form-item>
-              <el-form-item :label="$t('auto.Playground.9.5b8c65')">
+              <el-form-item :label="$t('auto.Playground.5b8c65d8')">
                 <el-slider v-model="sandbox.temperature" :min="0" :max="1" :step="0.1" show-input />
               </el-form-item>
-              <el-form-item :label="$t('auto.Playground.10.e09c9b')">
+              <el-form-item :label="$t('auto.Playground.e09c9b51')">
                 <el-input-number v-model="sandbox.maxTokens" :min="128" :max="8192" :step="128" />
               </el-form-item>
             </el-form>
@@ -127,7 +127,7 @@
 
           
           <div class="chat-section">
-            <div class="section-title">{{ $t('auto.Playground.28.92bdbb') }}</div>
+            <div class="section-title">{{ $t('auto.Playground.92bdbbc2') }}</div>
             <div class="chat-history" ref="chatHistoryRef">
               <div
                 v-for="(m, i) in sandbox.history"
@@ -138,14 +138,14 @@
                 <div class="chat-role">{{ roleLabel(m.role) }}</div>
                 <pre class="chat-content">{{ m.content }}</pre>
               </div>
-              <el-empty v-if="!sandbox.history.length" :description="$t('auto.Playground.11.53a063')" :image-size="60" />
+              <el-empty v-if="!sandbox.history.length" :description="$t('auto.Playground.53a0637a')" :image-size="60" />
             </div>
             <div class="chat-input-row">
               <el-input
                 v-model="sandbox.input"
                 type="textarea"
                 :rows="2"
-                :placeholder="$t('auto.Playground.12.1ba6a5')"
+                :placeholder="$t('auto.Playground.1ba6a52e')"
                 @keydown.enter.ctrl="runSandbox"
               />
               <el-button type="primary" :loading="sandbox.running" @click="runSandbox">
@@ -156,7 +156,7 @@
 
           
           <div class="intent-section" v-if="sandbox.lastIntent">
-            <div class="section-title">{{ $t('auto.Playground.29.6d5f36') }}</div>
+            <div class="section-title">{{ $t('auto.Playground.6d5f3689') }}</div>
             <div class="intent-status">
               <el-tag :type="sandbox.lastIntent.valid ? 'success' : 'danger'">
                 {{ sandbox.lastIntent.valid ? '🟢 合法格式，成功抓取' : '🔴 非法格式' }}
@@ -189,20 +189,20 @@
               label-width="120px"
               size="small"
             >
-              <el-form-item :label="$t('auto.Playground.13.694a76')">
+              <el-form-item :label="$t('auto.Playground.694a76ec')">
                 <el-input v-model="bundle.price" placeholder="$ 299.00" />
               </el-form-item>
-              <el-form-item :label="$t('auto.Playground.14.4705b8')">
+              <el-form-item :label="$t('auto.Playground.4705b884')">
                 <el-radio-group v-model="bundle.scope">
-                  <el-radio label="private">{{ $t('auto.Playground.30.3dc518') }}</el-radio>
-                  <el-radio label="shared">{{ $t('auto.Playground.31.fffd3c') }}</el-radio>
-                  <el-radio label="official">{{ $t('auto.Playground.32.f5c379') }}</el-radio>
+                  <el-radio label="private">{{ $t('auto.Playground.3dc5185d') }}</el-radio>
+                  <el-radio label="shared">{{ $t('auto.Playground.fffd3ce7') }}</el-radio>
+                  <el-radio label="official">{{ $t('auto.Playground.f5c3795b') }}</el-radio>
                 </el-radio-group>
               </el-form-item>
             </el-form>
             <el-button type="primary" plain class="publish-btn" @click="handlePublish">
               {{ platformEnabled ? '🚀 审核上架到官方蜂巢商城' : '🚀 发布到本地资产库' }}
-              <span class="publish-hint">{{ $t('auto.Playground.33.cff336') }}</span>
+              <span class="publish-hint">{{ $t('auto.Playground.cff3361b') }}</span>
             </el-button>
           </div>
         </el-card>
@@ -282,10 +282,10 @@ const roleTagType = (r) => ({
 }[r] || 'info')
 
 const rolePlaceholder = (r) => ({
-  system: t('auto.Playground.34.d282e8'),
-  user: t('auto.Playground.35.97423a'),
+  system: t('auto.Playground.d282e812'),
+  user: t('auto.Playground.97423adf'),
   assistant: 'AI 标准回复（含末尾 ```json 业务结算块```）',
-  tool: t('auto.Playground.36.9742cd')
+  tool: t('auto.Playground.9742cd7b')
 }[r] || '')
 
 const addMessage = (role = 'user') => {
@@ -328,21 +328,21 @@ const loadBundle = async () => {
       bundle.messages = (data.messages || []).map(m => ({ ...m }))
     }
   } catch (e) {
-    ElMessage.error(t('auto.Playground.37.2cfc14') + (e?.message || e))
+    ElMessage.error(t('auto.Playground.2cfc148d') + (e?.message || e))
   }
 };
 
 const handleSave = async () => {
   if (!bundle.asset_id) {
-    ElMessage.warning(t('auto.Playground.38.b9b9a9'))
+    ElMessage.warning(t('auto.Playground.b9b9a97e'))
     return
   }
   if (!bundle.title) {
-    ElMessage.warning(t('auto.Playground.39.ac8238'))
+    ElMessage.warning(t('auto.Playground.ac8238fb'))
     return
   }
   if (!bundle.messages.length) {
-    ElMessage.warning(t('auto.Playground.40.a397f8'))
+    ElMessage.warning(t('auto.Playground.a397f8ff'))
     return
   }
   saving.value = true
@@ -359,20 +359,20 @@ const handleSave = async () => {
     if (bundle.id) {
       payload.id = bundle.id
       await updateBundle(bundle.id, payload)
-      ElMessage.success(t('auto.Playground.41.55aa63'))
+      ElMessage.success(t('auto.Playground.55aa6366'))
     } else {
       const resp = await createBundle(payload)
       const data = resp?.data || resp
       if (data && data.id) {
         bundle.id = data.id
-        ElMessage.success(t('auto.Playground.42.3b1083'))
+        ElMessage.success(t('auto.Playground.3b108349'))
         router.replace(`/asset-bundle/playground/${bundle.asset_id}`)
       } else {
-        ElMessage.success(t('auto.Playground.42.3b1083'))
+        ElMessage.success(t('auto.Playground.3b108349'))
       }
     }
   } catch (e) {
-    ElMessage.error(t('auto.Playground.43.40f902') + (e?.message || e))
+    ElMessage.error(t('auto.Playground.40f90217') + (e?.message || e))
   } finally {
     saving.value = false
   }
@@ -380,29 +380,29 @@ const handleSave = async () => {
 
 const handlePublish = async () => {
   if (!bundle.id) {
-    ElMessage.warning(t('auto.Playground.44.9558c4'))
+    ElMessage.warning(t('auto.Playground.9558c46d'))
     return
   }
   const toPlatform = platformEnabled.value
   try {
     await ElMessageBox.confirm(
-      toPlatform ? t('auto.Playground.45.40ec61') : t('auto.Playground.46.325fd5'),
-      t('auto.Playground.47.e83a25'), { type: 'warning' })
+      toPlatform ? t('auto.Playground.40ec618c') : t('auto.Playground.325fd5f5'),
+      t('auto.Playground.e83a256e'), { type: 'warning' })
     await publishBundle(bundle.id)
     bundle.status = 'active'
     if (!toPlatform) {
-      ElMessage.success(t('auto.Playground.48.ac3aba'))
+      ElMessage.success(t('auto.Playground.ac3aba2b'))
       return
     }
     try {
       await submitToPlatform(bundle.id)
-      ElMessage.success(t('auto.Playground.49.1c6034'))
+      ElMessage.success(t('auto.Playground.1c603424'))
     } catch (e) {
-      ElMessage.warning(t('auto.Playground.50.f716d0') + (e?.message || e))
+      ElMessage.warning(t('auto.Playground.f716d0d8') + (e?.message || e))
     }
   } catch (e) {
     if (e !== 'cancel') {
-      ElMessage.error(t('auto.Playground.51.bd774a') + (e?.message || e))
+      ElMessage.error(t('auto.Playground.bd774adc') + (e?.message || e))
     }
   }
 };
@@ -435,11 +435,11 @@ const extractIntent = (reply) => {
 
 const runSandbox = async () => {
   if (!sandbox.input.trim()) {
-    ElMessage.warning(t('auto.Playground.52.32f04b'))
+    ElMessage.warning(t('auto.Playground.32f04b9e'))
     return
   }
   if (!bundle.messages.length) {
-    ElMessage.warning(t('auto.Playground.53.0a3a6c'))
+    ElMessage.warning(t('auto.Playground.0a3a6c8a'))
     return
   }
   sandbox.running = true
@@ -497,8 +497,8 @@ const runSandbox = async () => {
     }
   } catch (e) {
     if (!weaveOk) {
-      const msg = (e && e.message) ? e.message : t('auto.Playground.54.803571');
-      ElMessage.error(t('auto.Playground.55.e32926') + msg)
+      const msg = (e && e.message) ? e.message : t('auto.Playground.80357119');
+      ElMessage.error(t('auto.Playground.e32926c4') + msg)
       sandbox.history.push({
         role: 'assistant',
         content: `[织布失败] ${msg}\n\n提示：\n1. 请先「保存」资产包（织布需按 asset_id 读取已保存的 messages）\n2. 确认 asset_id 正确且未被删除`

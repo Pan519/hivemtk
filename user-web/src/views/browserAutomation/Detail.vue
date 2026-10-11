@@ -3,91 +3,91 @@
     <div class="header">
       <h2>{{ task.name }} <el-tag :type="task.status === 'running' ? 'warning' : 'info'">{{ task.status }}</el-tag></h2>
       <div>
-        <el-button type="success" :disabled="task.status === 'running'" @click="onRun">{{ $t('auto.Detail.31.1a6aa2') }}</el-button>
-        <el-button v-if="task.status === 'draft'" @click="onPublish">{{ $t('auto.Detail.32.83611a') }}</el-button>
-        <el-button @click="$router.push(`/browser-automation/tasks/${task.id}/edit`)">{{ $t('auto.Detail.33.95b351') }}</el-button>
+        <el-button type="success" :disabled="task.status === 'running'" @click="onRun">{{ $t('auto.Detail.1a6aa24e') }}</el-button>
+        <el-button v-if="task.status === 'draft'" @click="onPublish">{{ $t('auto.Detail.83611abd') }}</el-button>
+        <el-button @click="$router.push(`/browser-automation/tasks/${task.id}/edit`)">{{ $t('auto.Detail.95b351c8') }}</el-button>
       </div>
     </div>
 
     <el-descriptions :column="3" border style="margin-top: 12px">
-      <el-descriptions-item :label="$t('auto.Detail.1.226b09')">{{ task.task_type }}</el-descriptions-item>
-      <el-descriptions-item :label="$t('auto.Detail.2.f0789e')">{{ task.brain_mode ? 'Brain（LLM）' : '显式步骤' }}</el-descriptions-item>
+      <el-descriptions-item :label="$t('auto.Detail.226b0912')">{{ task.task_type }}</el-descriptions-item>
+      <el-descriptions-item :label="$t('auto.Detail.f0789e79')">{{ task.brain_mode ? 'Brain（LLM）' : '显式步骤' }}</el-descriptions-item>
       <el-descriptions-item label="URL">
         <a :href="task.url" target="_blank" rel="noopener">{{ task.url }}</a>
       </el-descriptions-item>
-      <el-descriptions-item :label="$t('auto.Detail.3.2dbd74')">{{ task.loop_count }}</el-descriptions-item>
-      <el-descriptions-item :label="$t('auto.Detail.4.2a700c')">{{ task.delay_ms }}ms</el-descriptions-item>
-      <el-descriptions-item :label="$t('auto.Detail.5.e944c7')">{{ task.timeout_sec }}s</el-descriptions-item>
-      <el-descriptions-item :label="$t('auto.Detail.6.37cd80')">{{ task.retry_on_fail ? `${task.retry_delay_sec}s × ${task.max_retry_times} 次` : '关闭' }}</el-descriptions-item>
-      <el-descriptions-item :label="$t('auto.Detail.7.74069d')">{{ task.require_confirm ? '提交前需人工放行' : '全自动' }}</el-descriptions-item>
-      <el-descriptions-item :label="$t('auto.Detail.8.f3d8ee')">{{ task.last_run_at ? new Date(task.last_run_at).toLocaleString('zh-CN') : '—' }}</el-descriptions-item>
-      <el-descriptions-item :label="$t('auto.Detail.9.009d64')">{{ task.last_result || '—' }}</el-descriptions-item>
-      <el-descriptions-item v-if="task.error_msg" :label="$t('auto.Detail.10.7030ff')" :span="3">
+      <el-descriptions-item :label="$t('auto.Detail.2dbd74ad')">{{ task.loop_count }}</el-descriptions-item>
+      <el-descriptions-item :label="$t('auto.Detail.2a700c39')">{{ task.delay_ms }}ms</el-descriptions-item>
+      <el-descriptions-item :label="$t('auto.Detail.e944c7c9')">{{ task.timeout_sec }}s</el-descriptions-item>
+      <el-descriptions-item :label="$t('auto.Detail.37cd8040')">{{ task.retry_on_fail ? `${task.retry_delay_sec}s × ${task.max_retry_times} 次` : '关闭' }}</el-descriptions-item>
+      <el-descriptions-item :label="$t('auto.Detail.74069d14')">{{ task.require_confirm ? '提交前需人工放行' : '全自动' }}</el-descriptions-item>
+      <el-descriptions-item :label="$t('auto.Detail.f3d8eec5')">{{ task.last_run_at ? new Date(task.last_run_at).toLocaleString('zh-CN') : '—' }}</el-descriptions-item>
+      <el-descriptions-item :label="$t('auto.Detail.009d6473')">{{ task.last_result || '—' }}</el-descriptions-item>
+      <el-descriptions-item v-if="task.error_msg" :label="$t('auto.Detail.7030ff64')" :span="3">
         <span style="color: #ef4444">{{ task.error_msg }}</span>
       </el-descriptions-item>
     </el-descriptions>
 
-    <el-card v-if="!task.brain_mode" :header="$t('auto.Detail.11.08bb8d')" style="margin-top: 16px">
+    <el-card v-if="!task.brain_mode" :header="$t('auto.Detail.08bb8d1a')" style="margin-top: 16px">
       <el-table :data="task.steps || []">
         <el-table-column type="index" label="#" width="60" />
-        <el-table-column prop="action" :label="$t('auto.Detail.12.c500cf')" width="140" />
-        <el-table-column prop="target" :label="$t('auto.Detail.13.73e825')" min-width="180" />
-        <el-table-column prop="value" :label="$t('auto.Detail.14.fe7509')" min-width="140" />
+        <el-table-column prop="action" :label="$t('auto.Detail.c500cfab')" width="140" />
+        <el-table-column prop="target" :label="$t('auto.Detail.73e82552')" min-width="180" />
+        <el-table-column prop="value" :label="$t('auto.Detail.fe7509e0')" min-width="140" />
       </el-table>
     </el-card>
 
-    <el-card v-if="task.brain_mode" :header="$t('auto.Detail.15.0f80fa')" style="margin-top: 16px">
+    <el-card v-if="task.brain_mode" :header="$t('auto.Detail.0f80fa06')" style="margin-top: 16px">
       {{ task.brain_goal }}
     </el-card>
 
-    <el-card :header="$t('auto.Detail.16.e723c0')" style="margin-top: 16px">
+    <el-card :header="$t('auto.Detail.e723c0e5')" style="margin-top: 16px">
       <el-table :data="sessions">
         <el-table-column prop="id" label="Session" width="90">
           <template #default="{ row }">
             <el-link type="primary" @click="$router.push(`/browser-automation/sessions/${row.id}`)">#{{ row.id }}</el-link>
           </template>
         </el-table-column>
-        <el-table-column prop="status" :label="$t('auto.Detail.17.3fea7c')" width="110">
+        <el-table-column prop="status" :label="$t('auto.Detail.3fea7ca7')" width="110">
           <template #default="{ row }">
             <el-tag :type="{ completed: 'success', failed: 'danger', stopped: 'info', active: 'warning' }[row.status] || 'info'">{{ row.status }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="total_steps" :label="$t('auto.Detail.18.52b365')" width="120">
+        <el-table-column prop="total_steps" :label="$t('auto.Detail.52b36576')" width="120">
           <template #default="{ row }">{{ row.success_steps }}/{{ row.total_steps }} 成功</template>
         </el-table-column>
-        <el-table-column prop="duration_ms" :label="$t('auto.Detail.19.39f137')" width="110">
+        <el-table-column prop="duration_ms" :label="$t('auto.Detail.39f1374d')" width="110">
           <template #default="{ row }">{{ sessionDurationText(row) }}</template>
         </el-table-column>
-        <el-table-column prop="error_msg" :label="$t('auto.Detail.10.7030ff')" min-width="200" show-overflow-tooltip />
-        <el-table-column prop="created_at" :label="$t('auto.Detail.20.19fcb9')" width="170">
+        <el-table-column prop="error_msg" :label="$t('auto.Detail.7030ff64')" min-width="200" show-overflow-tooltip />
+        <el-table-column prop="created_at" :label="$t('auto.Detail.19fcb9eb')" width="170">
           <template #default="{ row }">{{ new Date(row.created_at).toLocaleString('zh-CN') }}</template>
         </el-table-column>
       </el-table>
     </el-card>
 
-    <el-card :header="$t('auto.Detail.21.cab7c6')" style="margin-top: 16px">
+    <el-card :header="$t('auto.Detail.cab7c6c3')" style="margin-top: 16px">
       <template v-if="receipts.length">
         <el-table :data="receipts">
-          <el-table-column prop="created_at" :label="$t('auto.Detail.20.19fcb9')" width="170">
+          <el-table-column prop="created_at" :label="$t('auto.Detail.19fcb9eb')" width="170">
             <template #default="{ row }">{{ new Date(row.created_at).toLocaleString('zh-CN') }}</template>
           </el-table-column>
-          <el-table-column prop="platform" :label="$t('auto.Detail.22.498128')" width="120" />
-          <el-table-column prop="action" :label="$t('auto.Detail.12.c500cf')" width="120" />
-          <el-table-column :label="$t('auto.Detail.23.4ff7ea')" min-width="220" show-overflow-tooltip>
+          <el-table-column prop="platform" :label="$t('auto.Detail.4981287f')" width="120" />
+          <el-table-column prop="action" :label="$t('auto.Detail.c500cfab')" width="120" />
+          <el-table-column :label="$t('auto.Detail.4ff7eaf8')" min-width="220" show-overflow-tooltip>
             <template #default="{ row }">
               <a v-if="row.target_url" :href="row.target_url" target="_blank" rel="noopener">{{ row.target_url }}</a>
-              <span v-else style="color: #909399">{{ $t('auto.Detail.34.d370a5') }}</span>
+              <span v-else style="color: #909399">{{ $t('auto.Detail.d370a542') }}</span>
             </template>
           </el-table-column>
-          <el-table-column prop="copy_snapshot" :label="$t('auto.Detail.24.b01cf0')" min-width="200" show-overflow-tooltip />
-          <el-table-column :label="$t('auto.Detail.25.cd8992')" width="120">
+          <el-table-column prop="copy_snapshot" :label="$t('auto.Detail.b01cf0ff')" min-width="200" show-overflow-tooltip />
+          <el-table-column :label="$t('auto.Detail.cd8992b6')" width="120">
             <template #default="{ row }">
               <el-tag :type="row.verified ? 'success' : 'warning'">{{ row.verified ? '已确认发布' : '结果未知' }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column :label="$t('auto.Detail.26.369abf')" width="100">
+          <el-table-column :label="$t('auto.Detail.369abff3')" width="100">
             <template #default="{ row }">
-              <a v-if="row.screenshot_url" :href="row.screenshot_url" target="_blank" rel="noopener">{{ $t('auto.Detail.35.607e7a') }}</a>
+              <a v-if="row.screenshot_url" :href="row.screenshot_url" target="_blank" rel="noopener">{{ $t('auto.Detail.607e7a4f') }}</a>
               <span v-else style="color: #909399">—</span>
             </template>
           </el-table-column>
@@ -96,16 +96,16 @@
           「结果未知」= 平台侧回查没归因到这条评论，不等于没发出去——请人工核对后再决定是否重跑
         </div>
       </template>
-      <div v-else style="color: #909399">{{ $t('auto.Detail.36.b0275e') }}</div>
+      <div v-else style="color: #909399">{{ $t('auto.Detail.b0275ea7') }}</div>
     </el-card>
 
-    <el-card v-if="task.task_type === 'cron'" :header="$t('auto.Detail.27.002198')" style="margin-top: 16px">
+    <el-card v-if="task.task_type === 'cron'" :header="$t('auto.Detail.00219842')" style="margin-top: 16px">
       <template v-if="cron">
         <el-space>
           <span>cron：{{ cron.cron_expr }}</span>
           <el-tag>{{ cron.enabled ? '已启用' : '已停用' }}</el-tag>
           <el-button size="small" @click="toggleCron">{{ cron.enabled ? '停用' : '启用' }}</el-button>
-          <el-button size="small" type="danger" @click="removeCron">{{ $t('auto.Detail.37.2f4aad') }}</el-button>
+          <el-button size="small" type="danger" @click="removeCron">{{ $t('auto.Detail.2f4aaddd') }}</el-button>
         </el-space>
         <div v-if="cronBlocked" class="cron-warn">
           任务状态 {{ task.status }} 不可执行，到点只会空跑（不产生会话，服务端只写一条告警日志）——需先发布
@@ -113,16 +113,16 @@
       </template>
       <template v-else>
         <el-space>
-          <el-input v-model="newCronExpr" :placeholder="$t('auto.Detail.28.5e53e7')" style="width: 200px" />
-          <el-select v-model="newCronTz" clearable :placeholder="$t('auto.Detail.29.458a3d')" style="width: 170px; margin-left: 8px">
+          <el-input v-model="newCronExpr" :placeholder="$t('auto.Detail.5e53e7a3')" style="width: 200px" />
+          <el-select v-model="newCronTz" clearable :placeholder="$t('auto.Detail.458a3d79')" style="width: 170px; margin-left: 8px">
             <el-option v-for="tz in ['Asia/Shanghai','Asia/Tokyo','Europe/London','America/New_York','UTC']" :key="tz" :label="tz" :value="tz" />
           </el-select>
-          <el-button type="primary" @click="addCron">{{ $t('auto.Detail.38.d9449a') }}</el-button>
+          <el-button type="primary" @click="addCron">{{ $t('auto.Detail.d9449a6c') }}</el-button>
         </el-space>
       </template>
     </el-card>
 
-    <el-dialog v-model="hostDialog.visible" :title="$t('auto.Detail.30.604cad')" width="520px">
+    <el-dialog v-model="hostDialog.visible" :title="$t('auto.Detail.604cad2f')" width="520px">
       <HostInstallGuide />
     </el-dialog>
   </div>
@@ -133,8 +133,8 @@
     <el-alert type="error" :closable="false" show-icon>
       <template #title>这条任务读不到：{{ loadError }}</template>
       <div class="error-actions">
-        <el-button size="small" type="primary" @click="load">{{ $t('auto.Detail.39.132c5c') }}</el-button>
-        <el-button size="small" @click="router.push('/browser-automation/tasks')">{{ $t('auto.Detail.40.90e22f') }}</el-button>
+        <el-button size="small" type="primary" @click="load">{{ $t('auto.Detail.132c5cdc') }}</el-button>
+        <el-button size="small" @click="router.push('/browser-automation/tasks')">{{ $t('auto.Detail.90e22f5e') }}</el-button>
       </div>
     </el-alert>
   </div>
@@ -192,7 +192,7 @@ async function load() {
   }
   task.value = unpack(res)
   if (!task.value) {
-    loadError.value = t('auto.Detail.41.9e4395')
+    loadError.value = t('auto.Detail.9e43953e')
     return
   }
 
@@ -230,7 +230,7 @@ async function onRun() {
     const res = await runBrowserTask(task.value.id)
     // 点了执行就要看得见执行：直接进这条会话的监控页（放行闸门、步骤流都在那里）
     const sid = unpack(res)?.session_id
-    ElMessage.success(t('auto.Detail.42.2bdc57'))
+    ElMessage.success(t('auto.Detail.2bdc5742'))
     load()
     if (sid) router.push(`/browser-automation/sessions/${sid}`)
   } catch (e) {
@@ -244,7 +244,7 @@ async function onRun() {
 async function onPublish() {
   try {
     await publishBrowserTask(task.value.id)
-    ElMessage.success(t('auto.Detail.43.dca0c1'))
+    ElMessage.success(t('auto.Detail.dca0c13b'))
     load()
   } catch (e) { ElMessage.error(RUN_ERROR_TEXT(e)) }
 }
@@ -252,7 +252,7 @@ async function onPublish() {
 async function addCron() {
   try {
     await createBrowserCron({ task_id: Number(route.params.id), cron_expr: newCronExpr.value, time_zone: newCronTz.value || '', enabled: true })
-    ElMessage.success(t('auto.Detail.44.d2ffee'))
+    ElMessage.success(t('auto.Detail.d2ffee2f'))
     load()
   } catch (e) { ElMessage.error(String(e?.message || e)) }
 }
@@ -264,7 +264,7 @@ async function toggleCron() {
   try {
     if (cron.value.enabled) await disableBrowserCron(cron.value.id)
     else await enableBrowserCron(cron.value.id)
-    ElMessage.success(next ? t('auto.Detail.45.53ace4') : t('auto.Detail.46.69b0f6'))
+    ElMessage.success(next ? t('auto.Detail.53ace430') : t('auto.Detail.69b0f684'))
   } catch (e) {
     ElMessage.error(`操作失败：${String(e?.message || e)}`)
   }
@@ -273,11 +273,11 @@ async function toggleCron() {
 
 async function removeCron() {
   try {
-    await ElMessageBox.confirm(t('auto.Detail.47.f2b4b1'), t('auto.Detail.48.02d981'), { type: 'warning' })
+    await ElMessageBox.confirm(t('auto.Detail.f2b4b137'), t('auto.Detail.02d9819d'), { type: 'warning' })
   } catch { return } // 用户取消不是失败
   try {
     await deleteBrowserCron(cron.value.id)
-    ElMessage.success(t('auto.Detail.49.6dcb8e'))
+    ElMessage.success(t('auto.Detail.6dcb8e5d'))
   } catch (e) {
     ElMessage.error(`删除失败：${String(e?.message || e)}`)
   }

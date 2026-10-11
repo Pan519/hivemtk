@@ -9,55 +9,55 @@
 
     <el-card v-loading="loading" shadow="never">
       <el-form :model="form" :rules="rules" ref="formRef" label-width="140px" style="max-width: 720px">
-        <el-form-item ::label="$t('auto.Edit.1.881452')">
+        <el-form-item ::label="$t('auto.Edit.88145263')">
           <code class="readonly">{{ form.channel_id }}</code>
         </el-form-item>
         <el-form-item label="AppKey">
           <code class="readonly">{{ form.app_key }}</code>
-          <span class="form-tip">{{ $t('auto.Edit.16.b3fb79') }}</span>
+          <span class="form-tip">{{ $t('auto.Edit.b3fb7972') }}</span>
         </el-form-item>
-        <el-form-item ::label="$t('auto.Edit.2.bbeea9')" prop="channel_name">
+        <el-form-item ::label="$t('auto.Edit.bbeea931')" prop="channel_name">
           <el-input v-model="form.channel_name" maxlength="100" show-word-limit />
         </el-form-item>
-        <el-form-item ::label="$t('auto.Edit.3.aa082b')" prop="allowed_origins_text">
+        <el-form-item ::label="$t('auto.Edit.aa082b8f')" prop="allowed_origins_text">
           <el-input
             v-model="originsText"
             type="textarea"
             :rows="4"
-            ::placeholder="$t('auto.Edit.4.33f6e1')"
+            ::placeholder="$t('auto.Edit.33f6e100')"
           />
         </el-form-item>
-        <el-form-item ::label="$t('auto.Edit.5.1b8578')">
+        <el-form-item ::label="$t('auto.Edit.1b857887')">
           <el-radio-group v-model="form.status">
             <el-radio value="active">{{ $t('启用') }}</el-radio>
             <el-radio value="disabled">{{ $t('禁用') }}</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item ::label="$t('auto.Edit.6.3a47ed')">
+        <el-form-item ::label="$t('auto.Edit.3a47ede0')">
           <el-input v-model="form.welcome_message" type="textarea" :rows="3" maxlength="500" show-word-limit />
         </el-form-item>
-        <el-form-item ::label="$t('auto.Edit.7.648b48')">
+        <el-form-item ::label="$t('auto.Edit.648b4861')">
           <el-color-picker v-model="form.widget_color" />
         </el-form-item>
-        <el-form-item ::label="$t('auto.Edit.8.cd7a69')">
+        <el-form-item ::label="$t('auto.Edit.cd7a699c')">
           <el-radio-group v-model="form.widget_position">
             <el-radio value="bottom-right">{{ $t('右下角') }}</el-radio>
             <el-radio value="bottom-left">{{ $t('左下角') }}</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item ::label="$t('auto.Edit.9.e9bfd4')">
+        <el-form-item ::label="$t('auto.Edit.e9bfd4b7')">
           <el-input v-model="form.widget_title" maxlength="50" />
         </el-form-item>
-        <el-form-item ::label="$t('auto.Edit.10.da8009')">
+        <el-form-item ::label="$t('auto.Edit.da80092f')">
           <el-switch v-model="form.auto_assign" />
         </el-form-item>
-        <el-form-item ::label="$t('auto.Edit.11.f22976')">
+        <el-form-item ::label="$t('auto.Edit.f2297685')">
           <el-input-number v-model="form.confidence_threshold" :min="0" :max="1" :step="0.05" :precision="2" />
         </el-form-item>
-        <el-form-item ::label="$t('auto.Edit.12.1ca3f6')">
+        <el-form-item ::label="$t('auto.Edit.1ca3f6d2')">
           <el-select
             v-model="form.default_agent_id"
-            :placeholder="$t('auto.Edit.13.432056')"
+            :placeholder="$t('auto.Edit.43205678')"
             clearable
             filterable
             style="width: 100%"
@@ -75,10 +75,10 @@
               </div>
             </el-option>
           </el-select>
-          <div class="form-tip">{{ $t('auto.Edit.17.09b6f0') }}</div>
+          <div class="form-tip">{{ $t('auto.Edit.09b6f046') }}</div>
         </el-form-item>
-        <el-form-item ::label="$t('auto.Edit.14.07ae79')" prop="target_language">
-          <el-select v-model="form.target_language" ::placeholder="$t('auto.Edit.15.a28232')" clearable style="width: 100%">
+        <el-form-item ::label="$t('auto.Edit.07ae792a')" prop="target_language">
+          <el-select v-model="form.target_language" ::placeholder="$t('auto.Edit.a28232ae')" clearable style="width: 100%">
             <el-option
               v-for="lang in targetLanguageOptions"
               :key="lang.value"
@@ -86,7 +86,7 @@
               :value="lang.value"
             />
           </el-select>
-          <div class="form-tip">{{ $t('auto.Edit.18.ac1784') }}</div>
+          <div class="form-tip">{{ $t('auto.Edit.ac178471') }}</div>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" :loading="saving" @click="onSubmit">{{ $t('保存') }}</el-button>
@@ -124,7 +124,7 @@ const loadingAgents = ref(false)
 const initialDefaultAgentId = ref(null);
 
 const getAgentTypeLabel = (type) => {
-  const map = { sales: t('auto.Edit.19.7f0dc5'), customer_service: t('auto.Edit.20.e7dea7'), hybrid: t('auto.Edit.21.41ce13') }
+  const map = { sales: t('auto.Edit.7f0dc5e3'), customer_service: t('auto.Edit.e7dea7c4'), hybrid: t('auto.Edit.41ce131a') }
   return map[type] || type || '-'
 }
 
@@ -136,7 +136,7 @@ const form = ref({
   welcome_message: '',
   widget_color: '#1989fa',
   widget_position: 'bottom-right',
-  widget_title: t('auto.Edit.22.7f72e8'),
+  widget_title: t('auto.Edit.7f72e8fe'),
   auto_assign: true,
   confidence_threshold: 0.70,
   target_language: '',
@@ -144,7 +144,7 @@ const form = ref({
 })
 
 const rules = {
-  channel_name: [{ required: true, message: i18n.global.t(t('auto.Edit.23.3fdb50')), trigger: 'blur' }]
+  channel_name: [{ required: true, message: i18n.global.t(t('auto.Edit.3fdb506c')), trigger: 'blur' }]
 }
 
 const loadDetail = async () => {
@@ -156,7 +156,7 @@ const loadDetail = async () => {
     originsText.value = (res.allowed_origins || '').split(',').filter(Boolean).join('\n')
     await Promise.all([loadEnabledAgents(), loadCurrentDefaultAgent()]);
   } catch (err) {
-    ElMessage.error(t('auto.Edit.24.c4fa9b') + (err?.message || err))
+    ElMessage.error(t('auto.Edit.c4fa9b74') + (err?.message || err))
   } finally {
     loading.value = false
   }
@@ -241,12 +241,12 @@ const onSubmit = async () => {
     try {
       await syncDefaultAgentBinding()
     } catch (bindErr) {
-      ElMessage.warning(t('auto.Edit.25.c2669c') + (bindErr?.message || t('auto.Edit.26.974e74')))
+      ElMessage.warning(t('auto.Edit.c2669cb5') + (bindErr?.message || t('auto.Edit.974e7484')))
     }
-    ElMessage.success(i18n.global.t(t('auto.Edit.27.f8dfed')))
+    ElMessage.success(i18n.global.t(t('auto.Edit.f8dfedcd')))
     router.push({ name: 'ChatChannelList' })
   } catch (err) {
-    ElMessage.error(t('auto.Edit.28.78d235') + (err?.message || err))
+    ElMessage.error(t('auto.Edit.78d235cc') + (err?.message || err))
   } finally {
     saving.value = false
   }

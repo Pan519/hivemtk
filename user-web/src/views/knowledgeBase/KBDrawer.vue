@@ -14,32 +14,32 @@
           <template #header>
             <div class="section-header">
               <el-icon><InfoFilled /></el-icon>
-              <span>{{ $t('auto.KBDrawer.15.9e5ffa') }}</span>
+              <span>{{ $t('auto.KBDrawer.9e5ffa06') }}</span>
             </div>
           </template>
           <el-descriptions :column="2" border>
             <el-descriptions-item label="ID">{{ kbData.id }}</el-descriptions-item>
-            <el-descriptions-item :label="$t('auto.KBDrawer.1.031c07')">{{ kbData.kb_code || '-' }}</el-descriptions-item>
-            <el-descriptions-item :label="$t('auto.KBDrawer.2.d7ec2d')" :span="2">
+            <el-descriptions-item :label="$t('auto.KBDrawer.031c076a')">{{ kbData.kb_code || '-' }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.KBDrawer.d7ec2d3f')" :span="2">
               {{ kbData.name }}
             </el-descriptions-item>
-            <el-descriptions-item :label="$t('auto.KBDrawer.3.226b09')" :span="1">
+            <el-descriptions-item :label="$t('auto.KBDrawer.226b0912')" :span="1">
               <el-tag :type="getTypeTagType(kbData.kb_type)" size="small">
                 {{ getTypeLabel(kbData.kb_type) }}
               </el-tag>
             </el-descriptions-item>
-            <el-descriptions-item :label="$t('auto.KBDrawer.4.3fea7c')" :span="1">
+            <el-descriptions-item :label="$t('auto.KBDrawer.3fea7ca7')" :span="1">
               <el-tag :type="kbData.status === 1 ? 'success' : 'info'" size="small">
                 {{ kbData.status === 1 ? '启用' : '禁用' }}
               </el-tag>
             </el-descriptions-item>
-            <el-descriptions-item :label="$t('auto.KBDrawer.5.3bdd08')" :span="2">
+            <el-descriptions-item :label="$t('auto.KBDrawer.3bdd08ad')" :span="2">
               {{ kbData.description || '-' }}
             </el-descriptions-item>
-            <el-descriptions-item :label="$t('auto.KBDrawer.6.eca37c')">
+            <el-descriptions-item :label="$t('auto.KBDrawer.eca37cb0')">
               {{ formatTime(kbData.created_at) }}
             </el-descriptions-item>
-            <el-descriptions-item :label="$t('auto.KBDrawer.7.a001a2')">
+            <el-descriptions-item :label="$t('auto.KBDrawer.a001a226')">
               {{ formatTime(kbData.updated_at) }}
             </el-descriptions-item>
           </el-descriptions>
@@ -50,7 +50,7 @@
           <template #header>
             <div class="section-header">
               <el-icon><DataLine /></el-icon>
-              <span>{{ $t('auto.KBDrawer.16.f56ae6') }}</span>
+              <span>{{ $t('auto.KBDrawer.f56ae67a') }}</span>
             </div>
           </template>
           <el-row :gutter="16">
@@ -58,20 +58,20 @@
               <div class="mini-stat">
                 <div class="mini-stat-label">{{ statsLabel.item }}</div>
                 <div class="mini-stat-value">{{ stats.item_count ?? '—' }}</div>
-                <div class="mini-stat-hint">{{ $t('auto.KBDrawer.17.8f5c4b') }}</div>
+                <div class="mini-stat-hint">{{ $t('auto.KBDrawer.8f5c4bfd') }}</div>
               </div>
             </el-col>
             <el-col :span="8">
               <div class="mini-stat">
-                <div class="mini-stat-label">{{ $t('auto.KBDrawer.18.9b4c8f') }}</div>
+                <div class="mini-stat-label">{{ $t('auto.KBDrawer.9b4c8f90') }}</div>
                 <div class="mini-stat-value text-primary">{{ stats.agent_count }}</div>
               </div>
             </el-col>
             <el-col :span="8">
               <div class="mini-stat">
-                <div class="mini-stat-label">{{ $t('auto.KBDrawer.19.ba4579') }}</div>
+                <div class="mini-stat-label">{{ $t('auto.KBDrawer.ba457909') }}</div>
                 <div class="mini-stat-value text-success">{{ stats.hit_count ?? '—' }}</div>
-                <div class="mini-stat-hint">{{ $t('auto.KBDrawer.17.8f5c4b') }}</div>
+                <div class="mini-stat-hint">{{ $t('auto.KBDrawer.8f5c4bfd') }}</div>
               </div>
             </el-col>
           </el-row>
@@ -82,7 +82,7 @@
           <template #header>
             <div class="section-header">
               <el-icon><Connection /></el-icon>
-              <span>{{ $t('auto.KBDrawer.20.ef41be') }}</span>
+              <span>{{ $t('auto.KBDrawer.ef41be05') }}</span>
               <el-button
                 type="primary"
                 link
@@ -97,32 +97,32 @@
           </template>
           <el-empty
             v-if="!loadingAgents && agentBindings.length === 0"
-            :description="$t('auto.KBDrawer.8.e792d8')"
+            :description="$t('auto.KBDrawer.e792d8b4')"
             :image-size="80"
           />
           <el-table v-else :data="agentBindings" stripe size="small" border>
             <el-table-column prop="id" label="ID" width="70" align="center" />
-            <el-table-column :label="$t('auto.KBDrawer.9.63ecdf')" min-width="160" show-overflow-tooltip>
+            <el-table-column :label="$t('auto.KBDrawer.63ecdffc')" min-width="160" show-overflow-tooltip>
               <template #default="{ row }">
                 <span class="agent-link" role="button" tabindex="0" @click="goEditAgent(row)" @keydown.enter.prevent="goEditAgent(row)" @keydown.space.prevent="goEditAgent(row)">
                   {{ row.name || row.agent_name || '-' }}
                 </span>
               </template>
             </el-table-column>
-            <el-table-column :label="$t('auto.KBDrawer.10.cc6c35')" width="140" show-overflow-tooltip>
+            <el-table-column :label="$t('auto.KBDrawer.cc6c35a3')" width="140" show-overflow-tooltip>
               <template #default="{ row }">
                 {{ row.agent_code || row.code || '-' }}
               </template>
             </el-table-column>
-            <el-table-column :label="$t('auto.KBDrawer.3.226b09')" width="110" align="center">
+            <el-table-column :label="$t('auto.KBDrawer.226b0912')" width="110" align="center">
               <template #default="{ row }">
                 <el-tag size="small">{{ row.agent_type || row.type || '-' }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column :label="$t('auto.KBDrawer.11.d12952')" width="160">
+            <el-table-column :label="$t('auto.KBDrawer.d129528d')" width="160">
               <template #default="{ row }">{{ formatTime(row.created_at || row.bind_at) }}</template>
             </el-table-column>
-            <el-table-column :label="$t('auto.KBDrawer.12.2b6bc0')" width="100" align="center" fixed="right">
+            <el-table-column :label="$t('auto.KBDrawer.2b6bc0f2')" width="100" align="center" fixed="right">
               <template #default="{ row }">
                 <el-button link type="primary" size="small" @click="goEditAgent(row)">
                   查看
@@ -142,7 +142,7 @@
           </template>
           <el-empty
             v-if="!loadingItems && itemsPreview.length === 0"
-            :description="$t('auto.KBDrawer.13.438afb')"
+            :description="$t('auto.KBDrawer.438afb7b')"
             :image-size="80"
           />
           <el-table v-else :data="itemsPreview" stripe size="small" border max-height="320">
@@ -158,11 +158,11 @@
           </el-table>
         </el-card>
       </template>
-      <el-empty v-else :description="$t('auto.KBDrawer.14.1a5036')" />
+      <el-empty v-else :description="$t('auto.KBDrawer.1a5036dd')" />
     </div>
 
     <template #footer>
-      <el-button @click="$emit('update:modelValue', false)">{{ $t('auto.KBDrawer.21.b15d91') }}</el-button>
+      <el-button @click="$emit('update:modelValue', false)">{{ $t('auto.KBDrawer.b15d9127') }}</el-button>
       <el-button
         type="primary"
         @click="goEdit"
@@ -208,16 +208,16 @@ const itemsPreview = ref([])
 const stats = ref({ agent_count: 0 })
 
 const drawerTitle = computed(() => {
-  if (!props.kbData) return t('auto.KBDrawer.22.cbdd57')
+  if (!props.kbData) return t('auto.KBDrawer.cbdd5794')
   return `知识库详情：${props.kbData.name || props.kbData.kb_code || '#' + props.kbData.id}`
 })
 
 const statsLabel = computed(() => {
   const t = props.kbData?.kb_type
-  if (t === 'rag') return { item: t('auto.KBDrawer.23.6bbc64') }
+  if (t === 'rag') return { item: t('auto.KBDrawer.6bbc6401') }
   if (t === 'faq') return { item: 'FAQ 条目' }
   if (t === 'sop') return { item: 'SOP 模板' }
-  return { item: t('auto.KBDrawer.24.ec39bb') }
+  return { item: t('auto.KBDrawer.ec39bb3b') }
 })
 
 const itemColumns = computed(() => {
@@ -225,33 +225,33 @@ const itemColumns = computed(() => {
   if (t === 'rag') {
     return [
       { prop: 'id', label: 'ID', width: 70 },
-      { prop: 'title', label: t('auto.KBDrawer.25.bf1368'), minWidth: 180 },
-      { prop: 'file_type', label: t('auto.KBDrawer.3.226b09'), width: 90 },
-      { prop: 'chunk_count', label: t('auto.KBDrawer.26.f3cb63'), width: 90 },
-      { prop: 'created_at', label: t('auto.KBDrawer.6.eca37c'), width: 160 }
+      { prop: 'title', label: t('auto.KBDrawer.bf13680e'), minWidth: 180 },
+      { prop: 'file_type', label: t('auto.KBDrawer.226b0912'), width: 90 },
+      { prop: 'chunk_count', label: t('auto.KBDrawer.f3cb638c'), width: 90 },
+      { prop: 'created_at', label: t('auto.KBDrawer.eca37cb0'), width: 160 }
     ]
   }
   if (t === 'faq') {
     return [
       { prop: 'id', label: 'ID', width: 70 },
-      { prop: 'question', label: t('auto.KBDrawer.27.5dc99f'), minWidth: 200 },
-      { prop: 'category', label: t('auto.KBDrawer.28.d0771a'), width: 120 },
-      { prop: 'intent', label: t('auto.KBDrawer.29.764aca'), width: 120 },
-      { prop: 'enabled', label: t('auto.KBDrawer.4.3fea7c'), width: 80 }
+      { prop: 'question', label: t('auto.KBDrawer.5dc99f6e'), minWidth: 200 },
+      { prop: 'category', label: t('auto.KBDrawer.d0771a42'), width: 120 },
+      { prop: 'intent', label: t('auto.KBDrawer.764aca4e'), width: 120 },
+      { prop: 'enabled', label: t('auto.KBDrawer.3fea7ca7'), width: 80 }
     ]
   }
   if (t === 'sop') {
     return [
       { prop: 'id', label: 'ID', width: 70 },
-      { prop: 'name', label: t('auto.KBDrawer.30.a5d1c5'), minWidth: 180 },
-      { prop: 'stage', label: t('auto.KBDrawer.31.d31633'), width: 100 },
-      { prop: 'intent', label: t('auto.KBDrawer.29.764aca'), width: 120 },
-      { prop: 'enabled', label: t('auto.KBDrawer.4.3fea7c'), width: 80 }
+      { prop: 'name', label: t('auto.KBDrawer.a5d1c511'), minWidth: 180 },
+      { prop: 'stage', label: t('auto.KBDrawer.d316330b'), width: 100 },
+      { prop: 'intent', label: t('auto.KBDrawer.764aca4e'), width: 120 },
+      { prop: 'enabled', label: t('auto.KBDrawer.3fea7ca7'), width: 80 }
     ]
   }
   return [
     { prop: 'id', label: 'ID', width: 70 },
-    { prop: 'name', label: t('auto.KBDrawer.2.d7ec2d'), minWidth: 180 }
+    { prop: 'name', label: t('auto.KBDrawer.d7ec2d3f'), minWidth: 180 }
   ]
 })
 

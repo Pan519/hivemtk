@@ -22,13 +22,13 @@
     
     <div class="search-form">
       <el-form :inline="true" :model="searchForm" class="search-form-content">
-        <el-form-item ::label="$t('auto.List.1.ae2511')">
-          <el-input v-model="searchForm.name" ::placeholder="$t('auto.List.2.31e59f')" clearable />
+        <el-form-item ::label="$t('auto.List.ae2511fc')">
+          <el-input v-model="searchForm.name" ::placeholder="$t('auto.List.31e59f42')" clearable />
         </el-form-item>
-        <el-form-item ::label="$t('auto.List.3.1b8578')">
-          <el-select v-model="searchForm.status" ::placeholder="$t('auto.List.4.333291')" clearable>
-            <el-option ::label="$t('auto.List.5.62f11e')" value="1" />
-            <el-option ::label="$t('auto.List.6.27ea4f')" value="2" />
+        <el-form-item ::label="$t('auto.List.1b857887')">
+          <el-select v-model="searchForm.status" ::placeholder="$t('auto.List.33329123')" clearable>
+            <el-option ::label="$t('auto.List.62f11ef3')" value="1" />
+            <el-option ::label="$t('auto.List.27ea4fcb')" value="2" />
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -47,19 +47,19 @@
     
     <el-table :data="groupList" border style="width: 100%" v-loading="loading">
       <el-table-column prop="id" label="ID" width="80" />
-      <el-table-column prop="name" ::label="$t('auto.List.1.ae2511')" min-width="150" show-overflow-tooltip />
-      <el-table-column prop="description" ::label="$t('auto.List.7.d1ef7e')" min-width="200" show-overflow-tooltip />
-      <el-table-column prop="member_count" ::label="$t('auto.List.8.d52201')" width="100" />
-      <el-table-column prop="message_count" ::label="$t('auto.List.9.ee6d1b')" width="100" />
-      <el-table-column prop="status" ::label="$t('auto.List.3.1b8578')" width="100">
+      <el-table-column prop="name" ::label="$t('auto.List.ae2511fc')" min-width="150" show-overflow-tooltip />
+      <el-table-column prop="description" ::label="$t('auto.List.d1ef7e0b')" min-width="200" show-overflow-tooltip />
+      <el-table-column prop="member_count" ::label="$t('auto.List.d522011b')" width="100" />
+      <el-table-column prop="message_count" ::label="$t('auto.List.ee6d1b85')" width="100" />
+      <el-table-column prop="status" ::label="$t('auto.List.1b857887')" width="100">
         <template #default="scope">
           <el-tag :type="scope.row.status === 1 ? 'success' : 'danger'">
             {{ scope.row.status === 1 ? '正常' : '禁用' }}
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="created_at" :label="$t('auto.List.10.eca37c')" width="180" />
-      <el-table-column :label="$t('auto.List.11.2b6bc0')" width="340" fixed="right">
+      <el-table-column prop="created_at" :label="$t('auto.List.eca37cb0')" width="180" />
+      <el-table-column :label="$t('auto.List.2b6bc0f2')" width="340" fixed="right">
         <template #default="scope">
           <el-button type="primary" size="small" @click="handleEdit(scope.row)">
             <el-icon><Edit /></el-icon>
@@ -111,22 +111,22 @@
         :rules="rules"
         label-width="100px"
       >
-        <el-form-item :label="$t('auto.List.12.1014b3')" prop="name">
-          <el-input v-model="form.name" :placeholder="$t('auto.List.13.0c6416')" />
+        <el-form-item :label="$t('auto.List.1014b33d')" prop="name">
+          <el-input v-model="form.name" :placeholder="$t('auto.List.0c64160a')" />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.14.3bdd08')" prop="description">
-          <el-input v-model="form.description" type="textarea" :rows="4" :placeholder="$t('auto.List.15.97bb06')" />
+        <el-form-item :label="$t('auto.List.3bdd08ad')" prop="description">
+          <el-input v-model="form.description" type="textarea" :rows="4" :placeholder="$t('auto.List.97bb062a')" />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.16.3fea7c')" prop="status">
+        <el-form-item :label="$t('auto.List.3fea7ca7')" prop="status">
           <el-radio-group v-model="form.status">
-            <el-radio :label="1">{{ $t('auto.List.28.fd6e80') }}</el-radio>
-            <el-radio :label="2">{{ $t('auto.List.29.710ad0') }}</el-radio>
+            <el-radio :label="1">{{ $t('auto.List.fd6e80f1') }}</el-radio>
+            <el-radio :label="2">{{ $t('auto.List.710ad08b') }}</el-radio>
           </el-radio-group>
         </el-form-item>
       </el-form>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="dialogVisible = false">{{ $t('auto.List.30.625fb2') }}</el-button>
+          <el-button @click="dialogVisible = false">{{ $t('auto.List.625fb26b') }}</el-button>
           <el-button type="primary" @click="handleSubmit" :loading="submitting">
             确定
           </el-button>
@@ -137,15 +137,15 @@
     
     <el-dialog
       v-model="membersDialogVisible"
-      :title="$t('auto.List.17.366cd9')"
+      :title="$t('auto.List.366cd9f4')"
       width="800px"
       top="5vh"
     >
       <el-table :data="memberList" border style="width: 100%" v-loading="membersLoading">
         <el-table-column prop="id" label="ID" width="80" />
-        <el-table-column prop="nickname" :label="$t('auto.List.18.23eb0e')" min-width="150" />
-        <el-table-column prop="role" :label="$t('auto.List.19.464f3d')" width="120" />
-        <el-table-column prop="join_time" :label="$t('auto.List.20.8653cd')" width="180" />
+        <el-table-column prop="nickname" :label="$t('auto.List.23eb0e60')" min-width="150" />
+        <el-table-column prop="role" :label="$t('auto.List.464f3d4e')" width="120" />
+        <el-table-column prop="join_time" :label="$t('auto.List.8653cd3d')" width="180" />
       </el-table>
       <div class="pagination-container">
         <el-pagination
@@ -162,16 +162,16 @@
     
     <el-dialog
       v-model="messagesDialogVisible"
-      :title="$t('auto.List.21.cd1964')"
+      :title="$t('auto.List.cd19640f')"
       width="800px"
       top="5vh"
     >
       <el-table :data="messageList" border style="width: 100%" v-loading="messagesLoading">
         <el-table-column prop="id" label="ID" width="80" />
-        <el-table-column prop="sender" :label="$t('auto.List.22.413dc9')" width="150" />
-        <el-table-column prop="content" :label="$t('auto.List.23.2d711b')" min-width="200" show-overflow-tooltip />
-        <el-table-column prop="type" :label="$t('auto.List.24.226b09')" width="100" />
-        <el-table-column prop="created_at" :label="$t('auto.List.25.19fcb9')" width="180" />
+        <el-table-column prop="sender" :label="$t('auto.List.413dc937')" width="150" />
+        <el-table-column prop="content" :label="$t('auto.List.2d711b09')" min-width="200" show-overflow-tooltip />
+        <el-table-column prop="type" :label="$t('auto.List.226b0912')" width="100" />
+        <el-table-column prop="created_at" :label="$t('auto.List.19fcb9eb')" width="180" />
       </el-table>
       <div class="pagination-container">
         <el-pagination
@@ -188,7 +188,7 @@
     
     <el-dialog
       v-model="statsDialogVisible"
-      :title="$t('auto.List.26.70352f')"
+      :title="$t('auto.List.70352f02')"
       width="700px"
     >
       <div v-loading="statsLoading" class="stats-content">
@@ -196,27 +196,27 @@
           <el-col :span="8">
             <el-card class="stats-card">
               <div class="stats-value">{{ currentStats.member_count || 0 }}</div>
-              <div class="stats-label">{{ $t('auto.List.31.df2b42') }}</div>
+              <div class="stats-label">{{ $t('auto.List.df2b42fe') }}</div>
             </el-card>
           </el-col>
           <el-col :span="8">
             <el-card class="stats-card">
               <div class="stats-value">{{ currentStats.message_count || 0 }}</div>
-              <div class="stats-label">{{ $t('auto.List.32.22825d') }}</div>
+              <div class="stats-label">{{ $t('auto.List.22825d3e') }}</div>
             </el-card>
           </el-col>
           <el-col :span="8">
             <el-card class="stats-card">
               <div class="stats-value">{{ currentStats.active_count || 0 }}</div>
-              <div class="stats-label">{{ $t('auto.List.33.a4fc75') }}</div>
+              <div class="stats-label">{{ $t('auto.List.a4fc7501') }}</div>
             </el-card>
           </el-col>
         </el-row>
         <el-descriptions :column="2" border style="margin-top: 20px">
-          <el-descriptions-item :label="$t('auto.List.12.1014b3')">{{ currentGroup.name }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.27.31fde0')">{{ currentGroup.id }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.10.eca37c')">{{ currentGroup.created_at }}</el-descriptions-item>
-          <el-descriptions-item :label="$t('auto.List.16.3fea7c')">{{ currentGroup.status === 1 ? '正常' : '禁用' }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.1014b33d')">{{ currentGroup.name }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.31fde0c9')">{{ currentGroup.id }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.eca37cb0')">{{ currentGroup.created_at }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.3fea7ca7')">{{ currentGroup.status === 1 ? '正常' : '禁用' }}</el-descriptions-item>
         </el-descriptions>
       </div>
     </el-dialog>
@@ -286,13 +286,13 @@ const form = reactive({
 
 const rules = {
   name: [
-    { required: true, message: i18n.global.t(t('auto.List.13.0c6416')), trigger: 'blur' },
-    { min: 2, max: 50, message: i18n.global.t(t('auto.List.34.946a36')), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.List.0c64160a')), trigger: 'blur' },
+    { min: 2, max: 50, message: i18n.global.t(t('auto.List.946a3653')), trigger: 'blur' }
   ]
 };
 
 const dialogTitle = computed(() => {
-  return isEdit.value ? t('auto.List.35.53dfd8') : t('auto.List.36.bd0362')
+  return isEdit.value ? t('auto.List.53dfd8b6') : t('auto.List.bd0362be')
 });
 
 onMounted(() => {
@@ -359,19 +359,19 @@ const handleEdit = (row) => {
 const handleDelete = (row) => {
   ElMessageBox.confirm(
     `确定要删除分组 "${row.name}" 吗？`,
-    t('auto.List.37.02d981'),
+    t('auto.List.02d9819d'),
     {
-      confirmButtonText: t('auto.List.38.38cf16'),
-      cancelButtonText: t('auto.List.30.625fb2'),
+      confirmButtonText: t('auto.List.38cf16f2'),
+      cancelButtonText: t('auto.List.625fb26b'),
       type: 'warning'
     }
   ).then(async () => {
     try {
       await communityApi.deleteGroup(row.id)
-      ElMessage.success(i18n.global.t(t('auto.List.39.0007d1')))
+      ElMessage.success(i18n.global.t(t('auto.List.0007d170')))
       fetchGroupList()
     } catch (error) {
-      ElMessage.error(i18n.global.t(t('auto.List.40.acf066')))
+      ElMessage.error(i18n.global.t(t('auto.List.acf0664a')))
       console.error(error)
     }
   }).catch((e) => {
@@ -392,11 +392,11 @@ const handleSubmit = async () => {
         } else {
           await communityApi.createGroup(form)
         }
-        ElMessage.success(isEdit.value ? t('auto.List.41.55aa63') : t('auto.List.42.04a691'))
+        ElMessage.success(isEdit.value ? t('auto.List.55aa6366') : t('auto.List.04a691b3'))
         dialogVisible.value = false
         fetchGroupList()
       } catch (error) {
-        ElMessage.error(isEdit.value ? t('auto.List.43.930442') : t('auto.List.44.a88928'))
+        ElMessage.error(isEdit.value ? t('auto.List.930442e2') : t('auto.List.a889286a'))
         console.error(error)
       } finally {
         submitting.value = false
@@ -494,10 +494,10 @@ const handleViewStats = async (row) => {
 const handleImport = async () => {
   try {
     await communityApi.importData({})
-    ElMessage.success(i18n.global.t(t('auto.List.45.b6d16a')))
+    ElMessage.success(i18n.global.t(t('auto.List.b6d16a81')))
     fetchGroupList()
   } catch (error) {
-    ElMessage.error(i18n.global.t(t('auto.List.46.fddcd7')))
+    ElMessage.error(i18n.global.t(t('auto.List.fddcd7c6')))
     console.error(error)
   }
 };
@@ -505,9 +505,9 @@ const handleImport = async () => {
 const handleExport = async () => {
   try {
     await communityApi.exportData({})
-    ElMessage.success(i18n.global.t(t('auto.List.47.105c8a')))
+    ElMessage.success(i18n.global.t(t('auto.List.105c8a51')))
   } catch (error) {
-    ElMessage.error(i18n.global.t(t('auto.List.48.dd51ab')))
+    ElMessage.error(i18n.global.t('auto.List.dd51ab50'))
     console.error(error)
   }
 };

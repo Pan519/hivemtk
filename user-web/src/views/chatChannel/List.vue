@@ -4,8 +4,8 @@
     <el-card class="header-card" shadow="never">
       <div class="header-content">
         <div>
-          <h2>{{ $t('auto.List.15.752cbd') }}</h2>
-          <p class="subtitle">{{ $t('auto.List.16.e641ef') }}</p>
+          <h2>{{ $t('auto.List.752cbd5b') }}</h2>
+          <p class="subtitle">{{ $t('auto.List.e641ef4f') }}</p>
         </div>
         <div class="header-actions">
           <el-button @click="loadList" :loading="loading">
@@ -23,20 +23,20 @@
     
     <el-card shadow="never" class="filter-card">
       <el-form :inline="true" :model="filter" @submit.prevent>
-        <el-form-item ::label="$t('auto.List.1.648229')">
+        <el-form-item ::label="$t('auto.List.64822934')">
           <el-input
             v-model="filter.keyword"
-            ::placeholder="$t('auto.List.2.e5b58b')"
+            ::placeholder="$t('auto.List.e5b58b72')"
             clearable
             style="width: 240px"
             @keyup.enter="onSearch"
             @clear="onSearch"
           />
         </el-form-item>
-        <el-form-item ::label="$t('auto.List.3.1b8578')">
-          <el-select v-model="filter.status" ::placeholder="$t('auto.List.4.86f694')" clearable style="width: 140px" @change="onSearch">
-            <el-option ::label="$t('auto.List.5.0e4c2a')" value="active" />
-            <el-option ::label="$t('auto.List.6.27ea4f')" value="disabled" />
+        <el-form-item ::label="$t('auto.List.1b857887')">
+          <el-select v-model="filter.status" ::placeholder="$t('auto.List.86f69427')" clearable style="width: 140px" @change="onSearch">
+            <el-option ::label="$t('auto.List.0e4c2a13')" value="active" />
+            <el-option ::label="$t('auto.List.27ea4fcb')" value="disabled" />
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -53,7 +53,7 @@
     <el-card shadow="never">
       <el-table :data="list" v-loading="loading" stripe border>
         <el-table-column prop="id" label="ID" width="70" align="center" />
-        <el-table-column prop="channel_name" ::label="$t('auto.List.7.bbeea9')" min-width="160" show-overflow-tooltip />
+        <el-table-column prop="channel_name" ::label="$t('auto.List.bbeea931')" min-width="160" show-overflow-tooltip />
         <el-table-column label="AppKey" min-width="240">
           <template #default="{ row }">
             <code class="appkey">{{ row.app_key }}</code>
@@ -62,14 +62,14 @@
             </el-button>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.8.3fea7c')" width="100" align="center">
+        <el-table-column :label="$t('auto.List.3fea7ca7')" width="100" align="center">
           <template #default="{ row }">
             <el-tag :type="getStatusTagType(row.status)" size="small">
               {{ getStatusLabel(row.status) }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.9.830929')" width="160">
+        <el-table-column :label="$t('auto.List.8309295c')" width="160">
           <template #default="{ row }">
             <div class="widget-preview" :style="{ backgroundColor: row.widget_color }">
               <el-icon><ChatLineRound /></el-icon>
@@ -77,27 +77,27 @@
             <span class="widget-pos">{{ row.widget_position }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="visitor_count" :label="$t('auto.List.10.852da3')" width="80" align="center" />
-        <el-table-column prop="session_count" :label="$t('auto.List.11.9a834e')" width="80" align="center" />
-        <el-table-column :label="$t('auto.List.12.129d05')" width="120" align="center">
+        <el-table-column prop="visitor_count" :label="$t('auto.List.852da3f7')" width="80" align="center" />
+        <el-table-column prop="session_count" :label="$t('auto.List.9a834e9a')" width="80" align="center" />
+        <el-table-column :label="$t('auto.List.129d0594')" width="120" align="center">
           <template #default="{ row }">
             <el-tag v-if="row.target_language" size="small">{{ getLanguageLabel(row.target_language) }}</el-tag>
-            <span v-else class="lang-follow">{{ $t('auto.List.17.487d74') }}</span>
+            <span v-else class="lang-follow">{{ $t('auto.List.487d74a6') }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="created_at" :label="$t('auto.List.13.eca37c')" width="180">
+        <el-table-column prop="created_at" :label="$t('auto.List.eca37cb0')" width="180">
           <template #default="{ row }">
             {{ formatTime(row.created_at) }}
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.List.14.2b6bc0')" width="320" fixed="right">
+        <el-table-column :label="$t('auto.List.2b6bc0f2')" width="320" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" size="small" @click="goEdit(row)">{{ $t('auto.List.18.95b351') }}</el-button>
-            <el-button link type="primary" size="small" @click="router.push({ name: 'ChatChannelInstallGuide', params: { id: row.channel_id } })">{{ $t('auto.List.19.9cbf97') }}</el-button>
-            <el-button link type="primary" size="small" @click="onRotateKey(row)">{{ $t('auto.List.20.17d08f') }}</el-button>
-            <el-button link type="warning" size="small" @click="onResetSecret(row)">{{ $t('auto.List.21.fa19fd') }}</el-button>
-            <el-button v-if="row.status === 'disabled'" link type="success" size="small" @click="onEnable(row)">{{ $t('auto.List.22.7854b5') }}</el-button>
-            <el-button v-else link type="danger" size="small" @click="onDisable(row)">{{ $t('auto.List.23.710ad0') }}</el-button>
+            <el-button link type="primary" size="small" @click="goEdit(row)">{{ $t('auto.List.95b351c8') }}</el-button>
+            <el-button link type="primary" size="small" @click="router.push({ name: 'ChatChannelInstallGuide', params: { id: row.channel_id } })">{{ $t('auto.List.9cbf975b') }}</el-button>
+            <el-button link type="primary" size="small" @click="onRotateKey(row)">{{ $t('auto.List.17d08fad') }}</el-button>
+            <el-button link type="warning" size="small" @click="onResetSecret(row)">{{ $t('auto.List.fa19fd5e') }}</el-button>
+            <el-button v-if="row.status === 'disabled'" link type="success" size="small" @click="onEnable(row)">{{ $t('auto.List.7854b52a') }}</el-button>
+            <el-button v-else link type="danger" size="small" @click="onDisable(row)">{{ $t('auto.List.710ad08b') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -154,7 +154,7 @@ const loadList = async () => {
     list.value = res?.list || []
     total.value = res?.total || 0
   } catch (err) {
-    ElMessage.error(t('auto.List.24.c4fa9b') + err.message)
+    ElMessage.error(t('auto.List.c4fa9b74') + err.message)
   } finally {
     loading.value = false
   }
@@ -178,15 +178,15 @@ const onDisable = async (row) => {
   try {
     await ElMessageBox.confirm(
       `确认禁用渠道「${row.channel_name}」？禁用后该 AppKey 将无法创建新会话（可随时重新启用）。`,
-      t('auto.List.25.a57617'),
+      t('auto.List.a57617c4'),
       { type: 'warning' }
     )
     await updateChannel(row.channel_id, { status: 'disabled' })
-    ElMessage.success(i18n.global.t(t('auto.List.26.1c1ed9')))
+    ElMessage.success(i18n.global.t(t('auto.List.1c1ed981')))
     loadList()
   } catch (err) {
     if (err !== 'cancel') {
-      ElMessage.error(t('auto.List.27.e39eab') + (err?.message || err))
+      ElMessage.error(t('auto.List.e39eabb8') + (err?.message || err))
     }
   }
 }
@@ -195,15 +195,15 @@ const onEnable = async (row) => {
   try {
     await ElMessageBox.confirm(
       `确认启用渠道「${row.channel_name}」？启用后该 AppKey 可正常创建新会话。`,
-      t('auto.List.28.068414'),
+      t('auto.List.06841401'),
       { type: 'warning' }
     )
     await updateChannel(row.channel_id, { status: 'active' })
-    ElMessage.success(i18n.global.t(t('auto.List.29.53ace4')))
+    ElMessage.success(i18n.global.t(t('auto.List.53ace430')))
     loadList()
   } catch (err) {
     if (err !== 'cancel') {
-      ElMessage.error(t('auto.List.30.1457f4') + (err?.message || err))
+      ElMessage.error(t('auto.List.1457f4a0') + (err?.message || err))
     }
   }
 }
@@ -212,19 +212,19 @@ const onRotateKey = async (row) => {
   try {
     await ElMessageBox.confirm(
       `确认轮换「${row.channel_name}」的 AppKey？轮换后旧 AppKey 立即失效。`,
-      t('auto.List.31.178f2d'),
+      t('auto.List.178f2db7'),
       { type: 'warning' }
     )
     const res = await rotateAppKey(row.channel_id)
     ElMessageBox.alert(
       DOMPurify.sanitize(`<p>新 AppKey：</p><pre style="background:#f5f5f5;padding:8px;user-select:all">${res.app_key}</pre><p style="color:#F59E0B">请立即更新嵌入代码中的 AppKey</p>`),
-      t('auto.List.32.2a93b5'),
+      t('auto.List.2a93b52f'),
       { dangerouslyUseHTMLString: true }
     )
     loadList()
   } catch (err) {
     if (err !== 'cancel') {
-      ElMessage.error(t('auto.List.33.6a890a') + (err?.message || err))
+      ElMessage.error(t('auto.List.6a890a49') + (err?.message || err))
     }
   }
 }
@@ -233,18 +233,18 @@ const onResetSecret = async (row) => {
   try {
     await ElMessageBox.confirm(
       `确认重置「${row.channel_name}」的 AppSecret？重置后旧 Secret 立即失效。`,
-      t('auto.List.34.a21aa9'),
+      t('auto.List.a21aa99f'),
       { type: 'warning' }
     )
     const res = await resetAppSecret(row.channel_id)
     ElMessageBox.alert(
       DOMPurify.sanitize(`<p>新 AppSecret（仅显示一次）：</p><pre style="background:#f5f5f5;padding:8px;user-select:all">${res.app_secret}</pre><p style="color:#F59E0B">请妥善保存！关闭后无法再次查看</p>`),
-      t('auto.List.35.faa357'),
+      t('auto.List.faa357fc'),
       { dangerouslyUseHTMLString: true }
     )
   } catch (err) {
     if (err !== 'cancel') {
-      ElMessage.error(t('auto.List.36.5281aa') + (err?.message || err))
+      ElMessage.error(t('auto.List.5281aaaa') + (err?.message || err))
     }
   }
 }
@@ -252,9 +252,9 @@ const onResetSecret = async (row) => {
 const copy = async (text) => {
   try {
     await navigator.clipboard.writeText(text)
-    ElMessage.success(i18n.global.t(t('auto.List.37.4fb42e')))
+    ElMessage.success(i18n.global.t(t('auto.List.4fb42e6e')))
   } catch {
-    ElMessage.error(i18n.global.t(t('auto.List.38.5154ae')))
+    ElMessage.error(i18n.global.t(t('auto.List.5154ae17')))
   }
 }
 

@@ -28,6 +28,44 @@ const (
 	PermissionTeamMemberManage    = "team.member.manage"
 )
 
+// PermissionLabels 权限点中文标签（registry.yaml label_zh）。
+var PermissionLabels = map[string]string{
+	"customer.read":         "客户-读",
+	"customer.write":        "客户-写",
+	"customer.delete":       "客户-删",
+	"inbox.read":            "收件箱-读",
+	"inbox.write":           "收件箱-写",
+	"clue.read":             "线索-读",
+	"clue.write":            "线索-写",
+	"kb.read":               "知识库-读",
+	"kb.write":              "知识库-写",
+	"opportunity.read":      "商机-读",
+	"opportunity.write":     "商机-写",
+	"reach.send":            "触达-外发",
+	"mcp.credential.manage": "MCP凭证-管理",
+	"api_key.reveal":        "密钥-查看明文",
+	"audit.read":            "审计-读",
+	"audit.export":          "审计-导出",
+	"team.manage":           "团队-管理（跨团队）",
+	"team.member.manage":    "团队-成员管理（本团队）",
+}
+
+// PermissionLabel 取权限点中文标签（无则回落 id）。
+func PermissionLabel(id string) string {
+	if l, ok := PermissionLabels[id]; ok {
+		return l
+	}
+	return id
+}
+
+// RoleLabels 角色中文标签。
+var RoleLabels = map[string]string{
+	"super_admin":       "超级管理员（平台）",
+	"team_admin":        "团队管理员",
+	"member":            "成员",
+	"read_only_auditor": "只读审计",
+}
+
 // RoleAllPermissions 角色 → 权限点集合（P1 中间件的判据源）。
 var RoleAllPermissions = map[string]map[string]bool{
 	"super_admin": {

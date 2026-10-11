@@ -8,15 +8,15 @@
             <el-date-picker
               v-model="dateRange"
               type="daterange"
-              :range-separator="$t('auto.Stats.1.981cbe')"
-              :start-placeholder="$t('auto.Stats.2.b44c0f')"
-              :end-placeholder="$t('auto.Stats.3.1d468b')"
+              :range-separator="$t('auto.Stats.981cbe31')"
+              :start-placeholder="$t('auto.Stats.b44c0f33')"
+              :end-placeholder="$t('auto.Stats.1d468be9')"
               @change="handleDateChange"
             />
-            <el-select v-model="groupBy" ::placeholder="$t('auto.Stats.4.bf8db0')" @change="handleGroupByChange">
-              <el-option ::label="$t('auto.Stats.5.4eb3b0')" value="day" />
-              <el-option ::label="$t('auto.Stats.6.787456')" value="week" />
-              <el-option ::label="$t('auto.Stats.7.31019b')" value="month" />
+            <el-select v-model="groupBy" ::placeholder="$t('auto.Stats.bf8db0fe')" @change="handleGroupByChange">
+              <el-option ::label="$t('auto.Stats.4eb3b00e')" value="day" />
+              <el-option ::label="$t('auto.Stats.7874566d')" value="week" />
+              <el-option ::label="$t('auto.Stats.31019b33')" value="month" />
             </el-select>
             <el-button type="primary" @click="refreshData">{{ $t('刷新') }}</el-button>
           </div>
@@ -30,7 +30,7 @@
             <el-card class="stats-card">
               <div class="stats-item">
                 <div class="stats-value">{{ overallStats.totalCards || 0 }}</div>
-                <div class="stats-label">{{ $t('auto.Stats.13.8135cb') }}</div>
+                <div class="stats-label">{{ $t('auto.Stats.8135cb4a') }}</div>
               </div>
             </el-card>
           </el-col>
@@ -38,7 +38,7 @@
             <el-card class="stats-card">
               <div class="stats-item">
                 <div class="stats-value">{{ overallStats.activeCards || 0 }}</div>
-                <div class="stats-label">{{ $t('auto.Stats.14.56601a') }}</div>
+                <div class="stats-label">{{ $t('auto.Stats.56601a67') }}</div>
               </div>
             </el-card>
           </el-col>
@@ -46,7 +46,7 @@
             <el-card class="stats-card">
               <div class="stats-item">
                 <div class="stats-value">{{ formatNumber(overallStats.totalViews) }}</div>
-                <div class="stats-label">{{ $t('auto.Stats.15.7e6ff5') }}</div>
+                <div class="stats-label">{{ $t('auto.Stats.7e6ff5a0') }}</div>
               </div>
             </el-card>
           </el-col>
@@ -54,7 +54,7 @@
             <el-card class="stats-card">
               <div class="stats-item">
                 <div class="stats-value">{{ formatPercent(overallStats.activeCards, overallStats.totalCards) }}</div>
-                <div class="stats-label">{{ $t('auto.Stats.16.d1b35a') }}</div>
+                <div class="stats-label">{{ $t('auto.Stats.d1b35af3') }}</div>
               </div>
             </el-card>
           </el-col>
@@ -68,7 +68,7 @@
             <el-card>
               <template #header>
                 <div class="card-header">
-                  <span>{{ $t('auto.Stats.17.8205ea') }}</span>
+                  <span>{{ $t('auto.Stats.8205ea14') }}</span>
                 </div>
               </template>
               <div ref="visitTrendChartRef" class="chart-container"></div>
@@ -84,17 +84,17 @@
             <el-card>
               <template #header>
                 <div class="card-header">
-                  <span>{{ $t('auto.Stats.18.575437') }}</span>
+                  <span>{{ $t('auto.Stats.5754370e') }}</span>
                 </div>
               </template>
               <el-table :data="overallStats.popularCards" style="width: 100%">
-                <el-table-column prop="title" :label="$t('auto.Stats.8.3944f2')" />
-                <el-table-column prop="viewCount" :label="$t('auto.Stats.9.88bc4d')">
+                <el-table-column prop="title" :label="$t('auto.Stats.3944f217')" />
+                <el-table-column prop="viewCount" :label="$t('auto.Stats.88bc4d7a')">
                   <template #default="scope">
                     {{ formatNumber(scope.row.viewCount) }}
                   </template>
                 </el-table-column>
-                <el-table-column :label="$t('auto.Stats.10.2b6bc0')" width="100">
+                <el-table-column :label="$t('auto.Stats.2b6bc0f2')" width="100">
                   <template #default="scope">
                     <el-button size="small" type="primary" @click="goToCardStats(scope.row.id)">
                       统计
@@ -108,20 +108,20 @@
             <el-card>
               <template #header>
                 <div class="card-header">
-                  <span>{{ $t('auto.Stats.19.73378a') }}</span>
+                  <span>{{ $t('auto.Stats.73378a1f') }}</span>
                 </div>
               </template>
               <el-table :data="overallStats.recentActivities" style="width: 100%">
-                <el-table-column prop="cardTitle" :label="$t('auto.Stats.8.3944f2')" />
-                <el-table-column prop="action" :label="$t('auto.Stats.10.2b6bc0')">
+                <el-table-column prop="cardTitle" :label="$t('auto.Stats.3944f217')" />
+                <el-table-column prop="action" :label="$t('auto.Stats.2b6bc0f2')">
                   <template #default="scope">
                     <el-tag :type="getActionType(scope.row.action)">
                       {{ getActionText(scope.row.action) }}
                     </el-tag>
                   </template>
                 </el-table-column>
-                <el-table-column prop="username" :label="$t('auto.Stats.11.1fd02a')" />
-                <el-table-column prop="createdAt" :label="$t('auto.Stats.12.19fcb9')">
+                <el-table-column prop="username" :label="$t('auto.Stats.1fd02a90')" />
+                <el-table-column prop="createdAt" :label="$t('auto.Stats.19fcb9eb')">
                   <template #default="scope">
                     {{ formatTime(scope.row.createdAt) }}
                   </template>
@@ -168,7 +168,7 @@ const overallStats = ref({
 
 const fetchOverallStats = async () => {
   if (!dateRange.value || dateRange.value.length !== 2) {
-    ElMessage.warning(i18n.global.t(t('auto.Stats.20.a2847d')))
+    ElMessage.warning(i18n.global.t(t('auto.Stats.a2847d82')))
     return
   }
 
@@ -197,8 +197,8 @@ const fetchOverallStats = async () => {
 
     updateCharts();
   } catch (error) {
-    console.error(t('auto.Stats.21.5acc95'), error)
-    ElMessage.error(i18n.global.t(t('auto.Stats.22.063dc7')))
+    console.error(t('auto.Stats.5acc9517'), error)
+    ElMessage.error(i18n.global.t(t('auto.Stats.063dc79a')))
   } finally {
     loading.value = false
   }
@@ -228,13 +228,13 @@ const updateCharts = () => {
   if (visitTrendChart) {
     const option = {
       title: {
-        text: t('auto.Stats.17.8205ea')
+        text: t('auto.Stats.8205ea14')
       },
       tooltip: {
         trigger: 'axis'
       },
       legend: {
-        data: [t('auto.Stats.9.88bc4d')]
+        data: [t('auto.Stats.88bc4d7a')]
       },
       grid: {
         left: '3%',
@@ -252,7 +252,7 @@ const updateCharts = () => {
       },
       series: [
         {
-          name: t('auto.Stats.9.88bc4d'),
+          name: t('auto.Stats.88bc4d7a'),
           type: 'line',
           stack: 'Total',
           smooth: true,
@@ -320,11 +320,11 @@ const formatTime = (time) => {
     const hours = Math.floor(diff / (1000 * 60 * 60))
     if (hours === 0) {
       const minutes = Math.floor(diff / (1000 * 60))
-      return minutes === 0 ? t('auto.Stats.23.4181f7') : `${minutes}分钟前`
+      return minutes === 0 ? t('auto.Stats.4181f7fe') : `${minutes}分钟前`
     }
     return `${hours}小时前`
   } else if (days === 1) {
-    return t('auto.Stats.24.2f8d6f')
+    return t('auto.Stats.2f8d6f15')
   } else if (days < 7) {
     return `${days}天前`
   } else {
@@ -343,7 +343,7 @@ const getActionType = (action) => {
 
 const getActionText = (action) => {
   const actionTextMap = {
-    view: t('auto.Stats.25.9c5c5c')
+    view: t('auto.Stats.9c5c5cdb')
   }
   return actionTextMap[action] || action
 };

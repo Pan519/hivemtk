@@ -4,8 +4,8 @@
     <el-card class="header-card" shadow="never">
       <div class="header-content">
         <div>
-          <h2>{{ $t('auto.ToolList.31.d3c67f') }}</h2>
-          <p class="subtitle">{{ $t('auto.ToolList.32.949f0e') }}</p>
+          <h2>{{ $t('auto.ToolList.d3c67f29') }}</h2>
+          <p class="subtitle">{{ $t('auto.ToolList.949f0ed8') }}</p>
         </div>
         <div class="header-actions">
           <el-button @click="loadTools" :loading="loading">
@@ -21,25 +21,25 @@
       <el-col :span="6">
         <el-card shadow="never" class="stat-card">
           <div class="stat-value">{{ stats.total }}</div>
-          <div class="stat-label">{{ $t('auto.ToolList.33.be7fc8') }}</div>
+          <div class="stat-label">{{ $t('auto.ToolList.be7fc8d9') }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card shadow="never" class="stat-card stat-success">
           <div class="stat-value">{{ stats.enabled }}</div>
-          <div class="stat-label">{{ $t('auto.ToolList.10.53ace4') }}</div>
+          <div class="stat-label">{{ $t('auto.ToolList.53ace430') }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card shadow="never" class="stat-card stat-warning">
           <div class="stat-value">{{ stats.disabled }}</div>
-          <div class="stat-label">{{ $t('auto.ToolList.11.1c1ed9') }}</div>
+          <div class="stat-label">{{ $t('auto.ToolList.1c1ed981') }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card shadow="never" class="stat-card stat-info">
           <div class="stat-value">{{ stats.categories }}</div>
-          <div class="stat-label">{{ $t('auto.ToolList.34.b0a53c') }}</div>
+          <div class="stat-label">{{ $t('auto.ToolList.b0a53cb6') }}</div>
         </el-card>
       </el-col>
     </el-row>
@@ -47,24 +47,24 @@
     
     <el-card shadow="never" class="filter-card">
       <el-form :inline="true" :model="filter">
-        <el-form-item :label="$t('auto.ToolList.1.d0771a')">
-          <el-select v-model="filter.category" :placeholder="$t('auto.ToolList.2.1a7503')" clearable @change="loadTools">
-            <el-option :label="$t('auto.ToolList.3.59fa82')" value="reach" />
-            <el-option :label="$t('auto.ToolList.4.110f30')" value="customer" />
-            <el-option :label="$t('auto.ToolList.5.b9a1ca')" value="knowledge" />
-            <el-option :label="$t('auto.ToolList.6.7a8e9c')" value="business" />
-            <el-option :label="$t('auto.ToolList.7.358d33')" value="private_message" />
+        <el-form-item :label="$t('auto.ToolList.d0771a42')">
+          <el-select v-model="filter.category" :placeholder="$t('auto.ToolList.1a750305')" clearable @change="loadTools">
+            <el-option :label="$t('auto.ToolList.59fa8204')" value="reach" />
+            <el-option :label="$t('auto.ToolList.110f306b')" value="customer" />
+            <el-option :label="$t('auto.ToolList.b9a1ca97')" value="knowledge" />
+            <el-option :label="$t('auto.ToolList.7a8e9c3c')" value="business" />
+            <el-option :label="$t('auto.ToolList.358d33d5')" value="private_message" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.ToolList.8.3fea7c')">
-          <el-select v-model="filter.enabled" :placeholder="$t('auto.ToolList.9.443483')" clearable @change="loadTools">
-            <el-option :label="$t('auto.ToolList.10.53ace4')" :value="true" />
-            <el-option :label="$t('auto.ToolList.11.1c1ed9')" :value="false" />
+        <el-form-item :label="$t('auto.ToolList.3fea7ca7')">
+          <el-select v-model="filter.enabled" :placeholder="$t('auto.ToolList.443483c9')" clearable @change="loadTools">
+            <el-option :label="$t('auto.ToolList.53ace430')" :value="true" />
+            <el-option :label="$t('auto.ToolList.1c1ed981')" :value="false" />
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="loadTools">{{ $t('auto.ToolList.35.e5f71f') }}</el-button>
-          <el-button @click="resetFilter">{{ $t('auto.ToolList.36.4b9c32') }}</el-button>
+          <el-button type="primary" @click="loadTools">{{ $t('auto.ToolList.e5f71fc3') }}</el-button>
+          <el-button @click="resetFilter">{{ $t('auto.ToolList.4b9c3271') }}</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -72,7 +72,7 @@
     
     <el-card shadow="never">
       <el-table :data="tools" v-loading="loading" stripe border>
-        <el-table-column :label="$t('auto.ToolList.12.20dce2')" min-width="280">
+        <el-table-column :label="$t('auto.ToolList.20dce2c6')" min-width="280">
           <template #default="{ row }">
             <div class="tool-info">
               <div class="tool-name">{{ row.tool_name }}</div>
@@ -80,14 +80,14 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.ToolList.1.d0771a')" width="120">
+        <el-table-column :label="$t('auto.ToolList.d0771a42')" width="120">
           <template #default="{ row }">
             <el-tag :type="getCategoryTagType(row.category)" size="small">
               {{ getCategoryLabel(row.category) }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.ToolList.8.3fea7c')" width="100" align="center">
+        <el-table-column :label="$t('auto.ToolList.3fea7ca7')" width="100" align="center">
           <template #default="{ row }">
             <el-switch
               v-model="row.is_enabled"
@@ -96,7 +96,7 @@
             />
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.ToolList.13.0529dc')" min-width="200">
+        <el-table-column :label="$t('auto.ToolList.0529dcd7')" min-width="200">
           <template #default="{ row }">
             <div v-if="row.bound_accounts?.length">
               <el-tag
@@ -118,7 +118,7 @@
             <span v-else class="text-muted">-</span>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('auto.ToolList.14.2b6bc0')" width="120" fixed="right">
+        <el-table-column :label="$t('auto.ToolList.2b6bc0f2')" width="120" fixed="right">
           <template #default="{ row }">
             <el-button link type="primary" size="small" @click="openDetail(row)">
               详情
@@ -129,21 +129,21 @@
     </el-card>
 
     
-    <el-dialog v-model="detailVisible" :title="$t('auto.ToolList.15.ab7eba')" width="600px">
+    <el-dialog v-model="detailVisible" :title="$t('auto.ToolList.ab7eba4a')" width="600px">
       <el-descriptions :column="2" border v-if="currentTool">
-        <el-descriptions-item :label="$t('auto.ToolList.16.ac6116')">{{ currentTool.tool_name }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.ToolList.1.d0771a')">
+        <el-descriptions-item :label="$t('auto.ToolList.ac6116b2')">{{ currentTool.tool_name }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.ToolList.d0771a42')">
           <el-tag :type="getCategoryTagType(currentTool.category)" size="small">
             {{ getCategoryLabel(currentTool.category) }}
           </el-tag>
         </el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.ToolList.8.3fea7c')">
+        <el-descriptions-item :label="$t('auto.ToolList.3fea7ca7')">
           <el-tag :type="currentTool.is_enabled ? 'success' : 'info'" size="small">
             {{ currentTool.is_enabled ? '已启用' : '已禁用' }}
           </el-tag>
         </el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.ToolList.17.0a05b1')">{{ currentTool.display_order }}</el-descriptions-item>
-        <el-descriptions-item :label="$t('auto.ToolList.18.224e2c')" :span="2">
+        <el-descriptions-item :label="$t('auto.ToolList.0a05b1d1')">{{ currentTool.display_order }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.ToolList.224e2ccd')" :span="2">
           <pre class="config-json">{{ JSON.stringify(currentTool.config || {}, null, 2) }}</pre>
         </el-descriptions-item>
       </el-descriptions>
@@ -152,29 +152,29 @@
     
     <el-dialog v-model="bindDialogVisible" :title="`绑定账号 - ${currentTool?.tool_name}`" width="600px">
       <el-form :model="bindForm" label-width="100px">
-        <el-form-item :label="$t('auto.ToolList.19.c65d92')">
-          <el-select v-model="bindForm.account_type" :placeholder="$t('auto.ToolList.20.c3b31c')">
-            <el-option :label="$t('auto.ToolList.21.485c3a')" value="sms" />
-            <el-option :label="$t('auto.ToolList.22.e9e805')" value="email" />
+        <el-form-item :label="$t('auto.ToolList.c65d9276')">
+          <el-select v-model="bindForm.account_type" :placeholder="$t('auto.ToolList.c3b31cc1')">
+            <el-option :label="$t('auto.ToolList.485c3abb')" value="sms" />
+            <el-option :label="$t('auto.ToolList.e9e8054f')" value="email" />
             <el-option label="Telegram" value="telegram" />
-            <el-option :label="$t('auto.ToolList.23.ff17b9')" value="wecom" />
-            <el-option :label="$t('auto.ToolList.24.7714e5')" value="feishu" />
+            <el-option :label="$t('auto.ToolList.ff17b9f9')" value="wecom" />
+            <el-option :label="$t('auto.ToolList.7714e5cf')" value="feishu" />
             <el-option label="WhatsApp" value="whatsapp" />
-            <el-option :label="$t('auto.ToolList.25.277a98')" value="douyin" />
-            <el-option :label="$t('auto.ToolList.26.f32c0a')" value="kuaishou" />
-            <el-option :label="$t('auto.ToolList.27.ae26bb')" value="xhs" />
+            <el-option :label="$t('auto.ToolList.277a984f')" value="douyin" />
+            <el-option :label="$t('auto.ToolList.f32c0a2a')" value="kuaishou" />
+            <el-option :label="$t('auto.ToolList.ae26bb04')" value="xhs" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('auto.ToolList.28.14d171')">
-          <el-input v-model="bindForm.account_id" :placeholder="$t('auto.ToolList.29.37c32e')" />
+        <el-form-item :label="$t('auto.ToolList.14d1718c')">
+          <el-input v-model="bindForm.account_id" :placeholder="$t('auto.ToolList.37c32e0f')" />
         </el-form-item>
-        <el-form-item :label="$t('auto.ToolList.30.a2c1a2')">
+        <el-form-item :label="$t('auto.ToolList.a2c1a209')">
           <el-switch v-model="bindForm.is_primary" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="bindDialogVisible = false">{{ $t('auto.ToolList.37.625fb2') }}</el-button>
-        <el-button type="primary" @click="onBind">{{ $t('auto.ToolList.38.38cf16') }}</el-button>
+        <el-button @click="bindDialogVisible = false">{{ $t('auto.ToolList.625fb26b') }}</el-button>
+        <el-button type="primary" @click="onBind">{{ $t('auto.ToolList.38cf16f2') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -213,11 +213,11 @@ const bindForm = reactive({
 })
 
 const categoryMap = {
-  reach: t('auto.ToolList.3.59fa82'),
-  customer: t('auto.ToolList.4.110f30'),
-  knowledge: t('auto.ToolList.5.b9a1ca'),
-  business: t('auto.ToolList.6.7a8e9c'),
-  private_message: t('auto.ToolList.7.358d33')
+  reach: t('auto.ToolList.59fa8204'),
+  customer: t('auto.ToolList.110f306b'),
+  knowledge: t('auto.ToolList.b9a1ca97'),
+  business: t('auto.ToolList.7a8e9c3c'),
+  private_message: t('auto.ToolList.358d33d5')
 };
 
 const getCategoryLabel = (category) => categoryMap[category] || category
@@ -251,7 +251,7 @@ const loadTools = async () => {
     stats.enabled = tools.value.filter(t => t.is_enabled).length
     stats.disabled = tools.value.filter(t => !t.is_enabled).length
   } catch (e) {
-    ElMessage.error(t('auto.ToolList.39.162848') + e.message)
+    ElMessage.error(t('auto.ToolList.16284841') + e.message)
   } finally {
     loading.value = false
   }
@@ -261,10 +261,10 @@ const onToggleTool = async (tool) => {
   tool._toggling = true
   try {
     await updateToolStatus(tool.tool_name, tool.is_enabled)
-    ElMessage.success(`${tool.is_enabled ? t('auto.ToolList.40.7854b5') : t('auto.ToolList.41.710ad0')}成功`)
+    ElMessage.success(`${tool.is_enabled ? t('auto.ToolList.7854b52a') : t('auto.ToolList.710ad08b')}成功`)
   } catch (e) {
     tool.is_enabled = !tool.is_enabled
-    ElMessage.error(t('auto.ToolList.42.79585f') + e.message)
+    ElMessage.error(t('auto.ToolList.79585f92') + e.message)
   } finally {
     tool._toggling = false
   }
@@ -291,7 +291,7 @@ const openBindDialog = (tool) => {
 
 const onBind = async () => {
   if (!bindForm.account_type || !bindForm.account_id) {
-    ElMessage.warning(t('auto.ToolList.43.d2d422'))
+    ElMessage.warning(t('auto.ToolList.d2d42275'))
     return
   }
 
@@ -302,11 +302,11 @@ const onBind = async () => {
       bindForm.account_id,
       bindForm.is_primary
     )
-    ElMessage.success(t('auto.ToolList.44.1974fe'))
+    ElMessage.success(t('auto.ToolList.1974fe53'))
     bindDialogVisible.value = false
     loadTools()
   } catch (e) {
-    ElMessage.error(t('auto.ToolList.45.8cbf8b') + e.message)
+    ElMessage.error(t('auto.ToolList.8cbf8be0') + e.message)
   }
 };
 

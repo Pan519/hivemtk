@@ -7,25 +7,25 @@
         <el-card shadow="never" class="form-card" v-loading="loading">
           <template #header>
             <div class="card-header">
-              <span class="card-title">{{ $t('auto.ConfigOptimizer.10.a8a257') }}</span>
+              <span class="card-title">{{ $t('auto.ConfigOptimizer.a8a2572e') }}</span>
               <el-button link type="primary" :loading="saving" @click="handleSave">
-                <el-icon><Check /></el-icon><span>{{ $t('auto.ConfigOptimizer.11.ed7526') }}</span>
+                <el-icon><Check /></el-icon><span>{{ $t('auto.ConfigOptimizer.ed752639') }}</span>
               </el-button>
             </div>
           </template>
           <el-form :model="config" label-width="100px">
-            <el-form-item :label="$t('auto.ConfigOptimizer.1.4e8713')">
-              <el-input v-model="config.brand" :placeholder="$t('auto.ConfigOptimizer.2.a08eb5')" clearable />
+            <el-form-item :label="$t('auto.ConfigOptimizer.4e871349')">
+              <el-input v-model="config.brand" :placeholder="$t('auto.ConfigOptimizer.a08eb519')" clearable />
             </el-form-item>
-            <el-form-item :label="$t('auto.ConfigOptimizer.3.1a83bc')">
+            <el-form-item :label="$t('auto.ConfigOptimizer.1a83bca5')">
               <el-input
                 v-model="config.description"
                 type="textarea"
                 :rows="3"
-                :placeholder="$t('auto.ConfigOptimizer.4.401cc9')"
+                :placeholder="$t('auto.ConfigOptimizer.401cc997')"
               />
             </el-form-item>
-            <el-form-item :label="$t('auto.ConfigOptimizer.5.4e4d6f')">
+            <el-form-item :label="$t('auto.ConfigOptimizer.4e4d6fa5')">
               <div class="tags-input">
                 <el-tag
                   v-for="(tag, i) in config.advantages"
@@ -43,10 +43,10 @@
                   @keyup.enter="addTag(config.advantages)"
                   @blur="onBlurAddTag('adv')"
                 />
-                <el-button v-else size="small" class="tag-add" @click="showAdvInput">{{ $t('auto.ConfigOptimizer.12.ad725b') }}</el-button>
+                <el-button v-else size="small" class="tag-add" @click="showAdvInput">{{ $t('auto.ConfigOptimizer.ad725b02') }}</el-button>
               </div>
             </el-form-item>
-            <el-form-item :label="$t('auto.ConfigOptimizer.6.9868d2')">
+            <el-form-item :label="$t('auto.ConfigOptimizer.9868d289')">
               <div class="tags-input">
                 <el-tag
                   v-for="(tag, i) in config.competitors"
@@ -65,15 +65,15 @@
                   @keyup.enter="addTag(config.competitors, 'comp')"
                   @blur="onBlurAddTag('comp')"
                 />
-                <el-button v-else size="small" class="tag-add" @click="showCompInput">{{ $t('auto.ConfigOptimizer.13.5e342c') }}</el-button>
+                <el-button v-else size="small" class="tag-add" @click="showCompInput">{{ $t('auto.ConfigOptimizer.5e342ca9') }}</el-button>
               </div>
             </el-form-item>
-            <el-form-item :label="$t('auto.ConfigOptimizer.7.89e0f5')">
+            <el-form-item :label="$t('auto.ConfigOptimizer.89e0f524')">
               <el-select v-model="config.default_model" style="width: 100%">
                 <el-option v-for="m in modelOptions" :key="m.value" :label="m.label" :value="m.value" />
               </el-select>
             </el-form-item>
-            <el-form-item :label="$t('auto.ConfigOptimizer.8.3a17e1')">
+            <el-form-item :label="$t('auto.ConfigOptimizer.3a17e15c')">
               <el-select
                 v-model="config.verify_models"
                 multiple
@@ -86,7 +86,7 @@
             </el-form-item>
             <el-form-item>
               <el-button type="success" :loading="optimizing" @click="handleOptimize">
-                <el-icon><MagicStick /></el-icon><span>{{ $t('auto.ConfigOptimizer.14.11e7dd') }}</span>
+                <el-icon><MagicStick /></el-icon><span>{{ $t('auto.ConfigOptimizer.11e7dd08') }}</span>
               </el-button>
             </el-form-item>
           </el-form>
@@ -96,9 +96,9 @@
       
       <el-col :xs="24" :lg="10">
         <el-card shadow="never" class="suggest-card">
-          <template #header><span class="card-title">{{ $t('auto.ConfigOptimizer.15.6e4d61') }}</span></template>
+          <template #header><span class="card-title">{{ $t('auto.ConfigOptimizer.6e4d6109') }}</span></template>
           <div v-loading="optimizing">
-            <el-empty v-if="!suggestions.length && !optimizing" :description="$t('auto.ConfigOptimizer.9.3241bd')" :image-size="60" />
+            <el-empty v-if="!suggestions.length && !optimizing" :description="$t('auto.ConfigOptimizer.3241bdaa')" :image-size="60" />
             <div v-else class="suggest-list">
               <div v-for="(s, i) in suggestions" :key="i" class="suggest-item">
                 <div class="suggest-item-title">
@@ -159,7 +159,7 @@ const loadModelOptions = async () => {
       }
     }
   } catch (e) {
-    console.warn(t('auto.ConfigOptimizer.16.a8d452'), e.message)
+    console.warn(t('auto.ConfigOptimizer.a8d4525a'), e.message)
   }
 }
 
@@ -227,7 +227,7 @@ const loadConfig = async () => {
       ? verifyFromDB
       : (config.verify_models.length ? config.verify_models : (modelOptions.value?.[0] ? [modelOptions.value[0].value] : []))
   } catch (e) {
-    ElMessage.error(e.message || t('auto.ConfigOptimizer.17.9cd43c'))
+    ElMessage.error(e.message || t('auto.ConfigOptimizer.9cd43c26'))
   } finally {
     loading.value = false
   }
@@ -235,7 +235,7 @@ const loadConfig = async () => {
 
 const handleSave = async () => {
   if (!config.brand.trim()) {
-    ElMessage.warning(t('auto.ConfigOptimizer.18.0e7774'))
+    ElMessage.warning(t('auto.ConfigOptimizer.0e777497'))
     return
   }
   saving.value = true
@@ -248,9 +248,9 @@ const handleSave = async () => {
       default_model: config.default_model,
       verify_models: config.verify_models
     })
-    ElMessage.success(t('auto.ConfigOptimizer.19.e94729'))
+    ElMessage.success(t('auto.ConfigOptimizer.e9472910'))
   } catch (e) {
-    ElMessage.error(e.message || t('auto.ConfigOptimizer.20.6b8ad6'))
+    ElMessage.error(e.message || t('auto.ConfigOptimizer.6b8ad6b8'))
   } finally {
     saving.value = false
   }
@@ -265,9 +265,9 @@ const handleOptimize = async () => {
       competitors: config.competitors
     })
     suggestions.value = res?.suggestions || []
-    ElMessage.success(res?.summary || t('auto.ConfigOptimizer.21.0e45f7'))
+    ElMessage.success(res?.summary || t('auto.ConfigOptimizer.0e45f7c3'))
   } catch (e) {
-    ElMessage.error(e.message || t('auto.ConfigOptimizer.22.b323b4'))
+    ElMessage.error(e.message || t('auto.ConfigOptimizer.b323b49b'))
   } finally {
     optimizing.value = false
   }

@@ -18,13 +18,13 @@
     
     <div class="search-form">
       <el-form :inline="true" :model="searchForm" class="search-form-content">
-        <el-form-item ::label="$t('auto.List.1.8abfb3')">
-          <el-input v-model="searchForm.domain" ::placeholder="$t('auto.List.2.c52926')" clearable />
+        <el-form-item ::label="$t('auto.List.8abfb370')">
+          <el-input v-model="searchForm.domain" ::placeholder="$t('auto.List.c52926b9')" clearable />
         </el-form-item>
-        <el-form-item ::label="$t('auto.List.3.1b8578')">
-          <el-select v-model="searchForm.status" ::placeholder="$t('auto.List.4.333291')" clearable>
-            <el-option ::label="$t('auto.List.5.62f11e')" value="1" />
-            <el-option ::label="$t('auto.List.6.8a9c48')" value="2" />
+        <el-form-item ::label="$t('auto.List.1b857887')">
+          <el-select v-model="searchForm.status" ::placeholder="$t('auto.List.33329123')" clearable>
+            <el-option ::label="$t('auto.List.62f11ef3')" value="1" />
+            <el-option ::label="$t('auto.List.8a9c48f7')" value="2" />
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -43,19 +43,19 @@
     
     <el-table :data="domainList" border style="width: 100%" v-loading="loading">
       <el-table-column prop="id" label="ID" width="80" />
-      <el-table-column prop="domain" ::label="$t('auto.List.1.8abfb3')" min-width="200" />
-      <el-table-column prop="port" ::label="$t('auto.List.7.2696c1')" width="100" />
-      <el-table-column prop="purpose" ::label="$t('auto.List.8.c55de6')" min-width="150" />
-      <el-table-column prop="status_str" ::label="$t('auto.List.3.1b8578')" width="100">
+      <el-table-column prop="domain" ::label="$t('auto.List.8abfb370')" min-width="200" />
+      <el-table-column prop="port" ::label="$t('auto.List.2696c1d1')" width="100" />
+      <el-table-column prop="purpose" ::label="$t('auto.List.c55de63e')" min-width="150" />
+      <el-table-column prop="status_str" ::label="$t('auto.List.1b857887')" width="100">
         <template #default="scope">
           <el-tag :type="scope.row.status === 1 ? 'success' : 'danger'">
             {{ scope.row.status_str }}
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="last_check" :label="$t('auto.List.9.cbe6d4')" width="180" />
-      <el-table-column prop="created_at" :label="$t('auto.List.10.eca37c')" width="180" />
-      <el-table-column :label="$t('auto.List.11.2b6bc0')" width="200" fixed="right">
+      <el-table-column prop="last_check" :label="$t('auto.List.cbe6d46f')" width="180" />
+      <el-table-column prop="created_at" :label="$t('auto.List.eca37cb0')" width="180" />
+      <el-table-column :label="$t('auto.List.2b6bc0f2')" width="200" fixed="right">
         <template #default="scope">
           <el-button type="primary" size="small" @click="handleEdit(scope.row)">
             编辑
@@ -96,25 +96,25 @@
         :rules="rules"
         label-width="80px"
       >
-        <el-form-item :label="$t('auto.List.12.190980')" prop="domain">
-          <el-input v-model="form.domain" :placeholder="$t('auto.List.13.a6e880')" />
+        <el-form-item :label="$t('auto.List.190980c7')" prop="domain">
+          <el-input v-model="form.domain" :placeholder="$t('auto.List.a6e88018')" />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.14.c76cfe')" prop="port">
-          <el-input-number v-model="form.port" :min="1" :max="65535" :placeholder="$t('auto.List.15.bc0eb7')" />
+        <el-form-item :label="$t('auto.List.c76cfefe')" prop="port">
+          <el-input-number v-model="form.port" :min="1" :max="65535" :placeholder="$t('auto.List.bc0eb7d7')" />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.16.67044a')" prop="purpose">
-          <el-input v-model="form.purpose" type="textarea" :placeholder="$t('auto.List.17.0aa798')" />
+        <el-form-item :label="$t('auto.List.67044a2e')" prop="purpose">
+          <el-input v-model="form.purpose" type="textarea" :placeholder="$t('auto.List.0aa798ec')" />
         </el-form-item>
-        <el-form-item :label="$t('auto.List.18.3fea7c')" prop="status" v-if="isEdit">
-          <el-select v-model="form.status" :placeholder="$t('auto.List.19.e1c965')">
-            <el-option :label="$t('auto.List.20.fd6e80')" :value="1" />
-            <el-option :label="$t('auto.List.21.2329a0')" :value="2" />
+        <el-form-item :label="$t('auto.List.3fea7ca7')" prop="status" v-if="isEdit">
+          <el-select v-model="form.status" :placeholder="$t('auto.List.e1c965ef')">
+            <el-option :label="$t('auto.List.fd6e80f1')" :value="1" />
+            <el-option :label="$t('auto.List.2329a0f2')" :value="2" />
           </el-select>
         </el-form-item>
       </el-form>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="dialogVisible = false">{{ $t('auto.List.22.625fb2') }}</el-button>
+          <el-button @click="dialogVisible = false">{{ $t('auto.List.625fb26b') }}</el-button>
           <el-button type="primary" @click="handleSubmit" :loading="submitting">
             确定
           </el-button>
@@ -164,17 +164,17 @@ const form = reactive({
 
 const rules = {
   domain: [
-    { required: true, message: i18n.global.t(t('auto.List.13.a6e880')), trigger: 'blur' },
-    { pattern: /^[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(\.[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/, message: i18n.global.t(t('auto.List.23.1f5304')), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.List.a6e88018')), trigger: 'blur' },
+    { pattern: /^[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(\.[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/, message: i18n.global.t(t('auto.List.1f530493')), trigger: 'blur' }
   ],
   port: [
-    { required: true, message: i18n.global.t(t('auto.List.15.bc0eb7')), trigger: 'blur' },
-    { type: 'number', min: 1, max: 65535, message: i18n.global.t(t('auto.List.24.b6e86d')), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.List.bc0eb7d7')), trigger: 'blur' },
+    { type: 'number', min: 1, max: 65535, message: i18n.global.t(t('auto.List.b6e86d44')), trigger: 'blur' }
   ]
 };
 
 const dialogTitle = computed(() => {
-  return isEdit.value ? t('auto.List.25.b99033') : t('auto.List.26.f605b5')
+  return isEdit.value ? t('auto.List.b990333d') : t('auto.List.f605b57a')
 });
 
 onMounted(() => {
@@ -194,7 +194,7 @@ const fetchDomainList = async () => {
     domainList.value = res.list
     pagination.total = res.total
   } catch (error) {
-    ElMessage.error(i18n.global.t(t('auto.List.27.3ceb0b')))
+    ElMessage.error(i18n.global.t(t('auto.List.3ceb0b74')))
     console.error(error)
   } finally {
     loading.value = false
@@ -243,19 +243,19 @@ const handleEdit = (row) => {
 const handleDelete = (row) => {
   ElMessageBox.confirm(
     `确定要删除域名 "${row.domain}" 吗？`,
-    t('auto.List.28.02d981'),
+    t('auto.List.02d9819d'),
     {
-      confirmButtonText: t('auto.List.29.38cf16'),
-      cancelButtonText: t('auto.List.22.625fb2'),
+      confirmButtonText: t('auto.List.38cf16f2'),
+      cancelButtonText: t('auto.List.625fb26b'),
       type: 'warning'
     }
   ).then(async () => {
     try {
       await domainPoolApi.delete(row.id)
-      ElMessage.success(i18n.global.t(t('auto.List.30.0007d1')))
+      ElMessage.success(i18n.global.t(t('auto.List.0007d170')))
       fetchDomainList()
     } catch (error) {
-      ElMessage.error(i18n.global.t(t('auto.List.31.acf066')))
+      ElMessage.error(i18n.global.t(t('auto.List.acf0664a')))
       console.error(error)
     }
   }).catch((e) => {
@@ -271,7 +271,7 @@ const handleCheck = async (row) => {
     ElMessage.success(`检查完成：${res.msg || 'OK'}`)
     fetchDomainList();
   } catch (error) {
-    ElMessage.error(i18n.global.t(t('auto.List.32.74bb5c')))
+    ElMessage.error(i18n.global.t(t('auto.List.74bb5c74')))
     console.error(error)
   } finally {
     row.checking = false
@@ -282,10 +282,10 @@ const handleCheckAll = async () => {
   checkingAll.value = true
   try {
     await domainPoolApi.checkAllDomains()
-    ElMessage.success(i18n.global.t(t('auto.List.33.6d24e6')))
+    ElMessage.success(i18n.global.t(t('auto.List.6d24e672')))
     fetchDomainList();
   } catch (error) {
-    ElMessage.error(i18n.global.t(t('auto.List.32.74bb5c')))
+    ElMessage.error(i18n.global.t(t('auto.List.74bb5c74')))
     console.error(error)
   } finally {
     checkingAll.value = false
@@ -301,16 +301,16 @@ const handleSubmit = async () => {
       try {
         if (isEdit.value) {
           await domainPoolApi.update(form)
-          ElMessage.success(i18n.global.t(t('auto.List.34.55aa63')))
+          ElMessage.success(i18n.global.t(t('auto.List.55aa6366')))
         } else {
           await domainPoolApi.create(form)
-          ElMessage.success(i18n.global.t(t('auto.List.35.04a691')))
+          ElMessage.success(i18n.global.t(t('auto.List.04a691b3')))
         }
         
         dialogVisible.value = false
         fetchDomainList()
       } catch (error) {
-        ElMessage.error(isEdit.value ? t('auto.List.36.930442') : t('auto.List.37.a88928'))
+        ElMessage.error(isEdit.value ? t('auto.List.930442e2') : t('auto.List.a889286a'))
         console.error(error)
       } finally {
         submitting.value = false

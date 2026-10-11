@@ -2,7 +2,7 @@
   <div class="sales-workbench">
     <div class="wb-header">
       <div class="wb-title">
-        <h3>{{ $t('auto.Index.18.05f652') }}</h3>
+        <h3>{{ $t('auto.Index.05f65226') }}</h3>
         <span class="wb-sub">
           {{ overview.name || '—' }}{{ overview.team ? ' · ' + overview.team : '' }}
           <el-tag
@@ -65,22 +65,22 @@
           </template>
           <div class="wb-stats">
             <div class="wb-stat">
-              <span class="num">{{ n(overview.today?.new_orders) }}</span><span class="lab">{{ $t('auto.Index.19.ea1053') }}</span>
+              <span class="num">{{ n(overview.today?.new_orders) }}</span><span class="lab">{{ $t('auto.Index.ea105393') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ money(overview.today?.new_revenue) }}</span><span class="lab">{{ $t('auto.Index.20.a3c215') }}</span>
+              <span class="num">{{ money(overview.today?.new_revenue) }}</span><span class="lab">{{ $t('auto.Index.a3c21582') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ n(overview.today?.follow_ups) }}</span><span class="lab">{{ $t('auto.Index.12.994dcf') }}</span>
+              <span class="num">{{ n(overview.today?.follow_ups) }}</span><span class="lab">{{ $t('auto.Index.994dcf28') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ n(overview.today?.conversions) }}</span><span class="lab">{{ $t('auto.Index.21.613b48') }}</span>
+              <span class="num">{{ n(overview.today?.conversions) }}</span><span class="lab">{{ $t('auto.Index.613b48bd') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ rate(overview.today?.conversion_rate) }}</span><span class="lab">{{ $t('auto.Index.13.715054') }}</span>
+              <span class="num">{{ rate(overview.today?.conversion_rate) }}</span><span class="lab">{{ $t('auto.Index.71505437') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ n(overview.today?.ai_deals) }}</span><span class="lab">{{ $t('auto.Index.22.124bec') }}</span>
+              <span class="num">{{ n(overview.today?.ai_deals) }}</span><span class="lab">{{ $t('auto.Index.124bec51') }}</span>
             </div>
           </div>
         </el-card>
@@ -98,22 +98,22 @@
           </template>
           <div class="wb-stats">
             <div class="wb-stat">
-              <span class="num">{{ n(overview.month?.total_orders) }}</span><span class="lab">{{ $t('auto.Index.10.4c117f') }}</span>
+              <span class="num">{{ n(overview.month?.total_orders) }}</span><span class="lab">{{ $t('auto.Index.4c117f20') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ money(overview.month?.total_revenue) }}</span><span class="lab">{{ $t('auto.Index.11.a883e8') }}</span>
+              <span class="num">{{ money(overview.month?.total_revenue) }}</span><span class="lab">{{ $t('auto.Index.a883e8d5') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ n(overview.month?.follow_ups) }}</span><span class="lab">{{ $t('auto.Index.12.994dcf') }}</span>
+              <span class="num">{{ n(overview.month?.follow_ups) }}</span><span class="lab">{{ $t('auto.Index.994dcf28') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ n(overview.month?.conversions) }}</span><span class="lab">{{ $t('auto.Index.21.613b48') }}</span>
+              <span class="num">{{ n(overview.month?.conversions) }}</span><span class="lab">{{ $t('auto.Index.613b48bd') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ rate(overview.month?.conversion_rate) }}</span><span class="lab">{{ $t('auto.Index.13.715054') }}</span>
+              <span class="num">{{ rate(overview.month?.conversion_rate) }}</span><span class="lab">{{ $t('auto.Index.71505437') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ n(overview.month?.new_customers) }}</span><span class="lab">{{ $t('auto.Index.23.8759f4') }}</span>
+              <span class="num">{{ n(overview.month?.new_customers) }}</span><span class="lab">{{ $t('auto.Index.8759f4b4') }}</span>
             </div>
           </div>
         </el-card>
@@ -131,22 +131,22 @@
           </template>
           <div class="wb-stats">
             <div class="wb-stat">
-              <span class="num">{{ money(overview.metrics?.avg_deal_amount) }}</span><span class="lab">{{ $t('auto.Index.24.53c7e7') }}</span>
+              <span class="num">{{ money(overview.metrics?.avg_deal_amount) }}</span><span class="lab">{{ $t('auto.Index.53c7e7b4') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ rate(overview.metrics?.renewal_rate) }}</span><span class="lab">{{ $t('auto.Index.25.b1a24e') }}</span>
+              <span class="num">{{ rate(overview.metrics?.renewal_rate) }}</span><span class="lab">{{ $t('auto.Index.b1a24e45') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ rate(overview.metrics?.repurchase_rate) }}</span><span class="lab">{{ $t('auto.Index.26.106d49') }}</span>
+              <span class="num">{{ rate(overview.metrics?.repurchase_rate) }}</span><span class="lab">{{ $t('auto.Index.106d4954') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ rate(overview.metrics?.churn_rate) }}</span><span class="lab">{{ $t('auto.Index.27.f620ee') }}</span>
+              <span class="num">{{ rate(overview.metrics?.churn_rate) }}</span><span class="lab">{{ $t('auto.Index.f620ee32') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ n(overview.metrics?.active_customers) }}</span><span class="lab">{{ $t('auto.Index.28.023ff0') }}</span>
+              <span class="num">{{ n(overview.metrics?.active_customers) }}</span><span class="lab">{{ $t('auto.Index.023ff0d3') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ n(overview.metrics?.dormant_customers) }}</span><span class="lab">{{ $t('auto.Index.29.5ad07e') }}</span>
+              <span class="num">{{ n(overview.metrics?.dormant_customers) }}</span><span class="lab">{{ $t('auto.Index.5ad07edf') }}</span>
             </div>
           </div>
         </el-card>
@@ -160,8 +160,8 @@
       class="wb-card wb-block"
     >
       <template #header>
-        <span>{{ $t('auto.Index.30.9fdf0e') }}</span>
-        <span class="wb-hint">{{ $t('auto.Index.31.661cac') }}</span>
+        <span>{{ $t('auto.Index.9fdf0e64') }}</span>
+        <span class="wb-hint">{{ $t('auto.Index.661cacac') }}</span>
       </template>
       <div class="wb-quick">
         <el-button
@@ -181,7 +181,7 @@
       class="wb-card wb-block"
     >
       <template #header>
-        <span>{{ $t('auto.Index.32.536d2e') }}</span>
+        <span>{{ $t('auto.Index.536d2e8e') }}</span>
         <span class="wb-hint">共 {{ overview.todos?.length || 0 }} 条，点击可跳转对应落点</span>
       </template>
       <el-table
@@ -190,7 +190,7 @@
         size="small"
       >
         <el-table-column
-          :label="$t('auto.Index.1.ee8ecb')"
+          :label="$t('auto.Index.ee8ecb9e')"
           width="80"
         >
           <template #default="{ row }">
@@ -203,7 +203,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          :label="$t('auto.Index.2.226b09')"
+          :label="$t('auto.Index.226b0912')"
           width="90"
         >
           <template #default="{ row }">
@@ -217,18 +217,18 @@
         </el-table-column>
         <el-table-column
           prop="title"
-          :label="$t('auto.Index.3.1bff23')"
+          :label="$t('auto.Index.1bff2322')"
           min-width="160"
           show-overflow-tooltip
         />
         <el-table-column
           prop="description"
-          :label="$t('auto.Index.4.f411d0')"
+          :label="$t('auto.Index.f411d0f1')"
           min-width="200"
           show-overflow-tooltip
         />
         <el-table-column
-          :label="$t('auto.Index.5.cd8fbf')"
+          :label="$t('auto.Index.cd8fbf6f')"
           width="140"
         >
           <template #default="{ row }">
@@ -236,7 +236,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          :label="$t('auto.Index.6.2b6bc0')"
+          :label="$t('auto.Index.2b6bc0f2')"
           width="90"
         >
           <template #default="{ row }">
@@ -254,7 +254,7 @@
       </el-table>
       <el-empty
         v-else
-        :description="$t('auto.Index.7.44406e')"
+        :description="$t('auto.Index.44406eaf')"
         :image-size="60"
       />
     </el-card>
@@ -288,21 +288,21 @@
             />
             <el-table-column
               prop="name"
-              :label="$t('auto.Index.8.7f0dc5')"
+              :label="$t('auto.Index.7f0dc5e3')"
               min-width="90"
             />
             <el-table-column
               prop="team"
-              :label="$t('auto.Index.9.4675fb')"
+              :label="$t('auto.Index.4675fbaf')"
               width="90"
             />
             <el-table-column
               prop="total_orders"
-              :label="$t('auto.Index.10.4c117f')"
+              :label="$t('auto.Index.4c117f20')"
               width="70"
             />
             <el-table-column
-              :label="$t('auto.Index.11.a883e8')"
+              :label="$t('auto.Index.a883e8d5')"
               width="120"
             >
               <template #default="{ row }">
@@ -311,11 +311,11 @@
             </el-table-column>
             <el-table-column
               prop="total_follow_ups"
-              :label="$t('auto.Index.12.994dcf')"
+              :label="$t('auto.Index.994dcf28')"
               width="70"
             />
             <el-table-column
-              :label="$t('auto.Index.13.715054')"
+              :label="$t('auto.Index.71505437')"
               width="90"
             >
               <template #default="{ row }">
@@ -324,13 +324,13 @@
             </el-table-column>
             <el-table-column
               prop="active_days"
-              :label="$t('auto.Index.14.9dc1f6')"
+              :label="$t('auto.Index.9dc1f6f4')"
               width="80"
             />
           </el-table>
           <el-empty
             v-else
-            :description="$t('auto.Index.15.3b80b3')"
+            :description="$t('auto.Index.3b80b3fb')"
             :image-size="60"
           />
         </el-card>
@@ -370,7 +370,7 @@
           <!-- journey 未装配时后端回 funnel=null（少一块 ≠ 500），按"未装配"措辞，不当成没数据 -->
           <el-empty
             v-else
-            :description="$t('auto.Index.16.e3f177')"
+            :description="$t('auto.Index.e3f17730')"
             :image-size="60"
           />
         </el-card>
@@ -435,7 +435,7 @@
           </div>
           <el-empty
             v-if="!champion.common_tags?.length && !champion.insights?.length"
-            :description="$t('auto.Index.17.dfcbe6')"
+            :description="$t('auto.Index.dfcbe644')"
             :image-size="60"
           />
         </el-card>
@@ -449,33 +449,33 @@
           class="wb-card"
         >
           <template #header>
-            <span>{{ $t('auto.Index.33.4d22ac') }}</span>
-            <span class="wb-hint">{{ $t('auto.Index.34.ab516c') }}</span>
+            <span>{{ $t('auto.Index.4d22acba') }}</span>
+            <span class="wb-hint">{{ $t('auto.Index.ab516c10') }}</span>
           </template>
           <div class="wb-stats">
             <div class="wb-stat">
-              <span class="num">{{ n(overview.ai_product?.total_ai_deals) }}</span><span class="lab">{{ $t('auto.Index.22.124bec') }}</span>
+              <span class="num">{{ n(overview.ai_product?.total_ai_deals) }}</span><span class="lab">{{ $t('auto.Index.124bec51') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ n(overview.ai_product?.ai_replied) }}</span><span class="lab">{{ $t('auto.Index.35.53ac19') }}</span>
+              <span class="num">{{ n(overview.ai_product?.ai_replied) }}</span><span class="lab">{{ $t('auto.Index.53ac193e') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ rate(overview.ai_product?.reply_rate) }}</span><span class="lab">{{ $t('auto.Index.36.0d0782') }}</span>
+              <span class="num">{{ rate(overview.ai_product?.reply_rate) }}</span><span class="lab">{{ $t('auto.Index.0d078219') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ rate(overview.ai_product?.transfer_rate) }}</span><span class="lab">{{ $t('auto.Index.37.381706') }}</span>
+              <span class="num">{{ rate(overview.ai_product?.transfer_rate) }}</span><span class="lab">{{ $t('auto.Index.381706fc') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ rate(overview.ai_product?.ai_conversion_rate) }}</span><span class="lab">{{ $t('auto.Index.38.3da640') }}</span>
+              <span class="num">{{ rate(overview.ai_product?.ai_conversion_rate) }}</span><span class="lab">{{ $t('auto.Index.3da64002') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ rate(overview.ai_product?.productivity_gain) }}</span><span class="lab">{{ $t('auto.Index.39.b9fb73') }}</span>
+              <span class="num">{{ rate(overview.ai_product?.productivity_gain) }}</span><span class="lab">{{ $t('auto.Index.b9fb7351') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ n(overview.ai_product?.total_cost_tokens) }}</span><span class="lab">{{ $t('auto.Index.40.c75aff') }}</span>
+              <span class="num">{{ n(overview.ai_product?.total_cost_tokens) }}</span><span class="lab">{{ $t('auto.Index.c75aff11') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ money(overview.ai_product?.solo_deal_amount) }}</span><span class="lab">{{ $t('auto.Index.41.3e9680') }}</span>
+              <span class="num">{{ money(overview.ai_product?.solo_deal_amount) }}</span><span class="lab">{{ $t('auto.Index.3e968096') }}</span>
             </div>
           </div>
         </el-card>
@@ -524,9 +524,9 @@ const rate = (v) => Number(v ?? 0).toFixed(1) + '%'
 const stagePct = (v) => Math.min(100, Math.max(0, Number(v ?? 0)))
 const fmtTime = (t) => (t ? String(t).replace('T', ' ').slice(0, 16) : '—')
 
-const priorityLabel = (p) => ({ 5: t('auto.Index.42.cb0ed5'), 4: t('auto.Index.43.4296d7'), 3: t('auto.Index.44.19ac67') }[p] || t('auto.Index.45.35242c'))
+const priorityLabel = (p) => ({ 5: t('auto.Index.cb0ed5ef'), 4: t('auto.Index.4296d7d2'), 3: t('auto.Index.19ac677a') }[p] || t('auto.Index.35242cff'))
 const priorityType = (p) => (p >= 5 ? 'danger' : p === 4 ? 'warning' : 'info')
-const typeLabel = (t) => ({ draft: t('auto.Index.46.83861e'), followup: t('auto.Index.12.994dcf') }[t] || t || '—')
+const typeLabel = (t) => ({ draft: t('auto.Index.83861e99'), followup: t('auto.Index.994dcf28') }[t] || t || '—')
 
 function errMsg(e, what) {
   const s = e?.status
@@ -538,7 +538,7 @@ function errMsg(e, what) {
 async function loadOverview() {
   const id = me()
   if (!id) {
-    error.value = t('auto.Index.47.689e23')
+    error.value = t('auto.Index.689e238c')
     return
   }
   overview.value = await salesWorkbenchApi.overview(id)
@@ -566,7 +566,7 @@ async function loadAll() {
   try {
     await Promise.all([loadOverview(), loadTeam(), loadQuickActions()])
   } catch (e) {
-    error.value = errMsg(e, t('auto.Index.48.1ccf79'))
+    error.value = errMsg(e, t('auto.Index.1ccf798e'))
   } finally {
     loading.value = false
   }
@@ -586,11 +586,11 @@ function goResolved(url, kind) {
 }
 
 function goTodo(row) {
-  goResolved(row.url, t('auto.Index.49.b60ec8'))
+  goResolved(row.url, t('auto.Index.b60ec8b0'))
 }
 
 function goQuick(action) {
-  goResolved(action.url, t('auto.Index.50.9b4a03'))
+  goResolved(action.url, t('auto.Index.9b4a031b'))
 }
 
 onMounted(loadAll)
