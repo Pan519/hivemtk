@@ -45,7 +45,9 @@
       "matches": [
         "https://*.douyin.com/*"
       ],
-      "js": ["content-douyin.js"],
+      "js": [
+        "content-douyin.js"
+      ],
       "run_at": "document_idle",
       "all_frames": false
     },
@@ -53,7 +55,9 @@
       "matches": [
         "https://*.xiaohongshu.com/*"
       ],
-      "js": ["content-xhs.js"],
+      "js": [
+        "content-xhs.js"
+      ],
       "run_at": "document_idle",
       "all_frames": false
     },
@@ -61,7 +65,9 @@
       "matches": [
         "https://*.tiktok.com/*"
       ],
-      "js": ["content-tiktok.js"],
+      "js": [
+        "content-tiktok.js"
+      ],
       "run_at": "document_idle",
       "all_frames": false
     },
@@ -70,7 +76,9 @@
         "https://*.goofish.com/*",
         "https://*.xianyu.com/*"
       ],
-      "js": ["content-xianyu.js"],
+      "js": [
+        "content-xianyu.js"
+      ],
       "run_at": "document_idle",
       "all_frames": false
     },
@@ -78,9 +86,12 @@
       "matches": [
         "https://*.kuaishou.com/*"
       ],
-      "js": ["content-kuaishou.js"],
+      "js": [
+        "content-kuaishou.js"
+      ],
       "run_at": "document_idle",
       "all_frames": false
     }
-  ]
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAs0J0l0DuA9dZaNgK/4uEUOrqPefDFI0lcz4/XaErdlquSc1ARhyM9cS2YRomyAjBJTm06fIxqH6fFPXdQcDkxcbXOnT7JX7SZNNXFoU+dx8JLF7fxYLqxbrVP2HajKwwV1W0atmAjL3te8Iva0jaVk5fVpFfUtMLOSSoj3D6/Xk613Fykb0zHQek/CPzfi8qjl+qFi51tbKvsK7ytb7rmIA30T2UHR7bdXs+6QX9LDLzTouOsnXhu6A7AL4jUjuAgk0bIeRMQsPgppG2UHoDHEiZJ2l8tqXBgXCylGFAwF7Ktptni4UYUwhcYpwXg1kayanuSv3tQZ1F/6E+s9+n3wIDAQAB"
 }
