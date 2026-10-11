@@ -35,8 +35,15 @@ if [ "$ok" != "1" ]; then
   exit 1
 fi
 
-echo "=== 4) 部署前端 ==="
-tar xzf /root/user-web-dist.tgz -C /var/www/hivemtk
+echo "=== 4) 部署前端（原子换目录）==="
+# 2026-10-11 教训：原地 tar 覆盖会让历史版本 chunk 无限堆积（实测 4366 个文件），
+# 浏览器/PWA 缓存的旧懒加载 chunk 与新 i18n 包组合 = 翻译键全部对不上（裸 key 上屏）。
+# 改为：解包到新目录 → 旧目录改名保留一个回滚窗口 → 新目录原子上位。
+rm -rf /var/www/hivemtk.new /var/www/hivemtk.old
+mkdir -p /var/www/hivemtk.new
+tar xzf /root/user-web-dist.tgz -C /var/www/hivemtk.new
+mv /var/www/hivemtk /var/www/hivemtk.old
+mv /var/www/hivemtk.new /var/www/hivemtk
 rm -f /root/user-web-dist.tgz
 cat /var/www/hivemtk/version.json; echo
 
