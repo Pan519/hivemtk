@@ -145,6 +145,15 @@ def main():
     data = load()
     go_src = gen_go(data)
     md_src = gen_md(data)
+    # 生成即 gofmt（const 块对齐靠 gofmt，手拼行宽必然漂移）；
+    # gofmt 不可用时跳过（本地无 Go 环境的编辑场景），CI 的 --check 照常比对。
+    try:
+        import subprocess
+        r = subprocess.run(["gofmt"], input=go_src, capture_output=True, text=True)
+        if r.returncode == 0 and r.stdout:
+            go_src = r.stdout
+    except FileNotFoundError:
+        pass
     if check:
         bad = []
         if GO_OUT.read_text(encoding="utf-8") != go_src:
