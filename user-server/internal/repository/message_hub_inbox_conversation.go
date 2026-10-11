@@ -8,7 +8,7 @@ import (
 	"unicode/utf8"
 
 	"hivemtk-user/internal/model"
-	"hivemtk-user/internal/repository/scope"
+	"hivemtk-user/internal/scope"
 
 	_db "hivemtk-user/internal/pkg/db"
 

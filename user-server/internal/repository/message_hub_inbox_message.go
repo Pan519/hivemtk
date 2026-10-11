@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"hivemtk-user/internal/model"
-	"hivemtk-user/internal/repository/scope"
+	"hivemtk-user/internal/scope"
 
 	"gorm.io/gorm"
 )

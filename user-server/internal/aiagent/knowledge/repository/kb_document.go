@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"hivemtk-user/internal/aiagent/knowledge/model"
-	"hivemtk-user/internal/repository/scope"
+	"hivemtk-user/internal/scope"
 
 	"gorm.io/gorm"
 )

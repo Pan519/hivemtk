@@ -38,7 +38,6 @@ type mcpAuditWriter struct {
 	flushed  atomic.Int64 // 成功落库行数
 	enqueued atomic.Int64 // 入队总数（Flush 的确定性等待判据）
 
-	startOnce sync.Once
 }
 
 var (

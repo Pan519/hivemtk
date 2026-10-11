@@ -9,7 +9,7 @@ import (
 	"hivemtk-user/internal/model"
 	"hivemtk-user/internal/pkg/utils"
 	"hivemtk-user/internal/pkg/utils/response"
-	"hivemtk-user/internal/repository/scope"
+	"hivemtk-user/internal/scope"
 
 	"github.com/gin-gonic/gin"
 )

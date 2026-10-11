@@ -5,7 +5,7 @@ import (
 	"errors"
 	"hivemtk-user/internal/aiagent/knowledge/model"
 	"hivemtk-user/internal/pkg/timeutil"
-	"hivemtk-user/internal/repository/scope"
+	"hivemtk-user/internal/scope"
 	"time"
 
 	"gorm.io/gorm"

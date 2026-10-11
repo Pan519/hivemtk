@@ -5,7 +5,7 @@ import (
 	"errors"
 	"hivemtk-user/internal/aiagent/knowledge/model"
 	sysmodel "hivemtk-user/internal/model"
-	"hivemtk-user/internal/repository/scope"
+	"hivemtk-user/internal/scope"
 	"time"
 
 	"github.com/google/uuid"

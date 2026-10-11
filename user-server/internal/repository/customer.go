@@ -9,7 +9,7 @@ import (
 	"hivemtk-user/internal/model"
 	_db "hivemtk-user/internal/pkg/db"
 	_utils "hivemtk-user/internal/pkg/utils"
-	"hivemtk-user/internal/repository/scope"
+	"hivemtk-user/internal/scope"
 
 	"gorm.io/gorm"
 )

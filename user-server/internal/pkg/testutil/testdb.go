@@ -24,7 +24,7 @@ import (
 	"time"
 
 	"hivemtk-user/internal/config"
-	"hivemtk-user/internal/repository/scope"
+	"hivemtk-user/internal/scope"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"

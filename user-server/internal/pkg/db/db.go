@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"hivemtk-user/internal/config"
 	"hivemtk-user/internal/rbac"
-	"hivemtk-user/internal/repository/scope"
+	"hivemtk-user/internal/scope"
 	"os"
 	"strings"
 	"sync"

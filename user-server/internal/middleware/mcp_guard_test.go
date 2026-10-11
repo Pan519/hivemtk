@@ -4,7 +4,7 @@ import (
 	"context"
 	"crypto/sha256"
 	"encoding/hex"
-	"hivemtk-user/internal/repository/scope"
+	"hivemtk-user/internal/scope"
 	"net/http"
 	"net/http/httptest"
 	"strings"

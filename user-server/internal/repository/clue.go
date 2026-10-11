@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"hivemtk-user/internal/model"
 	_db "hivemtk-user/internal/pkg/db"
-	"hivemtk-user/internal/repository/scope"
+	"hivemtk-user/internal/scope"
 	"time"
 
 	"gorm.io/gorm"

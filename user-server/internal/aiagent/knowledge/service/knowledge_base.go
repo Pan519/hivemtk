@@ -11,7 +11,7 @@ import (
 	"hivemtk-user/internal/etl"
 	chunkModel "hivemtk-user/internal/model"
 	"hivemtk-user/internal/pkg/db"
-	"hivemtk-user/internal/repository/scope"
+	"hivemtk-user/internal/scope"
 	"os"
 
 	"gorm.io/gorm"

@@ -6,7 +6,7 @@ import (
 	"crypto/subtle"
 	"encoding/hex"
 	"fmt"
-	"hivemtk-user/internal/repository/scope"
+	"hivemtk-user/internal/scope"
 	"os"
 	"strings"
 	"sync"

@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"hivemtk-user/internal/model"
-	"hivemtk-user/internal/repository/scope"
+	"hivemtk-user/internal/scope"
 )
 
 // ListByQuery 按条件分页查询会话（行为与原 service.List 一致）
