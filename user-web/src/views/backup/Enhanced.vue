@@ -132,12 +132,22 @@ const formatSize = formatFileSize
 async function load() {
   loading.value = true
   try {
-    const [s, b] = await Promise.all([
+    const [s, b, st] = await Promise.all([
       http.get('/api/backup/stats'),
-      http.get('/api/backup/list')
+      http.get('/api/backup/list'),
+      http.get('/api/backup/strategy')
     ])
     stats.value = s || stats.value
     backups.value = b || []
+    // 刷新后从服务器回读策略，否则关闭自动备份后刷新会回到页面初始值（开关"自动打开"）。
+    if (st) {
+      strategy.enabled = st.enabled ?? strategy.enabled
+      strategy.daily = new Date(2024, 0, 1, st.daily_hour ?? 2, st.daily_minute ?? 0)
+      strategy.weeklyDay = st.weekly_day ?? strategy.weeklyDay
+      strategy.weeklyTime = new Date(2024, 0, 1, st.weekly_hour ?? 3, st.weekly_minute ?? 0)
+      strategy.retentionDays = st.retention_days ?? strategy.retentionDays
+      strategy.checksum = st.checksum ?? strategy.checksum
+    }
   } finally {
     loading.value = false
   }

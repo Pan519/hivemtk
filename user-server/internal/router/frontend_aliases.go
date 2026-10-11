@@ -467,6 +467,7 @@ func setupFrontendAliases(auth *gin.RouterGroup, engine *gin.Engine, gormDB *gor
 	backupGapCtrl := controller.NewBackupGapController()
 	doRegAdmin("GET", "/backup/list", backupGapCtrl.List)
 	doRegAdmin("GET", "/backup/stats", backupGapCtrl.Stats)
+	doRegAdmin("GET", "/backup/strategy", backupGapCtrl.GetStrategy)
 	doRegAdmin("PUT", "/backup/strategy", backupGapCtrl.SaveStrategy)
 	doRegAdmin("POST", "/backup/create", backupGapCtrl.Create)
 	doRegAdmin("GET", "/backup/:id/preview", backupGapCtrl.Preview)
