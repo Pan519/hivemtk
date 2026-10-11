@@ -3,11 +3,10 @@ package controller
 import (
 	"net/http"
 	"strconv"
-	"time"
 
 	"hivemtk-user/internal/model"
 	"hivemtk-user/internal/pkg/utils/response"
-	"hivemtk-user/internal/repository"
+	"hivemtk-user/internal/service"
 
 	"github.com/gin-gonic/gin"
 )
@@ -18,7 +17,7 @@ import (
 //   团队管理员：GET|POST /team/invite-codes（本团队），POST /team/invite-codes/:codeId/disable
 // 消耗方：注册流（service.Register 的 Consume 原子扣次）。
 
-var inviteRepo = func() *repository.InviteCodeRepo { return repository.NewInviteCodeRepo() }
+var inviteSvc = func() *service.InviteAdminService { return service.NewInviteAdminService() }
 
 type inviteReq struct {
 	MaxUses     int `json:"max_uses"`
@@ -41,12 +40,7 @@ func generateInvite(ctx *gin.Context, teamID uint, createdBy *uint) {
 	if req.MaxUses < 0 {
 		req.MaxUses = 0
 	}
-	var expiresAt *time.Time
-	if req.ExpiresDays > 0 {
-		t := time.Now().AddDate(0, 0, req.ExpiresDays)
-		expiresAt = &t
-	}
-	row, err := inviteRepo().Generate(ctx.Request.Context(), teamID, req.MaxUses, expiresAt, createdBy)
+	row, err := inviteSvc().Generate(ctx.Request.Context(), teamID, req.MaxUses, req.ExpiresDays, createdBy)
 	if err != nil {
 		response.Error(ctx, http.StatusInternalServerError, "生成邀请码失败: "+err.Error())
 		return
@@ -55,7 +49,7 @@ func generateInvite(ctx *gin.Context, teamID uint, createdBy *uint) {
 }
 
 func listInvites(ctx *gin.Context, teamID uint) {
-	rows, err := inviteRepo().ListByTeam(ctx.Request.Context(), teamID)
+	rows, err := inviteSvc().ListByTeam(ctx.Request.Context(), teamID)
 	if err != nil {
 		response.Error(ctx, http.StatusInternalServerError, err.Error())
 		return
@@ -76,7 +70,7 @@ func disableInvite(ctx *gin.Context) {
 		response.Error(ctx, http.StatusBadRequest, "无效 id")
 		return
 	}
-	if err := inviteRepo().Disable(ctx.Request.Context(), codeID); err != nil {
+	if err := inviteSvc().Disable(ctx.Request.Context(), codeID); err != nil {
 		response.Error(ctx, http.StatusInternalServerError, err.Error())
 		return
 	}
@@ -166,21 +160,10 @@ func DisableMyTeamInvite(ctx *gin.Context) {
 		return
 	}
 	// 归属校验：只能停本团队的码
-	repo := inviteRepo()
 	codeID := parseUintOrZero(ctx.Param("codeId"))
-	rows, err := repo.ListByTeam(ctx.Request.Context(), teamID)
-	if err == nil {
-		mine := false
-		for _, r := range rows {
-			if r.ID == codeID {
-				mine = true
-				break
-			}
-		}
-		if !mine {
-			response.Error(ctx, http.StatusForbidden, "只能操作本团队的邀请码")
-			return
-		}
+	if !inviteSvc().OwnsCode(ctx.Request.Context(), teamID, codeID) {
+		response.Error(ctx, http.StatusForbidden, "只能操作本团队的邀请码")
+		return
 	}
 	disableInvite(ctx)
 }

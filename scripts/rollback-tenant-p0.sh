@@ -26,7 +26,7 @@ case "${1:-}" in
   *) ;;
 esac
 
-echo "== 多租户 P0 回滚演练（level=$LEVEL execute=$EXECUTE）=="
+echo "== 多租户 P0 回滚演练（level=${LEVEL} execute=${EXECUTE}）=="
 
 echo "
 [L1] 开关旁路（推荐首选，秒级生效、无数据变更）：

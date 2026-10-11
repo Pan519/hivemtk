@@ -46,8 +46,3 @@ type MCPCredential struct {
 }
 
 func (MCPCredential) TableName() string { return "mcp_credentials" }
-
-// CredentialExpired 报告该凭证是否已过期（nil ExpiresAt 永不视为过期）。
-func (c *MCPCredential) CredentialExpired(now time.Time) bool {
-	return c.ExpiresAt != nil && now.After(*c.ExpiresAt)
-}

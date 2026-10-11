@@ -32,17 +32,3 @@ const (
 	InviteStatusActive   = "active"
 	InviteStatusDisabled = "disabled"
 )
-
-// InviteUsable 报告该码当前是否可用（状态/次数/过期三判）。
-func (c *InviteCode) InviteUsable(now time.Time) bool {
-	if c.Status != InviteStatusActive {
-		return false
-	}
-	if c.MaxUses > 0 && c.UsedCount >= c.MaxUses {
-		return false
-	}
-	if c.ExpiresAt != nil && now.After(*c.ExpiresAt) {
-		return false
-	}
-	return true
-}

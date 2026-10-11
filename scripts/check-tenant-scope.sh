@@ -69,7 +69,7 @@ if [ "${UPDATE_TENANT_BASELINE:-0}" = "1" ]; then
     echo "# 每行 <TARGET 相对路径>:count；豁免必须在代码注释里写明理由（系统上下文直通/平台管线）"
     echo "$bare" | tr ' ' '\n' | grep -v '^$' | cut -d: -f1 | sed "s#^$TARGET/##;s#^user-server/##" | sort | uniq -c | awk '{print $2":"$1}'
   } > "$BASELINE"
-  echo -e "${GREEN}✅ 基线已更新: $BASELINE（$(echo $bare | wc -w) 个豁免点）${NC}"
+  echo -e "${GREEN}✅ 基线已更新: ${BASELINE}（$(echo $bare | wc -w) 个豁免点）${NC}"
   exit 0
 fi
 
@@ -85,7 +85,7 @@ while IFS= read -r loc; do
   allow=${allow:-0}
   got=$(echo "$bare" | tr ' ' '\n' | grep -c "^$f:" || true)
   if [ "$got" -gt "$allow" ]; then
-    echo -e "${RED}❌ $rel 出现 $got 处裸查询（基线允许 $allow）——核心表查询必须走 scope.TeamScoped(ctx)${NC}" >&2
+    echo -e "${RED}❌ ${rel} 出现 ${got} 处裸查询（基线允许 ${allow}）——核心表查询必须走 scope.TeamScoped(ctx)${NC}" >&2
     echo "$bare" | tr ' ' '\n' | grep "^$f:" | sed "s/^/    /" >&2
     fail=1
   fi
@@ -94,6 +94,6 @@ $(echo "$bare" | tr ' ' '\n' | grep -v '^$' | cut -d: -f1 | sort -u)
 EOF
 
 if [ "$fail" = "0" ]; then
-  echo -e "${GREEN}✅ 租户隔离守卫通过（裸查询 $bare_count 处，均在基线内）${NC}"
+  echo -e "${GREEN}✅ 租户隔离守卫通过（裸查询 ${bare_count} 处，均在基线内）${NC}"
 fi
 exit $fail

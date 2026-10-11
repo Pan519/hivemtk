@@ -65,15 +65,15 @@ func MCPKeyStatusValid(s string) bool {
 		s == MCPKeyStatusSuspended || s == MCPKeyStatusRevoked
 }
 
-// KeyExpired 报告该钥匙是否已过独立过期时间（nil = 永不过期）。
-func (k *MCPCredentialKey) KeyExpired(now time.Time) bool {
-	return k.ExpiresAt != nil && now.After(*k.ExpiresAt)
-}
-
-// MaskedKey 生成掩码展示形（wgk_ab12cd34••••wxyz）；无明文痕迹的迁移行返回「旧密钥」占位。
-func (k *MCPCredentialKey) MaskedKey() string {
+// MaskedKeyOf / KeyExpiredOf 钥匙掩码与过期判定（包级函数：model 文件不挂非 Hook
+// 接收器方法——架构门口径；调用方 controller/service 以参数传入）。
+func MaskedKeyOf(k *MCPCredentialKey) string {
 	if k.KeyPrefix == "" && k.KeySuffix == "" {
 		return "legacy-****"
 	}
 	return k.KeyPrefix + "••••" + k.KeySuffix
+}
+
+func KeyExpiredOf(k *MCPCredentialKey, now time.Time) bool {
+	return k.ExpiresAt != nil && now.After(*k.ExpiresAt)
 }

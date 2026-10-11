@@ -43,9 +43,9 @@ type mcpKeyRow struct {
 
 func mcpKeyOut(k *model.MCPCredentialKey) mcpKeyRow {
 	return mcpKeyRow{
-		ID: k.ID, Name: k.Name, Status: k.Status, KeyMasked: k.MaskedKey(),
+		ID: k.ID, Name: k.Name, Status: k.Status, KeyMasked: model.MaskedKeyOf(k),
 		CanReveal: k.KeyEnc != "", ExpiresAt: k.ExpiresAt,
-		Expired: k.KeyExpired(time.Now()), LastUsedAt: k.LastUsedAt, CreatedAt: k.CreatedAt,
+		Expired: model.KeyExpiredOf(k, time.Now()), LastUsedAt: k.LastUsedAt, CreatedAt: k.CreatedAt,
 	}
 }
 
@@ -209,7 +209,7 @@ func CreateMCPCredentialKey(ctx *gin.Context) {
 	}
 	middleware.InvalidateMCPCredentialCache()
 	mcpWriteAdminAudit(ctx, model.MCPAuditActionKeyCreate, "key", key.ID, &credID, cred.ClientID, gin.H{
-		"key_name": name, "key_masked": key.MaskedKey(), "expires_at": expiresAt,
+		"key_name": name, "key_masked": model.MaskedKeyOf(key), "expires_at": expiresAt,
 	})
 	response.Success(ctx, gin.H{
 		"key":      mcpKeyOut(key),
@@ -339,7 +339,7 @@ func DeleteMCPCredentialKey(ctx *gin.Context) {
 	}
 	middleware.InvalidateMCPCredentialCache()
 	mcpWriteAdminAudit(ctx, model.MCPAuditActionKeyDelete, "key", keyID, &credID, cred.ClientID, gin.H{
-		"key_name": key.Name, "key_masked": key.MaskedKey(), "status": key.Status,
+		"key_name": key.Name, "key_masked": model.MaskedKeyOf(key), "status": key.Status,
 	})
 	response.Success(ctx, gin.H{"ok": true}, "已删除")
 }

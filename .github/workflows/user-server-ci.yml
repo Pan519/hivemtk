@@ -13,6 +13,15 @@ on:
       - 'embed-sdk/**'
       - 'scripts/api-inventory.sh'
       - 'scripts/check-architecture.sh'
+      # 多租户隔离门（2026-10-11）：判据脚本与棘轮基线必须都在触发面，改门/改基线的提交要重跑。
+      - 'scripts/check-tenant-scope.sh'
+      - 'scripts/tenant-scope.baseline'
+      # 统一词汇表生成器：registry.yaml 改动的提交要重跑 --check（生成物新鲜度在步骤里）。
+      - 'scripts/gen-registry.py'
+      # 回滚演练脚本进触发面（门覆盖口径：运维脚本同样被 CJK/shellcheck 门扫）。
+      - 'scripts/rollback-tenant-p0.sh'
+      - 'scripts/audit-retention.sh'
+      - 'scripts/fix-ws-origin.sh'
       # 架构门的 L4 宽口径基线：门读它，不进触发面 ⇒ "只动基线"的提交不重跑这道门。
       - 'scripts/arch-l4-getdb.baseline'
       - 'scripts/check-date-bucket-tz.sh'

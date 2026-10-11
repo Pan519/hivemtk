@@ -39,18 +39,21 @@ fi
 if [ -z "$TOKEN" ]; then echo "  ❌ 拿不到 token，无法做握手验证"; exit 1; fi
 echo "  token 长度=${#TOKEN}（不回显）"
 
+WSKEY=$(head -c 16 /dev/urandom | base64 | tr -d "
+")  # RFC6455：每次随机
+
 hs() {
   local origin="$1"
   if [ -n "$origin" ]; then
     curl -s -i -N --max-time 4 \
       -H "Connection: Upgrade" -H "Upgrade: websocket" \
-      -H "Sec-WebSocket-Version: 13" -H "Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==" \
+      -H "Sec-WebSocket-Version: 13" -H "Sec-WebSocket-Key: ${WSKEY}" \
       -H "Origin: $origin" \
       "http://127.0.0.1:8204/api/ws/agent?agent_id=1&token=$TOKEN" | head -1
   else
     curl -s -i -N --max-time 4 \
       -H "Connection: Upgrade" -H "Upgrade: websocket" \
-      -H "Sec-WebSocket-Version: 13" -H "Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==" \
+      -H "Sec-WebSocket-Version: 13" -H "Sec-WebSocket-Key: ${WSKEY}" \
       "http://127.0.0.1:8204/api/ws/agent?agent_id=1&token=$TOKEN" | head -1
   fi
 }
