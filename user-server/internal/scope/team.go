@@ -124,6 +124,29 @@ func TenantTeamScoped(ctx context.Context) func(db *gorm.DB) *gorm.DB {
 	}
 }
 
+// TenantUserScoped 用户表（system_users）的租户范围过滤（多租户 P1）：
+//   - 系统上下文 / 项目超管（admin）→ 全量直通；
+//   - 租户超管（tenant_admin）→ WHERE tenant_id = ctx 租户；
+//   - 其余（team_admin / 成员）→ WHERE team_id = 本团队。
+func TenantUserScoped(ctx context.Context) func(db *gorm.DB) *gorm.DB {
+	return func(db *gorm.DB) *gorm.DB {
+		if db == nil || !tenantIsolationEnabled() {
+			return db
+		}
+		info, present := TeamInfoFromCtx(ctx)
+		if !present {
+			return db
+		}
+		if info.Platform || isAdmin(ctx) {
+			return db
+		}
+		if isTenantAdminWith(info) {
+			return db.Where("tenant_id = ?", info.TenantID)
+		}
+		return db.Where("team_id = ?", info.TeamID)
+	}
+}
+
 // teamFilterDecision 租户过滤的四态判定（纯函数，供 TeamScoped 与单测复用）：
 //   - (true, 0, 0)：直通——系统上下文（无身份）或平台管理员（admin）；
 //   - (false, tenantID>0, 0)：租户超管（tenant_admin）——锁本租户团队集合；

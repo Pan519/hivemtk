@@ -132,7 +132,7 @@ func TeamAdminAuthMiddleware() gin.HandlerFunc {
 			return
 		}
 		r, _ := role.(string)
-		if r != "admin" && r != model.SystemUserRoleTeamAdmin {
+		if r != "admin" && r != model.SystemUserRoleTenantAdmin && r != model.SystemUserRoleTeamAdmin {
 			c.JSON(http.StatusForbidden, gin.H{"code": 403, "msg": "权限不足，需要团队管理员权限"})
 			c.Abort()
 			return

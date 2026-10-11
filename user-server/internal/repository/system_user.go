@@ -9,6 +9,7 @@ import (
 	"gorm.io/gorm"
 
 	"hivemtk-user/internal/model"
+	"hivemtk-user/internal/scope"
 	"hivemtk-user/internal/pkg/db"
 )
 
@@ -127,7 +128,7 @@ func (r *systemUserRepo) Count(ctx context.Context) (int64, error) {
 func (r *systemUserRepo) SearchUsers(ctx context.Context, keyword string, offset, limit int) ([]*model.SystemUser, int64, error) {
 	var users []*model.SystemUser
 	var total int64
-	q := r.db.WithContext(ctx).Model(&model.SystemUser{})
+	q := r.db.WithContext(ctx).Model(&model.SystemUser{}).Scopes(scope.TenantUserScoped(ctx))
 	if keyword != "" {
 		like := "%" + keyword + "%"
 		q = q.Where("username ILIKE ? OR email ILIKE ? OR real_name ILIKE ?", like, like, like)

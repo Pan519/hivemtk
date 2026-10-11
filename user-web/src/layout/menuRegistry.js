@@ -16,13 +16,13 @@
 // ---------------------------------------------------------------------------
 
 export const MENU_SECTIONS = [
-  { key: "workspace", icon: "Monitor", order: 1, fallback: "工作台", roles: ["admin","manager","sales","viewer","staff", "team_admin"] },
-  { key: "customer", icon: "UserFilled", order: 2, fallback: "客户中心", roles: ["admin","manager","sales","viewer","staff", "team_admin"] },
-  { key: "aiAgent", icon: "Cpu", order: 3, fallback: "智能体", roles: ["admin","manager","customer_service","staff", "team_admin"] },
-  { key: "reach", icon: "Promotion", order: 4, fallback: "触达运营", roles: ["admin","manager","sales","viewer","staff", "team_admin"] },
-  { key: "knowledge", icon: "Collection", order: 5, fallback: "知识中心", roles: ["admin","manager","sales","viewer","staff", "team_admin"] },
-  { key: "analytics", icon: "DataAnalysis", order: 6, fallback: "数据分析", roles: ["admin","manager","sales","viewer","staff", "team_admin"] },
-  { key: "system", icon: "Setting", order: 7, fallback: "系统设置", roles: ["admin","manager","sales","viewer","staff", "team_admin"] },
+  { key: "workspace", icon: "Monitor", order: 1, fallback: "工作台", roles: ["admin","manager","sales","viewer","staff", "team_admin", "tenant_admin"] },
+  { key: "customer", icon: "UserFilled", order: 2, fallback: "客户中心", roles: ["admin","manager","sales","viewer","staff", "team_admin", "tenant_admin"] },
+  { key: "aiAgent", icon: "Cpu", order: 3, fallback: "智能体", roles: ["admin","manager","customer_service","staff", "team_admin", "tenant_admin"] },
+  { key: "reach", icon: "Promotion", order: 4, fallback: "触达运营", roles: ["admin","manager","sales","viewer","staff", "team_admin", "tenant_admin"] },
+  { key: "knowledge", icon: "Collection", order: 5, fallback: "知识中心", roles: ["admin","manager","sales","viewer","staff", "team_admin", "tenant_admin"] },
+  { key: "analytics", icon: "DataAnalysis", order: 6, fallback: "数据分析", roles: ["admin","manager","sales","viewer","staff", "team_admin", "tenant_admin"] },
+  { key: "system", icon: "Setting", order: 7, fallback: "系统设置", roles: ["admin","manager","sales","viewer","staff", "team_admin", "tenant_admin"] },
 ]
 
 export const MENU_GROUPS = {
@@ -30,19 +30,19 @@ export const MENU_GROUPS = {
   agentPassive: { icon: "ChatDotRound", section: "aiAgent", order: 3, fallback: "被动应答" },
   agentActive: { icon: "Promotion", section: "aiAgent", order: 4, fallback: "主动触达" },
   agentSupport: { icon: "Connection", section: "aiAgent", order: 5, fallback: "能力支撑" },
-  agentWorkbench: { icon: "Headset", section: "aiAgent", order: 6, fallback: "客服工作台", roles: ["admin","manager","sales","customer_service", "team_admin"] },
-  agentChannel: { icon: "Connection", section: "aiAgent", order: 7, fallback: "客服渠道", roles: ["admin","manager", "team_admin"] },
-  agentSalesIntel: { icon: "Trophy", section: "aiAgent", order: 8, fallback: "销售智能", roles: ["admin","manager","sales", "team_admin"] },
+  agentWorkbench: { icon: "Headset", section: "aiAgent", order: 6, fallback: "客服工作台", roles: ["admin","manager","sales","customer_service", "team_admin", "tenant_admin"] },
+  agentChannel: { icon: "Connection", section: "aiAgent", order: 7, fallback: "客服渠道", roles: ["admin","manager", "team_admin", "tenant_admin"] },
+  agentSalesIntel: { icon: "Trophy", section: "aiAgent", order: 8, fallback: "销售智能", roles: ["admin","manager","sales", "team_admin", "tenant_admin"] },
   browserAutomation: { icon: "Monitor", section: "analytics", order: 12, fallback: "浏览器自动化" },
   geoTools: { icon: "MagicStick", section: "analytics", order: 13, fallback: "GEO 智能优化" },
   geoConfigGroup: { icon: "Setting", section: "analytics", parents: ["geoTools"], order: 1, fallback: "配置" },
   geoProd: { icon: "EditPen", section: "analytics", parents: ["geoTools"], order: 2, fallback: "生产" },
   geoPublish: { icon: "Connection", section: "analytics", parents: ["geoTools"], order: 3, fallback: "发布" },
   geoMonitor: { icon: "Monitor", section: "analytics", parents: ["geoTools"], order: 4, fallback: "监控" },
-  customerIdentity: { icon: "Connection", section: "customer", order: 9, fallback: "客户身份", roles: ["admin","manager", "team_admin"] },
-  knowledgeWorkspace: { icon: "Files", section: "knowledge", order: 1, fallback: "知识库工作台", roles: ["admin","manager", "team_admin"] },
-  ragProductConfig: { icon: "ChatLineRound", section: "knowledge", order: 2, fallback: "RAG 知识库", roles: ["admin","manager", "team_admin"] },
-  i18nManage: { icon: "Coin", section: "knowledge", order: 4, fallback: "多语言管理", roles: ["admin","manager", "team_admin"] },
+  customerIdentity: { icon: "Connection", section: "customer", order: 9, fallback: "客户身份", roles: ["admin","manager", "team_admin", "tenant_admin"] },
+  knowledgeWorkspace: { icon: "Files", section: "knowledge", order: 1, fallback: "知识库工作台", roles: ["admin","manager", "team_admin", "tenant_admin"] },
+  ragProductConfig: { icon: "ChatLineRound", section: "knowledge", order: 2, fallback: "RAG 知识库", roles: ["admin","manager", "team_admin", "tenant_admin"] },
+  i18nManage: { icon: "Coin", section: "knowledge", order: 4, fallback: "多语言管理", roles: ["admin","manager", "team_admin", "tenant_admin"] },
   emailReach: { icon: "Message", section: "reach", order: 1, fallback: "邮件触达" },
   smsReach: { icon: "ChatDotSquare", section: "reach", order: 2, fallback: "短信触达" },
   douyin: { icon: "VideoPlay", section: "reach", order: 3, fallback: "抖音" },
@@ -53,12 +53,12 @@ export const MENU_GROUPS = {
   whatsapp: { icon: "ChatDotRound", section: "reach", order: 8, fallback: "WhatsApp" },
   telegram: { icon: "ChatDotRound", section: "reach", order: 9, fallback: "电报社群" },
   qq: { icon: "ChatDotRound", section: "reach", order: 10, fallback: "QQ 机器人" },
-  feishu: { icon: "ChatDotRound", section: "reach", order: 11, fallback: "飞书", roles: ["admin","manager", "team_admin"] },
+  feishu: { icon: "ChatDotRound", section: "reach", order: 11, fallback: "飞书", roles: ["admin","manager", "team_admin", "tenant_admin"] },
   shortLink: { icon: "Link", section: "reach", order: 13, fallback: "短链管理" },
   siteConfig: { icon: "Tools", section: "system", order: 2, fallback: "站点配置", roles: ["admin"] },
   teamGroup: { icon: "UserFilled", section: "system", order: 3, fallback: "团队", roles: ["admin"] },
   permissionGroup: { icon: "Lock", section: "system", order: 4, fallback: "权限设置", roles: ["admin"] },
-  assetBundle: { icon: "Box", section: "system", order: 5, fallback: "资产包", roles: ["admin","manager","sales","viewer","staff", "team_admin"] },
+  assetBundle: { icon: "Box", section: "system", order: 5, fallback: "资产包", roles: ["admin","manager","sales","viewer","staff", "team_admin", "tenant_admin"] },
 }
 
 export const DEFAULT_GROUP_ICON = 'Menu'
