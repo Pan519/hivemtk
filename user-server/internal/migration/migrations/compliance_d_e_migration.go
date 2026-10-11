@@ -209,15 +209,13 @@ func (m *ComplianceDEMigration) createSmsJobMetrics(ctx context.Context) error {
 	return execAllComplianceDE(ctx, m.db, stmts)
 }
 
-// Down 执行降级（删除 6 张表）
+// Down 执行降级。6 张表均已由模型/AutoMigrate 持有（EmailJobMetric/EmailTrackingEvent/
+// SMSJobMetric/EmailUnsubscribe/SMSUnsubscribe/SMSDeliveryStatus 已注册进 allModels()），
+// 降级删表＝销毁在用数据且当前进程不再补回，故与其余迁移同模式：全部放弃删表。
 func (m *ComplianceDEMigration) Down(ctx context.Context) error {
-	declineTableDrop(m.Version(), "sms_delivery_statuses", "sms_unsubscribes", "email_unsubscribes")
-	stmts := []string{
-		`DROP TABLE IF EXISTS sms_job_metrics`,
-		`DROP TABLE IF EXISTS email_job_metrics`,
-		`DROP TABLE IF EXISTS email_tracking_events`,
-	}
-	return execAllComplianceDE(ctx, m.db, stmts)
+	declineTableDrop(m.Version(), "sms_delivery_statuses", "sms_unsubscribes", "email_unsubscribes",
+		"sms_job_metrics", "email_job_metrics", "email_tracking_events")
+	return nil
 }
 
 func execAllComplianceDE(ctx context.Context, db *gorm.DB, stmts []string) error {

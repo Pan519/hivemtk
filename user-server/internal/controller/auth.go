@@ -95,17 +95,6 @@ func (c *AuthController) recordLoginRiskAsync(ctx *gin.Context, username string,
 	}()
 }
 
-// Register godoc
-// @Summary      用户注册
-// @Description  自主注册，支持邮箱验证（可选），注册成功返回 JWT token
-// @Tags         Auth
-// @Accept       json
-// @Produce      json
-// @Param        body  body  service.RegisterRequest  true  "注册请求"
-// @Success      200   {object}  response.Response  "注册成功，返回 token"
-// @Failure      400   {object}  response.Response  "参数错误"
-// @Failure      409   {object}  response.Response  "用户名/邮箱已存在"
-// @Router       /api/auth/register [post]
 // GetRegisterMeta GET /api/auth/register-meta（公开）：登录页注册表单按此渲染
 // （是否开放 + 准入模式：default_team/create_team/invite）。
 func (c *AuthController) GetRegisterMeta(ctx *gin.Context) {
@@ -121,6 +110,17 @@ func (c *AuthController) GetRegisterMeta(ctx *gin.Context) {
 	response.Success(ctx, gin.H{"enabled": true, "mode": mode}, "ok")
 }
 
+// Register godoc
+// @Summary      用户注册
+// @Description  自主注册，支持邮箱验证（可选），注册成功返回 JWT token
+// @Tags         Auth
+// @Accept       json
+// @Produce      json
+// @Param        body  body  service.RegisterRequest  true  "注册请求"
+// @Success      200   {object}  response.Response  "注册成功，返回 token"
+// @Failure      400   {object}  response.Response  "参数错误"
+// @Failure      409   {object}  response.Response  "用户名/邮箱已存在"
+// @Router       /api/auth/register [post]
 func (c *AuthController) Register(ctx *gin.Context) {
 	// enable_register 开关：关闭时 403（配置读失败按保守口径同样拒绝）
 	cfg, cfgErr := service.NewSystemConfigService().GetConfig(ctx.Request.Context())

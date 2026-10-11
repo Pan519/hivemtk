@@ -28,7 +28,7 @@ import (
 var opportunityWantColumns = []string{
 	"amount", "clue_id", "code", "created_at", "currency", "customer_id",
 	"expected_close_at", "id", "lost_reason", "one_id", "owner_user_id",
-	"stage", "status", "updated_at", "version", "win_probability",
+	"stage", "status", "team_id", "updated_at", "version", "win_probability",
 }
 
 func TestOpportunityRegisteredInAllModels(t *testing.T) {
