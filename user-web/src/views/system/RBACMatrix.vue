@@ -3,7 +3,7 @@
     <el-card shadow="never">
       <template #header>
         <div class="card-header">
-          <span>RBAC 权限矩阵</span>
+          <span>{{ $t('auto.RBACMatrix.6.24a4a4') }}</span>
         </div>
       </template>
 
@@ -11,7 +11,7 @@
         type="info"
         :closable="false"
         show-icon
-        title="只读矩阵：单一事实源是 docs/registry/registry.yaml（生成器 scripts/gen-registry.py）。改权限先改源，运行时由 RequireRBACPermission 强制执法——本页只做可视化对账。"
+        :title="$t('auto.RBACMatrix.1.e98201')"
         style="margin-bottom: 12px"
       />
 
@@ -20,14 +20,14 @@
           type="warning"
           :closable="false"
           show-icon
-          title="可编辑口径：super_admin 恒全量（锁定）；team_admin/member 的勾选为 DB 覆盖层（DB 优先、生成为兜底），保存后 60s 内全局生效。"
+          :title="$t('auto.RBACMatrix.2.a9db17')"
           style="margin-bottom: 12px"
         />
         <div style="margin-bottom: 12px">
-          <el-button type="primary" size="small" :loading="savingMatrix" :disabled="!matrixDirty" @click="saveMatrix">保存修改</el-button>
-          <el-button size="small" :disabled="!matrixDirty" @click="resetMatrix">放弃</el-button>
+          <el-button type="primary" size="small" :loading="savingMatrix" :disabled="!matrixDirty" @click="saveMatrix">{{ $t('auto.RBACMatrix.7.c5575b') }}</el-button>
+          <el-button size="small" :disabled="!matrixDirty" @click="resetMatrix">{{ $t('auto.RBACMatrix.8.5ac201') }}</el-button>
         </div>
-        <el-descriptions :column="4" border size="small" style="margin-bottom: 16px" title="角色">
+        <el-descriptions :column="4" border size="small" style="margin-bottom: 16px" :title="$t('auto.RBACMatrix.3.464f3d')">
           <el-descriptions-item v-for="r in data.roles" :key="r.id" :label="r.id">
             <el-tag size="small" :type="r.id === 'super_admin' ? 'danger' : r.id === 'team_admin' ? 'warning' : 'info'">
               {{ r.id }}
@@ -36,7 +36,7 @@
         </el-descriptions>
 
         <el-table :data="data.permissions" border size="small">
-          <el-table-column prop="id" label="权限点（资源.动作）" min-width="200">
+          <el-table-column prop="id" :label="$t('auto.RBACMatrix.4.2007ae')" min-width="200">
             <template #default="{ row }">
               <code class="mono">{{ row.id }}</code>
             </template>
@@ -59,7 +59,7 @@
           </el-table-column>
         </el-table>
 
-        <el-descriptions :column="4" border size="small" style="margin-top: 16px" title="API Key 状态机">
+        <el-descriptions :column="4" border size="small" style="margin-top: 16px" :title="$t('auto.RBACMatrix.5.ff36d6')">
           <el-descriptions-item v-for="st in data.api_key_states" :key="st.id" :label="st.id">
             <code class="mono">{{ st.id }}</code>
           </el-descriptions-item>
@@ -71,9 +71,12 @@
 
 <script setup>
 import { ref, reactive, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import { http } from '@/utils/request'
 import { rbacApi } from '@/api/teamAdmin'
+
+const { t } = useI18n()
 
 const data = ref(null)
 // draft[roleCode] = [permIds]——仅覆盖可编辑角色（team_admin/member）；
@@ -96,11 +99,11 @@ const saveMatrix = async () => {
     for (const [roleCode, perms] of Object.entries(draft)) {
       await http.put(`/api/manage/role-permissions/${roleCode}`, { permissions: perms })
     }
-    ElMessage.success('已保存（60s 内全局生效）')
+    ElMessage.success(t('auto.RBACMatrix.9.a7b722'))
     Object.keys(draft).forEach((k) => delete draft[k])
     await load()
   } catch (e) {
-    ElMessage.error(e?.response?.data?.message || '保存失败')
+    ElMessage.error(e?.response?.data?.message || t('auto.RBACMatrix.10.6de920'))
   } finally {
     savingMatrix.value = false
   }

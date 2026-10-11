@@ -1,0 +1,5 @@
+{
+ "说明": "2026-10-11 全量盘点：views 下模板区硬编码中文（不含已用 $t/t() 的行）。转换工具 scripts/i18n-codemod.py，zh 兜底 fallbackLocale 已配置，非 zh locale 增量补齐。",
+ "总计": 0,
+ "files": {}
+}

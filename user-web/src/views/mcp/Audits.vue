@@ -4,8 +4,8 @@
       <template #header>
         <div class="card-header">
           <el-tabs v-model="tab" style="flex: 1">
-            <el-tab-pane label="调用审计" name="call" />
-            <el-tab-pane label="管理审计" name="admin" />
+            <el-tab-pane :label="$t('auto.Audits.1.3d4100')" name="call" />
+            <el-tab-pane :label="$t('auto.Audits.2.b5b410')" name="admin" />
           </el-tabs>
           <div v-if="tab === 'call'" class="filters">
             <el-input
@@ -18,56 +18,56 @@
             />
             <el-input
               v-model="filters.tool"
-              placeholder="工具名"
+              :placeholder="$t('auto.Audits.3.7da405')"
               clearable
               size="small"
               style="width: 160px"
               @change="load"
             />
-            <el-select v-model="filters.event" placeholder="事件" clearable size="small" style="width: 130px" @change="load">
-              <el-option label="工具调用" value="call" />
-              <el-option label="工具枚举" value="list" />
-              <el-option label="鉴权失败" value="auth" />
+            <el-select v-model="filters.event" :placeholder="$t('auto.Audits.4.10b276')" clearable size="small" style="width: 130px" @change="load">
+              <el-option :label="$t('auto.Audits.5.850b4e')" value="call" />
+              <el-option :label="$t('auto.Audits.6.3476d2')" value="list" />
+              <el-option :label="$t('auto.Audits.7.c0a3c7')" value="auth" />
             </el-select>
-            <el-select v-model="filters.allowed" placeholder="结果" clearable size="small" style="width: 110px" @change="load">
-              <el-option label="已执行" :value="1" />
-              <el-option label="被拒（越权）" :value="0" />
+            <el-select v-model="filters.allowed" :placeholder="$t('auto.Audits.8.5ad7f5')" clearable size="small" style="width: 110px" @change="load">
+              <el-option :label="$t('auto.Audits.9.c6bc47')" :value="1" />
+              <el-option :label="$t('auto.Audits.10.c87187')" :value="0" />
             </el-select>
             <el-date-picker
               v-model="filters.range"
               type="datetimerange"
               size="small"
               style="width: 320px"
-              start-placeholder="开始时间"
-              end-placeholder="结束时间"
+              :start-placeholder="$t('auto.Audits.11.592c59')"
+              :end-placeholder="$t('auto.Audits.12.f78277')"
               value-format="YYYY-MM-DDTHH:mm:ssZ"
               @change="load"
             />
-            <el-button type="primary" size="small" @click="load">刷新</el-button>
-            <el-button size="small" @click="exportCSV('mcp/audits/export', 'mcp-call-audits')">导出 CSV</el-button>
+            <el-button type="primary" size="small" @click="load">{{ $t('auto.Audits.30.694fc5') }}</el-button>
+            <el-button size="small" @click="exportCSV('mcp/audits/export', 'mcp-call-audits')">{{ $t('auto.Audits.31.1add12') }}</el-button>
           </div>
           <div v-else class="filters">
-            <el-select v-model="adminFilters.action" placeholder="动作" clearable filterable size="small" style="width: 180px" @change="loadAdmin">
+            <el-select v-model="adminFilters.action" :placeholder="$t('auto.Audits.13.c500cf')" clearable filterable size="small" style="width: 180px" @change="loadAdmin">
               <el-option v-for="a in actions" :key="a" :label="a" :value="a" />
             </el-select>
-            <el-select v-model="adminFilters.target_type" placeholder="对象" clearable size="small" style="width: 120px" @change="loadAdmin">
-              <el-option label="凭证" value="credential" />
-              <el-option label="密钥" value="key" />
+            <el-select v-model="adminFilters.target_type" :placeholder="$t('auto.Audits.14.b14494')" clearable size="small" style="width: 120px" @change="loadAdmin">
+              <el-option :label="$t('auto.Audits.15.94171c')" value="credential" />
+              <el-option :label="$t('auto.Audits.16.cdb81c')" value="key" />
               <el-option label="Skill" value="skill" />
             </el-select>
-            <el-input v-model="adminFilters.operator" placeholder="操作人" clearable size="small" style="width: 120px" @change="loadAdmin" />
+            <el-input v-model="adminFilters.operator" :placeholder="$t('auto.Audits.17.f9ac4b')" clearable size="small" style="width: 120px" @change="loadAdmin" />
             <el-date-picker
               v-model="adminFilters.range"
               type="datetimerange"
               size="small"
               style="width: 320px"
-              start-placeholder="开始时间"
-              end-placeholder="结束时间"
+              :start-placeholder="$t('auto.Audits.11.592c59')"
+              :end-placeholder="$t('auto.Audits.12.f78277')"
               value-format="YYYY-MM-DDTHH:mm:ssZ"
               @change="loadAdmin"
             />
-            <el-button type="primary" size="small" @click="loadAdmin">刷新</el-button>
-            <el-button size="small" @click="exportCSV('mcp/admin-audits/export', 'mcp-admin-audits')">导出 CSV</el-button>
+            <el-button type="primary" size="small" @click="loadAdmin">{{ $t('auto.Audits.30.694fc5') }}</el-button>
+            <el-button size="small" @click="exportCSV('mcp/admin-audits/export', 'mcp-admin-audits')">{{ $t('auto.Audits.31.1add12') }}</el-button>
           </div>
         </div>
       </template>
@@ -78,47 +78,47 @@
           type="info"
           :closable="false"
           show-icon
-          title="MCP 入口（POST /api/mcp）每次调用都留痕：谁、哪把凭证哪把钥匙、调了什么、成没成。参数只存摘要（sha256），不落原文；鉴权失败（拿错钥匙撞门）也在此列。"
+          :title="$t('auto.Audits.18.15007d')"
           style="margin-bottom: 12px"
         />
         <el-table v-loading="loading" :data="rows" border size="small">
-          <el-table-column prop="created_at" label="时间" width="170">
+          <el-table-column prop="created_at" :label="$t('auto.Audits.19.19fcb9')" width="170">
             <template #default="{ row }">{{ fmtTime(row.created_at) }}</template>
           </el-table-column>
           <el-table-column prop="client_id" label="Client ID" width="150" />
-          <el-table-column label="事件" width="90">
+          <el-table-column :label="$t('auto.Audits.4.10b276')" width="90">
             <template #default="{ row }">
-              <el-tag v-if="row.event === 'auth'" type="danger" size="small">鉴权失败</el-tag>
-              <el-tag v-else-if="row.event === 'list'" type="info" size="small">枚举</el-tag>
-              <el-tag v-else size="small">调用</el-tag>
+              <el-tag v-if="row.event === 'auth'" type="danger" size="small">{{ $t('auto.Audits.7.c0a3c7') }}</el-tag>
+              <el-tag v-else-if="row.event === 'list'" type="info" size="small">{{ $t('auto.Audits.32.569756') }}</el-tag>
+              <el-tag v-else size="small">{{ $t('auto.Audits.33.97d29d') }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="method" label="方法" width="100" />
-          <el-table-column prop="tool" label="工具" min-width="140" />
-          <el-table-column label="钥匙" width="70">
+          <el-table-column prop="method" :label="$t('auto.Audits.20.ea340b')" width="100" />
+          <el-table-column prop="tool" :label="$t('auto.Audits.21.20dce2')" min-width="140" />
+          <el-table-column :label="$t('auto.Audits.22.02b66e')" width="70">
             <template #default="{ row }">
               <span v-if="row.key_id" class="mono">#{{ row.key_id }}</span>
               <span v-else class="muted">—</span>
             </template>
           </el-table-column>
-          <el-table-column label="结果" width="110">
+          <el-table-column :label="$t('auto.Audits.8.5ad7f5')" width="110">
             <template #default="{ row }">
-              <el-tag v-if="row.event === 'auth'" type="danger" size="small">拒绝</el-tag>
-              <el-tag v-else-if="row.allowed && row.ok" type="success" size="small">成功</el-tag>
-              <el-tag v-else-if="row.allowed" type="warning" size="small">失败</el-tag>
-              <el-tag v-else type="danger" size="small">越权拒绝</el-tag>
+              <el-tag v-if="row.event === 'auth'" type="danger" size="small">{{ $t('auto.Audits.34.7173f8') }}</el-tag>
+              <el-tag v-else-if="row.allowed && row.ok" type="success" size="small">{{ $t('auto.Audits.35.330363') }}</el-tag>
+              <el-tag v-else-if="row.allowed" type="warning" size="small">{{ $t('auto.Audits.36.acd5cb') }}</el-tag>
+              <el-tag v-else type="danger" size="small">{{ $t('auto.Audits.37.a8a1bf') }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column label="耗时" width="80">
+          <el-table-column :label="$t('auto.Audits.23.39f137')" width="80">
             <template #default="{ row }">{{ row.event === 'auth' ? '—' : row.latency_ms + 'ms' }}</template>
           </el-table-column>
-          <el-table-column prop="ip" label="来源 IP" width="130" />
-          <el-table-column prop="args_hash" label="参数摘要" width="150">
+          <el-table-column prop="ip" :label="$t('auto.Audits.24.11c50d')" width="130" />
+          <el-table-column prop="args_hash" :label="$t('auto.Audits.25.436c61')" width="150">
             <template #default="{ row }">
               <code class="mono">{{ row.args_hash || '—' }}</code>
             </template>
           </el-table-column>
-          <el-table-column prop="error_msg" label="错误" min-width="160" show-overflow-tooltip />
+          <el-table-column prop="error_msg" :label="$t('auto.Audits.26.7030ff')" min-width="160" show-overflow-tooltip />
         </el-table>
         <el-pagination
           v-model:current-page="page"
@@ -137,31 +137,31 @@
           type="info"
           :closable="false"
           show-icon
-          title="凭证 / 钥匙 / Skill 的每次管理动作（签发、状态流转、删除、查看明文）都记在这里。明文永不入账——reveal 只记「谁看了哪把钥匙」。"
+          :title="$t('auto.Audits.27.78ff2a')"
           style="margin-bottom: 12px"
         />
         <el-table v-loading="adminLoading" :data="adminRows" border size="small">
-          <el-table-column prop="created_at" label="时间" width="170">
+          <el-table-column prop="created_at" :label="$t('auto.Audits.19.19fcb9')" width="170">
             <template #default="{ row }">{{ fmtTime(row.created_at) }}</template>
           </el-table-column>
-          <el-table-column prop="action" label="动作" width="170">
+          <el-table-column prop="action" :label="$t('auto.Audits.13.c500cf')" width="170">
             <template #default="{ row }">
               <el-tag size="small" :type="actionTagType(row.action)">{{ row.action }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column label="对象" width="90">
+          <el-table-column :label="$t('auto.Audits.14.b14494')" width="90">
             <template #default="{ row }">
               {{ { credential: '凭证', key: '密钥', skill: 'Skill' }[row.target_type] || row.target_type }} #{{ row.target_id }}
             </template>
           </el-table-column>
-          <el-table-column prop="target_label" label="标签" min-width="140" show-overflow-tooltip>
+          <el-table-column prop="target_label" :label="$t('auto.Audits.28.14d342')" min-width="140" show-overflow-tooltip>
             <template #default="{ row }">{{ row.target_label || '—' }}</template>
           </el-table-column>
-          <el-table-column prop="operator_username" label="操作人" width="110">
+          <el-table-column prop="operator_username" :label="$t('auto.Audits.17.f9ac4b')" width="110">
             <template #default="{ row }">{{ row.operator_username || '—' }}</template>
           </el-table-column>
-          <el-table-column prop="ip" label="来源 IP" width="130" />
-          <el-table-column prop="detail" label="详情" min-width="240" show-overflow-tooltip>
+          <el-table-column prop="ip" :label="$t('auto.Audits.24.11c50d')" width="130" />
+          <el-table-column prop="detail" :label="$t('auto.Audits.29.f26225')" min-width="240" show-overflow-tooltip>
             <template #default="{ row }">
               <code class="mono">{{ row.detail || '—' }}</code>
             </template>
@@ -183,8 +183,11 @@
 
 <script setup>
 import { ref, onMounted, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import { mcpAuditApi, mcpAdminAuditApi } from '@/api/mcpCredential'
+
+const { t } = useI18n()
 
 const tab = ref('call')
 const size = 20
@@ -282,7 +285,7 @@ const exportCSV = async (path, name) => {
     a.click()
     URL.revokeObjectURL(url)
   } catch (e) {
-    ElMessage.error('导出失败：' + e.message)
+    ElMessage.error(t('auto.Audits.38.bccb12') + e.message)
   }
 }
 
