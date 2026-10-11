@@ -8,46 +8,46 @@ package rbac
 
 // 权限点常量（资源.动作）。
 const (
-	PermissionCustomerRead        = "customer.read"
-	PermissionCustomerWrite       = "customer.write"
-	PermissionCustomerDelete      = "customer.delete"
-	PermissionInboxRead           = "inbox.read"
-	PermissionInboxWrite          = "inbox.write"
-	PermissionClueRead            = "clue.read"
-	PermissionClueWrite           = "clue.write"
-	PermissionKbRead              = "kb.read"
-	PermissionKbWrite             = "kb.write"
-	PermissionOpportunityRead     = "opportunity.read"
-	PermissionOpportunityWrite    = "opportunity.write"
-	PermissionReachSend           = "reach.send"
+	PermissionCustomerRead = "customer.read"
+	PermissionCustomerWrite = "customer.write"
+	PermissionCustomerDelete = "customer.delete"
+	PermissionInboxRead = "inbox.read"
+	PermissionInboxWrite = "inbox.write"
+	PermissionClueRead = "clue.read"
+	PermissionClueWrite = "clue.write"
+	PermissionKbRead = "kb.read"
+	PermissionKbWrite = "kb.write"
+	PermissionOpportunityRead = "opportunity.read"
+	PermissionOpportunityWrite = "opportunity.write"
+	PermissionReachSend = "reach.send"
 	PermissionMcpCredentialManage = "mcp.credential.manage"
-	PermissionApiKeyReveal        = "api_key.reveal"
-	PermissionAuditRead           = "audit.read"
-	PermissionAuditExport         = "audit.export"
-	PermissionTeamManage          = "team.manage"
-	PermissionTeamMemberManage    = "team.member.manage"
+	PermissionApiKeyReveal = "api_key.reveal"
+	PermissionAuditRead = "audit.read"
+	PermissionAuditExport = "audit.export"
+	PermissionTeamManage = "team.manage"
+	PermissionTeamMemberManage = "team.member.manage"
 )
 
 // PermissionLabels 权限点中文标签（registry.yaml label_zh）。
 var PermissionLabels = map[string]string{
-	"customer.read":         "客户-读",
-	"customer.write":        "客户-写",
-	"customer.delete":       "客户-删",
-	"inbox.read":            "收件箱-读",
-	"inbox.write":           "收件箱-写",
-	"clue.read":             "线索-读",
-	"clue.write":            "线索-写",
-	"kb.read":               "知识库-读",
-	"kb.write":              "知识库-写",
-	"opportunity.read":      "商机-读",
-	"opportunity.write":     "商机-写",
-	"reach.send":            "触达-外发",
+	"customer.read": "客户-读",
+	"customer.write": "客户-写",
+	"customer.delete": "客户-删",
+	"inbox.read": "收件箱-读",
+	"inbox.write": "收件箱-写",
+	"clue.read": "线索-读",
+	"clue.write": "线索-写",
+	"kb.read": "知识库-读",
+	"kb.write": "知识库-写",
+	"opportunity.read": "商机-读",
+	"opportunity.write": "商机-写",
+	"reach.send": "触达-外发",
 	"mcp.credential.manage": "MCP凭证-管理",
-	"api_key.reveal":        "密钥-查看明文",
-	"audit.read":            "审计-读",
-	"audit.export":          "审计-导出",
-	"team.manage":           "团队-管理（跨团队）",
-	"team.member.manage":    "团队-成员管理（本团队）",
+	"api_key.reveal": "密钥-查看明文",
+	"audit.read": "审计-读",
+	"audit.export": "审计-导出",
+	"team.manage": "团队-管理（跨团队）",
+	"team.member.manage": "团队-成员管理（本团队）",
 }
 
 // PermissionLabel 取权限点中文标签（无则回落 id）。
@@ -60,72 +60,72 @@ func PermissionLabel(id string) string {
 
 // RoleLabels 角色中文标签。
 var RoleLabels = map[string]string{
-	"super_admin":       "超级管理员（平台）",
-	"team_admin":        "团队管理员",
-	"member":            "成员",
+	"super_admin": "超级管理员（平台）",
+	"team_admin": "团队管理员",
+	"member": "成员",
 	"read_only_auditor": "只读审计",
 }
 
 // RoleAllPermissions 角色 → 权限点集合（P1 中间件的判据源）。
 var RoleAllPermissions = map[string]map[string]bool{
 	"super_admin": {
-		"customer.read":         true,
-		"customer.write":        true,
-		"customer.delete":       true,
-		"inbox.read":            true,
-		"inbox.write":           true,
-		"clue.read":             true,
-		"clue.write":            true,
-		"kb.read":               true,
-		"kb.write":              true,
-		"opportunity.read":      true,
-		"opportunity.write":     true,
-		"reach.send":            true,
+		"customer.read": true,
+		"customer.write": true,
+		"customer.delete": true,
+		"inbox.read": true,
+		"inbox.write": true,
+		"clue.read": true,
+		"clue.write": true,
+		"kb.read": true,
+		"kb.write": true,
+		"opportunity.read": true,
+		"opportunity.write": true,
+		"reach.send": true,
 		"mcp.credential.manage": true,
-		"api_key.reveal":        true,
-		"audit.read":            true,
-		"audit.export":          true,
-		"team.manage":           true,
-		"team.member.manage":    true,
+		"api_key.reveal": true,
+		"audit.read": true,
+		"audit.export": true,
+		"team.manage": true,
+		"team.member.manage": true,
 	},
 	"team_admin": {
-		"customer.read":         true,
-		"customer.write":        true,
-		"customer.delete":       true,
-		"inbox.read":            true,
-		"inbox.write":           true,
-		"clue.read":             true,
-		"clue.write":            true,
-		"kb.read":               true,
-		"kb.write":              true,
-		"opportunity.read":      true,
-		"opportunity.write":     true,
-		"reach.send":            true,
+		"customer.read": true,
+		"customer.write": true,
+		"customer.delete": true,
+		"inbox.read": true,
+		"inbox.write": true,
+		"clue.read": true,
+		"clue.write": true,
+		"kb.read": true,
+		"kb.write": true,
+		"opportunity.read": true,
+		"opportunity.write": true,
+		"reach.send": true,
 		"mcp.credential.manage": true,
-		"api_key.reveal":        true,
-		"audit.read":            true,
-		"audit.export":          true,
-		"team.member.manage":    true,
+		"api_key.reveal": true,
+		"audit.read": true,
+		"audit.export": true,
+		"team.member.manage": true,
 	},
 	"member": {
-		"customer.read":     true,
-		"customer.write":    true,
-		"inbox.read":        true,
-		"inbox.write":       true,
-		"clue.read":         true,
-		"clue.write":        true,
-		"kb.read":           true,
-		"kb.write":          true,
-		"opportunity.read":  true,
+		"customer.read": true,
+		"customer.write": true,
+		"inbox.read": true,
+		"inbox.write": true,
+		"clue.read": true,
+		"clue.write": true,
+		"kb.read": true,
+		"kb.write": true,
+		"opportunity.read": true,
 		"opportunity.write": true,
 	},
 	"read_only_auditor": {
-		"customer.read":    true,
-		"inbox.read":       true,
-		"clue.read":        true,
-		"kb.read":          true,
+		"customer.read": true,
+		"inbox.read": true,
+		"clue.read": true,
+		"kb.read": true,
 		"opportunity.read": true,
-		"audit.read":       true,
+		"audit.read": true,
 	},
 }
 
@@ -139,8 +139,8 @@ func RoleHasPermission(role, permission string) bool {
 
 // API Key 生命周期状态（与 model 层常量同口径，漂移由测试钉住）。
 const (
-	APIKeyStateActive    = "active"
-	APIKeyStateDisabled  = "disabled"
+	APIKeyStateActive = "active"
+	APIKeyStateDisabled = "disabled"
 	APIKeyStateSuspended = "suspended"
-	APIKeyStateRevoked   = "revoked"
+	APIKeyStateRevoked = "revoked"
 )

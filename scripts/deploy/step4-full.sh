@@ -34,6 +34,8 @@ if [ "$ok" != "1" ]; then
   journalctl -u hivemtk -n 25 --no-pager
   exit 1
 fi
+# 健康检查过了才清上一版前端目录（失败时保留它作快速回滚位）
+rm -rf /var/www/hivemtk.old
 
 echo "=== 4) 部署前端（原子换目录）==="
 # 2026-10-11 教训：原地 tar 覆盖会让历史版本 chunk 无限堆积（实测 4366 个文件），

@@ -89,6 +89,9 @@ function checkCoverage() {
     process.exit(1);
   }
   const refKeys = new Set(ref.keys);
+  // auto.* 段是机械转换产物，zh 为唯一事实源（fallbackLocale: 'zh' 兜底），
+  // 其余 locale 刻意不放——覆盖统计按设计豁免，不算缺失。
+  const refKeysForOtherLocales = new Set([...ref.keys].filter((k) => !k.startsWith('auto.')));
   const results = {};
 
   for (const code of LOCALES) {
@@ -102,7 +105,7 @@ function checkCoverage() {
       continue;
     }
     const locSet = new Set(loc.keys);
-    const missing = ref.keys.filter((k) => !locSet.has(k));
+    const missing = [...refKeysForOtherLocales].filter((k) => !locSet.has(k));
     // 用 flattenValues 的真实取值判断，避免键名含点号时 split('.') 下钻失败
     const locJson = JSON.parse(fs.readFileSync(loc.file, 'utf8'));
     const empty = flattenValues(locJson)
