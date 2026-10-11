@@ -27,6 +27,7 @@
 | ADR-016（文件 `ADR-016-telegram-group-gate-policy.md`，入库后把本列换成链接）| Telegram 社群门控的三项处置口径 | ✅ Accepted | 2026-09-29 | Telegram 渠道 / 后台任务 |
 | [ADR-017](ADR-017-platform-vocabulary-registry.md) | 统一平台词汇表与渠道注册表（多渠道"一份规格生成"） | 💡 Proposed | 2026-10-11 | 渠道集成 / MCP / 配置参数 / 管理端 UI |
 | [ADR-018](../../adr/catbus-borrowings.md) | catbus 借鉴评估（词汇表注册表/错误hint/凭证纪律/脱敏，按指令落位 docs/adr/） | ✅ Accepted | 2026-10-11 | 全局模式参考 |
+| [ADR-019](../../adr/ADR-019-multi-tenant-boundaries.md) | 多租户边界——监管/内容审核/LLM池并发/非UI链路隔离/DB路由 | ✅ Accepted | 2026-10-11 | 全局架构 |
 
 **统计**：
 - Accepted：9 份
