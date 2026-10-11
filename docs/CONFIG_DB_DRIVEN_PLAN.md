@@ -683,7 +683,7 @@ GET  /api/config/runtime?groups=frontend_ws,frontend_ui,pagination
 - 不引入新框架：不加 ORM 之外的依赖，不改 `config_params` 已有列语义，
   新增列全部可空并给默认值，**旧数据零迁移风险**。
 
-#### 3.1 第三批已落地（2026-10-10）：`sop` 组 6 条
+### 3.1 第三批已落地（2026-10-10）：`sop` 组 6 条
 
 | group.key | 默认 | 代码点位 | 生效时机 |
 | --- | --- | --- | --- |

@@ -18,7 +18,7 @@ import (
 //
 // plainAuth 组只挂一条只读的 Runtime（GET /api/config/runtime），它返回白名单内的
 // 组的值，供前端缓存。两条组的分界见 controller/config_param_runtime.go。
-func setupConfigParamRoutes(plainAuth, admin *gin.RouterGroup, db *gorm.DB) {
+func setupConfigParamRoutes(plainAuth *gin.RouterGroup, admin *gin.RouterGroup, db *gorm.DB) {
 	svc := service.GlobalConfigParam()
 	ctrl := controller.NewConfigParamController(svc)
 
