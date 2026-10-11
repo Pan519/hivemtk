@@ -76,19 +76,23 @@ const DefaultTeamName = "默认团队"
 // 换启动健壮性——回填钩子的日志会把这种漂移喊出来）。
 // 表名/列名直查（不经 model）：scope 是最底层包，不能反向依赖 model。
 var (
-	defaultTeamIDOnce sync.Once
-	defaultTeamIDVal  uint
+	defaultTeamIDMu       sync.Mutex // 保护 resolved/val：Reset 与 Cached 并发安全
+	defaultTeamIDResolved bool
+	defaultTeamIDVal      uint
 )
 
 var defaultTeamIDDB func(ctx context.Context) *gorm.DB // 由挂回调方注入（db.GetDB）
 
 // ResetDefaultTeamIDCache 清空默认团队 id 的进程级缓存（测试库切换时调用）。
-// defaultTeamIDOnce 是 sync.Once：一旦某个 slot 库解析过（id 可能是 0 或旧库的 id），
-// 后续所有测试库都会复用这个值，跨库污染在 CI 的 -p 1 串行下表现为
+// 跨库污染在 CI 的 -p 1 串行下表现为
 // "系统管线行应落默认团队 got 0" / "平台管理员应保持 team_id=0 got 1"（2026-10-11 实测）。
 // 生产启动路径只解析一次无需重置。
+// 用 mutex 而非 sync.Once 重置：直接给 defaultTeamIDOnce 赋值新值，会与上一条测试
+// 遗留 goroutine 的 defaultTeamIDCached 读构成 data race（-race 实测红，2026-10-11）。
 func ResetDefaultTeamIDCache() {
-	defaultTeamIDOnce = sync.Once{}
+	defaultTeamIDMu.Lock()
+	defer defaultTeamIDMu.Unlock()
+	defaultTeamIDResolved = false
 	defaultTeamIDVal = 0
 }
 
@@ -98,22 +102,29 @@ func SetDefaultTeamIDDB(fn func(ctx context.Context) *gorm.DB) {
 }
 
 func defaultTeamIDCached(ctx context.Context) uint {
-	defaultTeamIDOnce.Do(func() {
-		if defaultTeamIDDB == nil {
-			logger.Warn("[tenant] 默认团队查询句柄未注入，系统管线新建行将落 team_id=0")
-			return
-		}
-		g := defaultTeamIDDB(ctx)
-		if g == nil {
-			return
-		}
-		var id uint
-		if err := g.WithContext(ctx).Table("teams").
-			Where("name = ?", DefaultTeamName).Select("id").Scan(&id).Error; err != nil || id == 0 {
-			logger.Warnf("[tenant] 默认团队未找到（回填钩子未跑？），系统管线新建行将落 team_id=0: %v", err)
-			return
-		}
-		defaultTeamIDVal = id
-	})
+	defaultTeamIDMu.Lock()
+	defer defaultTeamIDMu.Unlock()
+	if defaultTeamIDResolved {
+		return defaultTeamIDVal
+	}
+	if defaultTeamIDDB == nil {
+		logger.Warn("[tenant] 默认团队查询句柄未注入，系统管线新建行将落 team_id=0")
+		defaultTeamIDResolved = true
+		return 0
+	}
+	g := defaultTeamIDDB(ctx)
+	if g == nil {
+		defaultTeamIDResolved = true
+		return 0
+	}
+	var id uint
+	if err := g.WithContext(ctx).Table("teams").
+		Where("name = ?", DefaultTeamName).Select("id").Scan(&id).Error; err != nil || id == 0 {
+		logger.Warnf("[tenant] 默认团队未找到（回填钩子未跑？），系统管线新建行将落 team_id=0: %v", err)
+		defaultTeamIDResolved = true
+		return 0
+	}
+	defaultTeamIDVal = id
+	defaultTeamIDResolved = true
 	return defaultTeamIDVal
 }
