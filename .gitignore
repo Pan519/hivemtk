@@ -382,3 +382,7 @@ docs/superpowers/specs/ledger/logs/R22-lanes/service-full-mut-batchecho.log
 !docs/superpowers/specs/ledger/logs/RouteTriage/
 !docs/superpowers/specs/ledger/logs/RouteTriage/**/*.tsv
 !docs/superpowers/specs/ledger/logs/RouteTriage/**/*.log
+user-web/eslint-out*.txt
+user-web/modscope-issues.json
+user-web/polluted-refs.json
+user-web/i18n-batch*.txt
