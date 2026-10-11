@@ -218,7 +218,8 @@ onMounted(() => {
 const loadRagProducts = async () => {
   try {
     const response = await ragProductConfigAPI.getRagProducts()
-    ragProducts.value = response.items || [];
+    // 信封键是 list；只认 items 时这个下拉恒空。
+    ragProducts.value = response?.list || response?.items || [];
   } catch (error) {
     ElMessage.error(t('auto.AccountConfig.24b6c3d3') + error.message)
   }

@@ -193,7 +193,39 @@ func TestFallbackNilDB(t *testing.T) {
 //     make(chan, N) 与起 goroutine，只对下次启动生效，三条都标 Restart=true。
 //   - max_retries 与 agent_llm.max_retries 同名不同义（那一条管 LLM 调用本身的重试，
 //     本条目管渠道出网投递），Description 里写明了区分，免得运维在页面上看混。
-const defaultParamDefsWant = 154
+//
+// 2026-10-10（第九次，阶段三 3.1 第三批）：+6 = sop 组的调度器并发三项 + Saga 补偿三项。
+//   - dispatcher_worker_count / dispatcher_queue_capacity / dispatcher_llm_concurrency：
+//     DefaultSOPDispatcherConfig() 里原本写死的 16/1000/4。
+//   - compensation_max_attempts / compensation_ttl / compensation_max_plans_kept：
+//     DefaultCompensationConfig() 里原本写死的 3/30s/512。补偿链路受
+//     FF_LTC_SAGA_COMPENSATION 开关控制（默认关闭），开关开启时这些值才真的被读。
+//   - 六条全部是构造期读一次，故全标 Restart=true：make(chan,N) 与 goroutine 数
+//     在 NewSOPExecutionDispatcher 里定型，改完只对下次启动的进程生效。
+//   - 调度器没纳入参数中心的 MaxAttempts/InitialBackoff/MaxBackoff/BackoffMultiplier
+//     四项只从字面量提成常量（DefaultSOPDispatcher*），语义不变。
+//
+// 2026-10-10（第十次，阶段三 3.1 第四批）：+11 = domain_health 4 条 + rag_health 7 条。
+//   - domain_health：score_healthy / score_switch_threshold / consecutive_failure_limit
+//     / check_timeout。这四条是"看一眼分数就做决定"的类型，改错的结果不是性能问题而是
+//     "该切的没切"。除 check_timeout 在 http.Client 构造时定型（Restart=true）外都每请求读。
+//   - rag_health：default_window + 六维权重。六个权重按总和归一化后使用——
+//     report.Score 是六个 WeightedScore 直接相加（rag_health.go:132-136），不归一化
+//     的话运营把某一项调成 3 就会让总分超出 0-100、scoreToGrade 的分档全部错位。
+//     归一化后每个旋钮的语义就是干净的"相对比重"。
+//   - 六项全读不到或全被写成 0 时回落常量权重：那时 report.Weight 会是 0，
+//     任何维度看起来都是 0 分，比百分比失准更难排查。
+//
+// 2026-10-10（第十一次，阶段三 3.1 第五批）：+22 = feedback 组，反馈学习闭环全部旋钮。
+//   - bandit 6：样本量三档（转利用/晋升/后验采样）+ 三个比例（探索下限/流量上限/收敛阈值）。
+//   - collector 3：队列容量 / 刷盘间隔 / 批量。信号权重表 DefaultSignalWeights（12 键）
+//     刻意不入库——那是一张双射表，拆成 12 条参数后运维要看全貌反而更难。
+//   - analyzer 5 / iterator 4 / optimizer 4：销冠分析、Prompt 迭代、自动优化。
+//   - 22 条全部构造期读一次，故全标 Restart=true：五个组件的配置在
+//     InitFeedbackLoopComponents / InitFeedbackCollector 里组装完就固化。
+//   - iterator_negative_reward_threshold 的默认是负数（-0.5），读取侧用 fbOrAnyFloat
+//     而不是 fbOrPosFloat：0 的语义是「关掉这道门限」，不是「没配过」。
+const defaultParamDefsWant = 193
 
 func TestDefaultParamDefsCount(t *testing.T) {
 	defs := DefaultParamDefs()

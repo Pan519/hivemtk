@@ -682,3 +682,185 @@ GET  /api/config/runtime?groups=frontend_ws,frontend_ui,pagination
   `dictionaries` 走标准 `Model → Repository → Service → Controller → Router`。
 - 不引入新框架：不加 ORM 之外的依赖，不改 `config_params` 已有列语义，
   新增列全部可空并给默认值，**旧数据零迁移风险**。
+
+#### 3.1 第三批已落地（2026-10-10）：`sop` 组 6 条
+
+| group.key | 默认 | 代码点位 | 生效时机 |
+| --- | --- | --- | --- |
+| `sop.dispatcher_worker_count` | 16 | `sop_dispatcher.go` `DefaultSOPDispatcherConfig` | 构造期 · Restart=true |
+| `sop.dispatcher_queue_capacity` | 1000 | 同上 | 构造期 · Restart=true |
+| `sop.dispatcher_llm_concurrency` | 4 | 同上 | 构造期 · Restart=true |
+| `sop.compensation_max_attempts` | 3 | `sop_compensation.go` `DefaultCompensationConfig` | 构造期 · Restart=true |
+| `sop.compensation_ttl` | 30 | 同上 | 构造期 · Restart=true |
+| `sop.compensation_max_plans_kept` | 512 | 同上 | 构造期 · Restart=true |
+
+**六条全部是构造期读一次**：调度器的 worker 数、队列 channel 容量、LLM 信号量在
+`NewSOPExecutionDispatcher` 里 `make(chan, N)` / 起 goroutine 时定型；补偿管理器的
+`MaxPlansKept` 决定的是内存里保留的计划表大小。改完只对下次启动的进程生效，
+故六条全标 `Restart=true`。
+
+**装配路径已核实**（这是本批与"僵尸参数"的区别所在）：
+- `cmd/api/main.go:380` `InitSOPExecutionDispatcher(db, sopSvc, nil)` —— cfg 传 **nil**，
+  旧代码在这里回落写死的 `16/1000/4`。改成 `cfg == nil` 时读
+  `SOPDispatcherConfigFromParams(ctx)`。
+- `cmd/api/main.go:384` `InitSOPCompensation(execDispatcher)` —— 受
+  `FF_LTC_SAGA_COMPENSATION` 开关控制（**默认关闭**）。开关开启时才构造管理器，
+  所以这三个补偿参数在现网默认配置下不被读取——但这不是"僵尸"：开关一开就生效，
+  Description 里写明了这层关系。
+
+**两条判断**：
+1. **走直连不造 seam**：读取点全在 `internal/service` 包内。
+2. **`DefaultSOPDispatcherConfig()` 里没纳入参数中心的四项**（`MaxAttempts` /
+   `InitialBackoff` / `MaxBackoff` / `BackoffMultiplier`）只从字面量提成导出常量
+   `DefaultSOPDispatcher*`，**语义不变**。理由：它们是单条 SOP 节点的重试与退避，
+   已经有一套独立的按 dispatcher 注入的配置通道（`SOPDispatcherConfig` 结构体本身），
+   再造参数中心入口只会让同一个旋钮有两个 UI，改哪个生效说不清。
+   `CompensationConfig.TotalTimeout` 同理（仍取 `DefaultCompensationConfig()` 的 5m），
+   避免两处各写一份 5 分钟。
+
+**一个需要说明的口径**：`sop.compensation_max_attempts` 的 `Min` 是 `0`（"显式关掉
+补偿重试"是合法取值），但读取侧 `sopCompensationMaxAttempts` 仍把 0 当"没配过"
+回落 3。二者只在"重启前已构造的管理器"这一层有区别，Description 里写明了。
+
+**验证**：干净 worktree `/tmp/hivemtk_v25`（@`4ca99e15`）gofmt 空、
+`go build ./...` 全过；`internal/service` 全包 **ok 476.324s**（0 失败）。
+门禁 **`wired 140 → 146`、已声明未接线 14、UNDECLARED 0、STALE 0，rc=0**，
+种子条目 154 → 160、锚点同步到 160。
+行为级测试：`TestNewSOPExecutionDispatcherNilConfigPicksUpParams`（走生产的 nil cfg
+路径，断言 workerCount / 队列容量 / LLM 信号量真的是参数值）、
+`TestInitSOPCompensationPicksUpParams`（开关开启后装配出的管理器真的用参数值，
+且 `TotalTimeout` 未被参数化）。
+
+#### 3.1 第四批已落地（2026-10-10）：`domain_health`(4) + `rag_health`(7) 共 11 条
+
+**域名健康度 4 条**——"看一眼分数就做决定"的类型，改错的结果不是性能问题而是
+"该切的没切"：
+
+| group.key | 默认 | 生效时机 |
+| --- | --- | --- |
+| `domain_health.score_healthy` | 80 | 每请求（参与选优 / 状态提升 / 无可用域名报错） |
+| `domain_health.score_switch_threshold` | 30 | 每请求（自动切换触发线，须低于 score_healthy） |
+| `domain_health.consecutive_failure_limit` | 3 | 每请求（"分数还没掉下来就先切走"的旁路） |
+| `domain_health.check_timeout` | 5s | **构造期，Restart=true**（`http.Client.Timeout`） |
+
+**RAG 健康度 7 条**：`default_window`（1h）+ 六维权重（0.10 / 0.30 / 0.15 ×4，
+总和 1.0）。
+
+**本批最关键的一个设计决定：六个权重按总和归一化后使用。**
+
+`report.Score` 是六个 `WeightedScore` 直接相加再取整（`rag_health.go:132-136`），
+等级表 `scoreToGrade` 按 90/75/60 分档。如果权重不归一化，运营把某一项调成 3 就会
+让**总分超出 0-100、等级分档全部错位**——而且症状是"分数突然变 300 分会"，不是
+"比重变了"，极难定位。归一化后每个旋钮的语义变成干净的"相对比重"：
+`召回质量` 调到 3 就是"召回占总分 3/(3+其余)"这么多。
+
+六项全被写成 0（或非正）时**回落常量权重**：那时 `report.Weight` 会是 0、
+任何维度看起来都是 0 分，比百分比失准更难排查。读取侧 `positiveFloatOrDH` 把
+单一项的 0 也当"没配过"回落常量——想降比重应该调小，清零只会让总分少一块而看不出原因。
+
+**两条判断**：
+1. **走直连不造 provider seam**：两组读取点全在 `internal/service` 包内。
+2. **`domain_health.check_timeout` 是四条的 Restart 异类**：它在 `http.Client`
+   构造时定型，改完只对下次新建的服务实例生效，故单独标 `Restart=true`；
+   其余三条每请求读，标 false。
+
+**一个测试上的坑（已写进测试注释）**：`setDHRaw` 直接写库绕过 service，
+而 `ConfigParamService.invalidate` 只在 `UpdateValue`/`Reset` 路径上被调——
+所以"先 `UpdateValue` 再直接写库"的混合用例，60s 内读到的还是旧值。
+修法是 `refreshParamCache(db)` 换一个冷缓存的服务实例。这不是新问题，
+是 3.1b 起就存在的 `configParamTTL` 语义，只是本批第一次把它撞出来。
+
+**验证**：干净 worktree `/tmp/hivemtk_v26`（@`d9f8fa3e`）gofmt 空、
+`go build ./...` 全过；`internal/service` 全包 **ok 452.764s**（0 失败）。
+门禁 **`wired 146 → 157`、已声明未接线 14、UNDECLARED 0、STALE 0，rc=0**，
+种子条目 160 → 171、锚点同步到 171。
+行为级测试：`TestDomainHealthNewServicePicksUpTimeout`（新服务实例的
+`http.Client.Timeout` 真的是参数值）、`TestRagHealthWeightsNormalizedToSumOne`
+（召回调成 3.0 后占主导且六项和仍为 1.0）、
+`TestRagHealthWeightsFallBackWhenAllZero`（全 0 回落常量）、
+`TestRagHealthWeightIndividualFallback`（只回落那一项）。
+
+#### 3.1 第五批已落地（2026-10-10）：`feedback` 组 22 条（阶段三收尾）
+
+反馈学习闭环全部旋钮。**22 条全部构造期读一次，故全标 `Restart=true`**：
+五个组件的配置在 `InitFeedbackLoopComponents` / `InitFeedbackCollector`
+（`cmd/api/main.go:408/418`）里组装完就固化在各组件的 `config` 字段里。
+
+| 子域 | 条数 | 参数 |
+| --- | --- | --- |
+| `bandit` | 6 | `min_samples_for_exploit` 30 / `exploration_floor` 0.10 / `traffic_ceiling` 0.60 / `convergence_threshold` 0.95 / `min_samples_for_promote` 100 / `posterior_samples` 1000 |
+| `collector` | 3 | `queue_size` 1000 / `flush_interval` 2s / `batch_size` 50 |
+| `analyzer` | 5 | `min_reward` 1.0 / `cluster_sim_threshold` 0.85 / `min_cluster_size` 3 / `top_k_per_cluster` 3 / `max_dialogues_per_run` 500 |
+| `iterator` | 4 | `min_samples_for_iteration` 50 / `negative_reward_threshold` -0.5 / `candidates_per_run` 3 / `auto_approve` false |
+| `optimizer` | 4 | `auto_apply_priority` 2 / `rollback_drop_threshold` 0.20 / `rollback_complaint_ratio` 0.50 / `ab_test_duration` 7d |
+
+**两条克制（不做什么）**：
+1. **`DefaultSignalWeights`（12 键信号权重表）刻意不入库**。它是一张
+   `dto.FeedbackSignalKey → float64` 的双射表，拆成 12 条参数后每一行仍是
+   "配了这一格才覆盖一格的权重"，运维要看全貌反而更难，而且 key 是 `dto` 常量
+   （与 `model/feedback_loop.go:39` 的注释绑定，改了要同步两处）。要动它应走
+   **字典表（阶段四）**，不是参数中心。
+2. **`iterator_auto_approve` 默认 false，Description 写明了"改成 true 等于把
+   提示词改写这条产线全自动"**。它是本组唯一一个"改了影响每一通对话"的开关，
+   与 2b 的验签旁路同类——但区别在于它**不翻安全闸**，只翻产线行为，
+   所以入库 + 默认关闭是正确的处置。
+
+**本批一个真实的设计坑：`fbMissingFloat` 哨兵。**
+`iterator_negative_reward_threshold` 的默认是 **-0.5**，而 `0` 是它的合法语义
+（"关掉这道负向门限"）。第一版照抄正值参数的写法用 0 当 `GetFloat` 的 fallback，
+结果「没配过」和「配了 0」都落到兜底 -0.5 上——运维填 0 后看不到任何变化，
+且没有报错。改用 `math.NaN()` 当哨兵：库里存不下 NaN（`validateValue` 走
+`strconv.ParseFloat`），所以它**只可能来自 fallback 这一条路**。
+同类参数（合法取值可以是 0 或负数的）今后一律走 `fbOrAnyFloat`。
+
+**验证**：干净 worktree `/tmp/hivemtk_v27`（@`e86ab783`）gofmt 空、
+`go build ./...` 全过；`internal/service/...` **10 个包全绿**
+（service 453.953s、feedback_loop 14.407s）。门禁 **`wired 157 → 179`、
+已声明未接线 14、UNDECLARED 0、STALE 0，rc=0**，种子条目 171 → 193、
+锚点同步到 193。
+行为级测试：`TestFeedbackConfigsFromParamsMatchDefaults`（无库时五个组件逐字段
+等于各自的 `DefaultXxxConfig()`——这是"参数缺省时行为不变"的总闸）、
+`TestFeedbackFloatFallbackSemantics`（`fbOrPosFloat` 与 `fbOrAnyFloat` 的分界）、
+`TestFeedbackParamKeysAreAllRead`（22 条逐一改库后断言对应字段真的变了）。
+
+**阶段三到此收尾**：3.1 五批共接 **54 条**（9 + 7 + 6 + 11 + 22），门禁从
+`wired 131` 到 `wired 179`，种子从 138 到 193。
+
+#### 3.2 已落地（2026-10-11）：`GET /api/config/runtime` 只读端点
+
+前端拿运行时配置的唯一出口。**三条判据写死在代码里，不给「可配置」的口子**：
+
+1. **只返回白名单内的组**（`runtimePublicGroups`：`frontend_ws` / `frontend_ui` /
+   `pagination`）。传入的 groups 里不在白名单的**静默忽略**——不报错也不回显，
+   免得调用方拿它当「探测有哪些组」的手段。
+2. **只返回 value**（`group.key -> string` 扁平映射）。`Name`/`Description`/`Min`/
+   `Max`/`Restart`/`ReadOnly` 一个都不给。`/api/manage/config-params` 是**管理端全量
+   列表**，把它暴露给终端用户等于把整套运维决策面摊开——里面既有
+   `misc.upload_max_size_mb` 这种可直接放开的口子，也有 `read_only` 标记为系统推导的键。
+3. **不读数据库时返回空 map + code 0**，前端据此用代码兜底值。不能因为运维配置面挂了
+   就让整个 SPA 白屏。
+
+**顺带修掉一个后端口径缺口（规则2，当轮修）**：`setupConfigParamRoutes` 此前把那五个
+全量/写端点挂在 `auth` 上，而 `auth` **只要求登录、不要求管理员**——任何普通登录用户
+都能改上传上限、改验签旁路、改锁 TTL。前端侧 `router/modules/system.js` 的
+ConfigParams 路由一直标了 `requiresAdmin: true`，两端口径不一致，靠前端藏菜单挡着。
+本批把五个端点改挂 `systemAdmin`（已过 `AdminAuthMiddleware` 的 auth 子组），
+`plainAuth` 只留只读的 `Runtime` 一条。
+
+**顺带补掉两处 nil DB panic（同为规则2）**：
+- `ConfigParamRepository` 七个方法（`List`/`ListByGroup`/`GetByGroupKey`/`UpdateValue`/
+  `ResetToDefault`/`BulkResetGroup`/`AuditLogs`）在 `r.db == nil` 时 `WithContext` 直接
+  panic。统一返回哨兵错 `ErrConfigParamStoreUnavailable`（与 0.4 的
+  `ErrKVStoreUnavailable`、0.5 的 `ErrSystemConfigStoreUnavailable` 同一口径）。
+- `ConfigParamService` 的 `List`/`ListByGroup`/`ResetToDefault`/`BulkResetGroup`/
+  `AuditLogs` 补 `s.repo == nil` 守卫；`ConfigParamController.Runtime` 补 `c.svc == nil`
+  守卫——**Runtime 是前端启动链上的一环，它 panic 会让整个 SPA 打不开**，这一条比
+  别的端点更要 nil-safe。
+
+**验证**：干净 worktree `/tmp/hivemtk_v28`（@`400a79fc`）gofmt 空、`go build ./...`、
+`go vet ./internal/...` 全过；`controller`(95.859s) / `repository`(76.867s) /
+`router`(11.095s) / `service`(474.315s) **全绿**。
+门禁读数不变（`wired 179 / 已声明未接线 14 / UNDECLARED 0 / STALE 0`，rc=0）——
+本批不新增参数键。
+行为级测试：`TestRuntimeReadsRealValues`（真库 seed 后把 `pagination` 组一条改成 77，
+断言端点读到 77）。
