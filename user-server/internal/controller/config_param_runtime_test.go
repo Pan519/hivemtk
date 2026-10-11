@@ -164,9 +164,11 @@ func TestRuntimeReadsRealValues(t *testing.T) {
 	t.Cleanup(func() { service.SetGlobalForTest(nil) })
 
 	// pagination 组在种子里存在，取其一条改掉再读。
+	// 刻意避开 runtimePublicKeys 的排除清单（page_max_size/page_default_size）：
+	// 那两条即使改了 runtime 也不下发，选它只会测出"改的 key 不在响应里"。
 	var p model.ConfigParam
-	if err := database.Where("param_group = ?", "pagination").First(&p).Error; err != nil {
-		t.Fatalf("pagination 组无种子：%v", err)
+	if err := database.Where("param_group = ? AND key = ?", "pagination", "cursor_page_size").First(&p).Error; err != nil {
+		t.Fatalf("pagination 组无 cursor_page_size 种子：%v", err)
 	}
 	orig := p.Value
 	defer func() {
