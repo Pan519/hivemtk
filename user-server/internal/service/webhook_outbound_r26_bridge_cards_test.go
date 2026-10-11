@@ -12,6 +12,7 @@ import (
 	"context"
 	"io"
 	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 	"time"
@@ -140,32 +141,22 @@ func TestSendOutbound_Bridge_CardsDropWarns(t *testing.T) {
 	releaseReplyClaimForTest(t, "evt-r26-warn")
 	p := &ParsedPayload{EventID: "evt-r26-warn", Sender: hub.SenderID, Content: "有推荐吗", ChatID: hub.ConversationID}
 
-	oldOut := os.Stdout
-	r, w, err := os.Pipe()
-	if err != nil {
-		t.Fatalf("管道创建失败：%v", err)
-	}
-	os.Stdout = w
-	logger.InitLogger(logger.LoggingConfig{Level: "info", Format: "json", Output: "stdout"})
-	// 正对照：只换 os.Stdout 不重建日志器会一行也抓不到（GetLogger 缓存实例），
-	// 缺这行探针的话"没抓到"就分不清是接缝坏了还是代码没出声。
+	// 日志捕获走临时文件而非全局 os.Stdout 重定向：
+	// logger 后台协程并发读 os.Stdout（var stdout = func() io.Writer { return os.Stdout }），
+	// 测试写全局 os.Stdout 与之构成 data race（-race 下本用例实测红，2026-10-11）。
+	logPath := filepath.Join(t.TempDir(), "bridge-warn.log")
+	logger.InitLogger(logger.LoggingConfig{Level: "info", Format: "json", Output: "file", File: logPath, Component: "user-server"})
 	logger.GetLogger().Info().Msg("r26-capture-probe")
 	t.Cleanup(func() {
-		os.Stdout = oldOut
+		logger.CloseFileWriter() // 释放 file 输出句柄，避免 TempDir 清理失败
 		logger.InitLogger(logger.DefaultConfig())
 	})
 
 	if _, sendErr := svc.sendOutbound(context.Background(), ChannelXiaohongshu, hub.AccountID, p, "看下这款", hub, bridgeCardsForTest(3)); sendErr != nil {
-		os.Stdout = oldOut
-		_ = w.Close()
 		t.Fatalf("正常出库不应报错: %v", sendErr)
 	}
 
-	if closeErr := w.Close(); closeErr != nil {
-		t.Fatalf("关闭写端失败：%v", closeErr)
-	}
-	os.Stdout = oldOut
-	captured, readErr := io.ReadAll(r)
+	captured, readErr := os.ReadFile(logPath)
 	if readErr != nil {
 		t.Fatalf("读取日志失败：%v", readErr)
 	}

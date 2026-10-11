@@ -40,8 +40,9 @@ func DefaultConfig() LoggingConfig {
 }
 
 var (
-	mu   sync.RWMutex
-	inst *zerolog.Logger
+	mu          sync.RWMutex
+	inst        *zerolog.Logger
+	currentFile *rotatingWriter // file/both 模式当前打开的日志文件（CloseFileWriter 关闭）
 )
 
 func parseLevel(s string) zerolog.Level {
@@ -89,11 +90,11 @@ func InitLogger(c LoggingConfig) {
 	switch c.Output {
 	case "file":
 		writer = newRotatingWriter(c.File, int64(c.MaxSizeMB)*1024*1024)
+		currentFile = writer.(*rotatingWriter)
 	case "both":
-		writer = zerolog.MultiLevelWriter(
-			consoleWriter(c.Format),
-			newRotatingWriter(c.File, int64(c.MaxSizeMB)*1024*1024),
-		)
+		rot := newRotatingWriter(c.File, int64(c.MaxSizeMB)*1024*1024)
+		writer = zerolog.MultiLevelWriter(consoleWriter(c.Format), rot)
+		currentFile = rot
 	default:
 		writer = consoleWriter(c.Format)
 	}
@@ -322,6 +323,31 @@ func (w *rotatingWriter) Write(p []byte) (int, error) {
 	n, err := w.f.Write(p)
 	w.size += int64(n)
 	return n, err
+}
+
+// Close 关闭当前日志文件句柄。
+func (w *rotatingWriter) Close() error {
+	w.mu.Lock()
+	defer w.mu.Unlock()
+	if w.f != nil {
+		err := w.f.Close()
+		w.f = nil
+		return err
+	}
+	return nil
+}
+
+// CloseFileWriter 关闭 file/both 模式打开的日志文件。
+// 测试用 Output:"file" 捕获日志后调用，释放句柄避免 TempDir 清理失败
+// （Windows 上文件被占用即 RemoveAll 报错，2026-10-11 实测）。
+// 生产进程退出由 OS 回收文件句柄，无需调用。
+func CloseFileWriter() {
+	mu.Lock()
+	defer mu.Unlock()
+	if currentFile != nil {
+		_ = currentFile.Close()
+		currentFile = nil
+	}
 }
 
 // StdLogger 返回 io.Writer 兼容的标准 logger 适配器，

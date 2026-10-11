@@ -209,6 +209,9 @@ func NewTestDB(t testing.TB, models ...any) *gorm.DB {
 	// 与生产 InitDB 同口径挂租户回调：PG 依赖用例在测试库上验证的行为
 	// 必须与生产行为一致（Create 回填 team_id），不能只在生产路径生效。
 	testDB := database
+	// 重置默认团队 id 缓存：不同测试库（slot）的默认团队 id 不同，sync.Once 缓存
+	// 会把上一个 slot 的值泄漏到当前库（CI 串行下的 got 0 / got 1 假红，2026-10-11 实测）。
+	scope.ResetDefaultTeamIDCache()
 	scope.SetDefaultTeamIDDB(func(ctx context.Context) *gorm.DB { return testDB })
 	scope.RegisterTenantTeamCallback(database)
 	rbac.SetOverrideDB(func(ctx context.Context) *gorm.DB { return testDB })

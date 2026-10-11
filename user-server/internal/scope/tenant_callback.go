@@ -82,6 +82,16 @@ var (
 
 var defaultTeamIDDB func(ctx context.Context) *gorm.DB // 由挂回调方注入（db.GetDB）
 
+// ResetDefaultTeamIDCache 清空默认团队 id 的进程级缓存（测试库切换时调用）。
+// defaultTeamIDOnce 是 sync.Once：一旦某个 slot 库解析过（id 可能是 0 或旧库的 id），
+// 后续所有测试库都会复用这个值，跨库污染在 CI 的 -p 1 串行下表现为
+// "系统管线行应落默认团队 got 0" / "平台管理员应保持 team_id=0 got 1"（2026-10-11 实测）。
+// 生产启动路径只解析一次无需重置。
+func ResetDefaultTeamIDCache() {
+	defaultTeamIDOnce = sync.Once{}
+	defaultTeamIDVal = 0
+}
+
 // SetDefaultTeamIDDB 注入默认团队查询用的 DB 句柄（InitDB / testutil 装配时调用）。
 func SetDefaultTeamIDDB(fn func(ctx context.Context) *gorm.DB) {
 	defaultTeamIDDB = fn
