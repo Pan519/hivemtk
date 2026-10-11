@@ -1,15 +1,15 @@
 <template>
   <div class="batch-import-page">
     <el-alert
-      :title="$t('批量导入知识库文档')"
+      ::title="$t('auto.BatchImport.1.af030d')"
       type="info"
       :closable="false"
       show-icon
     >
       <template #default>
         支持两种方式:
-        <strong>1) 文件上传</strong> CSV / JSON / Excel(纯文本),
-        <strong>2) 文本批量粘贴</strong> JSON 数组直接提交。
+        <strong>{{ $t('auto.BatchImport.20.ca3308') }}</strong> CSV / JSON / Excel(纯文本),
+        <strong>{{ $t('auto.BatchImport.21.29b14a') }}</strong> JSON 数组直接提交。
         每行记录包含 title、content、category、tags 四个字段(除 content 外均可选)。
       </template>
     </el-alert>
@@ -20,21 +20,21 @@
         <el-card>
           <el-tabs v-model="activeTab" @tab-change="handleTabChange">
             
-            <el-tab-pane label="文件上传" name="upload">
+            <el-tab-pane :label="$t('auto.BatchImport.2.481e03')" name="upload">
               <el-form label-width="100px" :model="uploadForm">
-                <el-form-item label="产品" required>
-                  <el-select v-model="uploadForm.product_id" placeholder="选择产品" style="width: 100%" @change="loadPreview">
+                <el-form-item :label="$t('auto.BatchImport.3.a01543')" required>
+                  <el-select v-model="uploadForm.product_id" :placeholder="$t('auto.BatchImport.4.cbf1cf')" style="width: 100%" @change="loadPreview">
                     <el-option v-for="p in productList" :key="p.id" :label="p.name" :value="p.id" />
                   </el-select>
                 </el-form-item>
-                <el-form-item label="格式">
+                <el-form-item :label="$t('auto.BatchImport.5.e3127c')">
                   <el-radio-group v-model="uploadForm.format">
-                    <el-radio-button label="auto">自动识别</el-radio-button>
+                    <el-radio-button label="auto">{{ $t('auto.BatchImport.22.037508') }}</el-radio-button>
                     <el-radio-button label="csv">CSV</el-radio-button>
                     <el-radio-button label="json">JSON</el-radio-button>
                   </el-radio-group>
                 </el-form-item>
-                <el-form-item label="文件" required>
+                <el-form-item :label="$t('auto.BatchImport.6.2a0c47')" required>
                   <el-upload
                     ref="uploadRef"
                     :auto-upload="false"
@@ -45,25 +45,25 @@
                     drag
                   >
                     <el-icon class="el-icon--upload"><upload-filled /></el-icon>
-                    <div class="el-upload__text">将文件拖到此处,或<em>点击上传</em></div>
+                    <div class="el-upload__text">{{ $t('auto.BatchImport.23.d3a5c7') }}<em>{{ $t('auto.BatchImport.24.2c808b') }}</em></div>
                     <template #tip>
-                      <div class="el-upload__tip">支持 .csv / .json / .txt,单个文件不超过 20MB</div>
+                      <div class="el-upload__tip">{{ $t('auto.BatchImport.25.85fb57') }}</div>
                     </template>
                   </el-upload>
                 </el-form-item>
               </el-form>
-              <el-button type="primary" :icon="View" :disabled="!uploadForm.file" @click="loadPreview" style="margin-top: 8px">预览解析结果</el-button>
+              <el-button type="primary" :icon="View" :disabled="!uploadForm.file" @click="loadPreview" style="margin-top: 8px">{{ $t('auto.BatchImport.26.3e2cae') }}</el-button>
             </el-tab-pane>
 
             
-            <el-tab-pane label="JSON 粘贴" name="paste">
+            <el-tab-pane :label="$t('auto.BatchImport.7.3b6588')" name="paste">
               <el-form label-width="100px">
-                <el-form-item label="产品" required>
-                  <el-select v-model="pasteForm.product_id" placeholder="选择产品" style="width: 100%">
+                <el-form-item :label="$t('auto.BatchImport.3.a01543')" required>
+                  <el-select v-model="pasteForm.product_id" :placeholder="$t('auto.BatchImport.4.cbf1cf')" style="width: 100%">
                     <el-option v-for="p in productList" :key="p.id" :label="p.name" :value="p.id" />
                   </el-select>
                 </el-form-item>
-                <el-form-item label="JSON 内容" required>
+                <el-form-item :label="$t('auto.BatchImport.8.f51ef6')" required>
                   <el-input
                     v-model="pasteForm.jsonText"
                     type="textarea"
@@ -72,8 +72,8 @@
                   />
                 </el-form-item>
                 <el-form-item>
-                  <el-button @click="loadPastePreview" :icon="View">解析预览</el-button>
-                  <el-button @click="loadPasteTemplate">载入模板</el-button>
+                  <el-button @click="loadPastePreview" :icon="View">{{ $t('auto.BatchImport.27.80510e') }}</el-button>
+                  <el-button @click="loadPasteTemplate">{{ $t('auto.BatchImport.28.5806bb') }}</el-button>
                 </el-form-item>
               </el-form>
             </el-tab-pane>
@@ -86,19 +86,19 @@
         <el-card>
           <template #header>
             <div class="card-header">
-              <span>解析预览</span>
+              <span>{{ $t('auto.BatchImport.27.80510e') }}</span>
               <el-tag v-if="preview.length" type="info">共 {{ preview.length }} 条</el-tag>
             </div>
           </template>
-          <el-table :data="preview" max-height="320" size="small" empty-text="先选择产品和文件(或粘贴 JSON),点击「预览解析结果」">
-            <el-table-column prop="title" label="标题" min-width="120" show-overflow-tooltip />
-            <el-table-column prop="category" label="分类" width="80" />
-            <el-table-column label="内容预览" min-width="160" show-overflow-tooltip>
+          <el-table :data="preview" max-height="320" size="small" :empty-text="$t('auto.BatchImport.9.b53d71')">
+            <el-table-column prop="title" :label="$t('auto.BatchImport.10.32c65d')" min-width="120" show-overflow-tooltip />
+            <el-table-column prop="category" :label="$t('auto.BatchImport.11.d0771a')" width="80" />
+            <el-table-column :label="$t('auto.BatchImport.12.d93365')" min-width="160" show-overflow-tooltip>
               <template #default="{ row }">
                 <span class="content-prev">{{ truncateText(row.content, 60) }}</span>
               </template>
             </el-table-column>
-            <el-table-column label="标签" width="120" show-overflow-tooltip>
+            <el-table-column :label="$t('auto.BatchImport.13.14d342')" width="120" show-overflow-tooltip>
               <template #default="{ row }">
                 <span v-if="row.tags && row.tags.length">{{ row.tags.join(', ') }}</span>
                 <span v-else>-</span>
@@ -123,27 +123,27 @@
             导入完成
             <el-text type="info" size="small" style="margin-left: 8px">批次号: {{ lastResult.batch_no }}</el-text>
           </span>
-          <el-button link type="primary" @click="lastResult = null">关闭</el-button>
+          <el-button link type="primary" @click="lastResult = null">{{ $t('auto.BatchImport.29.b15d91') }}</el-button>
         </div>
       </template>
       <el-row :gutter="16">
         <el-col :span="6">
-          <el-statistic title="总数" :value="lastResult.total" />
+          <el-statistic :title="$t('auto.BatchImport.14.9ed7d3')" :value="lastResult.total" />
         </el-col>
         <el-col :span="6">
-          <el-statistic title="成功" :value="lastResult.accepted" :value-style="{ color: '#10B981' }" />
+          <el-statistic :title="$t('auto.BatchImport.15.330363')" :value="lastResult.accepted" :value-style="{ color: '#10B981' }" />
         </el-col>
         <el-col :span="6">
-          <el-statistic title="失败" :value="lastResult.rejected" :value-style="{ color: '#EF4444' }" />
+          <el-statistic :title="$t('auto.BatchImport.16.acd5cb')" :value="lastResult.rejected" :value-style="{ color: '#EF4444' }" />
         </el-col>
         <el-col :span="6">
-          <el-statistic title="成功率" :value="successRate" suffix="%" :precision="1" />
+          <el-statistic :title="$t('auto.BatchImport.17.b66435')" :value="successRate" suffix="%" :precision="1" />
         </el-col>
       </el-row>
-      <el-divider v-if="lastResult.errors && lastResult.errors.length" content-position="left">失败明细</el-divider>
+      <el-divider v-if="lastResult.errors && lastResult.errors.length" content-position="left">{{ $t('auto.BatchImport.30.6060a3') }}</el-divider>
       <el-table v-if="lastResult.errors && lastResult.errors.length" :data="lastResult.errors" max-height="200" size="small" border>
-        <el-table-column type="index" label="序号" width="60" />
-        <el-table-column prop="value" label="错误信息" />
+        <el-table-column type="index" :label="$t('auto.BatchImport.18.faaadc')" width="60" />
+        <el-table-column prop="value" :label="$t('auto.BatchImport.19.4604d5')" />
       </el-table>
     </el-card>
 
@@ -151,7 +151,7 @@
     <el-card style="margin-top: 16px">
       <template #header>
         <div class="card-header">
-          <span>CSV 格式说明</span>
+          <span>{{ $t('auto.BatchImport.31.5b8624') }}</span>
         </div>
       </template>
       <pre class="csv-help">
@@ -170,10 +170,13 @@ title,content,category,tags
 import i18n from '@/i18n'
 
 import { ref, reactive, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { Upload, View, CircleCheck, UploadFilled } from '@element-plus/icons-vue'
 import { knowledgeMerchantAPI } from '@/api/knowledgeMerchant'
 import { ragProductConfigAPI } from '@/api/ragProductConfig'
+
+const { t } = useI18n()
 
 const activeTab = ref('upload')
 const uploading = ref(false)
@@ -206,7 +209,7 @@ const loadProducts = async () => {
     if (Array.isArray(res)) productList.value = res
     else if (res?.items) productList.value = res.items
   } catch (e) {
-    console.error('加载产品列表失败:', e)
+    console.error(t('auto.BatchImport.32.4c46f3'), e)
   }
 }
 
@@ -217,7 +220,7 @@ const handleTabChange = (tab) => {
 
 const handleFileChange = (file) => {
   if (file.size > 20 * 1024 * 1024) {
-    ElMessage.error(i18n.global.t('文件大小不能超过 20MB'))
+    ElMessage.error(i18n.global.t(t('auto.BatchImport.33.55b353')))
     return false
   }
   uploadForm.file = file.raw
@@ -225,12 +228,12 @@ const handleFileChange = (file) => {
 }
 
 const handleExceed = () => {
-  ElMessage.warning(i18n.global.t('只能上传 1 个文件'))
+  ElMessage.warning(i18n.global.t(t('auto.BatchImport.34.c4e4c6')))
 }
 
 const loadPreview = () => {
   if (!uploadForm.file) {
-    ElMessage.warning(i18n.global.t('请先选择文件'))
+    ElMessage.warning(i18n.global.t(t('auto.BatchImport.35.3c2412')))
     return
   }
   const reader = new FileReader()
@@ -243,7 +246,7 @@ const loadPreview = () => {
 
 const loadPastePreview = () => {
   if (!pasteForm.jsonText.trim()) {
-    ElMessage.warning(i18n.global.t('请输入 JSON 内容'))
+    ElMessage.warning(i18n.global.t(t('auto.BatchImport.36.1ae7de')))
     return
   }
   parseTextToPreview(pasteForm.jsonText, 'json')
@@ -264,13 +267,13 @@ const parseTextToPreview = (text, format) => {
       preview.value = parseJSONClient(text)
     }
     if (preview.value.length === 0) {
-      ElMessage.warning(i18n.global.t('未解析到任何记录'))
+      ElMessage.warning(i18n.global.t(t('auto.BatchImport.37.3dacfa')))
     } else {
       ElMessage.success(`解析成功,共 ${preview.value.length} 条`)
     }
   } catch (e) {
     preview.value = []
-    ElMessage.error('解析失败: ' + e.message)
+    ElMessage.error(t('auto.BatchImport.38.fa5e42') + e.message)
   }
 }
 
@@ -329,8 +332,8 @@ const parseJSONClient = (text) => {
 
 const loadPasteTemplate = () => {
   pasteForm.jsonText = JSON.stringify([
-    { title: i18n.global.t('示例问题 1'), content: i18n.global.t('这里是问题的答案内容,描述清晰完整。'), category: 'FAQ', tags: ['示例', 'FAQ'] },
-    { title: i18n.global.t('示例问题 2'), content: i18n.global.t('另一段内容,可以更详细。'), category: '产品', tags: ['介绍'] }
+    { title: i18n.global.t(t('auto.BatchImport.39.9570d0')), content: i18n.global.t(t('auto.BatchImport.40.d6ba40')), category: 'FAQ', tags: [t('auto.BatchImport.41.1a63ac'), 'FAQ'] },
+    { title: i18n.global.t(t('auto.BatchImport.42.b8d7eb')), content: i18n.global.t(t('auto.BatchImport.43.4e2769')), category: t('auto.BatchImport.3.a01543'), tags: [t('auto.BatchImport.44.61a3ec')] }
   ], null, 2)
 }
 
@@ -339,7 +342,7 @@ const handleBatchImport = async () => {
   try {
     await ElMessageBox.confirm(
       `确认导入 ${preview.value.length} 条记录吗?`,
-      '批量导入',
+      t('auto.BatchImport.45.407f3d'),
       { type: 'info' }
     )
   } catch { return }
@@ -367,7 +370,7 @@ const handleBatchImport = async () => {
       else pasteForm.jsonText = ''
     }
   } catch (e) {
-    ElMessage.error('导入失败: ' + (e.message || ''))
+    ElMessage.error(t('auto.BatchImport.46.45332d') + (e.message || ''))
   } finally {
     importing.value = false
   }

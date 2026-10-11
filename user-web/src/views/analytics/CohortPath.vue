@@ -1,15 +1,15 @@
 <template>
   <div class="cohort-path">
     <el-tabs v-model="activeTab">
-      <el-tab-pane label="Cohort 留存" name="cohort">
+      <el-tab-pane :label="$t('auto.CohortPath.1.e3a5a0')" name="cohort">
         <el-card>
-          <el-empty v-if="cohortEmpty" description="暂无留存数据 — 有客户访问后将按周聚合展示" :image-size="80" />
+          <el-empty v-if="cohortEmpty" :description="$t('auto.CohortPath.2.555a11')" :image-size="80" />
           <div v-show="!cohortEmpty" ref="cohortChartRef" class="chart" />
         </el-card>
       </el-tab-pane>
-      <el-tab-pane label="行为路径" name="path">
+      <el-tab-pane :label="$t('auto.CohortPath.3.ea5baf')" name="path">
         <el-card>
-          <el-empty v-if="pathEmpty" description="暂无行为路径数据 — 需要更多会话行为积累" :image-size="80" />
+          <el-empty v-if="pathEmpty" :description="$t('auto.CohortPath.4.ed6171')" :image-size="80" />
           <div v-show="!pathEmpty" ref="pathChartRef" class="chart" />
         </el-card>
       </el-tab-pane>
@@ -18,10 +18,13 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, watch } from 'vue'
+import { useI18n } from 'vue-i18n';
 import * as echarts from 'echarts'
 import { safeInit } from '@/utils/echarts'
 import { http } from '@/utils/request'
+
+const { t } = useI18n()
 
 const activeTab = ref('cohort')
 const cohortChartRef = ref()

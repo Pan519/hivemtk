@@ -1,41 +1,41 @@
 <template>
   <div class="geo-brand-config">
     <el-tabs v-model="activeTab">
-      <el-tab-pane label="📄 llms.txt v2 预览" name="llms">
+      <el-tab-pane :label="$t('auto.BrandConfig.1.05b4f3')" name="llms">
         <el-card shadow="never">
           <template #header>
             <div class="card-header">
-              <span>llms.txt — AI 爬虫的内容导航（带 describedby Link 头 + Markdown 孪生）</span>
+              <span>{{ $t('auto.BrandConfig.5.ff9c4c') }}</span>
               <div>
                 <el-input v-model="previewDomain" placeholder="example.com" style="width:200px;margin-right:8px" />
-                <el-button type="primary" @click="loadLlms">生成预览</el-button>
+                <el-button type="primary" @click="loadLlms">{{ $t('auto.BrandConfig.6.b542b0') }}</el-button>
               </div>
             </div>
           </template>
-          <el-empty v-if="!llmsContent" description="输入域名 → 点「生成预览」">
-            <el-button type="primary" @click="loadLlms">示例域名</el-button>
+          <el-empty v-if="!llmsContent" :description="$t('auto.BrandConfig.2.94ef7c')">
+            <el-button type="primary" @click="loadLlms">{{ $t('auto.BrandConfig.7.50e17c') }}</el-button>
           </el-empty>
           <pre v-else class="code-block">{{ llmsContent }}</pre>
           <div v-if="llmsContent" style="margin-top:12px">
-            <el-tag type="success">✅ 符合 llms.txt v2 规范</el-tag>
-            <el-tag style="margin-left:8px">Markdown 孪生 → LLM 友好</el-tag>
-            <el-tag style="margin-left:8px">Link 头 → describedby → 语义关联</el-tag>
+            <el-tag type="success">{{ $t('auto.BrandConfig.8.38bc6a') }}</el-tag>
+            <el-tag style="margin-left:8px">{{ $t('auto.BrandConfig.9.5ef0f0') }}</el-tag>
+            <el-tag style="margin-left:8px">{{ $t('auto.BrandConfig.10.333724') }}</el-tag>
           </div>
         </el-card>
       </el-tab-pane>
 
-      <el-tab-pane label="🤖 robots.txt AI 爬虫白名单" name="robots">
+      <el-tab-pane :label="$t('auto.BrandConfig.3.c91198')" name="robots">
         <el-card shadow="never">
           <template #header>
             <div class="card-header">
-              <span>robots.txt — 2026 AI 爬虫完整白名单（8 国内 + 13 海外）</span>
-              <el-button type="primary" @click="loadRobots">生成预览</el-button>
+              <span>{{ $t('auto.BrandConfig.11.a14124') }}</span>
+              <el-button type="primary" @click="loadRobots">{{ $t('auto.BrandConfig.6.b542b0') }}</el-button>
             </div>
           </template>
-          <el-empty v-if="!robotsContent" description="点「生成预览」查看 robots.txt 内容" />
+          <el-empty v-if="!robotsContent" :description="$t('auto.BrandConfig.4.1c0c7e')" />
           <pre v-else class="code-block">{{ robotsContent }}</pre>
           <div v-if="robotsContent" style="margin-top:12px">
-            <el-tag type="success">✅ 覆盖 21 个 AI 爬虫 UA</el-tag>
+            <el-tag type="success">{{ $t('auto.BrandConfig.12.d7460e') }}</el-tag>
             <el-tag style="margin-left:8px">Bytespider/DeepSeekBot/QwenBot/ErnieBot</el-tag>
             <el-tag style="margin-left:8px">GPTBot/ClaudeBot/PerplexityBot/Amazonbot</el-tag>
           </div>
@@ -47,7 +47,10 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { geoApi } from '@/api/geo'
+
+const { t } = useI18n()
 
 const activeTab = ref('llms')
 const previewDomain = ref('example.com')

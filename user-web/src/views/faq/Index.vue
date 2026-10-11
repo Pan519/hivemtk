@@ -3,8 +3,8 @@
     <el-card class="header-card" shadow="never">
       <div class="header-content">
         <div>
-          <h2>FAQ 知识库</h2>
-          <p class="subtitle">Layer1 FAQ 快速匹配 · 命中即跳过 LLM 直接返回标准答案</p>
+          <h2>{{ $t('auto.Index.1.e571cd') }}</h2>
+          <p class="subtitle">{{ $t('auto.Index.2.a4ea7b') }}</p>
         </div>
       </div>
     </el-card>
@@ -13,8 +13,8 @@
       <el-col :span="8">
         <el-card shadow="hover" class="entry-card" @click="$router.push('/faq/list')">
           <div class="entry-icon"><el-icon><Notebook /></el-icon></div>
-          <div class="entry-title">FAQ 列表</div>
-          <div class="entry-desc">管理 Layer1 FAQ 知识库，支持 CRUD、批量启用、分类筛选</div>
+          <div class="entry-title">{{ $t('auto.Index.3.c7b1da') }}</div>
+          <div class="entry-desc">{{ $t('auto.Index.4.5a1a28') }}</div>
           <el-button type="primary" plain>
             进入
             <el-icon class="el-icon--right"><ArrowRight /></el-icon>
@@ -24,8 +24,8 @@
       <el-col :span="8">
         <el-card shadow="hover" class="entry-card">
           <div class="entry-icon"><el-icon><Aim /></el-icon></div>
-          <div class="entry-title">匹配测试</div>
-          <div class="entry-desc">在 FAQ 列表页可对单条或自定义问句执行 Layer1 关键词匹配验证</div>
+          <div class="entry-title">{{ $t('auto.Index.5.c50cce') }}</div>
+          <div class="entry-desc">{{ $t('auto.Index.6.9dc6c4') }}</div>
           <el-button type="primary" plain @click="$router.push('/faq/list')">
             打开
             <el-icon class="el-icon--right"><ArrowRight /></el-icon>
@@ -35,8 +35,8 @@
       <el-col :span="8">
         <el-card shadow="hover" class="entry-card">
           <div class="entry-icon"><el-icon><Connection /></el-icon></div>
-          <div class="entry-title">智能体绑定</div>
-          <div class="entry-desc">在 AI 智能体编辑页 → 知识库绑定 → 选择要挂载的 FAQ 范围（可多选）</div>
+          <div class="entry-title">{{ $t('auto.Index.7.629702') }}</div>
+          <div class="entry-desc">{{ $t('auto.Index.8.6067dc') }}</div>
           <el-button type="primary" plain @click="$router.push('/aiAgent/list')">
             去绑定
             <el-icon class="el-icon--right"><ArrowRight /></el-icon>

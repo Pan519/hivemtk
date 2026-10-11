@@ -3,7 +3,7 @@
     <el-card class="header-card">
       <div>
         <h2>{{ $t('异议处理中心') }}</h2>
-        <p class="subtitle">智能识别客户异议类型 · 匹配最佳应对话术 · 提升转化率</p>
+        <p class="subtitle">{{ $t('auto.List.16.bf1d68') }}</p>
       </div>
       <el-button type="primary" @click="switchToHandle">
         <el-icon><MagicStick /></el-icon>
@@ -57,18 +57,18 @@
       </template>
 
       <el-form :model="form" label-width="100px">
-        <el-form-item label="客户异议">
+        <el-form-item :label="$t('auto.List.1.236ece')">
           <el-input
             v-model="form.text"
             type="textarea"
             :rows="3"
-            placeholder="输入客户的异议内容，例如：太贵了、再考虑一下、其他家更便宜..."
+            :placeholder="$t('auto.List.2.973fdc')"
           />
         </el-form-item>
-        <el-form-item label="手动类别">
+        <el-form-item :label="$t('auto.List.3.ed709f')">
           <el-select
             v-model="form.category"
-            placeholder="自动识别（可手动调整）"
+            :placeholder="$t('auto.List.4.0592c5')"
             clearable
             style="width: 240px"
           >
@@ -85,8 +85,8 @@
             <el-icon><Search /></el-icon>
             智能匹配
           </el-button>
-          <el-button @click="handleClassify">仅分类</el-button>
-          <el-button @click="resetForm">清空</el-button>
+          <el-button @click="handleClassify">{{ $t('auto.List.17.9f5639') }}</el-button>
+          <el-button @click="resetForm">{{ $t('auto.List.18.288f0c') }}</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -119,14 +119,14 @@
           匹配的应对话术 ({{ handleResult.templates.length }})
         </div>
         <el-table :data="handleResult.templates" stripe size="default">
-          <el-table-column prop="title" label="标题" min-width="160" />
-          <el-table-column label="类别" width="120">
+          <el-table-column prop="title" :label="$t('auto.List.5.32c65d')" min-width="160" />
+          <el-table-column :label="$t('auto.List.6.383a6d')" width="120">
             <template #default="{ row }">
               <el-tag size="small">{{ row.category || handleResult.category }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="content" label="话术内容" min-width="320" show-overflow-tooltip />
-          <el-table-column label="成功率" width="120" align="center">
+          <el-table-column prop="content" :label="$t('auto.List.7.4395ee')" min-width="320" show-overflow-tooltip />
+          <el-table-column :label="$t('auto.List.8.b66435')" width="120" align="center">
             <template #default="{ row }">
               <el-progress
                 :percentage="Math.round((row.success_rate || 0) * 100)"
@@ -135,11 +135,11 @@
               />
             </template>
           </el-table-column>
-          <el-table-column prop="usage_count" label="使用次数" width="100" align="center" />
-          <el-table-column label="操作" width="160" fixed="right">
+          <el-table-column prop="usage_count" :label="$t('auto.List.9.194df9')" width="100" align="center" />
+          <el-table-column :label="$t('auto.List.10.2b6bc0')" width="160" fixed="right">
             <template #default="{ row }">
-              <el-button link type="primary" @click="copyTemplate(row)">复制</el-button>
-              <el-button link type="success" @click="useTemplate(row)">使用</el-button>
+              <el-button link type="primary" @click="copyTemplate(row)">{{ $t('auto.List.19.79d3ab') }}</el-button>
+              <el-button link type="success" @click="useTemplate(row)">{{ $t('auto.List.20.ecff77') }}</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -149,36 +149,36 @@
     <el-card class="history-card">
       <template #header>
         <div class="card-header">
-          <span>本会话使用记录</span>
-          <el-button size="small" @click="clearHistory">清空</el-button>
+          <span>{{ $t('auto.List.21.9a83c6') }}</span>
+          <el-button size="small" @click="clearHistory">{{ $t('auto.List.18.288f0c') }}</el-button>
         </div>
       </template>
       <el-table :data="usageHistory" v-loading="loading" stripe>
-        <el-table-column prop="time" label="时间" width="160" />
-        <el-table-column prop="text" label="异议内容" min-width="240" show-overflow-tooltip />
-        <el-table-column prop="category" label="类别" width="120">
+        <el-table-column prop="time" :label="$t('auto.List.11.19fcb9')" width="160" />
+        <el-table-column prop="text" :label="$t('auto.List.12.1aec07')" min-width="240" show-overflow-tooltip />
+        <el-table-column prop="category" :label="$t('auto.List.6.383a6d')" width="120">
           <template #default="{ row }">
             <el-tag size="small" :type="categoryColor(row.category)">
               {{ row.category_name || row.category }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="template_title" label="使用模板" min-width="160" />
-        <el-table-column label="结果" width="100" align="center">
+        <el-table-column prop="template_title" :label="$t('auto.List.13.bd2751')" min-width="160" />
+        <el-table-column :label="$t('auto.List.14.5ad7f5')" width="100" align="center">
           <template #default="{ row }">
-            <el-tag v-if="row.success === true" type="success">成功</el-tag>
-            <el-tag v-else-if="row.success === false" type="danger">失败</el-tag>
-            <el-tag v-else type="info">未记录</el-tag>
+            <el-tag v-if="row.success === true" type="success">{{ $t('auto.List.22.330363') }}</el-tag>
+            <el-tag v-else-if="row.success === false" type="danger">{{ $t('auto.List.23.acd5cb') }}</el-tag>
+            <el-tag v-else type="info">{{ $t('auto.List.24.38e1bd') }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="200" fixed="right">
+        <el-table-column :label="$t('auto.List.10.2b6bc0')" width="200" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" @click="markSuccess(row)">标记成功</el-button>
-            <el-button link type="danger" @click="markFailed(row)">标记失败</el-button>
+            <el-button link type="primary" @click="markSuccess(row)">{{ $t('auto.List.25.4a730c') }}</el-button>
+            <el-button link type="danger" @click="markFailed(row)">{{ $t('auto.List.26.408627') }}</el-button>
           </template>
         </el-table-column>
         <template #empty>
-          <el-empty description="暂无使用记录" />
+          <el-empty :description="$t('auto.List.15.97faae')" />
         </template>
       </el-table>
     </el-card>
@@ -189,6 +189,7 @@
 import i18n from '@/i18n'
 
 import { ref, reactive, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import { MagicStick, Search, Document } from '@element-plus/icons-vue'
 import {
@@ -197,6 +198,8 @@ import {
   listObjectionCategories,
   recordObjectionUsage
 } from '@/api/objection.js'
+
+const { t } = useI18n()
 
 const form = reactive({
   text: '',
@@ -231,30 +234,30 @@ const loadCategories = async () => {
     categories.value = raw.map((c) => ({ code: c.code || c.category, name: c.name }));
     if (categories.value.length === 0) {
       categories.value = [
-        { code: 'price', name: '价格异议' },
-        { code: 'need', name: '需求异议' },
-        { code: 'trust', name: '信任异议' },
-        { code: 'timing', name: '时机异议' },
-        { code: 'compare', name: '比较异议' },
-        { code: 'feature', name: '特性异议' },
-        { code: 'other', name: '其他异议' }
+        { code: 'price', name: t('auto.List.27.6347cc') },
+        { code: 'need', name: t('auto.List.28.01b833') },
+        { code: 'trust', name: t('auto.List.29.62d02b') },
+        { code: 'timing', name: t('auto.List.30.4742a9') },
+        { code: 'compare', name: t('auto.List.31.274787') },
+        { code: 'feature', name: t('auto.List.32.51af23') },
+        { code: 'other', name: t('auto.List.33.da963c') }
       ];
     }
   } catch (e) {
     categories.value = [
-      { code: 'price', name: '价格异议' },
-      { code: 'need', name: '需求异议' },
-      { code: 'trust', name: '信任异议' },
-      { code: 'timing', name: '时机异议' },
-      { code: 'compare', name: '比较异议' },
-      { code: 'feature', name: '特性异议' }
+      { code: 'price', name: t('auto.List.27.6347cc') },
+      { code: 'need', name: t('auto.List.28.01b833') },
+      { code: 'trust', name: t('auto.List.29.62d02b') },
+      { code: 'timing', name: t('auto.List.30.4742a9') },
+      { code: 'compare', name: t('auto.List.31.274787') },
+      { code: 'feature', name: t('auto.List.32.51af23') }
     ]
   }
 }
 
 const handleSubmit = async () => {
   if (!form.text.trim()) {
-    ElMessage.warning(i18n.global.t('请输入客户异议内容'))
+    ElMessage.warning(i18n.global.t(t('auto.List.34.223c42')))
     return
   }
   handling.value = true
@@ -264,9 +267,9 @@ const handleSubmit = async () => {
       category: form.category
     })
     handleResult.value = res
-    ElMessage.success(i18n.global.t('智能匹配完成'))
+    ElMessage.success(i18n.global.t(t('auto.List.35.e7f869')))
   } catch (e) {
-    ElMessage.error('匹配失败：' + (e?.message || ''))
+    ElMessage.error(t('auto.List.36.a4ccd5') + (e?.message || ''))
   } finally {
     handling.value = false
   }
@@ -274,7 +277,7 @@ const handleSubmit = async () => {
 
 const handleClassify = async () => {
   if (!form.text.trim()) {
-    ElMessage.warning(i18n.global.t('请输入客户异议内容'))
+    ElMessage.warning(i18n.global.t(t('auto.List.34.223c42')))
     return
   }
   try {
@@ -283,7 +286,7 @@ const handleClassify = async () => {
     form.category = data.category
     ElMessage.success(`分类结果：${data.category_name}`)
   } catch (e) {
-    ElMessage.error('分类失败：' + (e?.message || ''))
+    ElMessage.error(t('auto.List.37.21acb2') + (e?.message || ''))
   }
 }
 
@@ -296,7 +299,7 @@ const resetForm = () => {
 const copyTemplate = async (template) => {
   try {
     await navigator.clipboard.writeText(template.content)
-    ElMessage.success(i18n.global.t('已复制到剪贴板'))
+    ElMessage.success(i18n.global.t(t('auto.List.38.4fb42e')))
   } catch (e) {
     const ta = document.createElement('textarea');
     ta.value = template.content
@@ -304,7 +307,7 @@ const copyTemplate = async (template) => {
     ta.select()
     document.execCommand('copy')
     document.body.removeChild(ta)
-    ElMessage.success(i18n.global.t('已复制到剪贴板'))
+    ElMessage.success(i18n.global.t(t('auto.List.38.4fb42e')))
   }
 }
 
@@ -328,7 +331,7 @@ const markSuccess = async (row) => {
   if (row.template_id) {
     try {
       await recordObjectionUsage({ template_id: row.template_id, success: true })
-      ElMessage.success(i18n.global.t('已标记为成功'))
+      ElMessage.success(i18n.global.t(t('auto.List.39.4a5b54')))
     } catch (e) { console.warn("[request] 后台调用失败(已忽略):", e) }
   }
 }
@@ -338,14 +341,14 @@ const markFailed = async (row) => {
   if (row.template_id) {
     try {
       await recordObjectionUsage({ template_id: row.template_id, success: false })
-      ElMessage.success(i18n.global.t('已标记为失败'))
+      ElMessage.success(i18n.global.t(t('auto.List.40.15bb15')))
     } catch (e) { console.warn("[request] 后台调用失败(已忽略):", e) }
   }
 }
 
 const clearHistory = () => {
   usageHistory.value = []
-  ElMessage.success(i18n.global.t('已清空记录'))
+  ElMessage.success(i18n.global.t(t('auto.List.41.90b2ae')))
 }
 
 const switchToHandle = () => {

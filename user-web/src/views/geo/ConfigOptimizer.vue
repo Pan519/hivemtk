@@ -7,25 +7,25 @@
         <el-card shadow="never" class="form-card" v-loading="loading">
           <template #header>
             <div class="card-header">
-              <span class="card-title">GEO 配置</span>
+              <span class="card-title">{{ $t('auto.ConfigOptimizer.10.a8a257') }}</span>
               <el-button link type="primary" :loading="saving" @click="handleSave">
-                <el-icon><Check /></el-icon><span>保存配置</span>
+                <el-icon><Check /></el-icon><span>{{ $t('auto.ConfigOptimizer.11.ed7526') }}</span>
               </el-button>
             </div>
           </template>
           <el-form :model="config" label-width="100px">
-            <el-form-item label="品牌名称">
-              <el-input v-model="config.brand" placeholder="如：hivemtk" clearable />
+            <el-form-item :label="$t('auto.ConfigOptimizer.1.4e8713')">
+              <el-input v-model="config.brand" :placeholder="$t('auto.ConfigOptimizer.2.a08eb5')" clearable />
             </el-form-item>
-            <el-form-item label="品牌描述">
+            <el-form-item :label="$t('auto.ConfigOptimizer.3.1a83bc')">
               <el-input
                 v-model="config.description"
                 type="textarea"
                 :rows="3"
-                placeholder="品牌简介 / 定位描述"
+                :placeholder="$t('auto.ConfigOptimizer.4.401cc9')"
               />
             </el-form-item>
-            <el-form-item label="核心优势">
+            <el-form-item :label="$t('auto.ConfigOptimizer.5.4e4d6f')">
               <div class="tags-input">
                 <el-tag
                   v-for="(tag, i) in config.advantages"
@@ -43,10 +43,10 @@
                   @keyup.enter="addTag(config.advantages)"
                   @blur="onBlurAddTag('adv')"
                 />
-                <el-button v-else size="small" class="tag-add" @click="showAdvInput">+ 优势</el-button>
+                <el-button v-else size="small" class="tag-add" @click="showAdvInput">{{ $t('auto.ConfigOptimizer.12.ad725b') }}</el-button>
               </div>
             </el-form-item>
-            <el-form-item label="竞品">
+            <el-form-item :label="$t('auto.ConfigOptimizer.6.9868d2')">
               <div class="tags-input">
                 <el-tag
                   v-for="(tag, i) in config.competitors"
@@ -65,15 +65,15 @@
                   @keyup.enter="addTag(config.competitors, 'comp')"
                   @blur="onBlurAddTag('comp')"
                 />
-                <el-button v-else size="small" class="tag-add" @click="showCompInput">+ 竞品</el-button>
+                <el-button v-else size="small" class="tag-add" @click="showCompInput">{{ $t('auto.ConfigOptimizer.13.5e342c') }}</el-button>
               </div>
             </el-form-item>
-            <el-form-item label="默认生成模型">
+            <el-form-item :label="$t('auto.ConfigOptimizer.7.89e0f5')">
               <el-select v-model="config.default_model" style="width: 100%">
                 <el-option v-for="m in modelOptions" :key="m.value" :label="m.label" :value="m.value" />
               </el-select>
             </el-form-item>
-            <el-form-item label="验证模型">
+            <el-form-item :label="$t('auto.ConfigOptimizer.8.3a17e1')">
               <el-select
                 v-model="config.verify_models"
                 multiple
@@ -86,7 +86,7 @@
             </el-form-item>
             <el-form-item>
               <el-button type="success" :loading="optimizing" @click="handleOptimize">
-                <el-icon><MagicStick /></el-icon><span>优化配置</span>
+                <el-icon><MagicStick /></el-icon><span>{{ $t('auto.ConfigOptimizer.14.11e7dd') }}</span>
               </el-button>
             </el-form-item>
           </el-form>
@@ -96,9 +96,9 @@
       
       <el-col :xs="24" :lg="10">
         <el-card shadow="never" class="suggest-card">
-          <template #header><span class="card-title">优化建议</span></template>
+          <template #header><span class="card-title">{{ $t('auto.ConfigOptimizer.15.6e4d61') }}</span></template>
           <div v-loading="optimizing">
-            <el-empty v-if="!suggestions.length && !optimizing" description="点击「优化配置」生成建议" :image-size="60" />
+            <el-empty v-if="!suggestions.length && !optimizing" :description="$t('auto.ConfigOptimizer.9.3241bd')" :image-size="60" />
             <div v-else class="suggest-list">
               <div v-for="(s, i) in suggestions" :key="i" class="suggest-item">
                 <div class="suggest-item-title">
@@ -117,10 +117,13 @@
 
 <script setup>
 import { ref, reactive, onMounted, nextTick } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import { Check, MagicStick } from '@element-plus/icons-vue'
 import { geoApi } from '@/api/geo'
 import { http } from '@/utils/request'
+
+const { t } = useI18n()
 
 const modelOptions = ref([])
 
@@ -156,7 +159,7 @@ const loadModelOptions = async () => {
       }
     }
   } catch (e) {
-    console.warn('加载可用模型列表失败:', e.message)
+    console.warn(t('auto.ConfigOptimizer.16.a8d452'), e.message)
   }
 }
 
@@ -224,7 +227,7 @@ const loadConfig = async () => {
       ? verifyFromDB
       : (config.verify_models.length ? config.verify_models : (modelOptions.value?.[0] ? [modelOptions.value[0].value] : []))
   } catch (e) {
-    ElMessage.error(e.message || '配置加载失败')
+    ElMessage.error(e.message || t('auto.ConfigOptimizer.17.9cd43c'))
   } finally {
     loading.value = false
   }
@@ -232,7 +235,7 @@ const loadConfig = async () => {
 
 const handleSave = async () => {
   if (!config.brand.trim()) {
-    ElMessage.warning('请填写品牌名称')
+    ElMessage.warning(t('auto.ConfigOptimizer.18.0e7774'))
     return
   }
   saving.value = true
@@ -245,9 +248,9 @@ const handleSave = async () => {
       default_model: config.default_model,
       verify_models: config.verify_models
     })
-    ElMessage.success('配置已保存')
+    ElMessage.success(t('auto.ConfigOptimizer.19.e94729'))
   } catch (e) {
-    ElMessage.error(e.message || '配置保存失败')
+    ElMessage.error(e.message || t('auto.ConfigOptimizer.20.6b8ad6'))
   } finally {
     saving.value = false
   }
@@ -262,9 +265,9 @@ const handleOptimize = async () => {
       competitors: config.competitors
     })
     suggestions.value = res?.suggestions || []
-    ElMessage.success(res?.summary || '配置优化建议已生成')
+    ElMessage.success(res?.summary || t('auto.ConfigOptimizer.21.0e45f7'))
   } catch (e) {
-    ElMessage.error(e.message || '配置优化失败')
+    ElMessage.error(e.message || t('auto.ConfigOptimizer.22.b323b4'))
   } finally {
     optimizing.value = false
   }

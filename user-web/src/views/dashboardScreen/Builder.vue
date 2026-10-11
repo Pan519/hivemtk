@@ -2,29 +2,29 @@
   <div class="custom-dashboard">
     <el-row :gutter="12" class="toolbar">
       <el-col :span="12">
-        <span class="title">自定义看板拖拽（USR-AN-01）</span>
+        <span class="title">{{ $t('auto.Builder.6.cc57bc') }}</span>
       </el-col>
       <el-col :span="12" style="text-align: right">
-        <el-button @click="addBlock">+ 添加组件</el-button>
-        <el-button type="primary" @click="save">保存看板</el-button>
+        <el-button @click="addBlock">{{ $t('auto.Builder.7.fa4d93') }}</el-button>
+        <el-button type="primary" @click="save">{{ $t('auto.Builder.1.8e9a08') }}</el-button>
       </el-col>
     </el-row>
 
     <el-row :gutter="12">
       <el-col :span="6">
         <el-card class="palette">
-          <template #header><span>组件库</span>  <el-dialog v-model="saveDialogVisible" title="保存看板" width="420px">
+          <template #header><span>{{ $t('auto.Builder.8.ff885d') }}</span>  <el-dialog v-model="saveDialogVisible" :title="$t('auto.Builder.1.8e9a08')" width="420px">
     <el-form label-width="80px">
-      <el-form-item label="看板名称">
-        <el-input v-model="saveName" placeholder="请输入看板名称" maxlength="60" @keyup.enter="confirmSave" />
+      <el-form-item :label="$t('auto.Builder.2.cd2a09')">
+        <el-input v-model="saveName" :placeholder="$t('auto.Builder.3.921185')" maxlength="60" @keyup.enter="confirmSave" />
       </el-form-item>
-      <el-form-item label="公开访问">
-        <el-switch v-model="screenPublic" active-text="公开投屏链接" />
+      <el-form-item :label="$t('auto.Builder.4.e541f2')">
+        <el-switch v-model="screenPublic" :active-text="$t('auto.Builder.5.d68c91')" />
       </el-form-item>
     </el-form>
     <template #footer>
-      <el-button @click="saveDialogVisible = false">取消</el-button>
-      <el-button type="primary" :loading="saving" @click="confirmSave">保存</el-button>
+      <el-button @click="saveDialogVisible = false">{{ $t('auto.Builder.9.625fb2') }}</el-button>
+      <el-button type="primary" :loading="saving" @click="confirmSave">{{ $t('auto.Builder.10.be5fbb') }}</el-button>
     </template>
   </el-dialog>
 </template>
@@ -67,21 +67,21 @@
       </el-col>
     </el-row>
   <!-- el-dialog 原先与根 div 平级，使本组件有两个根节点（fragment）。路由层的
-       <Transition> 无法给 fragment 做动画，进页面必报 "Component inside <Transition>
+       <Transition>{{ $t('auto.Builder.11.165949') }}<Transition>
        renders non-element root node that cannot be animated"（实测 17 条）。
        它带 append-to-body（teleport 到 body），所以挪进根 div 内视觉与行为完全不变。 -->
-  <el-dialog v-model="saveDialogVisible" title="保存看板" width="420px" append-to-body>
+  <el-dialog v-model="saveDialogVisible" :title="$t('auto.Builder.1.8e9a08')" width="420px" append-to-body>
     <el-form label-width="80px">
-      <el-form-item label="看板名称">
-        <el-input v-model="saveName" placeholder="请输入看板名称" maxlength="60" @keyup.enter="confirmSave" />
+      <el-form-item :label="$t('auto.Builder.2.cd2a09')">
+        <el-input v-model="saveName" :placeholder="$t('auto.Builder.3.921185')" maxlength="60" @keyup.enter="confirmSave" />
       </el-form-item>
-      <el-form-item label="公开访问">
-        <el-switch v-model="screenPublic" active-text="公开投屏链接" />
+      <el-form-item :label="$t('auto.Builder.4.e541f2')">
+        <el-switch v-model="screenPublic" :active-text="$t('auto.Builder.5.d68c91')" />
       </el-form-item>
     </el-form>
     <template #footer>
-      <el-button @click="saveDialogVisible = false">取消</el-button>
-      <el-button type="primary" :loading="saving" @click="confirmSave">保存</el-button>
+      <el-button @click="saveDialogVisible = false">{{ $t('auto.Builder.9.625fb2') }}</el-button>
+      <el-button type="primary" :loading="saving" @click="confirmSave">{{ $t('auto.Builder.10.be5fbb') }}</el-button>
     </template>
   </el-dialog>
   </div>
@@ -98,13 +98,15 @@ import { safeInit } from '@/utils/echarts'
 import { http } from '@/utils/request'
 
 const blockTypes = [
-  { type: 'line', label: '折线', icon: markRaw(TrendCharts) },
-  { type: 'bar', label: '柱状', icon: markRaw(DataLine) },
-  { type: 'pie', label: '饼图', icon: markRaw(PieChart) },
-  { type: 'kpi', label: '数字卡', icon: markRaw(Document) },
-  { type: 'funnel', label: '漏斗', icon: markRaw(Histogram) },
-  { type: 'map', label: '地图', icon: markRaw(LocationInformation) }
+  { type: 'line', label: t('auto.Builder.12.0beb47'), icon: markRaw(TrendCharts) },
+  { type: 'bar', label: t('auto.Builder.13.f7fedc'), icon: markRaw(DataLine) },
+  { type: 'pie', label: t('auto.Builder.14.d5e33d'), icon: markRaw(PieChart) },
+  { type: 'kpi', label: t('auto.Builder.15.cd6590'), icon: markRaw(Document) },
+  { type: 'funnel', label: t('auto.Builder.16.be4e6e'), icon: markRaw(Histogram) },
+  { type: 'map', label: t('auto.Builder.17.823ea4'), icon: markRaw(LocationInformation) }
 ]
+
+const { t } = useI18n()
 
 const blocks = ref([])
 const saveDialogVisible = ref(false)
@@ -128,7 +130,7 @@ function onDrop(e) {
     height: 240,
     data: { value: Math.floor(Math.random() * 1000) }
   })
-  ElMessage.success('已添加组件')
+  ElMessage.success(t('auto.Builder.18.c26b25'))
 }
 
 function resolveChart(type) {
@@ -139,10 +141,11 @@ function resolveChart(type) {
     kpi: markRaw({ template: '<div class="kpi">{{ data.value }}</div>' }),
     funnel: defineAsyncComponent(() => loadChart(type)),
     map: defineAsyncComponent(() => loadChart(type))
-  }[type] || markRaw({ template: '未知' }))
+  }[type] || markRaw({ template: t('auto.Builder.19.1622dc') }))
 }
 
 import { defineAsyncComponent } from 'vue'
+import { useI18n } from 'vue-i18n'
 function loadChart(type) {
   return {
     template: `<div ref="chart" class="chart-area"></div>`,
@@ -176,7 +179,7 @@ async function save() {
     // R5-4：本页面内 ElMessageBox.prompt 触发 Vue 挂载崩溃（parent.provides undefined），
     // 改用 confirm + 自动命名绕开；名称含时间戳保证可辨识
     const autoName = `看板-${new Date().toISOString().slice(0, 16).replace('T', ' ')}`
-    await ElMessageBox.confirm(`保存为「${autoName}」？（公开投屏语义，保存后即可通过公开链接访问）`, '保存看板', { type: 'info' })
+    await ElMessageBox.confirm(`保存为「${autoName}」？（公开投屏语义，保存后即可通过公开链接访问）`, t('auto.Builder.1.8e9a08'), { type: 'info' })
     await http.post('/api/dashboards', {
       name: autoName,
       layout: { blocks: blocks.value },
@@ -191,7 +194,7 @@ async function save() {
       // 非 HTTP 错误（如 JSON 序列化失败）兜底提示；HTTP 错误由拦截器统一 toast
       if (!String(e).includes('Request failed')) {
         localStorage.setItem('r5_save_err', JSON.stringify({msg: e?.message || String(e), stack: e?.stack || ''}))
-        ElMessage.error('保存失败：' + (e?.message || e))
+        ElMessage.error(t('auto.Builder.20.78d235') + (e?.message || e))
       }
     }
   }

@@ -12,7 +12,7 @@
                 style="font-size:12px;margin-left:4px">
                 {{ hiveMTKSovTrend >= 0 ? '↑' : '↓' }}{{ Math.abs(hiveMTKSovTrend).toFixed(2) }}%
               </span>
-              <span v-else class="text-gray-400" style="font-size:12px;margin-left:4px">首期</span>
+              <span v-else class="text-gray-400" style="font-size:12px;margin-left:4px">{{ $t('auto.SovBoard.9.36bb23') }}</span>
             </template>
           </el-statistic>
           <div class="text-xs text-gray-400 mt-1">较上一 {{ trendDays }} 天窗口</div>
@@ -20,15 +20,15 @@
       </el-col>
       <el-col :span="6">
         <el-card>
-          <el-statistic title="竞品数（出现/配置）" :value="summary.competitor_count" />
+          <el-statistic :title="$t('auto.SovBoard.1.316128')" :value="summary.competitor_count" />
           <div class="text-xs text-gray-400 mt-1">配置 {{ configuredCompetitors.length }} 个</div>
         </el-card>
       </el-col>
       <el-col :span="6">
-        <el-card><el-statistic title="总提及次数" :value="summary.total_mentions" /></el-card>
+        <el-card><el-statistic :title="$t('auto.SovBoard.2.10ff5e')" :value="summary.total_mentions" /></el-card>
       </el-col>
       <el-col :span="6">
-        <el-card><el-statistic title="品牌提及次数" :value="hiveMTKMentions" /></el-card>
+        <el-card><el-statistic :title="$t('auto.SovBoard.3.3f99bd')" :value="hiveMTKMentions" /></el-card>
       </el-col>
     </el-row>
 
@@ -47,7 +47,7 @@
     </el-alert>
 
     <el-card class="mb-4">
-      <template #header><span class="font-bold">品牌 SOV 对比（AI 引擎声量份额）</span></template>
+      <template #header><span class="font-bold">{{ $t('auto.SovBoard.10.60ea84') }}</span></template>
       <div v-if="!loading && sovData.length === 0" class="py-12 text-center text-gray-400">
         暂无 SOV 数据，请先在"多模型验证"页面运行品牌验证，或到「可见性观测」页点「立即探测一轮」
       </div>
@@ -58,12 +58,12 @@
     <el-card class="mb-4">
       <template #header>
         <div class="flex items-center gap-4">
-          <span class="font-bold">品牌明细</span>
-          <el-button size="small" type="primary" @click="load" :loading="loading">刷新</el-button>
+          <span class="font-bold">{{ $t('auto.SovBoard.11.a33cbf') }}</span>
+          <el-button size="small" type="primary" @click="load" :loading="loading">{{ $t('auto.SovBoard.12.694fc5') }}</el-button>
         </div>
       </template>
       <el-table :data="sovData" v-loading="loading" size="small">
-        <el-table-column label="品牌" min-width="140">
+        <el-table-column :label="$t('auto.SovBoard.4.09307c')" min-width="140">
           <template #default="{ row }">
             <div class="flex items-center gap-2">
               <el-tag v-if="row.is_own" type="primary" size="small" effect="dark">OWN</el-tag>
@@ -71,7 +71,7 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column prop="mentions" label="提及次数" width="100" sortable />
+        <el-table-column prop="mentions" :label="$t('auto.SovBoard.5.2ee012')" width="100" sortable />
         <el-table-column prop="sov_percent" label="SOV(%)" width="110" sortable>
           <template #default="{ row }">
             <div class="flex items-center gap-2">
@@ -82,7 +82,7 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column label="环比" width="110">
+        <el-table-column :label="$t('auto.SovBoard.6.60f75c')" width="110">
           <template #default="{ row }">
             <span v-if="rowTrend(row) !== null" :class="rowTrend(row) >= 0 ? 'text-green-600' : 'text-red-500'" class="text-xs font-semibold">
               {{ rowTrend(row) >= 0 ? '↑' : '↓' }} {{ Math.abs(rowTrend(row)).toFixed(2) }}
@@ -90,12 +90,12 @@
             <span v-else class="text-gray-400 text-xs">—</span>
           </template>
         </el-table-column>
-        <el-table-column label="情感倾向" width="100">
+        <el-table-column :label="$t('auto.SovBoard.7.57f8d2')" width="100">
           <template #default="{ row }">
             <el-tag :type="sentimentTag(row.avg_sentiment)" size="small">{{ sentimentLabel(row.avg_sentiment) }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="total_mentions_all_brands" label="全行业总提及" width="120" />
+        <el-table-column prop="total_mentions_all_brands" :label="$t('auto.SovBoard.8.5f68ed')" width="120" />
       </el-table>
     </el-card>
     </div>
@@ -104,12 +104,15 @@
 
 <script setup>
 import { ref, computed, onMounted, nextTick, onBeforeUnmount } from 'vue'
+import { useI18n } from 'vue-i18n'
 import * as echarts from 'echarts'
 import { safeInit } from '@/utils/echarts'
 import { getSOV, getSOVTrend, listCompetitors } from '@/api/geoProbe.js'
 
 const BRAND_HINTS = ['hivemtk', 'hivemtk']
 const trendDays = 30
+
+const { t } = useI18n()
 
 const loading = ref(false)
 const sovData = ref([])
@@ -168,9 +171,9 @@ const sentimentTag = (s) => {
   return 'info'
 }
 const sentimentLabel = (s) => {
-  if (s === 'positive') return '积极'
-  if (s === 'negative') return '负面'
-  return '中性'
+  if (s === 'positive') return t('auto.SovBoard.13.1b614b')
+  if (s === 'negative') return t('auto.SovBoard.14.f3c630')
+  return t('auto.SovBoard.15.62731a')
 }
 
 const renderBarChart = () => {
@@ -230,7 +233,7 @@ const load = async () => {
       const data = results[0].value
       const list = Array.isArray(data) ? data : (data?.list || data?.data || []);
       sovData.value = list.map(r => ({
-        brand: r.brand || '未知',
+        brand: r.brand || t('auto.SovBoard.16.1622dc'),
         mentions: Number(r.mentions || 0),
         total_mentions_all_brands: Number(r.total_mentions_all_brands || 0),
         sov_percent: Number(r.sov_percent || 0),

@@ -3,7 +3,7 @@
     <el-card class="header-card">
       <div>
         <h2>{{ $t('销冠能力画像') }}</h2>
-        <p class="subtitle">5 维度能力评估 · 趋势追踪 · 团队对比分析</p>
+        <p class="subtitle">{{ $t('auto.List.12.80f54f') }}</p>
       </div>
       <el-button type="primary" @click="loadStaffs">
         <el-icon><Refresh /></el-icon>
@@ -20,7 +20,7 @@
               <el-input
                 v-model="search"
                 size="small"
-                :placeholder="$t('搜索姓名/ID')"
+                ::placeholder="$t('auto.List.1.55011c')"
                 style="width: 180px"
                 clearable
               />
@@ -35,8 +35,8 @@
             height="500"
           >
             <el-table-column prop="id" label="ID" width="80" />
-            <el-table-column prop="name" label="姓名" min-width="120" />
-            <el-table-column label="综合分" width="100" align="center">
+            <el-table-column prop="name" :label="$t('auto.List.2.60d045')" min-width="120" />
+            <el-table-column :label="$t('auto.List.3.4bcb44')" width="100" align="center">
               <template #default="{ row }">
                 <el-tag :type="scoreTagType(row.overall_score || row.overallScore)">
                   {{ Math.round(row.overall_score || row.overallScore || 0) }}
@@ -73,33 +73,33 @@
             <el-row :gutter="20" class="overview-row">
               <el-col :span="8">
                 <div class="overview-card">
-                  <div class="overview-label">综合评分</div>
+                  <div class="overview-label">{{ $t('auto.List.13.00dc6d') }}</div>
                   <div class="overview-value" :style="{ color: scoreColorValue(currentReport.overall_score) }">
                     {{ Math.round(currentReport.overall_score || 0) }}
                   </div>
-                  <div class="overview-tip">满分 100</div>
+                  <div class="overview-tip">{{ $t('auto.List.14.f32efb') }}</div>
                 </div>
               </el-col>
               <el-col :span="8">
                 <div class="overview-card">
-                  <div class="overview-label">评估维度</div>
+                  <div class="overview-label">{{ $t('auto.List.15.78bf74') }}</div>
                   <div class="overview-value">{{ (currentReport.items || []).length }}</div>
-                  <div class="overview-tip">个能力维度</div>
+                  <div class="overview-tip">{{ $t('auto.List.16.e1c1d5') }}</div>
                 </div>
               </el-col>
               <el-col :span="8">
                 <div class="overview-card">
-                  <div class="overview-label">生成时间</div>
+                  <div class="overview-label">{{ $t('auto.List.17.b683c8') }}</div>
                   <div class="overview-value time-text">
                     {{ formatTime(currentReport.generated_at) }}
                   </div>
-                  <div class="overview-tip">最近一次评估</div>
+                  <div class="overview-tip">{{ $t('auto.List.18.2be0dc') }}</div>
                 </div>
               </el-col>
             </el-row>
 
             <div class="radar-section">
-              <h4>能力雷达图</h4>
+              <h4>{{ $t('auto.List.19.90ed3e') }}</h4>
               <div class="radar-chart">
                 <svg :viewBox="`0 0 ${svgSize} ${svgSize}`" width="100%" :style="{ maxWidth: svgSize + 'px', margin: '0 auto', display: 'block' }">
                   
@@ -150,15 +150,15 @@
             </div>
 
             <div class="items-section">
-              <h4>能力维度详情</h4>
+              <h4>{{ $t('auto.List.20.d47c9d') }}</h4>
               <el-table :data="currentReport.items || []" stripe>
-                <el-table-column prop="name" label="能力维度" min-width="140" />
-                <el-table-column prop="tag" label="标签" width="120">
+                <el-table-column prop="name" :label="$t('auto.List.4.120419')" min-width="140" />
+                <el-table-column prop="tag" :label="$t('auto.List.5.14d342')" width="120">
                   <template #default="{ row }">
                     <el-tag size="small">{{ row.tag }}</el-tag>
                   </template>
                 </el-table-column>
-                <el-table-column label="得分" width="200">
+                <el-table-column :label="$t('auto.List.6.ad9619')" width="200">
                   <template #default="{ row }">
                     <el-progress
                       :percentage="Math.round(row.score || 0)"
@@ -167,8 +167,8 @@
                     />
                   </template>
                 </el-table-column>
-                <el-table-column prop="sample" label="样本数" width="100" align="center" />
-                <el-table-column label="趋势" width="100" align="center">
+                <el-table-column prop="sample" :label="$t('auto.List.7.c1ce23')" width="100" align="center" />
+                <el-table-column :label="$t('auto.List.8.009051')" width="100" align="center">
                   <template #default="{ row }">
                     <el-tag v-if="row.trend === 'up'" type="success" size="small">
                       <el-icon><CaretTop /></el-icon>{{ getTrendLabel(row.trend) }}
@@ -186,10 +186,10 @@
 
             
             <div v-if="compareMode" class="compare-section">
-              <h4>员工对比</h4>
+              <h4>{{ $t('auto.List.21.d1666a') }}</h4>
               <el-select
                 v-model="compareStaffId"
-                placeholder="选择对比员工"
+                :placeholder="$t('auto.List.9.426bdb')"
                 filterable
                 clearable
                 style="width: 240px; margin-bottom: 15px"
@@ -246,16 +246,16 @@
                   />
                 </svg>
                 <div class="compare-legend">
-                  <span><span class="legend-dot" style="background: #4F46E5"></span>当前员工</span>
-                  <span><span class="legend-dot" style="background: #F59E0B"></span>对比员工</span>
+                  <span><span class="legend-dot" style="background: #4F46E5"></span>{{ $t('auto.List.22.acf238') }}</span>
+                  <span><span class="legend-dot" style="background: #F59E0B"></span>{{ $t('auto.List.23.7f74c0') }}</span>
                 </div>
               </div>
             </div>
           </template>
-          <el-empty v-else description="请选择员工查看画像" />
+          <el-empty v-else :description="$t('auto.List.10.5d24ae')" />
         </el-card>
         <el-card v-else>
-          <el-empty description="请从左侧选择员工" />
+          <el-empty :description="$t('auto.List.11.e4c114')" />
         </el-card>
       </el-col>
     </el-row>
@@ -266,10 +266,13 @@
 import i18n from '@/i18n'
 
 import { ref, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import { Refresh, DataLine, CaretTop, CaretBottom, Minus } from '@element-plus/icons-vue'
 import { listStaffs, getPersonaReport } from '@/api/persona.js'
 import { getTrendLabel } from '@/constants/trend';
+
+const { t } = useI18n()
 
 const loadingStaffs = ref(false)
 const loadingReport = ref(false)
@@ -334,7 +337,7 @@ const loadStaffs = async () => {
       selectStaff(list[0])
     }
   } catch (e) {
-    ElMessage.error(i18n.global.t('加载员工列表失败'))
+    ElMessage.error(i18n.global.t(t('auto.List.24.c2c7ec')))
     staffs.value = []
   } finally {
     loadingStaffs.value = false
@@ -357,7 +360,7 @@ const loadReport = async () => {
     const res = await getPersonaReport(id)
     currentReport.value = res
   } catch (e) {
-    ElMessage.error('画像生成失败：' + (e?.message || ''))
+    ElMessage.error(t('auto.List.25.12ea67') + (e?.message || ''))
     currentReport.value = null;
   } finally {
     loadingReport.value = false
@@ -373,7 +376,7 @@ const loadCompareReport = async () => {
     const res = await getPersonaReport(compareStaffId.value)
     compareReport.value = res
   } catch (e) {
-    ElMessage.error(i18n.global.t('对比员工画像加载失败'))
+    ElMessage.error(i18n.global.t(t('auto.List.26.a097ce')))
     compareReport.value = null
   }
 }

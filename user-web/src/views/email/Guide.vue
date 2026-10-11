@@ -2,14 +2,14 @@
   <div class="guide-container">
     <h1 class="guide-title">{{ $t('邮件营销使用指南') }}</h1>
     <div class="guide-intro">
-      <p>欢迎使用邮件营销服务！本指南将引导您完成从 SMTP 配置到邮件发送的完整流程。</p>
+      <p>{{ $t('auto.Guide.10.90485c') }}</p>
     </div>
 
     <el-steps :active="activeStep" finish-status="success" align-center class="steps-container">
-      <el-step :title="$t('配置 SMTP')" description="配置发件邮箱" />
-      <el-step :title="$t('创建收件人列表')" description="导入收件人" />
-      <el-step :title="$t('编写邮件草稿')" description="准备邮件内容" />
-      <el-step :title="$t('发送任务')" description="启动发送并查看进度" />
+      <el-step ::title="$t('auto.Guide.1.22d452')" :description="$t('auto.Guide.2.b0ec48')" />
+      <el-step ::title="$t('auto.Guide.3.5c9b35')" :description="$t('auto.Guide.4.654ea9')" />
+      <el-step ::title="$t('auto.Guide.5.2dc0a5')" :description="$t('auto.Guide.6.7706ff')" />
+      <el-step ::title="$t('auto.Guide.7.a9bac7')" :description="$t('auto.Guide.8.16a610')" />
     </el-steps>
 
     <el-row :gutter="20" class="step-cards">
@@ -27,10 +27,10 @@
       </el-col>
     </el-row>
 
-    <el-alert :title="$t('常见问题')" type="info" :closable="false" show-icon class="faq">
-      <p><strong>Q: SMTP 验证失败？</strong> 请检查发件人邮箱、授权码是否正确，并确认邮箱已开启 SMTP 服务。</p>
-      <p><strong>Q: 邮件进入垃圾箱？</strong> {{ $t('建议使用企业域名邮箱，避免营销话术，并合理设置发送频率。') }}</p>
-      <p><strong>Q: 发送速度太慢？</strong> {{ $t('适当增加任务并发数，但需避免触发反垃圾邮件规则。') }}</p>
+    <el-alert ::title="$t('auto.Guide.9.d29c3d')" type="info" :closable="false" show-icon class="faq">
+      <p><strong>{{ $t('auto.Guide.11.2ae552') }}</strong>{{ $t('auto.Guide.12.ff52b6') }}</p>
+      <p><strong>{{ $t('auto.Guide.13.0ffcfb') }}</strong> {{ $t('建议使用企业域名邮箱，避免营销话术，并合理设置发送频率。') }}</p>
+      <p><strong>{{ $t('auto.Guide.14.8d4e89') }}</strong> {{ $t('适当增加任务并发数，但需避免触发反垃圾邮件规则。') }}</p>
     </el-alert>
   </div>
 </template>
@@ -39,49 +39,52 @@
 import i18n from '@/i18n'
 
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
+const { t } = useI18n()
+
 const activeStep = ref(0)
 
 const steps = [
   {
     title: i18n.global.t('1. 配置 SMTP'),
-    description: '配置发件人邮箱',
+    description: t('auto.Guide.15.5ce3b2'),
     details: [
-      '进入"邮件营销 → SMTP 配置"',
-      '填写发件邮箱、授权码、服务器地址',
-      '点击"测试连接"验证配置'
+      t('auto.Guide.16.fccb5b'),
+      t('auto.Guide.17.2b193a'),
+      t('auto.Guide.18.7019e4')
     ],
     path: '/email/smtp'
   },
   {
     title: i18n.global.t('2. 收件人列表'),
-    description: '导入和管理收件人',
+    description: t('auto.Guide.19.3ed4dd'),
     details: [
-      '进入"邮件营销 → 收件人列表"',
-      '手动添加或导入 CSV/Excel 文件',
-      '为收件人打标签,便于分组发送'
+      t('auto.Guide.20.ddcd34'),
+      t('auto.Guide.21.f4dd36'),
+      t('auto.Guide.22.b8a79f')
     ],
     path: '/email/list'
   },
   {
     title: i18n.global.t('3. 编写草稿'),
-    description: '准备邮件内容',
+    description: t('auto.Guide.6.7706ff'),
     details: [
-      '进入"邮件营销 → 邮件草稿"',
-      '编写邮件主题与正文',
-      '使用模板变量 {name} {phone} 等'
+      t('auto.Guide.23.a28521'),
+      t('auto.Guide.24.1b4f19'),
+      t('auto.Guide.25.81b926')
     ],
     path: '/email/drafts'
   },
   {
     title: i18n.global.t('4. 发送任务'),
-    description: '创建并启动发送任务',
+    description: t('auto.Guide.26.3978ef'),
     details: [
-      '进入"邮件营销 → 发送任务"',
-      '选择草稿、收件人列表',
-      '配置发送时间与并发数,启动任务'
+      t('auto.Guide.27.8d0988'),
+      t('auto.Guide.28.ef8d53'),
+      t('auto.Guide.29.2cfd19')
     ],
     path: '/email/jobs'
   }

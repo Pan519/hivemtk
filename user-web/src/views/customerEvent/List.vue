@@ -51,33 +51,33 @@
         <div class="card-header">
           <span>{{ $t('事件列表') }}</span>
           <div>
-            <el-select v-model="filterType" :placeholder="$t('事件类型')" clearable style="width: 150px; margin-right: 10px">
-              <el-option :label="$t('浏览')" value="view" />
-              <el-option :label="$t('点击')" value="click" />
-              <el-option :label="$t('注册')" value="register" />
-              <el-option :label="$t('购买')" value="purchase" />
-              <el-option :label="$t('分享')" value="share" />
+            <el-select v-model="filterType" ::placeholder="$t('auto.List.1.c7a0e9')" clearable style="width: 150px; margin-right: 10px">
+              <el-option ::label="$t('auto.List.2.fe9762')" value="view" />
+              <el-option ::label="$t('auto.List.3.6764dc')" value="click" />
+              <el-option ::label="$t('auto.List.4.45fdc3')" value="register" />
+              <el-option ::label="$t('auto.List.5.703a29')" value="purchase" />
+              <el-option ::label="$t('auto.List.6.e78edc')" value="share" />
             </el-select>
-            <el-date-picker v-model="dateRange" type="daterange" range-separator="至" start-placeholder="开始" end-placeholder="结束" value-format="YYYY-MM-DD" style="width: 240px" />
+            <el-date-picker v-model="dateRange" type="daterange" :range-separator="$t('auto.List.7.981cbe')" :start-placeholder="$t('auto.List.8.a3e3b8')" :end-placeholder="$t('auto.List.9.12f1d7')" value-format="YYYY-MM-DD" style="width: 240px" />
           </div>
         </div>
       </template>
       <el-table :data="filteredEvents" v-loading="loading" stripe>
-        <el-table-column prop="eventType" label="事件类型" width="120">
+        <el-table-column prop="eventType" :label="$t('auto.List.10.f974c8')" width="120">
           <template #default="{ row }">
             <el-tag :type="getEventTypeTag(row.eventType)">{{ row.eventType }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="userId" label="用户ID" width="100" />
-        <el-table-column prop="userName" label="用户" width="120" />
-        <el-table-column prop="action" label="行为" min-width="150" />
-        <el-table-column prop="target" label="目标对象" min-width="150" />
-        <el-table-column prop="source" label="来源" width="100" />
+        <el-table-column prop="userId" :label="$t('auto.List.11.30acd2')" width="100" />
+        <el-table-column prop="userName" :label="$t('auto.List.12.1fd02a')" width="120" />
+        <el-table-column prop="action" :label="$t('auto.List.13.a04961')" min-width="150" />
+        <el-table-column prop="target" :label="$t('auto.List.14.49e81f')" min-width="150" />
+        <el-table-column prop="source" :label="$t('auto.List.15.26ca20')" width="100" />
         <el-table-column prop="ip" label="IP" width="130" />
-        <el-table-column prop="createdAt" label="时间" width="180" />
-        <el-table-column label="操作" width="120" fixed="right">
+        <el-table-column prop="createdAt" :label="$t('auto.List.16.19fcb9')" width="180" />
+        <el-table-column :label="$t('auto.List.17.2b6bc0')" width="120" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" @click="viewEvent(row)">详情</el-button>
+            <el-button link type="primary" @click="viewEvent(row)">{{ $t('auto.List.29.f26225') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -91,56 +91,56 @@
       />
     </el-card>
 
-    <el-dialog v-model="dialogVisible" title="创建自定义事件" width="600px">
+    <el-dialog v-model="dialogVisible" :title="$t('auto.List.18.9c0ca8')" width="600px">
       <el-form :model="form" label-width="100px">
-        <el-form-item label="关联客户" required>
-          <el-select v-model="form.customerId" filterable placeholder="选择客户" style="width: 100%">
+        <el-form-item :label="$t('auto.List.19.52f15c')" required>
+          <el-select v-model="form.customerId" filterable :placeholder="$t('auto.List.20.ec3fb5')" style="width: 100%">
             <el-option v-for="c in customerOptions" :key="c.id" :label="(c.name || c.id) + (c.phone ? ' (' + c.phone + ')' : '')" :value="c.id" />
           </el-select>
         </el-form-item>
-        <el-form-item label="事件名称">
+        <el-form-item :label="$t('auto.List.21.e84aba')">
           <el-input v-model="form.name" />
         </el-form-item>
-        <el-form-item label="事件类型">
+        <el-form-item :label="$t('auto.List.10.f974c8')">
           <el-select v-model="form.eventType" style="width: 100%">
-            <el-option label="浏览" value="view" />
-            <el-option label="点击" value="click" />
-            <el-option label="自定义" value="custom" />
+            <el-option :label="$t('auto.List.22.9c5c5c')" value="view" />
+            <el-option :label="$t('auto.List.23.4363c1')" value="click" />
+            <el-option :label="$t('auto.List.24.f1d4ff')" value="custom" />
           </el-select>
         </el-form-item>
-        <el-form-item label="触发条件">
+        <el-form-item :label="$t('auto.List.25.65939c')">
           <el-input v-model="form.trigger" type="textarea" :rows="3" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="dialogVisible = false">取消</el-button>
-        <el-button type="primary" @click="submitForm">创建</el-button>
+        <el-button @click="dialogVisible = false">{{ $t('auto.List.30.625fb2') }}</el-button>
+        <el-button type="primary" @click="submitForm">{{ $t('auto.List.31.d9ac92') }}</el-button>
       </template>
     </el-dialog>
 
     
-    <el-dialog v-model="detailDialogVisible" title="事件详情" width="650px" :close-on-click-modal="false">
+    <el-dialog v-model="detailDialogVisible" :title="$t('auto.List.26.715f82')" width="650px" :close-on-click-modal="false">
       <template v-if="currentEvent">
         <el-descriptions :column="2" border>
-          <el-descriptions-item label="事件类型">
+          <el-descriptions-item :label="$t('auto.List.10.f974c8')">
             <el-tag :type="getEventTypeTag(currentEvent.eventType)">{{ currentEvent.eventType }}</el-tag>
           </el-descriptions-item>
-          <el-descriptions-item label="行为">{{ currentEvent.action }}</el-descriptions-item>
-          <el-descriptions-item label="用户ID">{{ currentEvent.userId }}</el-descriptions-item>
-          <el-descriptions-item label="用户名">{{ currentEvent.userName }}</el-descriptions-item>
-          <el-descriptions-item label="目标对象">{{ currentEvent.target }}</el-descriptions-item>
-          <el-descriptions-item label="来源">{{ currentEvent.source }}</el-descriptions-item>
-          <el-descriptions-item label="IP地址">{{ currentEvent.ip }}</el-descriptions-item>
-          <el-descriptions-item label="时间">{{ currentEvent.createdAt }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.13.a04961')">{{ currentEvent.action }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.11.30acd2')">{{ currentEvent.userId }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.27.819767')">{{ currentEvent.userName }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.14.49e81f')">{{ currentEvent.target }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.15.26ca20')">{{ currentEvent.source }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.28.2dc910')">{{ currentEvent.ip }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.16.19fcb9')">{{ currentEvent.createdAt }}</el-descriptions-item>
         </el-descriptions>
 
-        <el-divider content-position="left">事件数据 (JSON)</el-divider>
+        <el-divider content-position="left">{{ $t('auto.List.32.a9233d') }}</el-divider>
         <div class="event-data-json">
           <pre>{{ JSON.stringify(currentEvent, null, 2) }}</pre>
         </div>
 
         <template v-if="currentEvent.properties">
-          <el-divider content-position="left">关联属性</el-divider>
+          <el-divider content-position="left">{{ $t('auto.List.33.33aeeb') }}</el-divider>
           <el-descriptions :column="2" border>
             <el-descriptions-item
               v-for="(value, key) in currentEvent.properties"
@@ -153,7 +153,7 @@
         </template>
       </template>
       <template #footer>
-        <el-button type="primary" @click="detailDialogVisible = false">关闭</el-button>
+        <el-button type="primary" @click="detailDialogVisible = false">{{ $t('auto.List.34.b15d91') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -163,10 +163,13 @@
 import i18n from '@/i18n'
 
 import { ref, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import { Plus } from '@element-plus/icons-vue'
 import { getCustomerEventHistory, getEventStats, trackEvent, getGlobalEvents } from '@/api/customerEvent.js'
 import { getCustomerList } from '@/api/customer360.js'
+
+const { t } = useI18n()
 
 const loading = ref(false)
 const events = ref([])
@@ -234,7 +237,7 @@ const loadStats = async () => {
       eventTypes: byType.reduce((s, x) => s + (x.count || 0), 0)
     }
   } catch (e) {
-    console.error('加载统计失败', e)
+    console.error(t('auto.List.35.8522b5'), e)
   }
 }
 
@@ -244,7 +247,7 @@ const loadCustomerOptions = async () => {
     const res = await getCustomerList({ pageSize: 200 })
     customerOptions.value = res?.list || []
   } catch (e) {
-    console.error('加载客户选项失败', e)
+    console.error(t('auto.List.36.fbc9e9'), e)
   }
 }
 
@@ -256,7 +259,7 @@ const showCreateDialog = () => {
 
 const submitForm = async () => {
   if (!form.value.customerId) {
-    ElMessage.warning('请选择关联客户')
+    ElMessage.warning(t('auto.List.37.6d00ea'))
     return
   }
   await trackEvent({
@@ -265,7 +268,7 @@ const submitForm = async () => {
     event_source: 'manual',
     event_data: { name: form.value.name, trigger: form.value.trigger }
   })
-  ElMessage.success(i18n.global.t('事件创建成功'))
+  ElMessage.success(i18n.global.t(t('auto.List.38.39333c')))
   dialogVisible.value = false
   loadEvents()
 }

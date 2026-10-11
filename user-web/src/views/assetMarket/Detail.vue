@@ -1,6 +1,6 @@
 <template>
   <div class="asset-detail" v-loading="loading">
-    <el-page-header @back="$router.back()" content="资产详情" />
+    <el-page-header @back="$router.back()" :content="$t('auto.Detail.1.f508a4')" />
     <el-card v-if="detail" class="mt-16">
       <template #header>
         <div class="header">
@@ -22,11 +22,11 @@
               </div>
             </div>
           </div>
-          <el-button type="primary" @click="handlePurchase">免费试用</el-button>
+          <el-button type="primary" @click="handlePurchase">{{ $t('auto.Detail.2.248f81') }}</el-button>
         </div>
       </template>
       <p class="desc">{{ asset.description || '暂无描述' }}</p>
-      <el-divider>数据预览</el-divider>
+      <el-divider>{{ $t('auto.Detail.3.3bc470') }}</el-divider>
       <pre class="json-preview">{{ previewText }}</pre>
     </el-card>
   </div>
@@ -34,12 +34,15 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
 import { assetDetail, purchaseAsset } from '@/api/assetMarket'
 import { ElMessage, ElMessageBox } from 'element-plus'
 
 const route = useRoute()
 const router = useRouter()
+const { t } = useI18n()
+
 const loading = ref(false)
 const detail = ref(null)
 
@@ -60,7 +63,7 @@ const fetchDetail = async () => {
     const resp = await assetDetail(route.params.id)
     detail.value = resp?.data || resp
   } catch (e) {
-    ElMessage.error(e?.message || '获取资产详情失败')
+    ElMessage.error(e?.message || t('auto.Detail.4.93be62'))
   } finally {
     loading.value = false
   }
@@ -68,12 +71,12 @@ const fetchDetail = async () => {
 
 const handlePurchase = async () => {
   try {
-    await ElMessageBox.confirm(`确认免费试用「${asset.value.name}」？`, '免费试用')
+    await ElMessageBox.confirm(`确认免费试用「${asset.value.name}」？`, t('auto.Detail.2.248f81'))
   } catch {
     return
   }
   await purchaseAsset({ asset_id: asset.value.asset_id || route.params.id })
-  ElMessage.success('试用并同步成功')
+  ElMessage.success(t('auto.Detail.5.bc6d7a'))
   router.push('/asset-market/my-assets')
 }
 

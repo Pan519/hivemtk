@@ -3,7 +3,7 @@
     
     <el-card class="filter-card">
       <div class="filter-bar">
-        <el-select v-model="filter.product_id" :placeholder="$t('选择产品(可选)')" clearable style="width: 220px" @change="loadAll">
+        <el-select v-model="filter.product_id" ::placeholder="$t('auto.KnowledgeStatistics.1.c63099')" clearable style="width: 220px" @change="loadAll">
           <el-option v-for="p in productList" :key="p.id" :label="p.name" :value="p.id" />
         </el-select>
         <el-select v-model="filter.days" style="width: 120px" @change="loadAll">
@@ -44,7 +44,7 @@
           </div>
           <div class="metric-info">
             <div class="metric-value">{{ formatNumber(overview.total_tokens) }}</div>
-            <div class="metric-label">总 Token</div>
+            <div class="metric-label">{{ $t('auto.KnowledgeStatistics.20.b615f5') }}</div>
           </div>
         </el-card>
       </el-col>
@@ -71,19 +71,19 @@
           <div class="health-block">
             <div class="health-item">
               <div class="health-num success">{{ overview.index_health?.indexed_docs || 0 }}</div>
-              <div class="health-label">已索引</div>
+              <div class="health-label">{{ $t('auto.KnowledgeStatistics.21.b0d887') }}</div>
             </div>
             <div class="health-item">
               <div class="health-num warning">{{ overview.index_health?.processing_docs || 0 }}</div>
-              <div class="health-label">处理中</div>
+              <div class="health-label">{{ $t('auto.KnowledgeStatistics.22.5d459d') }}</div>
             </div>
             <div class="health-item">
               <div class="health-num info">{{ overview.index_health?.pending_docs || 0 }}</div>
-              <div class="health-label">待处理</div>
+              <div class="health-label">{{ $t('auto.KnowledgeStatistics.23.047109') }}</div>
             </div>
             <div class="health-item">
               <div class="health-num danger">{{ overview.index_health?.failed_docs || 0 }}</div>
-              <div class="health-label">失败</div>
+              <div class="health-label">{{ $t('auto.KnowledgeStatistics.24.acd5cb') }}</div>
             </div>
           </div>
           <el-progress :percentage="Math.round((overview.index_health?.index_rate || 0) * 100)" :stroke-width="14" status="success" />
@@ -93,7 +93,7 @@
       <el-col :span="12">
         <el-card>
           <template #header>
-            <span>来源类型分布</span>
+            <span>{{ $t('auto.KnowledgeStatistics.25.15332d') }}</span>
           </template>
           <div v-for="(count, type) in overview.source_type_breakdown" :key="type" class="source-bar">
             <div class="source-label">{{ sourceTypeLabel(type) }}</div>
@@ -107,12 +107,12 @@
     <el-card class="chart-card">
       <template #header>
         <div class="card-header">
-          <span>文档导入统计</span>
+          <span>{{ $t('auto.KnowledgeStatistics.26.9c7434') }}</span>
           <el-radio-group v-model="docStatsTab" size="small">
-            <el-radio-button label="trend">导入趋势</el-radio-button>
-            <el-radio-button label="source">来源分布</el-radio-button>
-            <el-radio-button label="category">分类分布</el-radio-button>
-            <el-radio-button label="top">热门文档</el-radio-button>
+            <el-radio-button label="trend">{{ $t('auto.KnowledgeStatistics.27.444247') }}</el-radio-button>
+            <el-radio-button label="source">{{ $t('auto.KnowledgeStatistics.28.26a888') }}</el-radio-button>
+            <el-radio-button label="category">{{ $t('auto.KnowledgeStatistics.29.cefbd4') }}</el-radio-button>
+            <el-radio-button label="top">{{ $t('auto.KnowledgeStatistics.30.de2cb4') }}</el-radio-button>
           </el-radio-group>
         </div>
       </template>
@@ -146,7 +146,7 @@
       </div>
 
       <div v-else-if="docStatsTab === 'top'">
-        <el-empty description="文档级检索命中统计尚未接入（检索未回写文档计数），暂无法计算热门文档" />
+        <el-empty :description="$t('auto.KnowledgeStatistics.2.cbdf35')" />
       </div>
     </el-card>
 
@@ -155,7 +155,7 @@
       <el-col :span="12">
         <el-card>
           <template #header>
-            <span>检索趋势</span>
+            <span>{{ $t('auto.KnowledgeStatistics.31.27fcb5') }}</span>
           </template>
           <div class="trend-chart">
             <div v-for="item in searchStats.search_trend || []" :key="item.day" class="trend-bar">
@@ -172,7 +172,7 @@
       <el-col :span="12">
         <el-card>
           <template #header>
-            <span>分数分布</span>
+            <span>{{ $t('auto.KnowledgeStatistics.32.1ae1d7') }}</span>
           </template>
           <div class="histogram">
             <div v-for="bucket in searchStats.score_histogram || []" :key="bucket.range" class="hist-bar">
@@ -190,13 +190,13 @@
       <el-col :span="12">
         <el-card>
           <template #header>
-            <span>热点查询 TOP20</span>
+            <span>{{ $t('auto.KnowledgeStatistics.33.ad40db') }}</span>
           </template>
           <el-table :data="searchStats.hot_queries || []" size="small" max-height="400">
             <el-table-column type="index" label="#" width="50" />
-            <el-table-column prop="query" label="查询内容" show-overflow-tooltip />
-            <el-table-column prop="count" label="次数" width="80" />
-            <el-table-column label="命中率" width="100">
+            <el-table-column prop="query" :label="$t('auto.KnowledgeStatistics.3.650e7c')" show-overflow-tooltip />
+            <el-table-column prop="count" :label="$t('auto.KnowledgeStatistics.4.f965fe')" width="80" />
+            <el-table-column :label="$t('auto.KnowledgeStatistics.5.678735')" width="100">
               <template #default="{ row }">{{ formatPercent(row.hit_rate) }}</template>
             </el-table-column>
           </el-table>
@@ -205,17 +205,17 @@
       <el-col :span="12">
         <el-card>
           <template #header>
-            <span>检索质量</span>
+            <span>{{ $t('auto.KnowledgeStatistics.34.e15268') }}</span>
           </template>
           <el-descriptions :column="2" border>
-            <el-descriptions-item label="总检索数">{{ searchStats.quality_stats?.total_searches || 0 }}</el-descriptions-item>
-            <el-descriptions-item label="命中数">{{ searchStats.quality_stats?.hit_count || 0 }}</el-descriptions-item>
-            <el-descriptions-item label="无结果数">{{ searchStats.quality_stats?.no_result_count || 0 }}</el-descriptions-item>
-            <el-descriptions-item label="命中率">{{ formatPercent(searchStats.quality_stats?.hit_rate) }}</el-descriptions-item>
-            <el-descriptions-item label="平均分">{{ (searchStats.quality_stats?.avg_score || 0).toFixed(3) }}</el-descriptions-item>
-            <el-descriptions-item label="最高分">{{ (searchStats.quality_stats?.max_score || 0).toFixed(3) }}</el-descriptions-item>
-            <el-descriptions-item label="最低分">{{ (searchStats.quality_stats?.min_score || 0).toFixed(3) }}</el-descriptions-item>
-            <el-descriptions-item label="平均耗时">{{ (searchStats.quality_stats?.avg_latency_ms || 0).toFixed(0) }} ms</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.KnowledgeStatistics.6.38a402')">{{ searchStats.quality_stats?.total_searches || 0 }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.KnowledgeStatistics.7.2f0aac')">{{ searchStats.quality_stats?.hit_count || 0 }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.KnowledgeStatistics.8.208785')">{{ searchStats.quality_stats?.no_result_count || 0 }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.KnowledgeStatistics.5.678735')">{{ formatPercent(searchStats.quality_stats?.hit_rate) }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.KnowledgeStatistics.9.356987')">{{ (searchStats.quality_stats?.avg_score || 0).toFixed(3) }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.KnowledgeStatistics.10.da21e8')">{{ (searchStats.quality_stats?.max_score || 0).toFixed(3) }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.KnowledgeStatistics.11.e31d50')">{{ (searchStats.quality_stats?.min_score || 0).toFixed(3) }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.KnowledgeStatistics.12.0d652d')">{{ (searchStats.quality_stats?.avg_latency_ms || 0).toFixed(0) }} ms</el-descriptions-item>
           </el-descriptions>
         </el-card>
       </el-col>
@@ -225,37 +225,37 @@
     <el-card class="chart-card">
       <template #header>
         <div class="card-header">
-          <span>导入审计日志</span>
+          <span>{{ $t('auto.KnowledgeStatistics.35.c4129f') }}</span>
           <div>
-            <span class="header-stat">成功率: <el-tag :type="importStats.success_rate >= 0.9 ? 'success' : 'warning'">{{ formatPercent(importStats.success_rate) }}</el-tag></span>
-            <span class="header-stat">平均耗时: <el-tag>{{ (importStats.avg_duration_ms || 0).toFixed(0) }} ms</el-tag></span>
+            <span class="header-stat">{{ $t('auto.KnowledgeStatistics.36.050d87') }}<el-tag :type="importStats.success_rate >= 0.9 ? 'success' : 'warning'">{{ formatPercent(importStats.success_rate) }}</el-tag></span>
+            <span class="header-stat">{{ $t('auto.KnowledgeStatistics.37.b278e1') }}<el-tag>{{ (importStats.avg_duration_ms || 0).toFixed(0) }} ms</el-tag></span>
           </div>
         </div>
       </template>
       <el-table :data="importStats.recent_logs || []" size="small" max-height="400">
         <el-table-column prop="id" label="ID" width="80" />
-        <el-table-column prop="source_type" label="来源" width="100">
+        <el-table-column prop="source_type" :label="$t('auto.KnowledgeStatistics.13.26ca20')" width="100">
           <template #default="{ row }">
             <el-tag size="small">{{ sourceTypeLabel(row.source_type) }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="batch_no" label="批次号" width="160" show-overflow-tooltip />
-        <el-table-column prop="operator" label="操作人" width="100" />
-        <el-table-column prop="status" label="状态" width="100">
+        <el-table-column prop="batch_no" :label="$t('auto.KnowledgeStatistics.14.51767c')" width="160" show-overflow-tooltip />
+        <el-table-column prop="operator" :label="$t('auto.KnowledgeStatistics.15.f9ac4b')" width="100" />
+        <el-table-column prop="status" :label="$t('auto.KnowledgeStatistics.16.3fea7c')" width="100">
           <template #default="{ row }">
             <el-tag :type="getPassFailStatusTagType(row.status)" size="small">
               {{ getPassFailStatusLabel(row.status) }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="duration_ms" label="耗时(ms)" width="100" />
-        <el-table-column prop="error_detail" label="错误信息" show-overflow-tooltip>
+        <el-table-column prop="duration_ms" :label="$t('auto.KnowledgeStatistics.17.7f62c0')" width="100" />
+        <el-table-column prop="error_detail" :label="$t('auto.KnowledgeStatistics.18.4604d5')" show-overflow-tooltip>
           <template #default="{ row }">
             <el-text v-if="row.error_detail" type="danger" size="small">{{ row.error_detail }}</el-text>
             <span v-else>-</span>
           </template>
         </el-table-column>
-        <el-table-column prop="created_at" label="时间" width="170">
+        <el-table-column prop="created_at" :label="$t('auto.KnowledgeStatistics.19.19fcb9')" width="170">
           <template #default="{ row }">{{ formatDate(row.created_at) }}</template>
         </el-table-column>
       </el-table>
@@ -264,31 +264,31 @@
     
     <el-card class="chart-card">
       <template #header>
-        <span>OpenAPI 数据源同步状态</span>
+        <span>{{ $t('auto.KnowledgeStatistics.38.d735a1') }}</span>
       </template>
       <el-row :gutter="16" class="openapi-stats">
         <el-col :span="6">
           <div class="openapi-stat-item">
             <div class="openapi-num">{{ openapiStats.total_sources || 0 }}</div>
-            <div class="openapi-label">数据源总数</div>
+            <div class="openapi-label">{{ $t('auto.KnowledgeStatistics.39.e67b65') }}</div>
           </div>
         </el-col>
         <el-col :span="6">
           <div class="openapi-stat-item">
             <div class="openapi-num success">{{ openapiStats.enabled_sources || 0 }}</div>
-            <div class="openapi-label">已启用</div>
+            <div class="openapi-label">{{ $t('auto.KnowledgeStatistics.40.53ace4') }}</div>
           </div>
         </el-col>
         <el-col :span="6">
           <div class="openapi-stat-item">
             <div class="openapi-num danger">{{ openapiStats.failed_sources || 0 }}</div>
-            <div class="openapi-label">同步失败</div>
+            <div class="openapi-label">{{ $t('auto.KnowledgeStatistics.41.d61036') }}</div>
           </div>
         </el-col>
         <el-col :span="6">
           <div class="openapi-stat-item">
             <div class="openapi-num primary">{{ formatNumber(openapiStats.total_synced) }}</div>
-            <div class="openapi-label">累计同步</div>
+            <div class="openapi-label">{{ $t('auto.KnowledgeStatistics.42.a53731') }}</div>
           </div>
         </el-col>
       </el-row>
@@ -300,6 +300,7 @@
 import i18n from '@/i18n'
 
 import { ref, reactive, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { Document, Files, Coin, Search, Refresh } from '@element-plus/icons-vue'
 import { knowledgeAPI } from '@/api/knowledge'
 import { ragProductConfigAPI } from '@/api/ragProductConfig'
@@ -308,6 +309,8 @@ import { PASS_FAIL_STATUS, getStatusLabel, getStatusTagType } from '@/constants/
 
 const getPassFailStatusLabel = (s) => getStatusLabel(s, PASS_FAIL_STATUS);
 const getPassFailStatusTagType = (s) => getStatusTagType(s, PASS_FAIL_STATUS)
+
+const { t } = useI18n()
 
 const productList = ref([])
 const overview = ref({})
@@ -336,7 +339,7 @@ const loadProducts = async () => {
       productList.value = res.items
     }
   } catch (e) {
-    console.error('加载产品列表失败:', e)
+    console.error(t('auto.KnowledgeStatistics.43.4c46f3'), e)
   }
 }
 
@@ -345,7 +348,7 @@ const loadOverview = async () => {
     const res = await knowledgeAPI.getOverviewStats({ product_id: filter.product_id })
     if (res) overview.value = res
   } catch (e) {
-    console.error('加载总览失败:', e)
+    console.error(t('auto.KnowledgeStatistics.44.3af525'), e)
   }
 }
 
@@ -354,7 +357,7 @@ const loadDocumentStats = async () => {
     const res = await knowledgeAPI.getDocumentStats({ product_id: filter.product_id, days: filter.days })
     if (res) documentStats.value = res
   } catch (e) {
-    console.error('加载文档统计失败:', e)
+    console.error(t('auto.KnowledgeStatistics.45.854510'), e)
   }
 }
 
@@ -363,7 +366,7 @@ const loadSearchStats = async () => {
     const res = await knowledgeAPI.getSearchStats({ product_id: filter.product_id, days: filter.days })
     if (res) searchStats.value = res
   } catch (e) {
-    console.error('加载检索统计失败:', e)
+    console.error(t('auto.KnowledgeStatistics.46.6f1114'), e)
   }
 }
 
@@ -372,7 +375,7 @@ const loadImportStats = async () => {
     const res = await knowledgeAPI.getImportStats({ product_id: filter.product_id, days: filter.days })
     if (res) importStats.value = res
   } catch (e) {
-    console.error('加载导入统计失败:', e)
+    console.error(t('auto.KnowledgeStatistics.47.7a1dec'), e)
   }
 }
 
@@ -381,7 +384,7 @@ const loadOpenAPIStats = async () => {
     const res = await knowledgeAPI.getOpenAPIStats({ product_id: filter.product_id })
     if (res) openapiStats.value = res
   } catch (e) {
-    console.error('加载 OpenAPI 统计失败:', e)
+    console.error(t('auto.KnowledgeStatistics.48.4b2c67'), e)
   }
 }
 

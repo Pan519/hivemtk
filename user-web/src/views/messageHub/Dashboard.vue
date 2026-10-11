@@ -7,30 +7,30 @@
     <el-row :gutter="16" class="stats-row">
       <el-col :span="6">
         <el-card class="stat-card">
-          <div class="stat-label">总吞吐</div>
+          <div class="stat-label">{{ $t('auto.Dashboard.10.059c43') }}</div>
           <div class="stat-value">{{ stats.total }}</div>
           <div class="stat-sub">{{ rangeLabel }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="stat-card success">
-          <div class="stat-label">发送</div>
+          <div class="stat-label">{{ $t('auto.Dashboard.11.1535fc') }}</div>
           <div class="stat-value">{{ stats.outbound }}</div>
-          <div class="stat-sub">outbound 方向（同窗口）</div>
+          <div class="stat-sub">{{ $t('auto.Dashboard.12.2d24a4') }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="stat-card warning">
-          <div class="stat-label">接收</div>
+          <div class="stat-label">{{ $t('auto.Dashboard.13.15e923') }}</div>
           <div class="stat-value">{{ stats.inbound }}</div>
-          <div class="stat-sub">inbound 方向（同窗口）</div>
+          <div class="stat-sub">{{ $t('auto.Dashboard.14.6e06e4') }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="stat-card danger">
-          <div class="stat-label">未读</div>
+          <div class="stat-label">{{ $t('auto.Dashboard.15.894a10') }}</div>
           <div class="stat-value">{{ stats.unread }}</div>
-          <div class="stat-sub">同窗口内未读，非全量积压</div>
+          <div class="stat-sub">{{ $t('auto.Dashboard.16.cf15b8') }}</div>
         </el-card>
       </el-col>
     </el-row>
@@ -54,9 +54,9 @@
             <span>方向与消息类型（{{ rangeLabel }}）</span>
           </template>
           <el-table :data="distributionRows" class="dist-table" size="small">
-            <el-table-column prop="dim" label="维度" width="90" />
-            <el-table-column prop="label" label="取值" />
-            <el-table-column prop="count" label="条数" width="80" align="right" />
+            <el-table-column prop="dim" :label="$t('auto.Dashboard.1.f29c54')" width="90" />
+            <el-table-column prop="label" :label="$t('auto.Dashboard.2.adf91a')" />
+            <el-table-column prop="count" :label="$t('auto.Dashboard.3.a6f7f1')" width="80" align="right" />
           </el-table>
         </el-card>
       </el-col>
@@ -79,19 +79,19 @@
       </template>
       <el-table :data="dlqList" v-loading="loading" size="small">
         <el-table-column prop="id" label="ID" width="80" />
-        <el-table-column label="渠道" width="120">
+        <el-table-column :label="$t('auto.Dashboard.4.ebee05')" width="120">
           <template #default="{ row }">{{ getChannelLabel(row.platform) }}</template>
         </el-table-column>
-        <el-table-column label="方向" width="100">
+        <el-table-column :label="$t('auto.Dashboard.5.a465db')" width="100">
           <template #default="{ row }">{{ directionLabel(row.direction) }}</template>
         </el-table-column>
-        <el-table-column prop="retries" label="重试次数" width="100" />
-        <el-table-column prop="error" label="错误" min-width="180" show-overflow-tooltip />
-        <el-table-column prop="failedAt" label="失败时间" width="180" />
-        <el-table-column label="操作" width="120" fixed="right">
+        <el-table-column prop="retries" :label="$t('auto.Dashboard.6.d5f413')" width="100" />
+        <el-table-column prop="error" :label="$t('auto.Dashboard.7.7030ff')" min-width="180" show-overflow-tooltip />
+        <el-table-column prop="failedAt" :label="$t('auto.Dashboard.8.4a65dc')" width="180" />
+        <el-table-column :label="$t('auto.Dashboard.9.2b6bc0')" width="120" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" @click="retryOne(row)">重试</el-button>
-            <el-button link type="danger" @click="dropOne(row)">丢弃</el-button>
+            <el-button link type="primary" @click="retryOne(row)">{{ $t('auto.Dashboard.17.132c5c') }}</el-button>
+            <el-button link type="danger" @click="dropOne(row)">{{ $t('auto.Dashboard.18.b0ef90') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -101,6 +101,7 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import { safeInit, safeDispose } from '@/utils/echarts'
 import { http } from '@/utils/request'
@@ -110,6 +111,8 @@ import { getChannelLabel } from '@/constants/channel'
 // 免得"最近 1 小时"这句文案和实际发出去的时间界各说各话。
 const WINDOW_HOURS = 1
 const REFRESH_MS = 30000
+
+const { t } = useI18n()
 
 const stats = ref({
   total: 0,
@@ -132,22 +135,22 @@ let chart = null
 
 const rangeLabel = `最近 ${WINDOW_HOURS} 小时`
 const refreshSeconds = REFRESH_MS / 1000
-const emptyChartHint = '该窗口内没有消息，画不出渠道分布；窗口外仍有积压时看上面的「近 24 小时累计」'
+const emptyChartHint = t('auto.Dashboard.19.e785be')
 
 const DIRECTION_LABELS = {
-  inbound: '接收',
-  outbound: '发送'
+  inbound: t('auto.Dashboard.13.15e923'),
+  outbound: t('auto.Dashboard.11.1535fc')
 }
 const MSG_TYPE_LABELS = {
-  text: '文本',
-  image: '图片',
-  file: '文件',
-  audio: '语音',
-  video: '视频',
-  link: '链接',
-  card: '卡片',
-  location: '位置',
-  event: '会话事件'
+  text: t('auto.Dashboard.20.97d076'),
+  image: t('auto.Dashboard.21.20def7'),
+  file: t('auto.Dashboard.22.2a0c47'),
+  audio: t('auto.Dashboard.23.48df35'),
+  video: t('auto.Dashboard.24.7fcf42'),
+  link: t('auto.Dashboard.25.bfe68d'),
+  card: t('auto.Dashboard.26.d87f21'),
+  location: t('auto.Dashboard.27.d4d2a6'),
+  event: t('auto.Dashboard.28.722829')
 }
 
 const directionLabel = (value) => DIRECTION_LABELS[value] || value
@@ -166,13 +169,13 @@ const hasPlatformRows = computed(() => platformRows.value.length > 0)
 
 const distributionRows = computed(() => [
   ...toRows(stats.value.by_direction).map((r) => ({
-    dim: '方向',
+    dim: t('auto.Dashboard.5.a465db'),
     key: r.key,
     label: directionLabel(r.key),
     count: r.count
   })),
   ...toRows(stats.value.by_msg_type).map((r) => ({
-    dim: '消息类型',
+    dim: t('auto.Dashboard.29.6d0071'),
     key: r.key,
     label: MSG_TYPE_LABELS[r.key] || r.key,
     count: r.count
@@ -194,10 +197,10 @@ function renderChart() {
         data: rows.map((r) => getChannelLabel(r.key)),
         axisLabel: { interval: 0, rotate: rows.length > 6 ? 30 : 0 }
       },
-      yAxis: { type: 'value', name: '条数', minInterval: 1 },
+      yAxis: { type: 'value', name: t('auto.Dashboard.3.a6f7f1'), minInterval: 1 },
       series: [
         {
-          name: '消息条数',
+          name: t('auto.Dashboard.30.b36585'),
           type: 'bar',
           barMaxWidth: 36,
           data: rows.map((r) => r.count),
@@ -224,13 +227,13 @@ async function load() {
     if (s.status === 'fulfilled' && s.value) {
       stats.value = { ...stats.value, ...s.value }
     } else {
-      failures.push('统计')
+      failures.push(t('auto.Dashboard.31.d7656a'))
     }
     if (dlq.status === 'fulfilled') {
       dlqList.value = Array.isArray(dlq.value?.list) ? dlq.value.list : []
       dlqTotal.value = Number(dlq.value?.total) || 0
     } else {
-      failures.push('死信队列')
+      failures.push(t('auto.Dashboard.32.3dead6'))
     }
     // 读不到就把"读到的是上一次的数"说在明面上：静默保留旧值看起来就像当前读数。
     loadError.value = failures.length
@@ -244,7 +247,7 @@ async function load() {
 
 function failReason(...settled) {
   const rejected = settled.find((r) => r && r.status === 'rejected')
-  return rejected?.reason?.message || '请求失败'
+  return rejected?.reason?.message || t('auto.Dashboard.33.f50bf4')
 }
 
 async function batchRetry() {

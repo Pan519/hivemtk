@@ -3,8 +3,8 @@
     <el-card class="header-card" shadow="never">
       <div class="header-content">
         <div>
-          <h2>客服 Widget 安装引导</h2>
-          <p class="subtitle">将客服浮标嵌入到第三方网站 · 复制代码粘贴到目标网站 &lt;/body&gt; 之前</p>
+          <h2>{{ $t('auto.InstallGuide.6.60657a') }}</h2>
+          <p class="subtitle">{{ $t('auto.InstallGuide.7.dbba14') }}</p>
         </div>
         <div class="header-actions">
           <el-button @click="$router.back()">
@@ -24,9 +24,9 @@
       <el-col :xs="24" :md="14">
         <el-card shadow="never">
           <template #header>
-            <span>第 1 步：选择渠道</span>
+            <span>{{ $t('auto.InstallGuide.8.db7d4e') }}</span>
           </template>
-          <el-empty v-if="channels.length === 0" description="暂无可用渠道，请先在 [客服渠道] 创建">
+          <el-empty v-if="channels.length === 0" :description="$t('auto.InstallGuide.1.cff997')">
             <el-button type="primary" @click="$router.push({ name: 'ChatChannelCreate' })">
               前往创建
             </el-button>
@@ -42,8 +42,8 @@
               <div class="channel-info">
                 <div class="channel-name">
                   {{ ch.channel_name }}
-                  <el-tag v-if="ch.status === 'active'" type="success" size="small">启用</el-tag>
-                  <el-tag v-else type="info" size="small">禁用</el-tag>
+                  <el-tag v-if="ch.status === 'active'" type="success" size="small">{{ $t('auto.InstallGuide.9.7854b5') }}</el-tag>
+                  <el-tag v-else type="info" size="small">{{ $t('auto.InstallGuide.10.710ad0') }}</el-tag>
                 </div>
                 <div class="channel-meta">
                   AppKey: <code>{{ ch.app_key }}</code>
@@ -56,7 +56,7 @@
         <el-card v-if="selected" shadow="never" class="code-card">
           <template #header>
             <div class="code-header">
-              <span>第 2 步：复制嵌入代码</span>
+              <span>{{ $t('auto.InstallGuide.11.c178a5') }}</span>
               <el-button link type="primary" @click="copyEmbed">
                 <el-icon><CopyDocument /></el-icon>
                 复制全部
@@ -72,15 +72,15 @@
 
         <el-card v-if="selected" shadow="never" class="code-card">
           <template #header>
-            <span>第 3 步：白名单 Origin 配置</span>
+            <span>{{ $t('auto.InstallGuide.12.e67c78') }}</span>
           </template>
           <el-form label-width="120px">
-            <el-form-item label="允许的来源">
+            <el-form-item :label="$t('auto.InstallGuide.2.acb354')">
               <el-input
                 v-model="originInput"
                 type="textarea"
                 :rows="4"
-                placeholder="每行一个 origin，例如：https://www.example.com"
+                :placeholder="$t('auto.InstallGuide.3.3f312c')"
               />
             </el-form-item>
             <el-form-item>
@@ -90,7 +90,7 @@
               <el-button @click="originInput = originsToText(selected?.allowed_origins)">
                 重置
               </el-button>
-              <span class="hint">只有白名单内的来源才能加载 Widget，防滥用</span>
+              <span class="hint">{{ $t('auto.InstallGuide.13.4601a6') }}</span>
             </el-form-item>
           </el-form>
         </el-card>
@@ -100,7 +100,7 @@
       <el-col :xs="24" :md="10">
         <el-card shadow="never" class="preview-card">
           <template #header>
-            <span>实时预览</span>
+            <span>{{ $t('auto.InstallGuide.14.2f586b') }}</span>
           </template>
           <div class="preview-frame">
             <div class="preview-mock-browser">
@@ -111,16 +111,16 @@
                 <span class="url">https://your-website.com</span>
               </div>
               <div class="browser-content">
-                <p class="mock-line">您的网站内容</p>
-                <p class="mock-line">访客在此浏览...</p>
-                <p class="mock-line">点击右下角浮标发起对话</p>
+                <p class="mock-line">{{ $t('auto.InstallGuide.15.3d8659') }}</p>
+                <p class="mock-line">{{ $t('auto.InstallGuide.16.7bd993') }}</p>
+                <p class="mock-line">{{ $t('auto.InstallGuide.17.a5c837') }}</p>
                 
                 <div
                   v-if="selected"
                   class="widget-button"
                   role="button"
                   tabindex="0"
-                  aria-label="切换客服挂件预览"
+                  :aria-label="$t('auto.InstallGuide.4.e11be7')"
                   :class="['pos-' + (selected.widget_position || 'bottom-right')]"
                   :style="{ backgroundColor: selected.widget_color || '#4F46E5' }"
                   @click="previewOpen = !previewOpen"
@@ -136,10 +136,10 @@
                     <el-icon class="close-btn" @click="previewOpen = false"><Close /></el-icon>
                   </div>
                   <div class="window-body">
-                    <p>您好，请问有什么可以帮您？</p>
+                    <p>{{ $t('auto.InstallGuide.18.6fef08') }}</p>
                   </div>
                   <div class="window-input">
-                    <el-input v-model="previewInput" placeholder="输入消息..." size="small" />
+                    <el-input v-model="previewInput" :placeholder="$t('auto.InstallGuide.5.17533c')" size="small" />
                   </div>
                 </div>
               </div>
@@ -149,7 +149,7 @@
 
         <el-card shadow="never" class="test-card">
           <template #header>
-            <span>第 4 步：测试连接</span>
+            <span>{{ $t('auto.InstallGuide.19.46f4c0') }}</span>
           </template>
           <el-button type="primary" :loading="testing" @click="onTestConnection">
             <el-icon><Connection /></el-icon>
@@ -169,6 +169,7 @@
 import i18n from '@/i18n'
 
 import { ref, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import {
@@ -181,6 +182,8 @@ import { http } from '@/utils/request'
 const router = useRouter()
 void Back; void Refresh; void CopyDocument; void ChatDotRound
 void Close; void Connection; void CircleCheck; void CircleClose
+
+const { t } = useI18n()
 
 const loading = ref(false)
 const channels = ref([])
@@ -230,7 +233,7 @@ const loadChannels = async () => {
       onChannelChange(channels.value[0].channel_id)
     }
   } catch (err) {
-    ElMessage.error('加载失败：' + (err?.message || err))
+    ElMessage.error(t('auto.InstallGuide.20.c4fa9b') + (err?.message || err))
   } finally {
     loading.value = false
   }
@@ -244,7 +247,7 @@ const onChannelChange = async (channelId) => {
     originInput.value = originsToText(res?.allowed_origins)
     testResult.value = null
   } catch (err) {
-    ElMessage.error('加载渠道失败：' + (err?.message || err))
+    ElMessage.error(t('auto.InstallGuide.21.52397f') + (err?.message || err))
   }
 }
 
@@ -252,9 +255,9 @@ const copyEmbed = async () => {
   if (!embedSnippet.value) return
   try {
     await navigator.clipboard.writeText(embedSnippet.value)
-    ElMessage.success(i18n.global.t('已复制到剪贴板'))
+    ElMessage.success(i18n.global.t(t('auto.InstallGuide.22.4fb42e')))
   } catch {
-    ElMessage.error(i18n.global.t('复制失败，请手动复制'))
+    ElMessage.error(i18n.global.t(t('auto.InstallGuide.23.41da1c')))
   }
 }
 
@@ -267,16 +270,16 @@ const onSaveOrigins = async () => {
   try {
     await ElMessageBox.confirm(
       `将白名单更新为 ${origins.length} 个 origin？`,
-      '保存白名单',
+      t('auto.InstallGuide.24.58030d'),
       { type: 'warning' }
     )
     originSaving.value = true
     await updateChannel(selected.value.channel_id, { allowed_origins: origins })
-    ElMessage.success(i18n.global.t('保存成功'))
+    ElMessage.success(i18n.global.t(t('auto.InstallGuide.25.3b1083')))
     await onChannelChange(selected.value.channel_id)
   } catch (err) {
     if (err !== 'cancel') {
-      ElMessage.error('保存失败：' + (err?.message || err))
+      ElMessage.error(t('auto.InstallGuide.26.78d235') + (err?.message || err))
     }
   } finally {
     originSaving.value = false
@@ -292,10 +295,10 @@ const onTestConnection = async () => {
     if (resp && resp.channel_id) {
       testResult.value = { ok: true, message: `连接成功 · ${resp.channel_name || ''}` }
     } else {
-      testResult.value = { ok: false, message: i18n.global.t('连接成功但返回数据异常') }
+      testResult.value = { ok: false, message: i18n.global.t(t('auto.InstallGuide.27.4857b2')) }
     }
   } catch (err) {
-    testResult.value = { ok: false, message: i18n.global.t('连接失败：') + (err?.message || err) }
+    testResult.value = { ok: false, message: i18n.global.t(t('auto.InstallGuide.28.4d5cd5')) + (err?.message || err) }
   } finally {
     testing.value = false
   }

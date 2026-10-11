@@ -5,15 +5,15 @@
       
       <el-col :xs="24" :lg="10">
         <el-card shadow="never" class="form-card">
-          <template #header><span class="card-title">生成配置</span></template>
+          <template #header><span class="card-title">{{ $t('auto.ContentCreation.13.febd91') }}</span></template>
           <el-form :model="form" label-width="92px" class="gen-form">
-            <el-form-item label="关键词">
-              <el-input v-model="form.keyword" placeholder="如：中小企业 CRM 推荐" clearable />
+            <el-form-item :label="$t('auto.ContentCreation.1.9699a5')">
+              <el-input v-model="form.keyword" :placeholder="$t('auto.ContentCreation.2.44e001')" clearable />
             </el-form-item>
-            <el-form-item label="品牌名称">
-              <el-input v-model="form.brand_name" placeholder="如：hivemtk" clearable />
+            <el-form-item :label="$t('auto.ContentCreation.3.4e8713')">
+              <el-input v-model="form.brand_name" :placeholder="$t('auto.ContentCreation.4.a08eb5')" clearable />
             </el-form-item>
-            <el-form-item label="核心优势">
+            <el-form-item :label="$t('auto.ContentCreation.5.4e4d6f')">
               <div class="tags-input">
                 <el-tag
                   v-for="(tag, i) in form.advantages"
@@ -31,28 +31,28 @@
                   @keyup.enter="addAdv"
                   @blur="onBlurAddAdv"
                 />
-                <el-button v-else size="small" class="adv-add" @click="showAdvInput">+ 优势</el-button>
+                <el-button v-else size="small" class="adv-add" @click="showAdvInput">{{ $t('auto.ContentCreation.14.ad725b') }}</el-button>
               </div>
             </el-form-item>
-            <el-form-item label="生成模型">
+            <el-form-item :label="$t('auto.ContentCreation.6.5ed9c8')">
               <el-select v-model="form.model" style="width: 100%">
                 <el-option v-for="m in models" :key="m.value" :label="m.label" :value="m.value" />
               </el-select>
             </el-form-item>
-            <el-form-item label="字数">
+            <el-form-item :label="$t('auto.ContentCreation.7.7b5770')">
               <el-input-number v-model="form.word_count" :min="200" :max="3000" :step="100" style="width: 100%" />
             </el-form-item>
-            <el-form-item label="文风">
+            <el-form-item :label="$t('auto.ContentCreation.8.c50632')">
               <el-select v-model="form.style" style="width: 100%">
-                <el-option label="专业严谨" value="professional" />
-                <el-option label="通俗易懂" value="popular" />
-                <el-option label="口语化" value="casual" />
+                <el-option :label="$t('auto.ContentCreation.9.e7d798')" value="professional" />
+                <el-option :label="$t('auto.ContentCreation.10.c8da06')" value="popular" />
+                <el-option :label="$t('auto.ContentCreation.11.506aec')" value="casual" />
               </el-select>
             </el-form-item>
             <el-form-item>
               <el-button type="primary" :loading="generating" @click="handleGenerate">
                 <el-icon><EditPen /></el-icon>
-                <span>生成内容</span>
+                <span>{{ $t('auto.ContentCreation.15.12e8dc') }}</span>
               </el-button>
             </el-form-item>
           </el-form>
@@ -64,22 +64,22 @@
         <el-card shadow="never" class="result-card">
           <template #header>
             <div class="card-header">
-              <span class="card-title">生成结果</span>
+              <span class="card-title">{{ $t('auto.ContentCreation.16.7951b7') }}</span>
               <el-button v-if="generatedContent" text type="primary" @click="copyContent">
-                <el-icon><DocumentCopy /></el-icon><span>复制</span>
+                <el-icon><DocumentCopy /></el-icon><span>{{ $t('auto.ContentCreation.17.79d3ab') }}</span>
               </el-button>
             </div>
           </template>
 
           <div v-loading="generating" class="result-body">
-            <el-empty v-if="!generatedContent && !generating" description="尚未生成内容" />
+            <el-empty v-if="!generatedContent && !generating" :description="$t('auto.ContentCreation.12.d4d3d6')" />
             <div v-else class="content-text">{{ generatedContent }}</div>
           </div>
 
           <div v-if="generatedContent" class="score-section">
             <div class="score-actions">
               <el-button type="success" :loading="scoring" @click="handleScore">
-                <el-icon><DataAnalysis /></el-icon><span>内容评分</span>
+                <el-icon><DataAnalysis /></el-icon><span>{{ $t('auto.ContentCreation.18.0cb893') }}</span>
               </el-button>
             </div>
 
@@ -87,27 +87,27 @@
               <div class="score-grid">
                 <div class="score-item total">
                   <div class="score-value">{{ score.scores?.total ?? '—' }}</div>
-                  <div class="score-label">总分</div>
+                  <div class="score-label">{{ $t('auto.ContentCreation.19.8a74af') }}</div>
                 </div>
                 <div class="score-item">
                   <div class="score-value">{{ score.scores?.structure ?? '—' }}</div>
-                  <div class="score-label">结构化</div>
+                  <div class="score-label">{{ $t('auto.ContentCreation.20.9fda5b') }}</div>
                 </div>
                 <div class="score-item">
                   <div class="score-value">{{ score.scores?.brand_mention ?? '—' }}</div>
-                  <div class="score-label">品牌提及</div>
+                  <div class="score-label">{{ $t('auto.ContentCreation.21.0a01f6') }}</div>
                 </div>
                 <div class="score-item">
                   <div class="score-value">{{ score.scores?.authority ?? '—' }}</div>
-                  <div class="score-label">权威性</div>
+                  <div class="score-label">{{ $t('auto.ContentCreation.22.2d8c57') }}</div>
                 </div>
                 <div class="score-item">
                   <div class="score-value">{{ score.scores?.citations ?? '—' }}</div>
-                  <div class="score-label">可引用性</div>
+                  <div class="score-label">{{ $t('auto.ContentCreation.23.665924') }}</div>
                 </div>
               </div>
               <div v-if="score.improvements?.length" class="score-suggest">
-                <div class="suggest-title">优化建议</div>
+                <div class="suggest-title">{{ $t('auto.ContentCreation.24.6e4d61') }}</div>
                 <ul>
                   <li v-for="(s, i) in score.improvements" :key="i">{{ s }}</li>
                 </ul>
@@ -122,10 +122,13 @@
 
 <script setup>
 import { ref, reactive, nextTick, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import { EditPen, DocumentCopy, DataAnalysis } from '@element-plus/icons-vue'
 import { geoApi } from '@/api/geo'
 import { http } from '@/utils/request'
+
+const { t } = useI18n()
 
 const models = ref([])
 
@@ -182,7 +185,7 @@ const onBlurAddAdv = () => setTimeout(addAdv, 100);
 
 const handleGenerate = async () => {
   if (!form.keyword.trim() || !form.brand_name.trim()) {
-    ElMessage.warning('请填写关键词与品牌名称')
+    ElMessage.warning(t('auto.ContentCreation.25.7fae28'))
     return
   }
   generating.value = true
@@ -198,9 +201,9 @@ const handleGenerate = async () => {
       style: form.style
     })
     generatedContent.value = res?.content || res?.article || (typeof res === 'string' ? res : '')
-    ElMessage.success('内容生成完成')
+    ElMessage.success(t('auto.ContentCreation.26.8be38c'))
   } catch (e) {
-    ElMessage.error(e.message || '内容生成失败')
+    ElMessage.error(e.message || t('auto.ContentCreation.27.d355c5'))
   } finally {
     generating.value = false
   }
@@ -216,9 +219,9 @@ const handleScore = async () => {
       keyword: form.keyword
     })
     score.value = res || null
-    ElMessage.success('评分完成')
+    ElMessage.success(t('auto.ContentCreation.28.4ea68d'))
   } catch (e) {
-    ElMessage.error(e.message || '内容评分失败')
+    ElMessage.error(e.message || t('auto.ContentCreation.29.bf54e4'))
   } finally {
     scoring.value = false
   }
@@ -227,9 +230,9 @@ const handleScore = async () => {
 const copyContent = async () => {
   try {
     await navigator.clipboard.writeText(generatedContent.value)
-    ElMessage.success('已复制到剪贴板')
+    ElMessage.success(t('auto.ContentCreation.30.4fb42e'))
   } catch {
-    ElMessage.error('复制失败，请手动选择文本复制')
+    ElMessage.error(t('auto.ContentCreation.31.9b2d71'))
   }
 }
 </script>

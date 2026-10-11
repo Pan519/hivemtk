@@ -3,20 +3,20 @@
     <el-card class="box-card">
       <template #header>
         <div class="card-header">
-          <span>TikTok卡片统计</span>
+          <span>{{ $t('auto.Stats.13.16505b') }}</span>
           <div class="header-actions">
             <el-date-picker
               v-model="dateRange"
               type="daterange"
-              range-separator="至"
-              start-placeholder="开始日期"
-              end-placeholder="结束日期"
+              :range-separator="$t('auto.Stats.1.981cbe')"
+              :start-placeholder="$t('auto.Stats.2.b44c0f')"
+              :end-placeholder="$t('auto.Stats.3.1d468b')"
               @change="handleDateChange"
             />
-            <el-select v-model="groupBy" :placeholder="$t('分组方式')" @change="handleGroupByChange">
-              <el-option :label="$t('按天')" value="day" />
-              <el-option :label="$t('按周')" value="week" />
-              <el-option :label="$t('按月')" value="month" />
+            <el-select v-model="groupBy" ::placeholder="$t('auto.Stats.4.bf8db0')" @change="handleGroupByChange">
+              <el-option ::label="$t('auto.Stats.5.4eb3b0')" value="day" />
+              <el-option ::label="$t('auto.Stats.6.787456')" value="week" />
+              <el-option ::label="$t('auto.Stats.7.31019b')" value="month" />
             </el-select>
             <el-button type="primary" @click="refreshData">{{ $t('刷新') }}</el-button>
           </div>
@@ -30,7 +30,7 @@
             <el-card class="stats-card">
               <div class="stats-item">
                 <div class="stats-value">{{ overallStats.total_cards || 0 }}</div>
-                <div class="stats-label">总卡片数</div>
+                <div class="stats-label">{{ $t('auto.Stats.14.8135cb') }}</div>
               </div>
             </el-card>
           </el-col>
@@ -38,7 +38,7 @@
             <el-card class="stats-card">
               <div class="stats-item">
                 <div class="stats-value">{{ overallStats.active_cards || 0 }}</div>
-                <div class="stats-label">激活卡片数</div>
+                <div class="stats-label">{{ $t('auto.Stats.15.56601a') }}</div>
               </div>
             </el-card>
           </el-col>
@@ -46,7 +46,7 @@
             <el-card class="stats-card">
               <div class="stats-item">
                 <div class="stats-value">{{ formatNumber(overallStats.total_views) }}</div>
-                <div class="stats-label">总浏览量</div>
+                <div class="stats-label">{{ $t('auto.Stats.16.7e6ff5') }}</div>
               </div>
             </el-card>
           </el-col>
@@ -60,7 +60,7 @@
             <el-card>
               <template #header>
                 <div class="card-header">
-                  <span>访问趋势</span>
+                  <span>{{ $t('auto.Stats.17.8205ea') }}</span>
                 </div>
               </template>
               <div ref="visitTrendChart" class="chart-container"></div>
@@ -76,17 +76,17 @@
             <el-card>
               <template #header>
                 <div class="card-header">
-                  <span>热门卡片</span>
+                  <span>{{ $t('auto.Stats.18.575437') }}</span>
                 </div>
               </template>
               <el-table :data="overallStats.top_cards" style="width: 100%">
-                <el-table-column prop="title" label="卡片标题" />
-                <el-table-column prop="viewCount" label="浏览量">
+                <el-table-column prop="title" :label="$t('auto.Stats.8.3944f2')" />
+                <el-table-column prop="viewCount" :label="$t('auto.Stats.9.88bc4d')">
                   <template #default="scope">
                     {{ formatNumber(scope.row.viewCount) }}
                   </template>
                 </el-table-column>
-                <el-table-column label="操作" width="100">
+                <el-table-column :label="$t('auto.Stats.10.2b6bc0')" width="100">
                   <template #default="scope">
                     <el-button size="small" type="primary" @click="goToCardStats(scope.row.id)">
                       统计
@@ -100,20 +100,20 @@
             <el-card>
               <template #header>
                 <div class="card-header">
-                  <span>最近活动</span>
+                  <span>{{ $t('auto.Stats.19.73378a') }}</span>
                 </div>
               </template>
               <el-table :data="overallStats.recent_activity" style="width: 100%">
-                <el-table-column prop="cardTitle" label="卡片标题" />
-                <el-table-column prop="action" label="操作">
+                <el-table-column prop="cardTitle" :label="$t('auto.Stats.8.3944f2')" />
+                <el-table-column prop="action" :label="$t('auto.Stats.10.2b6bc0')">
                   <template #default="scope">
                     <el-tag :type="getActionType(scope.row.action)">
                       {{ getActionText(scope.row.action) }}
                     </el-tag>
                   </template>
                 </el-table-column>
-                <el-table-column prop="username" label="用户" />
-                <el-table-column prop="createdAt" label="时间">
+                <el-table-column prop="username" :label="$t('auto.Stats.11.1fd02a')" />
+                <el-table-column prop="createdAt" :label="$t('auto.Stats.12.19fcb9')">
                   <template #default="scope">
                     {{ formatTime(scope.row.createdAt) }}
                   </template>
@@ -131,6 +131,7 @@
 import i18n from '@/i18n'
 
 import { ref, reactive, onMounted, nextTick } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import * as echarts from 'echarts'
@@ -138,6 +139,8 @@ import { safeInit } from '@/utils/echarts'
 import { getTikTokCardOverallStats } from '@/api/tiktokCard'
 
 const router = useRouter();
+
+const { t } = useI18n()
 
 const loading = ref(false);
 const dateRange = ref([])
@@ -181,7 +184,7 @@ const fetchOverallStats = async () => {
       updateCharts()
     });
   } catch (error) {
-    ElMessage.error(i18n.global.t('获取统计数据失败'))
+    ElMessage.error(i18n.global.t(t('auto.Stats.20.063dc7')))
     console.error(error)
   } finally {
     loading.value = false
@@ -222,7 +225,7 @@ const updateCharts = () => {
         type: 'value'
       },
       series: [{
-        name: '浏览量',
+        name: t('auto.Stats.9.88bc4d'),
         type: 'line',
         data: views,
         smooth: true,
@@ -268,11 +271,11 @@ const formatTime = (timeStr) => {
     const hours = Math.floor(diff / (1000 * 60 * 60))
     if (hours === 0) {
       const minutes = Math.floor(diff / (1000 * 60))
-      return minutes <= 1 ? '刚刚' : `${minutes}分钟前`
+      return minutes <= 1 ? t('auto.Stats.21.4181f7') : `${minutes}分钟前`
     }
     return `${hours}小时前`
   } else if (days === 1) {
-    return '昨天'
+    return t('auto.Stats.22.2f8d6f')
   } else if (days < 7) {
     return `${days}天前`
   } else {
@@ -291,7 +294,7 @@ const getActionType = (action) => {
 
 const getActionText = (action) => {
   const texts = {
-    view: '浏览'
+    view: t('auto.Stats.23.9c5c5c')
   }
   return texts[action] || action
 }

@@ -8,13 +8,13 @@
 
     
     <el-table :data="tableData" border stripe style="width: 100%">
-      <el-table-column prop="name" :label="$t('代理名称')" width="300" />
-      <el-table-column prop="server" :label="$t('服务器地址')" width="200" />
-      <el-table-column prop="port" :label="$t('端口')" width="100" />
-      <el-table-column prop="limit" :label="$t('代理日限制')" width="100" />
-      <el-table-column prop="password" :label="$t('密码')" />
-      <el-table-column prop="username" :label="$t('用户名')" />
-      <el-table-column :label="$t('操作')" width="200" align="center">
+      <el-table-column prop="name" ::label="$t('auto.Smtp.1.77fbe7')" width="300" />
+      <el-table-column prop="server" ::label="$t('auto.Smtp.2.b210fb')" width="200" />
+      <el-table-column prop="port" ::label="$t('auto.Smtp.3.2696c1')" width="100" />
+      <el-table-column prop="limit" ::label="$t('auto.Smtp.4.6ae271')" width="100" />
+      <el-table-column prop="password" ::label="$t('auto.Smtp.5.b9ae4d')" />
+      <el-table-column prop="username" ::label="$t('auto.Smtp.6.ef1551')" />
+      <el-table-column ::label="$t('auto.Smtp.7.4414e3')" width="200" align="center">
         <template #default="scope">
           <el-button size="small" @click="handleEdit(scope.row)">{{ $t('编辑') }}</el-button>
           <el-button size="small" type="danger" @click="handleDelete(scope.row.id)">{{ $t('删除') }}</el-button>
@@ -25,28 +25,28 @@
     
     <el-dialog v-model="dialogVisible" :title="dialogTitle" width="600px">
       <el-form ref="formRef" :model="form" :rules="rules" label-width="120px">
-        <el-form-item label="代理名称" prop="name">
-          <el-input v-model="form.name" placeholder="请输入代理名称" />
+        <el-form-item :label="$t('auto.Smtp.8.00d24b')" prop="name">
+          <el-input v-model="form.name" :placeholder="$t('auto.Smtp.9.b6f633')" />
         </el-form-item>
-        <el-form-item label="服务器地址" prop="server">
-          <el-input v-model="form.server" placeholder="请输入SMTP服务器地址" />
+        <el-form-item :label="$t('auto.Smtp.10.5d5782')" prop="server">
+          <el-input v-model="form.server" :placeholder="$t('auto.Smtp.11.c34c1b')" />
         </el-form-item>
-        <el-form-item label="端口" prop="port">
-          <el-input v-model.number="form.port" placeholder="请输入端口号" type="number" />
+        <el-form-item :label="$t('auto.Smtp.12.c76cfe')" prop="port">
+          <el-input v-model.number="form.port" :placeholder="$t('auto.Smtp.13.8d0fa2')" type="number" />
         </el-form-item>
-        <el-form-item label="用户名" prop="username">
-          <el-input v-model="form.username" placeholder="请输入用户名" />
+        <el-form-item :label="$t('auto.Smtp.14.819767')" prop="username">
+          <el-input v-model="form.username" :placeholder="$t('auto.Smtp.15.08b1fa')" />
         </el-form-item>
-        <el-form-item label="密码" prop="password">
-          <el-input v-model="form.password" placeholder="请输入密码" type="password" show-password autocomplete="new-password" />
+        <el-form-item :label="$t('auto.Smtp.16.a81052')" prop="password">
+          <el-input v-model="form.password" :placeholder="$t('auto.Smtp.17.e39ffe')" type="password" show-password autocomplete="new-password" />
         </el-form-item>
-        <el-form-item label="代理日限制" prop="limit">
-          <el-input v-model="form.limit" placeholder="请输入代理日限制" type="number" />
+        <el-form-item :label="$t('auto.Smtp.18.d8f7d4')" prop="limit">
+          <el-input v-model="form.limit" :placeholder="$t('auto.Smtp.19.742c9f')" type="number" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="dialogVisible = false">取消</el-button>
-        <el-button type="primary" @click="submitForm">确定</el-button>
+        <el-button @click="dialogVisible = false">{{ $t('auto.Smtp.20.625fb2') }}</el-button>
+        <el-button type="primary" @click="submitForm">{{ $t('auto.Smtp.21.38cf16') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -55,11 +55,14 @@
 <script setup>
 import i18n from '@/i18n'
 
-import { ref, reactive, onMounted } from 'vue';
+import { ref, reactive, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import { Plus } from '@element-plus/icons-vue';
 
 import { emailApi } from '@/api/email';
+
+const { t } = useI18n()
 
 const tableData = ref([]);
 
@@ -74,7 +77,7 @@ onMounted(() => {
 
 
 const dialogVisible = ref(false);
-const dialogTitle = ref('新增邮件代理');
+const dialogTitle = ref(t('auto.Smtp.22.247ae5'));
 const formRef = ref(null);
 
 const form = reactive({
@@ -88,45 +91,45 @@ const form = reactive({
 });
 
 const rules = {
-  name: [{ required: true, message: i18n.global.t('请输入代理名称'), trigger: 'blur' }],
-  server: [{ required: true, message: i18n.global.t('请输入服务器地址'), trigger: 'blur' }],
+  name: [{ required: true, message: i18n.global.t(t('auto.Smtp.9.b6f633')), trigger: 'blur' }],
+  server: [{ required: true, message: i18n.global.t(t('auto.Smtp.23.44056c')), trigger: 'blur' }],
   port: [
-    { required: true, message: i18n.global.t('请输入端口号'), trigger: 'blur' },
-    { type: 'number', message: i18n.global.t('端口号必须为数字'), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.Smtp.13.8d0fa2')), trigger: 'blur' },
+    { type: 'number', message: i18n.global.t(t('auto.Smtp.24.7522a1')), trigger: 'blur' }
   ],
-  username: [{ required: true, message: i18n.global.t('请输入用户名'), trigger: 'blur' }],
-  password: [{ required: true, message: i18n.global.t('请输入密码'), trigger: 'blur' }],
-  limit: [{ required: true, message: i18n.global.t('请输入代理日限制'), trigger: 'blur' }],
+  username: [{ required: true, message: i18n.global.t(t('auto.Smtp.15.08b1fa')), trigger: 'blur' }],
+  password: [{ required: true, message: i18n.global.t(t('auto.Smtp.17.e39ffe')), trigger: 'blur' }],
+  limit: [{ required: true, message: i18n.global.t(t('auto.Smtp.19.742c9f')), trigger: 'blur' }],
 };
 
 const handleAdd = () => {
-  dialogTitle.value = '新增邮件代理';
+  dialogTitle.value = t('auto.Smtp.22.247ae5');
   Object.assign(form, { id: '', name: '', server: '', port: '', username: '', password: '', limit: 50 });
   dialogVisible.value = true;
 };
 
 const handleEdit = (row) => {
-  dialogTitle.value = '编辑邮件代理';
+  dialogTitle.value = t('auto.Smtp.25.c19147');
   Object.assign(form, { ...row });
   dialogVisible.value = true;
 };
 
 const handleDelete = (id) => {
-  ElMessageBox.confirm('确定要删除该邮件代理吗？', '警告', {
-    confirmButtonText: '确定',
-    cancelButtonText: '取消',
+  ElMessageBox.confirm(t('auto.Smtp.26.e27f89'), t('auto.Smtp.27.900c70'), {
+    confirmButtonText: t('auto.Smtp.21.38cf16'),
+    cancelButtonText: t('auto.Smtp.20.625fb2'),
     type: 'warning'
   }).then( async () => {
       try {
         const response = await emailApi.deleteEmailSmtp(id);
         ElMessage({
           type: 'success',
-          message: i18n.global.t('删除成功'),
+          message: i18n.global.t(t('auto.Smtp.28.0007d1')),
         });
         fetchEmailSmtp()
       } catch (error) {
-        console.error('删除账号失败:', error)
-        ElMessage.error(i18n.global.t('删除账号失败'))
+        console.error(t('auto.Smtp.29.e4a3bb'), error)
+        ElMessage.error(i18n.global.t(t('auto.Smtp.30.5c7c95')))
       }
   }).catch((e) => {
     if (e !== 'cancel' && e !== 'close')
@@ -140,12 +143,12 @@ const submitForm = () => {
     if (valid) {
           if(form.id){
             const res = await emailApi.updateEmailSmtp(form.id,form)
-            ElMessage.success(i18n.global.t('更新成功'));
+            ElMessage.success(i18n.global.t(t('auto.Smtp.31.55aa63')));
             dialogVisible.value = false
             fetchEmailSmtp();
           }else{
             const res = await emailApi.addEmailSmtp(form)
-            ElMessage.success(i18n.global.t('新增成功'));
+            ElMessage.success(i18n.global.t(t('auto.Smtp.32.a5bfd7')));
             dialogVisible.value = false
             fetchEmailSmtp();
           }

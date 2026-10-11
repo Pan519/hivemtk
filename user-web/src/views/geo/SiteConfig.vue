@@ -3,38 +3,38 @@
     <el-card shadow="never">
       <template #header>
         <div class="card-header">
-          <span>🏠 静态站部署配置</span>
-          <el-button type="primary" @click="openDialog()">+ 新增站点</el-button>
+          <span>{{ $t('auto.SiteConfig.12.4d9278') }}</span>
+          <el-button type="primary" @click="openDialog()">{{ $t('auto.SiteConfig.13.8604ec') }}</el-button>
         </div>
       </template>
 
       <el-table :data="list" border stripe size="small">
-        <el-table-column prop="domain" label="域名" />
-        <el-table-column prop="provider" label="提供商" width="120">
+        <el-table-column prop="domain" :label="$t('auto.SiteConfig.1.190980')" />
+        <el-table-column prop="provider" :label="$t('auto.SiteConfig.2.8da5f7')" width="120">
           <template #default="{ row }">
             <el-tag size="small">{{ row.provider || 'cloudflare' }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="hugo_path" label="Hugo 路径" show-overflow-tooltip />
-        <el-table-column prop="git_repo" label="Git 仓库" show-overflow-tooltip />
-        <el-table-column label="健康" width="80">
+        <el-table-column prop="hugo_path" :label="$t('auto.SiteConfig.3.b078ff')" show-overflow-tooltip />
+        <el-table-column prop="git_repo" :label="$t('auto.SiteConfig.4.d71d03')" show-overflow-tooltip />
+        <el-table-column :label="$t('auto.SiteConfig.5.fbc026')" width="80">
           <template #default="{ row }">
             <el-tag :type="row.health_score > 80 ? 'success' : row.health_score > 40 ? 'warning' : 'danger'" size="small">
               {{ row.health_score || 0 }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="状态" width="80">
+        <el-table-column :label="$t('auto.SiteConfig.6.3fea7c')" width="80">
           <template #default="{ row }">
             <el-tag :type="row.active ? 'success' : 'info'" size="small">
               {{ row.active ? '启用' : '停用' }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="180" fixed="right">
+        <el-table-column :label="$t('auto.SiteConfig.7.2b6bc0')" width="180" fixed="right">
           <template #default="{ row }">
-            <el-button size="small" @click="openDialog(row)">编辑</el-button>
-            <el-button size="small" type="danger" @click="remove(row)">删除</el-button>
+            <el-button size="small" @click="openDialog(row)">{{ $t('auto.SiteConfig.14.95b351') }}</el-button>
+            <el-button size="small" type="danger" @click="remove(row)">{{ $t('auto.SiteConfig.15.2f4aad') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -53,35 +53,35 @@
     </el-card>
 
     <!-- Dialog -->
-    <el-dialog v-model="dialogVisible" :title="isEdit ? '编辑站点' : '新增站点'" width="560px">
+    <el-dialog v-model="dialogVisible" ::title="$t('auto.SiteConfig.8.4275a1')" width="560px">
       <el-form :model="form" label-width="100px">
-        <el-form-item label="域名" required>
+        <el-form-item :label="$t('auto.SiteConfig.1.190980')" required>
           <el-input v-model="form.domain" placeholder="example.com" />
         </el-form-item>
-        <el-form-item label="提供商">
+        <el-form-item :label="$t('auto.SiteConfig.2.8da5f7')">
           <el-select v-model="form.provider" style="width:100%">
             <el-option label="Cloudflare Pages" value="cloudflare" />
             <el-option label="GitHub Pages" value="github" />
             <el-option label="Vercel" value="vercel" />
-            <el-option label="自托管" value="self" />
+            <el-option :label="$t('auto.SiteConfig.9.04d686')" value="self" />
           </el-select>
         </el-form-item>
-        <el-form-item label="Hugo 路径">
+        <el-form-item :label="$t('auto.SiteConfig.3.b078ff')">
           <el-input v-model="form.hugo_path" placeholder="/data/hivemtk-site" />
         </el-form-item>
-        <el-form-item label="Git 仓库">
+        <el-form-item :label="$t('auto.SiteConfig.4.d71d03')">
           <el-input v-model="form.git_repo" placeholder="git@github.com:xxx/xxx.git" />
         </el-form-item>
-        <el-form-item label="部署命令">
+        <el-form-item :label="$t('auto.SiteConfig.10.65b20b')">
           <el-input v-model="form.deploy_cmd" placeholder="hugo -e production" />
         </el-form-item>
-        <el-form-item label="启用">
+        <el-form-item :label="$t('auto.SiteConfig.11.7854b5')">
           <el-switch v-model="form.active" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="dialogVisible = false">取消</el-button>
-        <el-button type="primary" @click="save">保存</el-button>
+        <el-button @click="dialogVisible = false">{{ $t('auto.SiteConfig.16.625fb2') }}</el-button>
+        <el-button type="primary" @click="save">{{ $t('auto.SiteConfig.17.be5fbb') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -89,8 +89,11 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { geoApi } from '@/api/geo'
 import { ElMessage, ElMessageBox } from 'element-plus'
+
+const { t } = useI18n()
 
 const list = ref([])
 const page = ref(1)
@@ -137,19 +140,19 @@ async function save() {
     } else {
       await geoApi.createSite(form.value)
     }
-    ElMessage.success('已保存')
+    ElMessage.success(t('auto.SiteConfig.18.f8dfed'))
     dialogVisible.value = false
     load()
   } catch (e) {
-    ElMessage.error(e?.response?.data?.message || '保存失败')
+    ElMessage.error(e?.response?.data?.message || t('auto.SiteConfig.19.6de920'))
   }
 }
 
 async function remove(row) {
   try {
-    await ElMessageBox.confirm(`确认删除 ${row.domain} ?`, '警告', { type: 'warning' })
+    await ElMessageBox.confirm(`确认删除 ${row.domain} ?`, t('auto.SiteConfig.20.900c70'), { type: 'warning' })
     await geoApi.deleteSite(row.id)
-    ElMessage.success('已删除')
+    ElMessage.success(t('auto.SiteConfig.21.5cc232'))
     load()
   } catch (e) { /* 忽略异常：失败时保持既有状态，不打断用户 */ }
 }

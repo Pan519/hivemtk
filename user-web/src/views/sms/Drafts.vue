@@ -10,15 +10,15 @@
       
       <el-table :data="draftList" style="width: 100%" v-loading="loading">
         <el-table-column prop="id" label="ID" width="80" />
-        <el-table-column prop="title" label="标题" />
-        <el-table-column prop="content" label="内容" show-overflow-tooltip />
-        <el-table-column prop="createdAt" label="创建时间" width="180" />
-        <el-table-column prop="updatedAt" label="更新时间" width="180" />
-        <el-table-column label="操作" width="200">
+        <el-table-column prop="title" :label="$t('auto.Drafts.1.32c65d')" />
+        <el-table-column prop="content" :label="$t('auto.Drafts.2.2d711b')" show-overflow-tooltip />
+        <el-table-column prop="createdAt" :label="$t('auto.Drafts.3.eca37c')" width="180" />
+        <el-table-column prop="updatedAt" :label="$t('auto.Drafts.4.a001a2')" width="180" />
+        <el-table-column :label="$t('auto.Drafts.5.2b6bc0')" width="200">
           <template #default="scope">
-            <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
-            <el-button size="small" type="success" @click="handleSend(scope.row)">发送</el-button>
-            <el-button size="small" type="danger" @click="handleDelete(scope.row)">删除</el-button>
+            <el-button size="small" @click="handleEdit(scope.row)">{{ $t('auto.Drafts.12.95b351') }}</el-button>
+            <el-button size="small" type="success" @click="handleSend(scope.row)">{{ $t('auto.Drafts.13.1535fc') }}</el-button>
+            <el-button size="small" type="danger" @click="handleDelete(scope.row)">{{ $t('auto.Drafts.14.2f4aad') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -39,14 +39,14 @@
     
     <el-dialog v-model="dialogVisible" :title="dialogTitle" width="500px" :before-close="handleDialogClose">
       <el-form :model="formData" label-width="80px" :rules="rules" ref="formRef">
-        <el-form-item label="标题" prop="title">
-          <el-input v-model="formData.title" placeholder="请输入草稿标题" maxlength="100" show-word-limit />
+        <el-form-item :label="$t('auto.Drafts.1.32c65d')" prop="title">
+          <el-input v-model="formData.title" :placeholder="$t('auto.Drafts.6.87eb95')" maxlength="100" show-word-limit />
         </el-form-item>
-        <el-form-item label="内容" prop="content">
+        <el-form-item :label="$t('auto.Drafts.2.2d711b')" prop="content">
           <el-input
             v-model="formData.content"
             type="textarea"
-            placeholder="请输入短信内容"
+            :placeholder="$t('auto.Drafts.7.56ad80')"
             :rows="6"
             maxlength="500"
             show-word-limit
@@ -55,26 +55,26 @@
       </el-form>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="handleDialogClose">取消</el-button>
-          <el-button type="primary" @click="handleSubmit">确定</el-button>
+          <el-button @click="handleDialogClose">{{ $t('auto.Drafts.15.625fb2') }}</el-button>
+          <el-button type="primary" @click="handleSubmit">{{ $t('auto.Drafts.16.38cf16') }}</el-button>
         </span>
       </template>
     </el-dialog>
 
     
-    <el-dialog v-model="sendDialogVisible" title="发送短信" width="400px">
+    <el-dialog v-model="sendDialogVisible" :title="$t('auto.Drafts.8.2d7288')" width="400px">
       <el-form :model="sendForm" label-width="80px">
-        <el-form-item label="手机号">
-          <el-input v-model="sendForm.phone" placeholder="请输入手机号" maxlength="11" show-word-limit />
+        <el-form-item :label="$t('auto.Drafts.9.8098e2')">
+          <el-input v-model="sendForm.phone" :placeholder="$t('auto.Drafts.10.6e4f4b')" maxlength="11" show-word-limit />
         </el-form-item>
-        <el-form-item label="内容预览">
+        <el-form-item :label="$t('auto.Drafts.11.d93365')">
           <div class="content-preview">{{ currentDraft?.content }}</div>
         </el-form-item>
       </el-form>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="sendDialogVisible = false">取消</el-button>
-          <el-button type="primary" @click="handleConfirmSend" :loading="sending">确定发送</el-button>
+          <el-button @click="sendDialogVisible = false">{{ $t('auto.Drafts.15.625fb2') }}</el-button>
+          <el-button type="primary" @click="handleConfirmSend" :loading="sending">{{ $t('auto.Drafts.17.3ceeb0') }}</el-button>
         </span>
       </template>
     </el-dialog>
@@ -85,8 +85,11 @@
 import i18n from '@/i18n'
 
 import { ref, reactive, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import smsApi from '@/api/sms'
+
+const { t } = useI18n()
 
 const draftList = ref([]);
 const currentPage = ref(1)
@@ -113,12 +116,12 @@ const sendForm = reactive({
 
 const rules = {
   title: [
-    { required: true, message: i18n.global.t('请输入草稿标题'), trigger: 'blur' },
-    { min: 1, max: 100, message: i18n.global.t('标题长度在 1 到 100 个字符'), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.Drafts.6.87eb95')), trigger: 'blur' },
+    { min: 1, max: 100, message: i18n.global.t(t('auto.Drafts.18.8ff90c')), trigger: 'blur' }
   ],
   content: [
-    { required: true, message: i18n.global.t('请输入短信内容'), trigger: 'blur' },
-    { min: 1, max: 500, message: i18n.global.t('内容长度在 1 到 500 个字符'), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.Drafts.7.56ad80')), trigger: 'blur' },
+    { min: 1, max: 500, message: i18n.global.t(t('auto.Drafts.19.75f753')), trigger: 'blur' }
   ]
 };
 
@@ -133,7 +136,7 @@ const getDraftList = async () => {
     draftList.value = response.list || [];
     total.value = response.total || 0
   } catch (error) {
-    ElMessage.error(i18n.global.t('获取草稿列表失败'))
+    ElMessage.error(i18n.global.t(t('auto.Drafts.20.6adbf4')))
   } finally {
     loading.value = false
   }
@@ -150,7 +153,7 @@ const resetForm = () => {
 
 const handleCreateDraft = () => {
   resetForm()
-  dialogTitle.value = '新建草稿'
+  dialogTitle.value = t('auto.Drafts.21.b127f2')
   dialogVisible.value = true
 };
 
@@ -161,10 +164,10 @@ const handleEdit = async (row) => {
     formData.title = data.title
     formData.content = data.content
     editingId.value = data.id
-    dialogTitle.value = '编辑草稿'
+    dialogTitle.value = t('auto.Drafts.22.e53cd8')
     dialogVisible.value = true
   } catch (error) {
-    ElMessage.error(i18n.global.t('获取草稿详情失败'))
+    ElMessage.error(i18n.global.t(t('auto.Drafts.23.249f21')))
   }
 };
 
@@ -185,17 +188,17 @@ const handleSubmit = async () => {
     
     if (editingId.value) {
       await smsApi.updateDraft(editingId.value, draftData);
-      ElMessage.success(i18n.global.t('草稿更新成功'))
+      ElMessage.success(i18n.global.t(t('auto.Drafts.24.b7773a')))
     } else {
       await smsApi.createDraft(draftData);
-      ElMessage.success(i18n.global.t('草稿创建成功'))
+      ElMessage.success(i18n.global.t(t('auto.Drafts.25.831675')))
     }
     
     dialogVisible.value = false
     getDraftList()
   } catch (error) {
     if (error !== false) {
-      ElMessage.error('操作失败：' + (error.message || '未知错误'))
+      ElMessage.error(t('auto.Drafts.26.79585f') + (error.message || t('auto.Drafts.27.974e74')))
     }
   }
 };
@@ -208,17 +211,17 @@ const handleSend = (row) => {
 
 const handleConfirmSend = async () => {
   if (!sendForm.phone || sendForm.phone.length !== 11) {
-    ElMessage.warning(i18n.global.t('请输入正确的手机号'))
+    ElMessage.warning(i18n.global.t(t('auto.Drafts.28.a32ab5')))
     return
   }
   
   sending.value = true
   try {
     await smsApi.sendDraft(currentDraft.value.id, { phone: sendForm.phone })
-    ElMessage.success(i18n.global.t('短信发送成功'))
+    ElMessage.success(i18n.global.t(t('auto.Drafts.29.b31360')))
     sendDialogVisible.value = false
   } catch (error) {
-    ElMessage.error(i18n.global.t('短信发送失败'))
+    ElMessage.error(i18n.global.t(t('auto.Drafts.30.8ea257')))
   } finally {
     sending.value = false
   }
@@ -226,17 +229,17 @@ const handleConfirmSend = async () => {
 
 const handleDelete = async (row) => {
   try {
-    await ElMessageBox.confirm(`确定要删除草稿「${row.title}」吗？`, '确认删除', {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
+    await ElMessageBox.confirm(`确定要删除草稿「${row.title}」吗？`, t('auto.Drafts.31.631cd2'), {
+      confirmButtonText: t('auto.Drafts.16.38cf16'),
+      cancelButtonText: t('auto.Drafts.15.625fb2'),
       type: 'warning'
     })
     await smsApi.deleteDraft(row.id)
-    ElMessage.success(i18n.global.t('草稿删除成功'))
+    ElMessage.success(i18n.global.t(t('auto.Drafts.32.341f75')))
     getDraftList()
   } catch (error) {
     if (error !== 'cancel') {
-      ElMessage.error(i18n.global.t('草稿删除失败'))
+      ElMessage.error(i18n.global.t(t('auto.Drafts.33.d2b74a')))
     }
   }
 };

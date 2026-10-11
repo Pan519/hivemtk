@@ -3,14 +3,14 @@
 
     
     <el-card shadow="never" class="form-card">
-      <template #header><span class="card-title">验证配置</span></template>
+      <template #header><span class="card-title">{{ $t('auto.Verification.21.4fd78a') }}</span></template>
       <el-form :model="form" label-width="92px">
         <el-row :gutter="16">
           <el-col :xs="24" :sm="12">
-            <el-form-item label="验证文章">
+            <el-form-item :label="$t('auto.Verification.1.1e9faa')">
               <el-select
                 v-model="form.article_id"
-                placeholder="选择已生成文章（或粘贴内容）"
+                :placeholder="$t('auto.Verification.2.1b3ab1')"
                 filterable
                 clearable
                 style="width: 100%"
@@ -26,18 +26,18 @@
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="12">
-            <el-form-item label="品牌名称">
-              <el-input v-model="form.brand_name" placeholder="如：hivemtk" clearable />
+            <el-form-item :label="$t('auto.Verification.3.4e8713')">
+              <el-input v-model="form.brand_name" :placeholder="$t('auto.Verification.4.a08eb5')" clearable />
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="12">
-            <el-form-item label="验证模型">
+            <el-form-item :label="$t('auto.Verification.5.3a17e1')">
               <el-select
                 v-model="form.models"
                 multiple
                 collapse-tags
                 collapse-tags-tooltip
-                placeholder="选择参与验证的 LLM"
+                :placeholder="$t('auto.Verification.6.9f701d')"
                 style="width: 100%"
               >
                 <el-option
@@ -50,17 +50,17 @@
             </el-form-item>
           </el-col>
         </el-row>
-        <el-form-item label="测试问题">
+        <el-form-item :label="$t('auto.Verification.7.dd6023')">
           <el-input
             v-model="form.queries"
             type="textarea"
             :rows="4"
-            placeholder="每行一个问题，可粘贴关键词"
+            :placeholder="$t('auto.Verification.8.b5b294')"
           />
         </el-form-item>
         <el-form-item>
           <el-button type="primary" :loading="verifying" @click="handleVerify">
-            <el-icon><CircleCheck /></el-icon><span>验证</span>
+            <el-icon><CircleCheck /></el-icon><span>{{ $t('auto.Verification.22.cd8992') }}</span>
           </el-button>
         </el-form-item>
       </el-form>
@@ -68,25 +68,25 @@
 
     
     <el-card v-if="results.length" shadow="never" class="result-card">
-      <template #header><span class="card-title">验证结果</span></template>
+      <template #header><span class="card-title">{{ $t('auto.Verification.23.fc3c71') }}</span></template>
       <el-table v-loading="verifying" :data="results" stripe style="width: 100%">
-        <el-table-column prop="model" label="验证模型" width="140" />
-        <el-table-column prop="query" label="问题" min-width="200" show-overflow-tooltip />
-        <el-table-column prop="brand_name" label="品牌" width="120" />
-        <el-table-column prop="brand_mentioned" label="品牌提及" width="100" align="center">
+        <el-table-column prop="model" :label="$t('auto.Verification.5.3a17e1')" width="140" />
+        <el-table-column prop="query" :label="$t('auto.Verification.9.5dc99f')" min-width="200" show-overflow-tooltip />
+        <el-table-column prop="brand_name" :label="$t('auto.Verification.10.09307c')" width="120" />
+        <el-table-column prop="brand_mentioned" :label="$t('auto.Verification.11.0a01f6')" width="100" align="center">
           <template #default="{ row }">
             <el-tag :type="row.brand_mentioned ? 'success' : 'info'" size="small">
               {{ row.brand_mentioned ? '是' : '否' }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="mention_count" label="提及次数" width="100" align="right" />
-        <el-table-column prop="sentiment" label="情感" width="90">
+        <el-table-column prop="mention_count" :label="$t('auto.Verification.12.2ee012')" width="100" align="right" />
+        <el-table-column prop="sentiment" :label="$t('auto.Verification.13.2b1c16')" width="90">
           <template #default="{ row }">
             <el-tag size="small" :type="sentimentType(row.sentiment)">{{ row.sentiment || '—' }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="position" label="提及位置" width="130" />
+        <el-table-column prop="position" :label="$t('auto.Verification.14.1b2b4b')" width="130" />
       </el-table>
     </el-card>
 
@@ -94,25 +94,25 @@
     <el-card shadow="never" class="negative-card">
       <template #header>
         <div class="card-header">
-          <span class="card-title">负面监控</span>
-          <el-tooltip :content="form.brand_name.trim() ? '' : '请先填写品牌名称'" :disabled="!!form.brand_name.trim()" placement="top">
+          <span class="card-title">{{ $t('auto.Verification.24.53119f') }}</span>
+          <el-tooltip ::content="$t('auto.Verification.15.f8761e')" :disabled="!!form.brand_name.trim()" placement="top">
             <el-button type="warning" :loading="monitoring" :disabled="!form.brand_name.trim()" @click="handleMonitorNegative">
-              <el-icon><Warning /></el-icon><span>检测负面</span>
+              <el-icon><Warning /></el-icon><span>{{ $t('auto.Verification.25.2e00d1') }}</span>
             </el-button>
           </el-tooltip>
         </div>
       </template>
-      <el-empty v-if="!negativeResults.length" description="暂无负面监控数据，点击「检测负面」生成" :image-size="60" />
+      <el-empty v-if="!negativeResults.length" :description="$t('auto.Verification.16.74e452')" :image-size="60" />
       <el-table v-else :data="negativeResults" stripe style="width: 100%">
-        <el-table-column prop="query" label="负面查询" min-width="200" show-overflow-tooltip />
-        <el-table-column prop="mention_count" label="提及次数" width="100" align="right" />
-        <el-table-column prop="negative_score" label="负面得分" width="100" align="right" />
-        <el-table-column prop="risk_level" label="风险等级" width="100">
+        <el-table-column prop="query" :label="$t('auto.Verification.17.eb8454')" min-width="200" show-overflow-tooltip />
+        <el-table-column prop="mention_count" :label="$t('auto.Verification.12.2ee012')" width="100" align="right" />
+        <el-table-column prop="negative_score" :label="$t('auto.Verification.18.5437e7')" width="100" align="right" />
+        <el-table-column prop="risk_level" :label="$t('auto.Verification.19.25eb6b')" width="100">
           <template #default="{ row }">
             <el-tag size="small" :type="riskType(row.risk_level)">{{ row.risk_level || '低' }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="risk_description" label="风险说明" min-width="220" show-overflow-tooltip />
+        <el-table-column prop="risk_description" :label="$t('auto.Verification.20.76f1c8')" min-width="220" show-overflow-tooltip />
       </el-table>
     </el-card>
   </div>
@@ -120,10 +120,13 @@
 
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import { CircleCheck, Warning } from '@element-plus/icons-vue'
 import { geoApi } from '@/api/geo'
 import { http } from '@/utils/request'
+
+const { t } = useI18n()
 
 const modelOptions = ref([])
 
@@ -149,7 +152,7 @@ const loadModelOptions = async () => {
       form.models = [options[0].value]
     }
   } catch (e) {
-    console.warn('加载可用模型列表失败:', e.message)
+    console.warn(t('auto.Verification.26.a8d452'), e.message)
   }
 }
 
@@ -189,17 +192,17 @@ const onArticleChange = async (id) => {
   try {
     await geoApi.getArticleByID(id)
   } catch (e) {
-    ElMessage.error(e.message || '文章加载失败')
+    ElMessage.error(e.message || t('auto.Verification.27.aaff45'))
   }
 }
 
 const handleVerify = async () => {
   if (!form.queries.trim()) {
-    ElMessage.warning('请输入测试问题')
+    ElMessage.warning(t('auto.Verification.28.2b216e'))
     return
   }
   if (!form.brand_name.trim()) {
-    ElMessage.warning('请填写品牌名称')
+    ElMessage.warning(t('auto.Verification.29.0e7774'))
     return
   }
   verifying.value = true
@@ -215,9 +218,9 @@ const handleVerify = async () => {
       })
       if (res) results.value.push(res)
     }
-    ElMessage.success('验证完成')
+    ElMessage.success(t('auto.Verification.30.816ade'))
   } catch (e) {
-    ElMessage.error(e.message || '验证失败')
+    ElMessage.error(e.message || t('auto.Verification.31.e441b1'))
   } finally {
     verifying.value = false
   }
@@ -225,7 +228,7 @@ const handleVerify = async () => {
 
 const handleMonitorNegative = async () => {
   if (!form.brand_name.trim()) {
-    ElMessage.warning('请先填写品牌名称')
+    ElMessage.warning(t('auto.Verification.32.8d1157'))
     return
   }
   monitoring.value = true
@@ -234,9 +237,9 @@ const handleMonitorNegative = async () => {
       brand_name: form.brand_name
     })
     negativeResults.value = res?.queries || []
-    ElMessage.success('负面检测完成')
+    ElMessage.success(t('auto.Verification.33.cf50ff'))
   } catch (e) {
-    ElMessage.error(e.message || '负面检测失败')
+    ElMessage.error(e.message || t('auto.Verification.34.e3cb70'))
   } finally {
     monitoring.value = false
   }

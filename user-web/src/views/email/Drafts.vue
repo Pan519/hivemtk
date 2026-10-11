@@ -21,8 +21,8 @@
       @row-dblclick="handleEditDraft"
     >
       <el-table-column type="selection" width="55" />
-      <el-table-column prop="subject" :label="$t('主题')" min-width="200" />
-      <el-table-column :label="$t('操作')" width="300" fixed="right">
+      <el-table-column prop="subject" ::label="$t('auto.Drafts.1.d8b085')" min-width="200" />
+      <el-table-column ::label="$t('auto.Drafts.2.4414e3')" width="300" fixed="right">
         <template #default="scope">
           <el-button size="small" @click="handleEditDraft(scope.row)">{{ $t('编辑') }}</el-button>
           <el-button size="small" type="danger" @click="handleDeleteDraft(scope.row.id)">{{ $t('删除') }}</el-button>
@@ -32,13 +32,13 @@
     </el-table>
 
     <div v-else class="empty-drafts">
-      <el-empty description="暂无草稿数据" />
+      <el-empty :description="$t('auto.Drafts.3.f34818')" />
     </div>
 
     
     <el-dialog 
       v-model="dialogVisible"
-      :title="dialogType === 'create' ? '新建草稿' : '编辑草稿'"
+      ::title="$t('auto.Drafts.4.e5815c')"
       width="70%"
       :before-close="handleClose"
     >
@@ -47,12 +47,12 @@
       </p>
       
       <el-form ref="draftFormRef" :model="draftForm" :rules="formRules" label-width="80px">
-        <el-form-item label="主题" prop="subject">
-          <el-input v-model="draftForm.subject" placeholder="请输入邮件主题" />
+        <el-form-item :label="$t('auto.Drafts.5.9970ad')" prop="subject">
+          <el-input v-model="draftForm.subject" :placeholder="$t('auto.Drafts.6.4f3c61')" />
         </el-form-item>
 
         
-        <el-form-item label="内容" prop="content">
+        <el-form-item :label="$t('auto.Drafts.7.2d711b')" prop="content">
           
           <SimpleEditor
             v-model="draftForm.content"
@@ -65,8 +65,8 @@
       </el-form>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="dialogVisible = false">取消</el-button>
-          <el-button type="primary" @click="submitDraft">保存草稿</el-button>
+          <el-button @click="dialogVisible = false">{{ $t('auto.Drafts.8.625fb2') }}</el-button>
+          <el-button type="primary" @click="submitDraft">{{ $t('auto.Drafts.9.4d7ea6') }}</el-button>
         </span>
       </template>
     </el-dialog>
@@ -77,9 +77,12 @@
 import i18n from '@/i18n'
 
 import { ref, reactive, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox, ElNotification } from 'element-plus'
 import { emailApi } from '@/api/email'
 import SimpleEditor from '@/components/SimpleEditor/index.vue'
+
+const { t } = useI18n()
 
 const drafts = ref([]);
 const dialogVisible = ref(false);
@@ -107,11 +110,11 @@ const sendForm = reactive({
 
 const formRules = {
   subject: [
-    { required: true, message: i18n.global.t('请输入邮件主题'), trigger: 'blur' },
-    { max: 100, message: i18n.global.t('主题长度不能超过100个字符'), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.Drafts.6.4f3c61')), trigger: 'blur' },
+    { max: 100, message: i18n.global.t(t('auto.Drafts.10.dcc9a7')), trigger: 'blur' }
   ],
   content: [
-    { required: true, message: i18n.global.t('请输入邮件内容'), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.Drafts.11.61a258')), trigger: 'blur' }
   ]
 };
 
@@ -129,8 +132,8 @@ const fetchDrafts = async () => {
     const response = await emailApi.getDrafts()
     drafts.value = response.list || [];
   } catch (error) {
-    console.error('获取草稿列表失败:', error)
-    ElMessage.error(i18n.global.t('获取草稿列表失败'))
+    console.error(t('auto.Drafts.12.88b6b3'), error)
+    ElMessage.error(i18n.global.t(t('auto.Drafts.13.6adbf4')))
   }
 };
 
@@ -162,28 +165,28 @@ const handleEditDraft = async (row) => {
     })
     dialogVisible.value = true
   } catch (error) {
-    console.error('获取草稿详情失败:', error)
-    ElMessage.error(i18n.global.t('获取草稿详情失败'))
+    console.error(t('auto.Drafts.14.9f9509'), error)
+    ElMessage.error(i18n.global.t(t('auto.Drafts.15.249f21')))
   }
 };
 
 const handleDeleteDraft = (id) => {
   ElMessageBox.confirm(
-    '确定要删除此草稿吗？',
-    '警告',
+    t('auto.Drafts.16.f44c0b'),
+    t('auto.Drafts.17.900c70'),
     {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
+      confirmButtonText: t('auto.Drafts.18.38cf16'),
+      cancelButtonText: t('auto.Drafts.8.625fb2'),
       type: 'warning'
     }
   ).then(async () => {
     try {
       const response = await emailApi.deleteDraft(id)
-      ElMessage.success(i18n.global.t('草稿删除成功'));
+      ElMessage.success(i18n.global.t(t('auto.Drafts.19.341f75')));
       fetchDrafts();
     } catch (error) {
-      console.error('删除草稿失败:', error)
-      ElMessage.error(i18n.global.t('删除草稿失败'))
+      console.error(t('auto.Drafts.20.ca35b2'), error)
+      ElMessage.error(i18n.global.t(t('auto.Drafts.21.c1cf61')))
     }
   }).catch(() => {})
 };
@@ -207,12 +210,12 @@ const submitDraft = () => {
           response = await emailApi.updateDraft(draftData.id, draftData);
         }
 
-        ElMessage.success(dialogType.value === 'create' ? '草稿创建成功' : '草稿更新成功');
+        ElMessage.success(dialogType.value === 'create' ? t('auto.Drafts.22.831675') : t('auto.Drafts.23.b7773a'));
         dialogVisible.value = false
         fetchDrafts();
       } catch (error) {
-        console.error('保存草稿失败:', error)
-        ElMessage.error(i18n.global.t('保存草稿失败'))
+        console.error(t('auto.Drafts.24.e26168'), error)
+        ElMessage.error(i18n.global.t(t('auto.Drafts.25.d9f436')))
       }
     }
   })
@@ -222,7 +225,7 @@ const handlePreview = (file) => {
   if (file.url) {
     window.open(file.url, '_blank')
   } else {
-    ElMessage.warning(i18n.global.t('附件尚未上传，无法预览'))
+    ElMessage.warning(i18n.global.t(t('auto.Drafts.26.e14782')))
   }
 };
 
@@ -254,11 +257,11 @@ const submitSend = async () => {
       };
       let res  = await emailApi.sendEmail(sendData)
 
-      ElMessage.success('邮件写入计划条数：' + (res.total || 0));
+      ElMessage.success(t('auto.Drafts.27.6f7526') + (res.total || 0));
       sendDialogVisible.value = false
     } catch (error) {
-      console.error('发送邮件失败:', error)
-      ElMessage.error(i18n.global.t('发送邮件失败'))
+      console.error(t('auto.Drafts.28.df52ee'), error)
+      ElMessage.error(i18n.global.t(t('auto.Drafts.29.c1355a')))
     }
   }
 

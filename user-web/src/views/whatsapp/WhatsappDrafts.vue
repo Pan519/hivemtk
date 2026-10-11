@@ -3,33 +3,33 @@
     <el-card>
       <template #header>
         <div class="card-header">
-          <span>WhatsApp 草稿箱</span>
+          <span>{{ $t('auto.WhatsappDrafts.9.5fee9d') }}</span>
           <el-button type="primary" :icon="Plus" @click="openCreate">{{ $t('新建草稿') }}</el-button>
         </div>
       </template>
 
       <el-form :inline="true" :model="search" class="search-form">
-        <el-form-item label="标题">
-          <el-input v-model="search.title" placeholder="搜索标题" clearable @keyup.enter="load" />
+        <el-form-item :label="$t('auto.WhatsappDrafts.1.32c65d')">
+          <el-input v-model="search.title" :placeholder="$t('auto.WhatsappDrafts.2.b1140e')" clearable @keyup.enter="load" />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" :icon="Search" @click="load">搜索</el-button>
+          <el-button type="primary" :icon="Search" @click="load">{{ $t('auto.WhatsappDrafts.10.e5f71f') }}</el-button>
         </el-form-item>
       </el-form>
 
       <el-table :data="drafts" style="width:100%" v-loading="loading" border>
         <el-table-column prop="id" label="ID" width="80" />
-        <el-table-column prop="title" label="标题" min-width="200" />
-        <el-table-column prop="content" label="内容" min-width="300" show-overflow-tooltip />
-        <el-table-column prop="updated_at" label="更新时间" width="180">
+        <el-table-column prop="title" :label="$t('auto.WhatsappDrafts.1.32c65d')" min-width="200" />
+        <el-table-column prop="content" :label="$t('auto.WhatsappDrafts.3.2d711b')" min-width="300" show-overflow-tooltip />
+        <el-table-column prop="updated_at" :label="$t('auto.WhatsappDrafts.4.a001a2')" width="180">
           <template #default="scope">
             {{ formatDate(scope.row.updated_at) }}
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="200" fixed="right">
+        <el-table-column :label="$t('auto.WhatsappDrafts.5.2b6bc0')" width="200" fixed="right">
           <template #default="scope">
-            <el-button size="small" type="primary" link @click="openEdit(scope.row)">编辑</el-button>
-            <el-button size="small" type="danger" link @click="confirmDelete(scope.row)">删除</el-button>
+            <el-button size="small" type="primary" link @click="openEdit(scope.row)">{{ $t('auto.WhatsappDrafts.11.95b351') }}</el-button>
+            <el-button size="small" type="danger" link @click="confirmDelete(scope.row)">{{ $t('auto.WhatsappDrafts.12.2f4aad') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -48,18 +48,18 @@
     </el-card>
 
     
-    <el-dialog v-model="dialogVisible" :title="isEdit ? '编辑草稿' : '新建草稿'" width="600px" @close="resetForm">
+    <el-dialog v-model="dialogVisible" ::title="$t('auto.WhatsappDrafts.6.050da0')" width="600px" @close="resetForm">
       <el-form ref="formRef" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="标题" prop="title">
-          <el-input v-model="form.title" placeholder="请输入草稿标题" />
+        <el-form-item :label="$t('auto.WhatsappDrafts.1.32c65d')" prop="title">
+          <el-input v-model="form.title" :placeholder="$t('auto.WhatsappDrafts.7.87eb95')" />
         </el-form-item>
-        <el-form-item label="内容" prop="content">
-          <el-input type="textarea" v-model="form.content" :rows="6" placeholder="请输入草稿内容" />
+        <el-form-item :label="$t('auto.WhatsappDrafts.3.2d711b')" prop="content">
+          <el-input type="textarea" v-model="form.content" :rows="6" :placeholder="$t('auto.WhatsappDrafts.8.90fbb8')" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="dialogVisible = false">取消</el-button>
-        <el-button type="primary" :loading="saving" @click="submit">保存</el-button>
+        <el-button @click="dialogVisible = false">{{ $t('auto.WhatsappDrafts.13.625fb2') }}</el-button>
+        <el-button type="primary" :loading="saving" @click="submit">{{ $t('auto.WhatsappDrafts.14.be5fbb') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -69,9 +69,12 @@
 import i18n from '@/i18n'
 
 import { ref, reactive, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import api from '@/api/whatsapp'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { Plus, Search } from '@element-plus/icons-vue'
+
+const { t } = useI18n()
 
 const loading = ref(false)
 const saving = ref(false)
@@ -87,8 +90,8 @@ const form = reactive({
 })
 
 const rules = {
-  title: [{ required: true, message: i18n.global.t('请输入标题'), trigger: 'blur' }],
-  content: [{ required: true, message: i18n.global.t('请输入内容'), trigger: 'blur' }]
+  title: [{ required: true, message: i18n.global.t(t('auto.WhatsappDrafts.15.96641a')), trigger: 'blur' }],
+  content: [{ required: true, message: i18n.global.t(t('auto.WhatsappDrafts.16.a11cc7')), trigger: 'blur' }]
 }
 
 const search = reactive({ title: '' })
@@ -119,7 +122,7 @@ const load = async () => {
       pagination.total = 0
     }
   } catch (err) {
-    ElMessage.error(i18n.global.t('加载草稿失败'))
+    ElMessage.error(i18n.global.t(t('auto.WhatsappDrafts.17.199b53')))
     drafts.value = []
   } finally {
     loading.value = false
@@ -153,15 +156,15 @@ const submit = async () => {
   try {
     if (isEdit.value && form.id) {
       await api.updateDraft(form.id, { title: form.title, content: form.content })
-      ElMessage.success(i18n.global.t('更新成功'))
+      ElMessage.success(i18n.global.t(t('auto.WhatsappDrafts.18.55aa63')))
     } else {
       await api.createDraft({ title: form.title, content: form.content })
-      ElMessage.success(i18n.global.t('创建成功'))
+      ElMessage.success(i18n.global.t(t('auto.WhatsappDrafts.19.04a691')))
     }
     dialogVisible.value = false
     load()
   } catch (err) {
-    ElMessage.error((isEdit.value ? '更新' : '创建') + '失败: ' + (err.message || '未知错误'))
+    ElMessage.error((isEdit.value ? t('auto.WhatsappDrafts.20.32ac15') : t('auto.WhatsappDrafts.21.d9ac92')) + t('auto.WhatsappDrafts.22.8c4701') + (err.message || t('auto.WhatsappDrafts.23.974e74')))
   } finally {
     saving.value = false
   }
@@ -169,13 +172,13 @@ const submit = async () => {
 
 const confirmDelete = async (row) => {
   try {
-    await ElMessageBox.confirm(`确认删除草稿 "${row.title}"?`, '提示', { type: 'warning' })
+    await ElMessageBox.confirm(`确认删除草稿 "${row.title}"?`, t('auto.WhatsappDrafts.24.02d981'), { type: 'warning' })
     await api.deleteDraft(row.id)
-    ElMessage.success(i18n.global.t('删除成功'))
+    ElMessage.success(i18n.global.t(t('auto.WhatsappDrafts.25.0007d1')))
     load()
   } catch (err) {
     if (err !== 'cancel') {
-      ElMessage.error('删除失败: ' + (err?.message || '未知错误'))
+      ElMessage.error(t('auto.WhatsappDrafts.26.ad23f0') + (err?.message || t('auto.WhatsappDrafts.23.974e74')))
     }
   }
 }

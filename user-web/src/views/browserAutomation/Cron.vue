@@ -1,16 +1,16 @@
 <template>
   <div class="page">
     <div class="toolbar">
-      <h2 style="margin: 0">定时触发器</h2>
+      <h2 style="margin: 0">{{ $t('auto.Cron.14.002198') }}</h2>
       <el-space>
-        <el-button type="primary" icon="Plus" @click="openCreate">新建触发器</el-button>
-        <el-button @click="$router.push('/browser-automation/tasks/create')">新建 cron 任务</el-button>
+        <el-button type="primary" icon="Plus" @click="openCreate">{{ $t('auto.Cron.15.1aeb9e') }}</el-button>
+        <el-button @click="$router.push('/browser-automation/tasks/create')">{{ $t('auto.Cron.16.d66eef') }}</el-button>
       </el-space>
     </div>
 
     <el-table :data="list" v-loading="loading">
       <el-table-column prop="id" label="ID" width="70" />
-      <el-table-column prop="task_id" label="任务" min-width="230">
+      <el-table-column prop="task_id" :label="$t('auto.Cron.1.0e46d8')" min-width="230">
         <template #default="{ row }">
           <el-link type="primary" @click="$router.push(`/browser-automation/tasks/${row.task_id}`)">#{{ row.task_id }} {{ taskName(row.task_id) }}</el-link>
           <template v-if="carrierKnown(row.task_id)">
@@ -22,28 +22,28 @@
             </div>
           </template>
           <template v-else>
-            <el-tag type="danger" size="small" class="task-tag">宿主缺失</el-tag>
+            <el-tag type="danger" size="small" class="task-tag">{{ $t('auto.Cron.17.b563b5') }}</el-tag>
             <div class="task-warn">
               这条触发器的任务已不在任务列表里（可能已被删除）。它到点执行不了，请删除本条
             </div>
           </template>
         </template>
       </el-table-column>
-      <el-table-column prop="cron_expr" label="表达式" width="160" />
-      <el-table-column prop="time_zone" label="时区" width="140">
+      <el-table-column prop="cron_expr" :label="$t('auto.Cron.2.a9400c')" width="160" />
+      <el-table-column prop="time_zone" :label="$t('auto.Cron.3.1220b0')" width="140">
         <template #default="{ row }">{{ row.time_zone || '服务器本地' }}</template>
       </el-table-column>
-      <el-table-column prop="enabled" label="状态" width="100">
+      <el-table-column prop="enabled" :label="$t('auto.Cron.4.3fea7c')" width="100">
         <template #default="{ row }">
           <el-tag :type="row.enabled ? 'success' : 'info'">{{ row.enabled ? '已启用' : '已停用' }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="next_run_at" label="下次触发" width="220">
+      <el-table-column prop="next_run_at" :label="$t('auto.Cron.5.038345')" width="220">
         <template #default="{ row }">
-          <template v-if="!row.enabled">—（已停用，不会触发）</template>
+          <template v-if="!row.enabled">{{ $t('auto.Cron.18.86e422') }}</template>
           <template v-else-if="!row.next_run_at">
-            <el-tag type="danger" size="small">未排程</el-tag>
-            <span class="next-hint">启用中却算不出下次触发时间，这条不会跑——请重新保存表达式</span>
+            <el-tag type="danger" size="small">{{ $t('auto.Cron.19.804637') }}</el-tag>
+            <span class="next-hint">{{ $t('auto.Cron.20.578393') }}</span>
           </template>
           <template v-else>
             {{ formatTime(row.next_run_at) }}
@@ -51,53 +51,53 @@
           </template>
         </template>
       </el-table-column>
-      <el-table-column prop="last_run_at" label="上次触发" width="170">
+      <el-table-column prop="last_run_at" :label="$t('auto.Cron.6.a1b7be')" width="170">
         <template #default="{ row }">{{ row.last_run_at ? formatTime(row.last_run_at) : '—' }}</template>
       </el-table-column>
-      <el-table-column label="操作" width="280" fixed="right">
+      <el-table-column :label="$t('auto.Cron.7.2b6bc0')" width="280" fixed="right">
         <template #default="{ row }">
           <el-button size="small" @click="toggle(row)">{{ row.enabled ? '停用' : '启用' }}</el-button>
-          <el-button size="small" @click="openEdit(row)">编辑</el-button>
-          <el-button size="small" type="danger" @click="remove(row)">删除</el-button>
+          <el-button size="small" @click="openEdit(row)">{{ $t('auto.Cron.21.95b351') }}</el-button>
+          <el-button size="small" type="danger" @click="remove(row)">{{ $t('auto.Cron.22.2f4aad') }}</el-button>
         </template>
       </el-table-column>
       <template #empty>
         <div class="empty-hint">
-          还没有触发器。触发器只能挂在 <b>task_type = 定时(cron)</b> 的任务上，且一条任务最多一个。
+          还没有触发器。触发器只能挂在 <b>{{ $t('auto.Cron.23.9bb577') }}</b> 的任务上，且一条任务最多一个。
         </div>
       </template>
     </el-table>
 
-    <el-dialog v-model="dialog.visible" :title="dialog.id ? '编辑触发器' : '新建触发器'" width="520px">
+    <el-dialog v-model="dialog.visible" ::title="$t('auto.Cron.8.0213dd')" width="520px">
       <el-form :model="dialog" label-width="100px">
-        <el-form-item label="任务" required>
-          <el-select v-model="dialog.task_id" :disabled="!!dialog.id" placeholder="选择 cron 类型任务" style="width: 100%">
+        <el-form-item :label="$t('auto.Cron.1.0e46d8')" required>
+          <el-select v-model="dialog.task_id" :disabled="!!dialog.id" :placeholder="$t('auto.Cron.9.b3d2d5')" style="width: 100%">
             <el-option v-for="t in cronTasks" :key="t.id" :label="`#${t.id} ${t.name}`" :value="t.id" />
           </el-select>
           <div v-if="!dialog.id && !cronTasks.length" class="form-hint">
             没有可选任务：先把某条任务的类型改成「定时 (cron)」并发布
           </div>
-          <div v-else-if="!dialog.id" class="form-hint">已排除现有触发器占用的任务（一条任务只能挂一个触发器）</div>
+          <div v-else-if="!dialog.id" class="form-hint">{{ $t('auto.Cron.24.b866f3') }}</div>
           <div v-if="dialog.task_id && !taskRunnable(dialog.task_id)" class="form-warn">
             已选任务状态为 {{ taskStatus(dialog.task_id) }}：触发器会照常排程，但到点会被执行入口拒掉、不产生会话——请先发布该任务
           </div>
         </el-form-item>
-        <el-form-item label="cron 表达式" required>
-          <el-input v-model="dialog.cron_expr" placeholder="*/5 * * * *（5 段：分 时 日 月 周）" />
-          <div class="form-hint">也接受 6 段（秒 分 时 日 月 周）。写错会直接拒，不会挂一个不跑的排程</div>
+        <el-form-item :label="$t('auto.Cron.10.d81787')" required>
+          <el-input v-model="dialog.cron_expr" :placeholder="$t('auto.Cron.11.121826')" />
+          <div class="form-hint">{{ $t('auto.Cron.25.a5923e') }}</div>
         </el-form-item>
-        <el-form-item label="时区">
-          <el-select v-model="dialog.time_zone" clearable placeholder="留空=服务器本地" style="width: 100%">
+        <el-form-item :label="$t('auto.Cron.3.1220b0')">
+          <el-select v-model="dialog.time_zone" clearable :placeholder="$t('auto.Cron.12.1abc48')" style="width: 100%">
             <el-option v-for="tz in TIMEZONES" :key="tz" :label="tz" :value="tz" />
           </el-select>
         </el-form-item>
-        <el-form-item v-if="!dialog.id" label="立即启用">
+        <el-form-item v-if="!dialog.id" :label="$t('auto.Cron.13.1388f2')">
           <el-switch v-model="dialog.enabled" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="dialog.visible = false">取消</el-button>
-        <el-button type="primary" :loading="dialog.saving" @click="submit">保存</el-button>
+        <el-button @click="dialog.visible = false">{{ $t('auto.Cron.26.625fb2') }}</el-button>
+        <el-button type="primary" :loading="dialog.saving" @click="submit">{{ $t('auto.Cron.27.be5fbb') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -105,6 +105,7 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import {
   listBrowserCron, createBrowserCron, updateBrowserCron,
@@ -113,6 +114,8 @@ import {
 } from '@/api/browserAutomation'
 
 const TIMEZONES = ['Asia/Shanghai', 'Asia/Tokyo', 'Europe/London', 'America/New_York', 'UTC']
+
+const { t } = useI18n()
 
 const list = ref([])
 const tasks = ref([])
@@ -152,7 +155,7 @@ const formatTime = (v) => {
 const relativeToNow = (v) => {
   const ms = new Date(v).getTime() - Date.now()
   if (Number.isNaN(ms)) return ''
-  if (ms <= 0) return '已到点'
+  if (ms <= 0) return t('auto.Cron.28.ec01ae')
   const min = Math.round(ms / 60000)
   if (min < 60) return `约 ${min} 分钟后`
   const hour = Math.round(min / 60)
@@ -185,14 +188,14 @@ function openEdit(row) {
 async function submit() {
   const d = dialog.value
   if (!d.cron_expr.trim() || (!d.id && !d.task_id)) {
-    ElMessage.warning('任务和 cron 表达式都得填')
+    ElMessage.warning(t('auto.Cron.29.3318d6'))
     return
   }
   d.saving = true
   try {
     if (d.id) await updateBrowserCron(d.id, { cron_expr: d.cron_expr.trim(), time_zone: d.time_zone || '' })
     else await createBrowserCron({ task_id: d.task_id, cron_expr: d.cron_expr.trim(), time_zone: d.time_zone || '', enabled: d.enabled })
-    ElMessage.success(d.id ? '触发器已更新' : '触发器已创建')
+    ElMessage.success(d.id ? t('auto.Cron.30.38efe7') : t('auto.Cron.31.698ad5'))
     d.visible = false
   } catch {
     // 拒因（表达式第几段不对、该任务已有触发器）由服务端文案给出，拦截器已经弹过一次；
@@ -207,7 +210,7 @@ async function toggle(row) {
   try {
     if (row.enabled) await disableBrowserCron(row.id)
     else await enableBrowserCron(row.id)
-    ElMessage.success('已更新')
+    ElMessage.success(t('auto.Cron.32.1b9209'))
   } catch {
     // 启停失败（例如表达式这次算不出排程）必须让界面回到后端真相，
     // 不能把「点了没生效」的旧状态留着让用户再点一次。
@@ -218,13 +221,13 @@ async function toggle(row) {
 
 async function remove(row) {
   try {
-    await ElMessageBox.confirm(`确认删除任务「${taskName(row.task_id) || '#' + row.task_id}」的触发器？删除后该任务不会再被定时唤起。`, '提示', { type: 'warning' })
+    await ElMessageBox.confirm(`确认删除任务「${taskName(row.task_id) || '#' + row.task_id}」的触发器？删除后该任务不会再被定时唤起。`, t('auto.Cron.33.02d981'), { type: 'warning' })
   } catch {
     return // 用户取消
   }
   try {
     await deleteBrowserCron(row.id)
-    ElMessage.success('已删除')
+    ElMessage.success(t('auto.Cron.34.5cc232'))
   } catch {
     // 同上：失败原因已由拦截器提示，此处只负责刷新回真相
   } finally {

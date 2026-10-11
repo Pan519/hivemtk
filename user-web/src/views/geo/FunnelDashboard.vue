@@ -3,13 +3,13 @@
     <el-card shadow="never">
       <template #header>
         <div class="card-header">
-          <span>🎯 漏斗总览 · 全链路 SEO × GEO</span>
-          <el-button type="primary" size="small" @click="load">刷新</el-button>
+          <span>{{ $t('auto.FunnelDashboard.7.3073ed') }}</span>
+          <el-button type="primary" size="small" @click="load">{{ $t('auto.FunnelDashboard.8.694fc5') }}</el-button>
         </div>
       </template>
 
-      <div v-if="loading">加载中...</div>
-      <el-empty v-else-if="!stats" description="暂无数据，先去做关键词蒸馏和文章生成吧" />
+      <div v-if="loading">{{ $t('auto.FunnelDashboard.9.26b5bd') }}</div>
+      <el-empty v-else-if="!stats" :description="$t('auto.FunnelDashboard.1.0c1515')" />
 
       <template v-else>
         <!-- 双漏斗 -->
@@ -25,11 +25,11 @@
         <!-- 引擎对比 -->
         <el-row :gutter="16" class="stats-row">
           <el-col :span="12">
-            <h4>📈 搜索引擎收录</h4>
+            <h4>{{ $t('auto.FunnelDashboard.10.c2fbb4') }}</h4>
             <el-table :data="engineIndexed" size="small" border>
-              <el-table-column prop="engine" label="引擎" width="120" />
-              <el-table-column prop="count" label="收录数" />
-              <el-table-column label="收录率">
+              <el-table-column prop="engine" :label="$t('auto.FunnelDashboard.2.6c1b19')" width="120" />
+              <el-table-column prop="count" :label="$t('auto.FunnelDashboard.3.ed138c')" />
+              <el-table-column :label="$t('auto.FunnelDashboard.4.b0e0fc')">
                 <template #default="{ row }">
                   <el-progress :percentage="rate(row.count)" />
                 </template>
@@ -37,11 +37,11 @@
             </el-table>
           </el-col>
           <el-col :span="12">
-            <h4>🤖 AI 引擎引用</h4>
+            <h4>{{ $t('auto.FunnelDashboard.11.8b6f7a') }}</h4>
             <el-table :data="engineCited" size="small" border>
-              <el-table-column prop="engine" label="引擎" width="120" />
-              <el-table-column prop="count" label="引用数" />
-              <el-table-column label="引用率">
+              <el-table-column prop="engine" :label="$t('auto.FunnelDashboard.2.6c1b19')" width="120" />
+              <el-table-column prop="count" :label="$t('auto.FunnelDashboard.5.373f31')" />
+              <el-table-column :label="$t('auto.FunnelDashboard.6.db472b')">
                 <template #default="{ row }">
                   <el-progress :percentage="rate(row.count)" />
                 </template>
@@ -63,20 +63,23 @@
 
 <script setup>
 import { ref, reactive, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { geoApi } from '@/api/geo'
+
+const { t } = useI18n()
 
 const stats = ref(null)
 const loading = ref(false)
 
 const labelMap = {
-  seed_count: '种子词',
-  longtail_count: '长尾词',
-  article_count: '文章',
-  deployed_count: '已部署',
-  indexed: '被收录',
-  ai_cited: '被 AI 引用',
-  longtail_to_article: '长尾→文章',
-  article_to_deployed: '文章→部署'
+  seed_count: t('auto.FunnelDashboard.12.d83af8'),
+  longtail_count: t('auto.FunnelDashboard.13.022f20'),
+  article_count: t('auto.FunnelDashboard.14.c75625'),
+  deployed_count: t('auto.FunnelDashboard.15.d87522'),
+  indexed: t('auto.FunnelDashboard.16.b585fa'),
+  ai_cited: t('auto.FunnelDashboard.17.d5c968'),
+  longtail_to_article: t('auto.FunnelDashboard.18.dc1a7b'),
+  article_to_deployed: t('auto.FunnelDashboard.19.33ecec')
 }
 
 const funnel = computed(() => {

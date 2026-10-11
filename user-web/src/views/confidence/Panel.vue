@@ -11,7 +11,7 @@
       <el-col :span="6">
         <el-card>
           <div class="stat-item">
-            <div class="stat-label">信号总数（24h）</div>
+            <div class="stat-label">{{ $t('auto.Panel.35.cd4534') }}</div>
             <div class="stat-value">{{ stats.totalSignals }}</div>
           </div>
         </el-card>
@@ -44,13 +44,13 @@
 
     <el-tabs v-model="activeTab" class="content-tabs">
       
-      <el-tab-pane :label="$t('置信度信号')" name="signals">
+      <el-tab-pane ::label="$t('auto.Panel.1.4b70a8')" name="signals">
         <el-card>
           <template #header>
             <div class="card-header">
-              <span>信号流（最近 100 条）</span>
+              <span>{{ $t('auto.Panel.36.f64e29') }}</span>
               <div>
-                <el-input v-model="signalSearch" :placeholder="$t('搜索 session_id')" clearable style="width: 200px" @change="loadSignals" />
+                <el-input v-model="signalSearch" ::placeholder="$t('auto.Panel.2.f95a4f')" clearable style="width: 200px" @change="loadSignals" />
                 <el-button @click="loadSignals" style="margin-left: 10px">
                   <el-icon><Refresh /></el-icon>
                   {{ $t('刷新') }}
@@ -60,50 +60,50 @@
           </template>
           <el-table :data="signals" v-loading="signalsLoading" stripe>
             <el-table-column prop="id" label="ID" width="80" />
-            <el-table-column prop="session_id" label="会话 ID" width="160" />
-            <el-table-column prop="intent_conf" label="意图置信" width="100">
+            <el-table-column prop="session_id" :label="$t('auto.Panel.3.427bc5')" width="160" />
+            <el-table-column prop="intent_conf" :label="$t('auto.Panel.4.489a1e')" width="100">
               <template #default="{ row }">
                 <el-tag :type="confTagType(row.intent_conf)">{{ (row.intent_conf || 0).toFixed(3) }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="entity_comp" label="实体完整度" width="100">
+            <el-table-column prop="entity_comp" :label="$t('auto.Panel.5.b05bf9')" width="100">
               <template #default="{ row }">
                 {{ (row.entity_comp || 0).toFixed(3) }}
               </template>
             </el-table-column>
-            <el-table-column prop="ctx_relev" label="上下文相关" width="100">
+            <el-table-column prop="ctx_relev" :label="$t('auto.Panel.6.a3845a')" width="100">
               <template #default="{ row }">
                 {{ (row.ctx_relev || 0).toFixed(3) }}
               </template>
             </el-table-column>
-            <el-table-column prop="rag_qual" label="RAG 质量" width="100">
+            <el-table-column prop="rag_qual" :label="$t('auto.Panel.7.a378ad')" width="100">
               <template #default="{ row }">
                 {{ (row.rag_qual || 0).toFixed(3) }}
               </template>
             </el-table-column>
-            <el-table-column prop="llm_entropy" label="LLM 熵" width="100">
+            <el-table-column prop="llm_entropy" :label="$t('auto.Panel.8.6fa147')" width="100">
               <template #default="{ row }">
                 {{ (row.llm_entropy || 0).toFixed(3) }}
               </template>
             </el-table-column>
-            <el-table-column prop="aggregated_score" label="综合置信度" width="110">
+            <el-table-column prop="aggregated_score" :label="$t('auto.Panel.9.32c847')" width="110">
               <template #default="{ row }">
                 <el-tag :type="confTagType(row.aggregated_score)" effect="dark">
                   {{ (row.aggregated_score || 0).toFixed(3) }}
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="threshold" label="动态阈值" width="100">
+            <el-table-column prop="threshold" :label="$t('auto.Panel.10.052c00')" width="100">
               <template #default="{ row }">
                 {{ (row.threshold || 0).toFixed(3) }}
               </template>
             </el-table-column>
-            <el-table-column label="决策" width="100">
+            <el-table-column :label="$t('auto.Panel.11.5fd3a1')" width="100">
               <template #default="{ row }">
                 <el-tag :type="decisionTagType(row.decision)">{{ decisionLabel(row.decision) }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="calculated_at" label="计算时间" width="170">
+            <el-table-column prop="calculated_at" :label="$t('auto.Panel.12.d7172b')" width="170">
               <template #default="{ row }">
                 {{ formatTime(row.calculated_at) }}
               </template>
@@ -124,11 +124,11 @@
       </el-tab-pane>
 
       
-      <el-tab-pane label="置信度校准" name="calibrations">
+      <el-tab-pane :label="$t('auto.Panel.13.8c11c0')" name="calibrations">
         <el-card>
           <template #header>
             <div class="card-header">
-              <span>温度缩放校准记录（最近 50 条）</span>
+              <span>{{ $t('auto.Panel.37.6f3127') }}</span>
               <el-button @click="loadCalibrations">
                 <el-icon><Refresh /></el-icon>
                 刷新
@@ -137,21 +137,21 @@
           </template>
           <el-table :data="calibrations" v-loading="calibrationsLoading" stripe>
             <el-table-column prop="id" label="ID" width="80" />
-            <el-table-column prop="scenario" label="场景" width="160" />
-            <el-table-column prop="temperature" label="温度参数" width="120">
+            <el-table-column prop="scenario" :label="$t('auto.Panel.14.c93165')" width="160" />
+            <el-table-column prop="temperature" :label="$t('auto.Panel.15.d04592')" width="120">
               <template #default="{ row }">
                 {{ (row.temperature || 0).toFixed(4) }}
               </template>
             </el-table-column>
-            <el-table-column prop="ece" label="ECE（期望校准误差）" width="180">
+            <el-table-column prop="ece" :label="$t('auto.Panel.16.50d812')" width="180">
               <template #default="{ row }">
                 <el-tag :type="row.ece < 0.05 ? 'success' : row.ece < 0.1 ? 'warning' : 'danger'">
                   {{ (row.ece || 0).toFixed(4) }}
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="sample_count" label="样本数" width="100" />
-            <el-table-column prop="calculated_at" label="计算时间" width="170">
+            <el-table-column prop="sample_count" :label="$t('auto.Panel.17.c1ce23')" width="100" />
+            <el-table-column prop="calculated_at" :label="$t('auto.Panel.12.d7172b')" width="170">
               <template #default="{ row }">
                 {{ formatTime(row.calculated_at) }}
               </template>
@@ -161,11 +161,11 @@
       </el-tab-pane>
 
       
-      <el-tab-pane label="转人工阈值策略" name="policies">
+      <el-tab-pane :label="$t('auto.Panel.18.ef01b5')" name="policies">
         <el-card>
           <template #header>
             <div class="card-header">
-              <span>转人工规则（base / customer_level / timeslot / agent_availability 四因子动态阈值）</span>
+              <span>{{ $t('auto.Panel.38.833b71') }}</span>
               <el-button type="primary" @click="showPolicyDialog()">
                 <el-icon><Plus /></el-icon>
                 新建策略
@@ -174,31 +174,31 @@
           </template>
           <el-table :data="policies" v-loading="policiesLoading" stripe>
             <el-table-column prop="id" label="ID" width="80" />
-            <el-table-column prop="name" label="策略名" />
-            <el-table-column prop="scenario" label="适用场景" width="160" />
-            <el-table-column prop="base_threshold" label="基础阈值" width="100">
+            <el-table-column prop="name" :label="$t('auto.Panel.19.27bf5b')" />
+            <el-table-column prop="scenario" :label="$t('auto.Panel.20.62b37e')" width="160" />
+            <el-table-column prop="base_threshold" :label="$t('auto.Panel.21.288144')" width="100">
               <template #default="{ row }">
                 {{ (row.base_threshold || 0).toFixed(3) }}
               </template>
             </el-table-column>
-            <el-table-column prop="vip_threshold" label="VIP 阈值" width="100">
+            <el-table-column prop="vip_threshold" :label="$t('auto.Panel.22.ef619e')" width="100">
               <template #default="{ row }">
                 {{ (row.vip_threshold || 0).toFixed(3) }}
               </template>
             </el-table-column>
-            <el-table-column prop="transfer_low" label="远低转人工" width="100">
+            <el-table-column prop="transfer_low" :label="$t('auto.Panel.23.78c0aa')" width="100">
               <template #default="{ row }">
                 {{ (row.transfer_low || 0).toFixed(3) }}
               </template>
             </el-table-column>
-            <el-table-column prop="is_active" label="启用" width="80">
+            <el-table-column prop="is_active" :label="$t('auto.Panel.24.7854b5')" width="80">
               <template #default="{ row }">
                 <el-switch :model-value="row.is_active" disabled />
               </template>
             </el-table-column>
-            <el-table-column label="操作" width="160" fixed="right">
+            <el-table-column :label="$t('auto.Panel.25.2b6bc0')" width="160" fixed="right">
               <template #default="{ row }">
-                <el-button size="small" @click="showPolicyDialog(row)">编辑</el-button>
+                <el-button size="small" @click="showPolicyDialog(row)">{{ $t('auto.Panel.39.95b351') }}</el-button>
                 <el-button size="small" type="primary" @click="togglePolicy(row)">
                   {{ row.is_active ? '禁用' : '启用' }}
                 </el-button>
@@ -210,42 +210,42 @@
     </el-tabs>
 
     
-    <el-dialog v-model="policyDialogVisible" :title="editingPolicy.id ? '编辑阈值策略' : '新建阈值策略'" width="640px">
+    <el-dialog v-model="policyDialogVisible" ::title="$t('auto.Panel.26.9ad05b')" width="640px">
       <el-form :model="editingPolicy" label-width="120px">
-        <el-form-item label="策略名" required>
-          <el-input v-model="editingPolicy.name" placeholder="例如：电商_高客单价场景" />
+        <el-form-item :label="$t('auto.Panel.19.27bf5b')" required>
+          <el-input v-model="editingPolicy.name" :placeholder="$t('auto.Panel.27.5a6dae')" />
         </el-form-item>
-        <el-form-item label="适用场景">
-          <el-select v-model="editingPolicy.scenario" placeholder="选择场景" style="width: 100%">
-            <el-option label="电商高客单" value="ecommerce_high_value" />
-            <el-option label="电商低客单" value="ecommerce_low_value" />
-            <el-option label="SaaS 销售" value="saas_sales" />
-            <el-option label="客服咨询" value="customer_service" />
-            <el-option label="全场景" value="all" />
+        <el-form-item :label="$t('auto.Panel.20.62b37e')">
+          <el-select v-model="editingPolicy.scenario" :placeholder="$t('auto.Panel.28.8a5227')" style="width: 100%">
+            <el-option :label="$t('auto.Panel.29.e9d2f7')" value="ecommerce_high_value" />
+            <el-option :label="$t('auto.Panel.30.9340e2')" value="ecommerce_low_value" />
+            <el-option :label="$t('auto.Panel.31.39ad72')" value="saas_sales" />
+            <el-option :label="$t('auto.Panel.32.ea8dc9')" value="customer_service" />
+            <el-option :label="$t('auto.Panel.33.eee699')" value="all" />
           </el-select>
         </el-form-item>
-        <el-form-item label="基础阈值">
+        <el-form-item :label="$t('auto.Panel.21.288144')">
           <el-input-number v-model="editingPolicy.base_threshold" :min="0" :max="1" :step="0.01" />
-          <span class="form-tip">默认 0.7，置信度低于此值触发 LLM 兜底</span>
+          <span class="form-tip">{{ $t('auto.Panel.40.51ea7f') }}</span>
         </el-form-item>
-        <el-form-item label="VIP 阈值">
+        <el-form-item :label="$t('auto.Panel.22.ef619e')">
           <el-input-number v-model="editingPolicy.vip_threshold" :min="0" :max="1" :step="0.01" />
-          <span class="form-tip">VIP 客户阈值更高（更倾向转人工）</span>
+          <span class="form-tip">{{ $t('auto.Panel.41.2782f2') }}</span>
         </el-form-item>
-        <el-form-item label="远低转人工">
+        <el-form-item :label="$t('auto.Panel.23.78c0aa')">
           <el-input-number v-model="editingPolicy.transfer_low" :min="0" :max="1" :step="0.01" />
-          <span class="form-tip">低于此值直接转人工，不进 LLM 兜底</span>
+          <span class="form-tip">{{ $t('auto.Panel.42.76744b') }}</span>
         </el-form-item>
-        <el-form-item label="启用">
+        <el-form-item :label="$t('auto.Panel.24.7854b5')">
           <el-switch v-model="editingPolicy.is_active" />
         </el-form-item>
-        <el-form-item label="备注">
+        <el-form-item :label="$t('auto.Panel.34.2432b5')">
           <el-input v-model="editingPolicy.remark" type="textarea" :rows="2" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="policyDialogVisible = false">取消</el-button>
-        <el-button type="primary" @click="savePolicy">保存</el-button>
+        <el-button @click="policyDialogVisible = false">{{ $t('auto.Panel.43.625fb2') }}</el-button>
+        <el-button type="primary" @click="savePolicy">{{ $t('auto.Panel.44.be5fbb') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -255,6 +255,7 @@
 import i18n from '@/i18n'
 
 import { ref, onMounted, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import {
   getConfidenceSignals,
@@ -263,6 +264,8 @@ import {
   getThresholdPolicies,
   upsertThresholdPolicy
 } from '@/api/tuning'
+
+const { t } = useI18n()
 
 const activeTab = ref('signals')
 
@@ -289,7 +292,7 @@ async function loadSignals() {
     signals.value = res?.list || res?.data?.list || []
     signalTotal.value = res?.total || res?.data?.total || 0
   } catch (e) {
-    ElMessage.error('信号列表加载失败：' + (e?.message || e))
+    ElMessage.error(t('auto.Panel.45.2c4696') + (e?.message || e))
   } finally {
     signalsLoading.value = false
   }
@@ -318,7 +321,7 @@ async function loadCalibrations() {
     const res = await getConfidenceCalibrations({ page: 1, page_size: 50 })
     calibrations.value = res?.list || res?.data?.list || []
   } catch (e) {
-    ElMessage.error('校准数据加载失败：' + (e?.message || e))
+    ElMessage.error(t('auto.Panel.46.793f31') + (e?.message || e))
   } finally {
     calibrationsLoading.value = false
   }
@@ -332,7 +335,7 @@ async function loadPolicies() {
     const res = await getThresholdPolicies({ page: 1, page_size: 100 })
     policies.value = res?.list || res?.data?.list || []
   } catch (e) {
-    ElMessage.error('策略列表加载失败：' + (e?.message || e))
+    ElMessage.error(t('auto.Panel.47.8fb5fa') + (e?.message || e))
   } finally {
     policiesLoading.value = false
   }
@@ -368,22 +371,22 @@ function showPolicyDialog(row) {
 }
 async function savePolicy() {
   if (!editingPolicy.value.name) {
-    ElMessage.warning(i18n.global.t('请填写策略名'))
+    ElMessage.warning(i18n.global.t(t('auto.Panel.48.f3e19e')))
     return
   }
   try {
     await upsertThresholdPolicy(editingPolicy.value)
-    ElMessage.success(i18n.global.t('保存成功'))
+    ElMessage.success(i18n.global.t(t('auto.Panel.49.3b1083')))
     policyDialogVisible.value = false
     await loadPolicies()
   } catch (e) {
-    ElMessage.error('保存失败：' + (e?.message || e))
+    ElMessage.error(t('auto.Panel.50.78d235') + (e?.message || e))
   }
 }
 async function togglePolicy(row) {
-  const action = row.is_active ? '禁用' : '启用'
+  const action = row.is_active ? t('auto.Panel.51.710ad0') : t('auto.Panel.24.7854b5')
   try {
-    await ElMessageBox.confirm(`确认要${action}策略「${row.name}」？`, '提示', { type: 'warning' })
+    await ElMessageBox.confirm(`确认要${action}策略「${row.name}」？`, t('auto.Panel.52.02d981'), { type: 'warning' })
     await upsertThresholdPolicy({ ...row, is_active: !row.is_active })
     ElMessage.success(`${action}成功`)
     await loadPolicies()
@@ -400,7 +403,7 @@ function confTagType(v) {
   return 'danger'
 }
 function decisionLabel(d) {
-  return { auto_reply: '自动回复', llm_fallback: 'LLM 兜底', review_queue: '审核队列', transfer: '转人工' }[d] || d || '-'
+  return { auto_reply: t('auto.Panel.53.922a77'), llm_fallback: 'LLM 兜底', review_queue: t('auto.Panel.54.3d1469'), transfer: t('auto.Panel.55.c7b8f4') }[d] || d || '-'
 }
 function decisionTagType(d) {
   // 兜底不能用空串：el-tag 的 type 合法值只有 primary/success/info/warning/danger，

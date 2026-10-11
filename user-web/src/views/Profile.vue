@@ -44,30 +44,30 @@
             label-width="100px"
             label-position="right"
           >
-            <el-form-item label="登录账号" prop="username">
+            <el-form-item :label="$t('auto.Profile.1.bb2cdf')" prop="username">
               <el-input v-model="form.username" disabled />
             </el-form-item>
-            <el-form-item label="真实姓名" prop="real_name">
-              <el-input v-model="form.real_name" placeholder="请输入真实姓名" maxlength="32" />
+            <el-form-item :label="$t('auto.Profile.2.7eacb4')" prop="real_name">
+              <el-input v-model="form.real_name" :placeholder="$t('auto.Profile.3.3348b7')" maxlength="32" />
             </el-form-item>
-            <el-form-item label="邮箱" prop="email">
-              <el-input v-model="form.email" placeholder="请输入邮箱" maxlength="64" />
+            <el-form-item :label="$t('auto.Profile.4.3bc5e6')" prop="email">
+              <el-input v-model="form.email" :placeholder="$t('auto.Profile.5.dbf6d0')" maxlength="64" />
             </el-form-item>
-            <el-form-item label="手机号" prop="phone">
-              <el-input v-model="form.phone" placeholder="请输入手机号" maxlength="20" />
+            <el-form-item :label="$t('auto.Profile.6.8098e2')" prop="phone">
+              <el-input v-model="form.phone" :placeholder="$t('auto.Profile.7.6e4f4b')" maxlength="20" />
             </el-form-item>
-            <el-form-item label="角色">
+            <el-form-item :label="$t('auto.Profile.8.464f3d')">
               <el-tag :type="roleTagType">{{ roleLabel }}</el-tag>
-              <span class="readonly-hint">角色由系统根据初始化/分配决定，暂不支持自助修改</span>
+              <span class="readonly-hint">{{ $t('auto.Profile.18.5b6eb1') }}</span>
             </el-form-item>
-            <el-form-item label="状态">
-              <el-tag v-if="form.status === 1" type="success">启用</el-tag>
-              <el-tag v-else type="info">已停用</el-tag>
+            <el-form-item :label="$t('auto.Profile.9.3fea7c')">
+              <el-tag v-if="form.status === 1" type="success">{{ $t('auto.Profile.19.7854b5') }}</el-tag>
+              <el-tag v-else type="info">{{ $t('auto.Profile.20.69b0f6') }}</el-tag>
             </el-form-item>
-            <el-form-item label="创建时间">
+            <el-form-item :label="$t('auto.Profile.10.eca37c')">
               <span class="readonly-text">{{ form.created_at || '-' }}</span>
             </el-form-item>
-            <el-form-item label="最后登录">
+            <el-form-item :label="$t('auto.Profile.11.19fb21')">
               <span class="readonly-text">{{ form.last_login_at || '尚未记录' }}</span>
             </el-form-item>
             <el-form-item>
@@ -75,14 +75,14 @@
                 <el-icon><Check /></el-icon>
                 保存修改
               </el-button>
-              <el-button @click="loadProfile">重置</el-button>
+              <el-button @click="loadProfile">{{ $t('auto.Profile.21.4b9c32') }}</el-button>
             </el-form-item>
           </el-form>
         </el-card>
 
         <el-card class="password-card" shadow="never">
           <template #header>
-            <span>修改密码</span>
+            <span>{{ $t('auto.Profile.22.7fc88a') }}</span>
           </template>
           <el-alert
             type="info"
@@ -99,28 +99,28 @@
             label-width="100px"
             label-position="right"
           >
-            <el-form-item label="当前密码" prop="oldPassword">
+            <el-form-item :label="$t('auto.Profile.12.a806ce')" prop="oldPassword">
               <el-input
                 v-model="pwdForm.oldPassword"
                 type="password"
                 show-password
-                placeholder="请输入当前密码"
+                :placeholder="$t('auto.Profile.13.cd043c')"
               />
             </el-form-item>
-            <el-form-item label="新密码" prop="newPassword">
+            <el-form-item :label="$t('auto.Profile.14.bf7da0')" prop="newPassword">
               <el-input
                 v-model="pwdForm.newPassword"
                 type="password"
                 show-password
-                placeholder="至少 8 位，含大小写字母+数字"
+                :placeholder="$t('auto.Profile.15.204d3e')"
               />
             </el-form-item>
-            <el-form-item label="确认新密码" prop="confirmPassword">
+            <el-form-item :label="$t('auto.Profile.16.670d63')" prop="confirmPassword">
               <el-input
                 v-model="pwdForm.confirmPassword"
                 type="password"
                 show-password
-                placeholder="再次输入新密码"
+                :placeholder="$t('auto.Profile.17.ec7b73')"
                 @keyup.enter="onChangePassword"
               />
             </el-form-item>
@@ -141,6 +141,7 @@
 import i18n from '@/i18n'
 
 import { ref, reactive, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { Check, Lock } from '@element-plus/icons-vue'
 import { http } from '@/utils/request'
@@ -148,6 +149,8 @@ import { useUserStore } from '@/stores/user'
 
 const userStore = useUserStore()
 void Check; void Lock
+
+const { t } = useI18n()
 
 const loading = ref(false)
 const saving = ref(false)
@@ -178,11 +181,11 @@ const initial = computed(() => (form.username || '?').charAt(0).toUpperCase())
 
 const roleLabel = computed(() => {
   const r = form.role || userStore.role || ''
-  if (r === 'admin') return '商户管理员'
-  if (r === 'manager') return '销售主管'
-  if (r === 'sales') return '一线销售'
-  if (r === 'viewer') return '数据分析师'
-  return r || '未设置'
+  if (r === 'admin') return t('auto.Profile.23.1dd8e0')
+  if (r === 'manager') return t('auto.Profile.24.c0477f')
+  if (r === 'sales') return t('auto.Profile.25.4ae98a')
+  if (r === 'viewer') return t('auto.Profile.26.6c5190')
+  return r || t('auto.Profile.27.fe2d26')
 })
 
 const roleTagType = computed(() => {
@@ -194,12 +197,12 @@ const roleTagType = computed(() => {
 })
 
 const rules = {
-  real_name: [{ max: 32, message: i18n.global.t('长度不能超过 32 字符'), trigger: 'blur' }],
+  real_name: [{ max: 32, message: i18n.global.t(t('auto.Profile.28.9864ba')), trigger: 'blur' }],
   email: [{
     validator: (_rule, value, cb) => {
       if (!value) return cb()
       if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value)) {
-        return cb(new Error('邮箱格式不正确'))
+        return cb(new Error(t('auto.Profile.29.75262e')))
       }
       cb()
     },
@@ -209,7 +212,7 @@ const rules = {
     validator: (_rule, value, cb) => {
       if (!value) return cb()
       if (!/^1[3-9]\d{9}$/.test(value)) {
-        return cb(new Error('手机号格式不正确'))
+        return cb(new Error(t('auto.Profile.30.19c896')))
       }
       cb()
     },
@@ -218,27 +221,27 @@ const rules = {
 }
 
 const pwdRules = {
-  oldPassword: [{ required: true, message: i18n.global.t('请输入当前密码'), trigger: 'blur' }],
+  oldPassword: [{ required: true, message: i18n.global.t(t('auto.Profile.13.cd043c')), trigger: 'blur' }],
   newPassword: [
-    { required: true, message: i18n.global.t('请输入新密码'), trigger: 'blur' },
-    { min: 8, max: 64, message: i18n.global.t('密码长度 8-64 位'), trigger: 'blur' },
+    { required: true, message: i18n.global.t(t('auto.Profile.31.abdd7e')), trigger: 'blur' },
+    { min: 8, max: 64, message: i18n.global.t(t('auto.Profile.32.73ca94')), trigger: 'blur' },
     {
       validator: (_rule, value, cb) => {
         if (!value) return cb()
-        if (!/[a-z]/.test(value)) return cb(new Error('需包含小写字母'))
-        if (!/[A-Z]/.test(value)) return cb(new Error('需包含大写字母'))
-        if (!/\d/.test(value)) return cb(new Error('需包含数字'))
+        if (!/[a-z]/.test(value)) return cb(new Error(t('auto.Profile.33.799739')))
+        if (!/[A-Z]/.test(value)) return cb(new Error(t('auto.Profile.34.bb02c8')))
+        if (!/\d/.test(value)) return cb(new Error(t('auto.Profile.35.a65c9e')))
         cb()
       },
       trigger: 'blur'
     }
   ],
   confirmPassword: [
-    { required: true, message: i18n.global.t('请再次输入新密码'), trigger: 'blur' },
+    { required: true, message: i18n.global.t(t('auto.Profile.36.d98a14')), trigger: 'blur' },
     {
       validator: (_rule, value, cb) => {
         if (value !== pwdForm.newPassword) {
-          return cb(new Error('两次输入的密码不一致'))
+          return cb(new Error(t('auto.Profile.37.6046d6')))
         }
         cb()
       },
@@ -270,7 +273,7 @@ const loadProfile = async () => {
       role: data.role
     });
   } catch (err) {
-    ElMessage.error('加载个人资料失败：' + (err?.message || err))
+    ElMessage.error(t('auto.Profile.38.19a682') + (err?.message || err))
   } finally {
     loading.value = false
   }
@@ -286,10 +289,10 @@ const onSave = async () => {
       email: form.email,
       phone: form.phone
     })
-    ElMessage.success(i18n.global.t('保存成功'))
+    ElMessage.success(i18n.global.t(t('auto.Profile.39.3b1083')))
   } catch (err) {
     if (err?.message) {
-      ElMessage.error('保存失败：' + err.message)
+      ElMessage.error(t('auto.Profile.40.78d235') + err.message)
     }
   } finally {
     saving.value = false
@@ -302,9 +305,9 @@ const onChangePassword = async () => {
     await pwdFormRef.value.validate()
     try {
       await ElMessageBox.confirm(
-        '修改密码后将退出当前登录，需要使用新密码重新登录。',
-        '确认修改密码',
-        { type: 'warning', confirmButtonText: '确认修改', cancelButtonText: '取消' }
+        t('auto.Profile.41.0abe7e'),
+        t('auto.Profile.42.146713'),
+        { type: 'warning', confirmButtonText: t('auto.Profile.43.49e56c'), cancelButtonText: t('auto.Profile.44.625fb2') }
       )
     } catch {
       return;
@@ -314,14 +317,14 @@ const onChangePassword = async () => {
       old_password: pwdForm.oldPassword,
       new_password: pwdForm.newPassword
     })
-    ElMessage.success(i18n.global.t('密码修改成功，即将退出登录'))
+    ElMessage.success(i18n.global.t(t('auto.Profile.45.4e400f')))
     setTimeout(() => {
       userStore.logout()
       window.location.href = '/#/login'
     }, 1200)
   } catch (err) {
     if (err?.message) {
-      ElMessage.error('修改失败：' + err.message)
+      ElMessage.error(t('auto.Profile.46.c26a1c') + err.message)
     }
   } finally {
     pwdSaving.value = false

@@ -2,7 +2,7 @@
   <div class="message-hub-container">
     
     <div class="page-header">
-      <h2>消息中台 MQ</h2>
+      <h2>{{ $t('auto.List.50.1c057a') }}</h2>
       <div class="header-actions">
         <el-button type="primary" @click="openPushDialog">
           <el-icon><Plus /></el-icon>
@@ -44,7 +44,7 @@
       <el-col :span="4">
         <el-card shadow="hover" class="stat-card stat-recent">
           <div class="stat-value">{{ stats.recent_24h ?? 0 }}</div>
-          <div class="stat-label">近 24h 新增</div>
+          <div class="stat-label">{{ $t('auto.List.51.bc03e4') }}</div>
         </el-card>
       </el-col>
       <el-col :span="4">
@@ -74,45 +74,45 @@
     
     <div class="search-form">
       <el-form :inline="true" :model="searchForm" class="search-form-content">
-        <el-form-item label="平台">
-          <el-select v-model="searchForm.platform" placeholder="全部平台" clearable style="width: 140px">
+        <el-form-item :label="$t('auto.List.1.498128')">
+          <el-select v-model="searchForm.platform" :placeholder="$t('auto.List.2.cca5c3')" clearable style="width: 140px">
             <el-option v-for="p in platformOptions" :key="p" :label="platformLabel(p)" :value="p" />
           </el-select>
         </el-form-item>
-        <el-form-item label="账号 ID">
-          <el-input v-model="searchForm.account_id" placeholder="账号 ID" clearable style="width: 160px" />
+        <el-form-item :label="$t('auto.List.3.d050a0')">
+          <el-input v-model="searchForm.account_id" :placeholder="$t('auto.List.3.d050a0')" clearable style="width: 160px" />
         </el-form-item>
-        <el-form-item label="会话 ID">
-          <el-input v-model="searchForm.conversation_id" placeholder="会话 ID" clearable style="width: 160px" />
+        <el-form-item :label="$t('auto.List.4.427bc5')">
+          <el-input v-model="searchForm.conversation_id" :placeholder="$t('auto.List.4.427bc5')" clearable style="width: 160px" />
         </el-form-item>
-        <el-form-item label="发送者">
-          <el-input v-model="searchForm.sender_id" placeholder="发送者 ID" clearable style="width: 140px" />
+        <el-form-item :label="$t('auto.List.5.413dc9')">
+          <el-input v-model="searchForm.sender_id" :placeholder="$t('auto.List.6.b21fd4')" clearable style="width: 140px" />
         </el-form-item>
-        <el-form-item label="方向">
-          <el-select v-model="searchForm.direction" placeholder="全部" clearable style="width: 120px">
-            <el-option label="接收 (inbound)" value="inbound" />
-            <el-option label="发送 (outbound)" value="outbound" />
+        <el-form-item :label="$t('auto.List.7.a465db')">
+          <el-select v-model="searchForm.direction" :placeholder="$t('auto.List.8.a8b0c2')" clearable style="width: 120px">
+            <el-option :label="$t('auto.List.9.3578f2')" value="inbound" />
+            <el-option :label="$t('auto.List.10.36b4aa')" value="outbound" />
           </el-select>
         </el-form-item>
-        <el-form-item label="类型">
-          <el-select v-model="searchForm.msg_type" placeholder="全部类型" clearable style="width: 120px">
+        <el-form-item :label="$t('auto.List.11.226b09')">
+          <el-select v-model="searchForm.msg_type" :placeholder="$t('auto.List.12.c079e7')" clearable style="width: 120px">
             <el-option v-for="t in msgTypeOptions" :key="t" :label="t" :value="t" />
           </el-select>
         </el-form-item>
-        <el-form-item label="已读">
-          <el-select v-model="searchForm.is_read" placeholder="全部" clearable style="width: 100px">
-            <el-option label="未读" value="false" />
-            <el-option label="已读" value="true" />
+        <el-form-item :label="$t('auto.List.13.8ad629')">
+          <el-select v-model="searchForm.is_read" :placeholder="$t('auto.List.8.a8b0c2')" clearable style="width: 100px">
+            <el-option :label="$t('auto.List.14.894a10')" value="false" />
+            <el-option :label="$t('auto.List.13.8ad629')" value="true" />
           </el-select>
         </el-form-item>
-        <el-form-item label="群消息">
-          <el-select v-model="searchForm.is_group" placeholder="全部" clearable style="width: 100px">
-            <el-option label="群消息" value="true" />
-            <el-option label="单聊" value="false" />
+        <el-form-item :label="$t('auto.List.15.6778af')">
+          <el-select v-model="searchForm.is_group" :placeholder="$t('auto.List.8.a8b0c2')" clearable style="width: 100px">
+            <el-option :label="$t('auto.List.15.6778af')" value="true" />
+            <el-option :label="$t('auto.List.16.f994ae')" value="false" />
           </el-select>
         </el-form-item>
-        <el-form-item label="关键字">
-          <el-input v-model="searchForm.keyword" placeholder="内容关键字" clearable style="width: 160px" />
+        <el-form-item :label="$t('auto.List.17.cfb5f1')">
+          <el-input v-model="searchForm.keyword" :placeholder="$t('auto.List.18.7370e4')" clearable style="width: 160px" />
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="handleSearch">
@@ -132,33 +132,33 @@
               @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="44" />
       <el-table-column prop="id" label="ID" width="80" />
-      <el-table-column label="平台" width="110">
+      <el-table-column :label="$t('auto.List.1.498128')" width="110">
         <template #default="{ row }">
           <el-tag :type="platformTagType(row.platform)" size="small">{{ platformLabel(row.platform) }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="account_id" label="账号" width="120" show-overflow-tooltip />
-      <el-table-column label="方向" width="80">
+      <el-table-column prop="account_id" :label="$t('auto.List.19.7035c6')" width="120" show-overflow-tooltip />
+      <el-table-column :label="$t('auto.List.7.a465db')" width="80">
         <template #default="{ row }">
           <el-tag :type="getDirectionTagType(row.direction)" size="small">
             {{ getDirectionLabel(row.direction) }}
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="msg_type" label="类型" width="90">
+      <el-table-column prop="msg_type" :label="$t('auto.List.11.226b09')" width="90">
         <template #default="{ row }">
           <el-tag :type="getMsgTypeTagType(row.msg_type)" size="small" effect="plain">
             {{ getMsgTypeLabel(row.msg_type) }}
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="sender_name" label="发送方" width="140" show-overflow-tooltip />
-      <el-table-column prop="receiver_name" label="接收方" width="140" show-overflow-tooltip />
-      <el-table-column prop="content" label="内容" min-width="240" show-overflow-tooltip />
-      <el-table-column label="会话" width="120" show-overflow-tooltip>
+      <el-table-column prop="sender_name" :label="$t('auto.List.20.16b213')" width="140" show-overflow-tooltip />
+      <el-table-column prop="receiver_name" :label="$t('auto.List.21.8db216')" width="140" show-overflow-tooltip />
+      <el-table-column prop="content" :label="$t('auto.List.22.2d711b')" min-width="240" show-overflow-tooltip />
+      <el-table-column :label="$t('auto.List.23.9a834e')" width="120" show-overflow-tooltip>
         <template #default="{ row }">
           <span>{{ row.conversation_id || '-' }}</span>
-          <el-tag v-if="row.is_group" type="info" size="small" style="margin-left: 4px">群</el-tag>
+          <el-tag v-if="row.is_group" type="info" size="small" style="margin-left: 4px">{{ $t('auto.List.52.532575') }}</el-tag>
         </template>
       </el-table-column>
       <el-table-column label="AI" width="70">
@@ -167,20 +167,20 @@
           <span v-else>-</span>
         </template>
       </el-table-column>
-      <el-table-column label="状态" width="80">
+      <el-table-column :label="$t('auto.List.24.3fea7c')" width="80">
         <template #default="{ row }">
           <el-tag :type="row.is_read ? 'info' : 'danger'" size="small">
             {{ row.is_read ? '已读' : '未读' }}
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="sent_at" label="发送时间" width="170">
+      <el-table-column prop="sent_at" :label="$t('auto.List.25.63b34d')" width="170">
         <template #default="{ row }">{{ formatTime(row.sent_at) }}</template>
       </el-table-column>
-      <el-table-column label="操作" width="170" fixed="right">
+      <el-table-column :label="$t('auto.List.26.2b6bc0')" width="170" fixed="right">
         <template #default="{ row }">
-          <el-button type="primary" size="small" link @click="handleViewDetail(row)">详情</el-button>
-          <el-button v-if="!row.is_read" type="warning" size="small" link @click="handleMarkRead(row)">标记已读</el-button>
+          <el-button type="primary" size="small" link @click="handleViewDetail(row)">{{ $t('auto.List.53.f26225') }}</el-button>
+          <el-button v-if="!row.is_read" type="warning" size="small" link @click="handleMarkRead(row)">{{ $t('auto.List.54.3105f7') }}</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -188,7 +188,7 @@
     
     <div class="batch-bar" v-if="selectedRows.length">
       <span>已选 {{ selectedRows.length }} 条</span>
-      <el-button size="small" type="primary" @click="handleBatchMarkRead">批量标记已读</el-button>
+      <el-button size="small" type="primary" @click="handleBatchMarkRead">{{ $t('auto.List.55.d30c40') }}</el-button>
     </div>
 
     
@@ -205,110 +205,110 @@
     </div>
 
     
-    <el-dialog v-model="pushDialogVisible" title="推送消息到中台" width="720px" top="5vh">
+    <el-dialog v-model="pushDialogVisible" :title="$t('auto.List.27.38f580')" width="720px" top="5vh">
       <el-form :model="pushForm" :rules="pushRules" ref="pushFormRef" label-width="120px">
-        <el-form-item label="平台" prop="platform">
-          <el-select v-model="pushForm.platform" placeholder="选择平台" style="width: 100%">
+        <el-form-item :label="$t('auto.List.1.498128')" prop="platform">
+          <el-select v-model="pushForm.platform" :placeholder="$t('auto.List.28.9134b4')" style="width: 100%">
             <el-option v-for="p in platformOptions" :key="p" :label="platformLabel(p)" :value="p" />
           </el-select>
         </el-form-item>
-        <el-form-item label="账号 ID" prop="account_id">
-          <el-input v-model="pushForm.account_id" placeholder="渠道账号 ID" />
+        <el-form-item :label="$t('auto.List.3.d050a0')" prop="account_id">
+          <el-input v-model="pushForm.account_id" :placeholder="$t('auto.List.29.e4f16d')" />
         </el-form-item>
-        <el-form-item label="消息 ID" prop="msg_id">
-          <el-input v-model="pushForm.msg_id" placeholder="渠道原始消息 ID（留空自动生成）" />
+        <el-form-item :label="$t('auto.List.30.795e00')" prop="msg_id">
+          <el-input v-model="pushForm.msg_id" :placeholder="$t('auto.List.31.1562af')" />
         </el-form-item>
-        <el-form-item label="方向" prop="direction">
+        <el-form-item :label="$t('auto.List.7.a465db')" prop="direction">
           <el-radio-group v-model="pushForm.direction">
-            <el-radio value="inbound">接收 (inbound)</el-radio>
-            <el-radio value="outbound">发送 (outbound)</el-radio>
+            <el-radio value="inbound">{{ $t('auto.List.9.3578f2') }}</el-radio>
+            <el-radio value="outbound">{{ $t('auto.List.10.36b4aa') }}</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="消息类型" prop="msg_type">
-          <el-select v-model="pushForm.msg_type" placeholder="选择类型" style="width: 100%">
+        <el-form-item :label="$t('auto.List.32.6d0071')" prop="msg_type">
+          <el-select v-model="pushForm.msg_type" :placeholder="$t('auto.List.33.5e1872')" style="width: 100%">
             <el-option v-for="t in msgTypeOptions" :key="t" :label="t" :value="t" />
           </el-select>
         </el-form-item>
-        <el-form-item label="发送方 ID">
-          <el-input v-model="pushForm.sender_id" placeholder="发送方 ID" />
+        <el-form-item :label="$t('auto.List.34.0fb440')">
+          <el-input v-model="pushForm.sender_id" :placeholder="$t('auto.List.34.0fb440')" />
         </el-form-item>
-        <el-form-item label="发送方名称">
-          <el-input v-model="pushForm.sender_name" placeholder="发送方显示名" />
+        <el-form-item :label="$t('auto.List.35.37f17f')">
+          <el-input v-model="pushForm.sender_name" :placeholder="$t('auto.List.36.0cd6ef')" />
         </el-form-item>
-        <el-form-item label="接收方 ID">
-          <el-input v-model="pushForm.receiver_id" placeholder="接收方 ID" />
+        <el-form-item :label="$t('auto.List.37.82147f')">
+          <el-input v-model="pushForm.receiver_id" :placeholder="$t('auto.List.37.82147f')" />
         </el-form-item>
-        <el-form-item label="接收方名称">
-          <el-input v-model="pushForm.receiver_name" placeholder="接收方显示名" />
+        <el-form-item :label="$t('auto.List.38.60471b')">
+          <el-input v-model="pushForm.receiver_name" :placeholder="$t('auto.List.39.75534a')" />
         </el-form-item>
-        <el-form-item label="会话 ID">
-          <el-input v-model="pushForm.conversation_id" placeholder="会话 ID（可选）" />
+        <el-form-item :label="$t('auto.List.4.427bc5')">
+          <el-input v-model="pushForm.conversation_id" :placeholder="$t('auto.List.40.0fa52e')" />
         </el-form-item>
-        <el-form-item label="内容" prop="content">
-          <el-input v-model="pushForm.content" type="textarea" :rows="4" placeholder="消息内容" />
+        <el-form-item :label="$t('auto.List.22.2d711b')" prop="content">
+          <el-input v-model="pushForm.content" type="textarea" :rows="4" :placeholder="$t('auto.List.41.b87b77')" />
         </el-form-item>
-        <el-form-item label="媒体 URL">
-          <el-input v-model="pushForm.media_url" placeholder="图片/文件 URL（可选）" />
+        <el-form-item :label="$t('auto.List.42.976d38')">
+          <el-input v-model="pushForm.media_url" :placeholder="$t('auto.List.43.c1534b')" />
         </el-form-item>
-        <el-form-item label="群消息">
+        <el-form-item :label="$t('auto.List.15.6778af')">
           <el-switch v-model="pushForm.is_group" />
-          <el-input v-if="pushForm.is_group" v-model="pushForm.group_id" placeholder="群 ID"
+          <el-input v-if="pushForm.is_group" v-model="pushForm.group_id" :placeholder="$t('auto.List.44.9b7e09')"
                     style="margin-left: 12px; width: 60%" />
         </el-form-item>
-        <el-form-item label="AI 回复">
+        <el-form-item :label="$t('auto.List.45.ae8297')">
           <el-switch v-model="pushForm.is_ai_reply" />
-          <el-input v-if="pushForm.is_ai_reply" v-model="pushForm.ai_agent" placeholder="AI Agent 名称"
+          <el-input v-if="pushForm.is_ai_reply" v-model="pushForm.ai_agent" :placeholder="$t('auto.List.46.5be750')"
                     style="margin-left: 12px; width: 60%" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="pushDialogVisible = false">取消</el-button>
-        <el-button type="primary" :loading="pushing" @click="submitPush">推送</el-button>
+        <el-button @click="pushDialogVisible = false">{{ $t('auto.List.56.625fb2') }}</el-button>
+        <el-button type="primary" :loading="pushing" @click="submitPush">{{ $t('auto.List.57.6f36dc') }}</el-button>
       </template>
     </el-dialog>
 
     
-    <el-dialog v-model="detailDialogVisible" title="消息详情" width="820px" top="5vh">
+    <el-dialog v-model="detailDialogVisible" :title="$t('auto.List.47.1172fc')" width="820px" top="5vh">
       <div v-loading="detailLoading">
         <el-descriptions :column="2" border>
           <el-descriptions-item label="ID">{{ currentMessage.id }}</el-descriptions-item>
-          <el-descriptions-item label="消息 ID">{{ currentMessage.msg_id }}</el-descriptions-item>
-          <el-descriptions-item label="平台">{{ platformLabel(currentMessage.platform) }}</el-descriptions-item>
-          <el-descriptions-item label="账号">{{ currentMessage.account_id }}</el-descriptions-item>
-          <el-descriptions-item label="方向">{{ currentMessage.direction === 'inbound' ? '接收' : '发送' }}</el-descriptions-item>
-          <el-descriptions-item label="类型">{{ currentMessage.msg_type }}</el-descriptions-item>
-          <el-descriptions-item label="发送方">{{ currentMessage.sender_name || currentMessage.sender_id || '-' }}</el-descriptions-item>
-          <el-descriptions-item label="接收方">{{ currentMessage.receiver_name || currentMessage.receiver_id || '-' }}</el-descriptions-item>
-          <el-descriptions-item label="会话 ID">{{ currentMessage.conversation_id || '-' }}</el-descriptions-item>
-          <el-descriptions-item label="群消息">
-            <el-tag v-if="currentMessage.is_group" type="info" size="small">是</el-tag>
-            <span v-else>否</span>
+          <el-descriptions-item :label="$t('auto.List.30.795e00')">{{ currentMessage.msg_id }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.1.498128')">{{ platformLabel(currentMessage.platform) }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.19.7035c6')">{{ currentMessage.account_id }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.7.a465db')">{{ currentMessage.direction === 'inbound' ? '接收' : '发送' }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.11.226b09')">{{ currentMessage.msg_type }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.20.16b213')">{{ currentMessage.sender_name || currentMessage.sender_id || '-' }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.21.8db216')">{{ currentMessage.receiver_name || currentMessage.receiver_id || '-' }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.4.427bc5')">{{ currentMessage.conversation_id || '-' }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.15.6778af')">
+            <el-tag v-if="currentMessage.is_group" type="info" size="small">{{ $t('auto.List.58.0a60ac') }}</el-tag>
+            <span v-else>{{ $t('auto.List.59.c9744f') }}</span>
           </el-descriptions-item>
-          <el-descriptions-item label="AI 回复">
+          <el-descriptions-item :label="$t('auto.List.45.ae8297')">
             <el-tag v-if="currentMessage.is_ai_reply" type="danger" size="small">{{ currentMessage.ai_agent || 'AI' }}</el-tag>
-            <span v-else>否</span>
+            <span v-else>{{ $t('auto.List.59.c9744f') }}</span>
           </el-descriptions-item>
-          <el-descriptions-item label="已读">
+          <el-descriptions-item :label="$t('auto.List.13.8ad629')">
             <el-tag :type="currentMessage.is_read ? 'info' : 'danger'" size="small">
               {{ currentMessage.is_read ? '已读' : '未读' }}
             </el-tag>
           </el-descriptions-item>
-          <el-descriptions-item label="发送时间">{{ formatTime(currentMessage.sent_at) }}</el-descriptions-item>
-          <el-descriptions-item label="读取时间">{{ formatTime(currentMessage.read_at) }}</el-descriptions-item>
-          <el-descriptions-item label="入库时间">{{ formatTime(currentMessage.created_at) }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.25.63b34d')">{{ formatTime(currentMessage.sent_at) }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.48.ef8fd0')">{{ formatTime(currentMessage.read_at) }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.49.5e2aaf')">{{ formatTime(currentMessage.created_at) }}</el-descriptions-item>
         </el-descriptions>
         <div class="detail-content-block">
-          <div class="detail-content-label">消息内容</div>
+          <div class="detail-content-label">{{ $t('auto.List.41.b87b77') }}</div>
           <div class="detail-content-body">{{ currentMessage.content || '(空)' }}</div>
         </div>
         <div v-if="currentMessage.media_url" class="detail-content-block">
-          <div class="detail-content-label">媒体 URL</div>
+          <div class="detail-content-label">{{ $t('auto.List.42.976d38') }}</div>
           <div class="detail-content-body">
             <a :href="currentMessage.media_url" target="_blank">{{ currentMessage.media_url }}</a>
           </div>
         </div>
         <div v-if="currentMessage.extra && Object.keys(currentMessage.extra).length" class="detail-content-block">
-          <div class="detail-content-label">扩展字段</div>
+          <div class="detail-content-label">{{ $t('auto.List.60.874c5f') }}</div>
           <pre class="detail-content-json">{{ JSON.stringify(currentMessage.extra, null, 2) }}</pre>
         </div>
       </div>
@@ -320,6 +320,7 @@
 import i18n from '@/i18n'
 
 import { ref, reactive, computed, onMounted, onUnmounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { Plus, Search, RefreshRight, DataAnalysis } from '@element-plus/icons-vue'
 import { messageHubApi } from '@/api/messageHub'
@@ -328,6 +329,8 @@ import AgentSocket from '@/utils/agentSocket'
 import { getChannelLabel, getChannelTagType, PLATFORM_GROUP_MEMBERS_REVERSE } from '@/constants/channel';
 import { getDirectionLabel, getDirectionTagType } from '@/constants/direction';
 import { getMsgTypeLabel, getMsgTypeTagType } from '@/constants/msgType'
+
+const { t } = useI18n()
 
 const loading = ref(false)
 const statsLoading = ref(false)
@@ -414,11 +417,11 @@ const pushForm = reactive({
 })
 
 const pushRules = {
-  platform: [{ required: true, message: i18n.global.t('请选择平台'), trigger: 'change' }],
-  account_id: [{ required: true, message: i18n.global.t('请输入账号 ID'), trigger: 'blur' }],
-  direction: [{ required: true, message: i18n.global.t('请选择方向'), trigger: 'change' }],
-  msg_type: [{ required: true, message: i18n.global.t('请选择消息类型'), trigger: 'change' }],
-  content: [{ required: true, message: i18n.global.t('请输入消息内容'), trigger: 'blur' }]
+  platform: [{ required: true, message: i18n.global.t(t('auto.List.61.72b562')), trigger: 'change' }],
+  account_id: [{ required: true, message: i18n.global.t(t('auto.List.62.6e738f')), trigger: 'blur' }],
+  direction: [{ required: true, message: i18n.global.t(t('auto.List.63.564589')), trigger: 'change' }],
+  msg_type: [{ required: true, message: i18n.global.t(t('auto.List.64.23a62a')), trigger: 'change' }],
+  content: [{ required: true, message: i18n.global.t(t('auto.List.65.fa967b')), trigger: 'blur' }]
 }
 
 const detailDialogVisible = ref(false);
@@ -469,8 +472,8 @@ const loadPlatforms = async () => {
     platformOptions.value = res.platforms || []
     msgTypeOptions.value = res.msg_types || []
   } catch (e) {
-    console.error('加载平台列表失败', e)
-    ElMessage.error('平台选项加载失败')
+    console.error(t('auto.List.66.1a4fc9'), e)
+    ElMessage.error(t('auto.List.67.65a90c'))
   }
 }
 
@@ -480,8 +483,8 @@ const loadStats = async () => {
     const res = await messageHubApi.getStats({})
     stats.value = res || {}
   } catch (e) {
-    console.error('加载统计失败', e)
-    ElMessage.error('统计加载失败')
+    console.error(t('auto.List.68.8522b5'), e)
+    ElMessage.error(t('auto.List.69.7b7097'))
   } finally {
     statsLoading.value = false
   }
@@ -511,8 +514,8 @@ const fetchMessageList = async () => {
     messageList.value = res.list || res.data || []
     pagination.total = res.total || 0
   } catch (e) {
-    console.error('加载消息列表失败', e)
-    ElMessage.error('消息列表加载失败')
+    console.error(t('auto.List.70.f82be4'), e)
+    ElMessage.error(t('auto.List.71.b854b3'))
   } finally {
     loading.value = false
   }
@@ -560,11 +563,11 @@ const handleViewDetail = async (row) => {
 const handleMarkRead = async (row) => {
   try {
     await messageHubApi.markRead([row.id])
-    ElMessage.success(i18n.global.t('已标记为已读'))
+    ElMessage.success(i18n.global.t(t('auto.List.72.2d1491')))
     row.is_read = true
     await loadStats()
   } catch (e) {
-    ElMessage.error(i18n.global.t('标记失败'))
+    ElMessage.error(i18n.global.t(t('auto.List.73.408627')))
   }
 }
 
@@ -577,7 +580,7 @@ const handleBatchMarkRead = async () => {
     selectedRows.value.forEach(r => { r.is_read = true })
     await loadStats()
   } catch (e) {
-    ElMessage.error(i18n.global.t('批量标记失败'))
+    ElMessage.error(i18n.global.t(t('auto.List.74.29d152')))
   }
 }
 
@@ -618,15 +621,15 @@ const submitPush = async () => {
     }
     const res = await messageHubApi.pushMessage(payload)
     if (res && res.duplicate) {
-      ElMessage.warning(i18n.global.t('消息已存在（幂等去重）'))
+      ElMessage.warning(i18n.global.t(t('auto.List.75.fc3dfa')))
     } else {
-      ElMessage.success(i18n.global.t('推送成功'))
+      ElMessage.success(i18n.global.t(t('auto.List.76.3aefb5')))
     }
     pushDialogVisible.value = false
     pagination.page = 1
     await Promise.all([fetchMessageList(), loadStats()])
   } catch (e) {
-    ElMessage.error('推送失败: ' + (e?.message || '未知错误'))
+    ElMessage.error(t('auto.List.77.448381') + (e?.message || t('auto.List.78.974e74')))
   } finally {
     pushing.value = false
   }

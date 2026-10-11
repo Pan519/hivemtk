@@ -3,22 +3,22 @@
 
     
     <el-card shadow="never" class="input-card">
-      <template #header><span class="card-title">优化输入</span></template>
+      <template #header><span class="card-title">{{ $t('auto.ContentOptimize.9.c543e5') }}</span></template>
       <el-form :model="form" label-width="92px">
         <el-row :gutter="16">
           <el-col :xs="24" :sm="12">
-            <el-form-item label="文章来源">
+            <el-form-item :label="$t('auto.ContentOptimize.1.6eee2d')">
               <el-radio-group v-model="form.source">
-                <el-radio value="textarea">粘贴文本</el-radio>
-                <el-radio value="article">从历史文章选择</el-radio>
+                <el-radio value="textarea">{{ $t('auto.ContentOptimize.10.28db28') }}</el-radio>
+                <el-radio value="article">{{ $t('auto.ContentOptimize.11.ababd8') }}</el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
           <el-col v-if="form.source === 'article'" :xs="24" :sm="12">
-            <el-form-item label="历史文章">
+            <el-form-item :label="$t('auto.ContentOptimize.2.e546ab')">
               <el-select
                 v-model="form.article_id"
-                placeholder="选择历史文章"
+                :placeholder="$t('auto.ContentOptimize.3.281009')"
                 filterable
                 clearable
                 style="width: 100%"
@@ -34,22 +34,22 @@
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="12">
-            <el-form-item label="品牌名称">
-              <el-input v-model="form.brand_name" placeholder="如：hivemtk" clearable />
+            <el-form-item :label="$t('auto.ContentOptimize.4.4e8713')">
+              <el-input v-model="form.brand_name" :placeholder="$t('auto.ContentOptimize.5.a08eb5')" clearable />
             </el-form-item>
           </el-col>
         </el-row>
-        <el-form-item v-if="form.source === 'textarea'" label="文章内容">
+        <el-form-item v-if="form.source === 'textarea'" :label="$t('auto.ContentOptimize.6.ad531b')">
           <el-input
             v-model="form.content"
             type="textarea"
             :rows="10"
-            placeholder="粘贴待优化文章内容"
+            :placeholder="$t('auto.ContentOptimize.7.966236')"
           />
         </el-form-item>
         <el-form-item>
           <el-button type="primary" :loading="optimizing" @click="handleOptimize">
-            <el-icon><MagicStick /></el-icon><span>优化内容</span>
+            <el-icon><MagicStick /></el-icon><span>{{ $t('auto.ContentOptimize.12.c34e3d') }}</span>
           </el-button>
           <el-button :loading="scoringBefore" :disabled="!originalContent" @click="handleScore('before')">
             优化前评分
@@ -62,7 +62,7 @@
     <el-card v-if="optimizedContent || originalContent" shadow="never" class="compare-card">
       <template #header>
         <div class="card-header">
-          <span class="card-title">优化前后对比</span>
+          <span class="card-title">{{ $t('auto.ContentOptimize.13.a11e70') }}</span>
           <div class="score-bar">
             <el-tag type="info">优化前：{{ scoreBefore?.total ?? '—' }}</el-tag>
             <el-icon class="arrow"><Right /></el-icon>
@@ -73,7 +73,7 @@
       <el-row :gutter="16">
         <el-col :xs="24" :md="12">
           <div class="compare-col">
-            <div class="col-title">原文</div>
+            <div class="col-title">{{ $t('auto.ContentOptimize.14.e5729e') }}</div>
             <div class="compare-text original">{{ originalContent || '—' }}</div>
           </div>
         </el-col>
@@ -81,7 +81,7 @@
           <div class="compare-col">
             <div class="col-title">
               优化后
-              <el-button v-if="optimizedContent" link type="primary" @click="copyOptimized">复制</el-button>
+              <el-button v-if="optimizedContent" link type="primary" @click="copyOptimized">{{ $t('auto.ContentOptimize.15.79d3ab') }}</el-button>
             </div>
             <div v-loading="optimizing" class="compare-text optimized">{{ optimizedContent || '—' }}</div>
           </div>
@@ -95,7 +95,7 @@
             优化后评分
           </el-button>
         </div>
-        <el-empty v-if="!suggestions.length" description="暂无优化建议" :image-size="60" />
+        <el-empty v-if="!suggestions.length" :description="$t('auto.ContentOptimize.8.a7ecab')" :image-size="60" />
         <ul v-else class="suggest-list">
           <li v-for="(s, i) in suggestions" :key="i">{{ s }}</li>
         </ul>
@@ -106,9 +106,12 @@
 
 <script setup>
 import { ref, reactive, onMounted, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import { MagicStick, Right } from '@element-plus/icons-vue'
 import { geoApi } from '@/api/geo'
+
+const { t } = useI18n()
 
 const form = reactive({
   source: 'textarea',
@@ -146,13 +149,13 @@ const onArticleChange = async (id) => {
     const res = await geoApi.getArticleByID(id)
     form.content = res?.content || res?.article || ''
   } catch (e) {
-    ElMessage.error(e.message || '文章加载失败')
+    ElMessage.error(e.message || t('auto.ContentOptimize.16.aaff45'))
   }
 }
 
 const handleOptimize = async () => {
   if (!form.content.trim()) {
-    ElMessage.warning('请先输入或选择文章内容')
+    ElMessage.warning(t('auto.ContentOptimize.17.ce22a5'))
     return
   }
   optimizing.value = true
@@ -167,9 +170,9 @@ const handleOptimize = async () => {
     optimizedContent.value = res?.optimized_content || res?.content || ''
     const raw = res?.suggestions || '';
     suggestions.value = Array.isArray(raw) ? raw : String(raw).split('\n').map((s) => s.trim()).filter(Boolean)
-    ElMessage.success('文章优化完成')
+    ElMessage.success(t('auto.ContentOptimize.18.ee7d46'))
   } catch (e) {
-    ElMessage.error(e.message || '文章优化失败')
+    ElMessage.error(e.message || t('auto.ContentOptimize.19.2d8b51'))
   } finally {
     optimizing.value = false
   }
@@ -178,7 +181,7 @@ const handleOptimize = async () => {
 const handleScore = async (stage) => {
   const content = stage === 'before' ? form.content : optimizedContent.value
   if (!content) {
-    ElMessage.warning('暂无可评分内容')
+    ElMessage.warning(t('auto.ContentOptimize.20.5ff123'))
     return
   }
   const loading = stage === 'before' ? scoringBefore : scoringAfter
@@ -187,9 +190,9 @@ const handleScore = async (stage) => {
     const res = await geoApi.scoreContent({ content, brand_name: form.brand_name, keyword: '' })
     if (stage === 'before') scoreBefore.value = res
     else scoreAfter.value = res
-    ElMessage.success('评分完成')
+    ElMessage.success(t('auto.ContentOptimize.21.4ea68d'))
   } catch (e) {
-    ElMessage.error(e.message || '评分失败')
+    ElMessage.error(e.message || t('auto.ContentOptimize.22.324f39'))
   } finally {
     loading.value = false
   }
@@ -198,9 +201,9 @@ const handleScore = async (stage) => {
 const copyOptimized = async () => {
   try {
     await navigator.clipboard.writeText(optimizedContent.value)
-    ElMessage.success('已复制到剪贴板')
+    ElMessage.success(t('auto.ContentOptimize.23.4fb42e'))
   } catch {
-    ElMessage.error('复制失败')
+    ElMessage.error(t('auto.ContentOptimize.24.5154ae'))
   }
 }
 

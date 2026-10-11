@@ -90,7 +90,7 @@
               @keydown.space.prevent="rating = n"
             >★</span>
           </div>
-          <textarea v-model="ratingComment" class="reason-input" rows="3" aria-label="评价备注" :placeholder="$t('选填，您的宝贵建议...')"></textarea>
+          <textarea v-model="ratingComment" class="reason-input" rows="3" :aria-label="$t('auto.ChatWindow.1.c08e51')" ::placeholder="$t('auto.ChatWindow.2.7833c2')"></textarea>
           <div class="modal-actions">
             <button class="primary" @click="submitRating">{{ $t('提交') }}</button>
           </div>
@@ -104,6 +104,7 @@
 import i18n from '@/i18n'
 
 import { ref, computed, onMounted, onUnmounted, watch, nextTick } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { trapFocus } from '@/utils/a11y'
 import VisitorHeader from './components/VisitorHeader.vue'
 import ChatMessages from './components/ChatMessages.vue'
@@ -115,7 +116,7 @@ import { ChatSocket } from '@/utils/chatSocket'
 const props = defineProps({
   appKey: { type: String, default: '' },
   channelId: { type: String, default: 'default' },
-  channelTitle: { type: String, default: '在线客服' },
+  channelTitle: { type: String, default: '' },
   widgetColor: { type: String, default: '#1989fa' },
   source: { type: String, default: '' },
   cardId: { type: String, default: '' },
@@ -129,6 +130,8 @@ const effectiveChannelId = computed(() => {
   if (props.appKey) return props.appKey
   return 'default'
 });
+
+const { t } = useI18n()
 
 const visitorId = ref('');
 const sessionId = ref('')
@@ -155,7 +158,7 @@ const startTransferWaiting = () => {
   transferTimer = setTimeout(() => {
     messages.value.push({
       sender_type: 'system',
-      content: i18n.global.t('暂无坐席在线，请留言，我们会尽快与您联系'),
+      content: i18n.global.t(t('auto.ChatWindow.4.4a908c')),
       created_at: new Date().toISOString()
     })
   }, 30000)
@@ -191,7 +194,7 @@ const initVisitorId = () => {
 const buildUiMessage = (m) => ({
   id: m.id,
   sender_type: m.sender_type,
-  sender_name: m.sender_name || '客服',
+  sender_name: m.sender_name || t('auto.ChatWindow.5.e7dea7'),
   content: m.content,
   content_type: m.content_type,
   card: m.card,
@@ -228,11 +231,11 @@ const openSession = async (resume = true) => {
     }
     connectWebSocket();
   } catch (err) {
-    console.error('打开会话失败：', err)
+    console.error(t('auto.ChatWindow.6.36ce96'), err)
     initFailed.value = true
     messages.value.push({
       sender_type: 'system',
-      content: i18n.global.t('会话连接失败，请点击右上角重试'),
+      content: i18n.global.t(t('auto.ChatWindow.7.933543')),
       created_at: new Date().toISOString()
     })
   } finally {
@@ -250,7 +253,7 @@ const loadHistory = async () => {
       messages.value.push(...real.map(buildUiMessage))
     }
   } catch (err) {
-    console.warn('加载历史消息失败：', err)
+    console.warn(t('auto.ChatWindow.8.d20f15'), err)
   }
 }
 
@@ -282,14 +285,14 @@ const connectWebSocket = () => {
       clearTransferTimer()
       messages.value.push({
         sender_type: 'system',
-        content: i18n.global.t('客服已接入，正在为您服务'),
+        content: i18n.global.t(t('auto.ChatWindow.9.d4b9b8')),
         created_at: new Date().toISOString()
       })
     },
     onSessionClosed: (payload) => {
       messages.value.push({
         sender_type: 'system',
-        content: i18n.global.t('会话已结束，感谢您的咨询'),
+        content: i18n.global.t(t('auto.ChatWindow.10.76a314')),
         created_at: new Date().toISOString()
       })
       showRating.value = true
@@ -329,7 +332,7 @@ const onSend = async (payload) => {
   const userMsg = {
     id: Date.now(),
     sender_type: 'user',
-    sender_name: '我',
+    sender_name: t('auto.ChatWindow.11.168152'),
     content: text,
     content_type: attachment ? attachment.mediaType : 'text',
     media_url: attachment?.url || '',
@@ -371,7 +374,7 @@ const onSend = async (payload) => {
       typing.value = false
       messages.value.push({
         sender_type: 'system',
-        content: i18n.global.t('正在为您转接人工客服，请稍候...'),
+        content: i18n.global.t(t('auto.ChatWindow.12.7ddc5f')),
         created_at: new Date().toISOString()
       })
       startTransferWaiting()
@@ -380,7 +383,7 @@ const onSend = async (payload) => {
     typing.value = false
     messages.value.push({
       sender_type: 'system',
-      content: i18n.global.t('消息发送失败：') + (err?.message || err),
+      content: i18n.global.t(t('auto.ChatWindow.13.3e2817')) + (err?.message || err),
       created_at: new Date().toISOString()
     })
   } finally {
@@ -397,9 +400,9 @@ const submitRating = async () => {
     showRating.value = false
     rating.value = 0
     ratingComment.value = ''
-    ElMessage.success(i18n.global.t('感谢您的评价！'))
+    ElMessage.success(i18n.global.t(t('auto.ChatWindow.14.2f5b35')))
   } catch (err) {
-    ElMessage.error('评价提交失败：' + (err?.message || ''))
+    ElMessage.error(t('auto.ChatWindow.15.a474b5') + (err?.message || ''))
   }
 }
 
@@ -409,7 +412,7 @@ const loadOfflineSessions = async () => {
     const list = res?.data?.list || res?.list || []
     offlineSessions.value = list
   } catch (err) {
-    console.warn('加载历史会话失败：', err)
+    console.warn(t('auto.ChatWindow.16.b5fa93'), err)
   }
 }
 
@@ -426,13 +429,13 @@ const resumeSession = async (s) => {
   try {
     const res = await chatApi.exchangeSessionToken(s.session_id, effectiveChannelId.value, visitorId.value)
     const token = res?.data?.visitor_token || res?.visitor_token || ''
-    if (!token) throw new Error('响应里没有 visitor_token')
+    if (!token) throw new Error(t('auto.ChatWindow.17.4cd525'))
     visitorToken.value = token
   } catch (err) {
-    console.warn('获取历史会话凭证失败：', err)
+    console.warn(t('auto.ChatWindow.18.ea7a8c'), err)
     messages.value.push({
       sender_type: 'system',
-      content: i18n.global.t('历史会话加载失败，请稍后重试'),
+      content: i18n.global.t(t('auto.ChatWindow.19.d5f717')),
       created_at: new Date().toISOString()
     })
     return

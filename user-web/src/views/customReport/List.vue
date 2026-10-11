@@ -13,37 +13,37 @@
 
     <el-card>
       <el-table :data="reports" v-loading="loading" stripe>
-        <el-table-column prop="name" :label="$t('报表名称')" min-width="180" />
-        <el-table-column prop="data_source" label="数据源" width="120">
+        <el-table-column prop="name" ::label="$t('auto.List.1.ba6d34')" min-width="180" />
+        <el-table-column prop="data_source" :label="$t('auto.List.2.c11322')" width="120">
           <template #default="{ row }">
             <el-tag>{{ dataSourceLabel(row.data_source) }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="chart_type" label="图表类型" width="110">
+        <el-table-column prop="chart_type" :label="$t('auto.List.3.7aed24')" width="110">
           <template #default="{ row }">
             <el-tag type="info">{{ chartTypeLabel(row.chart_type) }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="维度" min-width="200">
+        <el-table-column :label="$t('auto.List.4.f29c54')" min-width="200">
           <template #default="{ row }">
             <el-tag v-for="d in parseDimensions(row.dimensions)" :key="d.field" class="tag-item" size="small">{{ d.label }}</el-tag>
             <span v-if="!parseDimensions(row.dimensions).length" class="muted">-</span>
           </template>
         </el-table-column>
-        <el-table-column label="指标" min-width="200">
+        <el-table-column :label="$t('auto.List.5.7e6875')" min-width="200">
           <template #default="{ row }">
             <el-tag v-for="m in parseMetrics(row.metrics)" :key="m.field" class="tag-item" size="small" type="warning">{{ m.label }}</el-tag>
             <span v-if="!parseMetrics(row.metrics).length" class="muted">-</span>
           </template>
         </el-table-column>
-        <el-table-column prop="created_by" label="创建人" width="90" />
-        <el-table-column prop="created_at" label="创建时间" min-width="170" />
-        <el-table-column label="操作" width="300" fixed="right">
+        <el-table-column prop="created_by" :label="$t('auto.List.6.95a43e')" width="90" />
+        <el-table-column prop="created_at" :label="$t('auto.List.7.eca37c')" min-width="170" />
+        <el-table-column :label="$t('auto.List.8.2b6bc0')" width="300" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" @click="viewReport(row)">查看</el-button>
-            <el-button link type="primary" @click="exportReport(row)">导出</el-button>
-            <el-button link type="primary" @click="editReport(row)">编辑</el-button>
-            <el-button link type="danger" @click="deleteReport(row)">删除</el-button>
+            <el-button link type="primary" @click="viewReport(row)">{{ $t('auto.List.39.607e7a') }}</el-button>
+            <el-button link type="primary" @click="exportReport(row)">{{ $t('auto.List.40.55405e') }}</el-button>
+            <el-button link type="primary" @click="editReport(row)">{{ $t('auto.List.41.95b351') }}</el-button>
+            <el-button link type="danger" @click="deleteReport(row)">{{ $t('auto.List.42.2f4aad') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -51,67 +51,67 @@
 
     <el-dialog v-model="dialogVisible" :title="dialogTitle" width="820px">
       <el-form :model="form" :rules="formRules" ref="formRef" label-width="110px">
-        <el-form-item label="报表名称" prop="name">
-          <el-input v-model="form.name" placeholder="请输入报表名称" />
+        <el-form-item :label="$t('auto.List.9.a2e063')" prop="name">
+          <el-input v-model="form.name" :placeholder="$t('auto.List.10.948e17')" />
         </el-form-item>
-        <el-form-item label="数据源" prop="dataSource">
+        <el-form-item :label="$t('auto.List.2.c11322')" prop="dataSource">
           <el-select v-model="form.dataSource" style="width: 100%">
-            <el-option label="会话数据" value="sessions" />
-            <el-option label="消息数据" value="messages" />
-            <el-option label="订单数据" value="orders" />
-            <el-option label="线索数据" value="clues" />
-            <el-option label="用户数据" value="users" />
-            <el-option label="RFM 数据" value="rfm" />
-            <el-option label="客服数据" value="agents" />
+            <el-option :label="$t('auto.List.11.987711')" value="sessions" />
+            <el-option :label="$t('auto.List.12.878466')" value="messages" />
+            <el-option :label="$t('auto.List.13.69a3cf')" value="orders" />
+            <el-option :label="$t('auto.List.14.68262f')" value="clues" />
+            <el-option :label="$t('auto.List.15.0da9b1')" value="users" />
+            <el-option :label="$t('auto.List.16.6727a8')" value="rfm" />
+            <el-option :label="$t('auto.List.17.361fdc')" value="agents" />
           </el-select>
         </el-form-item>
-        <el-form-item label="图表类型" prop="chartType">
+        <el-form-item :label="$t('auto.List.3.7aed24')" prop="chartType">
           <el-select v-model="form.chartType" style="width: 100%">
-            <el-option label="表格" value="table" />
-            <el-option label="折线图" value="line" />
-            <el-option label="柱状图" value="bar" />
-            <el-option label="饼图" value="pie" />
-            <el-option label="面积图" value="area" />
-            <el-option label="卡片" value="card" />
+            <el-option :label="$t('auto.List.18.b339aa')" value="table" />
+            <el-option :label="$t('auto.List.19.c9c9bd')" value="line" />
+            <el-option :label="$t('auto.List.20.7c8ee6')" value="bar" />
+            <el-option :label="$t('auto.List.21.d5e33d')" value="pie" />
+            <el-option :label="$t('auto.List.22.af99db')" value="area" />
+            <el-option :label="$t('auto.List.23.d87f21')" value="card" />
           </el-select>
         </el-form-item>
-        <el-form-item label="维度(多选)">
-          <el-select v-model="form.dimensions" multiple style="width: 100%" placeholder="请选择维度">
+        <el-form-item :label="$t('auto.List.24.d55f7f')">
+          <el-select v-model="form.dimensions" multiple style="width: 100%" :placeholder="$t('auto.List.25.cfa2c0')">
             <el-option v-for="d in DIM_OPTIONS" :key="d.value" :label="d.label" :value="d.value" />
           </el-select>
         </el-form-item>
-        <el-form-item label="指标(多选)">
-          <el-select v-model="form.metrics" multiple style="width: 100%" placeholder="请选择指标">
+        <el-form-item :label="$t('auto.List.26.8331f9')">
+          <el-select v-model="form.metrics" multiple style="width: 100%" :placeholder="$t('auto.List.27.4837e0')">
             <el-option v-for="m in METRIC_OPTIONS" :key="m.value" :label="m.label" :value="m.value" />
           </el-select>
         </el-form-item>
-        <el-form-item label="筛选条件">
+        <el-form-item :label="$t('auto.List.28.5148fc')">
           <div class="filters">
             <div v-for="(f, idx) in form.filters" :key="idx" class="filter-row">
-              <el-input v-model="f.field" placeholder="字段" style="width: 140px" />
+              <el-input v-model="f.field" :placeholder="$t('auto.List.29.9caecd')" style="width: 140px" />
               <el-select v-model="f.operator" style="width: 110px">
-                <el-option label="等于" value="eq" />
-                <el-option label="不等于" value="ne" />
-                <el-option label="大于" value="gt" />
-                <el-option label="小于" value="lt" />
-                <el-option label="包含" value="like" />
+                <el-option :label="$t('auto.List.30.4c35bf')" value="eq" />
+                <el-option :label="$t('auto.List.31.14a8af')" value="ne" />
+                <el-option :label="$t('auto.List.32.2791dc')" value="gt" />
+                <el-option :label="$t('auto.List.33.f09dc0')" value="lt" />
+                <el-option :label="$t('auto.List.34.e13556')" value="like" />
               </el-select>
-              <el-input v-model="f.value" placeholder="值" style="width: 140px" />
-              <el-button type="danger" text @click="removeFilter(idx)">移除</el-button>
+              <el-input v-model="f.value" :placeholder="$t('auto.List.35.fe7509')" style="width: 140px" />
+              <el-button type="danger" text @click="removeFilter(idx)">{{ $t('auto.List.43.86048b') }}</el-button>
             </div>
-            <el-button @click="addFilter">+ 添加筛选</el-button>
+            <el-button @click="addFilter">{{ $t('auto.List.44.3c0961') }}</el-button>
           </div>
         </el-form-item>
-        <el-form-item label="备注">
+        <el-form-item :label="$t('auto.List.36.2432b5')">
           <el-input v-model="form.description" type="textarea" :rows="2" />
         </el-form-item>
-        <el-form-item label="公开">
+        <el-form-item :label="$t('auto.List.37.b6a098')">
           <el-switch v-model="form.isPublic" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="dialogVisible = false">取消</el-button>
-        <el-button type="primary" :loading="submitting" @click="submitForm">确定</el-button>
+        <el-button @click="dialogVisible = false">{{ $t('auto.List.45.625fb2') }}</el-button>
+        <el-button type="primary" :loading="submitting" @click="submitForm">{{ $t('auto.List.46.38cf16') }}</el-button>
       </template>
     </el-dialog>
 
@@ -126,11 +126,11 @@
           show-overflow-tooltip
         />
         <template #empty>
-          <el-empty description="暂无报表数据" />
+          <el-empty :description="$t('auto.List.38.58462e')" />
         </template>
       </el-table>
       <template #footer>
-        <el-button @click="viewDialogVisible = false">关闭</el-button>
+        <el-button @click="viewDialogVisible = false">{{ $t('auto.List.47.b15d91') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -139,6 +139,7 @@
 <script setup>
 import i18n from '@/i18n'
 import { ref, onMounted, onActivated } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { Plus } from '@element-plus/icons-vue'
 import { toList } from '@/utils/list.js'
@@ -152,31 +153,33 @@ import {
 } from '@/api/customReport.js'
 
 const DIM_MAP = {
-  date: { field: 'date', label: '日期', data_type: 'date', group_by: true },
-  source: { field: 'source', label: '来源', data_type: 'string', group_by: true },
-  platform: { field: 'platform', label: '平台', data_type: 'string', group_by: true },
-  region: { field: 'region', label: '地区', data_type: 'string', group_by: true },
-  user_type: { field: 'user_type', label: '用户类型', data_type: 'string', group_by: true },
+  date: { field: 'date', label: t('auto.List.48.4ff1e7'), data_type: 'date', group_by: true },
+  source: { field: 'source', label: t('auto.List.49.26ca20'), data_type: 'string', group_by: true },
+  platform: { field: 'platform', label: t('auto.List.50.498128'), data_type: 'string', group_by: true },
+  region: { field: 'region', label: t('auto.List.51.2560b3'), data_type: 'string', group_by: true },
+  user_type: { field: 'user_type', label: t('auto.List.52.d340e9'), data_type: 'string', group_by: true },
 }
 const METRIC_MAP = {
-  count: { field: 'count', label: '数量', agg_func: 'count', data_type: 'number' },
-  amount: { field: 'amount', label: '金额', agg_func: 'sum', data_type: 'number' },
-  conversion: { field: 'conversion', label: '转化率', agg_func: 'avg', data_type: 'percent' },
-  click_rate: { field: 'click_rate', label: '点击率', agg_func: 'avg', data_type: 'percent' },
-  open_rate: { field: 'open_rate', label: '打开率', agg_func: 'avg', data_type: 'percent' },
+  count: { field: 'count', label: t('auto.List.53.0bf60b'), agg_func: 'count', data_type: 'number' },
+  amount: { field: 'amount', label: t('auto.List.54.4cf24a'), agg_func: 'sum', data_type: 'number' },
+  conversion: { field: 'conversion', label: t('auto.List.55.715054'), agg_func: 'avg', data_type: 'percent' },
+  click_rate: { field: 'click_rate', label: t('auto.List.56.e6867b'), agg_func: 'avg', data_type: 'percent' },
+  open_rate: { field: 'open_rate', label: t('auto.List.57.eb9eb1'), agg_func: 'avg', data_type: 'percent' },
 }
 const DIM_OPTIONS = Object.entries(DIM_MAP).map(([value, v]) => ({ value, label: v.label }))
 const METRIC_OPTIONS = Object.entries(METRIC_MAP).map(([value, v]) => ({ value, label: v.label }))
 const DS_LABELS = {
-  sessions: '会话数据', messages: '消息数据', orders: '订单数据', clues: '线索数据',
-  users: '用户数据', rfm: 'RFM 数据', agents: '客服数据',
+  sessions: t('auto.List.11.987711'), messages: t('auto.List.12.878466'), orders: t('auto.List.13.69a3cf'), clues: t('auto.List.14.68262f'),
+  users: t('auto.List.15.0da9b1'), rfm: 'RFM 数据', agents: t('auto.List.17.361fdc'),
 }
-const CT_LABELS = { table: '表格', line: '折线图', bar: '柱状图', pie: '饼图', area: '面积图', card: '卡片' }
+const CT_LABELS = { table: t('auto.List.18.b339aa'), line: t('auto.List.19.c9c9bd'), bar: t('auto.List.20.7c8ee6'), pie: t('auto.List.21.d5e33d'), area: t('auto.List.22.af99db'), card: t('auto.List.23.d87f21') }
+
+const { t } = useI18n()
 
 const loading = ref(false)
 const reports = ref([])
 const dialogVisible = ref(false)
-const dialogTitle = ref('新建报表')
+const dialogTitle = ref(t('auto.List.58.025119'))
 const submitting = ref(false)
 const formRef = ref()
 const viewDialogVisible = ref(false)
@@ -201,9 +204,9 @@ function emptyForm() {
 }
 
 const formRules = {
-  name: [{ required: true, message: i18n.global.t('请输入报表名称'), trigger: 'blur' }],
-  dataSource: [{ required: true, message: i18n.global.t('请选择数据源'), trigger: 'change' }],
-  chartType: [{ required: true, message: i18n.global.t('请选择图表类型'), trigger: 'change' }],
+  name: [{ required: true, message: i18n.global.t(t('auto.List.10.948e17')), trigger: 'blur' }],
+  dataSource: [{ required: true, message: i18n.global.t(t('auto.List.59.9acb96')), trigger: 'change' }],
+  chartType: [{ required: true, message: i18n.global.t(t('auto.List.60.31ceb5')), trigger: 'change' }],
 }
 
 const dataSourceLabel = (v) => DS_LABELS[v] || v || '-'
@@ -222,7 +225,7 @@ const refreshData = async () => {
     const res = await getCustomReports()
     reports.value = toList(res?.data ?? res)
   } catch (e) {
-    ElMessage.error('加载失败：' + (e && e.message ? e.message : ''))
+    ElMessage.error(t('auto.List.61.c4fa9b') + (e && e.message ? e.message : ''))
   } finally {
     loading.value = false
   }
@@ -230,7 +233,7 @@ const refreshData = async () => {
 
 const showCreateDialog = () => {
   form.value = emptyForm()
-  dialogTitle.value = '新建报表'
+  dialogTitle.value = t('auto.List.58.025119')
   dialogVisible.value = true
 }
 
@@ -249,7 +252,7 @@ const editReport = (row) => {
     description: row.description || '',
     isPublic: !!row.is_public,
   }
-  dialogTitle.value = '编辑报表'
+  dialogTitle.value = t('auto.List.62.8ab69f')
   dialogVisible.value = true
 }
 
@@ -283,11 +286,11 @@ const submitForm = async () => {
       } else {
         await createCustomReport(payload)
       }
-      ElMessage.success(i18n.global.t('操作成功'))
+      ElMessage.success(i18n.global.t(t('auto.List.63.33130f')))
       dialogVisible.value = false
       await refreshData()
     } catch (e) {
-      ElMessage.error(i18n.global.t('操作失败') + '：' + (e && e.message ? e.message : ''))
+      ElMessage.error(i18n.global.t(t('auto.List.64.5fa802')) + '：' + (e && e.message ? e.message : ''))
     } finally {
       submitting.value = false
     }
@@ -312,7 +315,7 @@ const viewReport = async (row) => {
       reportColumns.value = (payload.dimensions || []).map((d) => ({ key: d, label: d, minWidth: 120 }))
     }
   } catch (e) {
-    ElMessage.error(i18n.global.t('获取报表数据失败') + '：' + (e && e.message ? e.message : ''))
+    ElMessage.error(i18n.global.t(t('auto.List.65.30f249')) + '：' + (e && e.message ? e.message : ''))
   } finally {
     viewLoading.value = false
   }
@@ -325,18 +328,18 @@ const exportReport = async (row) => {
     const rows = Array.isArray(payload) ? payload : (payload && payload.data) || []
     ElMessage.success(`导出成功，共 ${rows.length} 行`)
   } catch (e) {
-    ElMessage.error('导出失败：' + (e && e.message ? e.message : ''))
+    ElMessage.error(t('auto.List.66.bccb12') + (e && e.message ? e.message : ''))
   }
 }
 
 const deleteReport = async (row) => {
   try {
-    await ElMessageBox.confirm(`确定删除报表 "${row.name}"？`, '确认', { type: 'warning' })
+    await ElMessageBox.confirm(`确定删除报表 "${row.name}"？`, t('auto.List.67.e83a25'), { type: 'warning' })
     await deleteCustomReport(row.id)
-    ElMessage.success(i18n.global.t('删除成功'))
+    ElMessage.success(i18n.global.t(t('auto.List.68.0007d1')))
     await refreshData()
   } catch (e) {
-    if (e !== 'cancel') ElMessage.error(i18n.global.t('删除失败'))
+    if (e !== 'cancel') ElMessage.error(i18n.global.t(t('auto.List.69.acf066')))
   }
 }
 

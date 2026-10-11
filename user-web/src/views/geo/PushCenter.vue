@@ -10,10 +10,10 @@
             :status="status.remain > 100 ? 'success' : status.remain > 20 ? 'warning' : 'exception'"
           />
           <div class="plat-detail">
-            <el-tag v-if="status.registered" type="success">已注册</el-tag>
-            <el-tag v-else type="info">未注册</el-tag>
+            <el-tag v-if="status.registered" type="success">{{ $t('auto.PushCenter.2.19f13a') }}</el-tag>
+            <el-tag v-else type="info">{{ $t('auto.PushCenter.3.0e6fe5') }}</el-tag>
             <span v-if="status.remain >= 0">剩余 {{ status.remain }}</span>
-            <span v-else>∞ 无限额</span>
+            <span v-else>{{ $t('auto.PushCenter.4.bac375') }}</span>
           </div>
         </el-card>
       </el-col>
@@ -22,22 +22,22 @@
     <el-card shadow="never" style="margin-top:16px">
       <template #header>
         <div class="card-header">
-          <span>⚡ 手动推送</span>
+          <span>{{ $t('auto.PushCenter.5.2fcaef') }}</span>
         </div>
       </template>
       <el-input
         v-model="urlsText"
         type="textarea"
         :rows="4"
-        placeholder="每行一个 URL，粘贴要推送的文章地址"
+        :placeholder="$t('auto.PushCenter.1.9af24e')"
       />
       <div style="margin-top:8px">
         <el-checkbox-group v-model="selectedPlatforms">
-          <el-checkbox value="baidu">百度</el-checkbox>
+          <el-checkbox value="baidu">{{ $t('auto.PushCenter.6.a3f4a5') }}</el-checkbox>
           <el-checkbox value="indexnow">IndexNow (Bing/Yandex/Naver)</el-checkbox>
           <el-checkbox value="google">Google</el-checkbox>
         </el-checkbox-group>
-        <el-button type="primary" @click="push" style="margin-left:12px">🚀 推送</el-button>
+        <el-button type="primary" @click="push" style="margin-left:12px">{{ $t('auto.PushCenter.7.48aa9b') }}</el-button>
       </div>
     </el-card>
   </div>
@@ -45,8 +45,11 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { geoApi } from '@/api/geo'
 import { ElMessage } from 'element-plus'
+const { t } = useI18n()
+
 const quota = ref({})
 const urlsText = ref('')
 const selectedPlatforms = ref(['indexnow', 'baidu'])
@@ -60,10 +63,10 @@ async function push() {
   if (!urls.length) return
   try {
     await geoApi.pushUrls({ urls, platforms: selectedPlatforms.value })
-    ElMessage.success('推送成功')
+    ElMessage.success(t('auto.PushCenter.8.3aefb5'))
     urlsText.value = ''
     loadQuota()
-  } catch (e) { ElMessage.error('推送失败') }
+  } catch (e) { ElMessage.error(t('auto.PushCenter.9.3b6ba0')) }
 }
 onMounted(loadQuota)
 </script>

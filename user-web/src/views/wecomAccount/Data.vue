@@ -4,7 +4,7 @@
       <div class="toolbar">
         <el-select
           v-model="selectedAccountId"
-          placeholder="选择发送账号"
+          :placeholder="$t('auto.Data.1.915fcb')"
           clearable
           filterable
           style="width: 240px"
@@ -13,27 +13,27 @@
           <el-option
             v-for="a in accounts"
             :key="a.account.id"
-            :label="a.account.corp_id || ('账号 #' + a.account.id)"
+            ::label="$t('auto.Data.2.a5e6e3')"
             :value="a.account.id"
           />
         </el-select>
-        <el-button type="primary" :icon="Refresh" :loading="loadingAny" @click="refreshAll">刷新数据</el-button>
-        <span class="tip">客户「发消息」将用所选账号从企业微信外部联系人通道下发</span>
+        <el-button type="primary" :icon="Refresh" :loading="loadingAny" @click="refreshAll">{{ $t('auto.Data.26.498519') }}</el-button>
+        <span class="tip">{{ $t('auto.Data.27.49507c') }}</span>
       </div>
 
       
       <div class="summary-row">
         <div class="summary-card">
           <div class="summary-value">{{ total.customers || 0 }}</div>
-          <div class="summary-label">客户总数</div>
+          <div class="summary-label">{{ $t('auto.Data.28.a4577f') }}</div>
         </div>
         <div class="summary-card">
           <div class="summary-value">{{ total.groups || 0 }}</div>
-          <div class="summary-label">客户群总数</div>
+          <div class="summary-label">{{ $t('auto.Data.29.ce77df') }}</div>
         </div>
         <div class="summary-card">
           <div class="summary-value">{{ total.messages || 0 }}</div>
-          <div class="summary-label">消息总数</div>
+          <div class="summary-label">{{ $t('auto.Data.30.22825d') }}</div>
         </div>
       </div>
 
@@ -52,25 +52,25 @@
 
       <el-tabs v-model="activeTab" @tab-change="onTabChange">
         
-        <el-tab-pane label="客户" name="customers">
+        <el-tab-pane :label="$t('auto.Data.3.ff0b20')" name="customers">
           <el-table :data="customers" v-loading="loading.customers" border stripe size="small">
-            <el-table-column prop="avatar" label="头像" width="60">
+            <el-table-column prop="avatar" :label="$t('auto.Data.4.4c50ee')" width="60">
               <template #default="{ row }">
                 <el-avatar v-if="row.avatar" :src="row.avatar" size="small" />
                 <span v-else>{{ row.name?.charAt(0) || '?' }}</span>
               </template>
             </el-table-column>
-            <el-table-column prop="name" label="名称" min-width="120" />
-            <el-table-column label="类型" width="90">
+            <el-table-column prop="name" :label="$t('auto.Data.5.d7ec2d')" min-width="120" />
+            <el-table-column :label="$t('auto.Data.6.226b09')" width="90">
               <template #default="{ row }">{{ row.type === 1 ? '企业' : '个人' }}</template>
             </el-table-column>
-            <el-table-column prop="corp_name" label="企业" min-width="120" />
-            <el-table-column prop="position" label="职位" min-width="100" />
-            <el-table-column prop="external_userid" label="外部ID" min-width="160" show-overflow-tooltip />
-            <el-table-column prop="remark" label="备注" min-width="100" show-overflow-tooltip />
-            <el-table-column label="操作" width="100" fixed="right">
+            <el-table-column prop="corp_name" :label="$t('auto.Data.7.04c9e3')" min-width="120" />
+            <el-table-column prop="position" :label="$t('auto.Data.8.b652de')" min-width="100" />
+            <el-table-column prop="external_userid" :label="$t('auto.Data.9.941aeb')" min-width="160" show-overflow-tooltip />
+            <el-table-column prop="remark" :label="$t('auto.Data.10.2432b5')" min-width="100" show-overflow-tooltip />
+            <el-table-column :label="$t('auto.Data.11.2b6bc0')" width="100" fixed="right">
               <template #default="{ row }">
-                <el-button size="small" type="primary" @click="openSendTo(row.external_userid)">发消息</el-button>
+                <el-button size="small" type="primary" @click="openSendTo(row.external_userid)">{{ $t('auto.Data.31.94e705') }}</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -86,13 +86,13 @@
         </el-tab-pane>
 
         
-        <el-tab-pane label="客户群" name="groups">
+        <el-tab-pane :label="$t('auto.Data.12.8ba76f')" name="groups">
           <el-table :data="groups" v-loading="loading.groups" border stripe size="small">
-            <el-table-column prop="name" label="群名" min-width="160" />
-            <el-table-column prop="owner" label="群主" min-width="120" />
-            <el-table-column prop="member_count" label="成员数" width="90" />
-            <el-table-column prop="chat_id" label="群ID" min-width="160" show-overflow-tooltip />
-            <el-table-column label="创建时间" width="160">
+            <el-table-column prop="name" :label="$t('auto.Data.13.b65ab8')" min-width="160" />
+            <el-table-column prop="owner" :label="$t('auto.Data.14.4ef262')" min-width="120" />
+            <el-table-column prop="member_count" :label="$t('auto.Data.15.eb9d06')" width="90" />
+            <el-table-column prop="chat_id" :label="$t('auto.Data.16.3e0e8a')" min-width="160" show-overflow-tooltip />
+            <el-table-column :label="$t('auto.Data.17.eca37c')" width="160">
               <template #default="{ row }">{{ row.created_at ? formatTime(row.created_at) : '-' }}</template>
             </el-table-column>
           </el-table>
@@ -108,31 +108,31 @@
         </el-tab-pane>
 
         
-        <el-tab-pane label="标签" name="tags">
+        <el-tab-pane :label="$t('auto.Data.18.14d342')" name="tags">
           <el-table :data="tags" v-loading="loading.tags" border stripe size="small">
-            <el-table-column prop="tag_name" label="标签名" min-width="160" />
-            <el-table-column prop="tag_id" label="标签ID" min-width="140" />
+            <el-table-column prop="tag_name" :label="$t('auto.Data.19.0718bf')" min-width="160" />
+            <el-table-column prop="tag_id" :label="$t('auto.Data.20.e2c5cd')" min-width="140" />
           </el-table>
         </el-tab-pane>
 
         
-        <el-tab-pane label="消息记录" name="messages">
+        <el-tab-pane :label="$t('auto.Data.21.046826')" name="messages">
           <el-table :data="messages" v-loading="loading.messages" border stripe size="small">
-            <el-table-column prop="to_user" label="接收人" min-width="160" show-overflow-tooltip />
-            <el-table-column prop="msg_type" label="类型" width="90" />
-            <el-table-column label="内容" min-width="200" show-overflow-tooltip>
+            <el-table-column prop="to_user" :label="$t('auto.Data.22.8805bb')" min-width="160" show-overflow-tooltip />
+            <el-table-column prop="msg_type" :label="$t('auto.Data.6.226b09')" width="90" />
+            <el-table-column :label="$t('auto.Data.23.2d711b')" min-width="200" show-overflow-tooltip>
               <template #default="{ row }">
                 {{ previewContent(row) }}
               </template>
             </el-table-column>
-            <el-table-column label="状态" width="100">
+            <el-table-column :label="$t('auto.Data.24.3fea7c')" width="100">
               <template #default="{ row }">
                 <el-tag :type="row.status === 1 ? 'success' : 'danger'" size="small">
                   {{ row.status === 1 ? '成功' : '失败' }}
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column label="发送时间" width="160">
+            <el-table-column :label="$t('auto.Data.25.63b34d')" width="160">
               <template #default="{ row }">{{ row.created_at ? formatTime(row.created_at) : '-' }}</template>
             </el-table-column>
           </el-table>
@@ -156,6 +156,7 @@
 
 <script setup>
 import { ref, reactive, onMounted, onUnmounted, nextTick } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { Refresh } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 import * as echarts from 'echarts'
@@ -163,6 +164,8 @@ import { safeInit } from '@/utils/echarts'
 import { wecomAccountApi } from '@/api/wecomAccount'
 import WeComSendDialog from '@/components/WeComSendDialog.vue'
 import { toList } from '@/utils/list'
+
+const { t } = useI18n()
 
 const activeTab = ref('customers')
 const pageSize = 20
@@ -222,7 +225,7 @@ const loadAccounts = async () => {
       selectedAccountId.value = accounts.value[0].account.id
     }
   } catch (e) {
-    ElMessage.error('账号加载失败：' + (e.message || e))
+    ElMessage.error(t('auto.Data.32.51fceb') + (e.message || e))
   }
 }
 
@@ -233,7 +236,7 @@ const loadCustomers = async () => {
     customers.value = toList(res.list)
     total.customers = res.total || 0
   } catch (e) {
-    ElMessage.error('客户加载失败：' + (e.message || e))
+    ElMessage.error(t('auto.Data.33.40bf9d') + (e.message || e))
   } finally {
     loading.customers = false
   }
@@ -246,7 +249,7 @@ const loadGroups = async () => {
     groups.value = toList(res.list)
     total.groups = res.total || 0
   } catch (e) {
-    ElMessage.error('客户群加载失败：' + (e.message || e))
+    ElMessage.error(t('auto.Data.34.523fac') + (e.message || e))
   } finally {
     loading.groups = false
   }
@@ -258,7 +261,7 @@ const loadTags = async () => {
     const res = await wecomAccountApi.getTags()
     tags.value = toList(res)
   } catch (e) {
-    ElMessage.error('标签加载失败：' + (e.message || e))
+    ElMessage.error(t('auto.Data.35.d1e871') + (e.message || e))
   } finally {
     loading.tags = false
   }
@@ -271,7 +274,7 @@ const loadMessages = async () => {
     messages.value = toList(res.list)
     total.messages = res.total || 0
   } catch (e) {
-    ElMessage.error('消息加载失败：' + (e.message || e))
+    ElMessage.error(t('auto.Data.36.68a249') + (e.message || e))
   } finally {
     loading.messages = false
   }
@@ -291,7 +294,7 @@ const loadChartData = async () => {
 
     const sourceMap = {};
     for (const c of allCustomers) {
-      const k = c.source || '未知'
+      const k = c.source || t('auto.Data.37.1622dc')
       sourceMap[k] = (sourceMap[k] || 0) + 1
     }
     const sourceData = Object.keys(sourceMap).map((k) => ({ name: k, value: sourceMap[k] }))
@@ -299,7 +302,7 @@ const loadChartData = async () => {
     const topGroups = [...allGroups]
       .sort((a, b) => (Number(b.member_count) || 0) - (Number(a.member_count) || 0))
       .slice(0, 10);
-    const groupNames = topGroups.map((g) => g.name || g.chat_id || '群')
+    const groupNames = topGroups.map((g) => g.name || g.chat_id || t('auto.Data.38.532575'))
     const groupSizes = topGroups.map((g) => Number(g.member_count) || 0)
 
     const days = [];
@@ -324,7 +327,7 @@ const loadChartData = async () => {
       renderMsgTrendChart(days, trendData)
     })
   } catch (e) {
-    ElMessage.error('图表数据加载失败：' + (e.message || e))
+    ElMessage.error(t('auto.Data.39.ab4618') + (e.message || e))
   } finally {
     loading.charts = false
   }
@@ -335,16 +338,16 @@ const renderSourceChart = (data) => {
   if (!sourceChart.value) return
   sourceChartInst = safeInit(sourceChart.value)
   sourceChartInst.setOption({
-    title: { text: '客户来源分布', left: 'center' },
+    title: { text: t('auto.Data.40.e8f6bb'), left: 'center' },
     tooltip: { trigger: 'item' },
     legend: { bottom: 0, type: 'scroll' },
     series: [
       {
-        name: '客户来源',
+        name: t('auto.Data.41.d85de8'),
         type: 'pie',
         radius: '55%',
         center: ['50%', '45%'],
-        data: data.length ? data : [{ name: '暂无数据', value: 1 }],
+        data: data.length ? data : [{ name: t('auto.Data.42.21efd8'), value: 1 }],
         label: { formatter: '{b}: {c}' }
       }
     ]
@@ -356,14 +359,14 @@ const renderGroupSizeChart = (names, sizes) => {
   if (!groupSizeChart.value) return
   groupSizeChartInst = safeInit(groupSizeChart.value)
   groupSizeChartInst.setOption({
-    title: { text: '客户群规模 Top10', left: 'center' },
+    title: { text: t('auto.Data.43.f0ffef'), left: 'center' },
     tooltip: { trigger: 'axis' },
     grid: { left: 80, right: 20, top: 50, bottom: 30 },
     xAxis: { type: 'value' },
     yAxis: { type: 'category', data: names.slice().reverse() },
     series: [
       {
-        name: '成员数',
+        name: t('auto.Data.15.eb9d06'),
         type: 'bar',
         data: sizes.slice().reverse(),
         itemStyle: { color: '#409EFF' }
@@ -377,14 +380,14 @@ const renderMsgTrendChart = (days, data) => {
   if (!msgTrendChart.value) return
   msgTrendChartInst = safeInit(msgTrendChart.value)
   msgTrendChartInst.setOption({
-    title: { text: '消息趋势（近30天）', left: 'center' },
+    title: { text: t('auto.Data.44.59a763'), left: 'center' },
     tooltip: { trigger: 'axis' },
     grid: { left: 50, right: 20, top: 50, bottom: 50 },
     xAxis: { type: 'category', data: days, axisLabel: { rotate: 45, interval: 3 } },
     yAxis: { type: 'value' },
     series: [
       {
-        name: '消息数',
+        name: t('auto.Data.45.342cea'),
         type: 'line',
         smooth: true,
         data: data,
@@ -414,7 +417,7 @@ const onAccountChange = () => {
 
 const openSendTo = (externalUserid) => {
   if (!selectedAccountId.value) {
-    ElMessage.warning('请先选择发送账号')
+    ElMessage.warning(t('auto.Data.46.dcf5bd'))
     return
   }
   sendExternalUserID.value = externalUserid

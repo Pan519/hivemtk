@@ -5,7 +5,7 @@
       <div class="header-content">
         <div>
           <h2>{{ $t('对话记忆') }}</h2>
-          <p class="subtitle">短期记忆 + 长期记忆双层架构，为销冠 SOP 智能体提供完整客户上下文</p>
+          <p class="subtitle">{{ $t('auto.List.23.cb3995') }}</p>
         </div>
         <div class="header-actions">
           <el-button @click="refreshAll" :loading="loading">
@@ -52,7 +52,7 @@
           <div class="header-controls">
             <el-input
               v-model="filterCustomerID"
-              :placeholder="$t('客户 ID 搜索')"
+              ::placeholder="$t('auto.List.1.ca3542')"
               clearable
               size="small"
               style="width: 200px"
@@ -64,7 +64,7 @@
         </div>
       </template>
       <el-table :data="memoryList" v-loading="listLoading" stripe>
-        <el-table-column label="客户" min-width="160">
+        <el-table-column :label="$t('auto.List.2.ff0b20')" min-width="160">
           <template #default="{ row }">
             <div class="customer-cell">
               <span class="customer-name">{{ row.customer_name || row.customer_id || '-' }}</span>
@@ -72,38 +72,38 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column label="购买意向" width="100">
+        <el-table-column :label="$t('auto.List.3.ce092e')" width="100">
           <template #default="{ row }">
             <el-tag :type="getIntentType(row.intent_level || row.purchase_intent)" size="small">
               {{ getIntentLabel(row.intent_level || row.purchase_intent) }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="消息数" width="90" align="center">
+        <el-table-column :label="$t('auto.List.4.342cea')" width="90" align="center">
           <template #default="{ row }">{{ row.message_count || 0 }}</template>
         </el-table-column>
-        <el-table-column label="异议数" width="90" align="center">
+        <el-table-column :label="$t('auto.List.5.19b1dc')" width="90" align="center">
           <template #default="{ row }">{{ (row.objections || []).length }}</template>
         </el-table-column>
-        <el-table-column label="关键事实" width="90" align="center">
+        <el-table-column :label="$t('auto.List.6.507e6a')" width="90" align="center">
           <template #default="{ row }">
             <el-tag size="small" effect="plain">{{ keyFactsCount(row.key_facts) }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="SOP 历史" width="90" align="center">
+        <el-table-column :label="$t('auto.List.7.6a07e0')" width="90" align="center">
           <template #default="{ row }">{{ (row.sop_history || []).length }}</template>
         </el-table-column>
-        <el-table-column label="最后活跃" width="160">
+        <el-table-column :label="$t('auto.List.8.7f2846')" width="160">
           <template #default="{ row }">{{ formatTime(row.last_active_at || row.updated_at) }}</template>
         </el-table-column>
-        <el-table-column label="操作" width="160" fixed="right">
+        <el-table-column :label="$t('auto.List.9.2b6bc0')" width="160" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" size="small" @click="viewDetail(row)">查看记忆</el-button>
-            <el-button link type="success" size="small" @click="buildContext(row)">构建上下文</el-button>
+            <el-button link type="primary" size="small" @click="viewDetail(row)">{{ $t('auto.List.24.fddda3') }}</el-button>
+            <el-button link type="success" size="small" @click="buildContext(row)">{{ $t('auto.List.25.d956fe') }}</el-button>
           </template>
         </el-table-column>
         <template #empty>
-          <el-empty description="暂无记忆数据" />
+          <el-empty :description="$t('auto.List.10.85149b')" />
         </template>
       </el-table>
       <div class="pagination-container" v-if="pagination.total > 0">
@@ -124,20 +124,20 @@
          Vue 每次渲染都报 "Runtime directive used on component with non-element root node"），
          且它从声明起就从未被赋 true，是死状态。弹窗内的短消息/长期记忆分区各自有
          shortLoading / longLoading 转圈，删掉不影响任何可见行为。 -->
-    <el-dialog v-model="detailVisible" title="客户对话记忆详情" width="920px" top="5vh">
+    <el-dialog v-model="detailVisible" :title="$t('auto.List.11.f9b256')" width="920px" top="5vh">
       <template v-if="currentMemory">
         
         <el-descriptions :column="3" border size="small">
-          <el-descriptions-item label="客户 ID">{{ currentMemory.customer_id || '-' }}</el-descriptions-item>
-          <el-descriptions-item label="客户姓名">{{ currentMemory.customer_name || '-' }}</el-descriptions-item>
-          <el-descriptions-item label="购买意向">
+          <el-descriptions-item :label="$t('auto.List.12.3f61de')">{{ currentMemory.customer_id || '-' }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.13.79559f')">{{ currentMemory.customer_name || '-' }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.3.ce092e')">
             <el-tag :type="getIntentType(currentMemory.intent_level || currentMemory.purchase_intent)" size="small">
               {{ getIntentLabel(currentMemory.intent_level || currentMemory.purchase_intent) }}
             </el-tag>
           </el-descriptions-item>
-          <el-descriptions-item label="消息数">{{ currentMemory.message_count || 0 }}</el-descriptions-item>
-          <el-descriptions-item label="异议数">{{ (currentMemory.objections || []).length }}</el-descriptions-item>
-          <el-descriptions-item label="最后活跃">{{ formatTime(currentMemory.last_active_at || currentMemory.updated_at) }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.4.342cea')">{{ currentMemory.message_count || 0 }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.5.19b1dc')">{{ (currentMemory.objections || []).length }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.8.7f2846')">{{ formatTime(currentMemory.last_active_at || currentMemory.updated_at) }}</el-descriptions-item>
         </el-descriptions>
 
         <div class="context-bar">
@@ -150,14 +150,14 @@
             type="textarea"
             :rows="4"
             readonly
-            placeholder="上下文内容"
+            :placeholder="$t('auto.List.14.65e5d2')"
             class="context-text"
           />
         </div>
 
         <el-tabs v-model="activeTab" class="detail-tabs">
           
-          <el-tab-pane label="短期记忆" name="short">
+          <el-tab-pane :label="$t('auto.List.15.3932ef')" name="short">
             <div class="message-stream" v-loading="shortLoading">
               <template v-if="shortMessages.length">
                 <div v-for="(msg, idx) in shortMessages" :key="idx" :class="['message-item', msg.role]">
@@ -172,22 +172,22 @@
                   </div>
                 </div>
               </template>
-              <el-empty v-else description="暂无短期记忆消息" :image-size="80" />
+              <el-empty v-else :description="$t('auto.List.16.2f0723')" :image-size="80" />
             </div>
           </el-tab-pane>
 
           
-          <el-tab-pane label="长期记忆" name="long">
+          <el-tab-pane :label="$t('auto.List.17.de49f7')" name="long">
             <div v-loading="longLoading">
               <template v-if="longTermText">
                 <el-alert :title="longTermText" type="info" :closable="false" show-icon />
               </template>
-              <el-empty v-else description="暂无长期记忆摘要" :image-size="80" />
+              <el-empty v-else :description="$t('auto.List.18.40bdff')" :image-size="80" />
             </div>
           </el-tab-pane>
 
           
-          <el-tab-pane label="关键事实" name="facts">
+          <el-tab-pane :label="$t('auto.List.6.507e6a')" name="facts">
             <template v-if="keyFactsList.length">
               <el-descriptions :column="2" border size="small">
                 <el-descriptions-item v-for="item in keyFactsList" :key="item.key" :label="item.key">
@@ -195,7 +195,7 @@
                 </el-descriptions-item>
               </el-descriptions>
             </template>
-            <el-empty v-else description="暂无关键事实" :image-size="80" />
+            <el-empty v-else :description="$t('auto.List.19.2e89e2')" :image-size="80" />
           </el-tab-pane>
 
           
@@ -213,23 +213,23 @@
                 </el-timeline-item>
               </el-timeline>
             </template>
-            <el-empty v-else description="暂无异义记录" :image-size="80" />
+            <el-empty v-else :description="$t('auto.List.20.c0974a')" :image-size="80" />
           </el-tab-pane>
 
           
-          <el-tab-pane label="购买意向" name="purchase">
+          <el-tab-pane :label="$t('auto.List.3.ce092e')" name="purchase">
             <div class="intent-block">
               <div class="intent-current">
-                <span class="label">当前意向等级：</span>
+                <span class="label">{{ $t('auto.List.26.507a08') }}</span>
                 <el-tag :type="getIntentType(currentMemory.intent_level || currentMemory.purchase_intent)" size="large">
                   {{ getIntentLabel(currentMemory.intent_level || currentMemory.purchase_intent) }}
                 </el-tag>
               </div>
-              <el-divider content-position="left">手动调整意向</el-divider>
+              <el-divider content-position="left">{{ $t('auto.List.27.98003c') }}</el-divider>
               <el-radio-group v-model="intentLevel" @change="updateIntent">
-                <el-radio-button value="high">高意向</el-radio-button>
-                <el-radio-button value="medium">中意向</el-radio-button>
-                <el-radio-button value="low">低意向</el-radio-button>
+                <el-radio-button value="high">{{ $t('auto.List.28.2601e2') }}</el-radio-button>
+                <el-radio-button value="medium">{{ $t('auto.List.29.af4713') }}</el-radio-button>
+                <el-radio-button value="low">{{ $t('auto.List.30.b20283') }}</el-radio-button>
               </el-radio-group>
             </div>
           </el-tab-pane>
@@ -250,7 +250,7 @@
                 </el-tag>
               </div>
             </template>
-            <el-empty v-else description="暂无意图轨迹" :image-size="80" />
+            <el-empty v-else :description="$t('auto.List.21.727aad')" :image-size="80" />
           </el-tab-pane>
 
           
@@ -267,7 +267,7 @@
                 </el-timeline-item>
               </el-timeline>
             </template>
-            <el-empty v-else description="暂无 SOP 历史" :image-size="80" />
+            <el-empty v-else :description="$t('auto.List.22.53f73b')" :image-size="80" />
           </el-tab-pane>
         </el-tabs>
       </template>
@@ -279,9 +279,12 @@
 import i18n from '@/i18n'
 
 import { ref, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import { Refresh, Connection } from '@element-plus/icons-vue'
 import { memoryApi } from '@/api/dialogueMemory.js'
+
+const { t } = useI18n()
 
 const loading = ref(false)
 const listLoading = ref(false)
@@ -335,8 +338,8 @@ const getIntentType = (level) => {
 }
 
 const getIntentLabel = (level) => {
-  const map = { high: '高意向', medium: '中意向', low: '低意向' }
-  return map[level] || '未评估'
+  const map = { high: t('auto.List.28.2601e2'), medium: t('auto.List.29.af4713'), low: t('auto.List.30.b20283') }
+  return map[level] || t('auto.List.31.0ebf4f')
 }
 
 const getIntentTagType = (type) => {
@@ -350,13 +353,13 @@ const getIntentTagType = (type) => {
 
 const getIntentName = (type) => {
   const map = {
-    price_inquiry: '价格咨询', purchase: '购买意向',
-    objection_price: '价格异议', objection_need: '需求异议',
-    objection_trust: '信任异议', objection_competitor: '竞品异议',
-    objection_timing: '时机异议', ask_product: '产品咨询',
-    ask_service: '服务咨询', after_sale: '售后问题',
-    churn: '流失倾向', social: '社交寒暄', greeting: '问候',
-    complaint: '投诉', unknown: '未知'
+    price_inquiry: t('auto.List.32.be446c'), purchase: t('auto.List.3.ce092e'),
+    objection_price: t('auto.List.33.6347cc'), objection_need: t('auto.List.34.01b833'),
+    objection_trust: t('auto.List.35.62d02b'), objection_competitor: t('auto.List.36.8180b6'),
+    objection_timing: t('auto.List.37.4742a9'), ask_product: t('auto.List.38.516a44'),
+    ask_service: t('auto.List.39.62588a'), after_sale: t('auto.List.40.ab76fc'),
+    churn: t('auto.List.41.b0be74'), social: t('auto.List.42.7a0b74'), greeting: t('auto.List.43.3f7b30'),
+    complaint: t('auto.List.44.e19d1d'), unknown: t('auto.List.45.1622dc')
   }
   return map[type] || type
 }
@@ -368,10 +371,10 @@ const getRoleType = (role) => {
 }
 
 const getRoleLabel = (role) => {
-  if (role === 'user' || role === 'customer') return '客户'
+  if (role === 'user' || role === 'customer') return t('auto.List.2.ff0b20')
   if (role === 'assistant' || role === 'ai' || role === 'bot') return 'AI'
-  if (role === 'system') return '系统'
-  return role || '未知'
+  if (role === 'system') return t('auto.List.46.8a8b89')
+  return role || t('auto.List.45.1622dc')
 }
 
 const formatTime = (t) => {
@@ -399,7 +402,7 @@ const loadList = async () => {
     memoryList.value = res?.list || [];
     pagination.value.total = res?.total || 0
   } catch (e) {
-    ElMessage.error('加载记忆列表失败：' + (e.message || '未知错误'))
+    ElMessage.error(t('auto.List.47.94ca59') + (e.message || t('auto.List.48.974e74')))
   } finally {
     listLoading.value = false
   }
@@ -434,7 +437,7 @@ const loadShortMessages = async (customerId) => {
     const res = await memoryApi.getShortTerm({ customer_id: customerId, limit: 50 })
     shortMessages.value = Array.isArray(res) ? res : (res?.list || (res?.messages || []))
   } catch (e) {
-    ElMessage.error('加载短期记忆失败：' + (e.message || '未知错误'))
+    ElMessage.error(t('auto.List.49.667534') + (e.message || t('auto.List.48.974e74')))
     shortMessages.value = []
   } finally {
     shortLoading.value = false
@@ -459,7 +462,7 @@ const loadLongTerm = async (customerId) => {
       longTermText.value = res?.long_term_summary || ''
     }
   } catch (e) {
-    ElMessage.error('加载长期记忆失败：' + (e.message || '未知错误'))
+    ElMessage.error(t('auto.List.50.b871d6') + (e.message || t('auto.List.48.974e74')))
     longTermText.value = ''
   } finally {
     longLoading.value = false
@@ -468,7 +471,7 @@ const loadLongTerm = async (customerId) => {
 
 const buildContext = async (row) => {
   if (!row?.customer_id) {
-    ElMessage.warning(i18n.global.t('缺少客户 ID'))
+    ElMessage.warning(i18n.global.t(t('auto.List.51.330056')))
     return
   }
   contextLoading.value = true
@@ -479,9 +482,9 @@ const buildContext = async (row) => {
     } else {
       contextText.value = JSON.stringify(res, null, 2)
     }
-    ElMessage.success(i18n.global.t('上下文构建成功'))
+    ElMessage.success(i18n.global.t(t('auto.List.52.cb7059')))
   } catch (e) {
-    ElMessage.error('构建上下文失败：' + (e.message || '未知错误'))
+    ElMessage.error(t('auto.List.53.0f2820') + (e.message || t('auto.List.48.974e74')))
   } finally {
     contextLoading.value = false
   }
@@ -489,7 +492,7 @@ const buildContext = async (row) => {
 
 const updateIntent = async (level) => {
   if (!currentMemory.value?.customer_id) {
-    ElMessage.warning(i18n.global.t('缺少客户 ID'))
+    ElMessage.warning(i18n.global.t(t('auto.List.51.330056')))
     return
   }
   try {
@@ -499,10 +502,10 @@ const updateIntent = async (level) => {
     })
     currentMemory.value.intent_level = level
     currentMemory.value.purchase_intent = level
-    ElMessage.success(i18n.global.t('购买意向已更新'))
+    ElMessage.success(i18n.global.t(t('auto.List.54.11da4e')))
     loadList()
   } catch (e) {
-    ElMessage.error('更新失败：' + (e.message || '未知错误'))
+    ElMessage.error(t('auto.List.55.87ef41') + (e.message || t('auto.List.48.974e74')))
   }
 }
 

@@ -6,8 +6,8 @@
       type="warning"
       show-icon
       :closable="false"
-      title="订单草稿底座不可用"
-      description="后端回的是 503（FF_LTC_ORDER_DRAFT_DB 为 off 或未装配草稿运行时）。下面的空列表不是「草稿清完了」，是一次都没读到；档位只在装配期读一次，改完须重启。"
+      :title="$t('auto.List.1.7cb976')"
+      :description="$t('auto.List.2.62ae72')"
     />
     <el-alert
       v-if="!me"
@@ -15,15 +15,15 @@
       type="info"
       show-icon
       :closable="false"
-      title="登录态里没有 user id"
-      description="确认/取消/改价都要求操作者身份，所以这一页此刻只能看不能点。重新登录通常就能拿回身份。"
+      :title="$t('auto.List.3.d5e452')"
+      :description="$t('auto.List.4.a0545c')"
     />
 
     <el-card shadow="never">
       <template #header>
         <div class="card-header">
           <div class="header-left">
-            <span>订单草稿</span>
+            <span>{{ $t('auto.List.19.83861e') }}</span>
             <el-tag
               v-if="stats.mode"
               size="small"
@@ -54,13 +54,13 @@
         >
           {{ k }} <b>{{ n }}</b>
         </span>
-        <span class="counts-at">待确认池视图不含已确认/已取消/已过期（要看客户全历史，进详情页）</span>
+        <span class="counts-at">{{ $t('auto.List.20.d3edc1') }}</span>
       </div>
       <div
         v-else-if="stats.assembled === false"
         class="counts"
       >
-        <span class="count-chip">本进程未装配草稿运行时 ⇒ 计数未读取（不是 0）</span>
+        <span class="count-chip">{{ $t('auto.List.21.4efc6e') }}</span>
       </div>
       <el-alert
         v-if="stats.warning"
@@ -75,23 +75,23 @@
         inline
         class="mb-12"
       >
-        <el-form-item label="归属">
+        <el-form-item :label="$t('auto.List.5.2296bd')">
           <el-select
             v-model="filter.owner"
             class="filter-select"
             @change="reload"
           >
             <el-option
-              label="全部待确认（池子）"
+              :label="$t('auto.List.6.b54b96')"
               value="pool"
             />
             <el-option
-              label="我名下"
+              :label="$t('auto.List.7.2bc855')"
               value="me"
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="条数">
+        <el-form-item :label="$t('auto.List.8.a6f7f1')">
           <el-select
             v-model="filter.limit"
             class="filter-select"
@@ -113,7 +113,7 @@
         stripe
       >
         <el-table-column
-          label="产品"
+          :label="$t('auto.List.9.a01543')"
           min-width="200"
         >
           <template #default="{ row }">
@@ -135,7 +135,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="客户"
+          :label="$t('auto.List.10.ff0b20')"
           width="140"
         >
           <template #default="{ row }">
@@ -143,12 +143,12 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="数量"
+          :label="$t('auto.List.11.0bf60b')"
           width="70"
           prop="quantity"
         />
         <el-table-column
-          label="单价"
+          :label="$t('auto.List.12.da4abd')"
           width="100"
         >
           <template #default="{ row }">
@@ -156,7 +156,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="总额"
+          :label="$t('auto.List.13.6ffe81')"
           width="110"
         >
           <template #default="{ row }">
@@ -164,7 +164,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="置信度"
+          :label="$t('auto.List.14.8f3599')"
           width="80"
         >
           <template #default="{ row }">
@@ -172,7 +172,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="状态"
+          :label="$t('auto.List.15.3fea7c')"
           width="90"
         >
           <template #default="{ row }">
@@ -185,12 +185,12 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="来源"
+          :label="$t('auto.List.16.26ca20')"
           width="90"
           prop="source"
         />
         <el-table-column
-          label="到期"
+          :label="$t('auto.List.17.851824')"
           width="170"
         >
           <template #default="{ row }">
@@ -198,7 +198,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="操作"
+          :label="$t('auto.List.18.2b6bc0')"
           width="200"
           fixed="right"
         >
@@ -246,6 +246,7 @@
 
 <script setup>
 import { computed, onMounted, reactive, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { orderDraftApi } from '@/api/orderDraft'
@@ -267,6 +268,8 @@ const userStore = useUserStore()
 // 否则 userInfo.id 是数字时「有没有身份」的判断会出岔子。
 const me = computed(() => String(userStore.userInfo?.id ?? ''))
 
+const { t } = useI18n()
+
 const loading = ref(false)
 const actingId = ref('')
 const list = ref([])
@@ -276,7 +279,7 @@ const stats = reactive({ mode: '', store: '', assembled: undefined, counts: null
 const filter = reactive({ owner: 'pool', limit: 50 })
 
 const STATUS_TAGS = { pending: 'warning', confirmed: 'success', cancelled: 'info', expired: 'danger' }
-const STATUS_LABELS = { pending: '待确认', confirmed: '已确认', cancelled: '已取消', expired: '已过期' }
+const STATUS_LABELS = { pending: t('auto.List.22.2a2772'), confirmed: t('auto.List.23.4113e7'), cancelled: t('auto.List.24.2111cc'), expired: t('auto.List.25.4d5ccd') }
 
 const statusTag = (s) => STATUS_TAGS[s] || 'info'
 const statusLabel = (s) => STATUS_LABELS[s] || s
@@ -362,8 +365,8 @@ async function confirmDraft(row) {
   try {
     await ElMessageBox.confirm(
       `确认把「${row.product_name}」×${row.quantity} 转成正式订单？确认后草稿不可再改。`,
-      '确认成单',
-      { confirmButtonText: '确认成单', cancelButtonText: '再想想', type: 'warning' }
+      t('auto.List.26.9308e4'),
+      { confirmButtonText: t('auto.List.26.9308e4'), cancelButtonText: t('auto.List.27.abe78b'), type: 'warning' }
     )
   } catch {
     return
@@ -393,13 +396,13 @@ async function cancelDraft(row) {
   try {
     ({ value: reason } = await ElMessageBox.prompt(
       `取消「${row.product_name}」这张草稿，必须给理由`,
-      '取消草稿',
+      t('auto.List.28.027c28'),
       {
         inputType: 'textarea',
-        inputPlaceholder: '例如：客户不要了 / 价格谈不拢 / 重复草稿',
-        inputValidator: (v) => (v && v.trim() ? true : '取消必须写理由（理由是取消原因分析的唯一原料）'),
-        confirmButtonText: '取消草稿',
-        cancelButtonText: '返回'
+        inputPlaceholder: t('auto.List.29.c5fe89'),
+        inputValidator: (v) => (v && v.trim() ? true : t('auto.List.30.6210e8')),
+        confirmButtonText: t('auto.List.28.027c28'),
+        cancelButtonText: t('auto.List.31.5f4112')
       }
     ))
   } catch {
@@ -407,7 +410,7 @@ async function cancelDraft(row) {
   }
   try {
     await orderDraftApi.cancel(row.id, reason.trim())
-    ElMessage.success('已取消')
+    ElMessage.success(t('auto.List.24.2111cc'))
     refresh()
   } catch (err) {
     if (err?.status === 404 || err?.status === 409) refresh()

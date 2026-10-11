@@ -14,9 +14,9 @@
       
       <div class="search-bar">
         <el-form :inline="true" :model="searchForm">
-          <el-form-item label="分类">
-            <el-select v-model="searchForm.categoryId" placeholder="全部分类" clearable>
-              <el-option label="全部分类" value="" />
+          <el-form-item :label="$t('auto.MaterialLibrary.1.d0771a')">
+            <el-select v-model="searchForm.categoryId" :placeholder="$t('auto.MaterialLibrary.2.1a7503')" clearable>
+              <el-option :label="$t('auto.MaterialLibrary.2.1a7503')" value="" />
               <el-option
                 v-for="category in categories"
                 :key="category.id"
@@ -25,21 +25,21 @@
               />
             </el-select>
           </el-form-item>
-          <el-form-item label="类型">
-            <el-select v-model="searchForm.type" placeholder="全部类型" clearable>
-              <el-option label="全部类型" value="" />
-              <el-option label="图片" value="image" />
-              <el-option label="视频" value="video" />
-              <el-option label="音频" value="audio" />
-              <el-option label="文档" value="document" />
+          <el-form-item :label="$t('auto.MaterialLibrary.3.226b09')">
+            <el-select v-model="searchForm.type" :placeholder="$t('auto.MaterialLibrary.4.c079e7')" clearable>
+              <el-option :label="$t('auto.MaterialLibrary.4.c079e7')" value="" />
+              <el-option :label="$t('auto.MaterialLibrary.5.20def7')" value="image" />
+              <el-option :label="$t('auto.MaterialLibrary.6.7fcf42')" value="video" />
+              <el-option :label="$t('auto.MaterialLibrary.7.726dd5')" value="audio" />
+              <el-option :label="$t('auto.MaterialLibrary.8.325369')" value="document" />
             </el-select>
           </el-form-item>
-          <el-form-item label="关键词">
-            <el-input v-model="searchForm.keyword" placeholder="请输入素材名称" clearable />
+          <el-form-item :label="$t('auto.MaterialLibrary.9.9699a5')">
+            <el-input v-model="searchForm.keyword" :placeholder="$t('auto.MaterialLibrary.10.21724d')" clearable />
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="handleSearch">搜索</el-button>
-            <el-button @click="handleReset">重置</el-button>
+            <el-button type="primary" @click="handleSearch">{{ $t('auto.MaterialLibrary.17.e5f71f') }}</el-button>
+            <el-button @click="handleReset">{{ $t('auto.MaterialLibrary.18.4b9c32') }}</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -72,8 +72,8 @@
               </el-icon>
             </div>
             <div class="material-actions">
-              <el-button type="primary" link @click.stop="handleCopyUrl(material.url)">复制链接</el-button>
-              <el-button type="danger" link @click.stop="handleDelete(material)">删除</el-button>
+              <el-button type="primary" link @click.stop="handleCopyUrl(material.url)">{{ $t('auto.MaterialLibrary.19.879058') }}</el-button>
+              <el-button type="danger" link @click.stop="handleDelete(material)">{{ $t('auto.MaterialLibrary.20.2f4aad') }}</el-button>
             </div>
           </div>
           <div class="material-info">
@@ -103,14 +103,14 @@
 
     
     <el-dialog
-      title="上传素材"
+      :title="$t('auto.MaterialLibrary.11.fc5b61')"
       v-model="uploadDialogVisible"
       width="600px"
       @close="handleUploadClose"
     >
       <el-form ref="uploadFormRef" :model="uploadForm" label-width="100px">
-        <el-form-item label="选择分类" prop="categoryId">
-          <el-select v-model="uploadForm.categoryId" placeholder="请选择分类">
+        <el-form-item :label="$t('auto.MaterialLibrary.12.5fcb1e')" prop="categoryId">
+          <el-select v-model="uploadForm.categoryId" :placeholder="$t('auto.MaterialLibrary.13.8bb820')">
             <el-option
               v-for="category in categories"
               :key="category.id"
@@ -119,7 +119,7 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="上传文件">
+        <el-form-item :label="$t('auto.MaterialLibrary.14.a6fc9e')">
           <el-upload
             ref="uploadRef"
             drag
@@ -133,7 +133,7 @@
           >
             <el-icon class="el-icon--upload"><upload-filled /></el-icon>
             <div class="el-upload__text">
-              拖拽文件到此处或 <em>点击上传</em>
+              拖拽文件到此处或 <em>{{ $t('auto.MaterialLibrary.21.2c808b') }}</em>
             </div>
             <template #tip>
               <div class="el-upload__tip">
@@ -145,14 +145,14 @@
       </el-form>
 
       <template #footer>
-        <el-button @click="uploadDialogVisible = false">取消</el-button>
-        <el-button type="primary" @click="handleUploadSubmit">开始上传</el-button>
+        <el-button @click="uploadDialogVisible = false">{{ $t('auto.MaterialLibrary.22.625fb2') }}</el-button>
+        <el-button type="primary" @click="handleUploadSubmit">{{ $t('auto.MaterialLibrary.23.020f1e') }}</el-button>
       </template>
     </el-dialog>
 
     
     <el-dialog
-      title="分类管理"
+      :title="$t('auto.MaterialLibrary.15.5c2747')"
       v-model="categoryDialogVisible"
       width="500px"
     >
@@ -164,8 +164,8 @@
         >
           <span>{{ category.name }}</span>
           <div class="category-actions">
-            <el-button type="primary" link @click="handleEditCategory(category)">编辑</el-button>
-            <el-button type="danger" link @click="handleDeleteCategory(category)">删除</el-button>
+            <el-button type="primary" link @click="handleEditCategory(category)">{{ $t('auto.MaterialLibrary.24.95b351') }}</el-button>
+            <el-button type="danger" link @click="handleDeleteCategory(category)">{{ $t('auto.MaterialLibrary.20.2f4aad') }}</el-button>
           </div>
         </div>
       </div>
@@ -173,15 +173,15 @@
       <div class="category-form" v-if="showCategoryForm">
         <el-input
           v-model="categoryForm.name"
-          placeholder="请输入分类名称"
+          :placeholder="$t('auto.MaterialLibrary.16.68363f')"
           style="width: 200px; margin-right: 10px"
         />
-        <el-button type="primary" @click="handleSaveCategory">保存</el-button>
-        <el-button @click="handleCancelCategory">取消</el-button>
+        <el-button type="primary" @click="handleSaveCategory">{{ $t('auto.MaterialLibrary.25.be5fbb') }}</el-button>
+        <el-button @click="handleCancelCategory">{{ $t('auto.MaterialLibrary.22.625fb2') }}</el-button>
       </div>
 
       <div class="category-add" v-else>
-        <el-button type="primary" link @click="handleAddCategory">+ 新增分类</el-button>
+        <el-button type="primary" link @click="handleAddCategory">{{ $t('auto.MaterialLibrary.26.b6a506') }}</el-button>
       </div>
     </el-dialog>
   </div>
@@ -191,6 +191,7 @@
 import i18n from '@/i18n'
 
 import { ref, reactive, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { Document, VideoPlay, Headset, UploadFilled } from '@element-plus/icons-vue'
 import {
@@ -202,6 +203,8 @@ import {
   updateMaterialCategory,
   deleteMaterialCategory
 } from '@/api/material'
+
+const { t } = useI18n()
 
 const loading = ref(false)
 const materialList = ref([])
@@ -239,12 +242,12 @@ const pagination = reactive({
 
 const getTypeLabel = (type) => {
   const labels = {
-    image: '图片',
-    video: '视频',
-    audio: '音频',
-    document: '文档'
+    image: t('auto.MaterialLibrary.5.20def7'),
+    video: t('auto.MaterialLibrary.6.7fcf42'),
+    audio: t('auto.MaterialLibrary.7.726dd5'),
+    document: t('auto.MaterialLibrary.8.325369')
   }
-  return labels[type] || '其他'
+  return labels[type] || t('auto.MaterialLibrary.27.0d98c7')
 }
 
 const formatFileSize = (size) => {
@@ -267,7 +270,7 @@ const loadMaterialList = async () => {
     pagination.total = (response && response.total) || 0
   } catch (error) {
     if (error.response?.status !== 401) {
-      ElMessage.error(i18n.global.t('获取素材列表失败'))
+      ElMessage.error(i18n.global.t(t('auto.MaterialLibrary.28.934bcb')))
     }
   } finally {
     loading.value = false
@@ -280,7 +283,7 @@ const loadCategories = async () => {
     categories.value = (response && response.list) || []
   } catch (error) {
     if (error.response?.status !== 401) {
-      ElMessage.error(i18n.global.t('获取分类列表失败'))
+      ElMessage.error(i18n.global.t(t('auto.MaterialLibrary.29.a8205d')))
     }
   }
 }
@@ -322,7 +325,7 @@ const handleFileChange = (file, files) => {
 const beforeUpload = (file) => {
   const maxSize = 10 * 1024 * 1024;
   if (file.size > maxSize) {
-    ElMessage.error(i18n.global.t('文件大小不能超过10MB'))
+    ElMessage.error(i18n.global.t(t('auto.MaterialLibrary.30.e84c26')))
     return false
   }
   return true
@@ -330,12 +333,12 @@ const beforeUpload = (file) => {
 
 const handleUploadSubmit = async () => {
   if (!uploadForm.categoryId) {
-    ElMessage.error(i18n.global.t('请选择分类'))
+    ElMessage.error(i18n.global.t(t('auto.MaterialLibrary.13.8bb820')))
     return
   }
   
   if (fileList.value.length === 0) {
-    ElMessage.error(i18n.global.t('请选择文件'))
+    ElMessage.error(i18n.global.t(t('auto.MaterialLibrary.31.9febf3')))
     return
   }
 
@@ -348,11 +351,11 @@ const handleUploadSubmit = async () => {
       await uploadMaterial(formData)
     }
     
-    ElMessage.success(i18n.global.t('上传成功'))
+    ElMessage.success(i18n.global.t(t('auto.MaterialLibrary.32.a7699b')))
     uploadDialogVisible.value = false
     loadMaterialList()
   } catch (error) {
-    ElMessage.error(i18n.global.t('上传失败'))
+    ElMessage.error(i18n.global.t(t('auto.MaterialLibrary.33.54e5de')))
   }
 }
 
@@ -363,24 +366,24 @@ const handleUploadClose = () => {
 
 const handleCopyUrl = (url) => {
   navigator.clipboard.writeText(url).then(() => {
-    ElMessage.success(i18n.global.t('链接已复制到剪贴板'))
+    ElMessage.success(i18n.global.t(t('auto.MaterialLibrary.34.deb26c')))
   }).catch(() => {
-    ElMessage.error(i18n.global.t('复制失败'))
+    ElMessage.error(i18n.global.t(t('auto.MaterialLibrary.35.5154ae')))
   })
 }
 
 const handleDelete = async (material) => {
   try {
-    await ElMessageBox.confirm('确定要删除该素材吗？', '提示', {
+    await ElMessageBox.confirm(t('auto.MaterialLibrary.36.6fe549'), t('auto.MaterialLibrary.37.02d981'), {
       type: 'warning'
     })
     
     await deleteMaterial(material.id)
-    ElMessage.success(i18n.global.t('删除成功'))
+    ElMessage.success(i18n.global.t(t('auto.MaterialLibrary.38.0007d1')))
     loadMaterialList()
   } catch (error) {
     if (error !== 'cancel') {
-      ElMessage.error(i18n.global.t('删除失败'))
+      ElMessage.error(i18n.global.t(t('auto.MaterialLibrary.39.acf066')))
     }
   }
 }
@@ -401,16 +404,16 @@ const handleEditCategory = (category) => {
 
 const handleDeleteCategory = async (category) => {
   try {
-    await ElMessageBox.confirm('确定要删除该分类吗？', '提示', {
+    await ElMessageBox.confirm(t('auto.MaterialLibrary.40.cc0ca3'), t('auto.MaterialLibrary.37.02d981'), {
       type: 'warning'
     })
     
     await deleteMaterialCategory(category.id)
-    ElMessage.success(i18n.global.t('删除成功'))
+    ElMessage.success(i18n.global.t(t('auto.MaterialLibrary.38.0007d1')))
     loadCategories()
   } catch (error) {
     if (error !== 'cancel') {
-      ElMessage.error(i18n.global.t('删除失败'))
+      ElMessage.error(i18n.global.t(t('auto.MaterialLibrary.39.acf066')))
     }
   }
 }
@@ -423,23 +426,23 @@ const handleAddCategory = () => {
 
 const handleSaveCategory = async () => {
   if (!categoryForm.name.trim()) {
-    ElMessage.error(i18n.global.t('请输入分类名称'))
+    ElMessage.error(i18n.global.t(t('auto.MaterialLibrary.16.68363f')))
     return
   }
   
   try {
     if (categoryForm.id) {
       await updateMaterialCategory(categoryForm.id, categoryForm)
-      ElMessage.success(i18n.global.t('更新成功'))
+      ElMessage.success(i18n.global.t(t('auto.MaterialLibrary.41.55aa63')))
     } else {
       await createMaterialCategory(categoryForm)
-      ElMessage.success(i18n.global.t('创建成功'))
+      ElMessage.success(i18n.global.t(t('auto.MaterialLibrary.42.04a691')))
     }
     
     showCategoryForm.value = false
     loadCategories()
   } catch (error) {
-    ElMessage.error(categoryForm.id ? '更新失败' : '创建失败')
+    ElMessage.error(categoryForm.id ? t('auto.MaterialLibrary.43.930442') : t('auto.MaterialLibrary.44.a88928'))
   }
 }
 

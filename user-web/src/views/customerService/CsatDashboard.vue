@@ -11,28 +11,28 @@
     <el-row :gutter="16" class="stats-row">
       <el-col :span="6">
         <el-card shadow="hover" class="stat-card">
-          <div class="stat-label">CSAT 均分</div>
+          <div class="stat-label">{{ $t('auto.CsatDashboard.8.c8533d') }}</div>
           <div class="stat-value">{{ stats.responded > 0 ? stats.avgScore : '—' }}</div>
-          <div class="stat-sub">满分 5 星</div>
+          <div class="stat-sub">{{ $t('auto.CsatDashboard.9.fa5ef3') }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card shadow="hover" class="stat-card">
-          <div class="stat-label">好评率</div>
+          <div class="stat-label">{{ $t('auto.CsatDashboard.10.8f7e3a') }}</div>
           <div class="stat-value">{{ stats.responded > 0 ? stats.positiveRate + '%' : '—' }}</div>
-          <div class="stat-sub">4-5 星占比</div>
+          <div class="stat-sub">{{ $t('auto.CsatDashboard.11.692918') }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card shadow="hover" class="stat-card">
-          <div class="stat-label">总评分数</div>
+          <div class="stat-label">{{ $t('auto.CsatDashboard.12.f133dd') }}</div>
           <div class="stat-value">{{ stats.responded }}</div>
           <div class="stat-sub">{{ stats.windowLabel }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card shadow="hover" class="stat-card">
-          <div class="stat-label">差评数</div>
+          <div class="stat-label">{{ $t('auto.CsatDashboard.13.08e5d1') }}</div>
           <div class="stat-value" style="color: #EF4444">{{ stats.negativeCount }}</div>
           <div class="stat-sub">≤{{ stats.threshold }} 星</div>
         </el-card>
@@ -43,7 +43,7 @@
       <el-col :span="16">
         <el-card>
           <template #header>
-            <span>CSAT 趋势（最近 30 天）</span>
+            <span>{{ $t('auto.CsatDashboard.14.4bfe85') }}</span>
           </template>
           <div ref="trendChartRef" class="chart" />
         </el-card>
@@ -51,7 +51,7 @@
       <el-col :span="8">
         <el-card>
           <template #header>
-            <span>评分分布</span>
+            <span>{{ $t('auto.CsatDashboard.15.c4311b') }}</span>
           </template>
           <div ref="distChartRef" class="chart" />
         </el-card>
@@ -63,25 +63,25 @@
         <span>差评列表（≤{{ stats.threshold }} 星）</span>
       </template>
       <el-table :data="negativeList" v-loading="loading">
-        <el-table-column prop="session_id" label="会话 ID" width="240" show-overflow-tooltip />
-        <el-table-column prop="agent_name" label="坐席" width="120">
+        <el-table-column prop="session_id" :label="$t('auto.CsatDashboard.1.427bc5')" width="240" show-overflow-tooltip />
+        <el-table-column prop="agent_name" :label="$t('auto.CsatDashboard.2.2504da')" width="120">
           <template #default="{ row }">{{ row.agent_name || '—' }}</template>
         </el-table-column>
-        <el-table-column prop="user_name" label="客户" width="120">
+        <el-table-column prop="user_name" :label="$t('auto.CsatDashboard.3.ff0b20')" width="120">
           <template #default="{ row }">{{ row.user_name || '—' }}</template>
         </el-table-column>
-        <el-table-column prop="score" label="评分" width="80">
+        <el-table-column prop="score" :label="$t('auto.CsatDashboard.4.108db1')" width="80">
           <template #default="{ row }">
             <el-rate v-model="row.score" disabled :max="5" show-score />
           </template>
         </el-table-column>
-        <el-table-column prop="comment" label="评论" min-width="200" show-overflow-tooltip />
-        <el-table-column label="提交时间" width="180">
+        <el-table-column prop="comment" :label="$t('auto.CsatDashboard.5.55374d')" min-width="200" show-overflow-tooltip />
+        <el-table-column :label="$t('auto.CsatDashboard.6.fb4cc0')" width="180">
           <template #default="{ row }">{{ formatTime(row.responded_at) }}</template>
         </el-table-column>
-        <el-table-column label="操作" width="120" fixed="right">
+        <el-table-column :label="$t('auto.CsatDashboard.7.2b6bc0')" width="120" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" @click="viewSession(row)">查看会话</el-button>
+            <el-button link type="primary" @click="viewSession(row)">{{ $t('auto.CsatDashboard.16.a85ed2') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -90,20 +90,23 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue';
+import { ref, reactive, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n';
 import { getCSATStats, getCSATTrend, getNegativeCSAT } from '@/api/csat'
 import { safeInit } from '@/utils/echarts'
 
 // /api/csat/* 的信封：stats 是对象，trend 与 negative 各自包一层 {list, total}，字段一律 snake_case。
 // 早先按"接口直接返回数组 / 字段是驼峰"取用，结果 el-table 收到对象（rows is not iterable）、
 // 趋势图 data.map 抛错、四张统计卡恒空。
+const { t } = useI18n()
+
 const stats = reactive({
   avgScore: 0,
   positiveRate: 0,
   responded: 0,
   negativeCount: 0,
   threshold: 3,
-  windowLabel: '全部'
+  windowLabel: t('auto.CsatDashboard.17.a8b0c2')
 })
 const negativeList = ref([])
 const loading = ref(false)
@@ -134,7 +137,7 @@ async function load() {
       negativeCount: Number(s?.negative_count ?? 0),
       // 阈值只有一个事实源：差评列表返回的 threshold（模板 low_threshold）
       threshold: Number(neg?.threshold ?? s?.threshold ?? 3),
-      windowLabel: s?.window || '全部'
+      windowLabel: s?.window || t('auto.CsatDashboard.17.a8b0c2')
     })
     negativeList.value = Array.isArray(neg?.list) ? neg.list : []
     renderTrend(Array.isArray(t?.list) ? t.list : [])

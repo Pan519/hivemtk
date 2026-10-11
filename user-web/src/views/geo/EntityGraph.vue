@@ -4,16 +4,16 @@
     <div class="p-4">
     <el-row :gutter="16" class="mb-4">
       <el-col :span="6">
-        <el-card><el-statistic title="实体总数" :value="entities.length" /></el-card>
+        <el-card><el-statistic :title="$t('auto.EntityGraph.1.2c5045')" :value="entities.length" /></el-card>
       </el-col>
       <el-col :span="6">
-        <el-card><el-statistic title="关系总数" :value="totalRelations" /></el-card>
+        <el-card><el-statistic :title="$t('auto.EntityGraph.2.18bfca')" :value="totalRelations" /></el-card>
       </el-col>
       <el-col :span="6">
-        <el-card><el-statistic title="关系类型" :value="relationTypeCount" /></el-card>
+        <el-card><el-statistic :title="$t('auto.EntityGraph.3.ed4fdf')" :value="relationTypeCount" /></el-card>
       </el-col>
       <el-col :span="6">
-        <el-card><el-statistic title="已生成 Schema" :value="schemaGenerated ? 1 : 0" /></el-card>
+        <el-card><el-statistic :title="$t('auto.EntityGraph.4.016d94')" :value="schemaGenerated ? 1 : 0" /></el-card>
       </el-col>
     </el-row>
 
@@ -23,16 +23,16 @@
         <el-card style="height:100%">
           <template #header>
             <div class="flex items-center gap-2">
-              <span class="font-bold">实体列表</span>
-              <el-select v-model="typeFilter" placeholder="按类型筛选" size="small" style="width:120px" clearable>
+              <span class="font-bold">{{ $t('auto.EntityGraph.9.032c0d') }}</span>
+              <el-select v-model="typeFilter" :placeholder="$t('auto.EntityGraph.5.578c47')" size="small" style="width:120px" clearable>
                 <el-option v-for="t in entityTypes" :key="t" :label="t" :value="t" />
               </el-select>
-              <el-input v-model="keyword" placeholder="搜索" size="small" style="width:140px" clearable @clear="loadEntities" @keyup.enter="loadEntities" />
+              <el-input v-model="keyword" :placeholder="$t('auto.EntityGraph.6.e5f71f')" size="small" style="width:140px" clearable @clear="loadEntities" @keyup.enter="loadEntities" />
             </div>
           </template>
           <el-table :data="entities" v-loading="loading" size="small" highlight-current-row @row-click="onSelectEntity" ref="entityTable">
-            <el-table-column prop="name" label="名称" min-width="140" show-overflow-tooltip />
-            <el-table-column prop="type" label="类型" width="100">
+            <el-table-column prop="name" :label="$t('auto.EntityGraph.7.d7ec2d')" min-width="140" show-overflow-tooltip />
+            <el-table-column prop="type" :label="$t('auto.EntityGraph.8.226b09')" width="100">
               <template #default="{ row }">
                 <el-tag size="small">{{ row.type }}</el-tag>
               </template>
@@ -47,7 +47,7 @@
           <template #header>
             <div class="flex items-center justify-between">
               <span class="font-bold">实体关系图{{ currentEntity ? ` · ${currentEntity.name}` : '' }}</span>
-              <el-button size="small" type="primary" :disabled="!currentEntity" @click="onGenerateSchema" :loading="schemaLoading">生成 JSON-LD Schema</el-button>
+              <el-button size="small" type="primary" :disabled="!currentEntity" @click="onGenerateSchema" :loading="schemaLoading">{{ $t('auto.EntityGraph.10.82956f') }}</el-button>
             </div>
           </template>
           
@@ -88,8 +88,8 @@
         <el-card>
           <template #header>
             <div class="flex items-center justify-between">
-              <span class="font-bold">JSON-LD Schema 预览</span>
-              <el-button size="small" @click="onCopySchema" :disabled="!schema">复制</el-button>
+              <span class="font-bold">{{ $t('auto.EntityGraph.11.dea621') }}</span>
+              <el-button size="small" @click="onCopySchema" :disabled="!schema">{{ $t('auto.EntityGraph.12.79d3ab') }}</el-button>
             </div>
           </template>
           <div v-if="!schema" class="py-8 text-center text-gray-400">
@@ -105,9 +105,12 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import { listEntities, getEntityRelations, extractEntities } from '@/api/geoEntity.js'
 import { geoApi } from '@/api/geo.js'
+
+const { t } = useI18n()
 
 const entities = ref([])
 const loading = ref(false)
@@ -186,7 +189,7 @@ const onGenerateSchema = async () => {
     }
     ElMessage.success('JSON-LD Schema 生成成功')
   } catch (e) {
-    ElMessage.error('生成失败：' + (e?.message || e))
+    ElMessage.error(t('auto.EntityGraph.13.5aba40') + (e?.message || e))
   }
   schemaLoading.value = false
 }
@@ -194,9 +197,9 @@ const onGenerateSchema = async () => {
 const onCopySchema = async () => {
   try {
     await navigator.clipboard.writeText(schema.value)
-    ElMessage.success('已复制到剪贴板')
+    ElMessage.success(t('auto.EntityGraph.14.4fb42e'))
   } catch {
-    ElMessage.error('复制失败')
+    ElMessage.error(t('auto.EntityGraph.15.5154ae'))
   }
 }
 

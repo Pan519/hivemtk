@@ -2,7 +2,7 @@
   <div class="openapi-integration">
     
     <el-alert
-      :title="$t('OpenAPI 数据源集成')"
+      ::title="$t('auto.OpenAPIIntegration.1.ab958c')"
       type="info"
       :closable="false"
       show-icon
@@ -15,11 +15,11 @@
     
     <el-card class="filter-card">
       <div class="filter-bar">
-        <el-select v-model="filter.product_id" placeholder="选择产品(可选)" clearable style="width: 220px" @change="loadSources">
+        <el-select v-model="filter.product_id" :placeholder="$t('auto.OpenAPIIntegration.2.86705f')" clearable style="width: 220px" @change="loadSources">
           <el-option v-for="p in productList" :key="p.id" :label="p.name" :value="p.id" />
         </el-select>
-        <el-button :icon="Refresh" @click="loadSources">刷新</el-button>
-        <el-button type="primary" :icon="Plus" @click="showCreateDialog = true">新建数据源</el-button>
+        <el-button :icon="Refresh" @click="loadSources">{{ $t('auto.OpenAPIIntegration.48.694fc5') }}</el-button>
+        <el-button type="primary" :icon="Plus" @click="showCreateDialog = true">{{ $t('auto.OpenAPIIntegration.49.2b4af7') }}</el-button>
       </div>
     </el-card>
 
@@ -27,31 +27,31 @@
     <el-card>
       <el-table :data="sources" v-loading="loading" stripe>
         <el-table-column prop="id" label="ID" width="80" />
-        <el-table-column prop="name" label="名称" min-width="160" show-overflow-tooltip />
-        <el-table-column label="类型" width="80">
+        <el-table-column prop="name" :label="$t('auto.OpenAPIIntegration.3.d7ec2d')" min-width="160" show-overflow-tooltip />
+        <el-table-column :label="$t('auto.OpenAPIIntegration.4.226b09')" width="80">
           <template #default="{ row }">
             <el-tag size="small">{{ row.type?.toUpperCase() }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="方法" width="80">
+        <el-table-column :label="$t('auto.OpenAPIIntegration.5.ea340b')" width="80">
           <template #default="{ row }">
             <el-tag :type="getMethodTagType(row.method)" size="small">{{ getMethodLabel(row.method) }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="endpoint" label="端点" min-width="280" show-overflow-tooltip>
+        <el-table-column prop="endpoint" :label="$t('auto.OpenAPIIntegration.6.cf28e8')" min-width="280" show-overflow-tooltip>
           <template #default="{ row }">
             <el-text size="small" style="font-family: monospace">{{ row.endpoint }}</el-text>
           </template>
         </el-table-column>
-        <el-table-column label="认证" width="100">
+        <el-table-column :label="$t('auto.OpenAPIIntegration.7.b7158a')" width="100">
           <template #default="{ row }">{{ authTypeLabel(row.auth_type) }}</template>
         </el-table-column>
-        <el-table-column label="状态" width="100">
+        <el-table-column :label="$t('auto.OpenAPIIntegration.8.3fea7c')" width="100">
           <template #default="{ row }">
             <el-switch v-model="row._enabled" @change="(val) => handleToggle(row, val)" />
           </template>
         </el-table-column>
-        <el-table-column label="上次同步" width="180">
+        <el-table-column :label="$t('auto.OpenAPIIntegration.9.63ce1b')" width="180">
           <template #default="{ row }">
             <div>{{ row.last_sync_at ? formatDate(row.last_sync_at) : '从未同步' }}</div>
             <el-tag :type="getLastStatusTagType(row.last_status)" size="small">
@@ -59,46 +59,46 @@
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="total_synced" label="累计同步" width="100" />
-        <el-table-column label="操作" width="240" fixed="right">
+        <el-table-column prop="total_synced" :label="$t('auto.OpenAPIIntegration.10.a53731')" width="100" />
+        <el-table-column :label="$t('auto.OpenAPIIntegration.11.2b6bc0')" width="240" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" size="small" @click="showEditDialog(row)">编辑</el-button>
-            <el-button link type="success" size="small" @click="handleTest(row)">测试</el-button>
-            <el-button link type="primary" size="small" @click="handleSync(row)">立即同步</el-button>
-            <el-button link type="danger" size="small" @click="handleDelete(row)">删除</el-button>
+            <el-button link type="primary" size="small" @click="showEditDialog(row)">{{ $t('auto.OpenAPIIntegration.50.95b351') }}</el-button>
+            <el-button link type="success" size="small" @click="handleTest(row)">{{ $t('auto.OpenAPIIntegration.51.db06c7') }}</el-button>
+            <el-button link type="primary" size="small" @click="handleSync(row)">{{ $t('auto.OpenAPIIntegration.52.5f71b2') }}</el-button>
+            <el-button link type="danger" size="small" @click="handleDelete(row)">{{ $t('auto.OpenAPIIntegration.53.2f4aad') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
-      <el-empty v-if="!loading && sources.length === 0" description="还没有数据源,点击右上角「新建数据源」开始" />
+      <el-empty v-if="!loading && sources.length === 0" :description="$t('auto.OpenAPIIntegration.12.1bf1ea')" />
     </el-card>
 
     
-    <el-dialog v-model="showCreateDialog" :title="editingId ? '编辑数据源' : '新建数据源'" width="720px" :close-on-click-modal="false">
+    <el-dialog v-model="showCreateDialog" ::title="$t('auto.OpenAPIIntegration.13.1d4038')" width="720px" :close-on-click-modal="false">
       <el-form :model="form" :rules="rules" ref="formRef" label-width="100px">
-        <el-form-item label="名称" prop="name">
-          <el-input v-model="form.name" placeholder="如:产品文档同步" />
+        <el-form-item :label="$t('auto.OpenAPIIntegration.3.d7ec2d')" prop="name">
+          <el-input v-model="form.name" :placeholder="$t('auto.OpenAPIIntegration.14.819e4d')" />
         </el-form-item>
-        <el-form-item label="关联产品" prop="product_id">
-          <el-select v-model="form.product_id" placeholder="选择产品" style="width: 100%">
+        <el-form-item :label="$t('auto.OpenAPIIntegration.15.aa3fdf')" prop="product_id">
+          <el-select v-model="form.product_id" :placeholder="$t('auto.OpenAPIIntegration.16.cbf1cf')" style="width: 100%">
             <el-option v-for="p in productList" :key="p.id" :label="p.name" :value="p.id" />
           </el-select>
         </el-form-item>
-        <el-form-item label="端点 URL" prop="endpoint">
+        <el-form-item :label="$t('auto.OpenAPIIntegration.17.bcfbd5')" prop="endpoint">
           <el-input v-model="form.endpoint" placeholder="https://api.example.com/v1/docs" />
         </el-form-item>
-        <el-form-item label="请求方法">
+        <el-form-item :label="$t('auto.OpenAPIIntegration.18.ec4932')">
           <el-radio-group v-model="form.method">
             <el-radio-button label="GET">GET</el-radio-button>
             <el-radio-button label="POST">POST</el-radio-button>
             <el-radio-button label="PUT">PUT</el-radio-button>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="认证方式">
+        <el-form-item :label="$t('auto.OpenAPIIntegration.19.b33c72')">
           <el-select v-model="form.auth_type" style="width: 100%">
-            <el-option label="无认证" value="none" />
+            <el-option :label="$t('auto.OpenAPIIntegration.20.7870c3')" value="none" />
             <el-option label="Bearer Token" value="bearer" />
             <el-option label="API Key" value="api_key" />
-            <el-option label="HMAC 签名" value="hmac" />
+            <el-option :label="$t('auto.OpenAPIIntegration.21.baffb0')" value="hmac" />
             <el-option label="Basic Auth" value="basic" />
           </el-select>
         </el-form-item>
@@ -106,83 +106,83 @@
           <el-input v-model="form.auth_token" placeholder="Bearer Token" show-password />
         </el-form-item>
         <el-form-item v-if="form.auth_type === 'api_key'" label="API Key">
-          <el-input v-model="form.auth_token" placeholder="API Key 值" show-password />
+          <el-input v-model="form.auth_token" :placeholder="$t('auto.OpenAPIIntegration.22.ed3b95')" show-password />
         </el-form-item>
         <el-form-item v-if="form.auth_type === 'hmac'" label="HMAC Secret">
-          <el-input v-model="form.auth_token" placeholder="HMAC 签名密钥" show-password />
+          <el-input v-model="form.auth_token" :placeholder="$t('auto.OpenAPIIntegration.23.eca225')" show-password />
         </el-form-item>
         <template v-if="form.auth_type === 'basic'">
-          <el-form-item label="用户名">
-            <el-input v-model="form.auth_username" placeholder="Basic Auth 用户名" />
+          <el-form-item :label="$t('auto.OpenAPIIntegration.24.819767')">
+            <el-input v-model="form.auth_username" :placeholder="$t('auto.OpenAPIIntegration.25.b82c1b')" />
           </el-form-item>
-          <el-form-item label="密码">
-            <el-input v-model="form.auth_token" type="password" placeholder="Basic Auth 密码" show-password />
+          <el-form-item :label="$t('auto.OpenAPIIntegration.26.a81052')">
+            <el-input v-model="form.auth_token" type="password" :placeholder="$t('auto.OpenAPIIntegration.27.31e805')" show-password />
           </el-form-item>
         </template>
-        <el-form-item label="请求模板" v-if="form.method === 'POST' || form.method === 'PUT'">
+        <el-form-item :label="$t('auto.OpenAPIIntegration.28.f0bfdc')" v-if="form.method === 'POST' || form.method === 'PUT'">
           <el-input v-model="form.request_template" type="textarea" :rows="4" placeholder="支持模板变量: {{ now }}, {{ timestamp }}, {{ date }}, {{ last_sync_at }}" />
-          <div class="form-tip">JSON 格式,可使用 Go template 语法,<code v-pre>{{.last_sync_at}}</code> 用于增量同步</div>
+          <div class="form-tip">{{ $t('auto.OpenAPIIntegration.54.29a277') }}<code v-pre>{{.last_sync_at}}</code>{{ $t('auto.OpenAPIIntegration.55.b54a57') }}</div>
         </el-form-item>
-        <el-form-item label="响应路径">
+        <el-form-item :label="$t('auto.OpenAPIIntegration.29.4fcfe7')">
           <el-input v-model="form.response_path" placeholder="data.items" />
-          <div class="form-tip">JSON 响应中数据数组的路径,留空则期望整个响应是数组</div>
+          <div class="form-tip">{{ $t('auto.OpenAPIIntegration.56.902a98') }}</div>
         </el-form-item>
-        <el-form-item label="字段映射">
+        <el-form-item :label="$t('auto.OpenAPIIntegration.30.e5b2ad')">
           <el-input v-model="form.field_mapping" type="textarea" :rows="3" placeholder='{"title": "name", "content": "body", "ref": "id"}' />
-          <div class="form-tip">JSON 格式,指定 title/content/ref 对应的源字段,留空使用默认字段</div>
+          <div class="form-tip">{{ $t('auto.OpenAPIIntegration.57.334c7f') }}</div>
         </el-form-item>
-        <el-form-item label="定时任务">
-          <el-input v-model="form.schedule" placeholder="如: 0 */6 * * * (cron 表达式,留空表示仅手动同步)" />
+        <el-form-item :label="$t('auto.OpenAPIIntegration.31.a1bd97')">
+          <el-input v-model="form.schedule" :placeholder="$t('auto.OpenAPIIntegration.32.e840c2')" />
         </el-form-item>
-        <el-form-item label="启用">
+        <el-form-item :label="$t('auto.OpenAPIIntegration.33.7854b5')">
           <el-switch v-model="form.enabled" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="showCreateDialog = false">取消</el-button>
-        <el-button type="primary" :loading="saving" @click="handleSave">保存</el-button>
+        <el-button @click="showCreateDialog = false">{{ $t('auto.OpenAPIIntegration.58.625fb2') }}</el-button>
+        <el-button type="primary" :loading="saving" @click="handleSave">{{ $t('auto.OpenAPIIntegration.59.be5fbb') }}</el-button>
       </template>
     </el-dialog>
 
     
-    <el-dialog v-model="showTestResultDialog" title="连接测试结果" width="600px">
+    <el-dialog v-model="showTestResultDialog" :title="$t('auto.OpenAPIIntegration.34.92440e')" width="600px">
       <el-descriptions :column="1" border v-if="testResult">
-        <el-descriptions-item label="是否成功">
+        <el-descriptions-item :label="$t('auto.OpenAPIIntegration.35.5e9f2d')">
           <el-tag :type="testResult.success ? 'success' : 'danger'">
             {{ testResult.success ? '成功' : '失败' }}
           </el-tag>
         </el-descriptions-item>
-        <el-descriptions-item v-if="testResult.status_code !== undefined" label="HTTP 状态码">
+        <el-descriptions-item v-if="testResult.status_code !== undefined" :label="$t('auto.OpenAPIIntegration.36.ac7f0f')">
           <el-tag :type="testResult.status_code < 400 ? 'success' : 'danger'">{{ testResult.status_code }}</el-tag>
         </el-descriptions-item>
-        <el-descriptions-item v-if="testResult.latency_ms !== undefined" label="响应耗时">
+        <el-descriptions-item v-if="testResult.latency_ms !== undefined" :label="$t('auto.OpenAPIIntegration.37.e6d020')">
           {{ testResult.latency_ms }} ms
         </el-descriptions-item>
-        <el-descriptions-item v-if="testResult.body_size !== undefined" label="响应大小">
+        <el-descriptions-item v-if="testResult.body_size !== undefined" :label="$t('auto.OpenAPIIntegration.38.9dc5e1')">
           {{ formatFileSize(testResult.body_size) }}
         </el-descriptions-item>
-        <el-descriptions-item v-if="testResult.error" label="错误信息">
+        <el-descriptions-item v-if="testResult.error" :label="$t('auto.OpenAPIIntegration.39.4604d5')">
           <el-text type="danger">{{ testResult.error }}</el-text>
         </el-descriptions-item>
-        <el-descriptions-item v-if="testResult.body_sample" label="响应预览">
+        <el-descriptions-item v-if="testResult.body_sample" :label="$t('auto.OpenAPIIntegration.40.bbd615')">
           <pre class="response-preview">{{ testResult.body_sample }}</pre>
         </el-descriptions-item>
       </el-descriptions>
     </el-dialog>
 
     
-    <el-dialog v-model="showSyncResultDialog" title="同步结果" width="600px">
+    <el-dialog v-model="showSyncResultDialog" :title="$t('auto.OpenAPIIntegration.41.c6db98')" width="600px">
       <el-descriptions :column="2" border v-if="syncResult">
-        <el-descriptions-item label="数据源ID">{{ syncResult.source_id }}</el-descriptions-item>
-        <el-descriptions-item label="状态">
+        <el-descriptions-item :label="$t('auto.OpenAPIIntegration.42.545535')">{{ syncResult.source_id }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.OpenAPIIntegration.8.3fea7c')">
           <el-tag :type="syncResult.status === 'success' ? 'success' : 'danger'">{{ syncResult.status === 'success' ? '成功' : '失败' }}</el-tag>
         </el-descriptions-item>
-        <el-descriptions-item label="获取条目">{{ syncResult.total_items }}</el-descriptions-item>
-        <el-descriptions-item label="已导入">{{ syncResult.imported_num }}</el-descriptions-item>
-        <el-descriptions-item label="已跳过">{{ syncResult.skipped_num }}</el-descriptions-item>
-        <el-descriptions-item label="失败">{{ syncResult.failed_num }}</el-descriptions-item>
-        <el-descriptions-item label="耗时" :span="2">{{ syncResult.duration_ms }} ms</el-descriptions-item>
-        <el-descriptions-item v-if="syncResult.error_msg" label="错误信息" :span="2">
+        <el-descriptions-item :label="$t('auto.OpenAPIIntegration.43.f529de')">{{ syncResult.total_items }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.OpenAPIIntegration.44.ef1bce')">{{ syncResult.imported_num }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.OpenAPIIntegration.45.4a0854')">{{ syncResult.skipped_num }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.OpenAPIIntegration.46.acd5cb')">{{ syncResult.failed_num }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.OpenAPIIntegration.47.39f137')" :span="2">{{ syncResult.duration_ms }} ms</el-descriptions-item>
+        <el-descriptions-item v-if="syncResult.error_msg" :label="$t('auto.OpenAPIIntegration.39.4604d5')" :span="2">
           <el-text type="danger">{{ syncResult.error_msg }}</el-text>
         </el-descriptions-item>
       </el-descriptions>
@@ -194,6 +194,7 @@
 import i18n from '@/i18n'
 
 import { ref, reactive, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { Plus, Refresh } from '@element-plus/icons-vue'
 import { knowledgeAPI } from '@/api/knowledge'
@@ -204,8 +205,10 @@ import { PASS_FAIL_STATUS, getStatusLabel, getStatusTagType } from '@/constants/
 const HTTP_METHOD_TAG = { GET: '', POST: 'success', PUT: 'warning', DELETE: 'danger', PATCH: 'warning' };
 const getMethodLabel = (m) => (m || '').toUpperCase()
 const getMethodTagType = (m) => HTTP_METHOD_TAG[(m || '').toUpperCase()] || 'info'
-const getLastStatusLabel = (s) => (s ? getStatusLabel(s, PASS_FAIL_STATUS) : '待同步');
+const getLastStatusLabel = (s) => (s ? getStatusLabel(s, PASS_FAIL_STATUS) : t('auto.OpenAPIIntegration.60.a0bf20'));
 const getLastStatusTagType = (s) => (s ? getStatusTagType(s, PASS_FAIL_STATUS) : 'info')
+
+const { t } = useI18n()
 
 const loading = ref(false)
 const saving = ref(false)
@@ -238,9 +241,9 @@ const form = reactive({
 })
 
 const rules = {
-  name: [{ required: true, message: i18n.global.t('请输入名称'), trigger: 'blur' }],
-  product_id: [{ required: true, message: i18n.global.t('请选择产品'), trigger: 'change' }],
-  endpoint: [{ required: true, message: i18n.global.t('请输入端点 URL'), trigger: 'blur' }]
+  name: [{ required: true, message: i18n.global.t(t('auto.OpenAPIIntegration.61.06e2f8')), trigger: 'blur' }],
+  product_id: [{ required: true, message: i18n.global.t(t('auto.OpenAPIIntegration.62.3b8e12')), trigger: 'change' }],
+  endpoint: [{ required: true, message: i18n.global.t(t('auto.OpenAPIIntegration.63.894fdc')), trigger: 'blur' }]
 }
 
 const loadAll = async () => {
@@ -256,7 +259,7 @@ const loadProducts = async () => {
       productList.value = res.items
     }
   } catch (e) {
-    console.error('加载产品列表失败:', e)
+    console.error(t('auto.OpenAPIIntegration.64.4c46f3'), e)
   }
 }
 
@@ -268,7 +271,7 @@ const loadSources = async () => {
     list.forEach(s => { s._enabled = s.enabled === 1 })
     sources.value = list
   } catch (e) {
-    ElMessage.error('加载数据源失败: ' + (e.message || ''))
+    ElMessage.error(t('auto.OpenAPIIntegration.65.a63c81') + (e.message || ''))
   } finally {
     loading.value = false
   }
@@ -350,17 +353,17 @@ const handleSave = async () => {
     }
     if (editingId.value) {
       await knowledgeAPI.updateOpenAPISource(editingId.value, payload)
-      ElMessage.success(i18n.global.t('更新成功'))
+      ElMessage.success(i18n.global.t(t('auto.OpenAPIIntegration.66.55aa63')))
     } else {
       await knowledgeAPI.createOpenAPISource(payload)
-      ElMessage.success(i18n.global.t('创建成功'))
+      ElMessage.success(i18n.global.t(t('auto.OpenAPIIntegration.67.04a691')))
     }
     showCreateDialog.value = false
     resetForm()
     loadSources()
   } catch (e) {
     if (e !== false) {
-      ElMessage.error('保存失败: ' + (e.message || ''))
+      ElMessage.error(t('auto.OpenAPIIntegration.68.40f902') + (e.message || ''))
     }
   } finally {
     saving.value = false
@@ -382,40 +385,40 @@ const handleTest = async (row) => {
     testResult.value = res
     showTestResultDialog.value = true
   } catch (e) {
-    ElMessage.error('测试失败: ' + (e.message || ''))
+    ElMessage.error(t('auto.OpenAPIIntegration.69.9d9b6b') + (e.message || ''))
   }
 }
 
 const handleSync = async (row) => {
   try {
-    await ElMessageBox.confirm(`确认立即同步数据源「${row.name}」吗?`, '立即同步', { type: 'info' })
+    await ElMessageBox.confirm(`确认立即同步数据源「${row.name}」吗?`, t('auto.OpenAPIIntegration.52.5f71b2'), { type: 'info' })
     const res = await knowledgeAPI.syncOpenAPISource(row.id, { product_id: row.product_id })
     syncResult.value = res
     showSyncResultDialog.value = true
     loadSources()
   } catch (e) {
-    if (e !== 'cancel') ElMessage.error('同步失败: ' + (e.message || ''))
+    if (e !== 'cancel') ElMessage.error(t('auto.OpenAPIIntegration.70.46df36') + (e.message || ''))
   }
 }
 
 const handleToggle = async (row, enabled) => {
   try {
     await knowledgeAPI.toggleOpenAPISource(row.id, { enabled }, { product_id: row.product_id })
-    ElMessage.success(enabled ? '已启用' : '已禁用')
+    ElMessage.success(enabled ? t('auto.OpenAPIIntegration.71.53ace4') : t('auto.OpenAPIIntegration.72.1c1ed9'))
   } catch (e) {
     row._enabled = !enabled
-    ElMessage.error('切换失败: ' + (e.message || ''))
+    ElMessage.error(t('auto.OpenAPIIntegration.73.979ab6') + (e.message || ''))
   }
 }
 
 const handleDelete = async (row) => {
   try {
-    await ElMessageBox.confirm(`确认删除数据源「${row.name}」吗?已同步的数据不会被删除`, '删除数据源', { type: 'warning' })
+    await ElMessageBox.confirm(`确认删除数据源「${row.name}」吗?已同步的数据不会被删除`, t('auto.OpenAPIIntegration.74.cd72cc'), { type: 'warning' })
     await knowledgeAPI.deleteOpenAPISource(row.id, { product_id: row.product_id })
-    ElMessage.success(i18n.global.t('删除成功'))
+    ElMessage.success(i18n.global.t(t('auto.OpenAPIIntegration.75.0007d1')))
     loadSources()
   } catch (e) {
-    if (e !== 'cancel') ElMessage.error('删除失败: ' + (e.message || ''))
+    if (e !== 'cancel') ElMessage.error(t('auto.OpenAPIIntegration.76.ad23f0') + (e.message || ''))
   }
 }
 

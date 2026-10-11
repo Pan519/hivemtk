@@ -5,17 +5,17 @@
     <el-row :gutter="16" class="mb-4">
       <el-col :span="8">
         <el-card>
-          <el-statistic title="可用平台" :value="availablePlatforms.length" />
+          <el-statistic :title="$t('auto.PlatformPublish.1.a3b565')" :value="availablePlatforms.length" />
         </el-card>
       </el-col>
       <el-col :span="8">
         <el-card>
-          <el-statistic title="待发布文章" :value="articles.length" />
+          <el-statistic :title="$t('auto.PlatformPublish.2.23811c')" :value="articles.length" />
         </el-card>
       </el-col>
       <el-col :span="8">
         <el-card>
-          <el-statistic title="今日发布次数" :value="recordsToday" />
+          <el-statistic :title="$t('auto.PlatformPublish.3.abddee')" :value="recordsToday" />
         </el-card>
       </el-col>
     </el-row>
@@ -24,55 +24,55 @@
     <el-card class="mb-4">
       <template #header>
         <div class="flex items-center justify-between">
-          <span class="font-bold">可用平台列表</span>
-          <el-button size="small" type="primary" @click="loadAll">刷新</el-button>
+          <span class="font-bold">{{ $t('auto.PlatformPublish.23.e63f99') }}</span>
+          <el-button size="small" type="primary" @click="loadAll">{{ $t('auto.PlatformPublish.24.694fc5') }}</el-button>
         </div>
       </template>
       <el-table :data="availablePlatforms" v-loading="platformsLoading" size="small">
-        <el-table-column prop="display_name" label="平台" width="160">
+        <el-table-column prop="display_name" :label="$t('auto.PlatformPublish.4.498128')" width="160">
           <template #default="{ row }">
             <a v-if="row.url" :href="row.url" target="_blank" class="platform-link">{{ row.display_name }}</a>
             <span v-else>{{ row.display_name }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="name" label="标识" width="160" />
-        <el-table-column label="能力类型" width="110">
+        <el-table-column prop="name" :label="$t('auto.PlatformPublish.5.45235f')" width="160" />
+        <el-table-column :label="$t('auto.PlatformPublish.6.16bd32')" width="110">
           <template #default="{ row }">
-            <el-tag v-if="row.capability === 'real_api'" type="success" size="small">真实 API</el-tag>
+            <el-tag v-if="row.capability === 'real_api'" type="success" size="small">{{ $t('auto.PlatformPublish.25.144d38') }}</el-tag>
             <el-tag v-else-if="row.capability === 'cookie_gray'" type="warning" size="small">Cookie</el-tag>
             <el-tag v-else type="info" size="small">{{ row.capability || '未知' }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="认证方式" width="110">
+        <el-table-column :label="$t('auto.PlatformPublish.7.b33c72')" width="110">
           <template #default="{ row }">
             <span class="auth-type">{{ authLabel(row.auth_type) }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="状态" width="130">
+        <el-table-column :label="$t('auto.PlatformPublish.8.3fea7c')" width="130">
           <template #default="{ row }">
-            <el-tag v-if="isConfigured(row.name)" type="success" size="small">已配置</el-tag>
-            <el-tag v-else type="info" size="small">未配置 Token</el-tag>
+            <el-tag v-if="isConfigured(row.name)" type="success" size="small">{{ $t('auto.PlatformPublish.26.da208e') }}</el-tag>
+            <el-tag v-else type="info" size="small">{{ $t('auto.PlatformPublish.27.f6c72d') }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="说明" min-width="360">
+        <el-table-column :label="$t('auto.PlatformPublish.9.f411d0')" min-width="360">
           <template #default="{ row }">
             <span v-if="row.name && row.name.includes('github')" class="hint">
-              访问 <a href="https://github.com/settings/tokens" target="_blank">https://github.com/settings/tokens</a> 创建 Personal Access Token（classic，勾选 repo 权限），填入环境变量 <code>GITHUB_TOKEN</code>
+              访问 <a href="https://github.com/settings/tokens" target="_blank">https://github.com/settings/tokens</a>{{ $t('auto.PlatformPublish.28.57a0d7') }}<code>GITHUB_TOKEN</code>
             </span>
             <span v-else-if="row.name === 'medium'" class="hint">
-              访问 <a href="https://medium.com/me/settings/security" target="_blank">https://medium.com/me/settings/security</a> 手动配置 IntegrationToken（或通过 OAuth 应用授权），填入环境变量 <code>MEDIUM_TOKEN</code>
+              访问 <a href="https://medium.com/me/settings/security" target="_blank">https://medium.com/me/settings/security</a>{{ $t('auto.PlatformPublish.29.e203cd') }}<code>MEDIUM_TOKEN</code>
             </span>
             <span v-else-if="row.name === 'wordpress'" class="hint">
               WordPress 后台 → 用户 → 应用密码 → 生成专用密码，填入环境变量 <code>WORDPRESS_APPPASS</code>（用户名+密码）
             </span>
-            <span v-else-if="row.capability === 'real_api'" class="hint">需配置 API Token 环境变量后可发布</span>
+            <span v-else-if="row.capability === 'real_api'" class="hint">{{ $t('auto.PlatformPublish.30.65c68c') }}</span>
             <span v-else class="hint">—</span>
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="200">
+        <el-table-column :label="$t('auto.PlatformPublish.10.2b6bc0')" width="200">
           <template #default="{ row }">
-            <el-button size="small" @click="openAccountDialog(row)">配置 Token</el-button>
-            <el-button size="small" type="primary" plain :disabled="!isConfigured(row.name)" @click="onTestPublish(row)">测试发布</el-button>
+            <el-button size="small" @click="openAccountDialog(row)">{{ $t('auto.PlatformPublish.31.4e4010') }}</el-button>
+            <el-button size="small" type="primary" plain :disabled="!isConfigured(row.name)" @click="onTestPublish(row)">{{ $t('auto.PlatformPublish.32.b5c546') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -83,25 +83,25 @@
 
     
     <el-card class="mb-4">
-      <template #header><span class="font-bold">发布 Pipeline</span></template>
+      <template #header><span class="font-bold">{{ $t('auto.PlatformPublish.33.51b2c2') }}</span></template>
       <div class="flex items-center gap-4 mb-4 flex-wrap">
-        <el-select v-model="selectedArticle" placeholder="选择文章" size="small" style="width:260px">
+        <el-select v-model="selectedArticle" :placeholder="$t('auto.PlatformPublish.11.b72fad')" size="small" style="width:260px">
           <el-option v-for="a in articles" :key="a.id" :label="a.title || a.id" :value="a.id" />
         </el-select>
-        <el-select v-model="selectedPlatforms" multiple placeholder="选择发布平台" size="small" style="min-width:260px">
-          <el-option v-for="p in realApiPlatforms" :key="p.name" :label="p.display_name + ' (真实API)'" :value="p.name" />
+        <el-select v-model="selectedPlatforms" multiple :placeholder="$t('auto.PlatformPublish.12.e2c01f')" size="small" style="min-width:260px">
+          <el-option v-for="p in realApiPlatforms" :key="p.name" ::label="$t('auto.PlatformPublish.13.25e491')" :value="p.name" />
         </el-select>
-        <el-button size="small" type="primary" :disabled="!selectedArticle || !selectedPlatforms.length" :loading="pipelineRunning" @click="runPipeline">执行发布</el-button>
+        <el-button size="small" type="primary" :disabled="!selectedArticle || !selectedPlatforms.length" :loading="pipelineRunning" @click="runPipeline">{{ $t('auto.PlatformPublish.34.25de77') }}</el-button>
       </div>
       <el-table v-if="pipelineStatuses.length" :data="pipelineStatuses" size="small">
-        <el-table-column prop="platform" label="平台" width="160" />
-        <el-table-column prop="status" label="状态" width="120">
+        <el-table-column prop="platform" :label="$t('auto.PlatformPublish.4.498128')" width="160" />
+        <el-table-column prop="status" :label="$t('auto.PlatformPublish.8.3fea7c')" width="120">
           <template #default="{ row }">
             <el-tag :type="statusType(row.status)" size="small">{{ row.status }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="message" label="消息" min-width="200" show-overflow-tooltip />
-        <el-table-column prop="url" label="发布链接" min-width="200">
+        <el-table-column prop="message" :label="$t('auto.PlatformPublish.14.ff692f')" min-width="200" show-overflow-tooltip />
+        <el-table-column prop="url" :label="$t('auto.PlatformPublish.15.1a3b08')" min-width="200">
           <template #default="{ row }">
             <a v-if="row.url" :href="row.url" target="_blank">{{ row.url }}</a>
             <span v-else>-</span>
@@ -112,37 +112,37 @@
 
     
     <el-card>
-      <template #header><span class="font-bold">发布记录</span></template>
+      <template #header><span class="font-bold">{{ $t('auto.PlatformPublish.35.c15348') }}</span></template>
       <el-table :data="records" v-loading="recordsLoading" size="small">
-        <el-table-column prop="article_title" label="文章" min-width="160" show-overflow-tooltip />
-        <el-table-column prop="platform" label="平台" width="160" />
-        <el-table-column prop="status" label="状态" width="100">
+        <el-table-column prop="article_title" :label="$t('auto.PlatformPublish.16.c75625')" min-width="160" show-overflow-tooltip />
+        <el-table-column prop="platform" :label="$t('auto.PlatformPublish.4.498128')" width="160" />
+        <el-table-column prop="status" :label="$t('auto.PlatformPublish.8.3fea7c')" width="100">
           <template #default="{ row }">
             <el-tag :type="statusType(row.status)" size="small">{{ row.status }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="error" label="错误信息" min-width="200" show-overflow-tooltip />
-        <el-table-column prop="created_at" label="时间" width="180" />
+        <el-table-column prop="error" :label="$t('auto.PlatformPublish.17.4604d5')" min-width="200" show-overflow-tooltip />
+        <el-table-column prop="created_at" :label="$t('auto.PlatformPublish.18.19fcb9')" width="180" />
       </el-table>
-      <div v-if="records.length === 0" class="empty-hint">暂无发布记录</div>
+      <div v-if="records.length === 0" class="empty-hint">{{ $t('auto.PlatformPublish.36.9b97e3') }}</div>
     </el-card>
 
     
     <el-dialog v-model="accountDialogVisible" :title="`配置 ${currentPlatform?.display_name} Token`" width="480px">
       <el-form :model="accountForm" label-width="120px">
         <el-form-item label="AppKey / UserID">
-          <el-input v-model="accountForm.app_key" placeholder="填入平台 AppKey 或 UserID" />
+          <el-input v-model="accountForm.app_key" :placeholder="$t('auto.PlatformPublish.19.05a7fe')" />
         </el-form-item>
         <el-form-item label="Secret / Token">
-          <el-input v-model="accountForm.secret" type="password" show-password placeholder="填入 Secret 或 OAuth Token" />
+          <el-input v-model="accountForm.secret" type="password" show-password :placeholder="$t('auto.PlatformPublish.20.02b73d')" />
         </el-form-item>
-        <el-form-item label="额外配置">
-          <el-input v-model="accountForm.extra" type="textarea" :rows="3" placeholder="JSON 格式，可选" />
+        <el-form-item :label="$t('auto.PlatformPublish.21.05b5a8')">
+          <el-input v-model="accountForm.extra" type="textarea" :rows="3" :placeholder="$t('auto.PlatformPublish.22.fcb91a')" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="accountDialogVisible = false">取消</el-button>
-        <el-button type="primary" @click="saveAccount">保存</el-button>
+        <el-button @click="accountDialogVisible = false">{{ $t('auto.PlatformPublish.37.625fb2') }}</el-button>
+        <el-button type="primary" @click="saveAccount">{{ $t('auto.PlatformPublish.38.be5fbb') }}</el-button>
       </template>
     </el-dialog>
     </div>
@@ -151,6 +151,7 @@
 
 <script setup>
 import { ref, computed, reactive, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import { geoApi } from '@/api/geo.js'
 import {
@@ -160,6 +161,8 @@ import {
   publishToPlatform,
   listPlatformPublishRecords
 } from '@/api/geoPlatform.js'
+
+const { t } = useI18n()
 
 const allPlatforms = ref([]);
 const platformsLoading = ref(false)
@@ -205,7 +208,7 @@ const configuredPlatformNames = computed(() =>
 const isConfigured = (name) => configuredPlatformNames.value.includes(name)
 
 const authLabel = (t) => {
-  const map = { token: 'API Token', oauth: 'OAuth', cookie: 'Cookie', xmlrpc: 'XML-RPC', custom: '自定义' }
+  const map = { token: 'API Token', oauth: 'OAuth', cookie: 'Cookie', xmlrpc: 'XML-RPC', custom: t('auto.PlatformPublish.39.f1d4ff') }
   return map[t] || t || '-'
 }
 
@@ -274,17 +277,17 @@ const saveAccount = async () => {
       secret: accountForm.secret,
       extra: accountForm.extra
     })
-    ElMessage.success('保存成功')
+    ElMessage.success(t('auto.PlatformPublish.40.3b1083'))
     accountDialogVisible.value = false
     await loadAccounts()
   } catch (e) {
-    ElMessage.error(e?.message || '保存失败')
+    ElMessage.error(e?.message || t('auto.PlatformPublish.41.6de920'))
   }
 }
 
 const onTestPublish = async (p) => {
   if (!selectedArticle.value && !articles.value.length) {
-    ElMessage.warning('请先在 GEO 内容创作页创建一篇文章')
+    ElMessage.warning(t('auto.PlatformPublish.42.3c4489'))
     return
   }
   const articleId = selectedArticle.value || articles.value[0]?.id
@@ -299,19 +302,19 @@ const onTestPublish = async (p) => {
 
 const runPipeline = async () => {
   if (!selectedArticle.value || !selectedPlatforms.value.length) {
-    ElMessage.warning('请选择文章和发布平台')
+    ElMessage.warning(t('auto.PlatformPublish.43.ed9c22'))
     return
   }
   pipelineRunning.value = true
-  pipelineStatuses.value = selectedPlatforms.value.map(p => ({ platform: p, status: 'running', message: '发布中...' }))
+  pipelineStatuses.value = selectedPlatforms.value.map(p => ({ platform: p, status: 'running', message: t('auto.PlatformPublish.44.27d8a2') }))
   try {
     for (const p of selectedPlatforms.value) {
       const idx = pipelineStatuses.value.findIndex(s => s.platform === p)
       try {
         await publishToPlatform(selectedArticle.value, p, {})
-        if (idx >= 0) pipelineStatuses.value[idx] = { platform: p, status: 'success', message: '发布成功' }
+        if (idx >= 0) pipelineStatuses.value[idx] = { platform: p, status: 'success', message: t('auto.PlatformPublish.45.2fff07') }
       } catch (err) {
-        if (idx >= 0) pipelineStatuses.value[idx] = { platform: p, status: 'failed', message: err?.message || '发布失败' }
+        if (idx >= 0) pipelineStatuses.value[idx] = { platform: p, status: 'failed', message: err?.message || t('auto.PlatformPublish.46.250688') }
       }
     }
     try {

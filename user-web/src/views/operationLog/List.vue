@@ -6,7 +6,7 @@
         <p class="subtitle">{{ $t('审计追踪所有用户操作记录') }}</p>
       </div>
       <div>
-        <el-button @click="$router.push('/operationLog/enhanced')">增强视图</el-button>
+        <el-button @click="$router.push('/operationLog/enhanced')">{{ $t('auto.List.29.1b596e') }}</el-button>
         <el-button @click="exportLogs">
           <el-icon><Download /></el-icon>
           {{ $t('导出') }}
@@ -20,53 +20,53 @@
 
     <el-card>
       <div class="filter-bar">
-        <el-input v-model="searchKeyword" :placeholder="$t('搜索操作内容')" clearable style="width: 200px" />
-        <el-select v-model="filterModule" :placeholder="$t('模块')" clearable style="width: 150px">
-          <el-option :label="$t('用户')" value="user" />
-          <el-option :label="$t('线索')" value="clue" />
-          <el-option :label="$t('营销')" value="marketing" />
-          <el-option :label="$t('系统')" value="system" />
+        <el-input v-model="searchKeyword" ::placeholder="$t('auto.List.1.ebd8b1')" clearable style="width: 200px" />
+        <el-select v-model="filterModule" ::placeholder="$t('auto.List.2.a2a3af')" clearable style="width: 150px">
+          <el-option ::label="$t('auto.List.3.9cfb9a')" value="user" />
+          <el-option ::label="$t('auto.List.4.f35f98')" value="clue" />
+          <el-option ::label="$t('auto.List.5.4f29ef')" value="marketing" />
+          <el-option ::label="$t('auto.List.6.b67742')" value="system" />
         </el-select>
-        <el-select v-model="filterAction" :placeholder="$t('操作类型')" clearable style="width: 150px">
-          <el-option :label="$t('创建')" value="create" />
-          <el-option :label="$t('更新')" value="update" />
-          <el-option :label="$t('删除')" value="delete" />
-          <el-option :label="$t('登录')" value="login" />
-          <el-option :label="$t('登出')" value="logout" />
+        <el-select v-model="filterAction" ::placeholder="$t('auto.List.7.1fc340')" clearable style="width: 150px">
+          <el-option ::label="$t('auto.List.8.f40c87')" value="create" />
+          <el-option ::label="$t('auto.List.9.7ba167')" value="update" />
+          <el-option ::label="$t('auto.List.10.ae9b91')" value="delete" />
+          <el-option ::label="$t('auto.List.11.51ae82')" value="login" />
+          <el-option ::label="$t('auto.List.12.4c0be0')" value="logout" />
         </el-select>
-        <el-select v-model="filterUser" :placeholder="$t('操作人')" clearable style="width: 150px">
+        <el-select v-model="filterUser" ::placeholder="$t('auto.List.13.a11072')" clearable style="width: 150px">
           <el-option label="admin" value="admin" />
           <el-option label="manager" value="manager" />
         </el-select>
-        <el-date-picker v-model="dateRange" type="daterange" range-separator="至" start-placeholder="开始" end-placeholder="结束" value-format="YYYY-MM-DD" />
+        <el-date-picker v-model="dateRange" type="daterange" :range-separator="$t('auto.List.14.981cbe')" :start-placeholder="$t('auto.List.15.a3e3b8')" :end-placeholder="$t('auto.List.16.12f1d7')" value-format="YYYY-MM-DD" />
       </div>
 
       <el-table :data="filteredLogs" v-loading="loading" stripe>
         <el-table-column prop="id" label="ID" width="80" />
-        <el-table-column prop="username" :label="$t('操作人')" width="100" />
-        <el-table-column prop="module" :label="$t('模块')" width="100">
+        <el-table-column prop="username" ::label="$t('auto.List.13.a11072')" width="100" />
+        <el-table-column prop="module" ::label="$t('auto.List.2.a2a3af')" width="100">
           <template #default="{ row }">
             <el-tag size="small">{{ row.module }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="action" label="操作" width="100">
+        <el-table-column prop="action" :label="$t('auto.List.17.2b6bc0')" width="100">
           <template #default="{ row }">
             <el-tag :type="getActionType(row.action)" size="small">{{ getActionText(row.action) }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="resource" label="目标对象" min-width="150">
+        <el-table-column prop="resource" :label="$t('auto.List.18.49e81f')" min-width="150">
           <template #default="{ row }">
             <span v-if="row.resource_id">{{ row.resource }} #{{ row.resource_id }}</span>
             <span v-else>{{ row.resource }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="detail" label="操作描述" min-width="250" show-overflow-tooltip />
-        <el-table-column prop="ip" label="IP地址" width="130" />
-        <el-table-column prop="user_agent" label="浏览器" min-width="200" show-overflow-tooltip />
-        <el-table-column prop="created_at" label="时间" width="180" />
-        <el-table-column label="操作" width="100" fixed="right">
+        <el-table-column prop="detail" :label="$t('auto.List.19.f3ffb0')" min-width="250" show-overflow-tooltip />
+        <el-table-column prop="ip" :label="$t('auto.List.20.2dc910')" width="130" />
+        <el-table-column prop="user_agent" :label="$t('auto.List.21.912302')" min-width="200" show-overflow-tooltip />
+        <el-table-column prop="created_at" :label="$t('auto.List.22.19fcb9')" width="180" />
+        <el-table-column :label="$t('auto.List.17.2b6bc0')" width="100" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" @click="viewDetail(row)">详情</el-button>
+            <el-button link type="primary" @click="viewDetail(row)">{{ $t('auto.List.30.f26225') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -81,25 +81,25 @@
       />
     </el-card>
 
-    <el-dialog v-model="detailVisible" title="日志详情" width="700px">
+    <el-dialog v-model="detailVisible" :title="$t('auto.List.23.e0d9b6')" width="700px">
       <el-descriptions :column="1" border v-if="currentLog">
-        <el-descriptions-item label="操作人">{{ currentLog.username }}</el-descriptions-item>
-        <el-descriptions-item label="模块">{{ currentLog.module }}</el-descriptions-item>
-        <el-descriptions-item label="操作类型">{{ currentLog.action }}</el-descriptions-item>
-        <el-descriptions-item label="目标对象">
+        <el-descriptions-item :label="$t('auto.List.24.f9ac4b')">{{ currentLog.username }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.25.fac54c')">{{ currentLog.module }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.26.de9cc3')">{{ currentLog.action }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.18.49e81f')">
           <span v-if="currentLog.resource_id">{{ currentLog.resource }} #{{ currentLog.resource_id }}</span>
           <span v-else>{{ currentLog.resource }}</span>
         </el-descriptions-item>
-        <el-descriptions-item label="操作描述">{{ currentLog.detail }}</el-descriptions-item>
-        <el-descriptions-item label="修改前">
+        <el-descriptions-item :label="$t('auto.List.19.f3ffb0')">{{ currentLog.detail }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.27.86ae34')">
           <pre>{{ currentLog.old_value }}</pre>
         </el-descriptions-item>
-        <el-descriptions-item label="修改后">
+        <el-descriptions-item :label="$t('auto.List.28.79bf6b')">
           <pre>{{ currentLog.new_value }}</pre>
         </el-descriptions-item>
-        <el-descriptions-item label="IP地址">{{ currentLog.ip }}</el-descriptions-item>
-        <el-descriptions-item label="浏览器">{{ currentLog.user_agent }}</el-descriptions-item>
-        <el-descriptions-item label="时间">{{ currentLog.created_at }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.20.2dc910')">{{ currentLog.ip }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.21.912302')">{{ currentLog.user_agent }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.22.19fcb9')">{{ currentLog.created_at }}</el-descriptions-item>
       </el-descriptions>
     </el-dialog>
   </div>
@@ -109,9 +109,12 @@
 import i18n from '@/i18n'
 
 import { ref, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import { Download, Refresh } from '@element-plus/icons-vue'
 import { getOperationLogs, exportOperationLogs, getOperationLogDetail } from '@/api/operationLog.js'
+
+const { t } = useI18n()
 
 const loading = ref(false)
 const searchKeyword = ref('')
@@ -137,7 +140,7 @@ const getActionType = (action) => {
   const map = { create: 'success', update: 'primary', delete: 'danger', login: 'warning', logout: 'info' }
   return map[action]}
 const getActionText = (action) => {
-  const map = { create: '创建', update: '更新', delete: '删除', login: '登录', logout: '登出' }
+  const map = { create: t('auto.List.31.d9ac92'), update: t('auto.List.32.32ac15'), delete: t('auto.List.33.2f4aad'), login: t('auto.List.34.402d19'), logout: t('auto.List.35.75c856') }
   return map[action] || action
 }
 
@@ -172,9 +175,9 @@ const exportLogs = async () => {
     anchor.click()
     document.body.removeChild(anchor)
     window.URL.revokeObjectURL(url)
-    ElMessage.success(i18n.global.t('导出成功'))
+    ElMessage.success(i18n.global.t(t('auto.List.36.105c8a')))
   } catch (error) {
-    ElMessage.error('导出失败: ' + (error.message))
+    ElMessage.error(t('auto.List.37.2e0d8c') + (error.message))
   }
 }
 

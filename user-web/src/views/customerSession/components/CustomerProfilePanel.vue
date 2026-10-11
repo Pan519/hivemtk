@@ -3,43 +3,43 @@
     <el-card>
       <template #header>
         <div class="profile-header">
-          <span><el-icon><UserFilled /></el-icon> 客户 360°</span>
-          <el-button link size="small" @click="$emit('refresh')">刷新</el-button>
+          <span><el-icon><UserFilled /></el-icon>{{ $t('auto.CustomerProfilePanel.1.863210') }}</span>
+          <el-button link size="small" @click="$emit('refresh')">{{ $t('auto.CustomerProfilePanel.2.694fc5') }}</el-button>
         </div>
       </template>
 
 
       <div class="profile-section">
         <div class="profile-row">
-          <span class="label">客户ID</span>
+          <span class="label">{{ $t('auto.CustomerProfilePanel.3.1c2ecf') }}</span>
           <span class="value">{{ currentSession.customerId || currentSession.sessionId }}</span>
         </div>
         <div class="profile-row">
-          <span class="label">渠道</span>
+          <span class="label">{{ $t('auto.CustomerProfilePanel.4.ebee05') }}</span>
           <span class="value">{{ getChannelLabel(currentSession.channel) }}</span>
         </div>
         <div class="profile-row">
-          <span class="label">首次接入</span>
+          <span class="label">{{ $t('auto.CustomerProfilePanel.5.5d6354') }}</span>
           <span class="value">{{ formatTime(currentSession.createdAt) }}</span>
         </div>
         <div class="profile-row">
-          <span class="label">消息数</span>
+          <span class="label">{{ $t('auto.CustomerProfilePanel.6.342cea') }}</span>
           <span class="value">{{ profileStats.messageCount || 0 }}</span>
         </div>
         <div class="profile-row">
-          <span class="label">历史会话</span>
+          <span class="label">{{ $t('auto.CustomerProfilePanel.7.de0a38') }}</span>
           <span class="value">{{ profileStats.sessionCount || 0 }}</span>
         </div>
         <div class="profile-row">
-          <span class="label">AI 回复</span>
+          <span class="label">{{ $t('auto.CustomerProfilePanel.8.ae8297') }}</span>
           <span class="value">{{ profileStats.aiReplyCount || 0 }}</span>
         </div>
       </div>
 
 
       <div class="profile-section">
-        <div class="section-title">长期画像</div>
-        <div v-if="profileTags.length === 0" class="empty-hint">暂无画像标签</div>
+        <div class="section-title">{{ $t('auto.CustomerProfilePanel.9.9fa9d0') }}</div>
+        <div v-if="profileTags.length === 0" class="empty-hint">{{ $t('auto.CustomerProfilePanel.10.43e5ef') }}</div>
         <div class="tag-cloud">
           <el-tag
             v-for="t in profileTags"
@@ -55,12 +55,12 @@
 
 
       <div class="profile-section">
-        <div class="section-title">当前 SOP 阶段</div>
+        <div class="section-title">{{ $t('auto.CustomerProfilePanel.11.bc02a2') }}</div>
         <el-radio-group :model-value="sopStage" size="small" style="display: flex; flex-direction: column; gap: 6px" @update:model-value="$emit('update:sopStage', $event)">
-          <el-radio value="presale">售前询价</el-radio>
-          <el-radio value="lead">引导留资</el-radio>
-          <el-radio value="aftersale">售后查单</el-radio>
-          <el-radio value="refund">投诉退款</el-radio>
+          <el-radio value="presale">{{ $t('auto.CustomerProfilePanel.12.b19aec') }}</el-radio>
+          <el-radio value="lead">{{ $t('auto.CustomerProfilePanel.13.37cd3c') }}</el-radio>
+          <el-radio value="aftersale">{{ $t('auto.CustomerProfilePanel.14.a62ae1') }}</el-radio>
+          <el-radio value="refund">{{ $t('auto.CustomerProfilePanel.15.323770') }}</el-radio>
         </el-radio-group>
         <el-button
           size="small"
@@ -75,7 +75,7 @@
 
 
       <div class="profile-section">
-        <div class="section-title">快捷操作</div>
+        <div class="section-title">{{ $t('auto.CustomerProfilePanel.16.9530e8') }}</div>
         <el-button-group style="width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 6px">
           <el-button size="small" @click="$emit('send-coupon')">
             <el-icon><Ticket /></el-icon> 发券

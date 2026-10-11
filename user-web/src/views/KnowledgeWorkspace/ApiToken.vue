@@ -1,7 +1,7 @@
 <template>
   <div class="api-token-page">
     <el-alert
-      :title="$t('API Token 管理')"
+      ::title="$t('auto.ApiToken.1.97c6dc')"
       type="info"
       :closable="false"
       show-icon
@@ -18,53 +18,53 @@
         <el-card>
           <template #header>
             <div class="card-header">
-              <span>Token 列表</span>
+              <span>{{ $t('auto.ApiToken.15.94460b') }}</span>
               <div>
-                <el-select v-model="filterProductId" placeholder="按产品筛选" clearable style="width: 180px" @change="loadTokens">
+                <el-select v-model="filterProductId" :placeholder="$t('auto.ApiToken.2.6437ee')" clearable style="width: 180px" @change="loadTokens">
                   <el-option v-for="p in productList" :key="p.id" :label="p.name" :value="p.id" />
                 </el-select>
-                <el-button :icon="Refresh" @click="loadTokens" style="margin-left: 8px">刷新</el-button>
+                <el-button :icon="Refresh" @click="loadTokens" style="margin-left: 8px">{{ $t('auto.ApiToken.16.694fc5') }}</el-button>
               </div>
             </div>
           </template>
           <el-table :data="tokens" v-loading="loading" stripe>
             <el-table-column prop="id" label="ID" width="80" />
-            <el-table-column prop="name" label="名称" min-width="140" show-overflow-tooltip />
-            <el-table-column label="产品" width="160" show-overflow-tooltip>
+            <el-table-column prop="name" :label="$t('auto.ApiToken.3.d7ec2d')" min-width="140" show-overflow-tooltip />
+            <el-table-column :label="$t('auto.ApiToken.4.a01543')" width="160" show-overflow-tooltip>
               <template #default="{ row }">
                 {{ getProductName(row.product_id) }}
               </template>
             </el-table-column>
-            <el-table-column label="权限" width="160">
+            <el-table-column :label="$t('auto.ApiToken.5.ba6e91')" width="160">
               <template #default="{ row }">
                 <el-tag v-for="s in parseScopes(row.scopes)" :key="s" size="small" style="margin-right: 4px">
                   {{ scopeLabel(s) }}
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column label="状态" width="100">
+            <el-table-column :label="$t('auto.ApiToken.6.3fea7c')" width="100">
               <template #default="{ row }">
-                <el-tag v-if="row.enabled === 1" type="success">启用</el-tag>
-                <el-tag v-else type="danger">已吊销</el-tag>
+                <el-tag v-if="row.enabled === 1" type="success">{{ $t('auto.ApiToken.17.7854b5') }}</el-tag>
+                <el-tag v-else type="danger">{{ $t('auto.ApiToken.18.579886') }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column label="使用统计" width="140">
+            <el-table-column :label="$t('auto.ApiToken.7.d389aa')" width="140">
               <template #default="{ row }">
                 <div>调用 {{ row.use_count || 0 }} 次</div>
                 <el-text v-if="row.last_used_at" size="small" type="info">最后: {{ formatDate(row.last_used_at) }}</el-text>
               </template>
             </el-table-column>
-            <el-table-column label="过期时间" width="170">
+            <el-table-column :label="$t('auto.ApiToken.8.1fa23f')" width="170">
               <template #default="{ row }">
                 <span v-if="row.expires_at">{{ formatDate(row.expires_at) }}</span>
-                <span v-else style="color: #909399">永不过期</span>
+                <span v-else style="color: #909399">{{ $t('auto.ApiToken.19.718ab6') }}</span>
               </template>
             </el-table-column>
-            <el-table-column prop="created_by" label="创建人" width="100" />
-            <el-table-column label="操作" width="140" fixed="right">
+            <el-table-column prop="created_by" :label="$t('auto.ApiToken.9.95a43e')" width="100" />
+            <el-table-column :label="$t('auto.ApiToken.10.2b6bc0')" width="140" fixed="right">
               <template #default="{ row }">
-                <el-button v-if="row.enabled === 1" link type="danger" size="small" @click="handleRevoke(row)">吊销</el-button>
-                <el-text v-else type="info" size="small">已吊销</el-text>
+                <el-button v-if="row.enabled === 1" link type="danger" size="small" @click="handleRevoke(row)">{{ $t('auto.ApiToken.20.e87fd9') }}</el-button>
+                <el-text v-else type="info" size="small">{{ $t('auto.ApiToken.18.579886') }}</el-text>
               </template>
             </el-table-column>
           </el-table>
@@ -75,36 +75,36 @@
       <el-col :span="8">
         <el-card>
           <template #header>
-            <span>创建 Token</span>
+            <span>{{ $t('auto.ApiToken.21.710c40') }}</span>
           </template>
           <el-form :model="form" :rules="rules" ref="formRef" label-width="100px">
-            <el-form-item label="名称" prop="name">
-              <el-input v-model="form.name" placeholder="如:CRM 推送" />
+            <el-form-item :label="$t('auto.ApiToken.3.d7ec2d')" prop="name">
+              <el-input v-model="form.name" :placeholder="$t('auto.ApiToken.11.818bf1')" />
             </el-form-item>
-            <el-form-item label="产品" prop="product_id">
-              <el-select v-model="form.product_id" placeholder="选择产品" style="width: 100%">
+            <el-form-item :label="$t('auto.ApiToken.4.a01543')" prop="product_id">
+              <el-select v-model="form.product_id" :placeholder="$t('auto.ApiToken.12.cbf1cf')" style="width: 100%">
                 <el-option v-for="p in productList" :key="p.id" :label="p.name" :value="p.id" />
               </el-select>
             </el-form-item>
-            <el-form-item label="权限">
+            <el-form-item :label="$t('auto.ApiToken.5.ba6e91')">
               <el-checkbox-group v-model="form.scopes">
-                <el-checkbox label="read">只读</el-checkbox>
-                <el-checkbox label="write">可写</el-checkbox>
+                <el-checkbox label="read">{{ $t('auto.ApiToken.22.85541b') }}</el-checkbox>
+                <el-checkbox label="write">{{ $t('auto.ApiToken.23.a5230a') }}</el-checkbox>
               </el-checkbox-group>
-              <div class="form-hint">不勾选则默认 read + write</div>
+              <div class="form-hint">{{ $t('auto.ApiToken.24.1f17e0') }}</div>
             </el-form-item>
-            <el-form-item label="过期时间">
+            <el-form-item :label="$t('auto.ApiToken.8.1fa23f')">
               <el-date-picker
                 v-model="form.expires_at"
                 type="datetime"
-                placeholder="不填则永不过期"
+                :placeholder="$t('auto.ApiToken.13.81d3b2')"
                 style="width: 100%"
                 value-format="YYYY-MM-DDTHH:mm:ssZ"
                 format="YYYY-MM-DD HH:mm"
               />
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" :loading="creating" @click="handleCreate" style="width: 100%">创建</el-button>
+              <el-button type="primary" :loading="creating" @click="handleCreate" style="width: 100%">{{ $t('auto.ApiToken.25.d9ac92') }}</el-button>
             </el-form-item>
           </el-form>
         </el-card>
@@ -112,7 +112,7 @@
         
         <el-card style="margin-top: 16px">
           <template #header>
-            <span>外部系统调用示例</span>
+            <span>{{ $t('auto.ApiToken.26.9df2c6') }}</span>
           </template>
           <pre class="code-block">
 # 1. 推送文档(JSON)
@@ -139,29 +139,29 @@ curl -X POST \
     </el-row>
 
     
-    <el-dialog v-model="showTokenDialog" title="Token 已创建" width="640px" :close-on-click-modal="false">
+    <el-dialog v-model="showTokenDialog" :title="$t('auto.ApiToken.14.f6a730')" width="640px" :close-on-click-modal="false">
       <el-alert type="success" :closable="false" show-icon>
         <template #default>
           请立即复制并保存明文 Token,关闭后无法再次查看。
         </template>
       </el-alert>
       <el-form label-width="80px" style="margin-top: 16px">
-        <el-form-item label="名称">
+        <el-form-item :label="$t('auto.ApiToken.3.d7ec2d')">
           <el-text>{{ createdToken.name }}</el-text>
         </el-form-item>
-        <el-form-item label="产品">
+        <el-form-item :label="$t('auto.ApiToken.4.a01543')">
           <el-text>{{ getProductName(createdToken.product_id) }}</el-text>
         </el-form-item>
         <el-form-item label="Token">
           <el-input v-model="createdToken.token_plain" readonly>
             <template #append>
-              <el-button :icon="CopyDocument" @click="copyToken">复制</el-button>
+              <el-button :icon="CopyDocument" @click="copyToken">{{ $t('auto.ApiToken.27.79d3ab') }}</el-button>
             </template>
           </el-input>
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button type="primary" @click="showTokenDialog = false">我已保存,关闭</el-button>
+        <el-button type="primary" @click="showTokenDialog = false">{{ $t('auto.ApiToken.28.ac4dfe') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -171,10 +171,13 @@ curl -X POST \
 import i18n from '@/i18n'
 
 import { ref, reactive, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { Refresh, CopyDocument } from '@element-plus/icons-vue'
 import { knowledgeMerchantAPI } from '@/api/knowledgeMerchant'
 import { ragProductConfigAPI } from '@/api/ragProductConfig'
+
+const { t } = useI18n()
 
 const loading = ref(false)
 const creating = ref(false)
@@ -191,8 +194,8 @@ const form = reactive({
 })
 
 const rules = {
-  name: [{ required: true, message: i18n.global.t('请输入名称'), trigger: 'blur' }],
-  product_id: [{ required: true, message: i18n.global.t('请选择产品'), trigger: 'change' }]
+  name: [{ required: true, message: i18n.global.t(t('auto.ApiToken.29.06e2f8')), trigger: 'blur' }],
+  product_id: [{ required: true, message: i18n.global.t(t('auto.ApiToken.30.3b8e12')), trigger: 'change' }]
 }
 
 const showTokenDialog = ref(false)
@@ -204,7 +207,7 @@ const loadProducts = async () => {
     if (Array.isArray(res)) productList.value = res
     else if (res?.items) productList.value = res.items
   } catch (e) {
-    console.error('加载产品失败:', e)
+    console.error(t('auto.ApiToken.31.fcbbfe'), e)
   }
 }
 
@@ -216,7 +219,7 @@ const loadTokens = async () => {
     })
     tokens.value = res?.items || res || []
   } catch (e) {
-    ElMessage.error('加载 Token 失败: ' + (e.message || ''))
+    ElMessage.error(t('auto.ApiToken.32.db3a28') + (e.message || ''))
   } finally {
     loading.value = false
   }
@@ -236,7 +239,7 @@ const parseScopes = (scopes) => {
 }
 
 const scopeLabel = (s) => {
-  return { read: '读', write: '写', '*': '全部' }[s] || s
+  return { read: t('auto.ApiToken.33.75769d'), write: t('auto.ApiToken.34.4d7dc6'), '*': t('auto.ApiToken.35.a8b0c2') }[s] || s
 }
 
 const handleCreate = async () => {
@@ -261,7 +264,7 @@ const handleCreate = async () => {
       loadTokens()
     }
   } catch (e) {
-    ElMessage.error('创建失败: ' + (e.message || ''))
+    ElMessage.error(t('auto.ApiToken.36.a2bddc') + (e.message || ''))
   } finally {
     creating.value = false
   }
@@ -271,23 +274,23 @@ const handleRevoke = async (row) => {
   try {
     await ElMessageBox.confirm(
       `确认吊销 Token「${row.name}」吗?吊销后外部系统将无法继续使用。`,
-      '吊销 Token',
+      t('auto.ApiToken.37.a6ff25'),
       { type: 'warning' }
     )
     await knowledgeMerchantAPI.revokeToken(row.id)
-    ElMessage.success(i18n.global.t('已吊销'))
+    ElMessage.success(i18n.global.t(t('auto.ApiToken.18.579886')))
     loadTokens()
   } catch (e) {
-    if (e !== 'cancel') ElMessage.error('吊销失败: ' + (e.message || ''))
+    if (e !== 'cancel') ElMessage.error(t('auto.ApiToken.38.cb3afa') + (e.message || ''))
   }
 }
 
 const copyToken = async () => {
   try {
     await navigator.clipboard.writeText(createdToken.value.token_plain)
-    ElMessage.success(i18n.global.t('已复制到剪贴板'))
+    ElMessage.success(i18n.global.t(t('auto.ApiToken.39.4fb42e')))
   } catch {
-    ElMessage.warning(i18n.global.t('复制失败,请手动选择'))
+    ElMessage.warning(i18n.global.t(t('auto.ApiToken.40.c39f12')))
   }
 }
 

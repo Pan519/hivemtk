@@ -2,8 +2,8 @@
   <div class="humanize-panel">
     <el-card class="header-card">
       <div class="header-content">
-        <h2>拟人度评估 & 销冠基线</h2>
-        <p class="subtitle">查看 AI 回复拟人度评分、销冠话术基线、低质样本收集</p>
+        <h2>{{ $t('auto.Panel.23.c7fd80') }}</h2>
+        <p class="subtitle">{{ $t('auto.Panel.24.6db90a') }}</p>
       </div>
     </el-card>
 
@@ -11,7 +11,7 @@
       <el-col :span="6">
         <el-card>
           <div class="stat-item">
-            <div class="stat-label">评估总数（24h）</div>
+            <div class="stat-label">{{ $t('auto.Panel.25.83a7b7') }}</div>
             <div class="stat-value">{{ stats.totalScored }}</div>
           </div>
         </el-card>
@@ -44,11 +44,11 @@
 
     <el-tabs v-model="activeTab" class="content-tabs">
       
-      <el-tab-pane :label="$t('评估结果')" name="scores">
+      <el-tab-pane ::label="$t('auto.Panel.1.55ce19')" name="scores">
         <el-card>
           <template #header>
             <div class="card-header">
-              <span>拟人度评分流（最近 100 条）</span>
+              <span>{{ $t('auto.Panel.26.9ce7be') }}</span>
               <el-button @click="loadScores">
                 <el-icon><Refresh /></el-icon>
                 {{ $t('刷新') }}
@@ -57,34 +57,34 @@
           </template>
           <el-table :data="scores" v-loading="scoresLoading" stripe>
             <el-table-column prop="id" label="ID" width="80" />
-            <el-table-column prop="session_id" label="会话 ID" width="160" />
-            <el-table-column prop="rule_score" label="规则评分" width="100">
+            <el-table-column prop="session_id" :label="$t('auto.Panel.2.427bc5')" width="160" />
+            <el-table-column prop="rule_score" :label="$t('auto.Panel.3.564c79')" width="100">
               <template #default="{ row }">
                 <el-tag :type="confTagType(row.rule_score)">{{ (row.rule_score || 0).toFixed(3) }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="llm_score" label="LLM 评分" width="100">
+            <el-table-column prop="llm_score" :label="$t('auto.Panel.4.1db9ce')" width="100">
               <template #default="{ row }">
                 {{ (row.llm_score || 0).toFixed(3) }}
               </template>
             </el-table-column>
-            <el-table-column prop="final_score" label="综合评分" width="100">
+            <el-table-column prop="final_score" :label="$t('auto.Panel.5.00dc6d')" width="100">
               <template #default="{ row }">
                 <el-tag :type="confTagType(row.final_score)" effect="dark">{{ (row.final_score || 0).toFixed(3) }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="regenerated" label="是否重生成" width="100">
+            <el-table-column prop="regenerated" :label="$t('auto.Panel.6.458f9d')" width="100">
               <template #default="{ row }">
                 <el-tag :type="row.regenerated ? 'warning' : 'info'">{{ row.regenerated ? '是' : '否' }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="issues" label="问题标签" min-width="180">
+            <el-table-column prop="issues" :label="$t('auto.Panel.7.bf457a')" min-width="180">
               <template #default="{ row }">
                 <el-tag v-for="tag in (row.issues || [])" :key="tag" size="small" type="danger" style="margin-right: 4px">{{ tag }}</el-tag>
                 <span v-if="!row.issues || row.issues.length === 0" class="muted">-</span>
               </template>
             </el-table-column>
-            <el-table-column prop="created_at" label="评分时间" width="170">
+            <el-table-column prop="created_at" :label="$t('auto.Panel.8.362e80')" width="170">
               <template #default="{ row }">
                 {{ formatTime(row.created_at) }}
               </template>
@@ -104,11 +104,11 @@
       </el-tab-pane>
 
       
-      <el-tab-pane label="销冠基线" name="baselines">
+      <el-tab-pane :label="$t('auto.Panel.9.9045f6')" name="baselines">
         <el-card>
           <template #header>
             <div class="card-header">
-              <span>销冠话术基线（按场景）</span>
+              <span>{{ $t('auto.Panel.27.c2b41f') }}</span>
               <el-button @click="loadBaselines">
                 <el-icon><Refresh /></el-icon>
                 刷新
@@ -117,27 +117,27 @@
           </template>
           <el-table :data="baselines" v-loading="baselinesLoading" stripe>
             <el-table-column prop="id" label="ID" width="80" />
-            <el-table-column prop="scenario" label="场景" width="160" />
-            <el-table-column prop="staff_id" label="销冠 ID" width="100" />
-            <el-table-column prop="avg_reward" label="平均奖励" width="100">
+            <el-table-column prop="scenario" :label="$t('auto.Panel.10.c93165')" width="160" />
+            <el-table-column prop="staff_id" :label="$t('auto.Panel.11.83bc18')" width="100" />
+            <el-table-column prop="avg_reward" :label="$t('auto.Panel.12.6f224d')" width="100">
               <template #default="{ row }">
                 <el-tag :type="confTagType(row.avg_reward)">{{ (row.avg_reward || 0).toFixed(3) }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="dialogue_count" label="对话数" width="100" />
-            <el-table-column prop="scripts" label="提取话术数" width="100">
+            <el-table-column prop="dialogue_count" :label="$t('auto.Panel.13.e97204')" width="100" />
+            <el-table-column prop="scripts" :label="$t('auto.Panel.14.c3ba6f')" width="100">
               <template #default="{ row }">
                 {{ (row.scripts || []).length }}
               </template>
             </el-table-column>
-            <el-table-column prop="updated_at" label="更新时间" width="170">
+            <el-table-column prop="updated_at" :label="$t('auto.Panel.15.a001a2')" width="170">
               <template #default="{ row }">
                 {{ formatTime(row.updated_at) }}
               </template>
             </el-table-column>
-            <el-table-column label="操作" width="120" fixed="right">
+            <el-table-column :label="$t('auto.Panel.16.2b6bc0')" width="120" fixed="right">
               <template #default="{ row }">
-                <el-button size="small" @click="viewBaselineScripts(row)">查看话术</el-button>
+                <el-button size="small" @click="viewBaselineScripts(row)">{{ $t('auto.Panel.28.fd52fc') }}</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -145,11 +145,11 @@
       </el-tab-pane>
 
       
-      <el-tab-pane label="低质样本" name="lowQuality">
+      <el-tab-pane :label="$t('auto.Panel.17.efe753')" name="lowQuality">
         <el-card>
           <template #header>
             <div class="card-header">
-              <span>拟人度不达标的 AI 回复（用于反馈学习）</span>
+              <span>{{ $t('auto.Panel.29.658a9a') }}</span>
               <el-button @click="loadLowQuality">
                 <el-icon><Refresh /></el-icon>
                 刷新
@@ -158,20 +158,20 @@
           </template>
           <el-table :data="lowQuality" v-loading="lowQualityLoading" stripe>
             <el-table-column prop="id" label="ID" width="80" />
-            <el-table-column prop="session_id" label="会话 ID" width="160" />
-            <el-table-column prop="score" label="评分" width="100">
+            <el-table-column prop="session_id" :label="$t('auto.Panel.2.427bc5')" width="160" />
+            <el-table-column prop="score" :label="$t('auto.Panel.18.108db1')" width="100">
               <template #default="{ row }">
                 <el-tag type="danger">{{ (row.score || 0).toFixed(3) }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="ai_reply" label="AI 回复" min-width="320" show-overflow-tooltip />
-            <el-table-column prop="issues" label="问题标签" min-width="180">
+            <el-table-column prop="ai_reply" :label="$t('auto.Panel.19.ae8297')" min-width="320" show-overflow-tooltip />
+            <el-table-column prop="issues" :label="$t('auto.Panel.7.bf457a')" min-width="180">
               <template #default="{ row }">
                 <el-tag v-for="tag in (row.issues || [])" :key="tag" size="small" type="danger" style="margin-right: 4px">{{ tag }}</el-tag>
                 <span v-if="!row.issues || row.issues.length === 0" class="muted">-</span>
               </template>
             </el-table-column>
-            <el-table-column prop="created_at" label="采集时间" width="170">
+            <el-table-column prop="created_at" :label="$t('auto.Panel.20.319a3f')" width="170">
               <template #default="{ row }">
                 {{ formatTime(row.created_at) }}
               </template>
@@ -192,9 +192,9 @@
     </el-tabs>
 
     
-    <el-dialog v-model="scriptsDialogVisible" title="销冠基线话术" width="720px">
+    <el-dialog v-model="scriptsDialogVisible" :title="$t('auto.Panel.21.06f066')" width="720px">
       <div v-if="currentBaseline">
-        <p><strong>场景：</strong>{{ currentBaseline.scenario }} · <strong>销冠：</strong>{{ currentBaseline.staff_id }} · <strong>平均奖励：</strong>{{ (currentBaseline.avg_reward || 0).toFixed(3) }}</p>
+        <p><strong>{{ $t('auto.Panel.30.ae9ded') }}</strong>{{ currentBaseline.scenario }} · <strong>{{ $t('auto.Panel.31.bf597b') }}</strong>{{ currentBaseline.staff_id }} · <strong>{{ $t('auto.Panel.32.3e050d') }}</strong>{{ (currentBaseline.avg_reward || 0).toFixed(3) }}</p>
         <el-divider />
         <div v-for="(s, i) in (currentBaseline.scripts || [])" :key="i" class="script-item">
           <h4>{{ s.title || '话术 ' + (i + 1) }}</h4>
@@ -202,7 +202,7 @@
           <p v-if="s.tags" class="muted">标签：{{ (s.tags || []).join('、') }}</p>
           <el-divider v-if="i < (currentBaseline.scripts || []).length - 1" />
         </div>
-        <el-empty v-if="!currentBaseline.scripts || currentBaseline.scripts.length === 0" description="暂无话术" />
+        <el-empty v-if="!currentBaseline.scripts || currentBaseline.scripts.length === 0" :description="$t('auto.Panel.22.bd8901')" />
       </div>
     </el-dialog>
   </div>
@@ -212,6 +212,7 @@
 import i18n from '@/i18n'
 
 import { ref, onMounted, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import {
   getHumanizeScores,
@@ -219,6 +220,8 @@ import {
   getChampionBaselines,
   getLowQualitySamples
 } from '@/api/tuning'
+
+const { t } = useI18n()
 
 const activeTab = ref('scores')
 
@@ -242,7 +245,7 @@ async function loadScores() {
     scores.value = res?.list || res?.data?.list || []
     scoreTotal.value = res?.total || res?.data?.total || 0
   } catch (e) {
-    ElMessage.error('评分加载失败：' + (e?.message || e))
+    ElMessage.error(t('auto.Panel.33.85937d') + (e?.message || e))
   } finally {
     scoresLoading.value = false
   }
@@ -256,7 +259,7 @@ async function loadBaselines() {
     const res = await getChampionBaselines({ page: 1, page_size: 50 })
     baselines.value = res?.list || res?.data?.list || []
   } catch (e) {
-    ElMessage.error('基线加载失败：' + (e?.message || e))
+    ElMessage.error(t('auto.Panel.34.30eeda') + (e?.message || e))
   } finally {
     baselinesLoading.value = false
   }
@@ -274,7 +277,7 @@ async function loadLowQuality() {
     lowQuality.value = res?.list || res?.data?.list || []
     lowQualityTotal.value = res?.total || res?.data?.total || 0
   } catch (e) {
-    ElMessage.error('低质样本加载失败：' + (e?.message || e))
+    ElMessage.error(t('auto.Panel.35.2fe87d') + (e?.message || e))
   } finally {
     lowQualityLoading.value = false
   }

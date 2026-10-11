@@ -21,7 +21,7 @@
       </el-col>
       <el-col :span="6">
         <el-card class="stat-card">
-          <div class="stat-label">评估集</div>
+          <div class="stat-label">{{ $t('auto.RagEvaluation.4.35ccc2') }}</div>
           <div class="stat-value">{{ stats.evalSetSize || 0 }}</div>
         </el-card>
       </el-col>
@@ -30,43 +30,46 @@
     <el-card>
       <template #header>
         <div class="card-header">
-          <span>评估集管理</span>
+          <span>{{ $t('auto.RagEvaluation.5.ade6d9') }}</span>
           <div>
             <el-upload :auto-upload="false" :on-change="onUpload" accept=".csv,.jsonl">
-              <el-button>上传评估集（CSV/JSONL）</el-button>
+              <el-button>{{ $t('auto.RagEvaluation.6.ab19af') }}</el-button>
             </el-upload>
-            <el-button type="primary" @click="runEval">运行评估</el-button>
+            <el-button type="primary" @click="runEval">{{ $t('auto.RagEvaluation.7.de1190') }}</el-button>
           </div>
         </div>
       </template>
       <el-table :data="recentRuns" v-loading="loading">
         <el-table-column prop="id" label="Run ID" width="120" />
-        <el-table-column prop="strategy" label="策略" width="160" />
+        <el-table-column prop="strategy" :label="$t('auto.RagEvaluation.1.669145')" width="160" />
         <el-table-column prop="recall5" label="Recall@5" width="100" />
         <el-table-column prop="mrr" label="MRR" width="100" />
         <el-table-column prop="ndcg5" label="NDCG@5" width="100" />
-        <el-table-column prop="createdAt" label="时间" width="180" />
-        <el-table-column label="操作" width="120" fixed="right">
+        <el-table-column prop="createdAt" :label="$t('auto.RagEvaluation.2.19fcb9')" width="180" />
+        <el-table-column :label="$t('auto.RagEvaluation.3.2b6bc0')" width="120" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" @click="compareWith(row)">对比当前</el-button>
+            <el-button link type="primary" @click="compareWith(row)">{{ $t('auto.RagEvaluation.8.01b58d') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
     </el-card>
 
     <el-card class="chart-card">
-      <template #header><span>指标趋势</span></template>
+      <template #header><span>{{ $t('auto.RagEvaluation.9.09f12e') }}</span></template>
       <div ref="chartRef" class="chart" />
     </el-card>
   </div>
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue';
+import { ref, reactive, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n';
 import { ElMessage } from 'element-plus'
 import * as echarts from 'echarts'
 import { safeInit } from '@/utils/echarts'
 import { http } from '@/utils/request'
+
+const { t } = useI18n()
 
 const stats = reactive({ recall5: 0, mrr: 0, ndcg5: 0, evalSetSize: 0 })
 const recentRuns = ref([])
@@ -108,7 +111,7 @@ async function onUpload(file) {
   const form = new FormData()
   form.append('file', file.raw)
   await http.post('/api/rag/eval/upload', form, { headers: { 'Content-Type': 'multipart/form-data' } })
-  ElMessage.success('评估集已上传')
+  ElMessage.success(t('auto.RagEvaluation.10.a85c7a'))
   await load()
 }
 
@@ -116,7 +119,7 @@ async function runEval() {
   loading.value = true
   try {
     await http.post('/api/rag/eval/run', {})
-    ElMessage.success('评估已启动，3-5 分钟完成')
+    ElMessage.success(t('auto.RagEvaluation.11.27bed7'))
     setTimeout(load, 5000)
   } finally {
     loading.value = false

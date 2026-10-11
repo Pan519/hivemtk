@@ -106,23 +106,23 @@
     
     <el-card class="filter-card">
       <el-form :model="filterForm" inline>
-        <el-form-item :label="$t('日期范围')">
+        <el-form-item ::label="$t('auto.CardStats.1.3690ef')">
           <el-date-picker
             v-model="filterForm.dateRange"
             type="daterange"
-            range-separator="至"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
+            :range-separator="$t('auto.CardStats.2.981cbe')"
+            :start-placeholder="$t('auto.CardStats.3.b44c0f')"
+            :end-placeholder="$t('auto.CardStats.4.1d468b')"
             format="YYYY-MM-DD"
             value-format="YYYY-MM-DD"
             @change="handleDateChange"
           />
         </el-form-item>
-        <el-form-item :label="$t('分组方式')">
-          <el-select v-model="filterForm.groupBy" :placeholder="$t('请选择分组方式')" @change="handleGroupByChange">
-            <el-option :label="$t('按天')" value="day" />
-            <el-option :label="$t('按周')" value="week" />
-            <el-option :label="$t('按月')" value="month" />
+        <el-form-item ::label="$t('auto.CardStats.5.bf8db0')">
+          <el-select v-model="filterForm.groupBy" ::placeholder="$t('auto.CardStats.6.e59c18')" @change="handleGroupByChange">
+            <el-option ::label="$t('auto.CardStats.7.4eb3b0')" value="day" />
+            <el-option ::label="$t('auto.CardStats.8.787456')" value="week" />
+            <el-option ::label="$t('auto.CardStats.9.31019b')" value="month" />
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -149,8 +149,8 @@
         <span>{{ $t('最近活动') }}</span>
       </div>
       <el-table :data="recentActivities" stripe style="width: 100%" v-loading="loading">
-          <el-table-column prop="date" :label="$t('日期')" width="120" />
-          <el-table-column prop="views" :label="$t('浏览量')" width="80" />
+          <el-table-column prop="date" ::label="$t('auto.CardStats.10.0e23e0')" width="120" />
+          <el-table-column prop="views" ::label="$t('auto.CardStats.11.4b63a3')" width="80" />
         </el-table>
       
       
@@ -173,6 +173,7 @@
 import i18n from '@/i18n'
 
 import { ref, reactive, onMounted, nextTick } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import * as echarts from 'echarts'
@@ -181,6 +182,8 @@ import { getXiaohongshuCard, getXiaohongshuCardStats } from '@/api/xiaohongshuCa
 
 const route = useRoute();
 const router = useRouter()
+
+const { t } = useI18n()
 
 const loading = ref(false);
 const viewChart = ref(null)
@@ -223,7 +226,7 @@ const pagination = reactive({
 const fetchCardInfo = async () => {
   const cardId = route.params.id
   if (!cardId) {
-    ElMessage.error(i18n.global.t('缺少卡片ID'))
+    ElMessage.error(i18n.global.t(t('auto.CardStats.12.556b03')))
     return
   }
   
@@ -231,7 +234,7 @@ const fetchCardInfo = async () => {
     const res = await getXiaohongshuCard(cardId)
     Object.assign(cardInfo, res);
   } catch (error) {
-    ElMessage.error(i18n.global.t('获取卡片信息失败'))
+    ElMessage.error(i18n.global.t(t('auto.CardStats.13.eea2ec')))
     console.error(error)
   }
 };
@@ -239,7 +242,7 @@ const fetchCardInfo = async () => {
 const fetchCardStats = async () => {
   const cardId = route.params.id
   if (!cardId) {
-    ElMessage.error(i18n.global.t('缺少卡片ID'))
+    ElMessage.error(i18n.global.t(t('auto.CardStats.12.556b03')))
     return
   }
   
@@ -271,7 +274,7 @@ const fetchCardStats = async () => {
       updateCharts()
     });
   } catch (error) {
-    ElMessage.error(i18n.global.t('获取统计数据失败'))
+    ElMessage.error(i18n.global.t(t('auto.CardStats.14.063dc7')))
     console.error(error)
   } finally {
     loading.value = false
@@ -313,7 +316,7 @@ const updateCharts = () => {
     viewChart.value = safeInit(viewChartDom)
     const viewOption = {
       title: {
-        text: '访问趋势',
+        text: t('auto.CardStats.15.8205ea'),
         left: 'center'
       },
       tooltip: {
@@ -328,7 +331,7 @@ const updateCharts = () => {
       },
       series: [
         {
-          name: '浏览量',
+          name: t('auto.CardStats.16.88bc4d'),
           type: 'line',
           data: recentActivities.value.map(item => item.view),
           smooth: true,
@@ -367,7 +370,7 @@ const getActionType = (type) => {
 }
 
 const getActionText = (type) => {
-  return '浏览'
+  return t('auto.CardStats.17.9c5c5c')
 }
 
 onMounted(() => {

@@ -2,60 +2,60 @@
   <div class="chat-channel-form-page">
     <el-card class="header-card" shadow="never">
       <div class="header-content">
-        <h2>新建客服 Web Widget 渠道</h2>
+        <h2>{{ $t('auto.Create.19.257549') }}</h2>
         <el-button @click="goBack">{{ $t('返回') }}</el-button>
       </div>
     </el-card>
 
     <el-card shadow="never">
       <el-form :model="form" :rules="rules" ref="formRef" label-width="140px" style="max-width: 720px">
-        <el-form-item :label="$t('渠道名称')" prop="channel_name">
-          <el-input v-model="form.channel_name" :placeholder="$t('如：官网首页')" maxlength="100" show-word-limit />
+        <el-form-item ::label="$t('auto.Create.1.bbeea9')" prop="channel_name">
+          <el-input v-model="form.channel_name" ::placeholder="$t('auto.Create.2.1fca53')" maxlength="100" show-word-limit />
         </el-form-item>
 
-        <el-form-item :label="$t('允许的 origin')" prop="allowed_origins">
+        <el-form-item ::label="$t('auto.Create.3.aa082b')" prop="allowed_origins">
           <el-input
             v-model="originsText"
             type="textarea"
             :rows="4"
-            placeholder="一行一个 origin，如：&#10;https://www.example.com&#10;https://shop.example.com&#10;* 表示允许所有"
+            :placeholder="$t('auto.Create.4.92fc87')"
           />
-          <div class="form-tip">企业网站域名（前端部署协议+域名+端口）。<code>*</code> 表示允许所有 origin（仅测试用）。</div>
+          <div class="form-tip">{{ $t('auto.Create.20.81e2be') }}<code>*</code>{{ $t('auto.Create.21.4a66e4') }}</div>
         </el-form-item>
 
-        <el-form-item :label="$t('欢迎语')">
+        <el-form-item ::label="$t('auto.Create.5.3a47ed')">
           <el-input
             v-model="form.welcome_message"
             type="textarea"
             :rows="3"
-            :placeholder="$t('访客打开聊天窗时显示的欢迎语')"
+            ::placeholder="$t('auto.Create.6.364e29')"
             maxlength="500"
             show-word-limit
           />
         </el-form-item>
 
-        <el-form-item :label="$t('浮标颜色')">
+        <el-form-item ::label="$t('auto.Create.7.648b48')">
           <el-color-picker v-model="form.widget_color" />
           <span class="form-tip">{{ $t('聊天窗主色，建议与网站主色一致') }}</span>
         </el-form-item>
 
-        <el-form-item :label="$t('浮标位置')">
+        <el-form-item ::label="$t('auto.Create.8.cd7a69')">
           <el-radio-group v-model="form.widget_position">
             <el-radio value="bottom-right">{{ $t('右下角') }}</el-radio>
             <el-radio value="bottom-left">{{ $t('左下角') }}</el-radio>
           </el-radio-group>
         </el-form-item>
 
-        <el-form-item :label="$t('窗口标题')">
-          <el-input v-model="form.widget_title" :placeholder="$t('在线客服')" maxlength="50" />
+        <el-form-item ::label="$t('auto.Create.9.e9bfd4')">
+          <el-input v-model="form.widget_title" ::placeholder="$t('auto.Create.10.6012f3')" maxlength="50" />
         </el-form-item>
 
-        <el-form-item :label="$t('AI 自动回复')">
+        <el-form-item ::label="$t('auto.Create.11.da8009')">
           <el-switch v-model="form.auto_assign" />
           <span class="form-tip">{{ $t('关闭后所有访客消息需人工接管') }}</span>
         </el-form-item>
 
-        <el-form-item :label="$t('AI 置信度阈值')">
+        <el-form-item ::label="$t('auto.Create.12.f22976')">
           <el-input-number
             v-model="form.confidence_threshold"
             :min="0"
@@ -63,13 +63,13 @@
             :step="0.05"
             :precision="2"
           />
-          <span class="form-tip">低于此值转人工（0-1，推荐 0.70）</span>
+          <span class="form-tip">{{ $t('auto.Create.22.662f10') }}</span>
         </el-form-item>
 
-        <el-form-item :label="$t('默认智能体')">
+        <el-form-item ::label="$t('auto.Create.13.1ca3f6')">
           <el-select
             v-model="form.default_agent_id"
-            placeholder="选择渠道默认智能体（无则留空，后续在【渠道智能体绑定】中配置）"
+            :placeholder="$t('auto.Create.14.611251')"
             clearable
             filterable
             style="width: 100%"
@@ -87,11 +87,11 @@
               </div>
             </el-option>
           </el-select>
-          <div class="form-tip">直接选择默认智能体，可省去创建后再到【渠道智能体绑定】配置的步骤</div>
+          <div class="form-tip">{{ $t('auto.Create.23.4159d3') }}</div>
         </el-form-item>
 
-        <el-form-item :label="$t('目标语言')" prop="target_language">
-          <el-select v-model="form.target_language" :placeholder="$t('请选择目标语言')" clearable style="width: 100%">
+        <el-form-item ::label="$t('auto.Create.15.07ae79')" prop="target_language">
+          <el-select v-model="form.target_language" ::placeholder="$t('auto.Create.16.a28232')" clearable style="width: 100%">
             <el-option
               v-for="lang in targetLanguageOptions"
               :key="lang.value"
@@ -99,7 +99,7 @@
               :value="lang.value"
             />
           </el-select>
-          <div class="form-tip">渠道对外输出语言，覆盖智能体配置。空表示跟随智能体配置。</div>
+          <div class="form-tip">{{ $t('auto.Create.24.ac1784') }}</div>
         </el-form-item>
 
         <el-form-item>
@@ -112,18 +112,18 @@
     
     <el-dialog
       v-model="credentialsVisible"
-      :title="$t('渠道创建成功')"
+      ::title="$t('auto.Create.17.e049c7')"
       width="640px"
       :close-on-click-modal="false"
       :close-on-press-escape="false"
     >
       <el-alert type="warning" :closable="false" style="margin-bottom: 16px">
-        <p style="margin: 0 0 4px"><strong>AppKey 和 AppSecret 仅显示一次！</strong></p>
-        <p style="margin: 0">请立即复制并妥善保存。关闭后只能轮换 AppKey / 重置 AppSecret。</p>
+        <p style="margin: 0 0 4px"><strong>{{ $t('auto.Create.25.b5e59f') }}</strong></p>
+        <p style="margin: 0">{{ $t('auto.Create.26.67a7c5') }}</p>
       </el-alert>
 
       <el-form label-width="120px">
-        <el-form-item :label="$t('渠道 ID')">
+        <el-form-item ::label="$t('auto.Create.18.881452')">
           <code class="cred">{{ createdData?.Channel?.channel_id }}</code>
         </el-form-item>
         <el-form-item label="AppKey">
@@ -156,6 +156,7 @@
 import i18n from '@/i18n'
 
 import { ref, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { CopyDocument } from '@element-plus/icons-vue'
@@ -165,6 +166,8 @@ import { createBinding } from '@/api/channelAgentBinding'
 import { TARGET_LANGUAGE_OPTIONS } from '@/constants/languages'
 
 const router = useRouter()
+const { t } = useI18n()
+
 const formRef = ref()
 const saving = ref(false)
 const credentialsVisible = ref(false)
@@ -175,17 +178,17 @@ const enabledAgents = ref([]);
 const loadingAgents = ref(false)
 
 const getAgentTypeLabel = (type) => {
-  const map = { sales: '销售', customer_service: '客服', hybrid: '混合' }
+  const map = { sales: t('auto.Create.27.7f0dc5'), customer_service: t('auto.Create.28.e7dea7'), hybrid: t('auto.Create.29.41ce13') }
   return map[type] || type || '-'
 }
 
 const form = ref({
   channel_name: '',
   allowed_origins: [],
-  welcome_message: '您好，请问需要什么帮助？',
+  welcome_message: t('auto.Create.30.0b7281'),
   widget_color: '#1989fa',
   widget_position: 'bottom-right',
-  widget_title: '在线客服',
+  widget_title: t('auto.Create.31.7f72e8'),
   auto_assign: true,
   confidence_threshold: 0.70,
   default_agent_id: null
@@ -194,13 +197,13 @@ const form = ref({
 const targetLanguageOptions = TARGET_LANGUAGE_OPTIONS
 
 const rules = {
-  channel_name: [{ required: true, message: i18n.global.t('请输入渠道名称'), trigger: 'blur' }],
+  channel_name: [{ required: true, message: i18n.global.t(t('auto.Create.32.3fdb50')), trigger: 'blur' }],
   allowed_origins: [
     {
       validator: (rule, value, cb) => {
         const lines = originsText.value.split('\n').map(s => s.trim()).filter(Boolean)
         if (lines.length === 0) {
-          cb(new Error('至少配置一个允许的 origin'))
+          cb(new Error(t('auto.Create.33.c232ed')))
         } else {
           cb()
         }
@@ -234,7 +237,7 @@ const onSubmit = async () => {
       .map(s => s.trim())
       .filter(Boolean)
     if (form.value.allowed_origins.includes('*')) {
-      ElMessage.warning(i18n.global.t('检测到通配符 *，将允许所有域名接入，存在安全风险，建议仅用于测试'))
+      ElMessage.warning(i18n.global.t(t('auto.Create.34.7c583b')))
     }
     const payload = { ...form.value }
     delete payload.default_agent_id;
@@ -250,14 +253,14 @@ const onSubmit = async () => {
           is_primary: true,
           enabled: true
         })
-        ElMessage.success(i18n.global.t('已自动绑定默认智能体'))
+        ElMessage.success(i18n.global.t(t('auto.Create.35.7bcc8a')))
       } catch (bindErr) {
-        ElMessage.warning('渠道已创建，但默认智能体绑定失败：' + (bindErr?.message || '未知错误'));
+        ElMessage.warning(t('auto.Create.36.a2e0d8') + (bindErr?.message || t('auto.Create.37.974e74')));
       }
     }
     credentialsVisible.value = true
   } catch (err) {
-    ElMessage.error('创建失败：' + (err?.message || err))
+    ElMessage.error(t('auto.Create.38.3d6b61') + (err?.message || err))
   } finally {
     saving.value = false
   }
@@ -278,7 +281,7 @@ const copy = async (text) => {
     } else {
       throw new Error('clipboard unavailable')
     }
-    ElMessage.success(i18n.global.t('已复制'))
+    ElMessage.success(i18n.global.t(t('auto.Create.39.52e6ab')))
   } catch {
     try {
       const ta = document.createElement('textarea')
@@ -289,9 +292,9 @@ const copy = async (text) => {
       ta.select()
       document.execCommand('copy')
       document.body.removeChild(ta)
-      ElMessage.success(i18n.global.t('已复制'))
+      ElMessage.success(i18n.global.t(t('auto.Create.39.52e6ab')))
     } catch {
-      ElMessage.error(i18n.global.t('复制失败，请手动选择复制'))
+      ElMessage.error(i18n.global.t(t('auto.Create.40.063c17')))
     }
   }
 }

@@ -14,32 +14,32 @@
           <template #header>
             <div class="section-header">
               <el-icon><InfoFilled /></el-icon>
-              <span>基本信息</span>
+              <span>{{ $t('auto.KBDrawer.15.9e5ffa') }}</span>
             </div>
           </template>
           <el-descriptions :column="2" border>
             <el-descriptions-item label="ID">{{ kbData.id }}</el-descriptions-item>
-            <el-descriptions-item label="KB编码">{{ kbData.kb_code || '-' }}</el-descriptions-item>
-            <el-descriptions-item label="名称" :span="2">
+            <el-descriptions-item :label="$t('auto.KBDrawer.1.031c07')">{{ kbData.kb_code || '-' }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.KBDrawer.2.d7ec2d')" :span="2">
               {{ kbData.name }}
             </el-descriptions-item>
-            <el-descriptions-item label="类型" :span="1">
+            <el-descriptions-item :label="$t('auto.KBDrawer.3.226b09')" :span="1">
               <el-tag :type="getTypeTagType(kbData.kb_type)" size="small">
                 {{ getTypeLabel(kbData.kb_type) }}
               </el-tag>
             </el-descriptions-item>
-            <el-descriptions-item label="状态" :span="1">
+            <el-descriptions-item :label="$t('auto.KBDrawer.4.3fea7c')" :span="1">
               <el-tag :type="kbData.status === 1 ? 'success' : 'info'" size="small">
                 {{ kbData.status === 1 ? '启用' : '禁用' }}
               </el-tag>
             </el-descriptions-item>
-            <el-descriptions-item label="描述" :span="2">
+            <el-descriptions-item :label="$t('auto.KBDrawer.5.3bdd08')" :span="2">
               {{ kbData.description || '-' }}
             </el-descriptions-item>
-            <el-descriptions-item label="创建时间">
+            <el-descriptions-item :label="$t('auto.KBDrawer.6.eca37c')">
               {{ formatTime(kbData.created_at) }}
             </el-descriptions-item>
-            <el-descriptions-item label="更新时间">
+            <el-descriptions-item :label="$t('auto.KBDrawer.7.a001a2')">
               {{ formatTime(kbData.updated_at) }}
             </el-descriptions-item>
           </el-descriptions>
@@ -50,7 +50,7 @@
           <template #header>
             <div class="section-header">
               <el-icon><DataLine /></el-icon>
-              <span>统计信息</span>
+              <span>{{ $t('auto.KBDrawer.16.f56ae6') }}</span>
             </div>
           </template>
           <el-row :gutter="16">
@@ -58,20 +58,20 @@
               <div class="mini-stat">
                 <div class="mini-stat-label">{{ statsLabel.item }}</div>
                 <div class="mini-stat-value">{{ stats.item_count ?? '—' }}</div>
-                <div class="mini-stat-hint">未接入</div>
+                <div class="mini-stat-hint">{{ $t('auto.KBDrawer.17.8f5c4b') }}</div>
               </div>
             </el-col>
             <el-col :span="8">
               <div class="mini-stat">
-                <div class="mini-stat-label">关联智能体</div>
+                <div class="mini-stat-label">{{ $t('auto.KBDrawer.18.9b4c8f') }}</div>
                 <div class="mini-stat-value text-primary">{{ stats.agent_count }}</div>
               </div>
             </el-col>
             <el-col :span="8">
               <div class="mini-stat">
-                <div class="mini-stat-label">总命中次数</div>
+                <div class="mini-stat-label">{{ $t('auto.KBDrawer.19.ba4579') }}</div>
                 <div class="mini-stat-value text-success">{{ stats.hit_count ?? '—' }}</div>
-                <div class="mini-stat-hint">未接入</div>
+                <div class="mini-stat-hint">{{ $t('auto.KBDrawer.17.8f5c4b') }}</div>
               </div>
             </el-col>
           </el-row>
@@ -82,7 +82,7 @@
           <template #header>
             <div class="section-header">
               <el-icon><Connection /></el-icon>
-              <span>被哪些智能体使用（反向追溯）</span>
+              <span>{{ $t('auto.KBDrawer.20.ef41be') }}</span>
               <el-button
                 type="primary"
                 link
@@ -97,32 +97,32 @@
           </template>
           <el-empty
             v-if="!loadingAgents && agentBindings.length === 0"
-            description="暂未被任何智能体挂载"
+            :description="$t('auto.KBDrawer.8.e792d8')"
             :image-size="80"
           />
           <el-table v-else :data="agentBindings" stripe size="small" border>
             <el-table-column prop="id" label="ID" width="70" align="center" />
-            <el-table-column label="智能体名称" min-width="160" show-overflow-tooltip>
+            <el-table-column :label="$t('auto.KBDrawer.9.63ecdf')" min-width="160" show-overflow-tooltip>
               <template #default="{ row }">
                 <span class="agent-link" role="button" tabindex="0" @click="goEditAgent(row)" @keydown.enter.prevent="goEditAgent(row)" @keydown.space.prevent="goEditAgent(row)">
                   {{ row.name || row.agent_name || '-' }}
                 </span>
               </template>
             </el-table-column>
-            <el-table-column label="编码" width="140" show-overflow-tooltip>
+            <el-table-column :label="$t('auto.KBDrawer.10.cc6c35')" width="140" show-overflow-tooltip>
               <template #default="{ row }">
                 {{ row.agent_code || row.code || '-' }}
               </template>
             </el-table-column>
-            <el-table-column label="类型" width="110" align="center">
+            <el-table-column :label="$t('auto.KBDrawer.3.226b09')" width="110" align="center">
               <template #default="{ row }">
                 <el-tag size="small">{{ row.agent_type || row.type || '-' }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column label="绑定时间" width="160">
+            <el-table-column :label="$t('auto.KBDrawer.11.d12952')" width="160">
               <template #default="{ row }">{{ formatTime(row.created_at || row.bind_at) }}</template>
             </el-table-column>
-            <el-table-column label="操作" width="100" align="center" fixed="right">
+            <el-table-column :label="$t('auto.KBDrawer.12.2b6bc0')" width="100" align="center" fixed="right">
               <template #default="{ row }">
                 <el-button link type="primary" size="small" @click="goEditAgent(row)">
                   查看
@@ -142,7 +142,7 @@
           </template>
           <el-empty
             v-if="!loadingItems && itemsPreview.length === 0"
-            description="暂无子项"
+            :description="$t('auto.KBDrawer.13.438afb')"
             :image-size="80"
           />
           <el-table v-else :data="itemsPreview" stripe size="small" border max-height="320">
@@ -158,11 +158,11 @@
           </el-table>
         </el-card>
       </template>
-      <el-empty v-else description="未选择知识库" />
+      <el-empty v-else :description="$t('auto.KBDrawer.14.1a5036')" />
     </div>
 
     <template #footer>
-      <el-button @click="$emit('update:modelValue', false)">关闭</el-button>
+      <el-button @click="$emit('update:modelValue', false)">{{ $t('auto.KBDrawer.21.b15d91') }}</el-button>
       <el-button
         type="primary"
         @click="goEdit"
@@ -176,6 +176,7 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import {
@@ -197,6 +198,8 @@ const props = defineProps({
 defineEmits(['update:modelValue', 'updated'])
 const router = useRouter()
 
+const { t } = useI18n()
+
 const loading = ref(false)
 const loadingAgents = ref(false)
 const loadingItems = ref(false)
@@ -205,16 +208,16 @@ const itemsPreview = ref([])
 const stats = ref({ agent_count: 0 })
 
 const drawerTitle = computed(() => {
-  if (!props.kbData) return '知识库详情'
+  if (!props.kbData) return t('auto.KBDrawer.22.cbdd57')
   return `知识库详情：${props.kbData.name || props.kbData.kb_code || '#' + props.kbData.id}`
 })
 
 const statsLabel = computed(() => {
   const t = props.kbData?.kb_type
-  if (t === 'rag') return { item: '文档数' }
+  if (t === 'rag') return { item: t('auto.KBDrawer.23.6bbc64') }
   if (t === 'faq') return { item: 'FAQ 条目' }
   if (t === 'sop') return { item: 'SOP 模板' }
-  return { item: '子项' }
+  return { item: t('auto.KBDrawer.24.ec39bb') }
 })
 
 const itemColumns = computed(() => {
@@ -222,33 +225,33 @@ const itemColumns = computed(() => {
   if (t === 'rag') {
     return [
       { prop: 'id', label: 'ID', width: 70 },
-      { prop: 'title', label: '文档标题', minWidth: 180 },
-      { prop: 'file_type', label: '类型', width: 90 },
-      { prop: 'chunk_count', label: '切片数', width: 90 },
-      { prop: 'created_at', label: '创建时间', width: 160 }
+      { prop: 'title', label: t('auto.KBDrawer.25.bf1368'), minWidth: 180 },
+      { prop: 'file_type', label: t('auto.KBDrawer.3.226b09'), width: 90 },
+      { prop: 'chunk_count', label: t('auto.KBDrawer.26.f3cb63'), width: 90 },
+      { prop: 'created_at', label: t('auto.KBDrawer.6.eca37c'), width: 160 }
     ]
   }
   if (t === 'faq') {
     return [
       { prop: 'id', label: 'ID', width: 70 },
-      { prop: 'question', label: '问题', minWidth: 200 },
-      { prop: 'category', label: '分类', width: 120 },
-      { prop: 'intent', label: '意图', width: 120 },
-      { prop: 'enabled', label: '状态', width: 80 }
+      { prop: 'question', label: t('auto.KBDrawer.27.5dc99f'), minWidth: 200 },
+      { prop: 'category', label: t('auto.KBDrawer.28.d0771a'), width: 120 },
+      { prop: 'intent', label: t('auto.KBDrawer.29.764aca'), width: 120 },
+      { prop: 'enabled', label: t('auto.KBDrawer.4.3fea7c'), width: 80 }
     ]
   }
   if (t === 'sop') {
     return [
       { prop: 'id', label: 'ID', width: 70 },
-      { prop: 'name', label: '模板名称', minWidth: 180 },
-      { prop: 'stage', label: '阶段', width: 100 },
-      { prop: 'intent', label: '意图', width: 120 },
-      { prop: 'enabled', label: '状态', width: 80 }
+      { prop: 'name', label: t('auto.KBDrawer.30.a5d1c5'), minWidth: 180 },
+      { prop: 'stage', label: t('auto.KBDrawer.31.d31633'), width: 100 },
+      { prop: 'intent', label: t('auto.KBDrawer.29.764aca'), width: 120 },
+      { prop: 'enabled', label: t('auto.KBDrawer.4.3fea7c'), width: 80 }
     ]
   }
   return [
     { prop: 'id', label: 'ID', width: 70 },
-    { prop: 'name', label: '名称', minWidth: 180 }
+    { prop: 'name', label: t('auto.KBDrawer.2.d7ec2d'), minWidth: 180 }
   ]
 })
 

@@ -5,13 +5,13 @@
       <div class="header-content">
         <div>
           <h2>{{ $t('多语言监控') }}</h2>
-          <p class="subtitle">翻译服务运行态总览 · 语言分布 / 缓存命中 / 术语覆盖 / 质量与延迟</p>
+          <p class="subtitle">{{ $t('auto.Dashboard.14.87334a') }}</p>
         </div>
         <div class="header-actions">
           <el-select v-model="days" style="width: 130px" @change="loadAll">
-            <el-option :label="$t('近 7 天')" :value="7" />
-            <el-option :label="$t('近 14 天')" :value="14" />
-            <el-option :label="$t('近 30 天')" :value="30" />
+            <el-option ::label="$t('auto.Dashboard.1.bf855f')" :value="7" />
+            <el-option ::label="$t('auto.Dashboard.2.a219c3')" :value="14" />
+            <el-option ::label="$t('auto.Dashboard.3.c2a97d')" :value="30" />
           </el-select>
           <el-button @click="loadAll" :loading="loading">
             <el-icon><Refresh /></el-icon>
@@ -76,7 +76,7 @@
             </div>
           </template>
           <div v-loading="loading" ref="langDistChart" class="chart-box"></div>
-          <el-empty v-if="!langDist.length && !loading" :description="$t('暂无语言分布数据')" :image-size="60" />
+          <el-empty v-if="!langDist.length && !loading" ::description="$t('auto.Dashboard.4.c686b0')" :image-size="60" />
         </el-card>
       </el-col>
       <el-col :xs="24" :md="10">
@@ -125,7 +125,7 @@
             </div>
           </template>
           <div v-loading="loading" ref="qualityChart" class="chart-box"></div>
-          <el-empty v-if="!qualityTrend.length && !loading" :description="$t('暂无质量数据')" :image-size="60" />
+          <el-empty v-if="!qualityTrend.length && !loading" ::description="$t('auto.Dashboard.5.745ac7')" :image-size="60" />
         </el-card>
       </el-col>
       <el-col :xs="24" :md="10">
@@ -137,14 +137,14 @@
             </div>
           </template>
           <el-table :data="glossaryCoverage" v-loading="loading" stripe size="small" border>
-            <el-table-column label="目标语言" min-width="120">
+            <el-table-column :label="$t('auto.Dashboard.6.129d05')" min-width="120">
               <template #default="{ row }">
                 <el-tag size="small" type="success">{{ getLanguageLabel(row.target_lang) }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="term_count" label="术语总数" width="100" align="center" />
-            <el-table-column prop="active_count" label="启用数" width="90" align="center" />
-            <el-table-column label="覆盖率" min-width="140">
+            <el-table-column prop="term_count" :label="$t('auto.Dashboard.7.0a49b9')" width="100" align="center" />
+            <el-table-column prop="active_count" :label="$t('auto.Dashboard.8.601df5')" width="90" align="center" />
+            <el-table-column :label="$t('auto.Dashboard.9.004130')" min-width="140">
               <template #default="{ row }">
                 <el-progress
                   :percentage="glossaryCovPercent(row)"
@@ -155,7 +155,7 @@
               </template>
             </el-table-column>
             <template #empty>
-              <el-empty :description="$t('暂无术语覆盖数据')" :image-size="50" />
+              <el-empty ::description="$t('auto.Dashboard.10.a18cc9')" :image-size="50" />
             </template>
           </el-table>
         </el-card>
@@ -171,7 +171,7 @@
         </div>
       </template>
       <el-table :data="latencyStats" v-loading="loading" stripe border>
-        <el-table-column label="目标语言" min-width="140">
+        <el-table-column :label="$t('auto.Dashboard.6.129d05')" min-width="140">
           <template #default="{ row }">
             <el-tag size="small">{{ getLanguageLabel(row.target_lang) }}</el-tag>
           </template>
@@ -191,8 +191,8 @@
             <span class="latency-num" :class="latencyClass(row.p99)">{{ formatMs(row.p99) }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="count" label="样本数" width="120" align="center" />
-        <el-table-column label="P95 分布" min-width="200">
+        <el-table-column prop="count" :label="$t('auto.Dashboard.11.c1ce23')" width="120" align="center" />
+        <el-table-column :label="$t('auto.Dashboard.12.384183')" min-width="200">
           <template #default="{ row }">
             <el-progress
               :percentage="latencyBarPercent(row.p95)"
@@ -203,7 +203,7 @@
           </template>
         </el-table-column>
         <template #empty>
-          <el-empty :description="$t('暂无延迟数据')" :image-size="60" />
+          <el-empty ::description="$t('auto.Dashboard.13.ca7349')" :image-size="60" />
         </template>
       </el-table>
     </el-card>
@@ -214,6 +214,7 @@
 import i18n from '@/i18n'
 
 import { ref, computed, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import * as echarts from 'echarts'
 import { safeInit } from '@/utils/echarts'
@@ -350,7 +351,7 @@ const loadAll = async () => {
     renderLangDist()
     renderQuality()
   } catch (e) {
-    ElMessage.error(t('加载监控数据失败') + '：' + (e.message || '未知错误'))
+    ElMessage.error(t(t('auto.Dashboard.15.5cce99')) + '：' + (e.message || t('auto.Dashboard.16.974e74')))
   } finally {
     loading.value = false
   }
@@ -380,14 +381,14 @@ const renderLangDist = () => {
         const p = params[0]
         const item = data[p.dataIndex]
         if (!item) return p.name
-        return `${item.name}<br/>${t('调用数')}: ${item.value}<br/>${t('跨语言')}: ${item.cross}`
+        return `${item.name}<br/>${t(t('auto.Dashboard.17.8bc42b'))}: ${item.value}<br/>${t(t('auto.Dashboard.18.e6dc1a'))}: ${item.cross}`
       }
     },
     grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
-    xAxis: { type: 'value', name: t('调用数') },
+    xAxis: { type: 'value', name: t(t('auto.Dashboard.17.8bc42b')) },
     yAxis: { type: 'category', data: data.map((d) => d.name), inverse: true },
     series: [{
-      name: t('调用数'),
+      name: t(t('auto.Dashboard.17.8bc42b')),
       type: 'bar',
       data: data.map((d) => d.value),
       itemStyle: {
@@ -425,7 +426,7 @@ const renderQuality = () => {
         const p = params[0]
         const item = data[p.dataIndex]
         if (!item) return p.name
-        return `${item.date}<br/>${t('平均评分')}: ${Number(item.avg_score || 0).toFixed(2)}<br/>${t('样本数')}: ${item.total_count || 0}`
+        return `${item.date}<br/>${t(t('auto.Dashboard.19.93d5f3'))}: ${Number(item.avg_score || 0).toFixed(2)}<br/>${t(t('auto.Dashboard.11.c1ce23'))}: ${item.total_count || 0}`
       }
     },
     grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
@@ -436,13 +437,13 @@ const renderQuality = () => {
     },
     yAxis: {
       type: 'value',
-      name: t('评分'),
+      name: t(t('auto.Dashboard.20.108db1')),
       min: 0,
       max: 1,
       interval: 0.2
     },
     series: [{
-      name: t('平均评分'),
+      name: t(t('auto.Dashboard.19.93d5f3')),
       type: 'line',
       smooth: true,
       data: data.map((d) => Number(d.avg_score || 0)),

@@ -5,18 +5,18 @@
         <template #header>
           <span>{{ $t('客户搜索') }}</span>
         </template>
-        <el-input v-model="searchKeyword" placeholder="搜索客户(姓名/手机/邮箱)" clearable />
+        <el-input v-model="searchKeyword" :placeholder="$t('auto.List.1.50d897')" clearable />
         <el-table
           :data="pagedCustomers"
           v-loading="loading"
           highlight-current-row
           @row-click="selectCustomer"
           style="margin-top: 15px"
-          empty-text="暂无客户"
+          :empty-text="$t('auto.List.2.604dfb')"
         >
-          <el-table-column prop="name" label="姓名" min-width="120" show-overflow-tooltip />
-          <el-table-column prop="phone" label="手机号" min-width="140" show-overflow-tooltip />
-          <el-table-column label="来源" min-width="140" show-overflow-tooltip>
+          <el-table-column prop="name" :label="$t('auto.List.3.60d045')" min-width="120" show-overflow-tooltip />
+          <el-table-column prop="phone" :label="$t('auto.List.4.8098e2')" min-width="140" show-overflow-tooltip />
+          <el-table-column :label="$t('auto.List.5.26ca20')" min-width="140" show-overflow-tooltip>
           <template #default="{ row }">{{ getChannelLabel(row.source) || '-' }}</template>
         </el-table-column>
         </el-table>
@@ -43,39 +43,39 @@
             </div>
           </div>
           <div class="header-actions">
-            <el-button type="primary" @click="contactCustomer">联系客户</el-button>
-            <el-button @click="addTag">添加标签</el-button>
+            <el-button type="primary" @click="contactCustomer">{{ $t('auto.List.30.acbfd9') }}</el-button>
+            <el-button @click="addTag">{{ $t('auto.List.34.736eaa') }}</el-button>
           </div>
         </div>
 
         <el-descriptions :column="3" border>
-          <el-descriptions-item label="手机号">{{ current.phone }}</el-descriptions-item>
-          <el-descriptions-item label="邮箱">{{ current.email }}</el-descriptions-item>
-          <el-descriptions-item label="微信号">{{ current.wechat }}</el-descriptions-item>
-          <el-descriptions-item label="来源">{{ getChannelLabel(current.source) }}</el-descriptions-item>
-          <el-descriptions-item label="注册时间">{{ current.createdAt }}</el-descriptions-item>
-          <el-descriptions-item label="最后活跃">{{ current.lastActive }}</el-descriptions-item>
-          <el-descriptions-item label="客户状态">
+          <el-descriptions-item :label="$t('auto.List.4.8098e2')">{{ current.phone }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.6.3bc5e6')">{{ current.email }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.7.bcaaee')">{{ current.wechat }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.5.26ca20')">{{ getChannelLabel(current.source) }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.8.87d5eb')">{{ current.createdAt }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.9.7f2846')">{{ current.lastActive }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.10.ce62f8')">
             <el-tag :type="getCustomerStatusTagType(current.status)">{{ getCustomerStatusLabel(current.status) }}</el-tag>
           </el-descriptions-item>
         </el-descriptions>
       </el-card>
 
       <el-tabs v-model="activeTab" class="detail-tabs">
-        <el-tab-pane label="基本信息" name="basic">
+        <el-tab-pane :label="$t('auto.List.11.9e5ffa')" name="basic">
           <el-card>
             <el-descriptions :column="2" border>
-              <el-descriptions-item label="年龄">{{ current.age }}</el-descriptions-item>
-              <el-descriptions-item label="性别">{{ current.gender }}</el-descriptions-item>
-              <el-descriptions-item label="职业">{{ current.occupation }}</el-descriptions-item>
-              <el-descriptions-item label="地区">{{ current.region }}</el-descriptions-item>
-              <el-descriptions-item label="生日">{{ current.birthday }}</el-descriptions-item>
-              <el-descriptions-item label="备注">{{ current.remark }}</el-descriptions-item>
+              <el-descriptions-item :label="$t('auto.List.12.a01a99')">{{ current.age }}</el-descriptions-item>
+              <el-descriptions-item :label="$t('auto.List.13.787b56')">{{ current.gender }}</el-descriptions-item>
+              <el-descriptions-item :label="$t('auto.List.14.7379c9')">{{ current.occupation }}</el-descriptions-item>
+              <el-descriptions-item :label="$t('auto.List.15.2560b3')">{{ current.region }}</el-descriptions-item>
+              <el-descriptions-item :label="$t('auto.List.16.8483ed')">{{ current.birthday }}</el-descriptions-item>
+              <el-descriptions-item :label="$t('auto.List.17.2432b5')">{{ current.remark }}</el-descriptions-item>
             </el-descriptions>
           </el-card>
         </el-tab-pane>
 
-        <el-tab-pane label="行为轨迹" name="behavior">
+        <el-tab-pane :label="$t('auto.List.18.949053')" name="behavior">
           <el-card>
             <el-timeline>
               <el-timeline-item
@@ -91,7 +91,7 @@
           </el-card>
         </el-tab-pane>
 
-        <el-tab-pane label="沟通记录" name="communications">
+        <el-tab-pane :label="$t('auto.List.19.0caa82')" name="communications">
           <el-card>
             <el-timeline>
               <el-timeline-item
@@ -107,7 +107,7 @@
           </el-card>
         </el-tab-pane>
 
-        <el-tab-pane label="标签" name="tags">
+        <el-tab-pane :label="$t('auto.List.20.14d342')" name="tags">
           <el-card>
             <el-tag
               v-for="tag in current.tags"
@@ -116,28 +116,28 @@
               @close="removeTag(tag)"
               style="margin: 5px"
             >{{ tag }}</el-tag>
-            <el-button link type="primary" @click="addTag">+ 添加标签</el-button>
+            <el-button link type="primary" @click="addTag">{{ $t('auto.List.35.ea971b') }}</el-button>
           </el-card>
         </el-tab-pane>
 
-        <el-tab-pane label="订单记录" name="orders">
+        <el-tab-pane :label="$t('auto.List.21.bd31c4')" name="orders">
           <el-card>
             <div v-if="!current.phone && !current.name" class="order-tip">
               该客户缺少手机号/姓名，无法关联外部订单
             </div>
-            <el-table v-else :data="orders" v-loading="ordersLoading" empty-text="暂无订单记录">
-              <el-table-column prop="order_id" label="订单号" width="170" />
-              <el-table-column label="平台" width="100">
+            <el-table v-else :data="orders" v-loading="ordersLoading" :empty-text="$t('auto.List.22.e98aef')">
+              <el-table-column prop="order_id" :label="$t('auto.List.23.1e8dc2')" width="170" />
+              <el-table-column :label="$t('auto.List.24.498128')" width="100">
                 <template #default="{ row }">
                   {{ getChannelLabel(row.platform) }}
                 </template>
               </el-table-column>
-              <el-table-column prop="status" label="状态" width="110" />
-              <el-table-column label="金额" width="120">
+              <el-table-column prop="status" :label="$t('auto.List.25.3fea7c')" width="110" />
+              <el-table-column :label="$t('auto.List.26.4cf24a')" width="120">
                 <template #default="{ row }">¥{{ ((row.total_amount || 0) / 100).toFixed(2) }}</template>
               </el-table-column>
-              <el-table-column prop="pay_time" label="支付时间" width="160" />
-              <el-table-column prop="items" label="商品" min-width="160" show-overflow-tooltip />
+              <el-table-column prop="pay_time" :label="$t('auto.List.27.05c5dc')" width="160" />
+              <el-table-column prop="items" :label="$t('auto.List.28.9897d8')" min-width="160" show-overflow-tooltip />
             </el-table>
           </el-card>
         </el-tab-pane>
@@ -145,26 +145,26 @@
     </div>
 
     <div v-else class="empty-state">
-      <el-empty description="请从左侧选择客户" />
+      <el-empty :description="$t('auto.List.29.cf40ba')" />
     </div>
 
-    <el-dialog v-model="contactVisible" title="联系客户" width="500px">
+    <el-dialog v-model="contactVisible" :title="$t('auto.List.30.acbfd9')" width="500px">
       <el-form :model="contactForm" label-position="top">
-        <el-form-item label="客户">
+        <el-form-item :label="$t('auto.List.31.ff0b20')">
           <span>{{ current?.name }}</span>
         </el-form-item>
-        <el-form-item label="消息内容">
+        <el-form-item :label="$t('auto.List.32.b87b77')">
           <el-input
             v-model="contactForm.content"
             type="textarea"
             :rows="5"
-            placeholder="请输入要发送的消息内容..."
+            :placeholder="$t('auto.List.33.5e3842')"
           />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="contactVisible = false">取消</el-button>
-        <el-button type="primary" :loading="submittingContact" @click="submitContact">发送</el-button>
+        <el-button @click="contactVisible = false">{{ $t('auto.List.36.625fb2') }}</el-button>
+        <el-button type="primary" :loading="submittingContact" @click="submitContact">{{ $t('auto.List.37.1535fc') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -174,6 +174,7 @@
 import i18n from '@/i18n'
 
 import { ref, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { getCustomerList, getCustomerDetail, addCustomerTag, removeCustomerTag } from '@/api/customer360.js'
 import { createSession, sendMessage } from '@/api/customerSession.js'
@@ -188,6 +189,8 @@ import { getEnabledLabel, getEnabledTagType } from '@/constants/enabled';
 
 const getCustomerStatusLabel = (s) => getCustomerStatusLabelFromConst(s) || getEnabledLabel(s);
 const getCustomerStatusTagType = (s) => getCustomerStatusTagTypeFromConst(s) || getEnabledTagType(s)
+
+const { t } = useI18n()
 
 const loading = ref(false)
 const searchKeyword = ref('')
@@ -267,7 +270,7 @@ const selectCustomer = async (row) => {
     behaviors.value = messages.map((m) => ({
       time: m.created_at,
       type: m.sender_type === 'user' ? 'primary' : 'success',
-      action: m.sender_name || (m.sender_type === 'user' ? '客户' : '坐席'),
+      action: m.sender_name || (m.sender_type === 'user' ? t('auto.List.31.ff0b20') : t('auto.List.38.2504da')),
       detail: m.content
     }))
     communications.value = messages.map((m) => ({
@@ -278,7 +281,7 @@ const selectCustomer = async (row) => {
     }))
     loadOrders(current.value.phone, current.value.name);
   } catch (e) {
-    console.error('加载客户详情失败:', e)
+    console.error(t('auto.List.39.daa79a'), e)
   }
 }
 
@@ -304,7 +307,7 @@ const contactCustomer = () => {
 const submittingContact = ref(false)
 const submitContact = async () => {
   if (!contactForm.value.content.trim()) {
-    ElMessage.warning(i18n.global.t('请输入消息内容'))
+    ElMessage.warning(i18n.global.t(t('auto.List.40.fa967b')))
     return
   }
   // 提交锁：createSession+sendMessage 两串行请求期间双击会创建重复会话/消息
@@ -320,10 +323,10 @@ const submitContact = async () => {
     })
     const sessionId = res?.id;
     await sendMessage({ sessionId, content: contactForm.value.content, sender_type: 'agent' })
-    ElMessage.success(i18n.global.t('会话已创建，消息已发送'))
+    ElMessage.success(i18n.global.t(t('auto.List.41.615d82')))
     contactVisible.value = false
   } catch (e) {
-    ElMessage.error(i18n.global.t('发送失败，请稍后重试'))
+    ElMessage.error(i18n.global.t(t('auto.List.42.69d1f0')))
   } finally {
     submittingContact.value = false
   }
@@ -331,10 +334,10 @@ const submitContact = async () => {
 
 const addTag = async () => {
   try {
-    const { value } = await ElMessageBox.prompt('请输入标签名', '添加标签', { confirmButtonText: '添加' })
+    const { value } = await ElMessageBox.prompt(t('auto.List.43.3d9745'), t('auto.List.34.736eaa'), { confirmButtonText: t('auto.List.44.b58c75') })
     if (value) {
       await addCustomerTag(current.value.id, value)
-      ElMessage.success(i18n.global.t('标签已添加'))
+      ElMessage.success(i18n.global.t(t('auto.List.45.3ea58d')))
       if (!current.value.tags) current.value.tags = []
       current.value.tags.push(value)
     }
@@ -344,7 +347,7 @@ const addTag = async () => {
 const removeTag = async (tag) => {
   await removeCustomerTag(current.value.id, tag)
   current.value.tags = current.value.tags.filter((t) => t !== tag)
-  ElMessage.success(i18n.global.t('标签已删除'))
+  ElMessage.success(i18n.global.t(t('auto.List.46.722459')))
 }
 
 onMounted(() => loadCustomers())

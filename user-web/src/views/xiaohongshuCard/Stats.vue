@@ -46,23 +46,23 @@
     
     <el-card class="filter-card">
       <el-form :model="filterForm" inline>
-        <el-form-item :label="$t('日期范围')">
+        <el-form-item ::label="$t('auto.Stats.1.3690ef')">
           <el-date-picker
             v-model="filterForm.dateRange"
             type="daterange"
-            range-separator="至"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
+            :range-separator="$t('auto.Stats.2.981cbe')"
+            :start-placeholder="$t('auto.Stats.3.b44c0f')"
+            :end-placeholder="$t('auto.Stats.4.1d468b')"
             format="YYYY-MM-DD"
             value-format="YYYY-MM-DD"
             @change="handleDateChange"
           />
         </el-form-item>
-        <el-form-item :label="$t('分组方式')">
-          <el-select v-model="filterForm.groupBy" :placeholder="$t('请选择分组方式')" @change="handleGroupByChange">
-            <el-option :label="$t('按天')" value="day" />
-            <el-option :label="$t('按周')" value="week" />
-            <el-option :label="$t('按月')" value="month" />
+        <el-form-item ::label="$t('auto.Stats.5.bf8db0')">
+          <el-select v-model="filterForm.groupBy" ::placeholder="$t('auto.Stats.6.e59c18')" @change="handleGroupByChange">
+            <el-option ::label="$t('auto.Stats.7.4eb3b0')" value="day" />
+            <el-option ::label="$t('auto.Stats.8.787456')" value="week" />
+            <el-option ::label="$t('auto.Stats.9.31019b')" value="month" />
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -91,10 +91,10 @@
             <span>{{ $t('热门卡片') }}</span>
           </div>
           <el-table :data="overallStats.top_cards" stripe style="width: 100%">
-            <el-table-column prop="title" :label="$t('标题')" min-width="150" show-overflow-tooltip />
-            <el-table-column prop="author" :label="$t('作者')" width="100" />
-            <el-table-column prop="view_count" :label="$t('浏览量')" width="80" />
-            <el-table-column :label="$t('操作')" width="100" fixed="right">
+            <el-table-column prop="title" ::label="$t('auto.Stats.10.319eda')" min-width="150" show-overflow-tooltip />
+            <el-table-column prop="author" ::label="$t('auto.Stats.11.be3447')" width="100" />
+            <el-table-column prop="view_count" ::label="$t('auto.Stats.12.4b63a3')" width="80" />
+            <el-table-column ::label="$t('auto.Stats.13.4414e3')" width="100" fixed="right">
               <template #default="scope">
                 <el-button size="small" type="primary" @click="goToCardStats(scope.row.id)">{{ $t('统计') }}</el-button>
               </template>
@@ -105,19 +105,19 @@
       <el-col :span="12">
         <el-card class="table-card">
           <div class="table-header">
-            <span>最近活动</span>
+            <span>{{ $t('auto.Stats.18.73378a') }}</span>
           </div>
           <el-table :data="overallStats.recent_activities.filter(item => item.action_type === 'view')" stripe style="width: 100%">
-            <el-table-column prop="card_title" label="卡片标题" min-width="150" show-overflow-tooltip />
-            <el-table-column prop="action_type" label="操作类型" width="100">
+            <el-table-column prop="card_title" :label="$t('auto.Stats.14.3944f2')" min-width="150" show-overflow-tooltip />
+            <el-table-column prop="action_type" :label="$t('auto.Stats.15.de9cc3')" width="100">
               <template #default="scope">
                 <el-tag :type="getActionType(scope.row.action_type)">
                   {{ getActionText(scope.row.action_type) }}
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="user_ip" label="用户IP" width="120" />
-            <el-table-column prop="created_at" label="时间" width="180">
+            <el-table-column prop="user_ip" :label="$t('auto.Stats.16.cd75fe')" width="120" />
+            <el-table-column prop="created_at" :label="$t('auto.Stats.17.19fcb9')" width="180">
               <template #default="scope">
                 {{ formatTime(scope.row.created_at) }}
               </template>
@@ -133,6 +133,7 @@
 import i18n from '@/i18n'
 
 import { ref, reactive, onMounted, nextTick } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import * as echarts from 'echarts'
@@ -140,6 +141,8 @@ import { safeInit } from '@/utils/echarts'
 import { getXiaohongshuCardOverallStats } from '@/api/xiaohongshuCard'
 
 const router = useRouter();
+
+const { t } = useI18n()
 
 const loading = ref(false);
 const viewChart = ref(null)
@@ -193,7 +196,7 @@ const fetchOverallStats = async () => {
       updateCharts()
     });
   } catch (error) {
-    ElMessage.error(i18n.global.t('获取统计数据失败'))
+    ElMessage.error(i18n.global.t(t('auto.Stats.19.063dc7')))
     console.error(error)
   } finally {
     loading.value = false
@@ -222,7 +225,7 @@ const updateCharts = () => {
     viewChart.value = safeInit(viewChartDom)
     const viewOption = {
       title: {
-        text: '访问趋势',
+        text: t('auto.Stats.20.8205ea'),
         left: 'center'
       },
       tooltip: {
@@ -237,7 +240,7 @@ const updateCharts = () => {
       },
       series: [
         {
-          name: '浏览量',
+          name: t('auto.Stats.21.88bc4d'),
           type: 'line',
           data: overallStats.view_trend.map(item => item.count),
           smooth: true,
@@ -286,7 +289,7 @@ const getActionType = (type) => {
 
 const getActionText = (type) => {
   const textMap = {
-    view: '浏览'
+    view: t('auto.Stats.22.9c5c5c')
   }
   return textMap[type] || type
 }

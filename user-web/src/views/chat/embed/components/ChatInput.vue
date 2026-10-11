@@ -2,7 +2,7 @@
   <div class="chat-input">
     
     <div v-if="pendingAttachment" class="attachment-preview">
-      <img v-if="pendingAttachment.mediaType === 'image'" :src="pendingAttachment.preview" class="preview-img" alt="附件预览" />
+      <img v-if="pendingAttachment.mediaType === 'image'" :src="pendingAttachment.preview" class="preview-img" :alt="$t('auto.ChatInput.1.cce640')" />
       <div v-else class="preview-file">
         <div class="file-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
         <div class="file-info">
@@ -10,7 +10,7 @@
           <div class="file-size">{{ formatSize(pendingAttachment.size) }}</div>
         </div>
       </div>
-      <button class="remove-btn" @click="removeAttachment" :aria-label="$t('移除附件')">×</button>
+      <button class="remove-btn" @click="removeAttachment" ::aria-label="$t('auto.ChatInput.2.3d2eed')">×</button>
       <div v-if="uploading" class="upload-progress">
         <div class="progress-bar" :style="{ width: uploadProgress + '%' }"></div>
         <span class="progress-text">上传中 {{ uploadProgress }}%</span>
@@ -21,7 +21,7 @@
       ref="textareaRef"
       v-model="text"
       class="input"
-      aria-label="消息输入框"
+      :aria-label="$t('auto.ChatInput.3.ebd99c')"
       rows="1"
       :placeholder="placeholder"
       :maxlength="maxLength"
@@ -35,7 +35,7 @@
         ref="fileInputRef"
         type="file"
         style="display: none"
-        aria-label="选择附件"
+        :aria-label="$t('auto.ChatInput.4.6ed455')"
         :accept="acceptString"
         @change="onFileSelected"
       />
@@ -43,8 +43,8 @@
         class="action-btn attach"
         :disabled="sending || uploading"
         @click="triggerFileSelect"
-        :title="$t('发送附件')"
-        :aria-label="$t('发送附件')"
+        ::title="$t('auto.ChatInput.5.f3edee')"
+        ::aria-label="$t('auto.ChatInput.5.f3edee')"
       >
         <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true">
           <path d="M8.5 1.5a3.5 3.5 0 0 0-4.95 4.95l5.5 5.5a2 2 0 0 0 2.83-2.83l-4.5-4.5a.5.5 0 1 1 .71-.71l4.5 4.5a3 3 0 0 1-4.24 4.24l-5.5-5.5A4.5 4.5 0 0 1 8.5.5l5.5 5.5a.5.5 0 0 1-.7.7L8.5 1.5z"/>
@@ -66,6 +66,7 @@
 import i18n from '@/i18n'
 
 import { ref, computed, nextTick } from 'vue'
+import { useI18n } from 'vue-i18n'
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 import { getUploadToken } from '@/api/chat'
@@ -73,11 +74,13 @@ import { getUploadToken } from '@/api/chat'
 const props = defineProps({
   color: { type: String, default: '#1989fa' },
   sending: { type: Boolean, default: false },
-  placeholder: { type: String, default: '请输入消息...' },
+  placeholder: { type: String, default: '' },
   maxLength: { type: Number, default: 2000 }
 })
 
 const emit = defineEmits(['send', 'upload', 'progress'])
+
+const { t } = useI18n()
 
 const text = ref('')
 const textareaRef = ref(null)
@@ -138,7 +141,7 @@ const onFileSelected = async (e) => {
   if (!file) return
 
   if (file.size > 20 * 1024 * 1024) {
-    ElMessage.warning(i18n.global.t('文件不能超过 20MB'))
+    ElMessage.warning(i18n.global.t(t('auto.ChatInput.7.ceb523')))
     e.target.value = ''
     return
   }
@@ -187,7 +190,7 @@ const uploadAttachment = async () => {
       }
     })
     if (r.status !== 200) {
-      throw new Error('七牛返回 ' + r.status)
+      throw new Error(t('auto.ChatInput.8.ab56fb') + r.status)
     }
 
     pendingAttachment.value = {
@@ -198,7 +201,7 @@ const uploadAttachment = async () => {
     uploadProgress.value = 100
     emit('upload', pendingAttachment.value)
   } catch (err) {
-    ElMessage.error('上传失败：' + (err?.message || err))
+    ElMessage.error(t('auto.ChatInput.9.46bb97') + (err?.message || err))
     pendingAttachment.value = null
   } finally {
     uploading.value = false

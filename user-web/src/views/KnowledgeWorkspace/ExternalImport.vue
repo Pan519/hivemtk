@@ -1,14 +1,14 @@
 <template>
   <div class="external-import-page">
     <el-alert
-      :title="$t('外部系统文档接入')"
+      ::title="$t('auto.ExternalImport.1.7c872e')"
       type="info"
       :closable="false"
       show-icon
     >
       <template #default>
         通过 API Token 鉴权,接入外部系统(飞书 / Notion / 钉钉 / 自有 CRM)的文档数据。
-        支持两种模式:1) <strong>{{ $t('异步任务') }}</strong> 提交后返回 job_no,2) <strong>{{ $t('同步模式') }}</strong>(sync=true)立即返回处理结果。
+        支持两种模式:1) <strong>{{ $t('异步任务') }}</strong>{{ $t('auto.ExternalImport.22.d4c3de') }}<strong>{{ $t('同步模式') }}</strong>(sync=true)立即返回处理结果。
       </template>
     </el-alert>
 
@@ -18,36 +18,36 @@
         <el-card>
           <template #header>
             <div class="card-header">
-              <span>导入测试</span>
+              <span>{{ $t('auto.ExternalImport.23.756331') }}</span>
               <el-tag :type="testMode ? 'warning' : 'success'" size="small">
                 {{ testMode ? '同步模式' : '异步模式' }}
               </el-tag>
             </div>
           </template>
           <el-form :model="form" label-width="100px">
-            <el-form-item label="数据源">
+            <el-form-item :label="$t('auto.ExternalImport.2.c11322')">
               <el-radio-group v-model="form.source" @change="handleSourceChange">
-                <el-radio-button label="custom">通用 JSON</el-radio-button>
-                <el-radio-button label="feishu">飞书</el-radio-button>
+                <el-radio-button label="custom">{{ $t('auto.ExternalImport.24.fb20b6') }}</el-radio-button>
+                <el-radio-button label="feishu">{{ $t('auto.ExternalImport.25.7714e5') }}</el-radio-button>
                 <el-radio-button label="notion">Notion</el-radio-button>
-                <el-radio-button label="dingtalk">钉钉</el-radio-button>
+                <el-radio-button label="dingtalk">{{ $t('auto.ExternalImport.26.4a0e91') }}</el-radio-button>
               </el-radio-group>
             </el-form-item>
-            <el-form-item label="产品" required>
-              <el-select v-model="form.product_id" placeholder="选择产品" style="width: 100%">
+            <el-form-item :label="$t('auto.ExternalImport.3.a01543')" required>
+              <el-select v-model="form.product_id" :placeholder="$t('auto.ExternalImport.4.cbf1cf')" style="width: 100%">
                 <el-option v-for="p in productList" :key="p.id" :label="p.name" :value="p.id" />
               </el-select>
             </el-form-item>
-            <el-form-item v-if="form.source === 'feishu'" label="飞书 DocID">
-              <el-input v-model="form.feishu_doc_id" placeholder="如:doccnXYZ123" />
+            <el-form-item v-if="form.source === 'feishu'" :label="$t('auto.ExternalImport.5.5fe7ed')">
+              <el-input v-model="form.feishu_doc_id" :placeholder="$t('auto.ExternalImport.6.288d39')" />
             </el-form-item>
             <el-form-item v-if="form.source === 'notion'" label="Notion PageID">
-              <el-input v-model="form.notion_page_id" placeholder="Notion 页面 ID" />
+              <el-input v-model="form.notion_page_id" :placeholder="$t('auto.ExternalImport.7.fec57c')" />
             </el-form-item>
-            <el-form-item v-if="form.source === 'dingtalk'" label="钉钉 DocID">
-              <el-input v-model="form.dingtalk_doc_id" placeholder="钉钉文档 ID" />
+            <el-form-item v-if="form.source === 'dingtalk'" :label="$t('auto.ExternalImport.8.6918fd')">
+              <el-input v-model="form.dingtalk_doc_id" :placeholder="$t('auto.ExternalImport.9.c6e794')" />
             </el-form-item>
-            <el-form-item v-if="form.source === 'custom'" label="文档数据" required>
+            <el-form-item v-if="form.source === 'custom'" :label="$t('auto.ExternalImport.10.c35ee6')" required>
               <el-input
                 v-model="form.itemsJson"
                 type="textarea"
@@ -56,8 +56,8 @@
               />
             </el-form-item>
             <el-form-item>
-              <el-checkbox v-model="testMode">同步返回(否则异步)</el-checkbox>
-              <el-button :icon="Document" @click="loadTemplate" style="margin-left: 8px">载入模板</el-button>
+              <el-checkbox v-model="testMode">{{ $t('auto.ExternalImport.27.d482e5') }}</el-checkbox>
+              <el-button :icon="Document" @click="loadTemplate" style="margin-left: 8px">{{ $t('auto.ExternalImport.28.5806bb') }}</el-button>
             </el-form-item>
             <el-form-item>
               <el-button type="primary" :icon="Promotion" :loading="importing" :disabled="!canSubmit" @click="handleImport" style="width: 100%">
@@ -71,26 +71,26 @@
         <el-card v-if="lastResponse" style="margin-top: 16px">
           <template #header>
             <div class="card-header">
-              <span>提交结果</span>
-              <el-button link @click="lastResponse = null">关闭</el-button>
+              <span>{{ $t('auto.ExternalImport.29.ac24ff') }}</span>
+              <el-button link @click="lastResponse = null">{{ $t('auto.ExternalImport.30.b15d91') }}</el-button>
             </div>
           </template>
           <el-descriptions :column="2" border size="small">
-            <el-descriptions-item label="任务号">{{ lastResponse.job_no }}</el-descriptions-item>
-            <el-descriptions-item label="状态">
+            <el-descriptions-item :label="$t('auto.ExternalImport.11.7cb78f')">{{ lastResponse.job_no }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.ExternalImport.12.3fea7c')">
               <el-tag :type="statusType(lastResponse.status)">{{ statusLabel(lastResponse.status) }}</el-tag>
             </el-descriptions-item>
-            <el-descriptions-item label="总数">{{ lastResponse.total }}</el-descriptions-item>
-            <el-descriptions-item label="成功">{{ lastResponse.accepted }}</el-descriptions-item>
-            <el-descriptions-item label="失败">{{ lastResponse.failed_items }}</el-descriptions-item>
-            <el-descriptions-item label="异步">
+            <el-descriptions-item :label="$t('auto.ExternalImport.13.9ed7d3')">{{ lastResponse.total }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.ExternalImport.14.330363')">{{ lastResponse.accepted }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.ExternalImport.15.acd5cb')">{{ lastResponse.failed_items }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.ExternalImport.16.8b5a24')">
               <el-tag :type="lastResponse.async ? 'warning' : 'success'" size="small">
                 {{ lastResponse.async ? '异步处理中' : '同步完成' }}
               </el-tag>
             </el-descriptions-item>
           </el-descriptions>
           <div v-if="lastResponse.document_ids && lastResponse.document_ids.length" style="margin-top: 12px">
-            <el-text size="small">成功文档 ID:</el-text>
+            <el-text size="small">{{ $t('auto.ExternalImport.31.a3bc87') }}</el-text>
             <el-tag v-for="id in lastResponse.document_ids" :key="id" size="small" style="margin-left: 4px">#{{ id }}</el-tag>
           </div>
           <el-alert
@@ -118,12 +118,12 @@
               <el-input
                 v-model="apiToken"
                 type="password"
-                placeholder="请先到「API Token 管理」创建"
+                :placeholder="$t('auto.ExternalImport.17.2457a9')"
                 show-password
               />
             </el-form-item>
             <el-form-item>
-              <el-text size="small" type="info">外部系统通过 <code>X-Knowledge-Token</code> Header 鉴权</el-text>
+              <el-text size="small" type="info">{{ $t('auto.ExternalImport.32.6e8aa1') }}<code>X-Knowledge-Token</code>{{ $t('auto.ExternalImport.33.999851') }}</el-text>
             </el-form-item>
           </el-form>
         </el-card>
@@ -131,34 +131,34 @@
         <el-card style="margin-top: 16px">
           <template #header>
             <div class="card-header">
-              <span>历史任务</span>
-              <el-button link :icon="Refresh" @click="loadJobs">刷新</el-button>
+              <span>{{ $t('auto.ExternalImport.34.2762e0') }}</span>
+              <el-button link :icon="Refresh" @click="loadJobs">{{ $t('auto.ExternalImport.35.694fc5') }}</el-button>
             </div>
           </template>
-          <el-select v-model="jobFilterProduct" placeholder="按产品筛选" clearable style="width: 100%; margin-bottom: 8px" @change="loadJobs">
+          <el-select v-model="jobFilterProduct" :placeholder="$t('auto.ExternalImport.18.6437ee')" clearable style="width: 100%; margin-bottom: 8px" @change="loadJobs">
             <el-option v-for="p in productList" :key="p.id" :label="p.name" :value="p.id" />
           </el-select>
           <el-table :data="jobs" v-loading="jobsLoading" max-height="380" size="small">
-            <el-table-column prop="job_no" label="任务号" width="160" />
-            <el-table-column prop="source" label="来源" width="80">
+            <el-table-column prop="job_no" :label="$t('auto.ExternalImport.11.7cb78f')" width="160" />
+            <el-table-column prop="source" :label="$t('auto.ExternalImport.19.26ca20')" width="80">
               <template #default="{ row }">
                 <el-tag size="small">{{ row.source }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column label="状态" width="90">
+            <el-table-column :label="$t('auto.ExternalImport.12.3fea7c')" width="90">
               <template #default="{ row }">
                 <el-tag :type="statusType(row.status)" size="small">{{ statusLabel(row.status) }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="total_items" label="总数" width="60" />
-            <el-table-column label="成功/失败" width="100">
+            <el-table-column prop="total_items" :label="$t('auto.ExternalImport.13.9ed7d3')" width="60" />
+            <el-table-column :label="$t('auto.ExternalImport.20.b9ae34')" width="100">
               <template #default="{ row }">
                 <span style="color: #10B981">{{ row.done_items || 0 }}</span>
                 /
                 <span style="color: #EF4444">{{ row.failed_items || 0 }}</span>
               </template>
             </el-table-column>
-            <el-table-column prop="created_at" label="时间" width="150">
+            <el-table-column prop="created_at" :label="$t('auto.ExternalImport.21.19fcb9')" width="150">
               <template #default="{ row }">{{ formatDate(row.created_at) }}</template>
             </el-table-column>
           </el-table>
@@ -172,10 +172,13 @@
 import i18n from '@/i18n'
 
 import { ref, reactive, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import { Refresh, Document, Promotion } from '@element-plus/icons-vue'
 import { knowledgeMerchantAPI } from '@/api/knowledgeMerchant'
 import { ragProductConfigAPI } from '@/api/ragProductConfig'
+
+const { t } = useI18n()
 
 const importing = ref(false)
 const jobsLoading = ref(false)
@@ -210,7 +213,7 @@ const loadProducts = async () => {
     if (Array.isArray(res)) productList.value = res
     else if (res?.items) productList.value = res.items
   } catch (e) {
-    console.error('加载产品失败:', e)
+    console.error(t('auto.ExternalImport.36.fcbbfe'), e)
   }
 }
 
@@ -223,18 +226,18 @@ const handleSourceChange = () => {
 
 const loadTemplate = () => {
   form.itemsJson = JSON.stringify([
-    { title: i18n.global.t('退款流程'), content: i18n.global.t('用户可在订单页面提交退款申请,审核通过后 3-5 个工作日原路退回。'), category: '售后', tags: ['退款', '售后'] },
-    { title: i18n.global.t('保修政策'), content: i18n.global.t('产品自购买之日起 12 个月内提供免费保修服务。'), category: '售后', tags: ['保修'] }
+    { title: i18n.global.t(t('auto.ExternalImport.37.1a1063')), content: i18n.global.t(t('auto.ExternalImport.38.48b1d8')), category: t('auto.ExternalImport.39.59bd68'), tags: [t('auto.ExternalImport.40.44c198'), t('auto.ExternalImport.39.59bd68')] },
+    { title: i18n.global.t(t('auto.ExternalImport.41.85bead')), content: i18n.global.t(t('auto.ExternalImport.42.8e40c9')), category: t('auto.ExternalImport.39.59bd68'), tags: [t('auto.ExternalImport.43.b909d2')] }
   ], null, 2)
 }
 
 const handleImport = async () => {
   if (!canSubmit.value) {
-    ElMessage.warning(i18n.global.t('请填写完整信息'))
+    ElMessage.warning(i18n.global.t(t('auto.ExternalImport.44.5b5301')))
     return
   }
   if (!apiToken.value) {
-    ElMessage.warning(i18n.global.t('请填写 API Token'))
+    ElMessage.warning(i18n.global.t(t('auto.ExternalImport.45.188b02')))
     return
   }
   let items
@@ -266,11 +269,11 @@ const handleImport = async () => {
     const res = await knowledgeMerchantAPI.externalImport(payload, apiToken.value)
     if (res) {
       lastResponse.value = res
-      ElMessage.success(res.async ? '任务已提交,异步处理中' : '导入完成')
+      ElMessage.success(res.async ? t('auto.ExternalImport.46.52c403') : t('auto.ExternalImport.47.8edcee'))
       loadJobs()
     }
   } catch (e) {
-    ElMessage.error('提交失败: ' + (e.message || ''))
+    ElMessage.error(t('auto.ExternalImport.48.931ce4') + (e.message || ''))
   } finally {
     importing.value = false
   }
@@ -286,14 +289,14 @@ const loadJobs = async () => {
     })
     jobs.value = res?.items || []
   } catch (e) {
-    console.error('加载任务失败:', e)
+    console.error(t('auto.ExternalImport.49.7fb38b'), e)
   } finally {
     jobsLoading.value = false
   }
 }
 
 const statusType = (s) => ({ pending: 'info', running: 'warning', completed: 'success', failed: 'danger' }[s] || '')
-const statusLabel = (s) => ({ pending: '等待中', running: '处理中', completed: '已完成', failed: '失败' }[s] || s)
+const statusLabel = (s) => ({ pending: t('auto.ExternalImport.50.65dd9e'), running: t('auto.ExternalImport.51.5d459d'), completed: t('auto.ExternalImport.52.fad522'), failed: t('auto.ExternalImport.15.acd5cb') }[s] || s)
 const formatDate = (d) => d ? new Date(d).toLocaleString('zh-CN') : '-'
 
 onMounted(async () => {

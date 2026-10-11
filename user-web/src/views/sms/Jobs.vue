@@ -10,30 +10,30 @@
       
       <el-table :data="jobList" style="width: 100%" v-loading="loading">
         <el-table-column prop="id" label="ID" width="80" />
-        <el-table-column prop="name" label="任务名称" />
-        <el-table-column prop="total" label="总数" width="100" />
-        <el-table-column prop="sent" label="已发送" width="100" />
-        <el-table-column prop="failed" label="失败数" width="100" />
-        <el-table-column prop="status" label="状态" width="100">
+        <el-table-column prop="name" :label="$t('auto.Jobs.1.78caf7')" />
+        <el-table-column prop="total" :label="$t('auto.Jobs.2.9ed7d3')" width="100" />
+        <el-table-column prop="sent" :label="$t('auto.Jobs.3.93d159')" width="100" />
+        <el-table-column prop="failed" :label="$t('auto.Jobs.4.249f7b')" width="100" />
+        <el-table-column prop="status" :label="$t('auto.Jobs.5.3fea7c')" width="100">
           <template #default="scope">
             <el-tag :type="getStatusType(scope.row.status)">
               {{ getStatusText(scope.row.status) }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="scheduleTime" label="计划发送时间" width="180">
+        <el-table-column prop="scheduleTime" :label="$t('auto.Jobs.6.f0c9d2')" width="180">
           <template #default="scope">
             {{ scope.row.scheduleTime || '-' }}
           </template>
         </el-table-column>
-        <el-table-column prop="createdAt" label="创建时间" width="180" />
-        <el-table-column label="操作" width="250">
+        <el-table-column prop="createdAt" :label="$t('auto.Jobs.7.eca37c')" width="180" />
+        <el-table-column :label="$t('auto.Jobs.8.2b6bc0')" width="250">
           <template #default="scope">
-            <el-button size="small" @click="handleView(scope.row)">查看</el-button>
-            <el-button size="small" type="warning" @click="handlePause(scope.row)" v-if="scope.row.status === 'running'">暂停</el-button>
-            <el-button size="small" type="success" @click="handleResume(scope.row)" v-if="scope.row.status === 'paused'">继续</el-button>
-            <el-button size="small" type="danger" @click="handleStop(scope.row)" v-if="scope.row.status === 'running' || scope.row.status === 'paused'">停止</el-button>
-            <el-button size="small" type="danger" @click="handleDelete(scope.row)" v-if="scope.row.status === 'completed' || scope.row.status === 'failed'">删除</el-button>
+            <el-button size="small" @click="handleView(scope.row)">{{ $t('auto.Jobs.24.607e7a') }}</el-button>
+            <el-button size="small" type="warning" @click="handlePause(scope.row)" v-if="scope.row.status === 'running'">{{ $t('auto.Jobs.25.8d63ef') }}</el-button>
+            <el-button size="small" type="success" @click="handleResume(scope.row)" v-if="scope.row.status === 'paused'">{{ $t('auto.Jobs.26.27ca56') }}</el-button>
+            <el-button size="small" type="danger" @click="handleStop(scope.row)" v-if="scope.row.status === 'running' || scope.row.status === 'paused'">{{ $t('auto.Jobs.27.095e93') }}</el-button>
+            <el-button size="small" type="danger" @click="handleDelete(scope.row)" v-if="scope.row.status === 'completed' || scope.row.status === 'failed'">{{ $t('auto.Jobs.28.2f4aad') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -52,14 +52,14 @@
     </el-card>
 
     
-    <el-dialog v-model="dialogVisible" title="创建任务" width="600px" :before-close="handleDialogClose">
+    <el-dialog v-model="dialogVisible" :title="$t('auto.Jobs.9.6ef95f')" width="600px" :before-close="handleDialogClose">
       <el-form :model="formData" label-width="100px" :rules="rules" ref="formRef">
-        <el-form-item label="任务名称" prop="name">
-          <el-input v-model="formData.name" placeholder="请输入任务名称" maxlength="100" show-word-limit />
+        <el-form-item :label="$t('auto.Jobs.1.78caf7')" prop="name">
+          <el-input v-model="formData.name" :placeholder="$t('auto.Jobs.10.64615c')" maxlength="100" show-word-limit />
         </el-form-item>
         
-        <el-form-item label="选择草稿" prop="draftId">
-          <el-select v-model="formData.draftId" placeholder="请选择草稿">
+        <el-form-item :label="$t('auto.Jobs.11.2b1806')" prop="draftId">
+          <el-select v-model="formData.draftId" :placeholder="$t('auto.Jobs.12.03b81b')">
             <el-option
               v-for="draft in draftOptions"
               :key="draft.id"
@@ -69,20 +69,20 @@
           </el-select>
         </el-form-item>
         
-        <el-form-item label="内容预览" v-if="selectedDraft">
+        <el-form-item :label="$t('auto.Jobs.13.d93365')" v-if="selectedDraft">
           <div class="content-preview">{{ selectedDraft.content }}</div>
         </el-form-item>
         
-        <el-form-item label="接收人群" prop="phoneList">
+        <el-form-item :label="$t('auto.Jobs.14.8290e9')" prop="phoneList">
           <div class="phone-input-section">
             <el-input
               v-model="tempPhone"
-              placeholder="请输入手机号"
+              :placeholder="$t('auto.Jobs.15.6e4f4b')"
               maxlength="11"
               @keyup.enter="addPhone"
             >
               <template #append>
-                <el-button @click="addPhone">添加</el-button>
+                <el-button @click="addPhone">{{ $t('auto.Jobs.29.b58c75') }}</el-button>
               </template>
             </el-input>
           </div>
@@ -104,27 +104,27 @@
               type="file"
               accept=".csv,.txt"
               style="display: none"
-              aria-label="选择号码文件"
+              :aria-label="$t('auto.Jobs.16.77f431')"
               @change="handleFileChange"
             />
             <!-- 链接态按钮要用独立的 link prop（见 components/AgentBindingDialog.vue:44 等既有写法），
                  type 的合法值是 default/primary/success/warning/info/danger/text/空串，不含 link；
                  写 type="link" 会触发 prop 校验告警并回落到 default，链接外观失效。 -->
-            <el-button link size="small" @click="handleBatchUpload">批量上传</el-button>
-            <span class="tips-text">或从线索库选择</span>
+            <el-button link size="small" @click="handleBatchUpload">{{ $t('auto.Jobs.30.c3202e') }}</el-button>
+            <span class="tips-text">{{ $t('auto.Jobs.31.21fe0c') }}</span>
           </div>
         </el-form-item>
         
-        <el-form-item label="发送方式">
-          <el-radio v-model="formData.sendType" label="immediate">立即发送</el-radio>
-          <el-radio v-model="formData.sendType" label="schedule">定时发送</el-radio>
+        <el-form-item :label="$t('auto.Jobs.17.6aa351')">
+          <el-radio v-model="formData.sendType" label="immediate">{{ $t('auto.Jobs.32.1176c5') }}</el-radio>
+          <el-radio v-model="formData.sendType" label="schedule">{{ $t('auto.Jobs.33.74e5c0') }}</el-radio>
         </el-form-item>
         
-        <el-form-item label="定时时间" v-if="formData.sendType === 'schedule'" prop="scheduleTime">
+        <el-form-item :label="$t('auto.Jobs.18.4d9f36')" v-if="formData.sendType === 'schedule'" prop="scheduleTime">
           <el-date-picker
             v-model="formData.scheduleTime"
             type="datetime"
-            placeholder="选择发送时间"
+            :placeholder="$t('auto.Jobs.19.828c82')"
             value-format="YYYY-MM-DD HH:mm:ss"
             :disabled-date="disabledBeforeToday"
           />
@@ -133,41 +133,41 @@
       
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="handleDialogClose">取消</el-button>
-          <el-button type="primary" @click="handleSubmit">确定</el-button>
+          <el-button @click="handleDialogClose">{{ $t('auto.Jobs.34.625fb2') }}</el-button>
+          <el-button type="primary" @click="handleSubmit">{{ $t('auto.Jobs.35.38cf16') }}</el-button>
         </span>
       </template>
     </el-dialog>
 
     
-    <el-dialog v-model="detailVisible" title="任务详情" width="700px">
+    <el-dialog v-model="detailVisible" :title="$t('auto.Jobs.20.4a98bf')" width="700px">
       <el-descriptions :column="1" border>
-        <el-descriptions-item label="任务名称">{{ currentJob?.name }}</el-descriptions-item>
-        <el-descriptions-item label="总数">{{ currentJob?.total }}</el-descriptions-item>
-        <el-descriptions-item label="已发送">{{ currentJob?.sent }}</el-descriptions-item>
-        <el-descriptions-item label="失败数">{{ currentJob?.failed }}</el-descriptions-item>
-        <el-descriptions-item label="状态">
+        <el-descriptions-item :label="$t('auto.Jobs.1.78caf7')">{{ currentJob?.name }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.Jobs.2.9ed7d3')">{{ currentJob?.total }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.Jobs.3.93d159')">{{ currentJob?.sent }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.Jobs.4.249f7b')">{{ currentJob?.failed }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.Jobs.5.3fea7c')">
           <el-tag :type="getStatusType(currentJob?.status)">
             {{ getStatusText(currentJob?.status) }}
           </el-tag>
         </el-descriptions-item>
-        <el-descriptions-item label="计划发送时间">{{ currentJob?.scheduleTime || '-' }}</el-descriptions-item>
-        <el-descriptions-item label="创建时间">{{ currentJob?.createdAt }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.Jobs.6.f0c9d2')">{{ currentJob?.scheduleTime || '-' }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.Jobs.7.eca37c')">{{ currentJob?.createdAt }}</el-descriptions-item>
       </el-descriptions>
       
       <div class="job-detail-list" v-if="jobDetails.length > 0">
-        <h3>发送记录</h3>
+        <h3>{{ $t('auto.Jobs.36.4865e7') }}</h3>
         <el-table :data="jobDetails" style="width: 100%">
-          <el-table-column prop="phone" label="手机号" width="150" />
-          <el-table-column prop="status" label="状态" width="100">
+          <el-table-column prop="phone" :label="$t('auto.Jobs.21.8098e2')" width="150" />
+          <el-table-column prop="status" :label="$t('auto.Jobs.5.3fea7c')" width="100">
             <template #default="scope">
               <el-tag :type="getStatusType(scope.row.status)">
                 {{ getStatusText(scope.row.status) }}
               </el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="sendTime" label="发送时间" width="180" />
-          <el-table-column prop="errorMsg" label="错误信息" show-overflow-tooltip />
+          <el-table-column prop="sendTime" :label="$t('auto.Jobs.22.63b34d')" width="180" />
+          <el-table-column prop="errorMsg" :label="$t('auto.Jobs.23.4604d5')" show-overflow-tooltip />
         </el-table>
       </div>
     </el-dialog>
@@ -178,11 +178,14 @@
 import i18n from '@/i18n'
 
 import { ref, reactive, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import smsApi from '@/api/sms'
 import { getOrderStatusLabel, getOrderStatusTagType } from '@/constants/orderStatus';
 import DOMPurify from 'dompurify'
 import { toList } from '@/utils/list'
+
+const { t } = useI18n()
 
 const jobList = ref([]);
 const currentPage = ref(1)
@@ -213,18 +216,18 @@ const tempPhone = ref('');
 
 const rules = {
   name: [
-    { required: true, message: i18n.global.t('请输入任务名称'), trigger: 'blur' },
-    { min: 1, max: 100, message: i18n.global.t('任务名称长度在 1 到 100 个字符'), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.Jobs.10.64615c')), trigger: 'blur' },
+    { min: 1, max: 100, message: i18n.global.t(t('auto.Jobs.37.01ecdf')), trigger: 'blur' }
   ],
   draftId: [
-    { required: true, message: i18n.global.t('请选择草稿'), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.Jobs.12.03b81b')), trigger: 'blur' }
   ],
   phoneList: [
-    { required: true, message: i18n.global.t('请至少添加一个手机号'), trigger: 'blur' },
-    { min: 1, message: i18n.global.t('请至少添加一个手机号'), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.Jobs.38.f31966')), trigger: 'blur' },
+    { min: 1, message: i18n.global.t(t('auto.Jobs.38.f31966')), trigger: 'blur' }
   ],
   scheduleTime: [
-    { required: true, message: i18n.global.t('请选择定时发送时间'), trigger: 'change' }
+    { required: true, message: i18n.global.t(t('auto.Jobs.39.88824a')), trigger: 'change' }
   ]
 };
 
@@ -241,13 +244,13 @@ const getStatusType = (status) => {
 
 const getStatusText = (status) => {
   const statusMap = {
-    pending: '待执行',
-    running: '执行中',
-    paused: '已暂停',
-    completed: '已完成',
-    failed: '执行失败'
+    pending: t('auto.Jobs.40.6139a6'),
+    running: t('auto.Jobs.41.46e386'),
+    paused: t('auto.Jobs.42.a2d930'),
+    completed: t('auto.Jobs.43.fad522'),
+    failed: t('auto.Jobs.44.1c83d7')
   }
-  return statusMap[status] || '未知'
+  return statusMap[status] || t('auto.Jobs.45.1622dc')
 };
 
 const disabledBeforeToday = (time) => {
@@ -259,7 +262,7 @@ const getDraftOptions = async () => {
     const response = await smsApi.getDraftList({ page: 1, limit: 100 })
     draftOptions.value = response.list || [];
   } catch (error) {
-    ElMessage.error(i18n.global.t('获取草稿列表失败'))
+    ElMessage.error(i18n.global.t(t('auto.Jobs.46.6adbf4')))
   }
 };
 
@@ -274,7 +277,7 @@ const getJobList = async () => {
     jobList.value = response.list || [];
     total.value = response.total || 0
   } catch (error) {
-    ElMessage.error(i18n.global.t('获取任务列表失败'))
+    ElMessage.error(i18n.global.t(t('auto.Jobs.47.f71ace')))
   } finally {
     loading.value = false
   }
@@ -295,17 +298,17 @@ const resetForm = () => {
 const addPhone = () => {
   const phone = tempPhone.value.trim()
   if (!phone) {
-    ElMessage.warning(i18n.global.t('请输入手机号'))
+    ElMessage.warning(i18n.global.t(t('auto.Jobs.15.6e4f4b')))
     return
   }
   
   if (!/^1[3-9]\d{9}$/.test(phone)) {
-    ElMessage.warning(i18n.global.t('请输入正确的手机号'))
+    ElMessage.warning(i18n.global.t(t('auto.Jobs.48.a32ab5')))
     return
   }
   
   if (formData.phoneList.includes(phone)) {
-    ElMessage.warning(i18n.global.t('手机号已存在'))
+    ElMessage.warning(i18n.global.t(t('auto.Jobs.49.d94262')))
     return
   }
   
@@ -370,11 +373,11 @@ const handleFileChange = (event) => {
     }
 
     if (messages.length > 0) {
-      ElMessageBox.alert(DOMPurify.sanitize(messages.join('<br>')), '批量导入结果', {
+      ElMessageBox.alert(DOMPurify.sanitize(messages.join('<br>')), t('auto.Jobs.50.658043'), {
         dangerouslyUseHTMLString: true
       })
     } else {
-      ElMessage.warning(i18n.global.t('文件中未找到有效手机号'))
+      ElMessage.warning(i18n.global.t(t('auto.Jobs.51.220948')))
     }
   }
   reader.readAsText(file)
@@ -409,13 +412,13 @@ const handleSubmit = async () => {
     }
     
     await smsApi.createJob(jobData)
-    ElMessage.success(i18n.global.t('任务创建成功'))
+    ElMessage.success(i18n.global.t(t('auto.Jobs.52.3799bd')))
     
     dialogVisible.value = false
     getJobList()
   } catch (error) {
     if (error !== false) {
-      ElMessage.error('任务创建失败：' + (error.message || '未知错误'))
+      ElMessage.error(t('auto.Jobs.53.a05f79') + (error.message || t('auto.Jobs.54.974e74')))
     }
   }
 };
@@ -433,60 +436,60 @@ const handleView = async (row) => {
     }
     detailVisible.value = true
   } catch (error) {
-    ElMessage.error(i18n.global.t('获取任务详情失败'))
+    ElMessage.error(i18n.global.t(t('auto.Jobs.55.b1e725')))
   }
 };
 
 const handlePause = async (row) => {
   try {
     await smsApi.pauseJob(row.id)
-    ElMessage.success(i18n.global.t('任务暂停成功'))
+    ElMessage.success(i18n.global.t(t('auto.Jobs.56.60833e')))
     getJobList()
   } catch (error) {
-    ElMessage.error(i18n.global.t('任务暂停失败'))
+    ElMessage.error(i18n.global.t(t('auto.Jobs.57.fcc066')))
   }
 };
 
 const handleResume = async (row) => {
   try {
     await smsApi.resumeJob(row.id)
-    ElMessage.success(i18n.global.t('任务继续成功'))
+    ElMessage.success(i18n.global.t(t('auto.Jobs.58.8dbf03')))
     getJobList()
   } catch (error) {
-    ElMessage.error(i18n.global.t('任务继续失败'))
+    ElMessage.error(i18n.global.t(t('auto.Jobs.59.d8cb5a')))
   }
 };
 
 const handleStop = async (row) => {
   try {
-    await ElMessageBox.confirm('确定要停止该任务吗？', '确认停止', {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
+    await ElMessageBox.confirm(t('auto.Jobs.60.344da8'), t('auto.Jobs.61.fb79c8'), {
+      confirmButtonText: t('auto.Jobs.35.38cf16'),
+      cancelButtonText: t('auto.Jobs.34.625fb2'),
       type: 'warning'
     })
     await smsApi.stopJob(row.id)
-    ElMessage.success(i18n.global.t('任务停止成功'))
+    ElMessage.success(i18n.global.t(t('auto.Jobs.62.b20399')))
     getJobList()
   } catch (error) {
     if (error !== 'cancel') {
-      ElMessage.error(i18n.global.t('任务停止失败'))
+      ElMessage.error(i18n.global.t(t('auto.Jobs.63.ad89cb')))
     }
   }
 };
 
 const handleDelete = async (row) => {
   try {
-    await ElMessageBox.confirm('确定要删除该任务吗？', '确认删除', {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
+    await ElMessageBox.confirm(t('auto.Jobs.64.0c217b'), t('auto.Jobs.65.631cd2'), {
+      confirmButtonText: t('auto.Jobs.35.38cf16'),
+      cancelButtonText: t('auto.Jobs.34.625fb2'),
       type: 'warning'
     })
     await smsApi.deleteJob(row.id)
-    ElMessage.success(i18n.global.t('任务删除成功'))
+    ElMessage.success(i18n.global.t(t('auto.Jobs.66.4aa7ab')))
     getJobList()
   } catch (error) {
     if (error !== 'cancel') {
-      ElMessage.error(i18n.global.t('任务删除失败'))
+      ElMessage.error(i18n.global.t(t('auto.Jobs.67.0a70cd')))
     }
   }
 };

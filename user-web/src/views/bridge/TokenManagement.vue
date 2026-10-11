@@ -3,7 +3,7 @@
     <el-card>
       <template #header>
         <div class="flex items-center justify-between">
-          <span>桥接通道凭证</span>
+          <span>{{ $t('auto.TokenManagement.5.ae69bb') }}</span>
           <el-tag :type="status.main_configured ? 'success' : 'danger'" size="small">
             {{ status.main_configured ? `已配置(${status.source === 'db' ? '运行时' : '环境变量'})` : '未配置(通道拒绝访问)' }}
           </el-tag>
@@ -11,22 +11,22 @@
       </template>
 
       <el-alert v-if="status.prev_configured" type="warning" :closable="false" show-icon class="mb-3"
-        title="灰度窗口中：旧凭据仍可用，请尽快更新各浏览器扩展后再次轮换以移除 PREV" />
+        :title="$t('auto.TokenManagement.1.736e03')" />
 
       <el-alert type="info" :closable="false" show-icon class="mb-3"
-        title="扩展端在设置页粘贴 token，请求头携带 X-Bridge-Token；SSE 场景可用 ?bridge_token= 透传" />
+        :title="$t('auto.TokenManagement.2.d2a603')" />
 
       <el-form label-width="90px">
-        <el-form-item label="新凭证">
-          <el-input v-model="newToken" readonly placeholder="点击「生成新凭证」后此处显示一次明文">
+        <el-form-item :label="$t('auto.TokenManagement.3.8f9448')">
+          <el-input v-model="newToken" readonly :placeholder="$t('auto.TokenManagement.4.78cfcb')">
             <template #append>
-              <el-button @click="copyToken" :disabled="!newToken">复制</el-button>
+              <el-button @click="copyToken" :disabled="!newToken">{{ $t('auto.TokenManagement.6.79d3ab') }}</el-button>
             </template>
           </el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" :loading="resetting" @click="onReset">生成新凭证(轮换)</el-button>
-          <span class="ml-3 text-xs text-gray-400">轮换后旧凭据进入灰度窗口仍可用；此明文仅显示一次</span>
+          <el-button type="primary" :loading="resetting" @click="onReset">{{ $t('auto.TokenManagement.7.456ef4') }}</el-button>
+          <span class="ml-3 text-xs text-gray-400">{{ $t('auto.TokenManagement.8.fcf89e') }}</span>
         </el-form-item>
       </el-form>
     </el-card>
@@ -35,8 +35,11 @@
 
 <script setup>
 import { onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import { getBridgeTokenStatus, resetBridgeToken } from '@/api/bridgeToken.js'
+
+const { t } = useI18n()
 
 const status = ref({})
 const newToken = ref('')
@@ -53,7 +56,7 @@ const onReset = async () => {
   try {
     const res = await resetBridgeToken()
     newToken.value = res?.token || ''
-    ElMessage.success('已轮换；旧凭据进入灰度窗口')
+    ElMessage.success(t('auto.TokenManagement.9.f2495b'))
     await loadStatus()
   } finally {
     resetting.value = false
@@ -62,7 +65,7 @@ const onReset = async () => {
 
 const copyToken = async () => {
   await navigator.clipboard.writeText(newToken.value)
-  ElMessage.success('已复制')
+  ElMessage.success(t('auto.TokenManagement.10.52e6ab'))
 }
 
 onMounted(loadStatus)

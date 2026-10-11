@@ -3,25 +3,25 @@
     <el-row :gutter="16" class="stats-row">
       <el-col :span="6">
         <el-card class="stat-card">
-          <div class="stat-label">总备份数</div>
+          <div class="stat-label">{{ $t('auto.Enhanced.15.5355b3') }}</div>
           <div class="stat-value">{{ stats.total }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="stat-card success">
-          <div class="stat-label">最近成功</div>
+          <div class="stat-label">{{ $t('auto.Enhanced.16.b2f3fe') }}</div>
           <div class="stat-value">{{ stats.lastSuccess }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="stat-card warning">
-          <div class="stat-label">总大小</div>
+          <div class="stat-label">{{ $t('auto.Enhanced.17.ea9ecb') }}</div>
           <div class="stat-value">{{ formatSize(stats.totalSize) }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="stat-card primary">
-          <div class="stat-label">下次计划</div>
+          <div class="stat-label">{{ $t('auto.Enhanced.18.9fe679') }}</div>
           <div class="stat-value" style="font-size: 16px">{{ stats.nextRun }}</div>
         </el-card>
       </el-col>
@@ -30,28 +30,28 @@
     <el-card>
       <template #header>
         <div class="card-header">
-          <span>备份策略（USR-SY-02）</span>
-          <el-button type="primary" @click="saveStrategy">保存策略</el-button>
+          <span>{{ $t('auto.Enhanced.19.fe9575') }}</span>
+          <el-button type="primary" @click="saveStrategy">{{ $t('auto.Enhanced.20.2d3f52') }}</el-button>
         </div>
       </template>
       <el-form :model="strategy" label-width="120px">
-        <el-form-item label="自动备份">
+        <el-form-item :label="$t('auto.Enhanced.1.590e5b')">
           <el-switch v-model="strategy.enabled" />
         </el-form-item>
-        <el-form-item label="每日">
+        <el-form-item :label="$t('auto.Enhanced.2.ce2210')">
           <el-time-picker v-model="strategy.daily" placeholder="02:00" />
         </el-form-item>
-        <el-form-item label="每周">
+        <el-form-item :label="$t('auto.Enhanced.3.09b03b')">
           <el-select v-model="strategy.weeklyDay" style="width: 120px">
-            <el-option label="周一" :value="1" />
-            <el-option label="周日" :value="0" />
+            <el-option :label="$t('auto.Enhanced.4.1603b0')" :value="1" />
+            <el-option :label="$t('auto.Enhanced.5.562d74')" :value="0" />
           </el-select>
           <el-time-picker v-model="strategy.weeklyTime" placeholder="03:00" style="margin-left: 8px" />
         </el-form-item>
-        <el-form-item label="保留天数">
+        <el-form-item :label="$t('auto.Enhanced.6.824607')">
           <el-input-number v-model="strategy.retentionDays" :min="7" :max="365" />
         </el-form-item>
-        <el-form-item label="校验和">
+        <el-form-item :label="$t('auto.Enhanced.7.ff59a8')">
           <el-switch v-model="strategy.checksum" />
         </el-form-item>
       </el-form>
@@ -60,53 +60,56 @@
     <el-card class="restore-card">
       <template #header>
         <div class="card-header">
-          <span>备份列表</span>
-          <el-button type="danger" :loading="backing" @click="createBackup">立即备份</el-button>
+          <span>{{ $t('auto.Enhanced.21.9014d6') }}</span>
+          <el-button type="danger" :loading="backing" @click="createBackup">{{ $t('auto.Enhanced.22.68c4a9') }}</el-button>
         </div>
       </template>
       <el-table :data="backups" v-loading="loading">
         <el-table-column prop="id" label="ID" width="100" />
-        <el-table-column prop="createdAt" label="备份时间" width="170" />
-        <el-table-column prop="size" label="大小" width="100">
+        <el-table-column prop="createdAt" :label="$t('auto.Enhanced.8.ae0fd9')" width="170" />
+        <el-table-column prop="size" :label="$t('auto.Enhanced.9.58f966')" width="100">
           <template #default="{ row }">{{ formatSize(row.size) }}</template>
         </el-table-column>
         <el-table-column prop="checksum" label="SHA256" width="160" />
-        <el-table-column prop="status" label="状态" width="100">
+        <el-table-column prop="status" :label="$t('auto.Enhanced.10.3fea7c')" width="100">
           <template #default="{ row }">
             <el-tag :type="row.status === 'ok' ? 'success' : 'danger'">{{ row.status }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="200" fixed="right">
+        <el-table-column :label="$t('auto.Enhanced.11.2b6bc0')" width="200" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" @click="showPreview(row)">预览影响</el-button>
-            <el-button link type="warning" @click="restore(row)">恢复</el-button>
-            <el-button link type="danger" @click="remove(row)">删除</el-button>
+            <el-button link type="primary" @click="showPreview(row)">{{ $t('auto.Enhanced.23.9caf9d') }}</el-button>
+            <el-button link type="warning" @click="restore(row)">{{ $t('auto.Enhanced.24.c7db6d') }}</el-button>
+            <el-button link type="danger" @click="remove(row)">{{ $t('auto.Enhanced.25.2f4aad') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
     </el-card>
 
-    <el-dialog v-model="previewVisible" title="恢复影响预览" width="600px">
+    <el-dialog v-model="previewVisible" :title="$t('auto.Enhanced.12.8552e7')" width="600px">
       <el-alert type="warning" :closable="false">
         即将恢复此备份：会影响以下数据（行数估算）
       </el-alert>
       <el-table :data="previewData">
-        <el-table-column prop="table" label="表名" />
-        <el-table-column prop="rows" label="行数估算" width="160" />
+        <el-table-column prop="table" :label="$t('auto.Enhanced.13.7ecd01')" />
+        <el-table-column prop="rows" :label="$t('auto.Enhanced.14.f5d74e')" width="160" />
       </el-table>
       <template #footer>
-        <el-button @click="previewVisible = false">取消</el-button>
-        <el-button type="danger" @click="confirmRestore">确认恢复</el-button>
+        <el-button @click="previewVisible = false">{{ $t('auto.Enhanced.26.625fb2') }}</el-button>
+        <el-button type="danger" @click="confirmRestore">{{ $t('auto.Enhanced.27.841e5e') }}</el-button>
       </template>
     </el-dialog>
   </div>
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue';
+import { ref, reactive, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n';
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { formatFileSize } from '@/utils/format'
 import { http } from '@/utils/request'
+
+const { t } = useI18n()
 
 const stats = ref({ total: 0, lastSuccess: '-', totalSize: 0, nextRun: '-' })
 const strategy = reactive({
@@ -153,14 +156,14 @@ async function saveStrategy() {
     retention_days: strategy.retentionDays,
     checksum: strategy.checksum
   })
-  ElMessage.success('策略已保存')
+  ElMessage.success(t('auto.Enhanced.28.2864c2'))
 }
 
 async function createBackup() {
   backing.value = true
   try {
     await http.post('/api/backup/create', {})
-    ElMessage.success('备份中...')
+    ElMessage.success(t('auto.Enhanced.29.3eb08b'))
     setTimeout(load, 3000)
   } finally {
     backing.value = false
@@ -176,13 +179,13 @@ async function showPreview(row) {
 async function confirmRestore() {
   if (!_selectedBackup) return
   try {
-    await ElMessageBox.confirm('确认恢复？此操作不可逆', '危险操作', { type: 'error' })
+    await ElMessageBox.confirm(t('auto.Enhanced.30.7a1fee'), t('auto.Enhanced.31.653fc4'), { type: 'error' })
   } catch (e) {
     if (e === 'cancel' || e === 'close') return
     throw e
   }
   await http.post(`/api/backup/${_selectedBackup.id}/restore`, {})
-  ElMessage.success('恢复指令已下发')
+  ElMessage.success(t('auto.Enhanced.32.0e7fa8'))
   previewVisible.value = false
 }
 
@@ -193,13 +196,13 @@ function restore(row) {
 
 async function remove(row) {
   try {
-    await ElMessageBox.confirm(`确认删除备份 ${row.id}？`, '删除确认', { type: 'warning' })
+    await ElMessageBox.confirm(`确认删除备份 ${row.id}？`, t('auto.Enhanced.33.50eaf9'), { type: 'warning' })
   } catch (e) {
     if (e === 'cancel' || e === 'close') return
     throw e
   }
   await http.delete(`/api/backup/${row.id}`)
-  ElMessage.success('已删除')
+  ElMessage.success(t('auto.Enhanced.34.5cc232'))
   await load()
 }
 

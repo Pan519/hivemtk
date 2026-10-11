@@ -54,70 +54,70 @@
 
     <el-tabs v-model="activeTab" @tab-change="onTabChange">
       
-      <el-tab-pane :label="$t('备份记录')" name="backup">
+      <el-tab-pane ::label="$t('auto.List.1.f52737')" name="backup">
         <el-card>
           <div class="filter-bar">
-            <el-input v-model="searchKeyword" :placeholder="$t('搜索备份名')" clearable style="width: 220px" />
-            <el-select v-model="filterType" :placeholder="$t('备份类型')" clearable style="width: 150px">
-              <el-option :label="$t('全量备份')" value="full" />
-              <el-option :label="$t('增量备份')" value="incremental" />
-              <el-option :label="$t('差异备份')" value="differential" />
+            <el-input v-model="searchKeyword" ::placeholder="$t('auto.List.2.f6cd07')" clearable style="width: 220px" />
+            <el-select v-model="filterType" ::placeholder="$t('auto.List.3.46041e')" clearable style="width: 150px">
+              <el-option ::label="$t('auto.List.4.ea46a3')" value="full" />
+              <el-option ::label="$t('auto.List.5.d4b04d')" value="incremental" />
+              <el-option ::label="$t('auto.List.6.a2d10b')" value="differential" />
             </el-select>
-            <el-select v-model="filterStatus" :placeholder="$t('状态')" clearable style="width: 150px">
-              <el-option :label="$t('待执行')" value="pending" />
-              <el-option :label="$t('进行中')" value="running" />
-              <el-option :label="$t('已完成')" value="completed" />
-              <el-option :label="$t('失败')" value="failed" />
+            <el-select v-model="filterStatus" ::placeholder="$t('auto.List.7.1b8578')" clearable style="width: 150px">
+              <el-option ::label="$t('auto.List.8.3a3efe')" value="pending" />
+              <el-option ::label="$t('auto.List.9.936560')" value="running" />
+              <el-option ::label="$t('auto.List.10.c98dc1')" value="completed" />
+              <el-option ::label="$t('auto.List.11.f8d3ae')" value="failed" />
             </el-select>
           </div>
 
           <el-table :data="filteredBackups" v-loading="loading" stripe>
             <el-table-column prop="id" label="ID" width="80" />
-            <el-table-column prop="backup_name" :label="$t('备份名称')" min-width="200" show-overflow-tooltip />
-            <el-table-column prop="backup_type" :label="$t('类型')" width="120" align="center">
+            <el-table-column prop="backup_name" ::label="$t('auto.List.12.517d97')" min-width="200" show-overflow-tooltip />
+            <el-table-column prop="backup_type" ::label="$t('auto.List.13.a0ee25')" width="120" align="center">
               <template #default="{ row }">
                 <el-tag :type="getTypeTag(row.backup_type)" size="small">
                   {{ getTypeText(row.backup_type) }}
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="status" label="状态" width="120" align="center">
+            <el-table-column prop="status" :label="$t('auto.List.14.3fea7c')" width="120" align="center">
               <template #default="{ row }">
                 <el-tag :type="getStatusType(row.status)" size="small">
                   {{ getStatusText(row.status) }}
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="file_size" label="文件大小" width="120" align="right">
+            <el-table-column prop="file_size" :label="$t('auto.List.15.396b7d')" width="120" align="right">
               <template #default="{ row }">
                 {{ formatSize(row.file_size) }}
               </template>
             </el-table-column>
-            <el-table-column prop="started_at" label="开始时间" min-width="170">
+            <el-table-column prop="started_at" :label="$t('auto.List.16.592c59')" min-width="170">
               <template #default="{ row }">
                 {{ formatTime(row.started_at) }}
               </template>
             </el-table-column>
-            <el-table-column prop="completed_at" label="完成时间" min-width="170">
+            <el-table-column prop="completed_at" :label="$t('auto.List.17.7cbadb')" min-width="170">
               <template #default="{ row }">
                 {{ formatTime(row.completed_at) }}
               </template>
             </el-table-column>
-            <el-table-column prop="error_message" label="错误信息" min-width="180" show-overflow-tooltip />
-            <el-table-column label="操作" width="220" fixed="right">
+            <el-table-column prop="error_message" :label="$t('auto.List.18.4604d5')" min-width="180" show-overflow-tooltip />
+            <el-table-column :label="$t('auto.List.19.2b6bc0')" width="220" fixed="right">
               <template #default="{ row }">
-                <el-button link type="primary" @click="viewDetail(row)">详情</el-button>
+                <el-button link type="primary" @click="viewDetail(row)">{{ $t('auto.List.40.f26225') }}</el-button>
                 <el-button
                   link
                   type="success"
                   :disabled="row.status !== 'completed'"
                   @click="openRestoreDialog(row)"
-                >恢复</el-button>
-                <el-button link type="danger" @click="doDeleteBackup(row)">删除</el-button>
+                >{{ $t('auto.List.41.c7db6d') }}</el-button>
+                <el-button link type="danger" @click="doDeleteBackup(row)">{{ $t('auto.List.42.2f4aad') }}</el-button>
               </template>
             </el-table-column>
             <template #empty>
-              <el-empty description="暂无备份记录" />
+              <el-empty :description="$t('auto.List.20.1f00e1')" />
             </template>
           </el-table>
 
@@ -135,42 +135,42 @@
       </el-tab-pane>
 
       
-      <el-tab-pane label="恢复记录" name="restore">
+      <el-tab-pane :label="$t('auto.List.21.078ebd')" name="restore">
         <el-card>
           <div class="filter-bar">
-            <el-input v-model="restoreKeyword" placeholder="搜索备份名" clearable style="width: 220px" />
-            <el-select v-model="restoreStatus" placeholder="状态" clearable style="width: 150px">
-              <el-option label="待执行" value="pending" />
-              <el-option label="进行中" value="running" />
-              <el-option label="已完成" value="completed" />
-              <el-option label="失败" value="failed" />
+            <el-input v-model="restoreKeyword" :placeholder="$t('auto.List.22.8d67fe')" clearable style="width: 220px" />
+            <el-select v-model="restoreStatus" :placeholder="$t('auto.List.14.3fea7c')" clearable style="width: 150px">
+              <el-option :label="$t('auto.List.23.6139a6')" value="pending" />
+              <el-option :label="$t('auto.List.24.fb852f')" value="running" />
+              <el-option :label="$t('auto.List.25.fad522')" value="completed" />
+              <el-option :label="$t('auto.List.26.acd5cb')" value="failed" />
             </el-select>
           </div>
 
           <el-table :data="filteredRestores" v-loading="restoreLoading" stripe>
             <el-table-column prop="id" label="ID" width="80" />
-            <el-table-column prop="backup_id" label="备份ID" width="100" />
-            <el-table-column prop="backup_name" label="备份名称" min-width="220" show-overflow-tooltip />
-            <el-table-column prop="status" label="状态" width="120" align="center">
+            <el-table-column prop="backup_id" :label="$t('auto.List.27.d10569')" width="100" />
+            <el-table-column prop="backup_name" :label="$t('auto.List.28.77b9ec')" min-width="220" show-overflow-tooltip />
+            <el-table-column prop="status" :label="$t('auto.List.14.3fea7c')" width="120" align="center">
               <template #default="{ row }">
                 <el-tag :type="getStatusType(row.status)" size="small">
                   {{ getStatusText(row.status) }}
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="restored_at" label="开始时间" min-width="170">
+            <el-table-column prop="restored_at" :label="$t('auto.List.16.592c59')" min-width="170">
               <template #default="{ row }">
                 {{ formatTime(row.restored_at) }}
               </template>
             </el-table-column>
-            <el-table-column prop="error_message" label="错误信息" min-width="220" show-overflow-tooltip />
-            <el-table-column label="操作" width="100" fixed="right">
+            <el-table-column prop="error_message" :label="$t('auto.List.18.4604d5')" min-width="220" show-overflow-tooltip />
+            <el-table-column :label="$t('auto.List.19.2b6bc0')" width="100" fixed="right">
               <template #default="{ row }">
-                <el-button link type="primary" @click="viewRestoreDetail(row)">详情</el-button>
+                <el-button link type="primary" @click="viewRestoreDetail(row)">{{ $t('auto.List.40.f26225') }}</el-button>
               </template>
             </el-table-column>
             <template #empty>
-              <el-empty description="暂无恢复记录" />
+              <el-empty :description="$t('auto.List.29.da0245')" />
             </template>
           </el-table>
 
@@ -189,63 +189,63 @@
     </el-tabs>
 
     
-    <el-dialog v-model="createVisible" title="创建备份" width="520px">
+    <el-dialog v-model="createVisible" :title="$t('auto.List.30.a4006e')" width="520px">
       <el-form :model="createForm" :rules="createRules" ref="createFormRef" label-width="100px">
-        <el-form-item label="备份名称" prop="backup_name">
-          <el-input v-model="createForm.backup_name" placeholder="留空将自动生成" />
+        <el-form-item :label="$t('auto.List.28.77b9ec')" prop="backup_name">
+          <el-input v-model="createForm.backup_name" :placeholder="$t('auto.List.31.1e66d8')" />
         </el-form-item>
-        <el-form-item label="备份类型" prop="backup_type">
+        <el-form-item :label="$t('auto.List.32.8c61c9')" prop="backup_type">
           <el-select v-model="createForm.backup_type" style="width: 100%">
-            <el-option label="全量备份" value="full" />
-            <el-option label="增量备份" value="incremental" />
-            <el-option label="差异备份" value="differential" />
+            <el-option :label="$t('auto.List.33.6d68bd')" value="full" />
+            <el-option :label="$t('auto.List.34.432138')" value="incremental" />
+            <el-option :label="$t('auto.List.35.b23a91')" value="differential" />
           </el-select>
         </el-form-item>
         <el-alert type="info" :closable="false" show-icon>
-          <template #title>备份将在后台异步执行，完成后请在列表中查看状态</template>
+          <template #title>{{ $t('auto.List.43.bcbabc') }}</template>
         </el-alert>
       </el-form>
       <template #footer>
-        <el-button @click="createVisible = false">取消</el-button>
-        <el-button type="primary" :loading="creating" @click="submitCreate">立即备份</el-button>
+        <el-button @click="createVisible = false">{{ $t('auto.List.44.625fb2') }}</el-button>
+        <el-button type="primary" :loading="creating" @click="submitCreate">{{ $t('auto.List.45.68c4a9') }}</el-button>
       </template>
     </el-dialog>
 
     
-    <el-dialog v-model="restoreVisible" title="恢复备份" width="520px">
+    <el-dialog v-model="restoreVisible" :title="$t('auto.List.36.554d49')" width="520px">
       <el-descriptions :column="1" border v-if="restoreTarget">
-        <el-descriptions-item label="备份ID">{{ restoreTarget.id }}</el-descriptions-item>
-        <el-descriptions-item label="备份名称">{{ restoreTarget.backup_name }}</el-descriptions-item>
-        <el-descriptions-item label="备份类型">{{ getTypeText(restoreTarget.backup_type) }}</el-descriptions-item>
-        <el-descriptions-item label="文件大小">{{ formatSize(restoreTarget.file_size) }}</el-descriptions-item>
-        <el-descriptions-item label="完成时间">{{ formatTime(restoreTarget.completed_at) }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.27.d10569')">{{ restoreTarget.id }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.28.77b9ec')">{{ restoreTarget.backup_name }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.32.8c61c9')">{{ getTypeText(restoreTarget.backup_type) }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.15.396b7d')">{{ formatSize(restoreTarget.file_size) }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.17.7cbadb')">{{ formatTime(restoreTarget.completed_at) }}</el-descriptions-item>
       </el-descriptions>
       <el-alert type="warning" :closable="false" show-icon style="margin-top: 12px">
-        <template #title>恢复操作将覆盖当前数据库中的对应数据，请确认无误后再执行</template>
+        <template #title>{{ $t('auto.List.46.6aa245') }}</template>
       </el-alert>
       <template #footer>
-        <el-button @click="restoreVisible = false">取消</el-button>
-        <el-button type="primary" :loading="restoring" @click="submitRestore">确认恢复</el-button>
+        <el-button @click="restoreVisible = false">{{ $t('auto.List.44.625fb2') }}</el-button>
+        <el-button type="primary" :loading="restoring" @click="submitRestore">{{ $t('auto.List.47.841e5e') }}</el-button>
       </template>
     </el-dialog>
 
     
-    <el-dialog v-model="detailVisible" title="备份详情" width="600px">
+    <el-dialog v-model="detailVisible" :title="$t('auto.List.37.4f9230')" width="600px">
       <el-descriptions :column="1" border v-if="detailRecord">
-        <el-descriptions-item label="备份ID">{{ detailRecord.id }}</el-descriptions-item>
-        <el-descriptions-item label="备份名称">{{ detailRecord.backup_name }}</el-descriptions-item>
-        <el-descriptions-item label="备份类型">{{ getTypeText(detailRecord.backup_type) }}</el-descriptions-item>
-        <el-descriptions-item label="状态">
+        <el-descriptions-item :label="$t('auto.List.27.d10569')">{{ detailRecord.id }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.28.77b9ec')">{{ detailRecord.backup_name }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.32.8c61c9')">{{ getTypeText(detailRecord.backup_type) }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.14.3fea7c')">
           <el-tag :type="getStatusType(detailRecord.status)" size="small">
             {{ getStatusText(detailRecord.status) }}
           </el-tag>
         </el-descriptions-item>
-        <el-descriptions-item label="文件路径">{{ detailRecord.file_path || '-' }}</el-descriptions-item>
-        <el-descriptions-item label="文件大小">{{ formatSize(detailRecord.file_size) }}</el-descriptions-item>
-        <el-descriptions-item label="创建人">{{ detailRecord.created_by || '系统' }}</el-descriptions-item>
-        <el-descriptions-item label="开始时间">{{ formatTime(detailRecord.started_at) }}</el-descriptions-item>
-        <el-descriptions-item label="完成时间">{{ formatTime(detailRecord.completed_at) }}</el-descriptions-item>
-        <el-descriptions-item v-if="detailRecord.error_message" label="错误信息">
+        <el-descriptions-item :label="$t('auto.List.38.de6104')">{{ detailRecord.file_path || '-' }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.15.396b7d')">{{ formatSize(detailRecord.file_size) }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.39.95a43e')">{{ detailRecord.created_by || '系统' }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.16.592c59')">{{ formatTime(detailRecord.started_at) }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.17.7cbadb')">{{ formatTime(detailRecord.completed_at) }}</el-descriptions-item>
+        <el-descriptions-item v-if="detailRecord.error_message" :label="$t('auto.List.18.4604d5')">
           <span class="error-text">{{ detailRecord.error_message }}</span>
         </el-descriptions-item>
       </el-descriptions>
@@ -257,6 +257,7 @@
 import i18n from '@/i18n'
 
 import { ref, reactive, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { Plus, Refresh } from '@element-plus/icons-vue'
 import {
@@ -271,6 +272,8 @@ import {
   getStatusLabel as getStatusLabelFromArr,
   getStatusTagType as getStatusTagTypeFromArr,
 } from '@/constants/status';
+
+const { t } = useI18n()
 
 const activeTab = ref('backup')
 
@@ -295,7 +298,7 @@ const createForm = reactive({
   backup_type: 'full'
 })
 const createRules = {
-  backup_type: [{ required: true, message: i18n.global.t('请选择备份类型'), trigger: 'change' }]
+  backup_type: [{ required: true, message: i18n.global.t(t('auto.List.48.43ebf3')), trigger: 'change' }]
 }
 
 const restoreVisible = ref(false);
@@ -338,7 +341,7 @@ const filteredRestores = computed(() => {
 })
 
 const getTypeText = (type) => {
-  const map = { full: '全量', incremental: '增量', differential: '差异' }
+  const map = { full: t('auto.List.49.c60ad6'), incremental: t('auto.List.50.36daeb'), differential: t('auto.List.51.5fdfba') }
   return map[type] || type || '-'
 }
 const getTypeTag = (type) => {
@@ -380,7 +383,7 @@ const loadData = async () => {
     backups.value = data.list || []
     pagination.total = data.total || 0
   } catch (e) {
-    ElMessage.error(i18n.global.t('加载备份列表失败'))
+    ElMessage.error(i18n.global.t(t('auto.List.52.e29ece')))
     backups.value = []
   } finally {
     loading.value = false
@@ -398,7 +401,7 @@ const loadRestores = async () => {
     restores.value = data.list || []
     restorePagination.total = data.total || 0
   } catch (e) {
-    ElMessage.error(i18n.global.t('加载恢复记录失败'))
+    ElMessage.error(i18n.global.t(t('auto.List.53.b9ab2b')))
     restores.value = []
   } finally {
     restoreLoading.value = false
@@ -425,11 +428,11 @@ const submitCreate = async () => {
         backup_name: createForm.backup_name,
         backup_type: createForm.backup_type
       })
-      ElMessage.success(i18n.global.t('备份任务已创建'))
+      ElMessage.success(i18n.global.t(t('auto.List.54.72f163')))
       createVisible.value = false
       await loadData()
     } catch (e) {
-      ElMessage.error(e?.message || '创建备份失败')
+      ElMessage.error(e?.message || t('auto.List.55.c33cb5'))
     } finally {
       creating.value = false
     }
@@ -446,12 +449,12 @@ const submitRestore = async () => {
   restoring.value = true
   try {
     await callRestoreApi({ backup_id: restoreTarget.value.id })
-    ElMessage.success(i18n.global.t('恢复任务已创建，请稍后查看进度'))
+    ElMessage.success(i18n.global.t(t('auto.List.56.c74008')))
     restoreVisible.value = false
     activeTab.value = 'restore'
     await loadRestores()
   } catch (e) {
-    ElMessage.error(e?.message || '恢复失败')
+    ElMessage.error(e?.message || t('auto.List.57.2e827d'))
   } finally {
     restoring.value = false
   }
@@ -461,14 +464,14 @@ const doDeleteBackup = async (row) => {
   try {
     await ElMessageBox.confirm(
       `确定删除备份 "${row.backup_name}"？删除后不可恢复`,
-      '警告',
+      t('auto.List.58.900c70'),
       { type: 'warning' }
     )
     await deleteBackup(row.id)
-    ElMessage.success(i18n.global.t('删除成功'))
+    ElMessage.success(i18n.global.t(t('auto.List.59.0007d1')))
     await loadData()
   } catch (e) {
-    if (e !== 'cancel' && e !== 'close') ElMessage.error(i18n.global.t('删除失败'))
+    if (e !== 'cancel' && e !== 'close') ElMessage.error(i18n.global.t(t('auto.List.60.acf066')))
   }
 }
 

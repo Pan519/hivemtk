@@ -3,25 +3,25 @@
     <el-row :gutter="16" class="stats-row">
       <el-col :span="6">
         <el-card class="stat-card">
-          <div class="stat-label">总成本（30 天）</div>
+          <div class="stat-label">{{ $t('auto.CostDashboard.3.a539a9') }}</div>
           <div class="stat-value">¥{{ Number(stats.total_cost || 0).toFixed(2) }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="stat-card">
-          <div class="stat-label">总 Token</div>
+          <div class="stat-label">{{ $t('auto.CostDashboard.4.b615f5') }}</div>
           <div class="stat-value">{{ formatNumber(stats.total_tokens) }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="stat-card warning">
-          <div class="stat-label">失败调用</div>
+          <div class="stat-label">{{ $t('auto.CostDashboard.5.0bedb9') }}</div>
           <div class="stat-value">{{ stats.total_failed || 0 }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="stat-card success">
-          <div class="stat-label">调用成功率</div>
+          <div class="stat-label">{{ $t('auto.CostDashboard.6.11d2f8') }}</div>
           <div class="stat-value">{{ stats.total_calls ? Math.round(stats.total_success / stats.total_calls * 100) : 0 }}%</div>
         </el-card>
       </el-col>
@@ -30,13 +30,13 @@
     <el-row :gutter="16">
       <el-col :span="16">
         <el-card>
-          <template #header><span>成本趋势（30 天）</span></template>
+          <template #header><span>{{ $t('auto.CostDashboard.7.d5bd40') }}</span></template>
           <div ref="trendRef" class="chart" />
         </el-card>
       </el-col>
       <el-col :span="8">
         <el-card>
-          <template #header><span>模型分布</span></template>
+          <template #header><span>{{ $t('auto.CostDashboard.8.ba70ac') }}</span></template>
           <div ref="distRef" class="chart" />
         </el-card>
       </el-col>
@@ -45,21 +45,21 @@
     <el-card class="breakdown-card">
       <template #header>
         <div class="card-header">
-          <span>场景维度</span>
+          <span>{{ $t('auto.CostDashboard.9.f0067d') }}</span>
           <el-radio-group v-model="breakdown" size="small">
-            <el-radio-button label="scenario">按场景</el-radio-button>
-            <el-radio-button label="model">按模型</el-radio-button>
-            <el-radio-button label="agent">按智能体</el-radio-button>
+            <el-radio-button label="scenario">{{ $t('auto.CostDashboard.10.e1ec3b') }}</el-radio-button>
+            <el-radio-button label="model">{{ $t('auto.CostDashboard.11.046f78') }}</el-radio-button>
+            <el-radio-button label="agent">{{ $t('auto.CostDashboard.12.a40967') }}</el-radio-button>
           </el-radio-group>
         </div>
       </template>
       <el-table :data="breakdownData" v-loading="loading">
         <el-table-column prop="name" :label="breakdownName" />
-        <el-table-column prop="call_count" label="调用次数" width="120" />
+        <el-table-column prop="call_count" :label="$t('auto.CostDashboard.1.00d5bd')" width="120" />
         <el-table-column prop="total_tokens" label="Token" width="120">
           <template #default="{ row }">{{ formatNumber(row.total_tokens) }}</template>
         </el-table-column>
-        <el-table-column prop="total_cost" label="成本(¥)" width="120">
+        <el-table-column prop="total_cost" :label="$t('auto.CostDashboard.2.1f9507')" width="120">
           <template #default="{ row }">{{ Number(row.total_cost || 0).toFixed(4) }}</template>
         </el-table-column>
       </el-table>
@@ -68,11 +68,14 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted } from 'vue';
+import { ref, computed, watch, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n';
 import * as echarts from 'echarts'
 import { safeInit } from '@/utils/echarts'
 import { http } from '@/utils/request'
 import { formatCompactNumber } from '@/utils/format'
+
+const { t } = useI18n()
 
 const stats = ref({})
 const breakdown = ref('scenario')
@@ -82,9 +85,9 @@ const trendRef = ref()
 const distRef = ref()
 
 const breakdownName = computed(() => ({
-  scenario: '场景',
-  model: '模型',
-  agent: '智能体'
+  scenario: t('auto.CostDashboard.13.c93165'),
+  model: t('auto.CostDashboard.14.8000f1'),
+  agent: t('auto.CostDashboard.15.72fbb9')
 }[breakdown.value]))
 
 const formatNumber = formatCompactNumber
@@ -117,11 +120,11 @@ function renderTrend(rows) {
     xAxis: { type: 'category', data: top.map((d) => d.name) },
     yAxis: [
       { type: 'value', name: '¥' },
-      { type: 'value', name: '调用次数', position: 'right' }
+      { type: 'value', name: t('auto.CostDashboard.1.00d5bd'), position: 'right' }
     ],
     series: [
-      { name: '成本', type: 'bar', data: top.map((d) => Number(d.total_cost || 0)) },
-      { name: '调用次数', type: 'bar', yAxisIndex: 1, data: top.map((d) => Number(d.call_count || 0)) }
+      { name: t('auto.CostDashboard.16.7e237e'), type: 'bar', data: top.map((d) => Number(d.total_cost || 0)) },
+      { name: t('auto.CostDashboard.1.00d5bd'), type: 'bar', yAxisIndex: 1, data: top.map((d) => Number(d.call_count || 0)) }
     ]
   })
 }

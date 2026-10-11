@@ -5,7 +5,7 @@
       <div class="page-header">
         <div class="header-text">
           <h2>{{ $t('统一消息') }}</h2>
-          <p class="subtitle">跨渠道消息汇总：收件箱、AI 回复、系统通知、用户对话集中管理与操作</p>
+          <p class="subtitle">{{ $t('auto.List.33.147e09') }}</p>
         </div>
         <div class="header-actions">
           <el-button @click="fetchMessageList">
@@ -37,37 +37,37 @@
     
     <div class="search-form">
       <el-form :inline="true" :model="searchForm" class="search-form-content">
-        <el-form-item :label="$t('关键字')">
+        <el-form-item ::label="$t('auto.List.1.8f8025')">
           <el-input
             v-model="searchForm.keyword"
-            :placeholder="$t('标题/内容/发送者')"
+            ::placeholder="$t('auto.List.2.e844f7')"
             clearable
             style="width: 220px"
             @keyup.enter="handleSearch"
           />
         </el-form-item>
-        <el-form-item :label="$t('消息类型')">
-          <el-select v-model="searchForm.type" :placeholder="$t('请选择类型')" clearable style="width: 140px">
-            <el-option :label="$t('系统消息')" value="system" />
-            <el-option :label="$t('用户消息')" value="user" />
-            <el-option :label="$t('通知')" value="notification" />
-            <el-option :label="$t('AI 回复')" value="ai" />
+        <el-form-item ::label="$t('auto.List.3.f85e33')">
+          <el-select v-model="searchForm.type" ::placeholder="$t('auto.List.4.e6855e')" clearable style="width: 140px">
+            <el-option ::label="$t('auto.List.5.ba3f54')" value="system" />
+            <el-option ::label="$t('auto.List.6.9258c2')" value="user" />
+            <el-option ::label="$t('auto.List.7.2e02d0')" value="notification" />
+            <el-option ::label="$t('auto.List.8.abb905')" value="ai" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('状态')">
-          <el-select v-model="searchForm.status" :placeholder="$t('请选择状态')" clearable style="width: 130px">
-            <el-option :label="$t('未读')" value="unread" />
-            <el-option :label="$t('已读')" value="read" />
-            <el-option :label="$t('处理中')" value="processing" />
+        <el-form-item ::label="$t('auto.List.9.1b8578')">
+          <el-select v-model="searchForm.status" ::placeholder="$t('auto.List.10.333291')" clearable style="width: 130px">
+            <el-option ::label="$t('auto.List.11.508ed9')" value="unread" />
+            <el-option ::label="$t('auto.List.12.a0f8db')" value="read" />
+            <el-option ::label="$t('auto.List.13.bf5faf')" value="processing" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('时间')">
+        <el-form-item ::label="$t('auto.List.14.ed7fae')">
           <el-date-picker
             v-model="dateRange"
             type="daterange"
-            range-separator="至"
-            start-placeholder="开始"
-            end-placeholder="结束"
+            :range-separator="$t('auto.List.15.981cbe')"
+            :start-placeholder="$t('auto.List.16.a3e3b8')"
+            :end-placeholder="$t('auto.List.17.12f1d7')"
             value-format="YYYY-MM-DD HH:mm:ss"
             style="width: 320px"
           />
@@ -91,16 +91,16 @@
       border
       style="width: 100%"
       v-loading="loading"
-      :empty-text="$t('暂无消息')"
+      ::empty-text="$t('auto.List.18.2d2d82')"
     >
       <el-table-column prop="id" label="ID" width="80" />
       <el-table-column
         prop="message_id"
-        :label="$t('消息ID')"
+        ::label="$t('auto.List.19.d15d9d')"
         min-width="180"
         show-overflow-tooltip
       />
-      <el-table-column :label="$t('渠道')" width="110">
+      <el-table-column ::label="$t('auto.List.20.349bd7')" width="110">
         <template #default="{ row }">
           <el-tag
             :type="getChannelTagType(row.channel || row.platform)"
@@ -111,14 +111,14 @@
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('类型')" width="100">
+      <el-table-column ::label="$t('auto.List.21.a0ee25')" width="100">
         <template #default="{ row }">
           <el-tag :type="getTypeTagType(row.type || row.content_type)" size="small">
             {{ getTypeLabel(row.type || row.content_type) }}
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('内容')" min-width="280" show-overflow-tooltip>
+      <el-table-column ::label="$t('auto.List.22.f2acfb')" min-width="280" show-overflow-tooltip>
         <template #default="{ row }">
           <div class="content-cell">
             <el-icon v-if="row.pinned" class="pin-icon"><Top /></el-icon>
@@ -128,27 +128,27 @@
       </el-table-column>
       <el-table-column
         prop="sender_name"
-        :label="$t('发送者')"
+        ::label="$t('auto.List.23.be89f6')"
         min-width="120"
         show-overflow-tooltip
       />
       <el-table-column
         prop="chat_id"
-        :label="$t('会话')"
+        ::label="$t('auto.List.24.351d26')"
         min-width="120"
         show-overflow-tooltip
       />
-      <el-table-column :label="$t('状态')" width="100">
+      <el-table-column ::label="$t('auto.List.9.1b8578')" width="100">
         <template #default="{ row }">
           <el-tag :type="getStatusTagType(row.status)" size="small">
             {{ getStatusLabel(row.status) }}
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('时间')" min-width="170" show-overflow-tooltip>
+      <el-table-column ::label="$t('auto.List.14.ed7fae')" min-width="170" show-overflow-tooltip>
         <template #default="{ row }">{{ formatTime(row.created_at) }}</template>
       </el-table-column>
-      <el-table-column :label="$t('操作')" width="240" fixed="right">
+      <el-table-column ::label="$t('auto.List.25.4414e3')" width="240" fixed="right">
         <template #default="{ row }">
           <el-button type="primary" size="small" link @click="handleViewDetail(row)">
             <el-icon><View /></el-icon>{{ $t('详情') }}
@@ -186,7 +186,7 @@
     </div>
 
     
-    <el-dialog v-model="detailDialogVisible" title="消息详情" width="800px" top="5vh">
+    <el-dialog v-model="detailDialogVisible" :title="$t('auto.List.26.1172fc')" width="800px" top="5vh">
       <div v-loading="detailLoading">
         <el-card class="detail-card">
           <template #header>
@@ -200,15 +200,15 @@
             </div>
           </template>
           <el-descriptions :column="2" border>
-            <el-descriptions-item label="消息ID">{{ currentMessage.id }}</el-descriptions-item>
-            <el-descriptions-item label="消息类型">{{ currentMessage.content_type }}</el-descriptions-item>
-            <el-descriptions-item label="发送者">{{ currentMessage.sender_name }}</el-descriptions-item>
-            <el-descriptions-item label="会话">{{ currentMessage.chat_id }}</el-descriptions-item>
-            <el-descriptions-item label="发送时间">{{ currentMessage.created_at }}</el-descriptions-item>
-            <el-descriptions-item label="更新时间">{{ currentMessage.updated_at }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.List.27.b801b5')">{{ currentMessage.id }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.List.28.6d0071')">{{ currentMessage.content_type }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.List.29.413dc9')">{{ currentMessage.sender_name }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.List.30.9a834e')">{{ currentMessage.chat_id }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.List.31.63b34d')">{{ currentMessage.created_at }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.List.32.a001a2')">{{ currentMessage.updated_at }}</el-descriptions-item>
           </el-descriptions>
           <div class="message-content">
-            <div class="content-label">消息内容</div>
+            <div class="content-label">{{ $t('auto.List.34.b87b77') }}</div>
             <div class="content-body">{{ currentMessage.content }}</div>
           </div>
         </el-card>
@@ -221,12 +221,15 @@
 import i18n from '@/i18n'
 
 import { ref, reactive, onMounted, onUnmounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import { Search, RefreshRight, View, Check, Top, CopyDocument } from '@element-plus/icons-vue'
 import { unifiedMessageApi } from '@/api/unifiedMessage'
 import { getMyAgent } from '@/api/customerService'
 import AgentSocket from '@/utils/agentSocket'
 import { CHANNEL_OPTIONS, getChannelLabel, getChannelTagType } from '@/constants/channel'
+
+const { t } = useI18n()
 
 const loading = ref(false);
 const detailLoading = ref(false)
@@ -235,7 +238,7 @@ const currentMessage = ref({})
 const detailDialogVisible = ref(false)
 
 const channelTabs = [
-  { value: 'all', label: '全部', icon: 'Grid' },
+  { value: 'all', label: t('auto.List.35.a8b0c2'), icon: 'Grid' },
   ...CHANNEL_OPTIONS.map((c) => ({ value: c.value, label: c.label, icon: c.icon }))
 ];
 const activeChannel = ref('all')
@@ -255,14 +258,14 @@ const pagination = reactive({
 });
 
 const TYPE_LABEL = {
-  system: '系统消息',
-  user: '用户消息',
-  notification: '通知',
+  system: t('auto.List.36.058ebd'),
+  user: t('auto.List.37.b492d0'),
+  notification: t('auto.List.38.5660bc'),
   ai: 'AI 回复',
-  text: '文本',
-  image: '图片',
-  file: '文件',
-  event: '事件'
+  text: t('auto.List.39.97d076'),
+  image: t('auto.List.40.20def7'),
+  file: t('auto.List.41.2a0c47'),
+  event: t('auto.List.42.10b276')
 };
 const TYPE_TAG = {
   system: 'info',
@@ -283,13 +286,13 @@ const getTypeLabel = (v) => TYPE_LABEL[v] || (v ? String(v) : '-')
 const getTypeTagType = (v) => TYPE_TAG[v] || 'info'
 
 const STATUS_LABEL = {
-  unread: '未读',
-  read: '已读',
-  processing: '处理中',
-  pending: '待处理',
-  sent: '已发送',
-  failed: '失败',
-  received: '已接收'
+  unread: t('auto.List.43.894a10'),
+  read: t('auto.List.44.8ad629'),
+  processing: t('auto.List.45.5d459d'),
+  pending: t('auto.List.46.047109'),
+  sent: t('auto.List.47.93d159'),
+  failed: t('auto.List.48.acd5cb'),
+  received: t('auto.List.49.b4554f')
 };
 const STATUS_TAG = {
   unread: 'danger',
@@ -408,17 +411,17 @@ const handleCurrentChange = (val) => {
 const handleMarkRead = (row) => {
   if (!row) return
   row.status = 'read'
-  ElMessage.success(i18n.global.t('已标记为已读'))
+  ElMessage.success(i18n.global.t(t('auto.List.50.2d1491')))
 };
 
 const handleResend = (row) => {
-  ElMessage.info(i18n.global.t('已触发重发：') + (row.message_id || row.id || '-'))
+  ElMessage.info(i18n.global.t(t('auto.List.51.f519ec')) + (row.message_id || row.id || '-'))
 };
 
 const handleCopyContent = async (row) => {
   const text = row?.content || row?.text || ''
   if (!text) {
-    ElMessage.warning(i18n.global.t('无可复制内容'))
+    ElMessage.warning(i18n.global.t(t('auto.List.52.757286')))
     return
   }
   try {
@@ -432,9 +435,9 @@ const handleCopyContent = async (row) => {
       document.execCommand('copy')
       document.body.removeChild(ta)
     }
-    ElMessage.success(i18n.global.t('已复制到剪贴板'))
+    ElMessage.success(i18n.global.t(t('auto.List.53.4fb42e')))
   } catch (e) {
-    ElMessage.error(i18n.global.t('复制失败，请手动选择'))
+    ElMessage.error(i18n.global.t(t('auto.List.54.b2cb4b')))
   }
 };
 

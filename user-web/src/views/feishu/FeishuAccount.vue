@@ -5,7 +5,7 @@
         <div class="account-search">
           <el-input
             v-model="searchKeyword"
-            :placeholder="$t('输入账号名称搜索')"
+            ::placeholder="$t('auto.FeishuAccount.1.9d9a5f')"
             prefix-icon="Search"
             clearable
             @clear="handleSearch"
@@ -22,9 +22,9 @@
 
         <div v-loading="loading" class="account-list">
           <el-table :data="filteredAccounts" style="width: 100%" border>
-            <el-table-column prop="account_name" :label="$t('账号名称')" min-width="160" />
+            <el-table-column prop="account_name" ::label="$t('auto.FeishuAccount.2.5f0720')" min-width="160" />
             <el-table-column prop="app_id" label="App ID" min-width="200" />
-            <el-table-column :label="$t('状态')" width="100" align="center">
+            <el-table-column ::label="$t('auto.FeishuAccount.3.1b8578')" width="100" align="center">
               <template #default="scope">
                 <el-tag :type="scope.row.status === 1 ? 'success' : 'danger'" effect="plain">
                   {{ scope.row.status === 1 ? '正常' : '停用' }}
@@ -38,7 +38,7 @@
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column label="智能体" width="110" align="center">
+            <el-table-column :label="$t('auto.FeishuAccount.4.72fbb9')" width="110" align="center">
               <template #default="scope">
                 <el-tag :type="scope.row.ai_agent_enabled ? 'success' : 'info'" effect="plain">
                   {{ scope.row.ai_agent_enabled ? '已启用' : '未启用' }}
@@ -47,28 +47,28 @@
             </el-table-column>
             <el-table-column label="Token" width="110" align="center">
               <template #default="scope">
-                <el-tooltip :content="scope.row.token_cached ? '已缓存 tenant_access_token' : '尚未缓存'" placement="top">
+                <el-tooltip ::content="$t('auto.FeishuAccount.5.caf951')" placement="top">
                   <el-tag :type="scope.row.token_cached ? 'success' : 'warning'" effect="plain">
                     {{ scope.row.token_cached ? '已缓存' : '未缓存' }}
                   </el-tag>
                 </el-tooltip>
               </template>
             </el-table-column>
-            <el-table-column prop="last_error_msg" label="最近错误" min-width="180" show-overflow-tooltip />
-            <el-table-column label="操作" width="420" fixed="right">
+            <el-table-column prop="last_error_msg" :label="$t('auto.FeishuAccount.6.a2b83d')" min-width="180" show-overflow-tooltip />
+            <el-table-column :label="$t('auto.FeishuAccount.7.2b6bc0')" width="420" fixed="right">
               <template #default="scope">
-                <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
-                <el-button size="small" type="success" @click="handleTestSend(scope.row)">测试发送</el-button>
-                <el-button size="small" type="warning" @click="handleRefreshToken(scope.row)">刷新Token</el-button>
-                <el-button size="small" type="primary" @click="openBindingDialog(scope.row)">绑定AI</el-button>
-                <el-button size="small" type="danger" @click="handleDelete(scope.row)">删除</el-button>
+                <el-button size="small" @click="handleEdit(scope.row)">{{ $t('auto.FeishuAccount.28.95b351') }}</el-button>
+                <el-button size="small" type="success" @click="handleTestSend(scope.row)">{{ $t('auto.FeishuAccount.29.e1c652') }}</el-button>
+                <el-button size="small" type="warning" @click="handleRefreshToken(scope.row)">{{ $t('auto.FeishuAccount.30.742bef') }}</el-button>
+                <el-button size="small" type="primary" @click="openBindingDialog(scope.row)">{{ $t('auto.FeishuAccount.31.c9e87d') }}</el-button>
+                <el-button size="small" type="danger" @click="handleDelete(scope.row)">{{ $t('auto.FeishuAccount.32.2f4aad') }}</el-button>
               </template>
             </el-table-column>
           </el-table>
         </div>
 
         <div v-if="!loading && filteredAccounts.length === 0" class="empty-data">
-          <el-empty description="暂无飞书账号，点击右上角添加" />
+          <el-empty :description="$t('auto.FeishuAccount.8.277c85')" />
         </div>
       </div>
     </div>
@@ -76,21 +76,21 @@
     
     <el-dialog
       v-model="dialogVisible"
-      :title="dialogType === 'add' ? '添加飞书账号' : '编辑飞书账号'"
+      ::title="$t('auto.FeishuAccount.9.ec5f1b')"
       width="640px"
       :close-on-click-modal="false"
     >
       <el-form ref="accountFormRef" :model="accountForm" :rules="rules" label-width="140px">
-        <el-form-item label="账号名称" prop="account_name">
-          <el-input v-model="accountForm.account_name" placeholder="用于识别，例如：飞书客服Bot" />
+        <el-form-item :label="$t('auto.FeishuAccount.10.17327f')" prop="account_name">
+          <el-input v-model="accountForm.account_name" :placeholder="$t('auto.FeishuAccount.11.28265a')" />
         </el-form-item>
         <el-form-item label="App ID" prop="app_id">
-          <el-input v-model="accountForm.app_id" placeholder="飞书开放平台 App ID" />
+          <el-input v-model="accountForm.app_id" :placeholder="$t('auto.FeishuAccount.12.f44b31')" />
         </el-form-item>
         <el-form-item label="App Secret" prop="app_secret">
           <el-input
             v-model="accountForm.app_secret"
-            :placeholder="dialogType === 'edit' ? '留空则保持原 Secret 不变' : '请输入飞书 App Secret'"
+            ::placeholder="$t('auto.FeishuAccount.13.6a205e')"
             type="password"
             show-password
           />
@@ -98,53 +98,53 @@
         <el-form-item label="Verification Token" prop="verification_token">
           <el-input
             v-model="accountForm.verification_token"
-            placeholder="事件订阅的 Verification Token（用于验证回调）"
+            :placeholder="$t('auto.FeishuAccount.14.4a9969')"
           />
         </el-form-item>
         <el-form-item label="Encrypt Key" prop="encrypt_key">
           <el-input
             v-model="accountForm.encrypt_key"
-            placeholder="事件订阅的 Encrypt Key（用于加密事件）"
+            :placeholder="$t('auto.FeishuAccount.15.16dd58')"
             type="password"
             show-password
           />
         </el-form-item>
-        <el-form-item label="启用 Webhook" prop="webhook_enabled">
+        <el-form-item :label="$t('auto.FeishuAccount.16.685aab')" prop="webhook_enabled">
           <el-switch v-model="accountForm.webhook_enabled" />
-          <span class="form-hint">开启后接受飞书事件推送（URL 验证 + 消息事件）</span>
+          <span class="form-hint">{{ $t('auto.FeishuAccount.33.f46a63') }}</span>
         </el-form-item>
-        <el-form-item label="启用 智能体" prop="ai_agent_enabled">
+        <el-form-item :label="$t('auto.FeishuAccount.17.706367')" prop="ai_agent_enabled">
           <el-switch v-model="accountForm.ai_agent_enabled" />
-          <span class="form-hint">开启后，飞书入站消息自动触发 智能体流程</span>
+          <span class="form-hint">{{ $t('auto.FeishuAccount.34.78e4f3') }}</span>
         </el-form-item>
-        <el-form-item label="状态" prop="status">
+        <el-form-item :label="$t('auto.FeishuAccount.18.3fea7c')" prop="status">
           <el-radio-group v-model="accountForm.status">
-            <el-radio :label="1">正常</el-radio>
-            <el-radio :label="0">停用</el-radio>
+            <el-radio :label="1">{{ $t('auto.FeishuAccount.35.fd6e80') }}</el-radio>
+            <el-radio :label="0">{{ $t('auto.FeishuAccount.36.5c56a8') }}</el-radio>
           </el-radio-group>
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="dialogVisible = false">取消</el-button>
-        <el-button type="primary" @click="handleSubmit" :loading="submitting">确定</el-button>
+        <el-button @click="dialogVisible = false">{{ $t('auto.FeishuAccount.37.625fb2') }}</el-button>
+        <el-button type="primary" @click="handleSubmit" :loading="submitting">{{ $t('auto.FeishuAccount.38.38cf16') }}</el-button>
       </template>
     </el-dialog>
 
     
     <el-dialog
       v-model="testSendVisible"
-      title="测试发送消息"
+      :title="$t('auto.FeishuAccount.19.880075')"
       width="500px"
     >
       <el-form :model="testSendForm" label-width="100px">
-        <el-form-item label="接收者">
-          <el-input v-model="testSendForm.open_id" placeholder="请输入 open_id（ou_xxx）或 chat_id（oc_xxx）" />
+        <el-form-item :label="$t('auto.FeishuAccount.20.88340e')">
+          <el-input v-model="testSendForm.open_id" :placeholder="$t('auto.FeishuAccount.21.2ca9d3')" />
         </el-form-item>
-        <el-form-item label="消息内容">
-          <el-input v-model="testSendForm.content" type="textarea" :rows="4" placeholder="请输入测试消息" />
+        <el-form-item :label="$t('auto.FeishuAccount.22.b87b77')">
+          <el-input v-model="testSendForm.content" type="textarea" :rows="4" :placeholder="$t('auto.FeishuAccount.23.dfbeaf')" />
         </el-form-item>
-        <el-form-item label="消息类型">
-          <el-select v-model="testSendForm.msg_type" placeholder="默认 text">
+        <el-form-item :label="$t('auto.FeishuAccount.24.6d0071')">
+          <el-select v-model="testSendForm.msg_type" :placeholder="$t('auto.FeishuAccount.25.b15a60')">
             <el-option label="text" value="text" />
             <el-option label="post" value="post" />
             <el-option label="interactive" value="interactive" />
@@ -152,22 +152,22 @@
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="testSendVisible = false">取消</el-button>
-        <el-button type="primary" @click="submitTestSend" :loading="testSending">发送</el-button>
+        <el-button @click="testSendVisible = false">{{ $t('auto.FeishuAccount.37.625fb2') }}</el-button>
+        <el-button type="primary" @click="submitTestSend" :loading="testSending">{{ $t('auto.FeishuAccount.39.1535fc') }}</el-button>
       </template>
     </el-dialog>
 
     
     <el-dialog
       v-model="bindingVisible"
-      title="绑定 智能体"
+      :title="$t('auto.FeishuAccount.26.253b0d')"
       width="500px"
     >
       <el-form :model="bindingForm" label-width="100px">
-        <el-form-item label="账号">
+        <el-form-item :label="$t('auto.FeishuAccount.27.7035c6')">
           <el-input :value="bindingForm.account_name" disabled />
         </el-form-item>
-        <el-form-item label="智能体">
+        <el-form-item :label="$t('auto.FeishuAccount.4.72fbb9')">
           <el-switch v-model="bindingForm.ai_agent_enabled" />
         </el-form-item>
         <el-form-item label="Webhook">
@@ -175,8 +175,8 @@
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="bindingVisible = false">取消</el-button>
-        <el-button type="primary" @click="submitBinding" :loading="bindingSubmitting">保存</el-button>
+        <el-button @click="bindingVisible = false">{{ $t('auto.FeishuAccount.37.625fb2') }}</el-button>
+        <el-button type="primary" @click="submitBinding" :loading="bindingSubmitting">{{ $t('auto.FeishuAccount.40.be5fbb') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -186,6 +186,7 @@
 import i18n from '@/i18n'
 
 import { ref, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { Refresh } from '@element-plus/icons-vue'
 import { toList } from '@/utils/list'
@@ -197,6 +198,8 @@ import {
   testSend,
   refreshToken
 } from '@/api/feishu'
+
+const { t } = useI18n()
 
 const loading = ref(false);
 const submitting = ref(false)
@@ -236,9 +239,9 @@ const bindingForm = ref({
 })
 
 const rules = {
-  account_name: [{ required: true, message: i18n.global.t('请输入账号名称'), trigger: 'blur' }],
-  app_id: [{ required: true, message: i18n.global.t('请输入 App ID'), trigger: 'blur' }],
-  app_secret: [{ required: true, message: i18n.global.t('请输入 App Secret'), trigger: 'blur' }]
+  account_name: [{ required: true, message: i18n.global.t(t('auto.FeishuAccount.41.1f3797')), trigger: 'blur' }],
+  app_id: [{ required: true, message: i18n.global.t(t('auto.FeishuAccount.42.4288f9')), trigger: 'blur' }],
+  app_secret: [{ required: true, message: i18n.global.t(t('auto.FeishuAccount.43.5eace4')), trigger: 'blur' }]
 };
 
 const filteredAccounts = computed(() => {
@@ -254,7 +257,7 @@ const fetchAccounts = async () => {
     const res = await listAccounts()
     accounts.value = toList(res)
   } catch (e) {
-    ElMessage.error('网络错误：' + e.message)
+    ElMessage.error(t('auto.FeishuAccount.44.d36a57') + e.message)
   } finally {
     loading.value = false
   }
@@ -307,11 +310,11 @@ const handleSubmit = async () => {
       await (isEdit
         ? updateAccount(accountForm.value.id, accountForm.value)
         : createAccount(accountForm.value))
-      ElMessage.success(isEdit ? '更新成功' : '创建成功')
+      ElMessage.success(isEdit ? t('auto.FeishuAccount.45.55aa63') : t('auto.FeishuAccount.46.04a691'))
       dialogVisible.value = false
       await fetchAccounts()
     } catch (e) {
-      ElMessage.error('网络错误：' + e.message)
+      ElMessage.error(t('auto.FeishuAccount.44.d36a57') + e.message)
     } finally {
       submitting.value = false
     }
@@ -322,15 +325,15 @@ const handleDelete = async (row) => {
   try {
     await ElMessageBox.confirm(
       `确定要删除账号 "${row.account_name}" 吗？`,
-      '确认删除',
+      t('auto.FeishuAccount.47.631cd2'),
       { type: 'warning' }
     )
     await deleteAccount(row.id)
-    ElMessage.success(i18n.global.t('删除成功'))
+    ElMessage.success(i18n.global.t(t('auto.FeishuAccount.48.0007d1')))
     await fetchAccounts()
   } catch (e) {
     if (e !== 'cancel') {
-      ElMessage.error('操作失败：' + e.message)
+      ElMessage.error(t('auto.FeishuAccount.49.79585f') + e.message)
     }
   }
 }
@@ -339,7 +342,7 @@ const handleTestSend = (row) => {
   testSendForm.value = {
     account_id: row.id,
     open_id: '',
-    content: i18n.global.t('这是一条来自 hivemtk 的测试消息，飞书账号：') + row.account_name,
+    content: i18n.global.t(t('auto.FeishuAccount.50.8a145f')) + row.account_name,
     msg_type: 'text'
   }
   testSendVisible.value = true
@@ -347,11 +350,11 @@ const handleTestSend = (row) => {
 
 const submitTestSend = async () => {
   if (!testSendForm.value.open_id) {
-    ElMessage.warning(i18n.global.t('请输入接收者 open_id 或 chat_id'))
+    ElMessage.warning(i18n.global.t(t('auto.FeishuAccount.51.3d80fa')))
     return
   }
   if (!testSendForm.value.content) {
-    ElMessage.warning(i18n.global.t('请输入消息内容'))
+    ElMessage.warning(i18n.global.t(t('auto.FeishuAccount.52.fa967b')))
     return
   }
   testSending.value = true
@@ -361,10 +364,10 @@ const submitTestSend = async () => {
       content: testSendForm.value.content,
       msg_type: testSendForm.value.msg_type
     })
-    ElMessage.success(i18n.global.t('测试消息已发送'))
+    ElMessage.success(i18n.global.t(t('auto.FeishuAccount.53.8c6e34')))
     testSendVisible.value = false
   } catch (e) {
-    ElMessage.error('网络错误：' + e.message)
+    ElMessage.error(t('auto.FeishuAccount.44.d36a57') + e.message)
   } finally {
     testSending.value = false
   }
@@ -376,7 +379,7 @@ const handleRefreshToken = async (row) => {
     ElMessage.success(i18n.global.t('Token 刷新成功'))
     await fetchAccounts()
   } catch (e) {
-    ElMessage.error('网络错误：' + e.message)
+    ElMessage.error(t('auto.FeishuAccount.44.d36a57') + e.message)
   }
 }
 
@@ -397,11 +400,11 @@ const submitBinding = async () => {
       ai_agent_enabled: bindingForm.value.ai_agent_enabled,
       webhook_enabled: bindingForm.value.webhook_enabled
     })
-    ElMessage.success(i18n.global.t('保存成功'))
+    ElMessage.success(i18n.global.t(t('auto.FeishuAccount.54.3b1083')))
     bindingVisible.value = false
     await fetchAccounts()
   } catch (e) {
-    ElMessage.error('网络错误：' + e.message)
+    ElMessage.error(t('auto.FeishuAccount.44.d36a57') + e.message)
   } finally {
     bindingSubmitting.value = false
   }

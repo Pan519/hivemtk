@@ -18,27 +18,27 @@
       
       
       <el-form :model="searchForm" inline class="search-form">
-        <el-form-item label="关键词">
-          <el-input v-model="searchForm.keyword" placeholder="请输入关键词" clearable />
+        <el-form-item :label="$t('auto.List.1.9699a5')">
+          <el-input v-model="searchForm.keyword" :placeholder="$t('auto.List.2.cd11be')" clearable />
         </el-form-item>
-        <el-form-item label="状态">
-          <el-select v-model="searchForm.isActive" placeholder="请选择状态" clearable>
-            <el-option label="启用" :value="true" />
-            <el-option label="禁用" :value="false" />
+        <el-form-item :label="$t('auto.List.3.3fea7c')">
+          <el-select v-model="searchForm.isActive" :placeholder="$t('auto.List.4.e1c965')" clearable>
+            <el-option :label="$t('auto.List.5.7854b5')" :value="true" />
+            <el-option :label="$t('auto.List.6.710ad0')" :value="false" />
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="handleSearch">搜索</el-button>
-          <el-button @click="handleReset">重置</el-button>
+          <el-button type="primary" @click="handleSearch">{{ $t('auto.List.28.e5f71f') }}</el-button>
+          <el-button @click="handleReset">{{ $t('auto.List.29.4b9c32') }}</el-button>
         </el-form-item>
       </el-form>
       
       
       <el-table :data="tableData" border style="width: 100%" v-loading="loading">
         <el-table-column prop="id" label="ID" width="80" />
-        <el-table-column prop="title" label="标题" min-width="150" show-overflow-tooltip />
-        <el-table-column prop="description" label="描述" min-width="200" show-overflow-tooltip />
-        <el-table-column label="图片" width="120">
+        <el-table-column prop="title" :label="$t('auto.List.7.32c65d')" min-width="150" show-overflow-tooltip />
+        <el-table-column prop="description" :label="$t('auto.List.8.3bdd08')" min-width="200" show-overflow-tooltip />
+        <el-table-column :label="$t('auto.List.9.20def7')" width="120">
           <template #default="scope">
             <el-image
               v-if="scope.row.image_url"
@@ -48,42 +48,42 @@
               style="width: 80px; height: 60px"
               fit="cover"
             />
-            <span v-else>无图片</span>
+            <span v-else>{{ $t('auto.List.30.5423e2') }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="跳转链接" width="150">
+        <el-table-column :label="$t('auto.List.10.dec2eb')" width="150">
           <template #default="scope">
             <el-link v-if="scope.row.redirect_url" :href="scope.row.redirect_url" target="_blank" type="primary">
               访问链接
             </el-link>
-            <span v-else>无链接</span>
+            <span v-else>{{ $t('auto.List.31.7b8af9') }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="统计数据" width="100">
+        <el-table-column :label="$t('auto.List.11.439a19')" width="100">
           <template #default="scope">
             <div>
               <span>浏览: {{ scope.row.view_count }}</span>
             </div>
           </template>
         </el-table-column>
-        <el-table-column label="状态" width="100">
+        <el-table-column :label="$t('auto.List.3.3fea7c')" width="100">
           <template #default="scope">
             <el-tag :type="scope.row.is_active ? 'success' : 'danger'">
               {{ scope.row.is_active ? '启用' : '禁用' }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="created_at" label="创建时间" width="180" />
-        <el-table-column label="操作" width="280" fixed="right">
+        <el-table-column prop="created_at" :label="$t('auto.List.12.eca37c')" width="180" />
+        <el-table-column :label="$t('auto.List.13.2b6bc0')" width="280" fixed="right">
             <template #default="scope">
-              <el-button size="small" type="primary" @click="handleEdit(scope.row)">编辑</el-button>
-              <el-button size="small" type="info" @click="handleStats(scope.row)">统计</el-button>
-              <el-button size="small" type="info" @click="handleCopyLink(scope.row)">复制链接</el-button>
-              <el-button size="small" type="danger" @click="handleDelete(scope.row)">删除</el-button>
+              <el-button size="small" type="primary" @click="handleEdit(scope.row)">{{ $t('auto.List.32.95b351') }}</el-button>
+              <el-button size="small" type="info" @click="handleStats(scope.row)">{{ $t('auto.List.33.d7656a') }}</el-button>
+              <el-button size="small" type="info" @click="handleCopyLink(scope.row)">{{ $t('auto.List.34.879058') }}</el-button>
+              <el-button size="small" type="danger" @click="handleDelete(scope.row)">{{ $t('auto.List.35.2f4aad') }}</el-button>
             </template>
           </el-table-column>
         <template #empty>
-          <el-empty description="暂无数据" />
+          <el-empty :description="$t('auto.List.14.21efd8')" />
         </template>
       </el-table>
 
@@ -117,27 +117,27 @@
             :rules="rules"
             label-width="100px"
           >
-            <el-form-item label="标题" prop="title">
-              <el-input v-model="form.title" placeholder="请输入标题" />
+            <el-form-item :label="$t('auto.List.7.32c65d')" prop="title">
+              <el-input v-model="form.title" :placeholder="$t('auto.List.15.96641a')" />
             </el-form-item>
-            <el-form-item label="描述" prop="description">
+            <el-form-item :label="$t('auto.List.8.3bdd08')" prop="description">
               <el-input
                 v-model="form.description"
                 type="textarea"
                 :rows="3"
-                placeholder="请输入描述"
+                :placeholder="$t('auto.List.16.11956a')"
               />
             </el-form-item>
-            <el-form-item label="图片URL" prop="image_url">
-              <el-input v-model="form.image_url" placeholder="请输入图片URL" />
+            <el-form-item :label="$t('auto.List.17.844bf1')" prop="image_url">
+              <el-input v-model="form.image_url" :placeholder="$t('auto.List.18.3af187')" />
             </el-form-item>
-            <el-form-item label="跳转链接" prop="redirect_url">
-              <el-input v-model="form.redirect_url" placeholder="请输入跳转链接" />
+            <el-form-item :label="$t('auto.List.10.dec2eb')" prop="redirect_url">
+              <el-input v-model="form.redirect_url" :placeholder="$t('auto.List.19.c63a53')" />
             </el-form-item>
-            <el-form-item label="域名池" prop="domain_pool_id">
+            <el-form-item :label="$t('auto.List.20.0efb07')" prop="domain_pool_id">
               <el-select 
                 v-model="form.domain_pool_id" 
-                placeholder="请选择域名池" 
+                :placeholder="$t('auto.List.21.8ee08e')" 
                 clearable
                 style="width: 100%"
               >
@@ -152,10 +152,10 @@
                 </el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="标签" prop="tags">
-              <el-input v-model="form.tags" placeholder="请输入标签，多个标签用逗号分隔" />
+            <el-form-item :label="$t('auto.List.22.14d342')" prop="tags">
+              <el-input v-model="form.tags" :placeholder="$t('auto.List.23.dc1fb7')" />
             </el-form-item>
-            <el-form-item label="状态" prop="is_active">
+            <el-form-item :label="$t('auto.List.3.3fea7c')" prop="is_active">
               <el-switch v-model="form.is_active" />
             </el-form-item>
           </el-form>
@@ -171,8 +171,8 @@
       </div>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="dialogVisible = false">取消</el-button>
-          <el-button type="primary" @click="handleSubmit">确定</el-button>
+          <el-button @click="dialogVisible = false">{{ $t('auto.List.36.625fb2') }}</el-button>
+          <el-button type="primary" @click="handleSubmit">{{ $t('auto.List.37.38cf16') }}</el-button>
         </span>
       </template>
     </el-dialog>
@@ -180,35 +180,35 @@
     
     <el-dialog
       v-model="detailVisible"
-      title="卡片详情"
+      :title="$t('auto.List.24.4c4bc1')"
       width="600px"
     >
       <el-descriptions v-if="currentCard" :column="2" border>
         <el-descriptions-item label="ID">{{ currentCard.id }}</el-descriptions-item>
-        <el-descriptions-item label="标题">{{ currentCard.title }}</el-descriptions-item>
-        <el-descriptions-item label="描述" :span="2">{{ currentCard.description }}</el-descriptions-item>
-        <el-descriptions-item label="平台">小红书</el-descriptions-item>
-        <el-descriptions-item label="状态">
+        <el-descriptions-item :label="$t('auto.List.7.32c65d')">{{ currentCard.title }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.8.3bdd08')" :span="2">{{ currentCard.description }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.25.498128')">{{ $t('auto.List.38.ae26bb') }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.3.3fea7c')">
           <el-tag :type="currentCard.is_active ? 'success' : 'danger'">
             {{ currentCard.is_active ? '启用' : '禁用' }}
           </el-tag>
         </el-descriptions-item>
-        <el-descriptions-item label="创建时间" :span="2">{{ currentCard.created_at }}</el-descriptions-item>
-        <el-descriptions-item label="跳转链接" :span="2">
+        <el-descriptions-item :label="$t('auto.List.12.eca37c')" :span="2">{{ currentCard.created_at }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.10.dec2eb')" :span="2">
           <el-link v-if="currentCard.redirect_url" :href="currentCard.redirect_url" target="_blank" type="primary">
             {{ currentCard.redirect_url }}
           </el-link>
-          <span v-else>无</span>
+          <span v-else>{{ $t('auto.List.39.d81bb2') }}</span>
         </el-descriptions-item>
-        <el-descriptions-item label="短链接" :span="2">
+        <el-descriptions-item :label="$t('auto.List.26.d098e4')" :span="2">
           <template v-if="currentCard.short_link_url">
             {{ window.location.origin }}{{ currentCard.short_link_url }}
           </template>
-          <span v-else>无</span>
+          <span v-else>{{ $t('auto.List.39.d81bb2') }}</span>
         </el-descriptions-item>
-        <el-descriptions-item label="标签">{{ currentCard.tags || '无' }}</el-descriptions-item>
-        <el-descriptions-item label="浏览数">{{ currentCard.view_count }}</el-descriptions-item>
-        <el-descriptions-item label="图片" :span="2">
+        <el-descriptions-item :label="$t('auto.List.22.14d342')">{{ currentCard.tags || '无' }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.27.f8ff52')">{{ currentCard.view_count }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.9.20def7')" :span="2">
           <el-image
             v-if="currentCard.image_url"
             :src="currentCard.image_url"
@@ -216,11 +216,11 @@
             fit="cover"
             :preview-src-list="[currentCard.image_url]"
           />
-          <span v-else>无图片</span>
+          <span v-else>{{ $t('auto.List.30.5423e2') }}</span>
         </el-descriptions-item>
       </el-descriptions>
       <template #footer>
-        <el-button type="primary" @click="detailVisible = false">关闭</el-button>
+        <el-button type="primary" @click="detailVisible = false">{{ $t('auto.List.40.b15d91') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -238,6 +238,7 @@ const onImgError = (e) => {
 import i18n from '@/i18n'
 
 import { ref, reactive, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import XiaohongshuCardPreview from '@/components/XiaohongshuCardPreview.vue'
@@ -245,6 +246,8 @@ import { domainPoolApi } from '@/api/domainPool'
 import { getXiaohongshuCardList, createXiaohongshuCard, updateXiaohongshuCard, deleteXiaohongshuCard, generateShortLink } from '@/api/xiaohongshuCard'
 
 const router = useRouter();
+
+const { t } = useI18n()
 
 const domainPoolOptions = ref([]);
 
@@ -282,22 +285,22 @@ const form = reactive({
 
 const rules = {
   title: [
-    { required: true, message: i18n.global.t('请输入标题'), trigger: 'blur' },
-    { max: 100, message: i18n.global.t('标题长度不能超过100个字符'), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.List.15.96641a')), trigger: 'blur' },
+    { max: 100, message: i18n.global.t(t('auto.List.41.5f27c0')), trigger: 'blur' }
   ],
   description: [
-    { required: true, message: i18n.global.t('请输入描述'), trigger: 'blur' },
-    { max: 500, message: i18n.global.t('描述长度不能超过500个字符'), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.List.16.11956a')), trigger: 'blur' },
+    { max: 500, message: i18n.global.t(t('auto.List.42.2092c7')), trigger: 'blur' }
   ],
   image_url: [
-    { required: true, message: i18n.global.t('请输入图片URL'), trigger: 'blur' },
-    { type: 'url', message: i18n.global.t('请输入正确的URL格式'), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.List.18.3af187')), trigger: 'blur' },
+    { type: 'url', message: i18n.global.t(t('auto.List.43.ddb160')), trigger: 'blur' }
   ],
   redirect_url: [
-    { type: 'url', message: i18n.global.t('请输入正确的URL格式'), trigger: 'blur' }
+    { type: 'url', message: i18n.global.t(t('auto.List.43.ddb160')), trigger: 'blur' }
   ],
   tags: [
-    { max: 200, message: i18n.global.t('标签长度不能超过200个字符'), trigger: 'blur' }
+    { max: 200, message: i18n.global.t(t('auto.List.44.1c8395')), trigger: 'blur' }
   ]
 };
 
@@ -308,7 +311,7 @@ const getDomainPoolList = async () => {
     const res = await domainPoolApi.getList({ page: 1, page_size: 100 })
     domainPoolOptions.value = res.list || [];
   } catch (error) {
-    ElMessage.error(i18n.global.t('获取域名池列表失败'))
+    ElMessage.error(i18n.global.t(t('auto.List.45.1be7af')))
     console.error(error)
   }
 };
@@ -326,7 +329,7 @@ const getList = async () => {
     tableData.value = res.list || [];
     pagination.total = res.total || 0
   } catch (error) {
-    ElMessage.error(i18n.global.t('获取列表失败'))
+    ElMessage.error(i18n.global.t(t('auto.List.46.fe9d24')))
     console.error(error)
   } finally {
     loading.value = false
@@ -357,13 +360,13 @@ const handleCurrentChange = (val) => {
 };
 
 const handleAdd = () => {
-  dialogTitle.value = '添加小红书卡片'
+  dialogTitle.value = t('auto.List.47.cf4621')
   dialogVisible.value = true
   resetForm()
 };
 
 const handleEdit = (row) => {
-  dialogTitle.value = '编辑小红书卡片'
+  dialogTitle.value = t('auto.List.48.dde3a3')
   dialogVisible.value = true
   Object.assign(form, {
     id: row.id,
@@ -378,18 +381,18 @@ const handleEdit = (row) => {
 };
 
 const handleDelete = (row) => {
-  ElMessageBox.confirm(`确定要删除卡片"${row.title}"吗？`, '提示', {
-    confirmButtonText: '确定',
-    cancelButtonText: '取消',
+  ElMessageBox.confirm(`确定要删除卡片"${row.title}"吗？`, t('auto.List.49.02d981'), {
+    confirmButtonText: t('auto.List.37.38cf16'),
+    cancelButtonText: t('auto.List.36.625fb2'),
     type: 'warning'
   })
     .then(async () => {
       try {
     const res = await deleteXiaohongshuCard(row.id)
-    ElMessage.success(i18n.global.t('删除成功'));
+    ElMessage.success(i18n.global.t(t('auto.List.50.0007d1')));
     getList()
   } catch (error) {
-    ElMessage.error(i18n.global.t('删除失败'))
+    ElMessage.error(i18n.global.t(t('auto.List.51.acf066')))
     console.error(error)
   }
     })
@@ -412,11 +415,11 @@ const handleSubmit = () => {
           res = await createXiaohongshuCard(form);
         }
         
-        ElMessage.success(form.id ? '更新成功' : '创建成功');
+        ElMessage.success(form.id ? t('auto.List.52.55aa63') : t('auto.List.53.04a691'));
         dialogVisible.value = false
         getList()
       } catch (error) {
-        ElMessage.error(form.id ? '更新失败' : '创建失败')
+        ElMessage.error(form.id ? t('auto.List.54.930442') : t('auto.List.55.a88928'))
         console.error(error)
       }
     }
@@ -461,14 +464,14 @@ const handleCopyLink = async (row) => {
         row.short_link_url = res.short_link_url;
         row.short_code = res.short_code
       } catch (apiError) {
-        console.error('生成短链接API调用失败:', apiError)
+        console.error(t('auto.List.56.49d98a'), apiError)
         linkUrl = row.redirect_url || window.location.origin + '/xiaohongshu/card/' + row.id;
       }
     }
     
     if (navigator.clipboard && navigator.clipboard.writeText) {
       await navigator.clipboard.writeText(linkUrl)
-      ElMessage.success(i18n.global.t('链接已复制到剪贴板'))
+      ElMessage.success(i18n.global.t(t('auto.List.57.deb26c')))
     } else {
       const textArea = document.createElement('textarea');
       textArea.value = linkUrl
@@ -478,17 +481,17 @@ const handleCopyLink = async (row) => {
       
       try {
         document.execCommand('copy')
-        ElMessage.success(i18n.global.t('链接已复制到剪贴板'))
+        ElMessage.success(i18n.global.t(t('auto.List.57.deb26c')))
       } catch (copyError) {
-        ElMessage.error(i18n.global.t('复制链接失败，请手动复制链接'))
-        console.error('复制失败:', copyError)
+        ElMessage.error(i18n.global.t(t('auto.List.58.9fb499')))
+        console.error(t('auto.List.59.b38958'), copyError)
       } finally {
         document.body.removeChild(textArea)
       }
     }
   } catch (error) {
-    ElMessage.error(i18n.global.t('复制链接失败'))
-    console.error('复制链接错误:', error)
+    ElMessage.error(i18n.global.t(t('auto.List.60.da0ab5')))
+    console.error(t('auto.List.61.010973'), error)
   }
 };
 

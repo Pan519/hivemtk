@@ -4,29 +4,29 @@
     <el-card class="header-card" shadow="never">
       <el-row :gutter="20">
         <el-col :span="6">
-          <el-form-item label="资产 ID" label-width="80px">
+          <el-form-item :label="$t('auto.Playground.1.69847d')" label-width="80px">
             <el-input v-model="bundle.asset_id" placeholder="hive_sales_vape_cn_001" :disabled="isEdit" />
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="资产包名称" label-width="90px">
-            <el-input v-model="bundle.title" placeholder="销冠话术包名称" />
+          <el-form-item :label="$t('auto.Playground.2.0acf6d')" label-width="90px">
+            <el-input v-model="bundle.title" :placeholder="$t('auto.Playground.3.8774f1')" />
           </el-form-item>
         </el-col>
         <el-col :span="4">
-          <el-form-item label="版本" label-width="60px">
+          <el-form-item :label="$t('auto.Playground.4.fe2df0')" label-width="60px">
             <el-input v-model="bundle.version" placeholder="1.0.0" />
           </el-form-item>
         </el-col>
         <el-col :span="4">
-          <el-form-item label="行业" label-width="60px">
-            <el-input v-model="bundle.industry" placeholder="跨境电商" />
+          <el-form-item :label="$t('auto.Playground.5.6adafe')" label-width="60px">
+            <el-input v-model="bundle.industry" :placeholder="$t('auto.Playground.6.4529df')" />
           </el-form-item>
         </el-col>
         <el-col :span="4">
           <div class="header-actions">
-            <el-button type="primary" :loading="saving" @click="handleSave">💾 保存</el-button>
-            <el-button v-if="bundle.id" type="success" @click="handlePublish">🚀 发布</el-button>
+            <el-button type="primary" :loading="saving" @click="handleSave">{{ $t('auto.Playground.15.afcc3e') }}</el-button>
+            <el-button v-if="bundle.id" type="success" @click="handlePublish">{{ $t('auto.Playground.16.e822c2') }}</el-button>
           </div>
         </el-col>
       </el-row>
@@ -38,8 +38,8 @@
         <el-card class="left-panel" shadow="never">
           <template #header>
             <div class="panel-header">
-              <span>📝 左栏：OpenAI 协议标准的消息链流式编排区</span>
-              <el-button type="primary" size="small" @click="addMessage('user')">➕ 添加 Few-Shot 对</el-button>
+              <span>{{ $t('auto.Playground.17.709de7') }}</span>
+              <el-button type="primary" size="small" @click="addMessage('user')">{{ $t('auto.Playground.18.581c38') }}</el-button>
             </div>
           </template>
 
@@ -54,9 +54,9 @@
                 <el-tag :type="roleTagType(msg.role)" size="small">
                   {{ roleLabel(msg.role) }}
                 </el-tag>
-                <span v-if="idx === 0 && msg.role === 'system'" class="hint">（固化首项，商城的灵魂核心）</span>
-                <span v-else-if="msg.role === 'user'" class="hint">（Few-Shot 用户示例）</span>
-                <span v-else-if="msg.role === 'assistant'" class="hint">（Few-Shot AI 回复）</span>
+                <span v-if="idx === 0 && msg.role === 'system'" class="hint">{{ $t('auto.Playground.19.1bac12') }}</span>
+                <span v-else-if="msg.role === 'user'" class="hint">{{ $t('auto.Playground.20.d5eb2e') }}</span>
+                <span v-else-if="msg.role === 'assistant'" class="hint">{{ $t('auto.Playground.21.26ff4a') }}</span>
                 <div class="message-actions">
                   <el-button
                     v-if="idx > 0"
@@ -76,7 +76,7 @@
                     type="danger"
                     link
                     @click="removeMessage(idx)"
-                  >删除</el-button>
+                  >{{ $t('auto.Playground.22.2f4aad') }}</el-button>
                 </div>
               </div>
               <el-input
@@ -90,9 +90,9 @@
           </div>
 
           <div class="add-pair-row">
-            <el-button @click="addMessage('user')">➕ 添加 user Few-Shot</el-button>
-            <el-button @click="addMessage('assistant')">➕ 添加 assistant Few-Shot</el-button>
-            <el-button @click="addMessage('system')">➕ 添加 system 指令</el-button>
+            <el-button @click="addMessage('user')">{{ $t('auto.Playground.23.e043f7') }}</el-button>
+            <el-button @click="addMessage('assistant')">{{ $t('auto.Playground.24.9ce2e5') }}</el-button>
+            <el-button @click="addMessage('system')">{{ $t('auto.Playground.25.cf57fd') }}</el-button>
           </div>
         </el-card>
       </el-col>
@@ -102,24 +102,24 @@
         <el-card class="right-panel" shadow="never">
           <template #header>
             <div class="panel-header">
-              <span>🧪 右栏：本地模型沙箱内测与上架</span>
+              <span>{{ $t('auto.Playground.26.02ba7a') }}</span>
             </div>
           </template>
 
           
           <div class="config-section">
-            <div class="section-title">⚙️ 调试基座配置</div>
+            <div class="section-title">{{ $t('auto.Playground.27.d20472') }}</div>
             <el-form label-width="120px" size="small">
-              <el-form-item label="关联本地推理端">
+              <el-form-item :label="$t('auto.Playground.7.610269')">
                 <el-input v-model="sandbox.endpoint" placeholder="http://localhost:11434/v1/chat/completions" />
               </el-form-item>
-              <el-form-item label="模型名">
+              <el-form-item :label="$t('auto.Playground.8.0e0f4d')">
                 <el-input v-model="sandbox.model" placeholder="qwen2.5:7b" />
               </el-form-item>
-              <el-form-item label="测试推理温度">
+              <el-form-item :label="$t('auto.Playground.9.5b8c65')">
                 <el-slider v-model="sandbox.temperature" :min="0" :max="1" :step="0.1" show-input />
               </el-form-item>
-              <el-form-item label="最大 tokens">
+              <el-form-item :label="$t('auto.Playground.10.e09c9b')">
                 <el-input-number v-model="sandbox.maxTokens" :min="128" :max="8192" :step="128" />
               </el-form-item>
             </el-form>
@@ -127,7 +127,7 @@
 
           
           <div class="chat-section">
-            <div class="section-title">🖥️ 沙箱实时多轮对话模拟</div>
+            <div class="section-title">{{ $t('auto.Playground.28.92bdbb') }}</div>
             <div class="chat-history" ref="chatHistoryRef">
               <div
                 v-for="(m, i) in sandbox.history"
@@ -138,14 +138,14 @@
                 <div class="chat-role">{{ roleLabel(m.role) }}</div>
                 <pre class="chat-content">{{ m.content }}</pre>
               </div>
-              <el-empty v-if="!sandbox.history.length" description="输入测试用户消息开始模拟" :image-size="60" />
+              <el-empty v-if="!sandbox.history.length" :description="$t('auto.Playground.11.53a063')" :image-size="60" />
             </div>
             <div class="chat-input-row">
               <el-input
                 v-model="sandbox.input"
                 type="textarea"
                 :rows="2"
-                placeholder="输入测试用户消息，例如：发货到德国包清关吗？"
+                :placeholder="$t('auto.Playground.12.1ba6a5')"
                 @keydown.enter.ctrl="runSandbox"
               />
               <el-button type="primary" :loading="sandbox.running" @click="runSandbox">
@@ -156,7 +156,7 @@
 
           
           <div class="intent-section" v-if="sandbox.lastIntent">
-            <div class="section-title">🔍 拦截日志 JSON 预检</div>
+            <div class="section-title">{{ $t('auto.Playground.29.6d5f36') }}</div>
             <div class="intent-status">
               <el-tag :type="sandbox.lastIntent.valid ? 'success' : 'danger'">
                 {{ sandbox.lastIntent.valid ? '🟢 合法格式，成功抓取' : '🔴 非法格式' }}
@@ -189,20 +189,20 @@
               label-width="120px"
               size="small"
             >
-              <el-form-item label="商业买断价">
+              <el-form-item :label="$t('auto.Playground.13.694a76')">
                 <el-input v-model="bundle.price" placeholder="$ 299.00" />
               </el-form-item>
-              <el-form-item label="作用域">
+              <el-form-item :label="$t('auto.Playground.14.4705b8')">
                 <el-radio-group v-model="bundle.scope">
-                  <el-radio label="private">私有</el-radio>
-                  <el-radio label="shared">共享</el-radio>
-                  <el-radio label="official">官方</el-radio>
+                  <el-radio label="private">{{ $t('auto.Playground.30.3dc518') }}</el-radio>
+                  <el-radio label="shared">{{ $t('auto.Playground.31.fffd3c') }}</el-radio>
+                  <el-radio label="official">{{ $t('auto.Playground.32.f5c379') }}</el-radio>
                 </el-radio-group>
               </el-form-item>
             </el-form>
             <el-button type="primary" plain class="publish-btn" @click="handlePublish">
               {{ platformEnabled ? '🚀 审核上架到官方蜂巢商城' : '🚀 发布到本地资产库' }}
-              <span class="publish-hint">（自动序列化为标准 messages 数组）</span>
+              <span class="publish-hint">{{ $t('auto.Playground.33.cff336') }}</span>
             </el-button>
           </div>
         </el-card>
@@ -213,6 +213,7 @@
 
 <script setup>
 import { ref, reactive, onMounted, computed, nextTick } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import {
@@ -226,6 +227,8 @@ const userStore = useUserStore()
 
 const route = useRoute()
 const router = useRouter()
+const { t } = useI18n()
+
 const chatHistoryRef = ref(null)
 const saving = ref(false)
 // 关态下后端对上架写接口回 403，入口直接不渲染；取不到就按关态处理
@@ -279,10 +282,10 @@ const roleTagType = (r) => ({
 }[r] || 'info')
 
 const rolePlaceholder = (r) => ({
-  system: '系统人设 / 顶层指令 / 强制业务结算协议',
-  user: '客户提问示例（Few-Shot）',
+  system: t('auto.Playground.34.d282e8'),
+  user: t('auto.Playground.35.97423a'),
   assistant: 'AI 标准回复（含末尾 ```json 业务结算块```）',
-  tool: '工具调用结果'
+  tool: t('auto.Playground.36.9742cd')
 }[r] || '')
 
 const addMessage = (role = 'user') => {
@@ -325,21 +328,21 @@ const loadBundle = async () => {
       bundle.messages = (data.messages || []).map(m => ({ ...m }))
     }
   } catch (e) {
-    ElMessage.error('加载资产包失败: ' + (e?.message || e))
+    ElMessage.error(t('auto.Playground.37.2cfc14') + (e?.message || e))
   }
 };
 
 const handleSave = async () => {
   if (!bundle.asset_id) {
-    ElMessage.warning('请填写资产 ID')
+    ElMessage.warning(t('auto.Playground.38.b9b9a9'))
     return
   }
   if (!bundle.title) {
-    ElMessage.warning('请填写资产包名称')
+    ElMessage.warning(t('auto.Playground.39.ac8238'))
     return
   }
   if (!bundle.messages.length) {
-    ElMessage.warning('请至少添加一条 message')
+    ElMessage.warning(t('auto.Playground.40.a397f8'))
     return
   }
   saving.value = true
@@ -356,20 +359,20 @@ const handleSave = async () => {
     if (bundle.id) {
       payload.id = bundle.id
       await updateBundle(bundle.id, payload)
-      ElMessage.success('更新成功')
+      ElMessage.success(t('auto.Playground.41.55aa63'))
     } else {
       const resp = await createBundle(payload)
       const data = resp?.data || resp
       if (data && data.id) {
         bundle.id = data.id
-        ElMessage.success('保存成功')
+        ElMessage.success(t('auto.Playground.42.3b1083'))
         router.replace(`/asset-bundle/playground/${bundle.asset_id}`)
       } else {
-        ElMessage.success('保存成功')
+        ElMessage.success(t('auto.Playground.42.3b1083'))
       }
     }
   } catch (e) {
-    ElMessage.error('保存失败: ' + (e?.message || e))
+    ElMessage.error(t('auto.Playground.43.40f902') + (e?.message || e))
   } finally {
     saving.value = false
   }
@@ -377,29 +380,29 @@ const handleSave = async () => {
 
 const handlePublish = async () => {
   if (!bundle.id) {
-    ElMessage.warning('请先保存资产包')
+    ElMessage.warning(t('auto.Playground.44.9558c4'))
     return
   }
   const toPlatform = platformEnabled.value
   try {
     await ElMessageBox.confirm(
-      toPlatform ? '确认发布并上架该资产包？将本地发布并提交平台审核' : '确认发布该资产包？发布后本地即可引用',
-      '确认', { type: 'warning' })
+      toPlatform ? t('auto.Playground.45.40ec61') : t('auto.Playground.46.325fd5'),
+      t('auto.Playground.47.e83a25'), { type: 'warning' })
     await publishBundle(bundle.id)
     bundle.status = 'active'
     if (!toPlatform) {
-      ElMessage.success('本地已发布')
+      ElMessage.success(t('auto.Playground.48.ac3aba'))
       return
     }
     try {
       await submitToPlatform(bundle.id)
-      ElMessage.success('本地已发布，并已提交平台审核上架')
+      ElMessage.success(t('auto.Playground.49.1c6034'))
     } catch (e) {
-      ElMessage.warning('本地已发布；提交平台审核失败：' + (e?.message || e))
+      ElMessage.warning(t('auto.Playground.50.f716d0') + (e?.message || e))
     }
   } catch (e) {
     if (e !== 'cancel') {
-      ElMessage.error('发布失败: ' + (e?.message || e))
+      ElMessage.error(t('auto.Playground.51.bd774a') + (e?.message || e))
     }
   }
 };
@@ -432,11 +435,11 @@ const extractIntent = (reply) => {
 
 const runSandbox = async () => {
   if (!sandbox.input.trim()) {
-    ElMessage.warning('请输入测试用户消息')
+    ElMessage.warning(t('auto.Playground.52.32f04b'))
     return
   }
   if (!bundle.messages.length) {
-    ElMessage.warning('请先编排 messages 数组')
+    ElMessage.warning(t('auto.Playground.53.0a3a6c'))
     return
   }
   sandbox.running = true
@@ -494,8 +497,8 @@ const runSandbox = async () => {
     }
   } catch (e) {
     if (!weaveOk) {
-      const msg = (e && e.message) ? e.message : '织布失败';
-      ElMessage.error('织布失败：' + msg)
+      const msg = (e && e.message) ? e.message : t('auto.Playground.54.803571');
+      ElMessage.error(t('auto.Playground.55.e32926') + msg)
       sandbox.history.push({
         role: 'assistant',
         content: `[织布失败] ${msg}\n\n提示：\n1. 请先「保存」资产包（织布需按 asset_id 读取已保存的 messages）\n2. 确认 asset_id 正确且未被删除`

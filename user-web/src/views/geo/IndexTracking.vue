@@ -3,31 +3,31 @@
     <el-card shadow="never">
       <template #header>
         <div class="card-header">
-          <span>🔍 收录与 AI 引用追踪</span>
+          <span>{{ $t('auto.IndexTracking.7.e4ed96') }}</span>
           <div>
-            <el-button type="primary" @click="load">刷新</el-button>
-            <el-button @click="verifyAll">一键全量验证</el-button>
+            <el-button type="primary" @click="load">{{ $t('auto.IndexTracking.8.694fc5') }}</el-button>
+            <el-button @click="verifyAll">{{ $t('auto.IndexTracking.9.ffb91a') }}</el-button>
           </div>
         </div>
       </template>
-      <el-empty v-if="!trackings.length" description="暂无收录数据" />
+      <el-empty v-if="!trackings.length" :description="$t('auto.IndexTracking.1.928646')" />
       <el-table v-else :data="trackings" size="small" border>
         <el-table-column prop="url" label="URL" show-overflow-tooltip />
-        <el-table-column prop="engine" label="引擎" width="100" />
-        <el-table-column label="收录" width="80">
+        <el-table-column prop="engine" :label="$t('auto.IndexTracking.2.6c1b19')" width="100" />
+        <el-table-column :label="$t('auto.IndexTracking.3.1ed3c1')" width="80">
           <template #default="{ row }">
             <el-tag :type="row.indexed ? 'success' : 'info'" size="small">{{ row.indexed ? '✅' : '—' }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="rank_position" label="排名" width="80" />
-        <el-table-column label="AI 引用" width="100">
+        <el-table-column prop="rank_position" :label="$t('auto.IndexTracking.4.a4dc00')" width="80" />
+        <el-table-column :label="$t('auto.IndexTracking.5.346477')" width="100">
           <template #default="{ row }">
             <el-tag :type="row.ai_cited ? 'success' : 'warning'" size="small">
               {{ row.ai_cited ? '✅ ' + row.ai_cite_count + '次' : '❌' }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="last_checked" label="验证时间" width="160" />
+        <el-table-column prop="last_checked" :label="$t('auto.IndexTracking.6.c1ce23')" width="160" />
       </el-table>
     </el-card>
   </div>
@@ -35,8 +35,11 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { geoApi } from '@/api/geo'
 import { ElMessage } from 'element-plus'
+const { t } = useI18n()
+
 const trackings = ref([])
 
 async function load() {
@@ -48,9 +51,9 @@ async function load() {
 async function verifyAll() {
   try {
     await geoApi.verifyAllIndex()
-    ElMessage.success('已触发全量验证')
+    ElMessage.success(t('auto.IndexTracking.10.f99996'))
     load()
-  } catch (e) { ElMessage.error('失败') }
+  } catch (e) { ElMessage.error(t('auto.IndexTracking.11.acd5cb')) }
 }
 onMounted(load)
 </script>

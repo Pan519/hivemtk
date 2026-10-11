@@ -1,6 +1,6 @@
 <template>
   <div class="chat-messages" ref="listRef">
-    <div v-if="loading" class="loading">加载中...</div>
+    <div v-if="loading" class="loading">{{ $t('auto.ChatMessages.1.26b5bd') }}</div>
     <div v-else-if="messages.length === 0" class="empty">
       <div class="empty-icon">
         <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
@@ -46,6 +46,7 @@
 import i18n from '@/i18n'
 
 import { ref, watch, nextTick, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import DOMPurify from 'dompurify';
 import RichCard from './RichCard.vue'
 
@@ -54,6 +55,8 @@ const props = defineProps({
   loading: { type: Boolean, default: false },
   typing: { type: Boolean, default: false }
 })
+
+const { t } = useI18n()
 
 const listRef = ref(null)
 
@@ -72,8 +75,8 @@ const bubbleClass = (msg) => {
 
 const displayName = (msg) => {
   if (msg.sender_type === 'user' || msg.sender_type === 'system') return ''
-  if (msg.sender_type === 'ai') return '客服'
-  return msg.sender_name || '客服'
+  if (msg.sender_type === 'ai') return t('auto.ChatMessages.2.e7dea7')
+  return msg.sender_name || t('auto.ChatMessages.2.e7dea7')
 };
 
 const avatarBg = (msg) => {
@@ -84,14 +87,14 @@ const avatarBg = (msg) => {
 
 const avatarText = (msg) => {
   if (msg.sender_type === 'user') {
-    const name = msg.sender_name || '我'
+    const name = msg.sender_name || t('auto.ChatMessages.3.168152')
     return name.slice(0, 1).toUpperCase()
   }
   if (msg.sender_type === 'agent') {
-    const name = msg.sender_name || '客'
+    const name = msg.sender_name || t('auto.ChatMessages.4.f5ddec')
     return name.slice(0, 1)
   }
-  return '客'
+  return t('auto.ChatMessages.4.f5ddec')
 };
 
 const avatarStyle = (msg) => ({ background: avatarBg(msg) })

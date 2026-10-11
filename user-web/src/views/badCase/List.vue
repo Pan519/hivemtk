@@ -6,8 +6,8 @@
       type="warning"
       show-icon
       :closable="false"
-      title="Bad Case 底座不可用"
-      description="后端回的是 503（这一竖未装配或缺 DB 句柄）。下面的空列表与全 0 读数不是「队列清完了」，是一次都没读到。"
+      :title="$t('auto.List.1.2ed4cc')"
+      :description="$t('auto.List.2.b79c1c')"
     />
     <el-alert
       v-if="!me"
@@ -15,14 +15,14 @@
       type="info"
       show-icon
       :closable="false"
-      title="登录态里没有 user id"
-      description="打标与撤销都要落到人（labeler_id 是这条结论谁下的的唯一出处），所以这一页此刻只能看不能点。重新登录通常就能拿回身份。"
+      :title="$t('auto.List.3.d5e452')"
+      :description="$t('auto.List.4.86595b')"
     />
 
     <el-card shadow="never">
       <template #header>
         <div class="card-header">
-          <span>Bad Case 队列</span>
+          <span>{{ $t('auto.List.41.d6784e') }}</span>
           <div class="header-actions">
             <el-button
               :disabled="!me"
@@ -32,7 +32,7 @@
             </el-button>
             <el-tooltip
               :disabled="canExportSet"
-              content="队列里没有「已打标且未导出」的样本 —— 先把待判定的判掉"
+              :content="$t('auto.List.5.2cbb4f')"
               placement="bottom"
             >
               <span>
@@ -84,14 +84,14 @@
         inline
         class="mb-12"
       >
-        <el-form-item label="来源">
+        <el-form-item :label="$t('auto.List.6.26ca20')">
           <el-select
             v-model="filter.source"
             class="filter-select"
             multiple
             clearable
             collapse-tags
-            placeholder="全部来源"
+            :placeholder="$t('auto.List.7.99b7a3')"
             @change="reload"
           >
             <el-option
@@ -102,14 +102,14 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="状态">
+        <el-form-item :label="$t('auto.List.8.3fea7c')">
           <el-select
             v-model="filter.status"
             class="filter-select"
             multiple
             clearable
             collapse-tags
-            placeholder="开放态（待判定＋已判定）"
+            :placeholder="$t('auto.List.9.1ea5af')"
             @change="reload"
           >
             <el-option
@@ -120,14 +120,14 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="归因类目">
+        <el-form-item :label="$t('auto.List.10.edbe83')">
           <el-select
             v-model="filter.label"
             class="filter-select"
             multiple
             clearable
             collapse-tags
-            placeholder="全部类目"
+            :placeholder="$t('auto.List.11.a01449')"
             @change="reload"
           >
             <el-option
@@ -138,12 +138,12 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="责任层">
+        <el-form-item :label="$t('auto.List.12.d8fc33')">
           <el-select
             v-model="filter.fix_layer"
             class="filter-select"
             clearable
-            placeholder="全部责任层"
+            :placeholder="$t('auto.List.13.214840')"
             @change="reload"
           >
             <el-option
@@ -162,7 +162,7 @@
         stripe
       >
         <el-table-column
-          label="来源"
+          :label="$t('auto.List.6.26ca20')"
           width="110"
         >
           <template #default="{ row }">
@@ -175,7 +175,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="现场"
+          :label="$t('auto.List.14.498bd0')"
           min-width="260"
         >
           <template #default="{ row }">
@@ -195,7 +195,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="置信度"
+          :label="$t('auto.List.15.8f3599')"
           width="150"
         >
           <template #default="{ row }">
@@ -208,7 +208,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="状态"
+          :label="$t('auto.List.8.3fea7c')"
           width="100"
         >
           <template #default="{ row }">
@@ -216,7 +216,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="归因"
+          :label="$t('auto.List.16.ffda23')"
           width="200"
         >
           <template #default="{ row }">
@@ -239,7 +239,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="判定人"
+          :label="$t('auto.List.17.badc15')"
           width="120"
         >
           <template #default="{ row }">
@@ -253,7 +253,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="操作"
+          :label="$t('auto.List.18.2b6bc0')"
           width="180"
           fixed="right"
         >
@@ -283,7 +283,7 @@
 
     <el-drawer
       v-model="detail.visible"
-      title="坏例详情"
+      :title="$t('auto.List.19.dab392')"
       size="42%"
     >
       <el-skeleton
@@ -307,7 +307,7 @@
 
     <el-drawer
       v-model="mark.visible"
-      title="归因打标"
+      :title="$t('auto.List.20.0bc59d')"
       size="46%"
     >
       <el-alert
@@ -323,13 +323,13 @@
         border
         class="mb-12"
       >
-        <el-descriptions-item label="现场提问">
+        <el-descriptions-item :label="$t('auto.List.21.9cacfc')">
           {{ mark.row?.query_text || '—' }}
         </el-descriptions-item>
-        <el-descriptions-item label="本轮回答">
+        <el-descriptions-item :label="$t('auto.List.22.a98b82')">
           {{ mark.row?.answer_text || '—' }}
         </el-descriptions-item>
-        <el-descriptions-item label="为什么被记">
+        <el-descriptions-item :label="$t('auto.List.23.49a47c')">
           {{ mark.row?.mark_reason || '—' }}
         </el-descriptions-item>
       </el-descriptions>
@@ -338,10 +338,10 @@
         label-position="top"
         @submit.prevent
       >
-        <el-form-item label="归因类目">
+        <el-form-item :label="$t('auto.List.10.edbe83')">
           <el-select
             v-model="mark.label"
-            placeholder="这条该找谁修"
+            :placeholder="$t('auto.List.24.c9c71a')"
             class="full"
           >
             <el-option
@@ -352,14 +352,14 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="判定依据">
+        <el-form-item :label="$t('auto.List.25.cd64ff')">
           <el-input
             v-model="mark.note"
             type="textarea"
             :rows="3"
             maxlength="2000"
             show-word-limit
-            placeholder="凭什么判它归这一层（导出评测集时这一句就是标准答案的注脚，缺了它这条样本就只能说「某人觉得它不对」）"
+            :placeholder="$t('auto.List.26.fd3a48')"
           />
         </el-form-item>
       </el-form>
@@ -384,7 +384,7 @@
 
     <el-drawer
       v-model="create.visible"
-      title="补录一条坏例"
+      :title="$t('auto.List.27.045a60')"
       size="46%"
     >
       <el-alert
@@ -399,41 +399,41 @@
         label-position="top"
         @submit.prevent
       >
-        <el-form-item label="会话 id">
+        <el-form-item :label="$t('auto.List.28.a45b37')">
           <el-input
             v-model="create.form.session_id"
-            placeholder="必填：这条得能指回是哪一次会话"
+            :placeholder="$t('auto.List.29.ccfb57')"
           />
         </el-form-item>
-        <el-form-item label="消息 id">
+        <el-form-item :label="$t('auto.List.30.2e4b80')">
           <el-input
             v-model="create.form.message_id"
-            placeholder="可缺：补录的幂等键用的是这条自己的新 id，同一会话可以补多条"
+            :placeholder="$t('auto.List.31.1e7b1d')"
           />
         </el-form-item>
-        <el-form-item label="意图">
+        <el-form-item :label="$t('auto.List.32.764aca')">
           <el-input v-model="create.form.intent_type" />
         </el-form-item>
-        <el-form-item label="现场提问">
+        <el-form-item :label="$t('auto.List.21.9cacfc')">
           <el-input
             v-model="create.form.query_text"
             type="textarea"
             :rows="2"
-            placeholder="必填"
+            :placeholder="$t('auto.List.33.537b39')"
           />
         </el-form-item>
-        <el-form-item label="本轮回答">
+        <el-form-item :label="$t('auto.List.22.a98b82')">
           <el-input
             v-model="create.form.answer_text"
             type="textarea"
             :rows="3"
-            placeholder="必填：判案要看的另一半边"
+            :placeholder="$t('auto.List.34.14cdc5')"
           />
         </el-form-item>
-        <el-form-item label="补录理由">
+        <el-form-item :label="$t('auto.List.35.1c3e6f')">
           <el-input
             v-model="create.form.reason"
-            placeholder="置信度没觉得低，但你觉得这次答得不行 —— 写下是哪一句让你这么判"
+            :placeholder="$t('auto.List.36.c6075e')"
           />
         </el-form-item>
       </el-form>
@@ -450,7 +450,7 @@
 
     <el-drawer
       v-model="exported.visible"
-      title="已导出的评测集"
+      :title="$t('auto.List.37.b85ec4')"
       size="42%"
     >
       <el-descriptions
@@ -458,13 +458,13 @@
         border
         class="mb-12"
       >
-        <el-descriptions-item label="评测集 id">
+        <el-descriptions-item :label="$t('auto.List.38.c0c78e')">
           {{ exported.set?.eval_set_id }}
         </el-descriptions-item>
-        <el-descriptions-item label="条数">
+        <el-descriptions-item :label="$t('auto.List.39.a6f7f1')">
           {{ exported.set?.count }}
         </el-descriptions-item>
-        <el-descriptions-item label="导出时刻">
+        <el-descriptions-item :label="$t('auto.List.40.bdfd7a')">
           {{ formatTime(exported.set?.exported_at) }}
         </el-descriptions-item>
       </el-descriptions>
@@ -485,6 +485,7 @@
 
 <script setup>
 import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { badCaseApi } from '@/api/badCase'
 import { toList } from '@/utils/list'
@@ -511,9 +512,9 @@ import {
 // **显示用**的：值域来自 taxonomy，命中就译、没命中就原样显示英文枚举值。
 
 const SOURCE_LABELS = {
-  low_confidence: '置信度偏低',
-  zero_hit: '零命中',
-  manual: '坐席补录'
+  low_confidence: t('auto.List.42.0c4305'),
+  zero_hit: t('auto.List.43.8732b9'),
+  manual: t('auto.List.44.9fcf7b')
 }
 const SOURCE_TAG_TYPES = {
   low_confidence: 'warning',
@@ -521,27 +522,27 @@ const SOURCE_TAG_TYPES = {
   manual: 'info'
 }
 const STATUS_LABELS = {
-  pending: '待判定',
-  labeled: '已判定',
-  exported: '已导出',
-  dismissed: '已撤销'
+  pending: t('auto.List.45.5a7f3f'),
+  labeled: t('auto.List.46.f36e8a'),
+  exported: t('auto.List.47.5c51c3'),
+  dismissed: t('auto.List.48.50239f')
 }
 const LABEL_NAMES = {
-  kb_missing: '知识库缺内容',
-  kb_stale: '知识库内容过时',
-  retrieve_miss: '检索没召回',
-  retrieve_wrong: '检索召回错条',
-  generation_wrong: '生成答错',
-  generation_style: '生成表达问题',
-  intent_misjudge: '意图判错'
+  kb_missing: t('auto.List.49.27de62'),
+  kb_stale: t('auto.List.50.2167b7'),
+  retrieve_miss: t('auto.List.51.df4c6e'),
+  retrieve_wrong: t('auto.List.52.5ae0bd'),
+  generation_wrong: t('auto.List.53.e739d3'),
+  generation_style: t('auto.List.54.626c87'),
+  intent_misjudge: t('auto.List.55.811e60')
 }
 const LAYER_LABELS = {
-  knowledge: '知识库',
-  retrieval: '检索',
-  generation: '生成',
-  intent: '意图算法'
+  knowledge: t('auto.List.56.7e4333'),
+  retrieval: t('auto.List.57.8bedce'),
+  generation: t('auto.List.58.4dfe70'),
+  intent: t('auto.List.59.ef84bd')
 }
-const ACTION_LABELS = { label: '打标', dismiss: '撤销' }
+const ACTION_LABELS = { label: t('auto.List.60.567503'), dismiss: t('auto.List.61.bd9fcf') }
 
 // STATS_POLL_MS：已判率是本卡北极星，值班要的是"打开时看到的是此刻的数"。
 // 30s 与待办中心同档；更短只是把读接口打成压力源。
@@ -551,6 +552,8 @@ const userStore = useUserStore()
 // 后端的 labeler_id 存的是 user id 的十进制字符串，这里统一成字符串，
 // 否则 userInfo.id 是数字时"这条是不是我判的"会永远判否。
 const me = computed(() => String(userStore.userInfo?.id ?? ''))
+
+const { t } = useI18n()
 
 const loading = ref(false)
 const exporting = ref(false)
@@ -582,11 +585,11 @@ const create = reactive({
 })
 const exported = reactive({ visible: false, set: null })
 
-const sourceLabel = (s) => SOURCE_LABELS[s] || s || '未知来源'
+const sourceLabel = (s) => SOURCE_LABELS[s] || s || t('auto.List.62.36cead')
 const sourceTagType = (s) => SOURCE_TAG_TYPES[s] || 'info'
-const statusLabel = (s) => STATUS_LABELS[s] || s || '未知状态'
+const statusLabel = (s) => STATUS_LABELS[s] || s || t('auto.List.63.903b25')
 const labelName = (l) => LABEL_NAMES[l] || l
-const layerLabel = (l) => LAYER_LABELS[l] || l || '未归层'
+const layerLabel = (l) => LAYER_LABELS[l] || l || t('auto.List.64.23ac2b')
 const actionLabel = (a) => ACTION_LABELS[a] || a
 const statusCount = (s) => Number(stats.by_status?.[s]) || 0
 const layerCount = (l) => Number(stats.by_fix_layer?.[l]) || 0
@@ -711,7 +714,7 @@ async function openDetail(row) {
     const data = await badCaseApi.get(row.id)
     detail.text = JSON.stringify(data ?? row, null, 2)
   } catch (err) {
-    detail.error = err?.message || '坏例详情读取失败'
+    detail.error = err?.message || t('auto.List.65.f87e6e')
   } finally {
     detail.loading = false
   }
@@ -730,7 +733,7 @@ async function submitLabel() {
   mark.error = ''
   try {
     await badCaseApi.label(mark.row.id, mark.label, mark.note)
-    ElMessage.success('已判定，这一条现在可以被导出进评测集')
+    ElMessage.success(t('auto.List.66.086beb'))
     mark.visible = false
     refresh()
   } catch (err) {
@@ -738,14 +741,14 @@ async function submitLabel() {
     if (status === 409) {
       // 两个人同时开着这一条：后提交的那个必被 CAS 挡下。这句"当前状态不允许"要让人读到，
       // 并把队列刷回来 —— 别人的结论该出现在界面上，而不是让人再点一次替自己盖章。
-      ElMessage.warning(err.message || '这条已被别人判定，界面显示的是当前状态')
+      ElMessage.warning(err.message || t('auto.List.67.236864'))
       mark.visible = false
       refresh()
     } else {
       // 其余一律留在抽屉里说一句话：400 是"类目或依据这条腿没齐"（界面已经替人挡过一轮），
       // 401 是会话在这期间过期了，5xx 是底座的事 —— 三种都不该表现成
       // "点了没反应，刷新看看"，那会让人以为是自己手慢。
-      mark.error = err.message || '打标失败'
+      mark.error = err.message || t('auto.List.68.a669be')
     }
   } finally {
     mark.submitting = false
@@ -755,27 +758,27 @@ async function submitLabel() {
 async function dismissRow(row) {
   let value
   try {
-    ({ value } = await ElMessageBox.prompt('撤销这条坏例，必须给理由', '撤销坏例', {
+    ({ value } = await ElMessageBox.prompt(t('auto.List.69.be5cf5'), t('auto.List.70.895b38'), {
       inputType: 'textarea',
-      inputPlaceholder: '例如：这次答案其实是对的，置信度被否决规则压低了',
-      inputValidator: (v) => (hasDismissReason(v) ? true : '撤销必须写理由'),
-      confirmButtonText: '撤销',
-      cancelButtonText: '返回'
+      inputPlaceholder: t('auto.List.71.6e1e4a'),
+      inputValidator: (v) => (hasDismissReason(v) ? true : t('auto.List.72.9c365d')),
+      confirmButtonText: t('auto.List.61.bd9fcf'),
+      cancelButtonText: t('auto.List.73.5f4112')
     }))
   } catch {
     return // 点了返回
   }
   try {
     await badCaseApi.dismiss(row.id, value)
-    ElMessage.success('已撤销')
+    ElMessage.success(t('auto.List.48.50239f'))
     refresh()
   } catch (err) {
     if (Number(err?.status) === 409) {
       // 已经被别人判掉了：撤销这条路此刻不存在。刷新后看到的是当前那一行，不是猜。
-      ElMessage.warning(err.message || '这条的状态已经不允许撤销，界面显示的是当前状态')
+      ElMessage.warning(err.message || t('auto.List.74.ca87dc'))
       refresh()
     } else {
-      ElMessage.error(err.message || '撤销失败')
+      ElMessage.error(err.message || t('auto.List.75.a8301a'))
     }
   }
 }
@@ -795,13 +798,13 @@ async function submitCreate() {
   create.error = ''
   try {
     await badCaseApi.create({ ...create.form })
-    ElMessage.success('已记进队列')
+    ElMessage.success(t('auto.List.76.a6d2ff'))
     create.visible = false
     refresh()
   } catch (err) {
     // 409 = 同一个 message_id 已经记过（幂等键撞上）。那句"已存在"是结果而不是失败，
     // 但在这里必须让人看见 —— 否则坐席会以为补录没成功而再点一次。
-    create.error = err?.message || '补录失败'
+    create.error = err?.message || t('auto.List.77.6af607')
   }
   create.submitting = false
 }
@@ -820,8 +823,8 @@ async function doExport() {
     // 这一竖的调用是静默的（导出按钮点下去不该由网关弹一句"服务异常"），
     // 所以三种结果都得由这里说话 —— 尤其 409：那句"没有可导出的样本"是业务结论，
     // 说成失败会让人再点一次，说成没事会让人以为已经导走了。
-    if (status === 409) ElMessage.warning('没有「已打标且未导出」的样本，先把待判定的判掉')
-    else ElMessage.error(err.message || '导出失败')
+    if (status === 409) ElMessage.warning(t('auto.List.78.428ab6'))
+    else ElMessage.error(err.message || t('auto.List.79.dd51ab'))
   } finally {
     exporting.value = false
   }

@@ -5,7 +5,7 @@
         <h2 class="page-title">
           今日跟进
         </h2>
-        <span class="page-sub">逾期、今日日历与全部待办，完成或取消即推进旅程</span>
+        <span class="page-sub">{{ $t('auto.Today.5.2cc047') }}</span>
       </div>
       <div class="head-right">
         <el-button
@@ -14,7 +14,7 @@
           @click="reload"
         >
           <el-icon><Refresh /></el-icon>
-          <span>刷新</span>
+          <span>{{ $t('auto.Today.6.694fc5') }}</span>
         </el-button>
       </div>
     </div>
@@ -39,7 +39,7 @@
             <el-icon class="zone-icon danger">
               <WarningFilled />
             </el-icon>
-            <span class="zone-title">已逾期</span>
+            <span class="zone-title">{{ $t('auto.Today.7.5d8559') }}</span>
             <el-tag
               size="small"
               type="danger"
@@ -118,7 +118,7 @@
             <el-icon class="zone-icon">
               <Calendar />
             </el-icon>
-            <span class="zone-title">今日日历</span>
+            <span class="zone-title">{{ $t('auto.Today.8.ab7056') }}</span>
             <span class="zone-date">{{ todayDate }}</span>
             <el-tag
               size="small"
@@ -197,7 +197,7 @@
             <el-icon class="zone-icon">
               <List />
             </el-icon>
-            <span class="zone-title">全部待办</span>
+            <span class="zone-title">{{ $t('auto.Today.9.04d85c') }}</span>
             <el-tag
               size="small"
               effect="plain"
@@ -271,12 +271,12 @@
 
     <el-dialog
       v-model="completeVisible"
-      title="完成跟进"
+      :title="$t('auto.Today.1.dd3daa')"
       width="460px"
       append-to-body
     >
       <el-form label-width="80px">
-        <el-form-item label="结果">
+        <el-form-item :label="$t('auto.Today.2.5ad7f5')">
           <el-select
             v-model="completeForm.result"
             class="fu-select"
@@ -289,12 +289,12 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="备注">
+        <el-form-item :label="$t('auto.Today.3.2432b5')">
           <el-input
             v-model="completeForm.note"
             type="textarea"
             :rows="3"
-            placeholder="本次沟通结论（可空）"
+            :placeholder="$t('auto.Today.4.39fdae')"
           />
         </el-form-item>
       </el-form>
@@ -316,6 +316,7 @@
 
 <script setup>
 import { ref, computed, onMounted, nextTick, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { Refresh, WarningFilled, Calendar, List } from '@element-plus/icons-vue'
@@ -325,6 +326,8 @@ import { followupApi } from '@/api/followup.js'
 // 三区并排（逾期/今日/全部待办）— 读口三条端点一一对应，完成/取消动作走
 // 写口。/followups/:id 深链（sales_workbench 聚合待办生成）在此定位高亮。
 const route = useRoute()
+
+const { t } = useI18n()
 
 const loading = ref(false)
 const submitting = ref(false)
@@ -350,16 +353,16 @@ const todayDate = computed(() => {
 // 与后端 FollowUpResultInfo 键一一对应（后端七枚举，缺一会出现"能选但
 // 后端 400"的半坏选项）。
 const resultOptions = [
-  { value: 'contacted', label: '已联系' },
-  { value: 'interested', label: '有意向' },
-  { value: 'quoted', label: '已报价' },
-  { value: 'converted', label: '已转化' },
-  { value: 'rejected', label: '已拒绝' },
-  { value: 'lost', label: '已流失' },
-  { value: 'no_response', label: '未回复' }
+  { value: 'contacted', label: t('auto.Today.10.6b00b8') },
+  { value: 'interested', label: t('auto.Today.11.003637') },
+  { value: 'quoted', label: t('auto.Today.12.e36736') },
+  { value: 'converted', label: t('auto.Today.13.f9a204') },
+  { value: 'rejected', label: t('auto.Today.14.81233d') },
+  { value: 'lost', label: t('auto.Today.15.f22a4d') },
+  { value: 'no_response', label: t('auto.Today.16.6231a2') }
 ]
 
-const priorityLabel = (p) => ({ 0: '低', 1: '普通', 2: '高', 3: '紧急' }[p] || '普通')
+const priorityLabel = (p) => ({ 0: t('auto.Today.17.19ac67'), 1: t('auto.Today.18.35242c'), 2: t('auto.Today.19.4296d7'), 3: t('auto.Today.20.cb0ed5') }[p] || t('auto.Today.18.35242c'))
 const priorityType = (p) => ({ 0: 'info', 1: 'info', 2: 'warning', 3: 'danger' }[p] || 'info')
 
 const fmtTime = (s) => {
@@ -380,11 +383,11 @@ const isOverdue = (r) => !!r.dueAt && new Date(r.dueAt).getTime() < Date.now()
 const describeError = (err) => {
   const status = err?.status ?? err?.response?.status
   const msg = err?.message || ''
-  if (status === 503) return { text: '跟进服务未装配（草稿/旅程运行时未启用），非“没有跟进”', type: 'warning' }
-  if (status === 400) return { text: `参数错误：${msg || '请检查筛选条件'}`, type: 'error' }
-  if (status === 409) return { text: msg || '提醒已处理', type: 'warning' }
-  if (status === 404) return { text: msg || '提醒不存在', type: 'warning' }
-  return { text: msg || '加载失败', type: 'error' }
+  if (status === 503) return { text: t('auto.Today.21.7a8abf'), type: 'warning' }
+  if (status === 400) return { text: `参数错误：${msg || t('auto.Today.22.2289f5')}`, type: 'error' }
+  if (status === 409) return { text: msg || t('auto.Today.23.612124'), type: 'warning' }
+  if (status === 404) return { text: msg || t('auto.Today.24.e6c84e'), type: 'warning' }
+  return { text: msg || t('auto.Today.25.866b79'), type: 'error' }
 }
 
 // ownerId：后端 owner_id 必带（空串=不过滤全员，读侧按当前登录人隔离）。
@@ -410,13 +413,13 @@ const locateRouteId = async () => {
   }
   // 深链 id 不在任何一区：提醒不存在/已处理/非本人 —— 只提示不跳转（与
   // I11 goTodo 的"无落点不进 NotFound"相反：这里有落点但提醒已不在 pending）。
-  ElMessage.info('该提醒不存在、已处理或不在你的待办中')
+  ElMessage.info(t('auto.Today.26.ce57f8'))
 }
 
 const reload = async () => {
   const ownerId = currentOwnerId()
   if (!ownerId) {
-    statusError.value = '未识别当前登录用户，无法按 owner 隔离跟进数据'
+    statusError.value = t('auto.Today.27.55d9c6')
     statusErrorType.value = 'error'
     return
   }
@@ -453,7 +456,7 @@ const doComplete = async () => {
   submitting.value = true
   try {
     await followupApi.complete(activeReminder.value.id, completeForm.value.result, completeForm.value.note)
-    ElMessage.success('已完成，旅程与销售事件已推进')
+    ElMessage.success(t('auto.Today.28.16ccb6'))
     completeVisible.value = false
     await reload()
   } catch (err) {
@@ -467,15 +470,15 @@ const doComplete = async () => {
 
 const doCancel = async (r) => {
   try {
-    await ElMessageBox.confirm(`确认取消「${r.title || r.id}」？取消后不可恢复。`, '取消跟进', {
+    await ElMessageBox.confirm(`确认取消「${r.title || r.id}」？取消后不可恢复。`, t('auto.Today.29.3fcc39'), {
       type: 'warning',
-      confirmButtonText: '确认取消',
-      cancelButtonText: '再想想'
+      confirmButtonText: t('auto.Today.30.e8606a'),
+      cancelButtonText: t('auto.Today.31.abe78b')
     })
   } catch { return }
   try {
     await followupApi.cancel(r.id)
-    ElMessage.success('已取消')
+    ElMessage.success(t('auto.Today.32.2111cc'))
     await reload()
   } catch (err) {
     const e = describeError(err)

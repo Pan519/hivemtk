@@ -9,15 +9,15 @@
             <el-date-picker
               v-model="dateRange"
               type="daterange"
-              range-separator="至"
-              start-placeholder="开始日期"
-              end-placeholder="结束日期"
+              :range-separator="$t('auto.CardStats.1.981cbe')"
+              :start-placeholder="$t('auto.CardStats.2.b44c0f')"
+              :end-placeholder="$t('auto.CardStats.3.1d468b')"
               @change="handleDateChange"
             />
-            <el-select v-model="groupBy" :placeholder="$t('分组方式')" @change="handleGroupByChange">
-              <el-option :label="$t('按天')" value="day" />
-              <el-option :label="$t('按周')" value="week" />
-              <el-option :label="$t('按月')" value="month" />
+            <el-select v-model="groupBy" ::placeholder="$t('auto.CardStats.4.bf8db0')" @change="handleGroupByChange">
+              <el-option ::label="$t('auto.CardStats.5.4eb3b0')" value="day" />
+              <el-option ::label="$t('auto.CardStats.6.787456')" value="week" />
+              <el-option ::label="$t('auto.CardStats.7.31019b')" value="month" />
             </el-select>
             <el-button type="primary" @click="refreshData">{{ $t('刷新') }}</el-button>
           </div>
@@ -37,15 +37,15 @@
           </el-col>
           <el-col :span="18">
             <el-descriptions :column="2" border>
-              <el-descriptions-item label="卡片ID">{{ cardInfo.id }}</el-descriptions-item>
-              <el-descriptions-item label="标题">{{ cardInfo.title }}</el-descriptions-item>
-              <el-descriptions-item label="状态">
+              <el-descriptions-item :label="$t('auto.CardStats.8.883016')">{{ cardInfo.id }}</el-descriptions-item>
+              <el-descriptions-item :label="$t('auto.CardStats.9.32c65d')">{{ cardInfo.title }}</el-descriptions-item>
+              <el-descriptions-item :label="$t('auto.CardStats.10.3fea7c')">
                 <el-tag :type="cardInfo.is_active ? 'success' : 'danger'">
                   {{ cardInfo.is_active ? '激活' : '禁用' }}
                 </el-tag>
               </el-descriptions-item>
-              <el-descriptions-item label="创建时间">{{ cardInfo.created_at }}</el-descriptions-item>
-              <el-descriptions-item label="描述" :span="2">{{ cardInfo.description }}</el-descriptions-item>
+              <el-descriptions-item :label="$t('auto.CardStats.11.eca37c')">{{ cardInfo.created_at }}</el-descriptions-item>
+              <el-descriptions-item :label="$t('auto.CardStats.12.3bdd08')" :span="2">{{ cardInfo.description }}</el-descriptions-item>
             </el-descriptions>
           </el-col>
         </el-row>
@@ -58,7 +58,7 @@
             <el-card class="stats-card">
               <div class="stats-item">
                 <div class="stats-value">{{ formatNumber(cardStats.viewCount) }}</div>
-                <div class="stats-label">总浏览量</div>
+                <div class="stats-label">{{ $t('auto.CardStats.17.7e6ff5') }}</div>
               </div>
             </el-card>
           </el-col>
@@ -72,7 +72,7 @@
             <el-card>
               <template #header>
                 <div class="card-header">
-                  <span>访问趋势</span>
+                  <span>{{ $t('auto.CardStats.18.8205ea') }}</span>
                 </div>
               </template>
               <div ref="visitTrendChart" class="chart-container"></div>
@@ -88,20 +88,20 @@
             <el-card>
               <template #header>
                 <div class="card-header">
-                  <span>最近活动</span>
+                  <span>{{ $t('auto.CardStats.19.73378a') }}</span>
                 </div>
               </template>
               <el-table :data="(cardStats.recentActivity || []).filter(item => item.action === 'view')" style="width: 100%">
-                <el-table-column prop="username" label="用户" />
-                <el-table-column prop="action" label="操作">
+                <el-table-column prop="username" :label="$t('auto.CardStats.13.1fd02a')" />
+                <el-table-column prop="action" :label="$t('auto.CardStats.14.2b6bc0')">
                   <template #default="scope">
                     <el-tag :type="getActionType(scope.row.action)">
                       {{ getActionText(scope.row.action) }}
                     </el-tag>
                   </template>
                 </el-table-column>
-                <el-table-column prop="ip_address" label="IP地址" />
-                <el-table-column prop="created_at" label="时间">
+                <el-table-column prop="ip_address" :label="$t('auto.CardStats.15.2dc910')" />
+                <el-table-column prop="created_at" :label="$t('auto.CardStats.16.19fcb9')">
                   <template #default="scope">
                     {{ formatDate(scope.row.created_at) }}
                   </template>
@@ -119,6 +119,7 @@
 import i18n from '@/i18n'
 
 import { ref, reactive, onMounted, nextTick } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import * as echarts from 'echarts'
@@ -127,6 +128,8 @@ import { getDouyinCard, getDouyinCardStats } from '@/api/douyinCard'
 
 const route = useRoute();
 const router = useRouter()
+
+const { t } = useI18n()
 
 const loading = ref(false);
 const cardId = ref(route.params.id)
@@ -150,7 +153,7 @@ const fetchCardInfo = async () => {
     const res = await getDouyinCard(cardId.value)
     cardInfo.value = res;
   } catch (error) {
-    ElMessage.error(i18n.global.t('获取卡片信息失败'))
+    ElMessage.error(i18n.global.t(t('auto.CardStats.20.eea2ec')))
     console.error(error)
   }
 };
@@ -174,7 +177,7 @@ const fetchCardStats = async () => {
       updateCharts()
     });
   } catch (error) {
-    ElMessage.error(i18n.global.t('获取统计数据失败'))
+    ElMessage.error(i18n.global.t(t('auto.CardStats.21.063dc7')))
     console.error(error)
   } finally {
     loading.value = false
@@ -189,7 +192,7 @@ const updateCharts = () => {
   visitChartInstance = safeInit(visitTrendChart.value)
   const visitOption = {
     title: {
-      text: '访问量趋势',
+      text: t('auto.CardStats.22.771eef'),
       left: 'center'
     },
     tooltip: {
@@ -204,7 +207,7 @@ const updateCharts = () => {
     },
     series: [
       {
-        name: '浏览量',
+        name: t('auto.CardStats.23.88bc4d'),
         type: 'line',
         data: (cardStats.dailyStats || []).map(item => item.view),
         smooth: true
@@ -263,7 +266,7 @@ const getActionType = (action) => {
 
 const getActionText = (action) => {
   const actionMap = {
-    view: '浏览'
+    view: t('auto.CardStats.24.9c5c5c')
   }
   return actionMap[action] || action
 };

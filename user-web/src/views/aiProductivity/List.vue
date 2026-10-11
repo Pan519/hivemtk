@@ -3,40 +3,40 @@
     <el-card class="page-card">
       <div class="page-header">
         <div>
-          <h2 class="page-title">AI 产能分析</h2>
-          <p class="page-sub">AI 回复占比、响应时长、转化率与 Token 成本概览</p>
+          <h2 class="page-title">{{ $t('auto.List.9.063fc7') }}</h2>
+          <p class="page-sub">{{ $t('auto.List.10.c43ffd') }}</p>
         </div>
-        <el-button type="primary" @click="loadAll">刷新</el-button>
+        <el-button type="primary" @click="loadAll">{{ $t('auto.List.11.694fc5') }}</el-button>
       </div>
 
       <el-row :gutter="16" class="kpi-row">
         <el-col :span="6">
-          <el-statistic title="总会话数" :value="rep.total_conversations" />
+          <el-statistic :title="$t('auto.List.1.7ed257')" :value="rep.total_conversations" />
         </el-col>
         <el-col :span="6">
-          <el-statistic title="AI 回复占比" :value="rep.ai_ratio" suffix="%" />
+          <el-statistic :title="$t('auto.List.2.cde02b')" :value="rep.ai_ratio" suffix="%" />
         </el-col>
         <el-col :span="6">
-          <el-statistic title="平均响应时长(秒)" :value="Number(Number(rep.avg_response_time || 0).toFixed(1))" />
+          <el-statistic :title="$t('auto.List.3.3871cd')" :value="Number(Number(rep.avg_response_time || 0).toFixed(1))" />
         </el-col>
         <el-col :span="6">
-          <el-statistic title="转化率" :value="rep.conversion_rate" suffix="%" />
+          <el-statistic :title="$t('auto.List.4.715054')" :value="rep.conversion_rate" suffix="%" />
         </el-col>
         <el-col :span="6">
-          <el-statistic title="AI 回复数" :value="rep.ai_replies" />
+          <el-statistic :title="$t('auto.List.5.9b925f')" :value="rep.ai_replies" />
         </el-col>
         <el-col :span="6">
-          <el-statistic title="人工回复数" :value="rep.human_replies" />
+          <el-statistic :title="$t('auto.List.6.58661d')" :value="rep.human_replies" />
         </el-col>
         <el-col :span="6">
-          <el-statistic title="转化数(成单)" :value="rep.total_conversions" />
+          <el-statistic :title="$t('auto.List.7.2550ea')" :value="rep.total_conversions" />
         </el-col>
         <el-col :span="6">
           <el-statistic title="LLM Token" :value="rep.llm_tokens" />
         </el-col>
       </el-row>
 
-      <el-card shadow="never" header="近 30 天趋势" class="trend-card">
+      <el-card shadow="never" :header="$t('auto.List.8.3c3478')" class="trend-card">
         <div ref="trendChart" class="chart-box"></div>
       </el-card>
     </el-card>
@@ -45,6 +45,8 @@
 
 <script>
 import * as echarts from 'echarts'
+import i18n from '@/i18n'
+const t = i18n.global.t
 import { safeInit } from '@/utils/echarts'
 import AIProductivityApi from '@/api/aiProductivity'
 
@@ -72,7 +74,7 @@ export default {
         AIProductivityApi.getTrend({ days: 30 })
       ])
       this.rep = rep || {}
-      const t = trendRes && Array.isArray(trendRes.trend) ? trendRes.trend : (Array.isArray(trendRes) ? trendRes : [])
+      const trendData = trendRes && Array.isArray(trendRes.trend) ? trendRes.trend : (Array.isArray(trendRes) ? trendRes : [])
       this.trend = t
       this.renderTrend()
     },
@@ -84,13 +86,13 @@ export default {
       const orders = this.trend.map((d) => d.conversions)
       this.chartInst.setOption({
         tooltip: { trigger: 'axis' },
-        legend: { data: ['会话数', 'AI 回复数', '转化数'] },
+        legend: { data: [t('auto.List.12.4d4b9c'), 'AI 回复数', t('auto.List.13.d4268d')] },
         xAxis: { type: 'category', data: dates },
         yAxis: { type: 'value' },
         series: [
-          { name: '会话数', type: 'line', data: conv },
+          { name: t('auto.List.12.4d4b9c'), type: 'line', data: conv },
           { name: 'AI 回复数', type: 'line', data: ai },
-          { name: '转化数', type: 'bar', data: orders }
+          { name: t('auto.List.13.d4268d'), type: 'bar', data: orders }
         ]
       })
     }

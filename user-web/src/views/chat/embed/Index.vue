@@ -12,7 +12,7 @@
     />
     <div v-else class="loading-container">
       <div class="loading-spinner"></div>
-      <p>正在加载...</p>
+      <p>{{ $t('auto.Index.1.bd0271') }}</p>
     </div>
   </div>
 </template>
@@ -21,14 +21,17 @@
 import i18n from '@/i18n'
 
 import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
 import ChatWindow from './ChatWindow.vue'
 
 const route = useRoute()
 const router = useRouter()
 
+const { t } = useI18n()
+
 const channelId = ref('default');
-const channelTitle = ref('在线客服')
+const channelTitle = ref(t('auto.Index.2.7f72e8'))
 const widgetColor = ref('#1989fa')
 const source = ref('')
 const cardId = ref('')

@@ -3,7 +3,7 @@
     <el-card class="header-card">
       <div>
         <h2>{{ $t('集成管理') }}</h2>
-        <p class="subtitle">管理第三方系统集成和 API 对接</p>
+        <p class="subtitle">{{ $t('auto.List.28.0574f4') }}</p>
       </div>
       <el-button type="primary" @click="showCreateDialog">
         <el-icon><Plus /></el-icon>
@@ -48,26 +48,26 @@
 
     <el-card>
       <el-table :data="integrations" v-loading="loading" stripe>
-        <el-table-column prop="account_name" :label="$t('集成名称')" min-width="150" />
-        <el-table-column prop="platform" :label="$t('类型')" width="120">
+        <el-table-column prop="account_name" ::label="$t('auto.List.1.41332a')" min-width="150" />
+        <el-table-column prop="platform" ::label="$t('auto.List.2.a0ee25')" width="120">
           <template #default="{ row }">
             <el-tag>{{ row.platform }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="status" label="状态" width="100">
+        <el-table-column prop="status" :label="$t('auto.List.3.3fea7c')" width="100">
           <template #default="{ row }">
             <el-switch v-model="row.status" :active-value="1" :inactive-value="0" @change="toggleIntegration(row)" />
           </template>
         </el-table-column>
-        <el-table-column prop="last_sync_at" label="最后调用" width="180" />
-        <el-table-column prop="callCount" label="调用次数" width="100" />
-        <el-table-column prop="errorCount" label="错误次数" width="100" />
-        <el-table-column label="操作" width="300" fixed="right">
+        <el-table-column prop="last_sync_at" :label="$t('auto.List.4.a4f23d')" width="180" />
+        <el-table-column prop="callCount" :label="$t('auto.List.5.00d5bd')" width="100" />
+        <el-table-column prop="errorCount" :label="$t('auto.List.6.8731f2')" width="100" />
+        <el-table-column :label="$t('auto.List.7.2b6bc0')" width="300" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" @click="testConnection(row)">测试</el-button>
-            <el-button link type="primary" @click="viewLogs(row)">日志</el-button>
-            <el-button link type="primary" @click="editIntegration(row)">配置</el-button>
-            <el-button link type="danger" @click="deleteIntegration(row)">删除</el-button>
+            <el-button link type="primary" @click="testConnection(row)">{{ $t('auto.List.29.db06c7') }}</el-button>
+            <el-button link type="primary" @click="viewLogs(row)">{{ $t('auto.List.30.456d29') }}</el-button>
+            <el-button link type="primary" @click="editIntegration(row)">{{ $t('auto.List.31.224e2c') }}</el-button>
+            <el-button link type="danger" @click="deleteIntegration(row)">{{ $t('auto.List.32.2f4aad') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -75,96 +75,96 @@
 
     <el-dialog v-model="dialogVisible" :title="dialogTitle" width="700px">
       <el-form :model="form" :rules="formRules" ref="formRef" label-width="120px">
-        <el-form-item label="集成名称" prop="name">
+        <el-form-item :label="$t('auto.List.8.11fb9b')" prop="name">
           <el-input v-model="form.name" />
         </el-form-item>
-        <el-form-item label="集成类型" prop="type">
+        <el-form-item :label="$t('auto.List.9.204e63')" prop="type">
           <el-select v-model="form.type" style="width: 100%">
             <el-option label="Webhook" value="webhook" />
             <el-option label="REST API" value="api" />
-            <el-option label="数据库" value="database" />
-            <el-option label="消息队列" value="mq" />
+            <el-option :label="$t('auto.List.10.68051b')" value="database" />
+            <el-option :label="$t('auto.List.11.8bedb7')" value="mq" />
             <el-option label="OAuth" value="oauth" />
           </el-select>
         </el-form-item>
-        <el-form-item label="接入地址" v-if="form.type !== 'database'">
+        <el-form-item :label="$t('auto.List.12.f682f8')" v-if="form.type !== 'database'">
           <el-input v-model="form.endpoint" placeholder="https://..." />
         </el-form-item>
-        <el-form-item label="认证方式" v-if="form.type !== 'database'">
+        <el-form-item :label="$t('auto.List.13.b33c72')" v-if="form.type !== 'database'">
           <el-select v-model="form.authType" style="width: 100%">
             <el-option label="API Key" value="apikey" />
             <el-option label="Bearer Token" value="bearer" />
             <el-option label="Basic Auth" value="basic" />
             <el-option label="OAuth 2.0" value="oauth2" />
-            <el-option label="无" value="none" />
+            <el-option :label="$t('auto.List.14.d81bb2')" value="none" />
           </el-select>
         </el-form-item>
-        <el-form-item label="凭据" v-if="form.authType !== 'none' && form.type !== 'database'">
+        <el-form-item :label="$t('auto.List.15.5f811d')" v-if="form.authType !== 'none' && form.type !== 'database'">
           <el-input v-model="form.credentials" type="textarea" :rows="3" placeholder='{"api_key": "xxx"}' />
         </el-form-item>
-        <el-form-item label="数据库连接" v-if="form.type === 'database'">
+        <el-form-item :label="$t('auto.List.16.e45381')" v-if="form.type === 'database'">
           <el-input v-model="form.dbConn" placeholder="user:pass@tcp(host)/dbname" />
         </el-form-item>
-        <el-form-item label="同步频率">
+        <el-form-item :label="$t('auto.List.17.170984')">
           <el-select v-model="form.syncInterval" style="width: 100%">
-            <el-option label="实时" value="realtime" />
-            <el-option label="每分钟" value="1m" />
-            <el-option label="每小时" value="1h" />
-            <el-option label="每天" value="1d" />
+            <el-option :label="$t('auto.List.18.2843e2')" value="realtime" />
+            <el-option :label="$t('auto.List.19.35cf16')" value="1m" />
+            <el-option :label="$t('auto.List.20.860c00')" value="1h" />
+            <el-option :label="$t('auto.List.21.78623e')" value="1d" />
           </el-select>
         </el-form-item>
-        <el-form-item label="事件订阅">
+        <el-form-item :label="$t('auto.List.22.57a166')">
           <el-checkbox-group v-model="form.events">
-            <el-checkbox label="user.created">用户创建</el-checkbox>
-            <el-checkbox label="clue.updated">线索更新</el-checkbox>
+            <el-checkbox label="user.created">{{ $t('auto.List.33.0dec71') }}</el-checkbox>
+            <el-checkbox label="clue.updated">{{ $t('auto.List.34.982624') }}</el-checkbox>
           </el-checkbox-group>
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="dialogVisible = false">取消</el-button>
-        <el-button type="primary" @click="submitForm">保存</el-button>
+        <el-button @click="dialogVisible = false">{{ $t('auto.List.35.625fb2') }}</el-button>
+        <el-button type="primary" @click="submitForm">{{ $t('auto.List.36.be5fbb') }}</el-button>
       </template>
     </el-dialog>
 
     <el-dialog v-model="logsDialogVisible" :title="`${currentLogName} - 同步日志`" width="900px">
       <el-table :data="logs" v-loading="logsLoading" stripe border max-height="500px">
-        <el-table-column prop="timestamp" label="时间" width="180" />
-        <el-table-column prop="status" label="状态" width="100">
+        <el-table-column prop="timestamp" :label="$t('auto.List.23.19fcb9')" width="180" />
+        <el-table-column prop="status" :label="$t('auto.List.3.3fea7c')" width="100">
           <template #default="{ row: logRow }">
             <el-tag :type="logRow.status === 'success' ? 'success' : logRow.status === 'error' ? 'danger' : 'warning'">
               {{ logRow.status === 'success' ? '成功' : logRow.status === 'error' ? '失败' : '处理中' }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="message" label="消息" min-width="200" show-overflow-tooltip />
-        <el-table-column prop="details" label="详情" min-width="250" show-overflow-tooltip />
-        <el-table-column label="操作" width="80" fixed="right">
+        <el-table-column prop="message" :label="$t('auto.List.24.ff692f')" min-width="200" show-overflow-tooltip />
+        <el-table-column prop="details" :label="$t('auto.List.25.f26225')" min-width="250" show-overflow-tooltip />
+        <el-table-column :label="$t('auto.List.7.2b6bc0')" width="80" fixed="right">
           <template #default="{ row: logRow }">
-            <el-button link type="primary" @click="showLogDetail(logRow)">详情</el-button>
+            <el-button link type="primary" @click="showLogDetail(logRow)">{{ $t('auto.List.25.f26225') }}</el-button>
           </template>
         </el-table-column>
         <template #empty>
-          <el-empty description="暂无同步日志" />
+          <el-empty :description="$t('auto.List.26.ae7333')" />
         </template>
       </el-table>
       <template #footer>
-        <el-button @click="logsDialogVisible = false">关闭</el-button>
+        <el-button @click="logsDialogVisible = false">{{ $t('auto.List.37.b15d91') }}</el-button>
       </template>
     </el-dialog>
 
-    <el-dialog v-model="logDetailVisible" title="日志详情" width="600px">
+    <el-dialog v-model="logDetailVisible" :title="$t('auto.List.27.e0d9b6')" width="600px">
       <el-descriptions :column="1" border>
-        <el-descriptions-item label="时间">{{ currentLogDetail?.timestamp }}</el-descriptions-item>
-        <el-descriptions-item label="状态">
+        <el-descriptions-item :label="$t('auto.List.23.19fcb9')">{{ currentLogDetail?.timestamp }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.3.3fea7c')">
           <el-tag :type="currentLogDetail?.status === 'success' ? 'success' : currentLogDetail?.status === 'error' ? 'danger' : 'warning'">
             {{ currentLogDetail?.status === 'success' ? '成功' : currentLogDetail?.status === 'error' ? '失败' : '处理中' }}
           </el-tag>
         </el-descriptions-item>
-        <el-descriptions-item label="消息">{{ currentLogDetail?.message }}</el-descriptions-item>
-        <el-descriptions-item label="详情">{{ currentLogDetail?.details }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.24.ff692f')">{{ currentLogDetail?.message }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.25.f26225')">{{ currentLogDetail?.details }}</el-descriptions-item>
       </el-descriptions>
       <template #footer>
-        <el-button @click="logDetailVisible = false">关闭</el-button>
+        <el-button @click="logDetailVisible = false">{{ $t('auto.List.37.b15d91') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -174,6 +174,7 @@
 import i18n from '@/i18n'
 
 import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { Plus } from '@element-plus/icons-vue'
 import { toList } from '@/utils/list'
@@ -187,11 +188,13 @@ import {
   getIntegrationLogs
 } from '@/api/integration.js'
 
+const { t } = useI18n()
+
 const loading = ref(false)
 const integrations = ref([])
 const stats = ref({ enabled: 0, disabled: 0, error: 0, totalCalls: 0 })
 const dialogVisible = ref(false)
-const dialogTitle = ref('添加集成')
+const dialogTitle = ref(t('auto.List.38.aedf5c'))
 const formRef = ref()
 const logsDialogVisible = ref(false)
 const logsLoading = ref(false)
@@ -211,8 +214,8 @@ const form = ref({
   events: []
 })
 const formRules = {
-  name: [{ required: true, message: i18n.global.t('请输入集成名称'), trigger: 'blur' }],
-  type: [{ required: true, message: i18n.global.t('请选择类型'), trigger: 'change' }]
+  name: [{ required: true, message: i18n.global.t(t('auto.List.39.6987d0')), trigger: 'blur' }],
+  type: [{ required: true, message: i18n.global.t(t('auto.List.40.95f11c')), trigger: 'change' }]
 }
 
 const refreshData = async () => {
@@ -235,13 +238,13 @@ const refreshData = async () => {
 
 const showCreateDialog = () => {
   form.value = { id: 0, name: '', type: 'webhook', endpoint: '', authType: 'none', credentials: '', dbConn: '', syncInterval: '1h', events: [] }
-  dialogTitle.value = '添加集成'
+  dialogTitle.value = t('auto.List.38.aedf5c')
   dialogVisible.value = true
 }
 
 const editIntegration = (row) => {
   form.value = { ...row }
-  dialogTitle.value = '编辑集成'
+  dialogTitle.value = t('auto.List.41.dd51ab')
   dialogVisible.value = true
 }
 
@@ -255,34 +258,34 @@ const submitForm = async () => {
       } else {
         await createIntegration(form.value)
       }
-      ElMessage.success(i18n.global.t('保存成功'))
+      ElMessage.success(i18n.global.t(t('auto.List.42.3b1083')))
       dialogVisible.value = false
       refreshData()
     } catch (error) {
-      ElMessage.error(i18n.global.t('保存失败'))
+      ElMessage.error(i18n.global.t(t('auto.List.43.6de920')))
     }
   })
 }
 
 const toggleIntegration = async (row) => {
   await toggleIntegrationStatus(row.id, row.status)
-  ElMessage.success(i18n.global.t('状态已更新'))
+  ElMessage.success(i18n.global.t(t('auto.List.44.7d6e0e')))
   refreshData()
 }
 
 const testConnection = async (row) => {
-  const loading = ElMessage({ message: i18n.global.t('正在测试...'), type: 'info', duration: 0 })
+  const loading = ElMessage({ message: i18n.global.t(t('auto.List.45.96ae82')), type: 'info', duration: 0 })
   try {
     const res = await testIntegration(row.id)
     loading.close()
     if (res?.status === 'ok') {
-      ElMessage.success(i18n.global.t('连接成功'))
+      ElMessage.success(i18n.global.t(t('auto.List.46.b33199')))
     } else {
-      ElMessage.error('连接失败: ' + (res?.error || ''))
+      ElMessage.error(t('auto.List.47.fcc15a') + (res?.error || ''))
     }
   } catch (error) {
     loading.close()
-    ElMessage.error(i18n.global.t('测试失败'))
+    ElMessage.error(i18n.global.t(t('auto.List.48.9710d9')))
   }
 }
 
@@ -300,7 +303,7 @@ const viewLogs = async (row) => {
       logs.value = data.logs
     }
   } catch (error) {
-    ElMessage.error(i18n.global.t('获取日志失败'))
+    ElMessage.error(i18n.global.t(t('auto.List.49.c93f33')))
   } finally {
     logsLoading.value = false
   }
@@ -313,12 +316,12 @@ const showLogDetail = (row) => {
 
 const deleteIntegration = async (row) => {
   try {
-    await ElMessageBox.confirm(`确定删除集成 "${row.name}"？`, '确认', { type: 'warning' })
+    await ElMessageBox.confirm(`确定删除集成 "${row.name}"？`, t('auto.List.50.e83a25'), { type: 'warning' })
     await deleteIntegrationApi(row.id)
-    ElMessage.success(i18n.global.t('删除成功'))
+    ElMessage.success(i18n.global.t(t('auto.List.51.0007d1')))
     refreshData()
   } catch (e) {
-    if (e !== 'cancel') ElMessage.error(i18n.global.t('删除失败'))
+    if (e !== 'cancel') ElMessage.error(i18n.global.t(t('auto.List.52.acf066')))
   }
 }
 

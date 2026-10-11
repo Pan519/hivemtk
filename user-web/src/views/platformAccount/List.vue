@@ -18,8 +18,8 @@
     
     <div class="search-form">
       <el-form :inline="true" :model="searchForm" class="search-form-content">
-        <el-form-item :label="$t('平台')">
-          <el-select v-model="searchForm.platform" :placeholder="$t('请选择平台')" clearable>
+        <el-form-item ::label="$t('auto.List.1.80a5d0')">
+          <el-select v-model="searchForm.platform" ::placeholder="$t('auto.List.2.9b247d')" clearable>
             <el-option
               v-for="platform in platformOptions"
               :key="platform.value"
@@ -28,14 +28,14 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('账号')">
-          <el-input v-model="searchForm.account" :placeholder="$t('请输入账号')" clearable />
+        <el-form-item ::label="$t('auto.List.3.4a56d3')">
+          <el-input v-model="searchForm.account" ::placeholder="$t('auto.List.4.5a2cef')" clearable />
         </el-form-item>
-        <el-form-item :label="$t('状态')">
-          <el-select v-model="searchForm.status" :placeholder="$t('请选择状态')" clearable>
-            <el-option :label="$t('正常')" value="1" />
-            <el-option :label="$t('异常')" value="2" />
-            <el-option :label="$t('未登录')" value="3" />
+        <el-form-item ::label="$t('auto.List.5.1b8578')">
+          <el-select v-model="searchForm.status" ::placeholder="$t('auto.List.6.333291')" clearable>
+            <el-option ::label="$t('auto.List.7.62f11e')" value="1" />
+            <el-option ::label="$t('auto.List.8.38b899')" value="2" />
+            <el-option ::label="$t('auto.List.9.c66e0a')" value="3" />
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -54,19 +54,19 @@
     
     <el-table :data="accountList" border style="width: 100%" v-loading="loading">
       <el-table-column prop="id" label="ID" width="80" />
-      <el-table-column prop="platform" :label="$t('平台')" width="120" />
-      <el-table-column prop="account_name" :label="$t('账号名称')" min-width="150" show-overflow-tooltip />
-      <el-table-column prop="account_id" :label="$t('账号ID')" min-width="150" show-overflow-tooltip />
-      <el-table-column prop="status" :label="$t('状态')" width="100">
+      <el-table-column prop="platform" ::label="$t('auto.List.1.80a5d0')" width="120" />
+      <el-table-column prop="account_name" ::label="$t('auto.List.10.5f0720')" min-width="150" show-overflow-tooltip />
+      <el-table-column prop="account_id" ::label="$t('auto.List.11.61c2f5')" min-width="150" show-overflow-tooltip />
+      <el-table-column prop="status" ::label="$t('auto.List.5.1b8578')" width="100">
         <template #default="scope">
           <el-tag :type="getStatusType(scope.row.status)">
             {{ getStatusText(scope.row.status) }}
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="last_login_at" label="最后登录" width="180" />
-      <el-table-column prop="created_at" label="创建时间" width="180" />
-      <el-table-column label="操作" width="280" fixed="right">
+      <el-table-column prop="last_login_at" :label="$t('auto.List.12.19fb21')" width="180" />
+      <el-table-column prop="created_at" :label="$t('auto.List.13.eca37c')" width="180" />
+      <el-table-column :label="$t('auto.List.14.2b6bc0')" width="280" fixed="right">
         <template #default="scope">
           <el-button type="primary" size="small" @click="handleEdit(scope.row)">
             <el-icon><Edit /></el-icon>
@@ -114,8 +114,8 @@
         :rules="rules"
         label-width="100px"
       >
-        <el-form-item label="平台" prop="platform">
-          <el-select v-model="form.platform" placeholder="请选择平台" style="width: 100%">
+        <el-form-item :label="$t('auto.List.15.498128')" prop="platform">
+          <el-select v-model="form.platform" :placeholder="$t('auto.List.16.72b562')" style="width: 100%">
             <el-option
               v-for="platform in platformOptions"
               :key="platform.value"
@@ -124,31 +124,31 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="账号名称" prop="account_name">
-          <el-input v-model="form.account_name" placeholder="请输入账号名称" />
+        <el-form-item :label="$t('auto.List.17.17327f')" prop="account_name">
+          <el-input v-model="form.account_name" :placeholder="$t('auto.List.18.1f3797')" />
         </el-form-item>
-        <el-form-item label="账号ID" prop="account_id">
-          <el-input v-model="form.account_id" placeholder="请输入账号ID" />
+        <el-form-item :label="$t('auto.List.19.14d171')" prop="account_id">
+          <el-input v-model="form.account_id" :placeholder="$t('auto.List.20.cf5e16')" />
         </el-form-item>
-        <el-form-item label="登录凭证" prop="credentials">
+        <el-form-item :label="$t('auto.List.21.ecf09a')" prop="credentials">
           <el-input
             v-model="form.credentials"
             type="textarea"
             :rows="4"
-            placeholder="请输入登录凭证信息（JSON格式）"
+            :placeholder="$t('auto.List.22.763626')"
           />
         </el-form-item>
-        <el-form-item label="状态" prop="status">
+        <el-form-item :label="$t('auto.List.23.3fea7c')" prop="status">
           <el-radio-group v-model="form.status">
-            <el-radio :label="1">正常</el-radio>
-            <el-radio :label="2">异常</el-radio>
-            <el-radio :label="3">未登录</el-radio>
+            <el-radio :label="1">{{ $t('auto.List.34.fd6e80') }}</el-radio>
+            <el-radio :label="2">{{ $t('auto.List.35.c195df') }}</el-radio>
+            <el-radio :label="3">{{ $t('auto.List.36.63e85d') }}</el-radio>
           </el-radio-group>
         </el-form-item>
       </el-form>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="dialogVisible = false">取消</el-button>
+          <el-button @click="dialogVisible = false">{{ $t('auto.List.37.625fb2') }}</el-button>
           <el-button type="primary" @click="handleSubmit" :loading="submitting">
             确定
           </el-button>
@@ -159,14 +159,14 @@
     
     <el-dialog
       v-model="platformsDialogVisible"
-      title="支持的平台"
+      :title="$t('auto.List.24.39e4a5')"
       width="600px"
     >
       <div v-loading="platformsLoading">
         <el-table :data="platformList" border style="width: 100%">
-          <el-table-column prop="code" label="平台代码" width="150" />
-          <el-table-column prop="name" label="平台名称" min-width="150" />
-          <el-table-column prop="description" label="说明" min-width="200" show-overflow-tooltip />
+          <el-table-column prop="code" :label="$t('auto.List.25.cb4e0f')" width="150" />
+          <el-table-column prop="name" :label="$t('auto.List.26.00c1f0')" min-width="150" />
+          <el-table-column prop="description" :label="$t('auto.List.27.f411d0')" min-width="200" show-overflow-tooltip />
         </el-table>
       </div>
     </el-dialog>
@@ -174,26 +174,26 @@
     
     <el-dialog
       v-model="loginDialogVisible"
-      title="账号登录"
+      :title="$t('auto.List.28.efae77')"
       width="500px"
       @close="handleLoginDialogClose"
     >
       <div v-loading="loginLoading">
         <el-form :model="loginForm" label-width="100px">
-          <el-form-item label="账号">
+          <el-form-item :label="$t('auto.List.29.7035c6')">
             <span>{{ currentAccount.account_name }}</span>
           </el-form-item>
-          <el-form-item label="平台">
+          <el-form-item :label="$t('auto.List.15.498128')">
             <span>{{ currentAccount.platform }}</span>
           </el-form-item>
-          <el-form-item label="验证码">
-            <el-input v-model="loginForm.code" placeholder="如需验证码请输入" />
+          <el-form-item :label="$t('auto.List.30.983f59')">
+            <el-input v-model="loginForm.code" :placeholder="$t('auto.List.31.09998b')" />
           </el-form-item>
         </el-form>
       </div>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="loginDialogVisible = false">取消</el-button>
+          <el-button @click="loginDialogVisible = false">{{ $t('auto.List.37.625fb2') }}</el-button>
           <el-button type="primary" @click="submitLogin" :loading="loginLoading">
             确认登录
           </el-button>
@@ -204,20 +204,20 @@
     
     <el-dialog
       v-model="statusDialogVisible"
-      title="账号状态"
+      :title="$t('auto.List.32.d05d90')"
       width="500px"
     >
       <div v-loading="statusLoading">
         <el-descriptions :column="1" border>
-          <el-descriptions-item label="账号">{{ currentAccount.account_name }}</el-descriptions-item>
-          <el-descriptions-item label="平台">{{ currentAccount.platform }}</el-descriptions-item>
-          <el-descriptions-item label="状态">
+          <el-descriptions-item :label="$t('auto.List.29.7035c6')">{{ currentAccount.account_name }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.15.498128')">{{ currentAccount.platform }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.23.3fea7c')">
             <el-tag :type="getStatusType(statusResult.status)">
               {{ getStatusText(statusResult.status) }}
             </el-tag>
           </el-descriptions-item>
-          <el-descriptions-item label="检测时间">{{ statusResult.checked_at }}</el-descriptions-item>
-          <el-descriptions-item label="说明">{{ statusResult.message || '-' }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.33.44c422')">{{ statusResult.checked_at }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.27.f411d0')">{{ statusResult.message || '-' }}</el-descriptions-item>
         </el-descriptions>
       </div>
     </el-dialog>
@@ -228,12 +228,15 @@
 import i18n from '@/i18n'
 
 import { ref, reactive, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import {
   Plus, Search, RefreshRight, Edit, Delete, Platform, SwitchButton, Check
 } from '@element-plus/icons-vue'
 import { platformAccountApi } from '@/api/platformAccount'
 import { getAccountStatusLabel, getAccountStatusTagType } from '@/constants/accountType';
+
+const { t } = useI18n()
 
 const loading = ref(false);
 const submitting = ref(false)
@@ -279,18 +282,18 @@ const loginForm = reactive({
 
 const rules = {
   platform: [
-    { required: true, message: i18n.global.t('请选择平台'), trigger: 'change' }
+    { required: true, message: i18n.global.t(t('auto.List.16.72b562')), trigger: 'change' }
   ],
   account_name: [
-    { required: true, message: i18n.global.t('请输入账号名称'), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.List.18.1f3797')), trigger: 'blur' }
   ],
   account_id: [
-    { required: true, message: i18n.global.t('请输入账号ID'), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.List.20.cf5e16')), trigger: 'blur' }
   ]
 };
 
 const dialogTitle = computed(() => {
-  return isEdit.value ? '编辑账号' : '新增账号'
+  return isEdit.value ? t('auto.List.38.656e89') : t('auto.List.39.34374b')
 });
 
 onMounted(() => {
@@ -362,19 +365,19 @@ const handleEdit = (row) => {
 const handleDelete = (row) => {
   ElMessageBox.confirm(
     `确定要删除平台账号 "${row.account_name}" 吗？`,
-    '提示',
+    t('auto.List.40.02d981'),
     {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
+      confirmButtonText: t('auto.List.41.38cf16'),
+      cancelButtonText: t('auto.List.37.625fb2'),
       type: 'warning'
     }
   ).then(async () => {
     try {
       await platformAccountApi.deleteAccount(row.id)
-      ElMessage.success(i18n.global.t('删除成功'))
+      ElMessage.success(i18n.global.t(t('auto.List.42.0007d1')))
       fetchAccountList()
     } catch (error) {
-      ElMessage.error(i18n.global.t('删除失败'))
+      ElMessage.error(i18n.global.t(t('auto.List.43.acf066')))
       console.error(error)
     }
   }).catch((e) => {
@@ -401,11 +404,11 @@ const handleSubmit = async () => {
         } else {
           await platformAccountApi.createAccount(submitData)
         }
-        ElMessage.success(isEdit.value ? '更新成功' : '创建成功')
+        ElMessage.success(isEdit.value ? t('auto.List.44.55aa63') : t('auto.List.45.04a691'))
         dialogVisible.value = false
         fetchAccountList()
       } catch (error) {
-        ElMessage.error(isEdit.value ? '更新失败' : '创建失败')
+        ElMessage.error(isEdit.value ? t('auto.List.46.930442') : t('auto.List.47.a88928'))
         console.error(error)
       } finally {
         submitting.value = false
@@ -462,11 +465,11 @@ const submitLogin = async () => {
   loginLoading.value = true
   try {
     await platformAccountApi.loginAccount(currentAccount.value.id, loginForm)
-    ElMessage.success(i18n.global.t('登录成功'))
+    ElMessage.success(i18n.global.t(t('auto.List.48.71fa3b')))
     loginDialogVisible.value = false
     fetchAccountList()
   } catch (error) {
-    ElMessage.error(i18n.global.t('登录失败'))
+    ElMessage.error(i18n.global.t(t('auto.List.49.b6076a')))
     console.error(error)
   } finally {
     loginLoading.value = false

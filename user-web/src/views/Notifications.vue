@@ -50,22 +50,22 @@
       <template #header>
         <div class="card-header">
           <el-space>
-            <el-select v-model="filter.type" :placeholder="$t('类型')" clearable style="width: 140px" @change="loadList">
-              <el-option :label="$t('全部')" :value="''" />
-              <el-option :label="$t('信息')" value="info" />
-              <el-option :label="$t('警告')" value="warning" />
-              <el-option :label="$t('错误')" value="error" />
-              <el-option :label="$t('成功')" value="success" />
-              <el-option :label="$t('公告')" value="announcement" />
+            <el-select v-model="filter.type" ::placeholder="$t('auto.Notifications.1.a0ee25')" clearable style="width: 140px" @change="loadList">
+              <el-option ::label="$t('auto.Notifications.2.86f694')" :value="''" />
+              <el-option ::label="$t('auto.Notifications.3.b98815')" value="info" />
+              <el-option ::label="$t('auto.Notifications.4.d7bbb0')" value="warning" />
+              <el-option ::label="$t('auto.Notifications.5.1623d1')" value="error" />
+              <el-option ::label="$t('auto.Notifications.6.063116')" value="success" />
+              <el-option ::label="$t('auto.Notifications.7.90af2a')" value="announcement" />
             </el-select>
-            <el-select v-model="filter.is_read" :placeholder="$t('状态')" clearable style="width: 120px" @change="loadList">
-              <el-option :label="$t('全部')" :value="''" />
-              <el-option :label="$t('未读')" :value="0" />
-              <el-option :label="$t('已读')" :value="1" />
+            <el-select v-model="filter.is_read" ::placeholder="$t('auto.Notifications.8.1b8578')" clearable style="width: 120px" @change="loadList">
+              <el-option ::label="$t('auto.Notifications.2.86f694')" :value="''" />
+              <el-option ::label="$t('auto.Notifications.9.508ed9')" :value="0" />
+              <el-option ::label="$t('auto.Notifications.10.a0f8db')" :value="1" />
             </el-select>
             <el-input
               v-model="filter.keyword"
-              :placeholder="$t('搜索标题/内容')"
+              ::placeholder="$t('auto.Notifications.11.bc08be')"
               clearable
               style="width: 220px"
               @keyup.enter="loadList"
@@ -76,29 +76,29 @@
       </template>
 
       <el-table :data="list" v-loading="loading" stripe>
-        <el-table-column label="状态" width="70" align="center">
+        <el-table-column :label="$t('auto.Notifications.12.3fea7c')" width="70" align="center">
           <template #default="{ row }">
             <el-badge v-if="!row.is_read" is-dot />
             <el-icon v-else color="#10B981"><Check /></el-icon>
           </template>
         </el-table-column>
-        <el-table-column label="类型" width="100" align="center">
+        <el-table-column :label="$t('auto.Notifications.13.226b09')" width="100" align="center">
           <template #default="{ row }">
             <el-tag :type="typeTagType(row.type)" size="small">
               {{ typeLabel(row.type) }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="title" label="标题" min-width="200" show-overflow-tooltip />
-        <el-table-column prop="content" label="内容" min-width="320" show-overflow-tooltip />
-        <el-table-column label="时间" width="180">
+        <el-table-column prop="title" :label="$t('auto.Notifications.14.32c65d')" min-width="200" show-overflow-tooltip />
+        <el-table-column prop="content" :label="$t('auto.Notifications.15.2d711b')" min-width="320" show-overflow-tooltip />
+        <el-table-column :label="$t('auto.Notifications.16.19fcb9')" width="180">
           <template #default="{ row }">
             {{ formatTime(row.created_at || row.createdAt) }}
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="100" fixed="right">
+        <el-table-column :label="$t('auto.Notifications.17.2b6bc0')" width="100" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" size="small" @click="onView(row)">查看</el-button>
+            <el-button link type="primary" size="small" @click="onView(row)">{{ $t('auto.Notifications.19.607e7a') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -117,7 +117,7 @@
     </el-card>
 
     
-    <el-dialog v-model="viewVisible" :title="current?.title || '通知详情'" width="560px">
+    <el-dialog v-model="viewVisible" ::title="$t('auto.Notifications.18.8102ab')" width="560px">
       <div v-if="current" class="detail-content">
         <el-tag :type="typeTagType(current.type)" size="small">
           {{ typeLabel(current.type) }}
@@ -133,7 +133,7 @@
         </div>
       </div>
       <template #footer>
-        <el-button @click="viewVisible = false">关闭</el-button>
+        <el-button @click="viewVisible = false">{{ $t('auto.Notifications.20.b15d91') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -143,10 +143,13 @@
 import i18n from '@/i18n'
 
 import { ref, reactive, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import { Refresh, Check, Link } from '@element-plus/icons-vue'
 import { http } from '@/utils/request'
 import { platformAPI } from '@/api/platform'
+
+const { t } = useI18n()
 
 const loading = ref(false)
 void Refresh; void Check; void Link
@@ -169,8 +172,8 @@ const stats = ref({
 const hasUnread = computed(() => (stats.value.unread || 0) > 0)
 
 const typeLabel = (t) => {
-  const map = { info: '信息', warning: '警告', error: '错误', success: '成功', announcement: '公告', notification: '通知' }
-  return map[t] || t || '通知'
+  const map = { info: t('auto.Notifications.21.d8c7e0'), warning: t('auto.Notifications.22.900c70'), error: t('auto.Notifications.23.7030ff'), success: t('auto.Notifications.24.330363'), announcement: t('auto.Notifications.25.fa86f1'), notification: t('auto.Notifications.26.5660bc') }
+  return map[t] || t || t('auto.Notifications.26.5660bc')
 }
 
 const typeTagType = (t) => {
@@ -209,7 +212,7 @@ const loadList = async () => {
     total.value = res?.total || list.value.length
     computeStats();
   } catch (err) {
-    ElMessage.error('加载通知失败：' + (err?.message || err))
+    ElMessage.error(t('auto.Notifications.27.724b62') + (err?.message || err))
   } finally {
     loading.value = false
   }
@@ -249,9 +252,9 @@ const onMarkAllRead = async () => {
     }
     list.value.forEach(m => { m.is_read = true })
     computeStats()
-    ElMessage.success(i18n.global.t('已全部标记为已读'))
+    ElMessage.success(i18n.global.t(t('auto.Notifications.28.2746f9')))
   } catch (err) {
-    ElMessage.error('操作失败：' + (err?.message || err))
+    ElMessage.error(t('auto.Notifications.29.79585f') + (err?.message || err))
   } finally {
     marking.value = false
   }

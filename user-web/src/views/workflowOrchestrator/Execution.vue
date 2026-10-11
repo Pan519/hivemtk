@@ -76,7 +76,7 @@
           type="textarea"
           :rows="4"
           readonly
-          placeholder="无"
+          :placeholder="$t('auto.Execution.1.d81bb2')"
         />
       </el-card>
 
@@ -124,7 +124,7 @@
             </div>
           </el-timeline-item>
         </el-timeline>
-        <el-empty v-else :description="$t('暂无节点执行记录')" />
+        <el-empty v-else ::description="$t('auto.Execution.2.f11e35')" />
       </el-card>
     </div>
   </div>
@@ -132,6 +132,7 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { VideoPause, Refresh, WarningFilled } from '@element-plus/icons-vue'
@@ -139,6 +140,8 @@ import { workflowOrchestratorApi } from '@/api/workflowOrchestrator.js'
 
 const route = useRoute()
 const executionId = computed(() => Number(route.params.id) || 0)
+
+const { t } = useI18n()
 
 const loading = ref(false)
 const execution = ref({})
@@ -189,7 +192,7 @@ const loadData = async () => {
     execution.value = execResult?.data || execResult || {}
     nodeExecutions.value = nodesResult?.data || nodesResult?.list || []
   } catch (e) {
-    ElMessage.error('加载失败: ' + (e?.message || ''))
+    ElMessage.error(t('auto.Execution.3.4bbdce') + (e?.message || ''))
   } finally {
     loading.value = false
   }
@@ -197,15 +200,15 @@ const loadData = async () => {
 
 const handleStop = async () => {
   try {
-    await ElMessageBox.confirm('确认停止此执行？', '停止确认', { type: 'warning' })
+    await ElMessageBox.confirm(t('auto.Execution.4.298ad0'), t('auto.Execution.5.f945b0'), { type: 'warning' })
     await workflowOrchestratorApi.stopExecution(executionId.value)
-    ElMessage.success('已停止')
+    ElMessage.success(t('auto.Execution.6.829778'))
     loadData()
   } catch (_) { /* 忽略：清理/存储/恢复类 best-effort 操作 */ }
 };
 
 const statusType = (s) => ({ running: 'primary', completed: 'success', failed: 'danger', terminated: 'warning', pending: 'info' }[s] || 'info');
-const statusText = (s) => ({ running: '运行中', completed: '已完成', failed: '失败', terminated: '已终止', pending: '等待中' }[s] || s)
+const statusText = (s) => ({ running: t('auto.Execution.7.d679ae'), completed: t('auto.Execution.8.fad522'), failed: t('auto.Execution.9.acd5cb'), terminated: t('auto.Execution.10.255412'), pending: t('auto.Execution.11.65dd9e') }[s] || s)
 const timelineColor = (s) => ({ running: 'primary', completed: 'success', failed: 'danger', terminated: 'warning', pending: 'info' }[s] || 'gray')
 const formatTime = (t) => {
   if (!t) return ''

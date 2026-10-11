@@ -5,11 +5,11 @@
         <el-card>
           <template #header>
             <div class="card-header">
-              <span>规则组合（拖拽构建）</span>
+              <span>{{ $t('auto.Builder.11.b0fd0d') }}</span>
               <el-button-group>
-                <el-button @click="addNode('and')">+ AND 节点</el-button>
-                <el-button @click="addNode('or')">+ OR 节点</el-button>
-                <el-button @click="addNode('condition')">+ 条件</el-button>
+                <el-button @click="addNode('and')">{{ $t('auto.Builder.12.41cd0b') }}</el-button>
+                <el-button @click="addNode('or')">{{ $t('auto.Builder.13.86143c') }}</el-button>
+                <el-button @click="addNode('condition')">{{ $t('auto.Builder.14.52fa34') }}</el-button>
               </el-button-group>
             </div>
           </template>
@@ -17,42 +17,42 @@
             <RuleNode v-for="(node, i) in rules" :key="i" :node="node" :level="0" @update="(n) => rules[i] = n" @remove="removeNode(i)" />
           </div>
           <div class="sql-preview">
-            <h4>SQL 预览</h4>
+            <h4>{{ $t('auto.Builder.15.64816d') }}</h4>
             <pre>{{ sqlPreview }}</pre>
-            <el-statistic :value="sqlCount" title="将命中客户数" />
+            <el-statistic :value="sqlCount" :title="$t('auto.Builder.1.63db38')" />
           </div>
         </el-card>
       </el-col>
       <el-col :span="8">
         <el-card>
-          <template #header><span>触发器</span></template>
+          <template #header><span>{{ $t('auto.Builder.16.469672') }}</span></template>
           <el-form :model="trigger" label-width="80px">
-            <el-form-item label="触发方式">
+            <el-form-item :label="$t('auto.Builder.2.159dbc')">
               <el-radio-group v-model="trigger.type">
-                <el-radio label="manual">手动</el-radio>
-                <el-radio label="schedule">定时</el-radio>
-                <el-radio label="event">事件触发</el-radio>
+                <el-radio label="manual">{{ $t('auto.Builder.17.2a3e7f') }}</el-radio>
+                <el-radio label="schedule">{{ $t('auto.Builder.18.72ebfe') }}</el-radio>
+                <el-radio label="event">{{ $t('auto.Builder.19.79ff3e') }}</el-radio>
               </el-radio-group>
             </el-form-item>
             <el-form-item v-if="trigger.type === 'schedule'" label="Cron">
               <el-input v-model="trigger.cron" placeholder="0 0 9 * * ?" />
             </el-form-item>
-            <el-form-item v-if="trigger.type === 'event'" label="事件">
+            <el-form-item v-if="trigger.type === 'event'" :label="$t('auto.Builder.3.10b276')">
               <el-select v-model="trigger.event">
-                <el-option label="新客户进入" value="customer.created" />
-                <el-option label="订单完成" value="order.completed" />
-                <el-option label="高价值行为" value="behavior.high_value" />
+                <el-option :label="$t('auto.Builder.4.0f1aa9')" value="customer.created" />
+                <el-option :label="$t('auto.Builder.5.c1a80c')" value="order.completed" />
+                <el-option :label="$t('auto.Builder.6.beaf9a')" value="behavior.high_value" />
               </el-select>
             </el-form-item>
-            <el-form-item label="同步到">
+            <el-form-item :label="$t('auto.Builder.7.d081f2')">
               <el-select v-model="trigger.sink" multiple>
-                <el-option label="触达 Pipeline" value="reach" />
-                <el-option label="客服队列" value="cs" />
-                <el-option label="群发任务" value="bulk" />
+                <el-option :label="$t('auto.Builder.8.58dfae')" value="reach" />
+                <el-option :label="$t('auto.Builder.9.33ae22')" value="cs" />
+                <el-option :label="$t('auto.Builder.10.ea4392')" value="bulk" />
               </el-select>
             </el-form-item>
           </el-form>
-          <el-button type="primary" style="width: 100%" @click="save">保存分群</el-button>
+          <el-button type="primary" style="width: 100%" @click="save">{{ $t('auto.Builder.20.797f7e') }}</el-button>
         </el-card>
       </el-col>
     </el-row>
@@ -60,13 +60,16 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed, h } from 'vue';
+import { ref, reactive, computed, h } from 'vue'
+import { useI18n } from 'vue-i18n';
 import { ElMessage } from 'element-plus'
 import { http } from '@/utils/request'
 // RuleNode 此前只在模板里用、从未 import 也从未定义（git HEAD 同样如此），
 // 导致 Vue 每次渲染都报 Failed to resolve component: RuleNode，且整棵规则树 UI 根本不显示。
 // 数据结构由本文件的 addNode / compileNode 唯一定义，组件按该契约实现。
 import RuleNode from './RuleNode.vue'
+
+const { t } = useI18n()
 
 const rules = ref([
   {
@@ -122,7 +125,7 @@ async function save() {
     rules: rules.value,
     trigger: JSON.stringify(trigger)
   })
-  ElMessage.success('分群已保存')
+  ElMessage.success(t('auto.Builder.21.e82641'))
 }
 </script>
 

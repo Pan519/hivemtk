@@ -10,7 +10,7 @@
             <el-select
               v-model="currentVersion"
               style="width: 140px"
-              :placeholder="$t('选择版本')"
+              ::placeholder="$t('auto.Editor.1.b4c33f')"
               @change="onVersionChange"
             >
               <el-option
@@ -101,7 +101,7 @@
                 marker-end="url(#wf-arrow)"
                 role="button"
                 tabindex="0"
-                aria-label="删除连线"
+                :aria-label="$t('auto.Editor.2.70c2f1')"
                 @click="removeEdge(idx)"
                 @keydown.enter.prevent="removeEdge(idx)"
                 @keydown.space.prevent="removeEdge(idx)"
@@ -152,11 +152,11 @@
               <span
                 class="node-handle handle-out"
                 @pointerdown.stop.prevent="onLinkStart(idx, $event)"
-                :title="$t('拖拽创建连线')"
+                ::title="$t('auto.Editor.3.b98332')"
               ></span>
             </div>
 
-            <el-empty v-if="nodes.length === 0" :description="$t('从左侧选择节点类型，点击添加到画布')" />
+            <el-empty v-if="nodes.length === 0" ::description="$t('auto.Editor.4.c3afdf')" />
           </div>
         </div>
 
@@ -165,22 +165,22 @@
           <h4>{{ $t('节点属性') }}</h4>
           <template v-if="selectedNodeIdx >= 0 && nodes[selectedNodeIdx]">
             <el-form :model="nodes[selectedNodeIdx]" label-width="90px" size="small">
-              <el-form-item :label="$t('标签')">
+              <el-form-item ::label="$t('auto.Editor.5.2a0c47')">
                 <el-input v-model="nodes[selectedNodeIdx].label" />
               </el-form-item>
-              <el-form-item :label="$t('节点 ID')">
+              <el-form-item ::label="$t('auto.Editor.6.a8633c')">
                 <el-input v-model="nodes[selectedNodeIdx].id" disabled />
               </el-form-item>
-              <el-form-item :label="$t('类型')">
+              <el-form-item ::label="$t('auto.Editor.7.a0ee25')">
                 <el-tag>{{ nodeTypeLabel(nodes[selectedNodeIdx].type) }}</el-tag>
               </el-form-item>
-              <el-form-item :label="$t('X 坐标')">
+              <el-form-item ::label="$t('auto.Editor.8.5d67d6')">
                 <el-input-number v-model="nodes[selectedNodeIdx].x" :min="0" :max="800" />
               </el-form-item>
-              <el-form-item :label="$t('Y 坐标')">
+              <el-form-item ::label="$t('auto.Editor.9.c74c80')">
                 <el-input-number v-model="nodes[selectedNodeIdx].y" :min="0" :max="500" />
               </el-form-item>
-              <el-form-item :label="$t('配置')">
+              <el-form-item ::label="$t('auto.Editor.10.ce283e')">
                 <el-input
                   v-model="nodes[selectedNodeIdx].config_text"
                   type="textarea"
@@ -190,7 +190,7 @@
               </el-form-item>
             </el-form>
           </template>
-          <el-empty v-else :description="$t('请选择一个节点')" />
+          <el-empty v-else ::description="$t('auto.Editor.11.3d3e42')" />
 
           <el-divider />
           <h4>{{ $t('JSON 预览') }}</h4>
@@ -199,7 +199,7 @@
             :model-value="definitionJson"
             :rows="8"
             readonly
-            placeholder="保存后显示 JSON"
+            :placeholder="$t('auto.Editor.12.803561')"
           />
         </div>
       </div>
@@ -209,6 +209,7 @@
 
 <script setup>
 import { ref, reactive, computed, onMounted, onBeforeUnmount, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { Delete, Lightning, Operation, Share, ForkSpoon } from '@element-plus/icons-vue'
@@ -218,13 +219,15 @@ const route = useRoute()
 const workflowId = computed(() => route.params.workflow_id || '')
 
 const nodeTypes = [
-  { value: 'trigger', label: '触发器', icon: Lightning },
-  { value: 'action', label: '动作', icon: Operation },
-  { value: 'condition', label: '条件', icon: ForkSpoon },
-  { value: 'subflow', label: '子流程', icon: Share }
+  { value: 'trigger', label: t('auto.Editor.13.469672'), icon: Lightning },
+  { value: 'action', label: t('auto.Editor.14.c500cf'), icon: Operation },
+  { value: 'condition', label: t('auto.Editor.15.69fbb2'), icon: ForkSpoon },
+  { value: 'subflow', label: t('auto.Editor.16.2d8cc6'), icon: Share }
 ]
 
 const nodeTypeLabel = (v) => nodeTypes.find(t => t.value === v)?.label || v
+const { t } = useI18n()
+
 const selectedNodeType = ref('trigger')
 const selectedNodeIdx = ref(-1)
 
@@ -341,10 +344,10 @@ const onPointerUp = (ev) => {
           (e.source || e.from) === sourceId && (e.target || e.to) === targetId
         );
         if (exists) {
-          ElMessage.warning('已存在相同连线')
+          ElMessage.warning(t('auto.Editor.17.2d3fea'))
         } else {
           definition.edges.push({ source: sourceId, target: targetId, label: '' })
-          ElMessage.success('已添加连线')
+          ElMessage.success(t('auto.Editor.18.bc32be'))
         }
       }
     }
@@ -408,8 +411,8 @@ const editEdgeLabel = async (idx) => {
   const edge = definition.edges[idx]
   if (!edge) return
   try {
-    const { value } = await ElMessageBox.prompt('请输入连线标签（可选，用于条件分支）', '连线标签', {
-      inputPlaceholder: '留空表示默认分支',
+    const { value } = await ElMessageBox.prompt(t('auto.Editor.19.ca112a'), t('auto.Editor.20.686deb'), {
+      inputPlaceholder: t('auto.Editor.21.519878'),
       inputValue: edge.label || '',
       inputValidator: () => true
     })
@@ -447,7 +450,7 @@ const removeEdge = (idx) => {
 
 const clearAll = async () => {
   try {
-    await ElMessageBox.confirm('确认清空所有节点？', '确认', { type: 'warning' })
+    await ElMessageBox.confirm(t('auto.Editor.22.8438c4'), t('auto.Editor.23.e83a25'), { type: 'warning' })
     definition.nodes = []
     definition.edges = []
     selectedNodeIdx.value = -1
@@ -521,7 +524,7 @@ const loadVersions = async () => {
       loadDefinition()
     }
   } catch (e) {
-    ElMessage.error('加载版本失败: ' + (e?.message || ''))
+    ElMessage.error(t('auto.Editor.24.2387a7') + (e?.message || ''))
   }
 };
 
@@ -557,18 +560,18 @@ const onVersionChange = () => {
   loadDefinition()
 }
 
-const statusText = (s) => ({ draft: '草稿', published: '已发布', archived: '已归档' }[s] || s)
+const statusText = (s) => ({ draft: t('auto.Editor.25.22b433'), published: t('auto.Editor.26.dca0c1'), archived: t('auto.Editor.27.c3ba16') }[s] || s)
 
 const validateDefinition = () => {
   const ids = new Set(definition.nodes.map(n => n.id))
   if (ids.size !== definition.nodes.length) {
-    return '存在重复的节点 ID'
+    return t('auto.Editor.28.912e23')
   }
   const seen = new Set();
   for (const e of definition.edges) {
     const s = e.source || e.from
     const t = e.target || e.to
-    if (!s || !t) return '连线缺少 source/target'
+    if (!s || !t) return t('auto.Editor.29.904b13')
     if (!ids.has(s) || !ids.has(t)) return `连线引用了不存在的节点：${s} -> ${t}`
     if (s === t) return `节点不能连接到自身：${s}`
     const key = `${s}|${t}|${e.label || ''}`
@@ -580,7 +583,7 @@ const validateDefinition = () => {
 
 const save = async () => {
   if (!currentVersion.value) {
-    ElMessage.warning('没有版本可保存')
+    ElMessage.warning(t('auto.Editor.30.3f622c'))
     return
   }
   const err = validateDefinition()
@@ -620,10 +623,10 @@ const save = async () => {
       description: currentVersion.value.description,
       definition: payloadDefinition
     })
-    ElMessage.success('保存成功')
+    ElMessage.success(t('auto.Editor.31.3b1083'))
     loadVersions()
   } catch (e) {
-    ElMessage.error('保存失败: ' + (e?.message || ''))
+    ElMessage.error(t('auto.Editor.32.40f902') + (e?.message || ''))
   }
 }
 
@@ -640,19 +643,19 @@ const saveAsNew = async () => {
       description: currentVersion.value?.description || '',
       definition
     })
-    ElMessage.success('新版本创建成功')
+    ElMessage.success(t('auto.Editor.33.0b0942'))
     loadVersions()
   } catch (e) {
-    ElMessage.error('创建失败: ' + (e?.message || ''))
+    ElMessage.error(t('auto.Editor.34.a2bddc') + (e?.message || ''))
   }
 }
 
 const publishCurrent = async () => {
   if (!currentVersion.value) return
   try {
-    await ElMessageBox.confirm('确认发布此版本？', '发布确认', { type: 'warning' })
+    await ElMessageBox.confirm(t('auto.Editor.35.a57f36'), t('auto.Editor.36.9861a6'), { type: 'warning' })
     await workflowOrchestratorApi.publishVersion(currentVersion.value.id)
-    ElMessage.success('发布成功')
+    ElMessage.success(t('auto.Editor.37.2fff07'))
     loadVersions()
   } catch (_) { /* 忽略：清理/存储/恢复类 best-effort 操作 */ }
 }

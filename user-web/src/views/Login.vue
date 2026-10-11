@@ -76,13 +76,13 @@
             <el-form-item v-if="registerMode === 'invite' || registerMode === 'default_team'">
               <el-input
                 v-model="registerForm.invite_code"
-                :placeholder="registerMode === 'invite' ? '邀请码（必填）' : '邀请码（选填，填了加入对应团队）'"
+                ::placeholder="$t('auto.Login.1.a43a4c')"
                 prefix-icon="Ticket"
                 size="large"
               />
             </el-form-item>
             <el-form-item v-if="registerMode === 'create_team'">
-              <el-input v-model="registerForm.team_name" placeholder="团队名称（注册即创建你的团队）" prefix-icon="OfficeBuilding" size="large" />
+              <el-input v-model="registerForm.team_name" :placeholder="$t('auto.Login.2.a7e4fb')" prefix-icon="OfficeBuilding" size="large" />
             </el-form-item>
           </div>
 
@@ -107,6 +107,7 @@
 
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { useUserStore } from '@/stores/user'
@@ -217,15 +218,15 @@ const handleLogin = async () => {
         ElMessage.success(t('core.login.success'))
         router.push('/')
       } else {
-        console.error('登录响应数据异常:', response)
+        console.error(t('auto.Login.3.f76002'), response)
         ElMessage.error(t('core.login.failServer'))
       }
     } else {
-      console.error('登录响应数据异常:', response)
+      console.error(t('auto.Login.3.f76002'), response)
       ElMessage.error(t('core.login.failServer'))
     }
     } catch (error) {
-    console.error('登录失败:', error)
+    console.error(t('auto.Login.4.0fe50a'), error)
     ElMessage.error(error.message || t('core.login.fail'))
   } finally {
     loading.value = false

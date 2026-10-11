@@ -37,22 +37,22 @@
       <!-- 左：会话列表 -->
       <el-card class="conv-panel" shadow="never">
         <div class="conv-filters">
-          <el-select v-model="searchForm.platform" :placeholder="$t('全部平台')" clearable size="default" @change="handleSearch" style="width: 130px">
+          <el-select v-model="searchForm.platform" ::placeholder="$t('auto.List.1.149e77')" clearable size="default" @change="handleSearch" style="width: 130px">
             <el-option v-for="c in CHANNEL_OPTIONS" :key="c.value" :label="c.label" :value="c.value" />
           </el-select>
-          <el-select v-model="searchForm.status" :placeholder="$t('全部状态')" clearable @change="handleSearch" style="width: 120px">
-            <el-option :label="$t('未读')" value="unread" />
-            <el-option :label="$t('待处理')" value="open" />
-            <el-option :label="$t('已分配')" value="assigned" />
-            <el-option :label="$t('已关闭')" value="closed" />
+          <el-select v-model="searchForm.status" ::placeholder="$t('auto.List.2.925332')" clearable @change="handleSearch" style="width: 120px">
+            <el-option ::label="$t('auto.List.3.508ed9')" value="unread" />
+            <el-option ::label="$t('auto.List.4.28eda9')" value="open" />
+            <el-option ::label="$t('auto.List.5.34d811')" value="assigned" />
+            <el-option ::label="$t('auto.List.6.ca9df5')" value="closed" />
           </el-select>
-          <el-select v-model="searchForm.pinned" :placeholder="$t('置顶筛选')" clearable @change="handleSearch" style="width: 120px">
-            <el-option :label="$t('仅置顶')" value="true" />
-            <el-option :label="$t('未置顶')" value="false" />
+          <el-select v-model="searchForm.pinned" ::placeholder="$t('auto.List.7.a356b0')" clearable @change="handleSearch" style="width: 120px">
+            <el-option ::label="$t('auto.List.8.89be16')" value="true" />
+            <el-option ::label="$t('auto.List.9.9f9229')" value="false" />
           </el-select>
           <el-input
             v-model="searchForm.keyword"
-            :placeholder="$t('客户名/ID')"
+            ::placeholder="$t('auto.List.10.083e3b')"
             clearable
             style="flex: 1; min-width: 130px"
             @keyup.enter="handleSearch"
@@ -103,7 +103,7 @@
               ><StarFilled /></el-icon>
             </div>
           </div>
-          <el-empty v-if="!loading && conversations.length === 0" :description="$t('暂无会话')" />
+          <el-empty v-if="!loading && conversations.length === 0" ::description="$t('auto.List.11.3eb857')" />
         </div>
 
         <div class="conv-pagination">
@@ -129,13 +129,13 @@
               <el-tag size="small" :type="statusTagType(currentConv.status)">{{ statusLabel(currentConv.status) }}</el-tag>
             </div>
             <div class="thread-actions">
-              <el-tooltip :content="currentConv.pinned ? $t('取消置顶') : $t('置顶')">
+              <el-tooltip ::content="$t('auto.List.12.beb08d')">
                 <el-button size="small" :type="currentConv.pinned ? 'primary' : 'default'" :icon="Top" circle @click="handleTogglePin(currentConv)" />
               </el-tooltip>
-              <el-tooltip :content="currentConv.starred ? $t('取消星标') : $t('星标')">
+              <el-tooltip ::content="$t('auto.List.13.b95e8f')">
                 <el-button size="small" :type="currentConv.starred ? 'warning' : 'default'" :icon="currentConv.starred ? StarFilled : Star" circle @click="handleToggleStar(currentConv)" />
               </el-tooltip>
-              <el-tooltip :content="currentConv.muted ? $t('取消静音') : $t('静音')">
+              <el-tooltip ::content="$t('auto.List.14.883f91')">
                 <el-button size="small" :type="currentConv.muted ? 'info' : 'default'" :icon="Mute" circle @click="handleToggleMute(currentConv)" />
               </el-tooltip>
               <el-button size="small" @click="tagDialogVisible = true">{{ $t('标签') }}</el-button>
@@ -175,7 +175,7 @@
                   {{ msg.source === 'hub' ? $t('渠道') : $t('客服') }}
                 </el-tag>
                 <span class="msg-time">{{ formatTime(msg.sent_at || msg.created_at) }}</span>
-                <el-popconfirm :title="$t('确认删除这条消息？')" @confirm="handleDeleteMessage(msg)">
+                <el-popconfirm ::title="$t('auto.List.15.f80e7d')" @confirm="handleDeleteMessage(msg)">
                   <template #reference>
                     <el-button size="small" type="danger" link :icon="Delete" class="msg-del" />
                   </template>
@@ -194,9 +194,9 @@
               </div>
             </div>
           </div>
-          <el-empty v-if="!threadLoading && threadMessages.length === 0" :description="$t('该会话暂无消息')" />
+          <el-empty v-if="!threadLoading && threadMessages.length === 0" ::description="$t('auto.List.16.4385e1')" />
         </div>
-        <el-empty v-else :description="$t('选择左侧会话查看对话')" />
+        <el-empty v-else ::description="$t('auto.List.17.732660')" />
 
         <div v-if="currentConv" class="thread-pagination">
           <el-pagination
@@ -213,14 +213,14 @@
     </div>
 
     <!-- 分配给坐席对话框 -->
-    <el-dialog v-model="assignDialogVisible" :title="$t('分配会话给坐席')" width="460px">
+    <el-dialog v-model="assignDialogVisible" ::title="$t('auto.List.18.dcb2b2')" width="460px">
       <el-form label-width="90px">
-        <el-form-item :label="$t('坐席')">
-          <el-select v-model="assignForm.to_user_id" filterable :placeholder="$t('选择坐席')" style="width: 100%">
+        <el-form-item ::label="$t('auto.List.19.f5a2b9')">
+          <el-select v-model="assignForm.to_user_id" filterable ::placeholder="$t('auto.List.20.215ed9')" style="width: 100%">
             <el-option v-for="s in staffOptions" :key="s.username" :label="`${s.nickname || s.username}`" :value="s.username" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('备注')">
+        <el-form-item ::label="$t('auto.List.21.0fe75c')">
           <el-input v-model="assignForm.remark" type="textarea" :rows="2" />
         </el-form-item>
       </el-form>
@@ -231,7 +231,7 @@
     </el-dialog>
 
     <!-- 标签管理对话框 -->
-    <el-dialog v-model="tagDialogVisible" :title="$t('会话标签')" width="420px">
+    <el-dialog v-model="tagDialogVisible" ::title="$t('auto.List.22.5f9207')" width="420px">
       <div class="tag-list" v-if="currentConv">
         <el-tag
           v-for="t in (currentConv.tags || [])"
@@ -244,7 +244,7 @@
         >{{ t }}</el-tag>
         <span v-if="!(currentConv.tags || []).length" class="tag-empty">{{ $t('暂无标签') }}</span>
       </div>
-      <el-input v-model="newTag" :placeholder="$t('输入标签后回车添加')" @keyup.enter="handleAddTag" clearable>
+      <el-input v-model="newTag" ::placeholder="$t('auto.List.23.d5fb4d')" @keyup.enter="handleAddTag" clearable>
         <template #append>
           <el-button @click="handleAddTag">{{ $t('添加') }}</el-button>
         </template>
@@ -255,22 +255,22 @@
     </el-dialog>
 
     <!-- 分配历史对话框 -->
-    <el-dialog v-model="historyDialogVisible" :title="$t('分配历史')" width="640px">
+    <el-dialog v-model="historyDialogVisible" ::title="$t('auto.List.24.5ef749')" width="640px">
       <el-table :data="assignmentHistory" border size="small" v-loading="historyLoading">
         <el-table-column prop="id" label="ID" width="60" />
-        <el-table-column prop="action" :label="$t('动作')" width="90">
+        <el-table-column prop="action" ::label="$t('auto.List.25.8ab8c0')" width="90">
           <template #default="{ row }">{{ actionLabel(row.action) }}</template>
         </el-table-column>
-        <el-table-column prop="to_type" :label="$t('对象类型')" width="90">
+        <el-table-column prop="to_type" ::label="$t('auto.List.26.cd778c')" width="90">
           <template #default="{ row }">{{ toTypeLabel(row.to_type) }}</template>
         </el-table-column>
-        <el-table-column prop="to_user_id" :label="$t('坐席/SOP')" min-width="110">
+        <el-table-column prop="to_user_id" ::label="$t('auto.List.27.3cf966')" min-width="110">
           <template #default="{ row }">{{ row.to_user_id || (row.to_sop_id ? `SOP#${row.to_sop_id}` : '-') }}</template>
         </el-table-column>
-        <el-table-column prop="operator_id" :label="$t('操作人')" min-width="100">
+        <el-table-column prop="operator_id" ::label="$t('auto.List.28.a11072')" min-width="100">
           <template #default="{ row }">{{ row.operator_id || '-' }}</template>
         </el-table-column>
-        <el-table-column prop="created_at" :label="$t('时间')" min-width="150">
+        <el-table-column prop="created_at" ::label="$t('auto.List.29.ed7fae')" min-width="150">
           <template #default="{ row }">{{ formatTime(row.created_at) }}</template>
         </el-table-column>
       </el-table>
@@ -280,6 +280,7 @@
 
 <script setup>
 import { ref, reactive, computed, onMounted, onUnmounted, nextTick } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import {
   Search, RefreshRight, Refresh, DataAnalysis, Top, Star, StarFilled, Mute,
@@ -328,25 +329,25 @@ let refreshTimer = null
 
 // ---- 字典 ----
 const STATUS_MAP = {
-  unread: { label: '未读', type: 'danger' },
-  open: { label: '待处理', type: 'warning' },
-  assigned: { label: '已分配', type: 'primary' },
-  closed: { label: '已关闭', type: 'success' }
+  unread: { label: t('auto.List.30.894a10'), type: 'danger' },
+  open: { label: t('auto.List.31.047109'), type: 'warning' },
+  assigned: { label: t('auto.List.32.fbfa6c'), type: 'primary' },
+  closed: { label: t('auto.List.33.9c5850'), type: 'success' }
 }
 // 非字典值（历史脏数据）归一到未读/待处理显示，避免出现原始英文状态
 const statusLabel = (v) => {
   if (STATUS_MAP[v]) return t(STATUS_MAP[v].label)
   if (!v) return '-'
-  return t((v.unread_count ?? 0) > 0 ? '未读' : '待处理')
+  return t((v.unread_count ?? 0) > 0 ? t('auto.List.30.894a10') : t('auto.List.31.047109'))
 }
 const statusTagType = (v) => (STATUS_MAP[v] ? STATUS_MAP[v].type : 'danger')
 
 const ACTION_MAP = {
-  assign: '分配', reassign: '改派', release: '释放', close: '关闭', reopen: '重开'
+  assign: t('auto.List.34.e39de3'), reassign: t('auto.List.35.dfd2e9'), release: t('auto.List.36.cbdcab'), close: t('auto.List.37.b15d91'), reopen: t('auto.List.38.50276e')
 }
 const actionLabel = (v) => (ACTION_MAP[v] ? t(ACTION_MAP[v]) : (v || '-'))
 
-const TOTYPE_MAP = { human: '人工', sop: 'SOP', ai: 'AI' }
+const TOTYPE_MAP = { human: t('auto.List.39.f6b362'), sop: 'SOP', ai: 'AI' }
 const toTypeLabel = (v) => (TOTYPE_MAP[v] ? t(TOTYPE_MAP[v]) : (v || '-'))
 
 const isImage = (msg) =>
@@ -529,7 +530,7 @@ const handleDeleteMessage = async (msg) => {
   if (!currentConv.value) return
   try {
     await inboxApi.deleteMessage(currentConv.value.id, msg.id, msg.source || 'hub')
-    ElMessage.success(t('删除成功'))
+    ElMessage.success(t(t('auto.List.40.0007d1')))
     fetchThread()
   } catch (e) { console.error('[inbox] deleteMessage', e) }
 }
@@ -561,7 +562,7 @@ const handleAssignCommand = async (cmd) => {
     await loadStaffOptions()
     const candidates = staffOptions.value.map((s) => s.username).filter(Boolean)
     if (!candidates.length) {
-      ElMessage.warning(t('暂无可分配坐席'))
+      ElMessage.warning(t(t('auto.List.41.bdf0c3')))
       return
     }
     try {
@@ -570,7 +571,7 @@ const handleAssignCommand = async (cmd) => {
         candidates,
         mode: cmd === 'auto-rr' ? 'round_robin' : 'least_busy'
       })
-      ElMessage.success(t('分配成功'))
+      ElMessage.success(t(t('auto.List.42.f54845')))
       refreshAll()
     } catch (e) { console.error('[inbox] autoAssign', e) }
     return
@@ -596,14 +597,14 @@ const handleAssignCommand = async (cmd) => {
       conversation_id: conv.id,
       action: cmd
     })
-    ElMessage.success(t('操作成功'))
+    ElMessage.success(t(t('auto.List.43.33130f')))
     refreshAll()
   } catch (e) { console.error('[inbox] assign', cmd, e) }
 }
 
 const submitAssign = async () => {
   if (!assignForm.to_user_id) {
-    ElMessage.warning(t('请选择坐席'))
+    ElMessage.warning(t(t('auto.List.44.827098')))
     return
   }
   assignSubmitting.value = true
@@ -615,7 +616,7 @@ const submitAssign = async () => {
       to_user_id: assignForm.to_user_id,
       remark: assignForm.remark
     })
-    ElMessage.success(t('分配成功'))
+    ElMessage.success(t(t('auto.List.42.f54845')))
     assignDialogVisible.value = false
     refreshAll()
   } catch (e) {
@@ -630,7 +631,7 @@ const handleReconcile = async (mode) => {
   try {
     const res = await inboxApi.reconcile(mode)
     const data = res?.data || res || {}
-    ElMessage.success(data.message || t('对账完成'))
+    ElMessage.success(data.message || t(t('auto.List.45.f8b065')))
     refreshAll()
   } catch (e) { console.error('[inbox] reconcile', e) }
 }

@@ -3,38 +3,38 @@
     <el-card class="card">
       <template #header>
         <div class="card-header">
-          <span>WhatsApp Cloud 账号</span>
-          <el-button type="primary" @click="openCreate">新增账号</el-button>
+          <span>{{ $t('auto.WhatsappCloudAccount.19.baff3b') }}</span>
+          <el-button type="primary" @click="openCreate">{{ $t('auto.WhatsappCloudAccount.20.34374b') }}</el-button>
         </div>
       </template>
 
       <el-table :data="tableData" v-loading="loading" border stripe>
         <el-table-column prop="id" label="ID" width="70" />
-        <el-table-column prop="name" label="名称" min-width="120" />
-        <el-table-column prop="remark" label="备注" min-width="120" show-overflow-tooltip />
+        <el-table-column prop="name" :label="$t('auto.WhatsappCloudAccount.1.d7ec2d')" min-width="120" />
+        <el-table-column prop="remark" :label="$t('auto.WhatsappCloudAccount.2.2432b5')" min-width="120" show-overflow-tooltip />
         <el-table-column prop="phone_number_id" label="PhoneNumberID" min-width="130" show-overflow-tooltip />
         <el-table-column prop="whatsapp_business_id" label="WABA ID" min-width="120" show-overflow-tooltip />
-        <el-table-column label="启用接收" width="90" align="center">
+        <el-table-column :label="$t('auto.WhatsappCloudAccount.3.5f1e0e')" width="90" align="center">
           <template #default="{ row }">
             <el-tag :type="row.webhook_enabled ? 'success' : 'info'" size="small">
               {{ row.webhook_enabled ? '已启用' : '未启用' }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="智能体回复" width="100" align="center">
+        <el-table-column :label="$t('auto.WhatsappCloudAccount.4.bfdd28')" width="100" align="center">
           <template #default="{ row }">
             <el-tag :type="row.ai_agent_enabled ? 'success' : 'info'" size="small">
               {{ row.ai_agent_enabled ? '已开启' : '未开启' }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="320" fixed="right">
+        <el-table-column :label="$t('auto.WhatsappCloudAccount.5.2b6bc0')" width="320" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" @click="openTestSend(row)">测试发送</el-button>
-            <el-button link type="primary" @click="openBind(row)">绑定AI</el-button>
-            <el-button link type="primary" @click="copyCallbackUrl(row)">复制回调URL</el-button>
-            <el-button link type="primary" @click="openEdit(row)">编辑</el-button>
-            <el-button link type="danger" @click="handleDelete(row)">删除</el-button>
+            <el-button link type="primary" @click="openTestSend(row)">{{ $t('auto.WhatsappCloudAccount.14.e1c652') }}</el-button>
+            <el-button link type="primary" @click="openBind(row)">{{ $t('auto.WhatsappCloudAccount.21.c9e87d') }}</el-button>
+            <el-button link type="primary" @click="copyCallbackUrl(row)">{{ $t('auto.WhatsappCloudAccount.22.e73c73') }}</el-button>
+            <el-button link type="primary" @click="openEdit(row)">{{ $t('auto.WhatsappCloudAccount.23.95b351') }}</el-button>
+            <el-button link type="danger" @click="handleDelete(row)">{{ $t('auto.WhatsappCloudAccount.24.2f4aad') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -52,68 +52,68 @@
     </el-card>
 
     
-    <el-dialog v-model="dialogVisible" :title="dialogMode === 'edit' ? '编辑 WhatsApp Cloud 账号' : '新增 WhatsApp Cloud 账号'" width="640px">
+    <el-dialog v-model="dialogVisible" ::title="$t('auto.WhatsappCloudAccount.6.571f04')" width="640px">
       <el-form :model="form" label-width="150px">
-        <el-form-item label="名称" prop="name">
-          <el-input v-model="form.name" placeholder="账号名称" />
+        <el-form-item :label="$t('auto.WhatsappCloudAccount.1.d7ec2d')" prop="name">
+          <el-input v-model="form.name" :placeholder="$t('auto.WhatsappCloudAccount.7.17327f')" />
         </el-form-item>
-        <el-form-item label="备注" prop="remark">
-          <el-input v-model="form.remark" placeholder="备注（可选）" />
+        <el-form-item :label="$t('auto.WhatsappCloudAccount.2.2432b5')" prop="remark">
+          <el-input v-model="form.remark" :placeholder="$t('auto.WhatsappCloudAccount.8.67f6a8')" />
         </el-form-item>
         <el-form-item label="PhoneNumberID" prop="phone_number_id">
-          <el-input v-model="form.phone_number_id" placeholder="WhatsApp 电话号码 ID" />
+          <el-input v-model="form.phone_number_id" :placeholder="$t('auto.WhatsappCloudAccount.9.8f4179')" />
         </el-form-item>
         <el-form-item label="WABA ID" prop="whatsapp_business_id">
           <el-input v-model="form.whatsapp_business_id" placeholder="WhatsApp Business Account ID" />
         </el-form-item>
         <el-form-item label="Access Token" prop="access_token">
-          <el-input v-model="form.access_token" type="password" show-password placeholder="永久/临时 Access Token" />
+          <el-input v-model="form.access_token" type="password" show-password :placeholder="$t('auto.WhatsappCloudAccount.10.e466a8')" />
         </el-form-item>
         <el-form-item label="App Secret" prop="app_secret">
-          <el-input v-model="form.app_secret" type="password" show-password placeholder="Meta 应用 App Secret" />
+          <el-input v-model="form.app_secret" type="password" show-password :placeholder="$t('auto.WhatsappCloudAccount.11.bb6463')" />
         </el-form-item>
         <el-form-item label="Verify Token" prop="verify_token">
-          <el-input v-model="form.verify_token" placeholder="回调验证 Token（自定义，与管理端一致）" />
-          <div class="form-hint">在 Meta「Webhook 配置」中填写此 Token，用于 GET 验证回调地址。</div>
+          <el-input v-model="form.verify_token" :placeholder="$t('auto.WhatsappCloudAccount.12.16428c')" />
+          <div class="form-hint">{{ $t('auto.WhatsappCloudAccount.25.87a987') }}</div>
         </el-form-item>
 
-        <el-divider content-position="left">回调（接收客户消息 → 智能体自动回复）</el-divider>
-        <el-form-item label="回调 URL" v-if="dialogMode === 'edit'">
+        <el-divider content-position="left">{{ $t('auto.WhatsappCloudAccount.26.f96de9') }}</el-divider>
+        <el-form-item :label="$t('auto.WhatsappCloudAccount.13.5c7f1a')" v-if="dialogMode === 'edit'">
           <el-input :model-value="callbackUrl(form.id)" readonly>
             <template #append>
-              <el-button @click="copyText(callbackUrl(form.id))">复制</el-button>
+              <el-button @click="copyText(callbackUrl(form.id))">{{ $t('auto.WhatsappCloudAccount.27.79d3ab') }}</el-button>
             </template>
           </el-input>
-          <div class="form-hint">将此 URL 配置到 Meta「Webhook 配置」的回调 URL 栏。</div>
+          <div class="form-hint">{{ $t('auto.WhatsappCloudAccount.28.938169') }}</div>
         </el-form-item>
-        <el-form-item label="启用接收">
+        <el-form-item :label="$t('auto.WhatsappCloudAccount.3.5f1e0e')">
           <el-switch v-model="form.webhook_enabled" />
-          <span class="form-hint-inline">开启后接收客户消息回调</span>
+          <span class="form-hint-inline">{{ $t('auto.WhatsappCloudAccount.29.1aad39') }}</span>
         </el-form-item>
-        <el-form-item label="智能体回复">
+        <el-form-item :label="$t('auto.WhatsappCloudAccount.4.bfdd28')">
           <el-switch v-model="form.ai_agent_enabled" />
-          <span class="form-hint-inline">开启后由已绑定智能体自动回复客户消息</span>
+          <span class="form-hint-inline">{{ $t('auto.WhatsappCloudAccount.30.809880') }}</span>
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="dialogVisible = false">取消</el-button>
-        <el-button type="primary" :loading="saving" @click="submit">保存</el-button>
+        <el-button @click="dialogVisible = false">{{ $t('auto.WhatsappCloudAccount.31.625fb2') }}</el-button>
+        <el-button type="primary" :loading="saving" @click="submit">{{ $t('auto.WhatsappCloudAccount.32.be5fbb') }}</el-button>
       </template>
     </el-dialog>
 
     
-    <el-dialog v-model="testVisible" title="测试发送" width="520px">
+    <el-dialog v-model="testVisible" :title="$t('auto.WhatsappCloudAccount.14.e1c652')" width="520px">
       <el-form :model="testForm" label-width="90px">
-        <el-form-item label="接收号码">
-          <el-input v-model="testForm.to" placeholder="国际格式，如 8613800138000" />
+        <el-form-item :label="$t('auto.WhatsappCloudAccount.15.dc2d48')">
+          <el-input v-model="testForm.to" :placeholder="$t('auto.WhatsappCloudAccount.16.504107')" />
         </el-form-item>
-        <el-form-item label="消息内容">
-          <el-input v-model="testForm.content" type="textarea" :rows="3" placeholder="测试消息内容" />
+        <el-form-item :label="$t('auto.WhatsappCloudAccount.17.b87b77')">
+          <el-input v-model="testForm.content" type="textarea" :rows="3" :placeholder="$t('auto.WhatsappCloudAccount.18.35af65')" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="testVisible = false">取消</el-button>
-        <el-button type="primary" :loading="testing" @click="submitTestSend">发送</el-button>
+        <el-button @click="testVisible = false">{{ $t('auto.WhatsappCloudAccount.31.625fb2') }}</el-button>
+        <el-button type="primary" :loading="testing" @click="submitTestSend">{{ $t('auto.WhatsappCloudAccount.33.1535fc') }}</el-button>
       </template>
     </el-dialog>
 
@@ -131,6 +131,7 @@
 
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import AgentBindingDialog from '@/components/AgentBindingDialog.vue'
 import {
@@ -141,6 +142,8 @@ import {
   deleteWhatsappCloud,
   testSendWhatsappCloud
 } from '@/api/whatsappCloud'
+
+const { t } = useI18n()
 
 const loading = ref(false)
 const saving = ref(false)
@@ -184,7 +187,7 @@ async function loadData() {
     tableData.value = arr
     total.value = res && res.total != null ? res.total : arr.length
   } catch (e) {
-    ElMessage.error('加载失败：' + (e.message || e))
+    ElMessage.error(t('auto.WhatsappCloudAccount.34.c4fa9b') + (e.message || e))
   } finally {
     loading.value = false
   }
@@ -230,7 +233,7 @@ async function openEdit(row) {
     })
     dialogVisible.value = true
   } catch (e) {
-    ElMessage.error('获取详情失败：' + (e.message || e))
+    ElMessage.error(t('auto.WhatsappCloudAccount.35.db870b') + (e.message || e))
   }
 }
 
@@ -253,11 +256,11 @@ async function submit() {
     } else {
       await createWhatsappCloud(payload)
     }
-    ElMessage.success('保存成功')
+    ElMessage.success(t('auto.WhatsappCloudAccount.36.3b1083'))
     dialogVisible.value = false
     loadData()
   } catch (e) {
-    ElMessage.error('保存失败：' + (e.message || e))
+    ElMessage.error(t('auto.WhatsappCloudAccount.37.78d235') + (e.message || e))
   } finally {
     saving.value = false
   }
@@ -265,16 +268,16 @@ async function submit() {
 
 async function handleDelete(row) {
   try {
-    await ElMessageBox.confirm(`确认删除账号「${row.name}」？`, '提示', { type: 'warning' })
+    await ElMessageBox.confirm(`确认删除账号「${row.name}」？`, t('auto.WhatsappCloudAccount.38.02d981'), { type: 'warning' })
   } catch {
     return
   }
   try {
     await deleteWhatsappCloud(row.id)
-    ElMessage.success('已删除')
+    ElMessage.success(t('auto.WhatsappCloudAccount.39.5cc232'))
     loadData()
   } catch (e) {
-    ElMessage.error('删除失败：' + (e.message || e))
+    ElMessage.error(t('auto.WhatsappCloudAccount.40.bc42bb') + (e.message || e))
   }
 }
 
@@ -287,16 +290,16 @@ function openTestSend(row) {
 
 async function submitTestSend() {
   if (!testForm.to || !testForm.content) {
-    ElMessage.warning('请填写接收号码与消息内容')
+    ElMessage.warning(t('auto.WhatsappCloudAccount.41.6943cc'))
     return
   }
   testing.value = true
   try {
     await testSendWhatsappCloud(testForm.id, { to: testForm.to, content: testForm.content })
-    ElMessage.success('发送成功')
+    ElMessage.success(t('auto.WhatsappCloudAccount.42.9db9a7'))
     testVisible.value = false
   } catch (e) {
-    ElMessage.error('发送失败：' + (e.message || e))
+    ElMessage.error(t('auto.WhatsappCloudAccount.43.9704ea') + (e.message || e))
   } finally {
     testing.value = false
   }
@@ -315,8 +318,8 @@ function onBindSaved() {
 function copyText(text) {
   if (!text) return
   navigator.clipboard.writeText(text).then(
-    () => ElMessage.success('已复制到剪贴板'),
-    () => ElMessage.error('复制失败，请手动复制')
+    () => ElMessage.success(t('auto.WhatsappCloudAccount.44.4fb42e')),
+    () => ElMessage.error(t('auto.WhatsappCloudAccount.45.41da1c'))
   )
 }
 

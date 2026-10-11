@@ -3,7 +3,7 @@
     <el-card class="header-card">
       <div>
         <h2>{{ $t('客户旅程大屏') }}</h2>
-        <p class="subtitle">9 阶段实时监控 · 转化漏斗可视化 · 沉睡客户自动检测</p>
+        <p class="subtitle">{{ $t('auto.Dashboard.14.0507a2') }}</p>
       </div>
       <div class="header-actions">
         <el-tag size="large" type="info" effect="plain">
@@ -11,8 +11,8 @@
         </el-tag>
         <el-switch
           v-model="autoRefresh"
-          active-text="自动刷新"
-          inactive-text="手动"
+          :active-text="$t('auto.Dashboard.1.891db2')"
+          :inactive-text="$t('auto.Dashboard.2.2a3e7f')"
           @change="toggleAutoRefresh"
         />
         <el-button type="primary" :icon="Refresh" @click="loadOverview" :loading="loading">
@@ -103,24 +103,24 @@
         <el-card class="detail-card">
           <template #header>
             <div class="card-header">
-              <span>阶段配置</span>
+              <span>{{ $t('auto.Dashboard.15.ff4fc7') }}</span>
             </div>
           </template>
           <el-table :data="stagesMeta" stripe max-height="400">
-            <el-table-column prop="label" label="阶段" width="100" />
-            <el-table-column prop="description" label="说明" min-width="160" show-overflow-tooltip />
-            <el-table-column prop="default_followup" label="默认跟进" width="120" />
-            <el-table-column prop="owner_role" label="负责角色" width="100" align="center">
+            <el-table-column prop="label" :label="$t('auto.Dashboard.3.d31633')" width="100" />
+            <el-table-column prop="description" :label="$t('auto.Dashboard.4.f411d0')" min-width="160" show-overflow-tooltip />
+            <el-table-column prop="default_followup" :label="$t('auto.Dashboard.5.36f762')" width="120" />
+            <el-table-column prop="owner_role" :label="$t('auto.Dashboard.6.7e5609')" width="100" align="center">
               <template #default="{ row }">
                 <el-tag size="small" :type="getRoleTagType(row.owner_role)">
                   {{ getRoleLabel(row.owner_role) }}
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column label="AI 接管" width="80" align="center">
+            <el-table-column :label="$t('auto.Dashboard.7.fa7e98')" width="80" align="center">
               <template #default="{ row }">
-                <el-tag v-if="row.allow_ai_handle" type="success" size="small">允许</el-tag>
-                <el-tag v-else type="info" size="small">仅人工</el-tag>
+                <el-tag v-if="row.allow_ai_handle" type="success" size="small">{{ $t('auto.Dashboard.16.e6a5c3') }}</el-tag>
+                <el-tag v-else type="info" size="small">{{ $t('auto.Dashboard.17.a2415b') }}</el-tag>
               </template>
             </el-table-column>
           </el-table>
@@ -131,14 +131,14 @@
         <el-card class="detail-card">
           <template #header>
             <div class="card-header">
-              <span>阶段客户分布</span>
+              <span>{{ $t('auto.Dashboard.18.9519b3') }}</span>
             </div>
           </template>
           <div v-loading="loading">
             <el-table :data="overview?.stages || []" stripe max-height="400">
-              <el-table-column prop="label" label="阶段" min-width="120" />
-              <el-table-column prop="count" label="客户数" width="100" align="center" />
-              <el-table-column label="占比" width="200">
+              <el-table-column prop="label" :label="$t('auto.Dashboard.3.d31633')" min-width="120" />
+              <el-table-column prop="count" :label="$t('auto.Dashboard.8.d185a8')" width="100" align="center" />
+              <el-table-column :label="$t('auto.Dashboard.9.c909e6')" width="200">
                 <template #default="{ row }">
                   <el-progress
                     :percentage="Math.round(row.rate)"
@@ -147,7 +147,7 @@
                   />
                 </template>
               </el-table-column>
-              <el-table-column label="平均停留" width="120" align="center">
+              <el-table-column :label="$t('auto.Dashboard.10.97cb75')" width="120" align="center">
                 <template #default="{ row }">
                   {{ row.avg_stay_hours.toFixed(0) }}h
                 </template>
@@ -166,7 +166,7 @@
             <el-icon style="color: #10B981"><Bell /></el-icon>
             实时旅程事件流
           </span>
-          <span class="card-tip">最近 20 条阶段迁移记录</span>
+          <span class="card-tip">{{ $t('auto.Dashboard.19.840704') }}</span>
         </div>
       </template>
       <el-timeline>
@@ -190,13 +190,13 @@
             </div>
           </el-card>
         </el-timeline-item>
-        <el-empty v-if="recentEvents.length === 0" description="暂无事件" />
+        <el-empty v-if="recentEvents.length === 0" :description="$t('auto.Dashboard.11.0b95b8')" />
       </el-timeline>
     </el-card>
 
     <el-dialog v-model="stageDialog" :title="`${selectedStageLabel} · 客户明细`" width="600px">
-      <el-table v-loading="stageLoading" :data="stageCustomers" stripe max-height="420" empty-text="该阶段暂无客户">
-        <el-table-column prop="customer_id" label="客户ID" />
+      <el-table v-loading="stageLoading" :data="stageCustomers" stripe max-height="420" :empty-text="$t('auto.Dashboard.12.21e5fa')">
+        <el-table-column prop="customer_id" :label="$t('auto.Dashboard.13.1c2ecf')" />
       </el-table>
     </el-dialog>
   </div>
@@ -206,6 +206,7 @@
 import i18n from '@/i18n'
 
 import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import {
   Refresh, User, CircleCheck, Sunny, Moon,
@@ -215,6 +216,8 @@ import {
   getJourneyOverview, listJourneyStages, listByStage
 } from '@/api/customerJourney.js'
 import { getRoleLabel, getRoleTagType } from '@/constants/role';
+
+const { t } = useI18n()
 
 const loading = ref(false)
 const autoRefresh = ref(false)
@@ -283,7 +286,7 @@ const selectStage = async (stage) => {
     const ids = (res && res.customer_ids) || []
     stageCustomers.value = ids.map((id) => ({ customer_id: id }))
   } catch (e) {
-    ElMessage.error('加载阶段客户失败：' + (e && e.message ? e.message : ''))
+    ElMessage.error(t('auto.Dashboard.20.d86a49') + (e && e.message ? e.message : ''))
   } finally {
     stageLoading.value = false
   }
@@ -301,7 +304,7 @@ const loadOverview = async () => {
     stagesMeta.value = Array.isArray(stagesData) ? stagesData : stagesData.list || []
     lastUpdate.value = new Date().toLocaleTimeString('zh-CN', { hour12: false })
   } catch (e) {
-    ElMessage.error('加载总览失败：' + (e?.message || ''))
+    ElMessage.error(t('auto.Dashboard.21.f51c3b') + (e?.message || ''))
   } finally {
     loading.value = false
   }
@@ -312,13 +315,13 @@ const toggleAutoRefresh = (val) => {
     refreshTimer = setInterval(() => {
       loadOverview()
     }, 30000);
-    ElMessage.success(i18n.global.t('已开启自动刷新（30秒）'))
+    ElMessage.success(i18n.global.t(t('auto.Dashboard.22.e2f71a')))
   } else {
     if (refreshTimer) {
       clearInterval(refreshTimer)
       refreshTimer = null
     }
-    ElMessage.info(i18n.global.t('已关闭自动刷新'))
+    ElMessage.info(i18n.global.t(t('auto.Dashboard.23.b61e77')))
   }
 }
 

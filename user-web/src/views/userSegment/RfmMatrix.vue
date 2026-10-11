@@ -3,25 +3,25 @@
     <el-row :gutter="16" class="stats-row">
       <el-col :span="6">
         <el-card class="stat-card">
-          <div class="stat-label">总用户</div>
+          <div class="stat-label">{{ $t('auto.RfmMatrix.4.5b005d') }}</div>
           <div class="stat-value">{{ stats.total }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="stat-card success">
-          <div class="stat-label">高价值</div>
+          <div class="stat-label">{{ $t('auto.RfmMatrix.5.2bafca') }}</div>
           <div class="stat-value">{{ stats.highValue }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="stat-card primary">
-          <div class="stat-label">活跃</div>
+          <div class="stat-label">{{ $t('auto.RfmMatrix.6.fe32de') }}</div>
           <div class="stat-value">{{ stats.active }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="stat-card danger">
-          <div class="stat-label">流失风险</div>
+          <div class="stat-label">{{ $t('auto.RfmMatrix.7.4b6cdc') }}</div>
           <div class="stat-value">{{ stats.churnRisk }}</div>
         </el-card>
       </el-col>
@@ -30,25 +30,25 @@
     <el-card>
       <template #header>
         <div class="card-header">
-          <span>RFM 矩阵（Recency × Frequency）</span>
+          <span>{{ $t('auto.RfmMatrix.8.40308c') }}</span>
           <el-button-group>
-            <el-button @click="exportToReach">导出到触达</el-button>
-            <el-button type="primary" @click="saveSegment">保存为分群</el-button>
+            <el-button @click="exportToReach">{{ $t('auto.RfmMatrix.9.5e09e6') }}</el-button>
+            <el-button type="primary" @click="saveSegment">{{ $t('auto.RfmMatrix.10.d2fb06') }}</el-button>
           </el-button-group>
         </div>
       </template>
       <div ref="matrixRef" class="matrix" />
       <el-table :data="segments" class="segments-table">
-        <el-table-column prop="name" label="分群名称" />
+        <el-table-column prop="name" :label="$t('auto.RfmMatrix.1.33429b')" />
         <el-table-column prop="recency" label="R" width="80" />
         <el-table-column prop="frequency" label="F" width="80" />
         <el-table-column prop="monetary" label="M" width="100" />
-        <el-table-column prop="count" label="人数" width="100" />
+        <el-table-column prop="count" :label="$t('auto.RfmMatrix.2.3640d2')" width="100" />
         <el-table-column prop="revenue" label="GMV" width="120" />
-        <el-table-column label="操作" width="160" fixed="right">
+        <el-table-column :label="$t('auto.RfmMatrix.3.2b6bc0')" width="160" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" @click="viewDetail(row)">详情</el-button>
-            <el-button link type="primary" @click="reachSegment(row)">触达</el-button>
+            <el-button link type="primary" @click="viewDetail(row)">{{ $t('auto.RfmMatrix.11.f26225') }}</el-button>
+            <el-button link type="primary" @click="reachSegment(row)">{{ $t('auto.RfmMatrix.12.8097e4') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -57,11 +57,14 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue';
+import { ref, reactive, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n';
 import { ElMessage } from 'element-plus'
 import * as echarts from 'echarts'
 import { safeInit } from '@/utils/echarts'
 import { http } from '@/utils/request'
+
+const { t } = useI18n()
 
 const stats = reactive({ total: 0, highValue: 0, active: 0, churnRisk: 0 })
 const segments = ref([])
@@ -101,13 +104,13 @@ async function saveSegment() {
     const hv = (segments.value || []).filter((d) => d.recency >= 4 && d.frequency >= 4);
     await http.post('/api/user-segments', {
       name: `RFM高价值客群 ${new Date().toLocaleDateString()}`,
-      description: '由 RFM 矩阵保存：R>=4 且 F>=4 的客户桶',
+      description: t('auto.RfmMatrix.13.05741a'),
       rules: { type: 'rfm_snapshot', matrix: hv, saved_at: new Date().toISOString() },
       trigger: 'static'
     })
-    ElMessage.success('分群已保存（可在分群列表查看）')
+    ElMessage.success(t('auto.RfmMatrix.14.221b31'))
   } catch (e) {
-    ElMessage.error(e?.message || '保存失败')
+    ElMessage.error(e?.message || t('auto.RfmMatrix.15.6de920'))
   } finally {
     saving.value = false
   }

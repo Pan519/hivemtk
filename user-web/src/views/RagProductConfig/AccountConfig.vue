@@ -15,10 +15,10 @@
       >
         <el-row :gutter="20">
           <el-col :span="12">
-            <el-form-item label="平台" prop="platform">
+            <el-form-item :label="$t('auto.AccountConfig.1.498128')" prop="platform">
               <el-select
                 v-model="form.platform"
-                placeholder="选择平台"
+                :placeholder="$t('auto.AccountConfig.2.9134b4')"
                 @change="onPlatformChange"
                 style="width: 100%;"
               >
@@ -33,10 +33,10 @@
           </el-col>
           
           <el-col :span="12">
-            <el-form-item label="账号ID" prop="account_id">
+            <el-form-item :label="$t('auto.AccountConfig.3.14d171')" prop="account_id">
               <el-input 
                 v-model="form.account_id" 
-                placeholder="输入平台账号ID"
+                :placeholder="$t('auto.AccountConfig.4.c03276')"
               ></el-input>
             </el-form-item>
           </el-col>
@@ -44,10 +44,10 @@
         
         <el-row :gutter="20">
           <el-col :span="12">
-            <el-form-item label="关联RAG产品">
+            <el-form-item :label="$t('auto.AccountConfig.5.6e7ce4')">
               <el-select 
                 v-model="form.rag_product_id" 
-                placeholder="选择RAG产品"
+                :placeholder="$t('auto.AccountConfig.6.85e9a8')"
                 :disabled="!ragProducts.length"
                 style="width: 100%;"
               >
@@ -71,7 +71,7 @@
           </el-col>
           
           <el-col :span="12">
-            <el-form-item label="每日最大查询数">
+            <el-form-item :label="$t('auto.AccountConfig.7.ffb248')">
               <el-input-number 
                 v-model="form.max_daily_queries" 
                 :min="1" 
@@ -82,20 +82,20 @@
           </el-col>
         </el-row>
         
-        <el-form-item label="功能开关">
+        <el-form-item :label="$t('auto.AccountConfig.8.b96130')">
           <el-switch
             v-model="form.is_auto_reply_enabled"
-            active-text="自动回复"
+            :active-text="$t('auto.AccountConfig.9.922a77')"
             style="margin-right: 20px;"
           />
           <el-switch
             v-model="form.is_rag_enabled"
-            active-text="RAG智能体"
+            :active-text="$t('auto.AccountConfig.10.cb093b')"
             :disabled="!form.rag_product_id"
           />
         </el-form-item>
         
-        <el-form-item label="回复规则">
+        <el-form-item :label="$t('auto.AccountConfig.11.988f37')">
           <el-button 
             type="primary" 
             size="small" 
@@ -129,7 +129,7 @@
                 <el-col :span="6">
                   <el-input 
                     v-model.number="rule.priority" 
-                    placeholder="优先级"
+                    :placeholder="$t('auto.AccountConfig.12.ee8ecb')"
                     type="number"
                   ></el-input>
                 </el-col>
@@ -137,21 +137,21 @@
                 <el-col :span="12">
                   <el-input 
                     v-model="rule.keywords_str" 
-                    placeholder="关键词(逗号分隔)"
+                    :placeholder="$t('auto.AccountConfig.13.f42e69')"
                   ></el-input>
                 </el-col>
                 
                 <el-col :span="6">
                   <el-switch
                     v-model="rule.is_active"
-                    active-text="启用"
+                    :active-text="$t('auto.AccountConfig.14.7854b5')"
                   />
                 </el-col>
               </el-row>
               
               <el-input 
                 v-model="rule.reply_template" 
-                placeholder="回复模板"
+                :placeholder="$t('auto.AccountConfig.15.0efefd')"
                 type="textarea"
                 :rows="2"
                 style="margin-top: 10px;"
@@ -167,7 +167,7 @@
           >
             保存配置
           </el-button>
-          <el-button @click="resetForm">重置</el-button>
+          <el-button @click="resetForm">{{ $t('auto.AccountConfig.16.4b9c32') }}</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -178,11 +178,14 @@
 import i18n from '@/i18n'
 
 import { ref, reactive, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import { ragProductConfigAPI } from '@/api/ragProductConfig'
 import { CARD_PLATFORM_OPTIONS } from '@/constants/cardPlatform';
 
 const cardPlatformOptions = CARD_PLATFORM_OPTIONS
+
+const { t } = useI18n()
 
 const formRef = ref()
 
@@ -198,10 +201,10 @@ const form = reactive({
 
 const rules = {
   platform: [
-    { required: true, message: i18n.global.t('请选择平台'), trigger: 'change' }
+    { required: true, message: i18n.global.t(t('auto.AccountConfig.17.72b562')), trigger: 'change' }
   ],
   account_id: [
-    { required: true, message: i18n.global.t('请输入账号ID'), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.AccountConfig.18.cf5e16')), trigger: 'blur' }
   ]
 }
 
@@ -217,7 +220,7 @@ const loadRagProducts = async () => {
     const response = await ragProductConfigAPI.getRagProducts()
     ragProducts.value = response.items || [];
   } catch (error) {
-    ElMessage.error('加载RAG产品失败: ' + error.message)
+    ElMessage.error(t('auto.AccountConfig.19.24b6c3') + error.message)
   }
 }
 
@@ -278,11 +281,11 @@ const submitForm = async () => {
     }
     
     await ragProductConfigAPI.updateAccountConfig(submitData)
-    ElMessage.success(i18n.global.t('配置保存成功'))
+    ElMessage.success(i18n.global.t(t('auto.AccountConfig.20.0a4915')))
     
     loadCurrentConfig();
   } catch (error) {
-    ElMessage.error('保存失败: ' + error.message)
+    ElMessage.error(t('auto.AccountConfig.21.40f902') + error.message)
   }
 }
 

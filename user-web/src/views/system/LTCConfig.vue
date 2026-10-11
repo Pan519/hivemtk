@@ -6,7 +6,7 @@
       type="error"
       :closable="false"
       show-icon
-      title="ltc.config 当前读不动，页面显示的是「默认全关」那一份"
+      :title="$t('auto.LTCConfig.1.bb2d62')"
     >
       <div class="alert-body">
         <p>
@@ -30,7 +30,7 @@
         >
           <template #header>
             <div class="card-head">
-              <span>总开关</span>
+              <span>{{ $t('auto.LTCConfig.10.b5db5c') }}</span>
               <el-tag
                 :type="cfg.source === 'kv' ? 'success' : 'info'"
                 size="small"
@@ -42,8 +42,8 @@
           <div class="master-body">
             <el-switch
               v-model="cfg.enabled"
-              active-text="开"
-              inactive-text="关"
+              :active-text="$t('auto.LTCConfig.2.849320')"
+              :inactive-text="$t('auto.LTCConfig.3.d58a55')"
             />
             <p class="hint">
               关掉时六个阶段全部拦在外面，无论各自那一项配的是什么。
@@ -60,7 +60,7 @@
         <el-card shadow="never">
           <template #header>
             <div class="card-head">
-              <span>分阶段开关</span>
+              <span>{{ $t('auto.LTCConfig.11.bf242e') }}</span>
               <span class="head-sub">归管路由合计 {{ cfg.guarded_total }} 条</span>
             </div>
           </template>
@@ -69,7 +69,7 @@
             size="small"
           >
             <el-table-column
-              label="阶段"
+              :label="$t('auto.LTCConfig.4.d31633')"
               width="120"
             >
               <template #default="{ row }">
@@ -77,7 +77,7 @@
               </template>
             </el-table-column>
             <el-table-column
-              label="开关"
+              :label="$t('auto.LTCConfig.5.a6beb9')"
               width="90"
             >
               <template #default="{ row }">
@@ -85,7 +85,7 @@
               </template>
             </el-table-column>
             <el-table-column
-              label="当前是否放行"
+              :label="$t('auto.LTCConfig.6.1d84af')"
               width="150"
             >
               <template #default="{ row }">
@@ -98,14 +98,14 @@
               </template>
             </el-table-column>
             <el-table-column
-              label="归管路由"
+              :label="$t('auto.LTCConfig.7.cf6395')"
               width="110"
             >
               <template #default="{ row }">
                 {{ row.guarded }} 条
               </template>
             </el-table-column>
-            <el-table-column label="键名">
+            <el-table-column :label="$t('auto.LTCConfig.8.36bf47')">
               <template #default="{ row }">
                 <code>{{ row.stage }}</code>
               </template>
@@ -126,8 +126,8 @@
     >
       <template #header>
         <div class="card-head">
-          <span>阈值</span>
-          <span class="head-sub">lead_score 与 confidence 是两道独立闸门，不可合并成一个分</span>
+          <span>{{ $t('auto.LTCConfig.12.e0de1c') }}</span>
+          <span class="head-sub">{{ $t('auto.LTCConfig.13.fc10ab') }}</span>
         </div>
       </template>
       <el-form
@@ -155,11 +155,11 @@
                 <span
                   v-if="!bounds[key].zero_legal"
                   class="zero-bad"
-                >给 0 会被拒（0 等于拆掉这道闸门）</span>
+                >{{ $t('auto.LTCConfig.14.03be92') }}</span>
                 <span
                   v-else
                   class="zero-ok"
-                >0 合法：含义是「任何折扣都要走审批」</span>
+                >{{ $t('auto.LTCConfig.15.82c82b') }}</span>
               </div>
             </el-form-item>
           </el-col>
@@ -174,7 +174,7 @@
     >
       <template #header>
         <div class="card-head">
-          <span>阈值</span>
+          <span>{{ $t('auto.LTCConfig.12.e0de1c') }}</span>
         </div>
       </template>
       <p class="hint">
@@ -190,7 +190,7 @@
     >
       <template #header>
         <div class="card-head">
-          <span>这份读数怎么讲</span>
+          <span>{{ $t('auto.LTCConfig.16.04d6d7') }}</span>
         </div>
       </template>
       <ul class="hints">
@@ -217,7 +217,7 @@
       type="warning"
       :closable="false"
       show-icon
-      :title="'开关已改，但这次变更没进审计：' + saveNotice.audit_error"
+      ::title="$t('auto.LTCConfig.9.865f26')"
     />
 
     <div class="actions">
@@ -244,33 +244,34 @@
 
 <script setup>
 import { computed, onMounted, reactive, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import { getLTCConfig, saveLTCConfig } from '@/api/ltcConfig'
 
 // 阶段键与中文名：顺序照后端 LTCKnownStages（销售流程顺序），
 // 键名照 ltc.config 的 JSON 字面量 —— 这两处错一处，保存就会被后端拒收。
 const STAGES = [
-  { stage: 'opportunity', label: '商机' },
-  { stage: 'outreach', label: '外联触达' },
-  { stage: 'quote', label: '报价' },
-  { stage: 'bill', label: '账单' },
-  { stage: 'payment', label: '回款' },
-  { stage: 'collection', label: '催收' }
+  { stage: 'opportunity', label: t('auto.LTCConfig.17.55290e') },
+  { stage: 'outreach', label: t('auto.LTCConfig.18.301dd5') },
+  { stage: 'quote', label: t('auto.LTCConfig.19.00bae3') },
+  { stage: 'bill', label: t('auto.LTCConfig.20.a08c6e') },
+  { stage: 'payment', label: t('auto.LTCConfig.21.1755fc') },
+  { stage: 'collection', label: t('auto.LTCConfig.22.b01bde') }
 ]
 
 const THRESHOLDS = [
-  { key: 'lead_score', label: '线索分下限 lead_score' },
-  { key: 'confidence', label: '置信度下限 confidence' },
-  { key: 'discount_percent', label: '折扣审批线 discount_percent' },
-  { key: 'win_probability', label: '赢率门槛 win_probability' }
+  { key: 'lead_score', label: t('auto.LTCConfig.23.fb1e8b') },
+  { key: 'confidence', label: t('auto.LTCConfig.24.94fa8e') },
+  { key: 'discount_percent', label: t('auto.LTCConfig.25.42cf7f') },
+  { key: 'win_probability', label: t('auto.LTCConfig.26.7ff868') }
 ]
 
 const REASON_TEXT = {
-  active: '放行',
-  master_off: '总开关关着',
-  stage_off: '本阶段未开',
-  degraded: '配置读不动',
-  unknown_stage: '阶段名未注册'
+  active: t('auto.LTCConfig.27.456399'),
+  master_off: t('auto.LTCConfig.28.ea6e33'),
+  stage_off: t('auto.LTCConfig.29.9bff6a'),
+  degraded: t('auto.LTCConfig.30.3d8283'),
+  unknown_stage: t('auto.LTCConfig.31.2a1bfe')
 }
 
 const emptyCfg = () => ({
@@ -291,6 +292,8 @@ const emptyCfg = () => ({
   threshold_bounds: {}
 })
 
+const { t } = useI18n()
+
 const cfg = reactive(emptyCfg())
 const bounds = ref({})
 const thresholdKeys = THRESHOLDS.map((t) => t.key)
@@ -299,7 +302,7 @@ const saving = ref(false)
 const saveError = ref('')
 const saveNotice = ref({})
 
-const sourceText = computed(() => (cfg.source === 'kv' ? '库里那份' : '内置默认（库里还没有值）'))
+const sourceText = computed(() => (cfg.source === 'kv' ? t('auto.LTCConfig.32.56f7a2') : t('auto.LTCConfig.33.c79870')))
 
 // 边界没到位之前不渲染阈值区：首帧 bounds 还是空对象，直接取 .max 会让整页白屏。
 const boundsReady = computed(() => thresholdKeys.every((k) => !!bounds.value[k]))
@@ -325,7 +328,7 @@ async function load() {
     Object.assign(cfg, emptyCfg(), data)
     bounds.value = data.threshold_bounds || {}
   } catch (err) {
-    saveError.value = '读取失败：' + (err?.message || '未知错误')
+    saveError.value = t('auto.LTCConfig.34.4154d0') + (err?.message || t('auto.LTCConfig.35.974e74'))
   } finally {
     loading.value = false
   }
@@ -351,12 +354,12 @@ async function onSave() {
       bounds.value = res.effective.threshold_bounds || {}
     }
     if (res?.persisted && !res?.audit_error) {
-      ElMessage.success(`已保存（${res.stored_bytes} 字节，开启阶段：${(res.stages_on || []).join('、') || '无'}）`)
+      ElMessage.success(`已保存（${res.stored_bytes} 字节，开启阶段：${(res.stages_on || []).join('、') || t('auto.LTCConfig.36.d81bb2')}）`)
     }
   } catch (err) {
     // 后端把拒绝原因拼到了句子级（「阶段名 qoute 不认识」「lead_score 给 0 等于拆闸」…），
     // 原样铺出来，不要换成一句"参数错误"让运营在六个阶段名里猜。
-    saveError.value = err?.message || '保存失败'
+    saveError.value = err?.message || t('auto.LTCConfig.37.6de920')
   } finally {
     saving.value = false
   }

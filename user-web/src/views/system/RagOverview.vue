@@ -3,7 +3,7 @@
     <el-card class="rag-overview-card">
       <template #header>
         <div class="card-header">
-          <span>RAG智能体概览</span>
+          <span>{{ $t('auto.RagOverview.11.d34062') }}</span>
         </div>
       </template>
       
@@ -13,7 +13,7 @@
             <el-card class="stat-card">
               <div class="stat-item">
                 <div class="stat-number">{{ stats.totalProducts }}</div>
-                <div class="stat-label">RAG产品数量</div>
+                <div class="stat-label">{{ $t('auto.RagOverview.12.b0291c') }}</div>
               </div>
             </el-card>
           </el-col>
@@ -21,7 +21,7 @@
             <el-card class="stat-card">
               <div class="stat-item">
                 <div class="stat-number">{{ stats.activeProducts }}</div>
-                <div class="stat-label">活跃产品</div>
+                <div class="stat-label">{{ $t('auto.RagOverview.13.51a086') }}</div>
               </div>
             </el-card>
           </el-col>
@@ -29,7 +29,7 @@
             <el-card class="stat-card">
               <div class="stat-item">
                 <div class="stat-number">{{ stats.activatedAccounts }}</div>
-                <div class="stat-label">已启用账号</div>
+                <div class="stat-label">{{ $t('auto.RagOverview.14.31ceae') }}</div>
               </div>
             </el-card>
           </el-col>
@@ -38,13 +38,13 @@
         <el-divider />
 
         <div class="quick-actions">
-          <h3>快速操作</h3>
+          <h3>{{ $t('auto.RagOverview.15.002df9') }}</h3>
           <el-row :gutter="20">
             <el-col :span="6">
               <el-card class="action-card" @click="goToConfig">
                 <div class="action-item">
                   <el-icon class="action-icon"><Setting /></el-icon>
-                  <div class="action-label">配置RAG产品</div>
+                  <div class="action-label">{{ $t('auto.RagOverview.16.924c17') }}</div>
                 </div>
               </el-card>
             </el-col>
@@ -52,7 +52,7 @@
               <el-card class="action-card" @click="goToAccountConfig">
                 <div class="action-item">
                   <el-icon class="action-icon"><User /></el-icon>
-                  <div class="action-label">账号配置</div>
+                  <div class="action-label">{{ $t('auto.RagOverview.17.a16a35') }}</div>
                 </div>
               </el-card>
             </el-col>
@@ -60,7 +60,7 @@
               <el-card class="action-card" @click="goToAccountConfig">
                 <div class="action-item">
                   <el-icon class="action-icon"><ChatDotRound /></el-icon>
-                  <div class="action-label">自动回复设置</div>
+                  <div class="action-label">{{ $t('auto.RagOverview.18.1f6097') }}</div>
                 </div>
               </el-card>
             </el-col>
@@ -68,7 +68,7 @@
               <el-card class="action-card" @click="goToDocs">
                 <div class="action-item">
                   <el-icon class="action-icon"><Document /></el-icon>
-                  <div class="action-label">帮助文档</div>
+                  <div class="action-label">{{ $t('auto.RagOverview.19.c39ced') }}</div>
                 </div>
               </el-card>
             </el-col>
@@ -78,12 +78,12 @@
         <el-divider />
 
         <div class="recent-activity">
-          <h3>最近活动</h3>
+          <h3>{{ $t('auto.RagOverview.20.73378a') }}</h3>
           <el-table :data="activities" style="width: 100%">
-            <el-table-column prop="time" label="时间" width="180" />
-            <el-table-column prop="action" label="操作" />
-            <el-table-column prop="user" label="用户" width="120" />
-            <el-table-column prop="status" label="状态" width="100">
+            <el-table-column prop="time" :label="$t('auto.RagOverview.1.19fcb9')" width="180" />
+            <el-table-column prop="action" :label="$t('auto.RagOverview.2.2b6bc0')" />
+            <el-table-column prop="user" :label="$t('auto.RagOverview.3.1fd02a')" width="120" />
+            <el-table-column prop="status" :label="$t('auto.RagOverview.4.3fea7c')" width="100">
               <template #default="{ row }">
                 <el-tag :type="getStatusTagType(row.status)">{{ getStatusLabel(row.status) }}</el-tag>
               </template>
@@ -94,97 +94,97 @@
     </el-card>
 
     
-    <el-dialog v-model="helpDialogVisible" title="RAG 帮助文档" width="780px" :close-on-click-modal="false">
+    <el-dialog v-model="helpDialogVisible" :title="$t('auto.RagOverview.5.d6c143')" width="780px" :close-on-click-modal="false">
       <div class="help-doc-content">
         <el-collapse v-model="activeHelpSections">
-          <el-collapse-item title="什么是 RAG？" name="1">
+          <el-collapse-item :title="$t('auto.RagOverview.6.40d5f4')" name="1">
             <div class="help-section">
-              <p>RAG（Retrieval-Augmented Generation，检索增强生成）是一种结合信息检索与文本生成的 AI 技术。通过将大语言模型（LLM）与外部知识库连接，RAG 能够在生成回复时动态检索相关文档，从而提供更准确、更及时的回答。</p>
-              <p><strong>核心优势：</strong></p>
+              <p>{{ $t('auto.RagOverview.21.853b1a') }}</p>
+              <p><strong>{{ $t('auto.RagOverview.22.a3d379') }}</strong></p>
               <ul>
-                <li>实时性：基于最新知识库内容生成回答，无需重新训练模型</li>
-                <li>准确性：回复可溯源至具体文档，降低 AI 幻觉</li>
-                <li>可控性：管理员可精确控制知识范围，确保回复符合业务规范</li>
-                <li>灵活性：支持多种平台接入，如网站客服、社交媒体自动回复等</li>
+                <li>{{ $t('auto.RagOverview.23.98e74b') }}</li>
+                <li>{{ $t('auto.RagOverview.24.e39f91') }}</li>
+                <li>{{ $t('auto.RagOverview.25.f78301') }}</li>
+                <li>{{ $t('auto.RagOverview.26.081fb9') }}</li>
               </ul>
             </div>
           </el-collapse-item>
 
-          <el-collapse-item title="如何配置 RAG 产品？" name="2">
+          <el-collapse-item :title="$t('auto.RagOverview.7.321e9b')" name="2">
             <div class="help-section">
-              <p><strong>步骤一：</strong>进入「系统设置」→「RAG 配置」页面，或点击概览页的「配置RAG产品」卡片。</p>
-              <p><strong>步骤二：</strong>点击「新增产品」，填写以下信息：</p>
+              <p><strong>{{ $t('auto.RagOverview.27.1cdf63') }}</strong>{{ $t('auto.RagOverview.28.3769ad') }}</p>
+              <p><strong>{{ $t('auto.RagOverview.29.e8ad9f') }}</strong>{{ $t('auto.RagOverview.30.4531fb') }}</p>
               <ul>
-                <li><strong>产品名称：</strong>为 RAG 应用起一个有辨识度的名称</li>
-                <li><strong>产品描述：</strong>简要描述该 RAG 产品的用途和场景</li>
-                <li><strong>模型选择：</strong>选择底层大语言模型（如 DeepSeek、GPT 等）</li>
-                <li><strong>温度参数：</strong>控制生成回复的随机性（0-2，建议 0.7）</li>
-                <li><strong>最大 Token：</strong>限制单次回复的最大长度</li>
+                <li><strong>{{ $t('auto.RagOverview.31.0fcac7') }}</strong>{{ $t('auto.RagOverview.32.5496af') }}</li>
+                <li><strong>{{ $t('auto.RagOverview.33.b421bd') }}</strong>{{ $t('auto.RagOverview.34.ac5641') }}</li>
+                <li><strong>{{ $t('auto.RagOverview.35.29e965') }}</strong>{{ $t('auto.RagOverview.36.9b6fdb') }}</li>
+                <li><strong>{{ $t('auto.RagOverview.37.97af7e') }}</strong>{{ $t('auto.RagOverview.38.183281') }}</li>
+                <li><strong>{{ $t('auto.RagOverview.39.577bc8') }}</strong>{{ $t('auto.RagOverview.40.9287f9') }}</li>
               </ul>
-              <p><strong>步骤三：</strong>保存配置后，产品将出现在列表中，可随时启用或禁用。</p>
+              <p><strong>{{ $t('auto.RagOverview.41.a5da0d') }}</strong>{{ $t('auto.RagOverview.42.70329e') }}</p>
             </div>
           </el-collapse-item>
 
-          <el-collapse-item title="如何搭建知识库？" name="3">
+          <el-collapse-item :title="$t('auto.RagOverview.8.ff7b09')" name="3">
             <div class="help-section">
-              <p><strong>步骤一：</strong>进入「知识库管理」页面。</p>
-              <p><strong>步骤二：</strong>上传文档或直接输入文本内容。支持的格式包括：</p>
+              <p><strong>{{ $t('auto.RagOverview.27.1cdf63') }}</strong>{{ $t('auto.RagOverview.43.ad5afa') }}</p>
+              <p><strong>{{ $t('auto.RagOverview.29.e8ad9f') }}</strong>{{ $t('auto.RagOverview.44.37e560') }}</p>
               <ul>
-                <li>PDF 文档</li>
-                <li>Word 文档（.docx）</li>
-                <li>Markdown 文件</li>
-                <li>纯文本（TXT）</li>
-                <li>网页链接（URL）</li>
+                <li>{{ $t('auto.RagOverview.45.11f65b') }}</li>
+                <li>{{ $t('auto.RagOverview.46.56227f') }}</li>
+                <li>{{ $t('auto.RagOverview.47.6ca908') }}</li>
+                <li>{{ $t('auto.RagOverview.48.6bc0b5') }}</li>
+                <li>{{ $t('auto.RagOverview.49.537a9b') }}</li>
               </ul>
-              <p><strong>步骤三：</strong>为文档设置分类标签和关联 RAG 产品，便于管理。</p>
-              <p><strong>步骤四：</strong>系统将自动对文档进行向量化处理，处理完成后即可用于 RAG 检索。</p>
-              <p><strong>最佳实践：</strong></p>
+              <p><strong>{{ $t('auto.RagOverview.41.a5da0d') }}</strong>{{ $t('auto.RagOverview.50.9d540f') }}</p>
+              <p><strong>{{ $t('auto.RagOverview.51.4cdc88') }}</strong>{{ $t('auto.RagOverview.52.58b184') }}</p>
+              <p><strong>{{ $t('auto.RagOverview.53.f35cf6') }}</strong></p>
               <ul>
-                <li>保持文档内容简洁、结构化</li>
-                <li>定期更新知识库以确保信息时效性</li>
-                <li>按主题分类文档，提高检索精度</li>
-                <li>避免上传重复内容</li>
+                <li>{{ $t('auto.RagOverview.54.819c2b') }}</li>
+                <li>{{ $t('auto.RagOverview.55.0712c1') }}</li>
+                <li>{{ $t('auto.RagOverview.56.6bba16') }}</li>
+                <li>{{ $t('auto.RagOverview.57.4e3a94') }}</li>
               </ul>
             </div>
           </el-collapse-item>
 
-          <el-collapse-item title="如何接入平台账号？" name="4">
+          <el-collapse-item :title="$t('auto.RagOverview.9.988503')" name="4">
             <div class="help-section">
-              <p><strong>步骤一：</strong>进入「账号配置」页面。</p>
-              <p><strong>步骤二：</strong>点击「新增账号」，选择平台类型（如抖音、微信、网站等）。</p>
-              <p><strong>步骤三：</strong>填写平台账号信息：</p>
+              <p><strong>{{ $t('auto.RagOverview.27.1cdf63') }}</strong>{{ $t('auto.RagOverview.58.e2d2b4') }}</p>
+              <p><strong>{{ $t('auto.RagOverview.29.e8ad9f') }}</strong>{{ $t('auto.RagOverview.59.4db3c8') }}</p>
+              <p><strong>{{ $t('auto.RagOverview.41.a5da0d') }}</strong>{{ $t('auto.RagOverview.60.ab11f7') }}</p>
               <ul>
-                <li><strong>平台类型：</strong>选择要接入的社交媒体或客服平台</li>
-                <li><strong>账号凭证：</strong>根据平台要求填写 API Key、Token 等认证信息</li>
-                <li><strong>关联 RAG 产品：</strong>选择该账号使用的 RAG 产品</li>
-                <li><strong>自动回复规则：</strong>配置触发条件和回复策略</li>
+                <li><strong>{{ $t('auto.RagOverview.61.68cf1f') }}</strong>{{ $t('auto.RagOverview.62.6759c6') }}</li>
+                <li><strong>{{ $t('auto.RagOverview.63.ef7595') }}</strong>{{ $t('auto.RagOverview.64.58b6bf') }}</li>
+                <li><strong>{{ $t('auto.RagOverview.65.873fe7') }}</strong>{{ $t('auto.RagOverview.66.c61007') }}</li>
+                <li><strong>{{ $t('auto.RagOverview.67.aff544') }}</strong>{{ $t('auto.RagOverview.68.18a3e3') }}</li>
               </ul>
-              <p><strong>步骤四：</strong>保存后，可在「自动回复设置」中进一步配置回复规则。</p>
+              <p><strong>{{ $t('auto.RagOverview.51.4cdc88') }}</strong>{{ $t('auto.RagOverview.69.e5e8a8') }}</p>
             </div>
           </el-collapse-item>
 
-          <el-collapse-item title="常见问题排查" name="5">
+          <el-collapse-item :title="$t('auto.RagOverview.10.90ebc2')" name="5">
             <div class="help-section">
-              <p><strong>1. RAG 回复不准确怎么办？</strong></p>
-              <p>检查知识库文档是否覆盖了相关问题；优化文档内容结构和质量；调整模型温度参数降低随机性。</p>
+              <p><strong>{{ $t('auto.RagOverview.70.4cc9ef') }}</strong></p>
+              <p>{{ $t('auto.RagOverview.71.bbf19b') }}</p>
 
-              <p><strong>2. 知识库文档上传失败？</strong></p>
-              <p>确认文件格式是否支持；检查文件大小是否超过限制（单文件最大 50MB）；确认网络连接正常。</p>
+              <p><strong>{{ $t('auto.RagOverview.72.25fdf5') }}</strong></p>
+              <p>{{ $t('auto.RagOverview.73.a20efa') }}</p>
 
-              <p><strong>3. 平台账号连接失败？</strong></p>
-              <p>检查 API 凭证是否正确且未过期；确认平台 API 配额是否充足；查看系统日志获取详细错误信息。</p>
+              <p><strong>{{ $t('auto.RagOverview.74.4114d0') }}</strong></p>
+              <p>{{ $t('auto.RagOverview.75.8a2dee') }}</p>
 
-              <p><strong>4. 向量化处理卡住？</strong></p>
-              <p>检查文档内容是否为空或损坏；尝试重新上传文档；联系管理员检查 Embedding 服务状态。</p>
+              <p><strong>{{ $t('auto.RagOverview.76.126a6a') }}</strong></p>
+              <p>{{ $t('auto.RagOverview.77.d31088') }}</p>
 
-              <p><strong>5. 如何查看 RAG 使用统计？</strong></p>
-              <p>在 RAG 概览页面可查看产品数量、活跃状态及最近活动记录。详细统计数据可在各子页面查看。</p>
+              <p><strong>{{ $t('auto.RagOverview.78.024e92') }}</strong></p>
+              <p>{{ $t('auto.RagOverview.79.fffe41') }}</p>
             </div>
           </el-collapse-item>
         </el-collapse>
       </div>
       <template #footer>
-        <el-button type="primary" @click="helpDialogVisible = false">关闭</el-button>
+        <el-button type="primary" @click="helpDialogVisible = false">{{ $t('auto.RagOverview.80.b15d91') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -194,12 +194,15 @@
 import i18n from '@/i18n'
 
 import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { ragProductConfigAPI } from '@/api/ragProductConfig'
 import { knowledgeBaseAPI } from '@/api/knowledgeBase'
 
 const router = useRouter()
+
+const { t } = useI18n()
 
 const stats = ref({
   totalProducts: 0,
@@ -210,7 +213,7 @@ const stats = ref({
 
 const activities = ref([]);
 
-const STATUS_ZH_TO_VALUE = { '成功': 'success', '失败': 'failed', '进行中': 'running' };
+const STATUS_ZH_TO_VALUE = { '成功': 'success', '失败': 'failed', '运行中': 'running' };
 const getStatusTagType = (status) => {
   const v = STATUS_ZH_TO_VALUE[status] || status
   switch (v) {
@@ -220,8 +223,8 @@ const getStatusTagType = (status) => {
     default:        return 'info'
   }
 }
-const STATUS_ZH_LABEL = { '成功': '成功', '失败': '失败', '进行中': '进行中' }
-const getStatusLabel = (status) => STATUS_ZH_LABEL[status] || (status === 'success' ? '成功' : status === 'failed' ? '失败' : status === 'running' ? '进行中' : status)
+const STATUS_ZH_LABEL = { '成功': t('auto.RagOverview.81.330363'), '失败': t('auto.RagOverview.82.acd5cb'), '运行中': t('auto.RagOverview.83.fb852f') }
+const getStatusLabel = (status) => STATUS_ZH_LABEL[status] || (status === 'success' ? t('auto.RagOverview.81.330363') : status === 'failed' ? t('auto.RagOverview.82.acd5cb') : status === 'running' ? t('auto.RagOverview.83.fb852f') : status)
 
 const goToConfig = () => {
   router.push('/system/rag-product-config')
@@ -252,7 +255,7 @@ const loadStats = async () => {
       const kbs = kbsRes?.list || kbsRes?.items || (Array.isArray(kbsRes) ? kbsRes : [])
       stats.value.totalDocuments = kbs.reduce((sum, k) => sum + Number(k?.doc_count || k?.document_count || 0), 0)
     } catch (e) {
-      console.warn('加载知识库文档失败:', e);
+      console.warn(t('auto.RagOverview.84.3e9149'), e);
     }
 
     try {
@@ -262,21 +265,21 @@ const loadStats = async () => {
         stats.value.activatedAccounts = accounts.filter((a) => a.is_active !== false).length
       }
     } catch (e) {
-      console.warn('加载账号配置失败:', e);
+      console.warn(t('auto.RagOverview.85.139fa0'), e);
     }
 
     if (Array.isArray(products) && products.length > 0) {
       activities.value = products.slice(0, 5).map((p) => ({
-        time: p.updated_at || p.created_at || '未知时间',
-        action: `RAG产品: ${p.name || '未命名'}`,
+        time: p.updated_at || p.created_at || t('auto.RagOverview.86.9418d7'),
+        action: `RAG产品: ${p.name || t('auto.RagOverview.87.7f0425')}`,
         user: p.creator || 'system',
-        status: p.is_active ? '成功' : '失败'
+        status: p.is_active ? t('auto.RagOverview.81.330363') : t('auto.RagOverview.82.acd5cb')
       }))
     } else {
       activities.value = []
     }
   } catch (error) {
-    console.error('加载 RAG 概览数据失败:', error)
+    console.error(t('auto.RagOverview.88.b6ee62'), error)
     ElMessage.warning(i18n.global.t('RAG 概览数据加载失败,请稍后重试'))
   }
 };

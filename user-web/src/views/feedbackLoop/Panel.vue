@@ -3,7 +3,7 @@
     <el-card class="header-card">
       <div class="header-content">
         <h2>{{ $t('反馈学习闭环') }}</h2>
-        <p class="subtitle">销冠对话聚类 → Prompt 候选迭代 → Multi-Armed Bandit A/B 自适应流量分配</p>
+        <p class="subtitle">{{ $t('auto.Panel.37.9868ef') }}</p>
       </div>
     </el-card>
 
@@ -11,7 +11,7 @@
       <el-col :span="6">
         <el-card>
           <div class="stat-item">
-            <div class="stat-label">反馈事件（24h）</div>
+            <div class="stat-label">{{ $t('auto.Panel.38.20db3a') }}</div>
             <div class="stat-value">{{ stats.feedbackCount }}</div>
           </div>
         </el-card>
@@ -27,7 +27,7 @@
       <el-col :span="6">
         <el-card>
           <div class="stat-item">
-            <div class="stat-label">Prompt 候选</div>
+            <div class="stat-label">{{ $t('auto.Panel.39.821460') }}</div>
             <div class="stat-value" style="color: #4F46E5">{{ stats.candidateCount }}</div>
           </div>
         </el-card>
@@ -35,7 +35,7 @@
       <el-col :span="6">
         <el-card>
           <div class="stat-item">
-            <div class="stat-label">Bandit 探索中</div>
+            <div class="stat-label">{{ $t('auto.Panel.40.07bf9a') }}</div>
             <div class="stat-value" style="color: #F59E0B">{{ stats.banditCount }}</div>
           </div>
         </el-card>
@@ -44,11 +44,11 @@
 
     <el-tabs v-model="activeTab" class="content-tabs">
       
-      <el-tab-pane :label="$t('反馈事件')" name="events">
+      <el-tab-pane ::label="$t('auto.Panel.1.9aa0dd')" name="events">
         <el-card>
           <template #header>
             <div class="card-header">
-              <span>三类反馈信号（显式 like/dislike / 隐式 conversion/reply_rate / 销冠 champion_mark）</span>
+              <span>{{ $t('auto.Panel.41.14de1a') }}</span>
               <el-button @click="loadEvents">
                 <el-icon><Refresh /></el-icon>
                 {{ $t('刷新') }}
@@ -57,14 +57,14 @@
           </template>
           <el-row :gutter="12" style="margin-bottom: 12px">
             <el-col :span="6">
-              <el-select v-model="eventTypeFilter" placeholder="事件类型" clearable style="width: 100%">
-                <el-option label="显式反馈" value="explicit" />
-                <el-option label="隐式反馈" value="implicit" />
-                <el-option label="销冠标记" value="champion" />
+              <el-select v-model="eventTypeFilter" :placeholder="$t('auto.Panel.2.f974c8')" clearable style="width: 100%">
+                <el-option :label="$t('auto.Panel.3.68f6d2')" value="explicit" />
+                <el-option :label="$t('auto.Panel.4.426f5c')" value="implicit" />
+                <el-option :label="$t('auto.Panel.5.4a27b5')" value="champion" />
               </el-select>
             </el-col>
             <el-col :span="6">
-              <el-select v-model="signalKeyFilter" placeholder="信号 key" clearable style="width: 100%">
+              <el-select v-model="signalKeyFilter" :placeholder="$t('auto.Panel.6.5fc982')" clearable style="width: 100%">
                 <el-option label="like" value="like" />
                 <el-option label="dislike" value="dislike" />
                 <el-option label="conversion" value="conversion" />
@@ -77,21 +77,21 @@
           </el-row>
           <el-table :data="events" v-loading="eventsLoading" stripe>
             <el-table-column prop="id" label="ID" width="80" />
-            <el-table-column prop="event_type" label="类型" width="100">
+            <el-table-column prop="event_type" :label="$t('auto.Panel.7.226b09')" width="100">
               <template #default="{ row }">
                 <el-tag :type="eventTypeTagType(row.event_type)">{{ eventTypeLabel(row.event_type) }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="signal_key" label="信号" width="100" />
-            <el-table-column prop="session_id" label="会话" width="160" />
-            <el-table-column prop="reward" label="奖励值" width="100">
+            <el-table-column prop="signal_key" :label="$t('auto.Panel.8.eaaf95')" width="100" />
+            <el-table-column prop="session_id" :label="$t('auto.Panel.9.9a834e')" width="160" />
+            <el-table-column prop="reward" :label="$t('auto.Panel.10.667378')" width="100">
               <template #default="{ row }">
                 <el-tag :type="confTagType(row.reward)">{{ (row.reward || 0).toFixed(3) }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="ai_reply" label="AI 回复" min-width="280" show-overflow-tooltip />
-            <el-table-column prop="customer_msg" label="客户消息" min-width="200" show-overflow-tooltip />
-            <el-table-column prop="created_at" label="时间" width="170">
+            <el-table-column prop="ai_reply" :label="$t('auto.Panel.11.ae8297')" min-width="280" show-overflow-tooltip />
+            <el-table-column prop="customer_msg" :label="$t('auto.Panel.12.80ded0')" min-width="200" show-overflow-tooltip />
+            <el-table-column prop="created_at" :label="$t('auto.Panel.13.19fcb9')" width="170">
               <template #default="{ row }">
                 {{ formatTime(row.created_at) }}
               </template>
@@ -111,11 +111,11 @@
       </el-tab-pane>
 
       
-      <el-tab-pane label="销冠对话" name="dialogues">
+      <el-tab-pane :label="$t('auto.Panel.14.971a4c')" name="dialogues">
         <el-card>
           <template #header>
             <div class="card-header">
-              <span>销冠高奖励对话（已聚类 + 话术提取）</span>
+              <span>{{ $t('auto.Panel.42.d5736f') }}</span>
               <el-button type="primary" @click="triggerDialogueAnalysis">
                 <el-icon><MagicStick /></el-icon>
                 立即触发分析
@@ -124,18 +124,18 @@
           </template>
           <el-table :data="dialogues" v-loading="dialoguesLoading" stripe>
             <el-table-column prop="id" label="ID" width="80" />
-            <el-table-column prop="scenario" label="场景" width="140" />
-            <el-table-column prop="journey_stage" label="旅程阶段" width="120" />
-            <el-table-column prop="staff_id" label="销冠" width="100" />
-            <el-table-column prop="customer_msg" label="客户消息" min-width="200" show-overflow-tooltip />
-            <el-table-column prop="champion_reply" label="销冠回复" min-width="280" show-overflow-tooltip />
-            <el-table-column prop="reward" label="奖励" width="100">
+            <el-table-column prop="scenario" :label="$t('auto.Panel.15.c93165')" width="140" />
+            <el-table-column prop="journey_stage" :label="$t('auto.Panel.16.439ef9')" width="120" />
+            <el-table-column prop="staff_id" :label="$t('auto.Panel.17.c08c17')" width="100" />
+            <el-table-column prop="customer_msg" :label="$t('auto.Panel.12.80ded0')" min-width="200" show-overflow-tooltip />
+            <el-table-column prop="champion_reply" :label="$t('auto.Panel.18.b8d942')" min-width="280" show-overflow-tooltip />
+            <el-table-column prop="reward" :label="$t('auto.Panel.19.c39a1a')" width="100">
               <template #default="{ row }">
                 <el-tag :type="confTagType(row.reward)" effect="dark">{{ (row.reward || 0).toFixed(3) }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="cluster_id" label="聚类 ID" width="100" />
-            <el-table-column prop="created_at" label="时间" width="170">
+            <el-table-column prop="cluster_id" :label="$t('auto.Panel.20.88e7f3')" width="100" />
+            <el-table-column prop="created_at" :label="$t('auto.Panel.13.19fcb9')" width="170">
               <template #default="{ row }">
                 {{ formatTime(row.created_at) }}
               </template>
@@ -155,11 +155,11 @@
       </el-tab-pane>
 
       
-      <el-tab-pane label="Prompt 迭代" name="prompts">
+      <el-tab-pane :label="$t('auto.Panel.21.8c68ef')" name="prompts">
         <el-card>
           <template #header>
             <div class="card-header">
-              <span>Prompt 候选（基于负反馈样本 LLM 生成）</span>
+              <span>{{ $t('auto.Panel.43.f40e52') }}</span>
               <el-button @click="loadPrompts">
                 <el-icon><Refresh /></el-icon>
                 刷新
@@ -169,24 +169,24 @@
           <el-table :data="prompts" v-loading="promptsLoading" stripe>
             <el-table-column prop="id" label="ID" width="80" />
             <el-table-column prop="sop_id" label="SOP" width="80" />
-            <el-table-column prop="sop_node_id" label="节点" width="120" />
-            <el-table-column prop="version" label="版本" width="100" />
-            <el-table-column prop="title" label="标题" min-width="200" show-overflow-tooltip />
-            <el-table-column prop="status" label="状态" width="100">
+            <el-table-column prop="sop_node_id" :label="$t('auto.Panel.22.3bf3c0')" width="120" />
+            <el-table-column prop="version" :label="$t('auto.Panel.23.fe2df0')" width="100" />
+            <el-table-column prop="title" :label="$t('auto.Panel.24.32c65d')" min-width="200" show-overflow-tooltip />
+            <el-table-column prop="status" :label="$t('auto.Panel.25.3fea7c')" width="100">
               <template #default="{ row }">
                 <el-tag :type="promptStatusTagType(row.status)">{{ promptStatusLabel(row.status) }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="generated_by" label="来源" width="80" />
-            <el-table-column prop="created_at" label="创建时间" width="170">
+            <el-table-column prop="generated_by" :label="$t('auto.Panel.26.26ca20')" width="80" />
+            <el-table-column prop="created_at" :label="$t('auto.Panel.27.eca37c')" width="170">
               <template #default="{ row }">
                 {{ formatTime(row.created_at) }}
               </template>
             </el-table-column>
-            <el-table-column label="操作" width="180" fixed="right">
+            <el-table-column :label="$t('auto.Panel.28.2b6bc0')" width="180" fixed="right">
               <template #default="{ row }">
-                <el-button size="small" @click="viewPrompt(row)">查看</el-button>
-                <el-button v-if="row.status === 'draft'" size="small" type="success" @click="approvePrompt(row)">批准</el-button>
+                <el-button size="small" @click="viewPrompt(row)">{{ $t('auto.Panel.44.607e7a') }}</el-button>
+                <el-button v-if="row.status === 'draft'" size="small" type="success" @click="approvePrompt(row)">{{ $t('auto.Panel.45.7a712b') }}</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -198,7 +198,7 @@
         <el-card>
           <template #header>
             <div class="card-header">
-              <span>Multi-Armed Bandit 流量分配（Thompson Sampling）</span>
+              <span>{{ $t('auto.Panel.46.051b51') }}</span>
               <el-button @click="loadBandits">
                 <el-icon><Refresh /></el-icon>
                 刷新
@@ -207,9 +207,9 @@
           </template>
           <el-table :data="bandits" v-loading="banditsLoading" stripe>
             <el-table-column prop="id" label="ID" width="80" />
-            <el-table-column prop="experiment_id" label="实验 ID" width="200" show-overflow-tooltip />
-            <el-table-column prop="arm_key" label="臂" width="100" />
-            <el-table-column prop="status" label="状态" width="100">
+            <el-table-column prop="experiment_id" :label="$t('auto.Panel.29.1014aa')" width="200" show-overflow-tooltip />
+            <el-table-column prop="arm_key" :label="$t('auto.Panel.30.d55d9e')" width="100" />
+            <el-table-column prop="status" :label="$t('auto.Panel.25.3fea7c')" width="100">
               <template #default="{ row }">
                 <el-tag :type="banditStatusTagType(row.status)">{{ banditStatusLabel(row.status) }}</el-tag>
               </template>
@@ -220,15 +220,15 @@
             <el-table-column prop="beta" label="β" width="80">
               <template #default="{ row }">{{ (row.beta || 0).toFixed(2) }}</template>
             </el-table-column>
-            <el-table-column prop="successes" label="成功" width="80" />
-            <el-table-column prop="failures" label="失败" width="80" />
-            <el-table-column prop="trials" label="试验数" width="80" />
-            <el-table-column prop="current_traffic_pct" label="当前流量%" width="110">
+            <el-table-column prop="successes" :label="$t('auto.Panel.31.330363')" width="80" />
+            <el-table-column prop="failures" :label="$t('auto.Panel.32.acd5cb')" width="80" />
+            <el-table-column prop="trials" :label="$t('auto.Panel.33.6cdece')" width="80" />
+            <el-table-column prop="current_traffic_pct" :label="$t('auto.Panel.34.8a83a3')" width="110">
               <template #default="{ row }">
                 {{ (row.current_traffic_pct || 0).toFixed(1) }}%
               </template>
             </el-table-column>
-            <el-table-column prop="posterior_best_prob" label="P(最优)" width="100">
+            <el-table-column prop="posterior_best_prob" :label="$t('auto.Panel.35.29d5fc')" width="100">
               <template #default="{ row }">
                 {{ (row.posterior_best_prob || 0).toFixed(3) }}
               </template>
@@ -239,13 +239,13 @@
     </el-tabs>
 
     
-    <el-dialog v-model="promptDialogVisible" :title="currentPrompt?.title || 'Prompt 详情'" width="780px">
+    <el-dialog v-model="promptDialogVisible" ::title="$t('auto.Panel.36.8dece2')" width="780px">
       <div v-if="currentPrompt">
-        <p><strong>版本：</strong>{{ currentPrompt.version }} · <strong>场景：</strong>{{ currentPrompt.scenario }} · <strong>状态：</strong>{{ promptStatusLabel(currentPrompt.status) }}</p>
+        <p><strong>{{ $t('auto.Panel.47.2684c4') }}</strong>{{ currentPrompt.version }} · <strong>{{ $t('auto.Panel.48.ae9ded') }}</strong>{{ currentPrompt.scenario }} · <strong>{{ $t('auto.Panel.49.bec98b') }}</strong>{{ promptStatusLabel(currentPrompt.status) }}</p>
         <el-divider />
-        <h4>系统 Prompt</h4>
+        <h4>{{ $t('auto.Panel.50.277e62') }}</h4>
         <pre class="prompt-content">{{ currentPrompt.system_prompt }}</pre>
-        <h4>用户 Prompt 模板</h4>
+        <h4>{{ $t('auto.Panel.51.e65346') }}</h4>
         <pre class="prompt-content">{{ currentPrompt.user_prompt_template }}</pre>
       </div>
     </el-dialog>
@@ -256,6 +256,7 @@
 import i18n from '@/i18n'
 
 import { ref, onMounted, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import {
   getFeedbackEvents,
@@ -264,6 +265,8 @@ import {
   updatePromptCandidateStatus,
   getBanditArms
 } from '@/api/tuning'
+
+const { t } = useI18n()
 
 const activeTab = ref('events')
 
@@ -286,7 +289,7 @@ async function loadEvents() {
     events.value = res?.list || res?.data?.list || []
     eventTotal.value = res?.total || res?.data?.total || 0
   } catch (e) {
-    ElMessage.error('事件加载失败：' + (e?.message || e))
+    ElMessage.error(t('auto.Panel.52.dcc1e9') + (e?.message || e))
   } finally {
     eventsLoading.value = false
   }
@@ -308,18 +311,18 @@ async function loadDialogues() {
     dialogues.value = res?.list || res?.data?.list || []
     dialogueTotal.value = res?.total || res?.data?.total || 0
   } catch (e) {
-    ElMessage.error('对话加载失败：' + (e?.message || e))
+    ElMessage.error(t('auto.Panel.53.29b9d4') + (e?.message || e))
   } finally {
     dialoguesLoading.value = false
   }
 }
 async function triggerDialogueAnalysis() {
   try {
-    await ElMessageBox.confirm('将触发销冠对话聚类 + 话术提取管道，预计耗时 1-5 分钟。是否继续？', '提示', { type: 'info' })
-    ElMessage.info(i18n.global.t('已提交分析任务（异步执行），完成后自动刷新'));
+    await ElMessageBox.confirm(t('auto.Panel.54.95fe77'), t('auto.Panel.55.02d981'), { type: 'info' })
+    ElMessage.info(i18n.global.t(t('auto.Panel.56.2abfb4')));
   } catch (e) {
     if (e !== 'cancel' && e !== 'close') {
-      ElMessage.error('触发失败：' + (e?.message || e))
+      ElMessage.error(t('auto.Panel.57.d195ec') + (e?.message || e))
     }
   }
 }
@@ -345,13 +348,13 @@ function viewPrompt(row) {
 }
 async function approvePrompt(row) {
   try {
-    await ElMessageBox.confirm(`确认批准 Prompt「${row.title}」？批准后将创建 Bandit A/B 实验。`, '提示', { type: 'warning' })
+    await ElMessageBox.confirm(`确认批准 Prompt「${row.title}」？批准后将创建 Bandit A/B 实验。`, t('auto.Panel.55.02d981'), { type: 'warning' })
     await updatePromptCandidateStatus(row.id, { status: 'approved' })
-    ElMessage.success(i18n.global.t('已批准'))
+    ElMessage.success(i18n.global.t(t('auto.Panel.58.337737')))
     await loadPrompts()
   } catch (e) {
     if (e !== 'cancel' && e !== 'close') {
-      ElMessage.error('批准失败：' + (e?.message || e))
+      ElMessage.error(t('auto.Panel.59.323657') + (e?.message || e))
     }
   }
 }
@@ -376,19 +379,19 @@ function confTagType(v) {
   return 'danger'
 }
 function eventTypeLabel(t) {
-  return { explicit: '显式', implicit: '隐式', champion: '销冠' }[t] || t
+  return { explicit: t('auto.Panel.60.34a09b'), implicit: t('auto.Panel.61.00878e'), champion: t('auto.Panel.17.c08c17') }[t] || t
 }
 function eventTypeTagType(t) {
   return { explicit: 'primary', implicit: 'info', champion: 'success' }[t] || ''
 }
 function promptStatusLabel(s) {
-  return { draft: '草稿', approved: '已批准', active: '已上线', retired: '已下线' }[s] || s
+  return { draft: t('auto.Panel.62.22b433'), approved: t('auto.Panel.58.337737'), active: t('auto.Panel.63.8d4a74'), retired: t('auto.Panel.64.0a6667') }[s] || s
 }
 function promptStatusTagType(s) {
   return { draft: 'info', approved: 'success', active: 'success', retired: 'danger' }[s] || ''
 }
 function banditStatusLabel(s) {
-  return { exploring: '探索中', exploiting: '利用中', promoted: '已晋升', retired: '已退役' }[s] || s
+  return { exploring: t('auto.Panel.65.67643e'), exploiting: t('auto.Panel.66.7f817d'), promoted: t('auto.Panel.67.c19943'), retired: t('auto.Panel.68.5b109a') }[s] || s
 }
 function banditStatusTagType(s) {
   return { exploring: 'warning', exploiting: 'primary', promoted: 'success', retired: 'info' }[s] || ''

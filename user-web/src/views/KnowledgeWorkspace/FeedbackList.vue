@@ -1,7 +1,7 @@
 <template>
   <div class="feedback-list-page">
     <el-alert
-      :title="$t('检索反馈管理')"
+      ::title="$t('auto.FeedbackList.1.2e5003')"
       type="info"
       :closable="false"
       show-icon
@@ -14,17 +14,17 @@
     
     <el-card class="filter-card">
       <div class="filter-bar">
-        <el-select v-model="filter.product_id" placeholder="选择产品" clearable filterable style="width: 200px" @change="loadFeedbacks">
+        <el-select v-model="filter.product_id" :placeholder="$t('auto.FeedbackList.2.cbf1cf')" clearable filterable style="width: 200px" @change="loadFeedbacks">
           <el-option v-for="p in productList" :key="p.id" :label="p.name" :value="p.id" />
         </el-select>
-        <el-select v-model="filter.rating" placeholder="评价" clearable style="width: 130px" @change="loadFeedbacks">
-          <el-option label="相关" :value="1" />
-          <el-option label="一般" :value="0" />
-          <el-option label="不相关" :value="-1" />
+        <el-select v-model="filter.rating" :placeholder="$t('auto.FeedbackList.3.606120')" clearable style="width: 130px" @change="loadFeedbacks">
+          <el-option :label="$t('auto.FeedbackList.4.ec0bce')" :value="1" />
+          <el-option :label="$t('auto.FeedbackList.5.2ab01e')" :value="0" />
+          <el-option :label="$t('auto.FeedbackList.6.354101')" :value="-1" />
         </el-select>
-        <el-input v-model="filter.keyword" placeholder="搜索查询文本" clearable style="width: 240px" @keyup.enter="loadFeedbacks" @clear="loadFeedbacks" />
-        <el-button type="primary" @click="loadFeedbacks">搜索</el-button>
-        <el-button :icon="Refresh" @click="loadFeedbacks">刷新</el-button>
+        <el-input v-model="filter.keyword" :placeholder="$t('auto.FeedbackList.7.119718')" clearable style="width: 240px" @keyup.enter="loadFeedbacks" @clear="loadFeedbacks" />
+        <el-button type="primary" @click="loadFeedbacks">{{ $t('auto.FeedbackList.15.e5f71f') }}</el-button>
+        <el-button :icon="Refresh" @click="loadFeedbacks">{{ $t('auto.FeedbackList.16.694fc5') }}</el-button>
       </div>
     </el-card>
 
@@ -32,25 +32,25 @@
     <el-row :gutter="16" class="metric-row">
       <el-col :span="6">
         <el-card class="metric-card">
-          <div class="metric-label">总反馈数</div>
+          <div class="metric-label">{{ $t('auto.FeedbackList.17.7429d4') }}</div>
           <div class="metric-value">{{ stats.total || 0 }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="metric-card success">
-          <div class="metric-label">相关</div>
+          <div class="metric-label">{{ $t('auto.FeedbackList.4.ec0bce') }}</div>
           <div class="metric-value">{{ stats.good || 0 }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="metric-card warning">
-          <div class="metric-label">一般</div>
+          <div class="metric-label">{{ $t('auto.FeedbackList.5.2ab01e') }}</div>
           <div class="metric-value">{{ stats.neutral || 0 }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="metric-card danger">
-          <div class="metric-label">不相关</div>
+          <div class="metric-label">{{ $t('auto.FeedbackList.6.354101') }}</div>
           <div class="metric-value">{{ stats.bad || 0 }}</div>
         </el-card>
       </el-col>
@@ -60,30 +60,30 @@
     <el-card>
       <el-table :data="feedbacks" v-loading="loading" stripe>
         <el-table-column prop="id" label="ID" width="80" />
-        <el-table-column label="评价" width="100">
+        <el-table-column :label="$t('auto.FeedbackList.3.606120')" width="100">
           <template #default="{ row }">
             <el-tag :type="getRatingTagType(row.rating)" :class="getRatingClass(row.rating)">
               {{ getRatingLabel(row.rating) }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="query" label="查询文本" min-width="200" show-overflow-tooltip />
-        <el-table-column label="关联文档" width="120">
+        <el-table-column prop="query" :label="$t('auto.FeedbackList.8.c8ddfe')" min-width="200" show-overflow-tooltip />
+        <el-table-column :label="$t('auto.FeedbackList.9.13385b')" width="120">
           <template #default="{ row }">
             <span v-if="row.document_id">#{{ row.document_id }}</span>
             <span v-else>-</span>
           </template>
         </el-table-column>
-        <el-table-column label="关联分段" width="120">
+        <el-table-column :label="$t('auto.FeedbackList.10.759ef6')" width="120">
           <template #default="{ row }">
             <span v-if="row.chunk_id">#{{ row.chunk_id }}</span>
             <span v-else>-</span>
           </template>
         </el-table-column>
-        <el-table-column prop="operator" label="操作员" width="120" />
-        <el-table-column prop="session_id" label="会话" width="120" show-overflow-tooltip />
-        <el-table-column prop="comment" label="备注" min-width="200" show-overflow-tooltip />
-        <el-table-column prop="created_at" label="时间" width="170">
+        <el-table-column prop="operator" :label="$t('auto.FeedbackList.11.676e59')" width="120" />
+        <el-table-column prop="session_id" :label="$t('auto.FeedbackList.12.9a834e')" width="120" show-overflow-tooltip />
+        <el-table-column prop="comment" :label="$t('auto.FeedbackList.13.2432b5')" min-width="200" show-overflow-tooltip />
+        <el-table-column prop="created_at" :label="$t('auto.FeedbackList.14.19fcb9')" width="170">
           <template #default="{ row }">{{ formatDate(row.created_at) }}</template>
         </el-table-column>
       </el-table>
@@ -105,6 +105,7 @@
 import i18n from '@/i18n'
 
 import { ref, reactive, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import { Refresh } from '@element-plus/icons-vue'
 import { knowledgeMerchantAPI } from '@/api/knowledgeMerchant'
@@ -112,6 +113,8 @@ import { ragProductConfigAPI } from '@/api/ragProductConfig'
 import { getRatingLabel, getRatingTagType } from '@/constants/rating';
 
 const getRatingClass = (r) => `rating-${r}`;
+
+const { t } = useI18n()
 
 const loading = ref(false)
 const feedbacks = ref([])
@@ -132,7 +135,7 @@ const loadProducts = async () => {
     if (Array.isArray(res)) productList.value = res
     else if (res?.items) productList.value = res.items
   } catch (e) {
-    console.error('加载产品列表失败:', e)
+    console.error(t('auto.FeedbackList.18.4c46f3'), e)
   }
 }
 
@@ -150,7 +153,7 @@ const loadFeedbacks = async () => {
     pagination.total = res?.total || 0
     computeStats();
   } catch (e) {
-    ElMessage.error('加载反馈失败: ' + (e.message || ''))
+    ElMessage.error(t('auto.FeedbackList.19.60902b') + (e.message || ''))
   } finally {
     loading.value = false
   }

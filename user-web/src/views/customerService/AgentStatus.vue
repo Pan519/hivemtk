@@ -50,94 +50,94 @@
       <template #header>
         <div class="card-header">
           <span>{{ $t('坐席列表') }}</span>
-          <el-input v-model="search" :placeholder="$t('搜索姓名/坐席 ID')" clearable style="width: 240px" />
+          <el-input v-model="search" ::placeholder="$t('auto.AgentStatus.1.1c2dec')" clearable style="width: 240px" />
         </div>
       </template>
       <el-table :data="filtered" v-loading="loading" stripe>
-        <el-table-column prop="agent_id" label="坐席 ID" width="120" />
-        <el-table-column prop="agent_name" label="姓名" min-width="120" />
-        <el-table-column prop="status" label="状态" width="100">
+        <el-table-column prop="agent_id" :label="$t('auto.AgentStatus.2.79f701')" width="120" />
+        <el-table-column prop="agent_name" :label="$t('auto.AgentStatus.3.60d045')" min-width="120" />
+        <el-table-column prop="status" :label="$t('auto.AgentStatus.4.3fea7c')" width="100">
           <template #default="{ row }">
             <el-tag :type="getAgentStatusTagType(row.status)" size="small">
               {{ getAgentStatusLabel(row.status) }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="active_sessions" label="当前会话" width="100" align="center" />
-        <el-table-column prop="max_sessions" label="接待上限" width="100" align="center" />
-        <el-table-column prop="last_active_at" label="最后活跃" min-width="180">
+        <el-table-column prop="active_sessions" :label="$t('auto.AgentStatus.5.00e436')" width="100" align="center" />
+        <el-table-column prop="max_sessions" :label="$t('auto.AgentStatus.6.4974bc')" width="100" align="center" />
+        <el-table-column prop="last_active_at" :label="$t('auto.AgentStatus.7.7f2846')" min-width="180">
           <template #default="{ row }">
             {{ formatTime(row.last_active_at || row.online_at) }}
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="280" fixed="right">
+        <el-table-column :label="$t('auto.AgentStatus.8.2b6bc0')" width="280" fixed="right">
           <template #default="{ row }">
-            <el-button v-if="row.status !== 'online'" link type="success" @click="handleGoOnline(row)">上线</el-button>
-            <el-button v-else link type="warning" @click="handleGoOffline(row)">下线</el-button>
-            <el-button link type="primary" @click="openStatusDialog(row)">修改状态</el-button>
-            <el-button link type="info" @click="loadSessions(row)">查看会话</el-button>
+            <el-button v-if="row.status !== 'online'" link type="success" @click="handleGoOnline(row)">{{ $t('auto.AgentStatus.19.879eb9') }}</el-button>
+            <el-button v-else link type="warning" @click="handleGoOffline(row)">{{ $t('auto.AgentStatus.20.4805dd') }}</el-button>
+            <el-button link type="primary" @click="openStatusDialog(row)">{{ $t('auto.AgentStatus.21.c2211d') }}</el-button>
+            <el-button link type="info" @click="loadSessions(row)">{{ $t('auto.AgentStatus.22.a85ed2') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
     </el-card>
 
     
-    <el-dialog v-model="createVisible" title="新增坐席" width="420px">
+    <el-dialog v-model="createVisible" :title="$t('auto.AgentStatus.9.725ec4')" width="420px">
       <el-form :model="createForm" label-width="100px">
-        <el-form-item label="坐席 ID" required>
-          <el-input-number v-model="createForm.id" :min="1" :step="1" placeholder="唯一坐席 ID (整数)" style="width: 100%" />
+        <el-form-item :label="$t('auto.AgentStatus.2.79f701')" required>
+          <el-input-number v-model="createForm.id" :min="1" :step="1" :placeholder="$t('auto.AgentStatus.10.21488a')" style="width: 100%" />
         </el-form-item>
-        <el-form-item label="姓名" required>
+        <el-form-item :label="$t('auto.AgentStatus.3.60d045')" required>
           <el-input v-model="createForm.name" />
         </el-form-item>
-        <el-form-item label="接待上限">
+        <el-form-item :label="$t('auto.AgentStatus.6.4974bc')">
           <el-input-number v-model="createForm.max_sessions" :min="1" :max="50" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="createVisible = false">取消</el-button>
-        <el-button type="primary" @click="submitCreate">保存</el-button>
+        <el-button @click="createVisible = false">{{ $t('auto.AgentStatus.23.625fb2') }}</el-button>
+        <el-button type="primary" @click="submitCreate">{{ $t('auto.AgentStatus.24.be5fbb') }}</el-button>
       </template>
     </el-dialog>
 
     
-    <el-dialog v-model="statusVisible" title="修改坐席状态" width="380px">
+    <el-dialog v-model="statusVisible" :title="$t('auto.AgentStatus.11.37eee7')" width="380px">
       <el-form :model="statusForm" label-width="100px">
-        <el-form-item label="状态">
+        <el-form-item :label="$t('auto.AgentStatus.4.3fea7c')">
           <el-select v-model="statusForm.status" style="width: 100%">
-            <el-option label="在线" value="online" />
-            <el-option label="忙碌" value="busy" />
-            <el-option label="离线" value="offline" />
+            <el-option :label="$t('auto.AgentStatus.12.68905c')" value="online" />
+            <el-option :label="$t('auto.AgentStatus.13.0f187d')" value="busy" />
+            <el-option :label="$t('auto.AgentStatus.14.50d4a8')" value="offline" />
           </el-select>
         </el-form-item>
-        <el-form-item label="接待上限">
+        <el-form-item :label="$t('auto.AgentStatus.6.4974bc')">
           <el-input-number v-model="statusForm.max_sessions" :min="1" :max="50" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="statusVisible = false">取消</el-button>
-        <el-button type="primary" @click="submitStatus">保存</el-button>
+        <el-button @click="statusVisible = false">{{ $t('auto.AgentStatus.23.625fb2') }}</el-button>
+        <el-button type="primary" @click="submitStatus">{{ $t('auto.AgentStatus.24.be5fbb') }}</el-button>
       </template>
     </el-dialog>
 
     
     <el-dialog v-model="sessionsVisible" :title="`坐席 ${currentAgent.agent_name || currentAgent.agent_id || currentAgent.id} 的会话`" width="640px">
       <el-table :data="agentSessions" v-loading="sessionsLoading" stripe>
-        <el-table-column prop="id" label="会话 ID" min-width="100" />
-        <el-table-column prop="user_name" label="客户" min-width="120" />
-        <el-table-column label="渠道" width="100">
+        <el-table-column prop="id" :label="$t('auto.AgentStatus.15.427bc5')" min-width="100" />
+        <el-table-column prop="user_name" :label="$t('auto.AgentStatus.16.ff0b20')" min-width="120" />
+        <el-table-column :label="$t('auto.AgentStatus.17.ebee05')" width="100">
           <template #default="{ row }">
             {{ getChannelLabel(row.platform) }}
           </template>
         </el-table-column>
-        <el-table-column prop="status" label="状态" width="100">
+        <el-table-column prop="status" :label="$t('auto.AgentStatus.4.3fea7c')" width="100">
           <template #default="{ row }">
             <el-tag :type="getSessionStatusTagType(row.status)" size="small">
               {{ getSessionStatusLabel(row.status) }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="started_at" label="开始时间" min-width="160">
+        <el-table-column prop="started_at" :label="$t('auto.AgentStatus.18.592c59')" min-width="160">
           <template #default="{ row }">
             {{ formatTime(row.started_at) }}
           </template>
@@ -151,6 +151,7 @@
 import i18n from '@/i18n'
 
 import { ref, reactive, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import { Plus } from '@element-plus/icons-vue'
 import {
@@ -169,6 +170,8 @@ const getAgentStatusLabel = (s) => getStatusLabel(s, AGENT_STATUS);
 const getAgentStatusTagType = (s) => getStatusTagType(s, AGENT_STATUS)
 const getSessionStatusLabel = (s) => getStatusLabel(s, SESSION_STATUS);
 const getSessionStatusTagType = (s) => getStatusTagType(s, SESSION_STATUS)
+
+const { t } = useI18n()
 
 const loading = ref(false)
 const search = ref('')
@@ -210,7 +213,7 @@ const loadAgents = async () => {
     const data = res || []
     agents.value = Array.isArray(data) ? data : data.list || []
   } catch (e) {
-    ElMessage.error(i18n.global.t('加载坐席失败'))
+    ElMessage.error(i18n.global.t(t('auto.AgentStatus.25.446f1a')))
     agents.value = []
   } finally {
     loading.value = false
@@ -224,12 +227,12 @@ const openCreate = () => {
 
 const submitCreate = async () => {
   if (!createForm.id || !createForm.name) {
-    ElMessage.warning(i18n.global.t('请填写坐席 ID 和姓名'))
+    ElMessage.warning(i18n.global.t(t('auto.AgentStatus.26.d1e4bf')))
     return
   }
   const agentId = Number(createForm.id)
   if (!Number.isInteger(agentId) || agentId <= 0) {
-    ElMessage.warning(i18n.global.t('坐席 ID 必须为正整数'))
+    ElMessage.warning(i18n.global.t(t('auto.AgentStatus.27.4b6ae2')))
     return
   }
   try {
@@ -238,31 +241,31 @@ const submitCreate = async () => {
       agent_name: createForm.name,
       max_sessions: createForm.max_sessions
     })
-    ElMessage.success(i18n.global.t('坐席已创建'))
+    ElMessage.success(i18n.global.t(t('auto.AgentStatus.28.a463c2')))
     createVisible.value = false
     await loadAgents()
   } catch (e) {
-    ElMessage.error(e?.message || '创建失败')
+    ElMessage.error(e?.message || t('auto.AgentStatus.29.a88928'))
   }
 }
 
 const handleGoOnline = async (row) => {
   try {
     await goOnline(row.agent_id)
-    ElMessage.success(i18n.global.t('已上线'))
+    ElMessage.success(i18n.global.t(t('auto.AgentStatus.30.8d4a74')))
     await loadAgents()
   } catch (e) {
-    ElMessage.error(i18n.global.t('上线失败'))
+    ElMessage.error(i18n.global.t(t('auto.AgentStatus.31.f70c66')))
   }
 }
 
 const handleGoOffline = async (row) => {
   try {
     await goOffline(row.agent_id)
-    ElMessage.success(i18n.global.t('已下线'))
+    ElMessage.success(i18n.global.t(t('auto.AgentStatus.32.0a6667')))
     await loadAgents()
   } catch (e) {
-    ElMessage.error(i18n.global.t('下线失败'))
+    ElMessage.error(i18n.global.t(t('auto.AgentStatus.33.485df0')))
   }
 }
 
@@ -279,11 +282,11 @@ const submitStatus = async () => {
       status: statusForm.status,
       max_sessions: statusForm.max_sessions
     })
-    ElMessage.success(i18n.global.t('状态已更新'))
+    ElMessage.success(i18n.global.t(t('auto.AgentStatus.34.7d6e0e')))
     statusVisible.value = false
     await loadAgents()
   } catch (e) {
-    ElMessage.error(i18n.global.t('更新失败'))
+    ElMessage.error(i18n.global.t(t('auto.AgentStatus.35.930442')))
   }
 }
 
@@ -297,7 +300,7 @@ const loadSessions = async (row) => {
     const data = res || []
     agentSessions.value = Array.isArray(data) ? data : data.list || []
   } catch (e) {
-    ElMessage.error(i18n.global.t('加载会话失败'))
+    ElMessage.error(i18n.global.t(t('auto.AgentStatus.36.c59cad')))
     agentSessions.value = []
   } finally {
     sessionsLoading.value = false

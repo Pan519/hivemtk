@@ -3,8 +3,8 @@
     <el-card shadow="never">
       <template #header>
         <div class="card-header">
-          <span>第三方知识库连接器</span>
-          <el-button type="primary" size="small" @click="openCreate">新建连接器</el-button>
+          <span>{{ $t('auto.Connectors.18.476ab4') }}</span>
+          <el-button type="primary" size="small" @click="openCreate">{{ $t('auto.Connectors.19.080ac6') }}</el-button>
         </div>
       </template>
 
@@ -12,70 +12,70 @@
         type="info"
         :closable="false"
         show-icon
-        title="把第三方知识库的文档拉取进本地 RAG（分块+向量化），检索体验与本地文档一致。IMA 仅支持文件类内容（笔记类平台不提供导出）。"
+        :title="$t('auto.Connectors.1.d2f5df')"
         style="margin-bottom: 12px"
       />
 
       <el-table v-loading="loading" :data="rows" border size="small">
-        <el-table-column prop="name" label="名称" min-width="120" />
-        <el-table-column prop="type" label="类型" width="100" />
-        <el-table-column label="鉴权" width="80">
+        <el-table-column prop="name" :label="$t('auto.Connectors.2.d7ec2d')" min-width="120" />
+        <el-table-column prop="type" :label="$t('auto.Connectors.3.226b09')" width="100" />
+        <el-table-column :label="$t('auto.Connectors.4.1abcfd')" width="80">
           <template #default="{ row }">
-            <el-tag v-if="hasCred(row)" type="success" size="small">已配</el-tag>
-            <el-tag v-else type="info" size="small">未配</el-tag>
+            <el-tag v-if="hasCred(row)" type="success" size="small">{{ $t('auto.Connectors.20.3794b7') }}</el-tag>
+            <el-tag v-else type="info" size="small">{{ $t('auto.Connectors.21.3f37e9') }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="状态" width="90">
+        <el-table-column :label="$t('auto.Connectors.5.3fea7c')" width="90">
           <template #default="{ row }">
             <el-tag :type="row.enabled ? 'success' : 'info'" size="small">
               {{ row.enabled ? '启用' : '停用' }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="last_status" label="最近同步" width="100" />
-        <el-table-column prop="last_summary" label="摘要" min-width="180" show-overflow-tooltip />
-        <el-table-column label="操作" width="220" fixed="right">
+        <el-table-column prop="last_status" :label="$t('auto.Connectors.6.34ac0a')" width="100" />
+        <el-table-column prop="last_summary" :label="$t('auto.Connectors.7.3ae146')" min-width="180" show-overflow-tooltip />
+        <el-table-column :label="$t('auto.Connectors.8.2b6bc0')" width="220" fixed="right">
           <template #default="{ row }">
-            <el-button size="small" type="primary" :loading="syncingId === row.id" @click="sync(row)">同步</el-button>
-            <el-button size="small" @click="openEdit(row)">编辑</el-button>
-            <el-button size="small" type="danger" @click="remove(row)">删除</el-button>
+            <el-button size="small" type="primary" :loading="syncingId === row.id" @click="sync(row)">{{ $t('auto.Connectors.22.6a620e') }}</el-button>
+            <el-button size="small" @click="openEdit(row)">{{ $t('auto.Connectors.23.95b351') }}</el-button>
+            <el-button size="small" type="danger" @click="remove(row)">{{ $t('auto.Connectors.24.2f4aad') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
     </el-card>
 
-    <el-dialog v-model="dialogVisible" :title="editId ? '编辑连接器' : '新建连接器'" width="560px">
+    <el-dialog v-model="dialogVisible" ::title="$t('auto.Connectors.9.5591a2')" width="560px">
       <el-form label-width="110px">
-        <el-form-item label="类型">
+        <el-form-item :label="$t('auto.Connectors.3.226b09')">
           <el-select v-model="form.type" style="width: 100%" :disabled="!!editId">
             <el-option v-for="t in types" :key="t" :value="t" :label="typeLabel(t)" />
           </el-select>
         </el-form-item>
-        <el-form-item label="名称">
-          <el-input v-model="form.name" maxlength="100" placeholder="如：IMA 装修攻略库" />
+        <el-form-item :label="$t('auto.Connectors.2.d7ec2d')">
+          <el-input v-model="form.name" maxlength="100" :placeholder="$t('auto.Connectors.10.bb46ae')" />
         </el-form-item>
         <el-form-item label="Client ID">
-          <el-input v-model="form.client_id" placeholder="IMA OpenAPI 的 client_id" autocomplete="off" />
+          <el-input v-model="form.client_id" :placeholder="$t('auto.Connectors.11.d8525c')" autocomplete="off" />
         </el-form-item>
         <el-form-item label="API Key">
-          <el-input v-model="form.api_key" placeholder="IMA OpenAPI 的 api_key" show-password autocomplete="new-password" />
+          <el-input v-model="form.api_key" :placeholder="$t('auto.Connectors.12.2ac9ed')" show-password autocomplete="new-password" />
         </el-form-item>
-        <el-form-item v-if="form.type === 'ima'" label="知识库 ID">
-          <el-input v-model="form.knowledge_base_id" placeholder="留空 = 同步全部知识库" />
+        <el-form-item v-if="form.type === 'ima'" :label="$t('auto.Connectors.13.c72e13')">
+          <el-input v-model="form.knowledge_base_id" :placeholder="$t('auto.Connectors.14.4297f6')" />
         </el-form-item>
-        <el-form-item v-if="form.type === 'webhttp'" label="清单 URL">
+        <el-form-item v-if="form.type === 'webhttp'" :label="$t('auto.Connectors.15.b42a03')">
           <el-input v-model="form.manifest_url" placeholder="https://.../manifest.json" />
         </el-form-item>
-        <el-form-item label="同步间隔">
+        <el-form-item :label="$t('auto.Connectors.16.25431f')">
           <el-input-number v-model="form.interval_minutes" :min="0" :max="1440" /> 分钟（0=仅手动）
         </el-form-item>
-        <el-form-item label="启用">
+        <el-form-item :label="$t('auto.Connectors.17.7854b5')">
           <el-switch v-model="form.enabled" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="dialogVisible = false">取消</el-button>
-        <el-button type="primary" :loading="saving" @click="save">保存</el-button>
+        <el-button @click="dialogVisible = false">{{ $t('auto.Connectors.25.625fb2') }}</el-button>
+        <el-button type="primary" :loading="saving" @click="save">{{ $t('auto.Connectors.26.be5fbb') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -83,8 +83,11 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { kbConnectorApi } from '@/api/kbConnector'
+
+const { t } = useI18n()
 
 const rows = ref([])
 const types = ref([])
@@ -99,7 +102,7 @@ function defaultForm() {
   return { type: 'ima', name: '', client_id: '', api_key: '', knowledge_base_id: '', manifest_url: '', interval_minutes: 0, enabled: true }
 }
 
-const typeLabel = (t) => ({ ima: '腾讯 IMA 知识库', webhttp: '通用 HTTP 清单' }[t] || t)
+const typeLabel = (t) => ({ ima: t('auto.Connectors.27.695f0c'), webhttp: t('auto.Connectors.28.33617f') }[t] || t)
 const hasCred = (row) => {
   const m = row.config_masked || ''
   return m.includes('client_id') || m.includes('"api_key"')
@@ -154,11 +157,11 @@ const save = async () => {
   try {
     if (editId.value) await kbConnectorApi.update(editId.value, buildPayload())
     else await kbConnectorApi.create(buildPayload())
-    ElMessage.success('已保存')
+    ElMessage.success(t('auto.Connectors.29.f8dfed'))
     dialogVisible.value = false
     await load()
   } catch (e) {
-    ElMessage.error(e?.response?.data?.message || '保存失败')
+    ElMessage.error(e?.response?.data?.message || t('auto.Connectors.30.6de920'))
   } finally {
     saving.value = false
   }
@@ -168,19 +171,19 @@ const sync = async (row) => {
   syncingId.value = row.id
   try {
     const res = await kbConnectorApi.sync(row.id)
-    ElMessage.success(res?.message || '同步完成')
+    ElMessage.success(res?.message || t('auto.Connectors.31.02f667'))
     await load()
   } catch (e) {
-    ElMessage.error(e?.response?.data?.message || '同步失败')
+    ElMessage.error(e?.response?.data?.message || t('auto.Connectors.32.d61036'))
   } finally {
     syncingId.value = null
   }
 }
 
 const remove = async (row) => {
-  await ElMessageBox.confirm(`删除连接器「${row.name}」？已导入的文档会保留在知识库。`, '删除确认', { type: 'warning' })
+  await ElMessageBox.confirm(`删除连接器「${row.name}」？已导入的文档会保留在知识库。`, t('auto.Connectors.33.50eaf9'), { type: 'warning' })
   await kbConnectorApi.remove(row.id)
-  ElMessage.success('已删除')
+  ElMessage.success(t('auto.Connectors.34.5cc232'))
   await load()
 }
 

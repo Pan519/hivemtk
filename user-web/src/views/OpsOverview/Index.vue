@@ -1,35 +1,35 @@
 <template>
   <div class="ops-overview">
-    <PageHeader title="运维总览" subtitle="系统健康度、关键指标、告警一览" />
+    <PageHeader :title="$t('auto.Index.1.99d546')" :subtitle="$t('auto.Index.2.e1e8ef')" />
 
     
     <el-row :gutter="20" class="status-row">
       <el-col :span="6">
         <el-card class="status-card status-ok">
-          <div class="status-label">系统状态</div>
+          <div class="status-label">{{ $t('auto.Index.13.a838a9') }}</div>
           <div class="status-value">{{ systemStatus.text }}</div>
           <div class="status-meta">运行时长 {{ uptime }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="status-card">
-          <div class="status-label">在线用户</div>
+          <div class="status-label">{{ $t('auto.Index.14.753e9e') }}</div>
           <div class="status-value">{{ stats.onlineUsers }}</div>
           <div class="status-meta">总用户 {{ stats.totalUsers }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="status-card">
-          <div class="status-label">今日消息</div>
+          <div class="status-label">{{ $t('auto.Index.15.3fa571') }}</div>
           <div class="status-value">{{ stats.todayMessages }}</div>
           <div class="status-meta">环比 {{ stats.messagesDelta }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card :class="['status-card', alertsCount > 0 ? 'status-warn' : '']">
-          <div class="status-label">未处理告警</div>
+          <div class="status-label">{{ $t('auto.Index.16.d5aede') }}</div>
           <div class="status-value">{{ alertsCount }}</div>
-          <div class="status-meta">查看告警中心</div>
+          <div class="status-meta">{{ $t('auto.Index.17.6e1e00') }}</div>
         </el-card>
       </el-col>
     </el-row>
@@ -37,29 +37,29 @@
     
     <el-row :gutter="20" class="mt-20">
       <el-col :span="12">
-        <el-card header="11 大系统模块状态">
+        <el-card :header="$t('auto.Index.3.dd300f')">
           <el-table :data="moduleStatus" stripe>
-            <el-table-column prop="name" label="模块" />
-            <el-table-column prop="status" label="状态">
+            <el-table-column prop="name" :label="$t('auto.Index.4.fac54c')" />
+            <el-table-column prop="status" :label="$t('auto.Index.5.3fea7c')">
               <template #default="{ row }">
                 <el-tag :type="row.status === 'ok' ? 'success' : row.status === 'warn' ? 'warning' : 'danger'">
                   {{ row.status === 'ok' ? '正常' : row.status === 'warn' ? '告警' : '异常' }}
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="latency" label="延迟 (ms)" />
+            <el-table-column prop="latency" :label="$t('auto.Index.6.93d028')" />
             <el-table-column prop="qps" label="QPS" />
-            <el-table-column prop="errorRate" label="错误率" />
+            <el-table-column prop="errorRate" :label="$t('auto.Index.7.0c8524')" />
           </el-table>
         </el-card>
       </el-col>
       <el-col :span="12">
-        <el-card header="最近 24h 关键操作">
+        <el-card :header="$t('auto.Index.8.bbb49e')">
           <el-table :data="recentOps" stripe max-height="400">
-            <el-table-column prop="time" label="时间" width="100" />
-            <el-table-column prop="user" label="操作人" />
-            <el-table-column prop="action" label="操作" />
-            <el-table-column prop="result" label="结果">
+            <el-table-column prop="time" :label="$t('auto.Index.9.19fcb9')" width="100" />
+            <el-table-column prop="user" :label="$t('auto.Index.10.f9ac4b')" />
+            <el-table-column prop="action" :label="$t('auto.Index.11.2b6bc0')" />
+            <el-table-column prop="result" :label="$t('auto.Index.12.5ad7f5')">
               <template #default="{ row }">
                 <el-tag :type="row.result === 'success' ? 'success' : 'danger'" size="small">
                   {{ row.result === 'success' ? '成功' : '失败' }}
@@ -75,11 +75,14 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import PageHeader from '@/components/PageHeader.vue'
 import { http } from '@/utils/request'
 import { getSystemStatus, getOpsStats, getModuleStatus, getRecentOperations } from '@/api/cockpit'
 
-const systemStatus = ref({ text: '加载中...', code: 'loading' })
+const { t } = useI18n()
+
+const systemStatus = ref({ text: t('auto.Index.18.26b5bd'), code: 'loading' })
 const uptime = ref('0h 0m')
 const stats = ref({ onlineUsers: 0, totalUsers: 0, todayMessages: 0, messagesDelta: '0%' })
 const moduleStatus = ref([])
@@ -109,11 +112,11 @@ function mapRecentOps(anomalies) {
   if (!anomalies) return []
   const rows = []
   const groups = [
-    { key: 'sync_gap', label: '同步缺口' },
-    { key: 'stuck_reachable', label: '卡死(可达)' },
-    { key: 'stuck_unreachable', label: '卡死(不可达)' },
-    { key: 'unreachable', label: '不可达' },
-    { key: 'node_abnormal', label: '节点异常' }
+    { key: 'sync_gap', label: t('auto.Index.19.78b323') },
+    { key: 'stuck_reachable', label: t('auto.Index.20.a2ea28') },
+    { key: 'stuck_unreachable', label: t('auto.Index.21.0fb8b2') },
+    { key: 'unreachable', label: t('auto.Index.22.834f7c') },
+    { key: 'node_abnormal', label: t('auto.Index.23.209a8c') }
   ]
   for (const g of groups) {
     const items = anomalies[g.key] || []
@@ -140,7 +143,7 @@ async function loadOverview() {
 
     const s = statusRes.data || {}
     systemStatus.value = {
-      text: s.status || (s.cpu_usage > 90 ? '告警' : '正常'),
+      text: s.status || (s.cpu_usage > 90 ? t('auto.Index.24.aa0eab') : t('auto.Index.25.fd6e80')),
       code: s.status || 'ok'
     }
     uptime.value = formatUptime(s.system_uptime ?? s.uptime)

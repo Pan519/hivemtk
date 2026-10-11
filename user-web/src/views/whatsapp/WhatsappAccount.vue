@@ -2,29 +2,29 @@
   <div class="page">
     <el-card>
       <template #header>
-        <div class="card-header">WhatsApp 账号管理</div>
+        <div class="card-header">{{ $t('auto.WhatsappAccount.7.3bf9cb') }}</div>
       </template>
       <el-form :inline="true" @submit.prevent>
-        <el-form-item label="名称">
-          <el-input v-model="form.name" placeholder="账号名称" />
+        <el-form-item :label="$t('auto.WhatsappAccount.1.d7ec2d')">
+          <el-input v-model="form.name" :placeholder="$t('auto.WhatsappAccount.2.17327f')" />
         </el-form-item>
-        <el-form-item label="备注">
-          <el-input v-model="form.remark" placeholder="备注" />
+        <el-form-item :label="$t('auto.WhatsappAccount.3.2432b5')">
+          <el-input v-model="form.remark" :placeholder="$t('auto.WhatsappAccount.3.2432b5')" />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="createAccount">添加账号</el-button>
+          <el-button type="primary" @click="createAccount">{{ $t('auto.WhatsappAccount.8.f0677c') }}</el-button>
         </el-form-item>
       </el-form>
 
       <el-table :data="accounts" style="width:100%" v-loading="loading">
-        <el-table-column prop="name" label="名称" />
-        <el-table-column prop="remark" label="备注" />
-        <el-table-column prop="status" label="状态" />
-        <el-table-column label="操作" width="340">
+        <el-table-column prop="name" :label="$t('auto.WhatsappAccount.1.d7ec2d')" />
+        <el-table-column prop="remark" :label="$t('auto.WhatsappAccount.3.2432b5')" />
+        <el-table-column prop="status" :label="$t('auto.WhatsappAccount.4.3fea7c')" />
+        <el-table-column :label="$t('auto.WhatsappAccount.5.2b6bc0')" width="340">
           <template #default="{ row }">
-            <el-button size="small" @click="startLogin(row)">登录</el-button>
-            <el-button size="small" @click="refreshStatus(row)">状态</el-button>
-            <el-button size="small" type="primary" @click="openBindingDialog(row)">绑定AI</el-button>
+            <el-button size="small" @click="startLogin(row)">{{ $t('auto.WhatsappAccount.9.402d19') }}</el-button>
+            <el-button size="small" @click="refreshStatus(row)">{{ $t('auto.WhatsappAccount.4.3fea7c') }}</el-button>
+            <el-button size="small" type="primary" @click="openBindingDialog(row)">{{ $t('auto.WhatsappAccount.10.c9e87d') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -39,11 +39,11 @@
       :account-enabled="true"
     />
 
-    <el-dialog v-model="qrDialog" title="扫码登录" width="360px">
+    <el-dialog v-model="qrDialog" :title="$t('auto.WhatsappAccount.6.d85b03')" width="360px">
       <div v-if="qrCode" class="qr-box">
         <img :src="qrImageSrc" alt="QR" width="300" height="300" />
       </div>
-      <div v-else>等待二维码生成...</div>
+      <div v-else>{{ $t('auto.WhatsappAccount.11.866d40') }}</div>
     </el-dialog>
   </div>
 </template>
@@ -52,10 +52,13 @@
 import i18n from '@/i18n'
 
 import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import api from '@/api/whatsapp'
 import { ElMessage } from 'element-plus'
 import { toList } from '@/utils/list'
 import { computed } from 'vue'
+
+const { t } = useI18n()
 
 const accounts = ref([])
 const loading = ref(false)
@@ -74,9 +77,9 @@ function loadAccounts() {
 }
 
 function createAccount() {
-  if (!form.value.name) { ElMessage.error(i18n.global.t('请输入名称')); return }
+  if (!form.value.name) { ElMessage.error(i18n.global.t(t('auto.WhatsappAccount.12.06e2f8'))); return }
   api.createAccount(form.value).then(() => {
-    ElMessage.success(i18n.global.t('创建成功'))
+    ElMessage.success(i18n.global.t(t('auto.WhatsappAccount.13.04a691')))
     form.value = { name: '', remark: '' }
     loadAccounts()
   })
@@ -87,22 +90,22 @@ function startLogin(row) {
     qrCode.value = res.qr;
     qrDialog.value = true
   }).catch((e) => {
-    ElMessage.error(e?.message || '启动登录失败（检查网络后重试）');
+    ElMessage.error(e?.message || t('auto.WhatsappAccount.14.7515ac'));
   })
 }
 
 function refreshStatus(row) {
   api.loginStatus(row.id).then(res => {
     if (res.logged_in) {
-      ElMessage.success(i18n.global.t('登录成功'))
+      ElMessage.success(i18n.global.t(t('auto.WhatsappAccount.15.71fa3b')))
       loadAccounts()
     } else {
       qrCode.value = res.qr || ''
       if (qrCode.value) qrDialog.value = true
-      else ElMessage.info(i18n.global.t('未登录，请点击登录生成二维码'))
+      else ElMessage.info(i18n.global.t(t('auto.WhatsappAccount.16.e6499a')))
     }
   }).catch((e) => {
-    ElMessage.error(e?.message || '获取登录状态失败')
+    ElMessage.error(e?.message || t('auto.WhatsappAccount.17.540141'))
   })
 }
 

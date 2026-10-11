@@ -5,11 +5,11 @@
         <el-card>
           <template #header>
             <div class="card-header">
-              <span>拖拽式邮件编辑器（USR-RC-02）MJML 编译</span>
+              <span>{{ $t('auto.DragEditor.5.4b00ca') }}</span>
               <div>
-                <el-button @click="previewDesktop">💻 桌面预览</el-button>
-                <el-button @click="previewMobile">📱 移动预览</el-button>
-                <el-button type="primary" @click="save">保存</el-button>
+                <el-button @click="previewDesktop">{{ $t('auto.DragEditor.6.745bb9') }}</el-button>
+                <el-button @click="previewMobile">{{ $t('auto.DragEditor.7.e79ace') }}</el-button>
+                <el-button type="primary" @click="save">{{ $t('auto.DragEditor.8.be5fbb') }}</el-button>
               </div>
             </div>
           </template>
@@ -41,33 +41,33 @@
               <el-button-group size="small" class="block-actions">
                 <el-button @click="moveUp(i)" :disabled="i === 0">↑</el-button>
                 <el-button @click="moveDown(i)" :disabled="i === blocks_state.length - 1">↓</el-button>
-                <el-button type="danger" @click="removeBlock(i)">删</el-button>
+                <el-button type="danger" @click="removeBlock(i)">{{ $t('auto.DragEditor.9.fe5c38') }}</el-button>
               </el-button-group>
             </div>
-            <div v-if="blocks_state.length === 0" class="empty">从左侧拖入内容块</div>
+            <div v-if="blocks_state.length === 0" class="empty">{{ $t('auto.DragEditor.10.34c361') }}</div>
           </div>
         </el-card>
       </el-col>
       <el-col :span="8">
         <el-card>
-          <template #header><span>变量 / 主题</span></template>
+          <template #header><span>{{ $t('auto.DragEditor.11.bc3480') }}</span></template>
           <el-form label-width="80px">
-            <el-form-item label="主题">
+            <el-form-item :label="$t('auto.DragEditor.1.9970ad')">
               <el-input v-model="subject" />
             </el-form-item>
-            <el-form-item label="发件人">
+            <el-form-item :label="$t('auto.DragEditor.2.88c952')">
               <el-input v-model="fromName" />
             </el-form-item>
-            <el-form-item label="预发列表">
+            <el-form-item :label="$t('auto.DragEditor.3.b3e170')">
               <el-tag v-for="(t, i) in testEmails" :key="i" closable @close="testEmails.splice(i, 1)">{{ t }}</el-tag>
               <el-input v-model="newTestEmail" size="small" @keyup.enter="addTestEmail" placeholder="test@x.com" style="width: 200px" />
             </el-form-item>
             <el-form-item>
-              <el-button @click="sendTest" :loading="sending">发送测试</el-button>
+              <el-button @click="sendTest" :loading="sending">{{ $t('auto.DragEditor.12.99b3a7') }}</el-button>
             </el-form-item>
           </el-form>
           <el-divider />
-          <h4>变量列表</h4>
+          <h4>{{ $t('auto.DragEditor.13.4e1d5d') }}</h4>
           <el-tag v-for="v in builtinVars" :key="v.key" size="small" style="margin: 2px">
             {{ v.key }}
           </el-tag>
@@ -75,14 +75,15 @@
       </el-col>
     </el-row>
 
-    <el-dialog v-model="previewVisible" title="预览" width="640px">
+    <el-dialog v-model="previewVisible" :title="$t('auto.DragEditor.4.645dbc')" width="640px">
       <div class="preview-frame" v-html="compiledHTML" />
     </el-dialog>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n';
 import { ElMessage, ElMessageBox } from 'element-plus'
 import {
   Document, Picture, EditPen, PriceTag, Share, ChatLineRound, Loading
@@ -91,19 +92,21 @@ import mjml2html from 'mjml-browser'
 import { http } from '@/utils/request'
 
 const BLOCK_TYPES = [
-  { type: 'text', label: '文本', icon: 'EditPen', default: { content: '在此输入文本...' } },
-  { type: 'image', label: '图片', icon: 'Picture', default: { src: '', alt: '' } },
-  { type: 'button', label: '按钮', icon: 'PriceTag', default: { text: '立即查看', url: '#', color: '#4F46E5' } },
-  { type: 'divider', label: '分割线', icon: 'Minus' },
-  { type: 'social', label: '社交', icon: 'Share', default: { networks: ['wechat', 'weibo'] } },
-  { type: 'coupon', label: '优惠券', icon: 'PriceTag', default: { code: 'SAVE10', amount: 10, expires: '30d' } }
+  { type: 'text', label: t('auto.DragEditor.14.97d076'), icon: 'EditPen', default: { content: t('auto.DragEditor.15.657b63') } },
+  { type: 'image', label: t('auto.DragEditor.16.20def7'), icon: 'Picture', default: { src: '', alt: '' } },
+  { type: 'button', label: t('auto.DragEditor.17.fa9663'), icon: 'PriceTag', default: { text: t('auto.DragEditor.18.65e6e6'), url: '#', color: '#4F46E5' } },
+  { type: 'divider', label: t('auto.DragEditor.19.8c47ec'), icon: 'Minus' },
+  { type: 'social', label: t('auto.DragEditor.20.8b8588'), icon: 'Share', default: { networks: ['wechat', 'weibo'] } },
+  { type: 'coupon', label: t('auto.DragEditor.21.2f3635'), icon: 'PriceTag', default: { code: 'SAVE10', amount: 10, expires: '30d' } }
 ]
 
 const blocks = BLOCK_TYPES.map((b) => ({ ...b, icon: resolveIcon(b.icon) }))
 
+const { t } = useI18n()
+
 const blocks_state = ref([])
 const subject = ref('')
-const fromName = ref('营销助手')
+const fromName = ref(t('auto.DragEditor.22.e6976d'))
 const testEmails = ref([])
 const newTestEmail = ref('')
 const sending = ref(false)
@@ -169,7 +172,7 @@ function addTestEmail() {
 }
 
 async function sendTest() {
-  if (testEmails.value.length === 0) return ElMessage.warning('请添加测试邮箱')
+  if (testEmails.value.length === 0) return ElMessage.warning(t('auto.DragEditor.23.cf001e'))
   sending.value = true
   try {
     await http.post('/api/email/test-send', {
@@ -177,7 +180,7 @@ async function sendTest() {
       html: compiledHTML.value,
       to: testEmails.value
     })
-    ElMessage.success('测试邮件已发送')
+    ElMessage.success(t('auto.DragEditor.24.17e557'))
   } finally {
     sending.value = false
   }
@@ -188,12 +191,12 @@ async function save() {
   saving.value = true
   try {
     await http.post('/api/email/drafts', {
-      subject: subject.value || '未命名拖拽模板',
+      subject: subject.value || t('auto.DragEditor.25.93db44'),
       content: compiledHTML.value
     })
-    ElMessage.success('模板已保存到草稿箱')
+    ElMessage.success(t('auto.DragEditor.26.22b831'))
   } catch (e) {
-    ElMessage.error('保存失败：' + (e?.message || e))
+    ElMessage.error(t('auto.DragEditor.27.78d235') + (e?.message || e))
   } finally {
     saving.value = false
   }

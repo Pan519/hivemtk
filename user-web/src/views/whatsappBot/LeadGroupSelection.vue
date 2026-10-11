@@ -9,8 +9,8 @@
 
       
       <el-form :model="filterForm" inline label-width="80px" style="margin-bottom: 20px;">
-        <el-form-item label="状态">
-          <el-select v-model="filterForm.status" placeholder="选择线索状态" clearable>
+        <el-form-item :label="$t('auto.LeadGroupSelection.1.3fea7c')">
+          <el-select v-model="filterForm.status" :placeholder="$t('auto.LeadGroupSelection.2.7090b1')" clearable>
             <el-option
               v-for="opt in leadStatusOptions"
               :key="opt.value"
@@ -20,21 +20,21 @@
           </el-select>
         </el-form-item>
         
-        <el-form-item label="来源">
-          <el-input v-model="filterForm.source" placeholder="线索来源" clearable />
+        <el-form-item :label="$t('auto.LeadGroupSelection.3.26ca20')">
+          <el-input v-model="filterForm.source" :placeholder="$t('auto.LeadGroupSelection.4.6c9445')" clearable />
         </el-form-item>
         
-        <el-form-item label="最低评分">
+        <el-form-item :label="$t('auto.LeadGroupSelection.5.571d04')">
           <el-slider v-model="filterForm.minScore" :min="0" :max="100" show-input />
         </el-form-item>
         
-        <el-form-item label="搜索">
-          <el-input v-model="filterForm.search" placeholder="姓名或电话" clearable />
+        <el-form-item :label="$t('auto.LeadGroupSelection.6.e5f71f')">
+          <el-input v-model="filterForm.search" :placeholder="$t('auto.LeadGroupSelection.7.ef2b01')" clearable />
         </el-form-item>
         
         <el-form-item>
-          <el-button type="primary" @click="applyFilters">筛选</el-button>
-          <el-button @click="resetFilters">重置</el-button>
+          <el-button type="primary" @click="applyFilters">{{ $t('auto.LeadGroupSelection.13.c2fe62') }}</el-button>
+          <el-button @click="resetFilters">{{ $t('auto.LeadGroupSelection.14.4b9c32') }}</el-button>
         </el-form-item>
       </el-form>
 
@@ -46,19 +46,19 @@
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="55" />
-        <el-table-column prop="name" label="姓名" width="120" />
-        <el-table-column prop="phone" label="手机号" width="150" />
-        <el-table-column prop="email" label="邮箱" width="200" />
-        <el-table-column prop="company" label="公司" width="150" />
-        <el-table-column prop="source" label="来源" width="100" />
-        <el-table-column prop="score" label="质量评分" width="100">
+        <el-table-column prop="name" :label="$t('auto.LeadGroupSelection.8.60d045')" width="120" />
+        <el-table-column prop="phone" :label="$t('auto.LeadGroupSelection.9.8098e2')" width="150" />
+        <el-table-column prop="email" :label="$t('auto.LeadGroupSelection.10.3bc5e6')" width="200" />
+        <el-table-column prop="company" :label="$t('auto.LeadGroupSelection.11.41716f')" width="150" />
+        <el-table-column prop="source" :label="$t('auto.LeadGroupSelection.3.26ca20')" width="100" />
+        <el-table-column prop="score" :label="$t('auto.LeadGroupSelection.12.b3dc71')" width="100">
           <template #default="{ row }">
             <el-tag :type="getScoreType(row.score)">
               {{ row.score }}分
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="status" label="状态" width="100">
+        <el-table-column prop="status" :label="$t('auto.LeadGroupSelection.1.3fea7c')" width="100">
           <template #default="{ row }">
             <el-tag :type="getStatusType(row.status)">
               {{ getStatusText(row.status) }}
@@ -85,16 +85,16 @@
       <template #header>
         <div class="card-header">
           <span>已选择 {{ selectedLeads.length }} 个联系人</span>
-          <el-button type="primary" @click="proceedToMessaging">下一步：群发消息</el-button>
+          <el-button type="primary" @click="proceedToMessaging">{{ $t('auto.LeadGroupSelection.15.507ec9') }}</el-button>
         </div>
       </template>
       
       <el-table :data="selectedLeads" style="width: 100%;">
-        <el-table-column prop="name" label="姓名" width="120" />
-        <el-table-column prop="phone" label="手机号" width="150" />
-        <el-table-column prop="email" label="邮箱" width="200" />
-        <el-table-column prop="company" label="公司" width="150" />
-        <el-table-column prop="score" label="质量评分" width="100">
+        <el-table-column prop="name" :label="$t('auto.LeadGroupSelection.8.60d045')" width="120" />
+        <el-table-column prop="phone" :label="$t('auto.LeadGroupSelection.9.8098e2')" width="150" />
+        <el-table-column prop="email" :label="$t('auto.LeadGroupSelection.10.3bc5e6')" width="200" />
+        <el-table-column prop="company" :label="$t('auto.LeadGroupSelection.11.41716f')" width="150" />
+        <el-table-column prop="score" :label="$t('auto.LeadGroupSelection.12.b3dc71')" width="100">
           <template #default="{ row }">
             <el-tag :type="getScoreType(row.score)">
               {{ row.score }}分
@@ -110,12 +110,15 @@
 import i18n from '@/i18n'
 
 import { ref, reactive, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import * as clueApi from '@/api/clue'
 import { useRouter } from 'vue-router'
 import { LEAD_STATUS_OPTIONS_SIMPLE, getLeadStatusLabel, getLeadStatusTagType } from '@/constants/leadStatus'
 
 const router = useRouter()
+const { t } = useI18n()
+
 const loading = ref(false)
 const leads = ref([])
 const selectedLeads = ref([])
@@ -144,7 +147,7 @@ const fetchLeads = async () => {
     const clueData = response?.list || response || [];
     leads.value = clueData.map(clue => ({
       id: clue.ID,
-      name: clue.Name || clue.name || '未知',
+      name: clue.Name || clue.name || t('auto.LeadGroupSelection.16.1622dc'),
       phone: clue.Account || clue.account || '',
       email: '',
       company: clue.Address || clue.address || clue.City || clue.city || '',
@@ -154,7 +157,7 @@ const fetchLeads = async () => {
     }));
     pagination.total = response?.total || response?.length || 0
   } catch (error) {
-    ElMessage.error(i18n.global.t('获取线索列表失败'))
+    ElMessage.error(i18n.global.t(t('auto.LeadGroupSelection.17.aa2f7e')))
   } finally {
     loading.value = false
   }
@@ -201,11 +204,11 @@ const getStatusType = (status) => {
 
 const getStatusText = (status) => {
   switch (status) {
-    case 'new': return '新线索'
-    case 'contacted': return '已联系'
-    case 'converted': return '已转化'
-    case 'lost': return '已流失'
-    default: return '未知'
+    case 'new': return t('auto.LeadGroupSelection.18.43eb02')
+    case 'contacted': return t('auto.LeadGroupSelection.19.6b00b8')
+    case 'converted': return t('auto.LeadGroupSelection.20.f9a204')
+    case 'lost': return t('auto.LeadGroupSelection.21.f22a4d')
+    default: return t('auto.LeadGroupSelection.16.1622dc')
   }
 }
 

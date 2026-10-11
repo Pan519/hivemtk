@@ -6,10 +6,10 @@
         <div>
           <h2>{{ isEdit ? '编辑 FAQ' : '创建 FAQ' }}</h2>
           <p class="subtitle" v-if="isEdit">FAQ ID：{{ faqId }} · 修改后保存生效</p>
-          <p class="subtitle" v-else>填写 FAQ 条目，启用后将进入 Layer1 快速匹配库</p>
+          <p class="subtitle" v-else>{{ $t('auto.Editor.14.8ae443') }}</p>
         </div>
         <div class="header-actions">
-          <el-button @click="goBack">返回列表</el-button>
+          <el-button @click="goBack">{{ $t('auto.Editor.15.adcd1d') }}</el-button>
         </div>
       </div>
     </el-card>
@@ -29,30 +29,30 @@
             FAQ 内容
           </div>
         </template>
-        <el-form-item label="问题" prop="question">
+        <el-form-item :label="$t('auto.Editor.1.5dc99f')" prop="question">
           <el-input
             v-model="form.question"
             type="textarea"
             :rows="2"
-            placeholder="用户可能问的问题，如：你们的发货时间多久？"
+            :placeholder="$t('auto.Editor.2.40bae0')"
           />
         </el-form-item>
-        <el-form-item label="标准答案" prop="answer">
+        <el-form-item :label="$t('auto.Editor.3.dbacf3')" prop="answer">
           <el-input
             v-model="form.answer"
             type="textarea"
             :rows="4"
-            placeholder="命中后返回的标准答案"
+            :placeholder="$t('auto.Editor.4.fddf8d')"
           />
         </el-form-item>
-        <el-form-item label="关键词" prop="keywords">
+        <el-form-item :label="$t('auto.Editor.5.9699a5')" prop="keywords">
           <el-input
             v-model="form.keywordsInput"
-            placeholder="多个关键词以英文逗号分隔，如：发货, 快递, 时效"
+            :placeholder="$t('auto.Editor.6.9667af')"
           />
-          <div class="form-tip">用于 Layer1 关键词匹配；多个关键词可提升命中率</div>
+          <div class="form-tip">{{ $t('auto.Editor.16.20986a') }}</div>
         </el-form-item>
-        <el-form-item v-if="form.keywords && form.keywords.length" label="预览">
+        <el-form-item v-if="form.keywords && form.keywords.length" :label="$t('auto.Editor.7.645dbc')">
           <div class="keyword-preview">
             <el-tag v-for="k in form.keywords" :key="k" size="small" type="info" effect="plain" closable @close="removeKeyword(k)">
               {{ k }}
@@ -71,24 +71,24 @@
         </template>
         <el-row :gutter="20">
           <el-col :span="12">
-            <el-form-item label="业务分类">
+            <el-form-item :label="$t('auto.Editor.8.e50e8a')">
               <el-select
                 v-model="form.category"
                 filterable
                 allow-create
                 clearable
-                placeholder="如：logistics / pricing / aftersales"
+                :placeholder="$t('auto.Editor.9.704203')"
                 style="width: 100%"
               >
                 <el-option v-for="c in presetCategories" :key="c" :label="c" :value="c" />
               </el-select>
-              <div class="form-tip">支持自定义输入新分类，便于前台筛选</div>
+              <div class="form-tip">{{ $t('auto.Editor.17.4de8f8') }}</div>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="关联意图">
-              <el-input v-model="form.intent" placeholder="如：shipping / refund / aftersales" />
-              <div class="form-tip">与意图识别结果对齐，命中后此意图将作为前置答案</div>
+            <el-form-item :label="$t('auto.Editor.10.852551')">
+              <el-input v-model="form.intent" :placeholder="$t('auto.Editor.11.f56009')" />
+              <div class="form-tip">{{ $t('auto.Editor.18.231c22') }}</div>
             </el-form-item>
           </el-col>
         </el-row>
@@ -104,7 +104,7 @@
         </template>
         <el-row :gutter="20">
           <el-col :span="12">
-            <el-form-item label="基准置信度">
+            <el-form-item :label="$t('auto.Editor.12.44c611')">
               <el-slider
                 v-model="form.confidence"
                 :min="0"
@@ -113,13 +113,13 @@
                 show-input
                 :show-input-controls="false"
               />
-              <div class="form-tip">建议 0.7+；与 ConfidenceThreshold 共同决定是否 SkipLLM</div>
+              <div class="form-tip">{{ $t('auto.Editor.19.a35e18') }}</div>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="启用">
+            <el-form-item :label="$t('auto.Editor.13.7854b5')">
               <el-switch v-model="form.enabled" />
-              <div class="form-tip">禁用后该 FAQ 不参与匹配（已绑定智能体也会忽略）</div>
+              <div class="form-tip">{{ $t('auto.Editor.20.bfd59d') }}</div>
             </el-form-item>
           </el-col>
         </el-row>
@@ -127,7 +127,7 @@
 
       
       <div class="footer-actions">
-        <el-button @click="goBack">取消</el-button>
+        <el-button @click="goBack">{{ $t('auto.Editor.21.625fb2') }}</el-button>
         <el-button type="primary" :loading="saving" @click="onSave">
           <el-icon><Check /></el-icon>
           {{ isEdit ? '保存更新' : '创建 FAQ' }}
@@ -140,6 +140,7 @@
 <script setup>
 import i18n from '@/i18n'
 import { ref, reactive, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import {
@@ -182,10 +183,10 @@ const form = reactive(getDefaultForm())
 
 const rules = {
   question: [
-    { required: true, message: t('请输入问题'), trigger: 'blur' }
+    { required: true, message: t(t('auto.Editor.22.73fb82')), trigger: 'blur' }
   ],
   answer: [
-    { required: true, message: t('请输入标准答案'), trigger: 'blur' }
+    { required: true, message: t(t('auto.Editor.23.6a34fc')), trigger: 'blur' }
   ]
 };
 
@@ -213,7 +214,7 @@ const loadDetail = async () => {
       form.enabled = res.enabled !== false
     }
   } catch (e) {
-    ElMessage.error('加载 FAQ 详情失败：' + (e.message || '未知错误'))
+    ElMessage.error(t('auto.Editor.24.de5e3b') + (e.message || t('auto.Editor.25.974e74')))
     goBack()
   } finally {
     pageLoading.value = false
@@ -224,7 +225,7 @@ const onSave = async () => {
   if (!formRef.value) return
   await formRef.value.validate(async (valid) => {
     if (!valid) {
-      ElMessage.warning(t('请完善必填项后再提交'))
+      ElMessage.warning(t(t('auto.Editor.26.341de0')))
       return
     }
     const fromInput = parseKeywords(form.keywordsInput);
@@ -249,7 +250,7 @@ const onSave = async () => {
       }
       goBack()
     } catch (e) {
-      ElMessage.error('保存失败：' + (e.message || '未知错误'))
+      ElMessage.error(t('auto.Editor.27.78d235') + (e.message || t('auto.Editor.25.974e74')))
     } finally {
       saving.value = false
     }

@@ -3,7 +3,7 @@
     <el-card class="header-card">
       <div>
         <h2>{{ $t('客户会话管理') }}</h2>
-        <p class="subtitle">统一管理多渠道客户对话 · 集成坐席状态 / 快捷回复 / 标签 / AI 建议 / 三栏看板</p>
+        <p class="subtitle">{{ $t('auto.List.14.68e45d') }}</p>
       </div>
       <div class="header-actions">
 
@@ -43,14 +43,14 @@
             <div class="card-header">
               <span>{{ $t('会话列表') }}</span>
               <el-select v-model="filterStatus" size="small" style="width: 120px">
-                <el-option :label="$t('全部')" value="" />
-                <el-option :label="$t('进行中')" value="__active__" />
-                <el-option :label="$t('待处理')" value="pending" />
-                <el-option :label="$t('AI处理')" value="ai_handling" />
-                <el-option :label="$t('人工')" value="human_handling" />
-                <el-option :label="$t('等待')" value="waiting" />
-                <el-option :label="$t('已解决')" value="resolved" />
-                <el-option :label="$t('已关闭')" value="closed" />
+                <el-option ::label="$t('auto.List.1.86f694')" value="" />
+                <el-option ::label="$t('auto.List.2.936560')" value="__active__" />
+                <el-option ::label="$t('auto.List.3.28eda9')" value="pending" />
+                <el-option ::label="$t('auto.List.4.f4bf16')" value="ai_handling" />
+                <el-option ::label="$t('auto.List.5.573383')" value="human_handling" />
+                <el-option ::label="$t('auto.List.6.aa9c3a')" value="waiting" />
+                <el-option ::label="$t('auto.List.7.b10891')" value="resolved" />
+                <el-option ::label="$t('auto.List.8.ca9df5')" value="closed" />
               </el-select>
             </div>
           </template>
@@ -91,12 +91,12 @@
                   size="small"
                   type="danger"
                   effect="dark"
-                >已拉黑</el-tag>
+                >{{ $t('auto.List.15.505759') }}</el-tag>
               </div>
             </div>
             <el-badge v-if="session.unread" :value="session.unread" />
           </div>
-          <el-empty v-if="filteredSessions.length === 0" description="暂无会话" :image-size="80" />
+          <el-empty v-if="filteredSessions.length === 0" :description="$t('auto.List.9.24b929')" :image-size="80" />
         </el-card>
       </div>
 
@@ -138,7 +138,7 @@
                   </el-tag>
                   <el-select
                     v-model="tagToAdd"
-                    placeholder="+ 添加标签"
+                    :placeholder="$t('auto.List.10.ea971b')"
                     size="small"
                     style="width: 110px"
                     clearable
@@ -176,7 +176,7 @@
                 >
                   释放回 AI
                 </el-button>
-                <el-button size="small" @click="closeSession">结束会话</el-button>
+                <el-button size="small" @click="closeSession">{{ $t('auto.List.16.2322d5') }}</el-button>
               </div>
             </div>
           </template>
@@ -212,7 +212,7 @@
                     type="primary"
                     size="small"
                     @click.stop="useAiSuggestion(s)"
-                  >采纳并发送</el-button>
+                  >{{ $t('auto.List.17.318fc5') }}</el-button>
                 </div>
               </div>
             </div>
@@ -230,7 +230,7 @@
                 <span v-else>{{ msg.from?.charAt(0) }}</span>
               </el-avatar>
               <div class="bubble">
-                <div class="sender-tag" v-if="msg.senderType === 'ai'">AI 助手</div>
+                <div class="sender-tag" v-if="msg.senderType === 'ai'">{{ $t('auto.List.18.318e1b') }}</div>
                 <div class="sender-tag agent" v-else-if="msg.senderType === 'agent'">{{ msg.from }}</div>
                 <div class="content">{{ msg.content }}</div>
                 <div class="time">{{ msg.createdAt }}</div>
@@ -270,7 +270,7 @@
               <el-input
                 v-model="quickReplySearch"
                 size="small"
-                placeholder="搜索关键词触发快捷回复..."
+                :placeholder="$t('auto.List.11.694f49')"
                 style="flex: 1; margin-left: 10px"
                 clearable
                 @input="onQuickReplySearch"
@@ -286,7 +286,7 @@
               style="margin-bottom: 10px"
             >
               <template #title>
-                AI 正在处理该会话。如需人工回复，请先点击右上角 <b>「接管会话」</b> 按钮。
+                AI 正在处理该会话。如需人工回复，请先点击右上角 <b>{{ $t('auto.List.19.289acb') }}</b> 按钮。
               </template>
             </el-alert>
 
@@ -295,11 +295,11 @@
               type="textarea"
               :rows="3"
               :disabled="currentHandler === 'ai'"
-              :placeholder="currentHandler === 'ai' ? 'AI 托管中（请先接管）' : '输入消息... (Ctrl+Enter 发送)'"
+              ::placeholder="$t('auto.List.12.c8f08e')"
               @keydown.ctrl.enter="sendMessage"
             />
             <div class="input-actions">
-              <el-button @click="insertTemplate" :disabled="currentHandler === 'ai'">话术模板</el-button>
+              <el-button @click="insertTemplate" :disabled="currentHandler === 'ai'">{{ $t('auto.List.20.d49563') }}</el-button>
               <el-button
                 type="primary"
                 :disabled="!inputMsg.trim() || currentHandler === 'ai'"
@@ -310,7 +310,7 @@
             </div>
           </div>
         </el-card>
-        <el-empty v-else description="请从左侧选择会话" />
+        <el-empty v-else :description="$t('auto.List.13.ae75ac')" />
       </div>
 
 
@@ -349,6 +349,7 @@
 // 数据流/操作逻辑拆分至 ./composables/{useSessionFilters,useSessionList,useSessionActions}.js
 // 右栏客户 360° 与黑名单弹窗拆分至 ./components/{CustomerProfilePanel,BlacklistDialog}.vue
 import { ref, onMounted, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { MagicStick, User, ChatLineSquare, Warning } from '@element-plus/icons-vue'
@@ -365,6 +366,8 @@ import BlacklistDialog from './components/BlacklistDialog.vue'
 // —— 共享状态:会话数据源 + 输入框内容(列表/操作/聊天多个职责共同读写) ——
 // 深链入口：CSAT 看板的「查看会话」等按钮以 ?session_id= 打开本页，需在列表就位后选中它
 const route = useRoute()
+const { t } = useI18n()
+
 const sessions = ref([])
 const inputMsg = ref('')
 
@@ -405,7 +408,7 @@ setReload(loadSessions)
 
 // 话术模板:填充输入框(原实现保留在容器层)
 const insertTemplate = () => {
-  inputMsg.value = '您好，请问有什么可以帮您？'
+  inputMsg.value = t('auto.List.21.6fef08')
 }
 
 // 会话列表加载(容器层保留:多个 composables 通过回调依赖此函数)
@@ -421,7 +424,7 @@ async function loadSessions(params) {
       id: s.id,
       sessionId: s.session_id,
       customerId: s.user_id,
-      customerName: s.user_name || '访客',
+      customerName: s.user_name || t('auto.List.22.852da3'),
       channel: s.platform || 'web',
       status: s.status,
       handlerType: s.handler_type || 'ai',
@@ -432,7 +435,7 @@ async function loadSessions(params) {
       tags: s.tags
     }))
   } catch (e) {
-    console.error('加载会话列表失败:', e)
+    console.error(t('auto.List.23.6a24b4'), e)
     sessions.value = []
   }
 }

@@ -16,7 +16,7 @@
           <div class="summary-card">
             <div class="summary-label">{{ $t('平均健康分') }}</div>
             <div class="summary-value" :class="healthScoreClass">{{ summary?.avg_score?.toFixed(1) ?? '-' }}</div>
-            <div class="summary-sub">满分 100</div>
+            <div class="summary-sub">{{ $t('auto.List.28.f32efb') }}</div>
           </div>
         </el-card>
       </el-col>
@@ -55,62 +55,62 @@
       </template>
 
       <el-table :data="accountList" v-loading="listLoading" border style="width: 100%">
-        <el-table-column prop="account.corp_id" label="企业ID" min-width="160" />
-        <el-table-column prop="account.agent_id" label="应用ID" width="100" />
-        <el-table-column label="登录状态" width="110">
+        <el-table-column prop="account.corp_id" :label="$t('auto.List.1.5a83cb')" min-width="160" />
+        <el-table-column prop="account.agent_id" :label="$t('auto.List.2.3751f6')" width="100" />
+        <el-table-column :label="$t('auto.List.3.959aca')" width="110">
           <template #default="{ row }">
             <el-tag :type="loginStateTag(row.account.login_state)" size="small">
               {{ loginStateText(row.account.login_state) }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="风险等级" width="110">
+        <el-table-column :label="$t('auto.List.4.25eb6b')" width="110">
           <template #default="{ row }">
             <el-tag :type="riskLevelTag(row.account.risk_level)" size="small" effect="dark">
               {{ riskLevelText(row.account.risk_level) }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="健康分" width="100">
+        <el-table-column :label="$t('auto.List.5.1661a7')" width="100">
           <template #default="{ row }">
             <span :class="healthScoreTextClass(row.health?.health_score)">
               {{ row.health?.health_score?.toFixed(0) ?? '-' }}
             </span>
           </template>
         </el-table-column>
-        <el-table-column label="好友/群组" width="120">
+        <el-table-column :label="$t('auto.List.6.2ce834')" width="120">
           <template #default="{ row }">
             {{ row.account.friend_count ?? 0 }} / {{ row.account.group_count ?? 0 }}
           </template>
         </el-table-column>
-        <el-table-column label="日配额" width="130">
+        <el-table-column :label="$t('auto.List.7.f74c1d')" width="130">
           <template #default="{ row }">
             {{ row.account.daily_msg_used ?? 0 }} / {{ row.account.daily_msg_quota ?? 0 }}
           </template>
         </el-table-column>
-        <el-table-column label="最后活跃" min-width="160">
+        <el-table-column :label="$t('auto.List.8.7f2846')" min-width="160">
           <template #default="{ row }">
             {{ row.account.last_active_at ? formatTime(row.account.last_active_at) : '从未' }}
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="300" fixed="right">
+        <el-table-column :label="$t('auto.List.9.2b6bc0')" width="300" fixed="right">
           <template #default="{ row }">
-            <el-button size="small" @click="viewDetail(row)">详情</el-button>
-            <el-button size="small" type="primary" @click="openEditDialog(row.account)">编辑</el-button>
-            <el-button size="small" type="danger" @click="handleDelete(row.account)">删除</el-button>
+            <el-button size="small" @click="viewDetail(row)">{{ $t('auto.List.29.f26225') }}</el-button>
+            <el-button size="small" type="primary" @click="openEditDialog(row.account)">{{ $t('auto.List.30.95b351') }}</el-button>
+            <el-button size="small" type="danger" @click="handleDelete(row.account)">{{ $t('auto.List.31.2f4aad') }}</el-button>
             <el-dropdown trigger="click" :disabled="!!actionLoading" @command="(cmd) => handleMoreCommand(cmd, row)">
               <el-button size="small" type="warning">
                 更多<el-icon class="el-icon--right"><ArrowDown /></el-icon>
               </el-button>
               <template #dropdown>
                 <el-dropdown-menu>
-                  <el-dropdown-item command="data" :icon="DataLine">数据看板</el-dropdown-item>
-                  <el-dropdown-item command="bind" :icon="Link">绑定AI</el-dropdown-item>
-                  <el-dropdown-item command="syncCustomers" :icon="Refresh">同步客户</el-dropdown-item>
-                  <el-dropdown-item command="syncGroups" :icon="Refresh">同步群组</el-dropdown-item>
-                  <el-dropdown-item command="syncTags" :icon="Refresh">同步标签</el-dropdown-item>
-                  <el-dropdown-item command="send" :icon="Promotion">测试发送</el-dropdown-item>
-                  <el-dropdown-item command="refresh" :icon="RefreshRight" divided>刷新登录状态</el-dropdown-item>
+                  <el-dropdown-item command="data" :icon="DataLine">{{ $t('auto.List.32.b12af0') }}</el-dropdown-item>
+                  <el-dropdown-item command="bind" :icon="Link">{{ $t('auto.List.33.c9e87d') }}</el-dropdown-item>
+                  <el-dropdown-item command="syncCustomers" :icon="Refresh">{{ $t('auto.List.34.763037') }}</el-dropdown-item>
+                  <el-dropdown-item command="syncGroups" :icon="Refresh">{{ $t('auto.List.35.0e5548') }}</el-dropdown-item>
+                  <el-dropdown-item command="syncTags" :icon="Refresh">{{ $t('auto.List.36.17caa1') }}</el-dropdown-item>
+                  <el-dropdown-item command="send" :icon="Promotion">{{ $t('auto.List.37.e1c652') }}</el-dropdown-item>
+                  <el-dropdown-item command="refresh" :icon="RefreshRight" divided>{{ $t('auto.List.38.e0846f') }}</el-dropdown-item>
                 </el-dropdown-menu>
               </template>
             </el-dropdown>
@@ -135,89 +135,89 @@
     <el-dialog v-model="createDialogVisible" :title="dialogTitle" width="520px" @closed="resetCreateForm">
       <el-form ref="createFormRef" :model="createForm" :rules="createRules" label-width="110px">
         <el-form-item label="CorpID" prop="corp_id">
-          <el-input v-model="createForm.corp_id" placeholder="企业微信 CorpID" />
+          <el-input v-model="createForm.corp_id" :placeholder="$t('auto.List.10.30af5c')" />
         </el-form-item>
         <el-form-item label="CorpSecret" prop="corp_secret">
-          <el-input v-model="createForm.corp_secret" type="password" show-password placeholder="企业微信 CorpSecret" />
+          <el-input v-model="createForm.corp_secret" type="password" show-password :placeholder="$t('auto.List.11.ff2ae6')" />
         </el-form-item>
         <el-form-item label="AgentID" prop="agent_id">
-          <el-input v-model="createForm.agent_id" placeholder="应用 AgentID（可选）" />
+          <el-input v-model="createForm.agent_id" :placeholder="$t('auto.List.12.e2efba')" />
         </el-form-item>
         <el-form-item label="AgentSecret" prop="agent_secret">
-          <el-input v-model="createForm.agent_secret" type="password" show-password placeholder="应用 Secret（可选）" />
+          <el-input v-model="createForm.agent_secret" type="password" show-password :placeholder="$t('auto.List.13.00718a')" />
         </el-form-item>
 
-        <el-divider content-position="left">入站回调（接收客户消息 → 智能体自动回复）</el-divider>
-        <el-form-item label="回调 URL" v-if="dialogMode === 'edit'">
+        <el-divider content-position="left">{{ $t('auto.List.39.045c35') }}</el-divider>
+        <el-form-item :label="$t('auto.List.14.5c7f1a')" v-if="dialogMode === 'edit'">
           <el-input :model-value="wecomCallbackUrl" readonly>
             <template #append>
-              <el-button @click="copyCallbackUrl">复制</el-button>
+              <el-button @click="copyCallbackUrl">{{ $t('auto.List.40.79d3ab') }}</el-button>
             </template>
           </el-input>
-          <div class="form-hint">将此 URL 配置到企业微信管理后台「客户联系 → 接收事件服务器」</div>
+          <div class="form-hint">{{ $t('auto.List.41.373018') }}</div>
         </el-form-item>
         <el-form-item label="Token">
-          <el-input v-model="createForm.callback_token" placeholder="回调 Token（与企微管理端保持一致）" />
+          <el-input v-model="createForm.callback_token" :placeholder="$t('auto.List.15.22d91b')" />
         </el-form-item>
         <el-form-item label="EncodingAESKey">
-          <el-input v-model="createForm.encoding_aes_key" placeholder="43 位 EncodingAESKey（用于消息体加解密）" />
+          <el-input v-model="createForm.encoding_aes_key" :placeholder="$t('auto.List.16.9678f7')" />
         </el-form-item>
-        <el-form-item label="启用接收">
+        <el-form-item :label="$t('auto.List.17.5f1e0e')">
           <el-switch v-model="createForm.webhook_enabled" />
-          <span class="form-hint-inline">开启后接收客户消息回调</span>
+          <span class="form-hint-inline">{{ $t('auto.List.42.1aad39') }}</span>
         </el-form-item>
-        <el-form-item label="智能体回复">
+        <el-form-item :label="$t('auto.List.18.bfdd28')">
           <el-switch v-model="createForm.ai_agent_enabled" />
-          <span class="form-hint-inline">开启后由已绑定智能体自动回复客户消息</span>
+          <span class="form-hint-inline">{{ $t('auto.List.43.809880') }}</span>
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="createDialogVisible = false">取消</el-button>
-        <el-button type="primary" :loading="createLoading" @click="submitForm">确定</el-button>
+        <el-button @click="createDialogVisible = false">{{ $t('auto.List.44.625fb2') }}</el-button>
+        <el-button type="primary" :loading="createLoading" @click="submitForm">{{ $t('auto.List.45.38cf16') }}</el-button>
       </template>
     </el-dialog>
 
     
-    <el-dialog v-model="detailDialogVisible" title="账号详情" width="640px">
+    <el-dialog v-model="detailDialogVisible" :title="$t('auto.List.19.9a1d81')" width="640px">
       <el-descriptions v-if="detailAccount" :column="2" border size="small">
-        <el-descriptions-item label="账号ID">{{ detailAccount.id }}</el-descriptions-item>
-        <el-descriptions-item label="企业ID">{{ detailAccount.corp_id }}</el-descriptions-item>
-        <el-descriptions-item label="应用ID">{{ detailAccount.agent_id || '-' }}</el-descriptions-item>
-        <el-descriptions-item label="登录状态">
+        <el-descriptions-item :label="$t('auto.List.20.14d171')">{{ detailAccount.id }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.1.5a83cb')">{{ detailAccount.corp_id }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.2.3751f6')">{{ detailAccount.agent_id || '-' }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.3.959aca')">
           <el-tag :type="loginStateTag(detailAccount.login_state)" size="small">
             {{ loginStateText(detailAccount.login_state) }}
           </el-tag>
         </el-descriptions-item>
-        <el-descriptions-item label="风险等级">
+        <el-descriptions-item :label="$t('auto.List.4.25eb6b')">
           <el-tag :type="riskLevelTag(detailAccount.risk_level)" size="small" effect="dark">
             {{ riskLevelText(detailAccount.risk_level) }}
           </el-tag>
         </el-descriptions-item>
-        <el-descriptions-item label="健康分">
+        <el-descriptions-item :label="$t('auto.List.5.1661a7')">
           {{ detailHealth?.health_score?.toFixed(0) ?? '-' }}
         </el-descriptions-item>
-        <el-descriptions-item label="好友数">{{ detailAccount.friend_count ?? 0 }}</el-descriptions-item>
-        <el-descriptions-item label="群组数">{{ detailAccount.group_count ?? 0 }}</el-descriptions-item>
-        <el-descriptions-item label="日配额">
+        <el-descriptions-item :label="$t('auto.List.21.fe59f4')">{{ detailAccount.friend_count ?? 0 }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.22.3d7d80')">{{ detailAccount.group_count ?? 0 }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.7.f74c1d')">
           {{ detailAccount.daily_msg_used ?? 0 }} / {{ detailAccount.daily_msg_quota ?? 0 }}
         </el-descriptions-item>
-        <el-descriptions-item label="累计发送">{{ detailAccount.total_sent ?? 0 }}</el-descriptions-item>
-        <el-descriptions-item label="累计接收">{{ detailAccount.total_received ?? 0 }}</el-descriptions-item>
-        <el-descriptions-item label="最后活跃">
+        <el-descriptions-item :label="$t('auto.List.23.eef65d')">{{ detailAccount.total_sent ?? 0 }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.24.b6b5a5')">{{ detailAccount.total_received ?? 0 }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.List.8.7f2846')">
           {{ detailAccount.last_active_at ? formatTime(detailAccount.last_active_at) : '从未' }}
         </el-descriptions-item>
-        <el-descriptions-item label="创建时间">
+        <el-descriptions-item :label="$t('auto.List.25.eca37c')">
           {{ detailAccount.created_at ? formatTime(detailAccount.created_at) : '-' }}
         </el-descriptions-item>
-        <el-descriptions-item v-if="detailHealth" label="错误信息" :span="2">
+        <el-descriptions-item v-if="detailHealth" :label="$t('auto.List.26.4604d5')" :span="2">
           {{ detailHealth.error_message || '无' }}
         </el-descriptions-item>
-        <el-descriptions-item v-if="detailHealth" label="最近上报" :span="2">
+        <el-descriptions-item v-if="detailHealth" :label="$t('auto.List.27.735be2')" :span="2">
           {{ detailHealth.reported_at ? formatTime(detailHealth.reported_at) : '暂无' }}
         </el-descriptions-item>
       </el-descriptions>
       <template #footer>
-        <el-button @click="detailDialogVisible = false">关闭</el-button>
+        <el-button @click="detailDialogVisible = false">{{ $t('auto.List.46.b15d91') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -227,6 +227,7 @@
 import i18n from '@/i18n'
 
 import { ref, reactive, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { Refresh, Plus, ArrowDown, Link, Promotion, RefreshRight, DataLine } from '@element-plus/icons-vue'
@@ -236,6 +237,8 @@ import WeComSendDialog from '@/components/WeComSendDialog.vue'
 import { getAccountStatusLabel, getAccountStatusTagType } from '@/constants/accountType';
 
 const router = useRouter()
+
+const { t } = useI18n()
 
 const listLoading = ref(false)
 const summaryLoading = ref(false)
@@ -258,10 +261,10 @@ const createForm = reactive({
   ai_agent_enabled: false
 })
 const createRules = {
-  corp_id: [{ required: true, message: '请输入 CorpID', trigger: 'blur' }],
-  corp_secret: [{ required: true, message: '请输入 CorpSecret', trigger: 'blur' }]
+  corp_id: [{ required: true, message: t('auto.List.47.46e5f8'), trigger: 'blur' }],
+  corp_secret: [{ required: true, message: t('auto.List.48.b34a26'), trigger: 'blur' }]
 }
-const dialogTitle = computed(() => (dialogMode.value === 'edit' ? '编辑企微账号' : '新增企微账号'))
+const dialogTitle = computed(() => (dialogMode.value === 'edit' ? t('auto.List.49.e03831') : t('auto.List.50.ec0a93')))
 const wecomCallbackUrl = computed(() => {
   if (dialogMode.value !== 'edit' || editingId.value == null) return ''
   return `${window.location.origin}/api/webhook/wecom/${editingId.value}`
@@ -269,9 +272,9 @@ const wecomCallbackUrl = computed(() => {
 const copyCallbackUrl = async () => {
   try {
     await navigator.clipboard.writeText(wecomCallbackUrl.value)
-    ElMessage.success('回调 URL 已复制')
+    ElMessage.success(t('auto.List.51.94f2c6'))
   } catch {
-    ElMessage.error('复制失败，请手动复制')
+    ElMessage.error(t('auto.List.52.41da1c'))
   }
 }
 const openCreateDialog = () => {
@@ -325,15 +328,15 @@ const submitForm = async () => {
     }
     if (dialogMode.value === 'edit' && editingId.value != null) {
       await wecomAccountApi.updateAccount(editingId.value, payload)
-      ElMessage.success('账号更新成功')
+      ElMessage.success(t('auto.List.53.8a225e'))
     } else {
       await wecomAccountApi.createAccount(payload)
-      ElMessage.success('账号创建成功')
+      ElMessage.success(t('auto.List.54.482ecf'))
     }
     createDialogVisible.value = false
     loadData()
   } catch (err) {
-    ElMessage.error('保存失败: ' + (err.message || '未知错误'))
+    ElMessage.error(t('auto.List.55.40f902') + (err.message || t('auto.List.56.974e74')))
   } finally {
     createLoading.value = false
   }
@@ -350,20 +353,20 @@ const viewDetail = (row) => {
 
 const handleDelete = async (account) => {
   try {
-    await ElMessageBox.confirm(`确认删除企业微信账号「${account.corp_id}」？该操作不可恢复。`, '删除确认', {
+    await ElMessageBox.confirm(`确认删除企业微信账号「${account.corp_id}」？该操作不可恢复。`, t('auto.List.57.50eaf9'), {
       type: 'warning',
-      confirmButtonText: '删除',
-      cancelButtonText: '取消'
+      confirmButtonText: t('auto.List.31.2f4aad'),
+      cancelButtonText: t('auto.List.44.625fb2')
     })
   } catch {
     return
   }
   try {
     await wecomAccountApi.deleteAccount(account.id)
-    ElMessage.success('删除成功')
+    ElMessage.success(t('auto.List.58.0007d1'))
     loadData()
   } catch (err) {
-    ElMessage.error('删除失败: ' + (err.message || '未知错误'))
+    ElMessage.error(t('auto.List.59.ad23f0') + (err.message || t('auto.List.56.974e74')))
   }
 };
 
@@ -375,7 +378,7 @@ const healthScoreClass = computed(() => {
 })
 
 const loginStateText = (state) => {
-  const map = { online: '在线', offline: '离线', banned: '封禁' }
+  const map = { online: t('auto.List.60.68905c'), offline: t('auto.List.61.50d4a8'), banned: t('auto.List.62.b08d38') }
   return map[state] || state
 }
 
@@ -385,7 +388,7 @@ const loginStateTag = (state) => {
 }
 
 const riskLevelText = (level) => {
-  const map = { normal: '正常', warning: '警告', critical: '危险', banned: '封禁' }
+  const map = { normal: t('auto.List.63.fd6e80'), warning: t('auto.List.64.900c70'), critical: t('auto.List.65.540f84'), banned: t('auto.List.62.b08d38') }
   return map[level] || level
 }
 
@@ -412,7 +415,7 @@ const loadAccountList = async () => {
     const data = await wecomAccountApi.listAccounts()
     accountList.value = Array.isArray(data) ? data : []
   } catch (err) {
-    ElMessage.error('加载账号列表失败: ' + (err.message || '未知错误'))
+    ElMessage.error(t('auto.List.66.779379') + (err.message || t('auto.List.56.974e74')))
     accountList.value = []
   } finally {
     listLoading.value = false
@@ -425,7 +428,7 @@ const loadSummary = async () => {
     const data = await wecomAccountApi.getHealthSummary()
     summary.value = data
   } catch (err) {
-    ElMessage.error('加载健康度概览失败: ' + (err.message || '未知错误'))
+    ElMessage.error(t('auto.List.67.4aad39') + (err.message || t('auto.List.56.974e74')))
     summary.value = null
   } finally {
     summaryLoading.value = false
@@ -475,9 +478,9 @@ const syncAction = async (account, type) => {
   try {
     const res = await api(account.id)
     const count = res && res.count != null ? res.count : 0
-    ElMessage.success('同步完成' + (count ? `，共 ${count} 条` : ''))
+    ElMessage.success(t('auto.List.68.02f667') + (count ? `，共 ${count} 条` : ''))
   } catch (e) {
-    ElMessage.error('同步失败：' + (e.message || e))
+    ElMessage.error(t('auto.List.69.a0f67c') + (e.message || e))
   } finally {
     actionLoading.value = ''
   }
@@ -487,10 +490,10 @@ const refreshAccount = async (account) => {
   actionLoading.value = 'refresh'
   try {
     await wecomAccountApi.refreshAccount(account.id)
-    ElMessage.success('登录状态已刷新')
+    ElMessage.success(t('auto.List.70.9b353c'))
     loadData()
   } catch (e) {
-    ElMessage.error('刷新失败：' + (e.message || e))
+    ElMessage.error(t('auto.List.71.df570e') + (e.message || e))
   } finally {
     actionLoading.value = ''
   }
