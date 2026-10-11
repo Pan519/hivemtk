@@ -17,10 +17,6 @@ func setupPlatformRoutes(platform *gin.RouterGroup, platformCtrl *controller.Pla
 	platform.GET("/merchant/list", platformCtrl.GetMerchantList)
 	platform.GET("/merchant/:id/stats", platformCtrl.GetMerchantStats)
 
-	platform.GET("/message/list", platformCtrl.GetMessageList)
-	platform.GET("/message/latest", platformCtrl.GetLatestMessage)
-	platform.POST("/message/send", platformCtrl.SendMessage)
-	platform.POST("/message/:id/read", platformCtrl.MarkPlatformMessageRead)
 
 	platform.GET("/user/list", platformCtrl.GetUserList)
 	platform.POST("/user", platformCtrl.CreateUser)
@@ -29,6 +25,13 @@ func setupPlatformRoutes(platform *gin.RouterGroup, platformCtrl *controller.Pla
 	platform.GET("/stats/system", platformCtrl.GetSystemStats)
 	platform.GET("/stats/overview", platformCtrl.GetPlatformStats)
 	platform.GET("/stats/merchant", platformCtrl.GetPlatformMerchantStats)
+}
+
+func setupPlatformMessageRoutes(msg *gin.RouterGroup, platformCtrl *controller.PlatformController) {
+	msg.GET("/message/list", platformCtrl.GetMessageList)
+	msg.GET("/message/latest", platformCtrl.GetLatestMessage)
+	msg.POST("/message/send", platformCtrl.SendMessage)
+	msg.POST("/message/:id/read", platformCtrl.MarkPlatformMessageRead)
 }
 
 func setupPublicRoutes(public *gin.RouterGroup, liveCodeController *controller.LiveCodeController, db *gorm.DB) {

@@ -743,6 +743,16 @@ func Setup(r *gin.Engine, gormDB *gorm.DB) {
 		setupPlatformRoutes(platform, platformCtrl)
 	}
 
+	// 消息中台（平台站内信）：团队管理员业务面（admin+team_admin 可用）。
+	// merchant/user/stats 等平台管理接口仍在 platform（AdminAuth）组。
+	platformMsg := r.Group("/api/platform")
+	platformMsg.Use(middleware.InitGuard())
+	platformMsg.Use(middleware.JWTAuthMiddleware())
+	platformMsg.Use(middleware.TeamAdminAuthMiddleware())
+	{
+		setupPlatformMessageRoutes(platformMsg, platformCtrl)
+	}
+
 	// Swagger 文档路由（dev-only）：RegisterSwaggerRoutes 内部以 ENABLE_SWAGGER=true 且仅本机访问双重门控，
 	// 未启用时直接 return，不向生产暴露任何文档端点。
 	RegisterSwaggerRoutes(r)

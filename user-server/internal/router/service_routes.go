@@ -230,33 +230,36 @@ func setupLLMProviderRoutes(auth *gin.RouterGroup) {
 	// —— 非 LLM 语义的管理面：连接器 / MCP 凭证 / 能力矩阵 / 全局 embedding ——
 	// 注意：不要放进上面 admin := auth.Group("/llm") 那个组，否则路径会带 /llm 双前缀。
 	authPlainAdmin := auth.Group("", middleware.AdminAuthMiddleware())
+	// 团队管理员业务面（admin+team_admin 可用，数据按 TeamScoped 按团队隔离）：
+	// 知识库连接器 / MCP 凭证与钥匙管理。系统配置类（embedding/teams/rbac/billing）仍在 Admin 组。
+	authTeamBiz := auth.Group("", middleware.TeamAdminAuthMiddleware())
 	{
 		authPlainAdmin.GET("/llm/embedding-config", controller.GetEmbeddingConfig)
 		authPlainAdmin.PUT("/llm/embedding-config", controller.UpdateEmbeddingConfig)
-		authPlainAdmin.GET("/kb-connectors", controller.ListKBConnectors)
-		authPlainAdmin.POST("/kb-connectors", controller.CreateKBConnector)
-		authPlainAdmin.PUT("/kb-connectors/:id", controller.UpdateKBConnector)
-		authPlainAdmin.DELETE("/kb-connectors/:id", controller.DeleteKBConnector)
-		authPlainAdmin.POST("/kb-connectors/:id/sync", controller.SyncKBConnector)
-		authPlainAdmin.GET("/mcp/credentials", controller.ListMCPCredentials)
-		authPlainAdmin.POST("/mcp/credentials", controller.CreateMCPCredential)
-		authPlainAdmin.PUT("/mcp/credentials/:id", controller.UpdateMCPCredential)
-		authPlainAdmin.DELETE("/mcp/credentials/:id", controller.DeleteMCPCredential)
+		authTeamBiz.GET("/kb-connectors", controller.ListKBConnectors)
+		authTeamBiz.POST("/kb-connectors", controller.CreateKBConnector)
+		authTeamBiz.PUT("/kb-connectors/:id", controller.UpdateKBConnector)
+		authTeamBiz.DELETE("/kb-connectors/:id", controller.DeleteKBConnector)
+		authTeamBiz.POST("/kb-connectors/:id/sync", controller.SyncKBConnector)
+		authTeamBiz.GET("/mcp/credentials", controller.ListMCPCredentials)
+		authTeamBiz.POST("/mcp/credentials", controller.CreateMCPCredential)
+		authTeamBiz.PUT("/mcp/credentials/:id", controller.UpdateMCPCredential)
+		authTeamBiz.DELETE("/mcp/credentials/:id", controller.DeleteMCPCredential)
 		// 1:N 钥匙管理（2026-10-11）：Client ID 名下多把 API Key，各自 启用/禁用/停用/删除；
 		// reveal 是敏感 GET（明文查看），强制落 mcp_credential_audit_logs。
-		authPlainAdmin.GET("/mcp/credentials/:id/keys", controller.ListMCPCredentialKeys)
-		authPlainAdmin.POST("/mcp/credentials/:id/keys", controller.CreateMCPCredentialKey)
-		authPlainAdmin.POST("/mcp/credentials/:id/keys/:keyId/enable", controller.EnableMCPCredentialKey)
-		authPlainAdmin.POST("/mcp/credentials/:id/keys/:keyId/disable", controller.DisableMCPCredentialKey)
-		authPlainAdmin.POST("/mcp/credentials/:id/keys/:keyId/suspend", controller.SuspendMCPCredentialKey)
-		authPlainAdmin.POST("/mcp/credentials/:id/keys/:keyId/revoke", controller.RevokeMCPCredentialKey)
-		authPlainAdmin.GET("/mcp/credentials/:id/keys/:keyId/reveal", controller.RevealMCPCredentialKey)
-		authPlainAdmin.DELETE("/mcp/credentials/:id/keys/:keyId", controller.DeleteMCPCredentialKey)
+		authTeamBiz.GET("/mcp/credentials/:id/keys", controller.ListMCPCredentialKeys)
+		authTeamBiz.POST("/mcp/credentials/:id/keys", controller.CreateMCPCredentialKey)
+		authTeamBiz.POST("/mcp/credentials/:id/keys/:keyId/enable", controller.EnableMCPCredentialKey)
+		authTeamBiz.POST("/mcp/credentials/:id/keys/:keyId/disable", controller.DisableMCPCredentialKey)
+		authTeamBiz.POST("/mcp/credentials/:id/keys/:keyId/suspend", controller.SuspendMCPCredentialKey)
+		authTeamBiz.POST("/mcp/credentials/:id/keys/:keyId/revoke", controller.RevokeMCPCredentialKey)
+		authTeamBiz.GET("/mcp/credentials/:id/keys/:keyId/reveal", controller.RevealMCPCredentialKey)
+		authTeamBiz.DELETE("/mcp/credentials/:id/keys/:keyId", controller.DeleteMCPCredentialKey)
 		// 管理面操作审计（凭证/钥匙/Skill 的增删改、状态流转、明文查看 reveal）。
-		authPlainAdmin.GET("/mcp/admin-audits", controller.ListMCPCredentialAuditLogs)
+		authTeamBiz.GET("/mcp/admin-audits", controller.ListMCPCredentialAuditLogs)
 		// 审计导出（CSV，与列表同源筛选，1 万行上限）。
-		authPlainAdmin.GET("/mcp/audits/export", controller.ExportMCPCallAudits)
-		authPlainAdmin.GET("/mcp/admin-audits/export", controller.ExportMCPCredentialAuditLogs)
+		authTeamBiz.GET("/mcp/audits/export", controller.ExportMCPCallAudits)
+		authTeamBiz.GET("/mcp/admin-audits/export", controller.ExportMCPCredentialAuditLogs)
 
 		// —— 多租户 P0：团队（租户）管理 ——
 		// 平台管理员面：全量 CRUD + 成员调拨（需求 3）。
