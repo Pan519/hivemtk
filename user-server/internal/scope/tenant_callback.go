@@ -97,7 +97,11 @@ func ResetDefaultTeamIDCache() {
 }
 
 // SetDefaultTeamIDDB 注入默认团队查询用的 DB 句柄（InitDB / testutil 装配时调用）。
+// 读写同受 defaultTeamIDMu 保护：上一条测试遗留 goroutine 可能仍在 defaultTeamIDCached
+// 里读本指针，testutil 装配新句柄时直接赋值会构成 data race（-race 实测红，2026-10-11）。
 func SetDefaultTeamIDDB(fn func(ctx context.Context) *gorm.DB) {
+	defaultTeamIDMu.Lock()
+	defer defaultTeamIDMu.Unlock()
 	defaultTeamIDDB = fn
 }
 
