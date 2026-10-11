@@ -42,6 +42,9 @@ type TeamInfo struct {
 	TenantID uint
 	// Platform 平台管理员直通：role==admin（超级管理员跨团队全量，需求 3）
 	Platform bool
+	// Role 请求方角色（admin/tenant_admin/team_admin/...）：JWT 中间件注入，
+	// 供 scope 层级判定（不依赖 gin ctx 的 Set，后者不进 Request.Context）。
+	Role string
 }
 
 // WithTeamInfo 把租户上下文注入 ctx（JWT 中间件/MCP guard 调用）。
@@ -91,8 +94,8 @@ func TeamScoped(ctx context.Context) func(db *gorm.DB) *gorm.DB {
 			return db
 		}
 		if tenantID > 0 {
-			// 租户超管：team_id ∈ 本租户全部团队（子查询 teams 表，scope 不 import model 用字面表名）
-			return db.Where("team_id IN (?)", db.Table("teams").Where("tenant_id = ?", tenantID).Select("id"))
+			// 租户超管：team_id ∈ 本租户全部团队（字面 SQL 子查询，避免 GORM statement 复用错乱）
+			return db.Where("team_id IN (SELECT id FROM teams WHERE tenant_id = ?)", tenantID)
 		}
 		return db.Where("team_id = ?", teamID)
 	}
@@ -114,7 +117,7 @@ func TenantTeamScoped(ctx context.Context) func(db *gorm.DB) *gorm.DB {
 		if info.Platform || isAdmin(ctx) {
 			return db
 		}
-		if isTenantAdmin(ctx) {
+		if isTenantAdminWith(info) {
 			return db.Where("tenant_id = ?", info.TenantID)
 		}
 		return db.Where("id = ?", info.TeamID)
@@ -133,10 +136,15 @@ func teamFilterDecision(ctx context.Context) (passthrough bool, tenantID, teamID
 	if info.Platform || isAdmin(ctx) {
 		return true, 0, 0 // 平台管理员：跨团队全量（需求 3）
 	}
-	if isTenantAdmin(ctx) {
+	if isTenantAdminWith(info) {
 		return false, info.TenantID, 0 // 租户超管：本租户全部团队
 	}
 	return false, 0, info.TeamID
+}
+
+// isTenantAdminWith 用 TeamInfo.Role 判定租户超管（JWT 中间件注入，可靠）。
+func isTenantAdminWith(info TeamInfo) bool {
+	return info.Role == "tenant_admin"
 }
 
 // isTenantAdmin 判断 ctx 身份是否为租户超管（tenant_admin）。

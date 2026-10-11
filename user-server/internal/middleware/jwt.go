@@ -100,7 +100,7 @@ func JWTAuthMiddleware() gin.HandlerFunc {
 		// 租户上下文进请求 ctx（多租户 P0）：repository 的 scope.TeamScoped /
 		// db 层的 Create 回调都从 Request.Context() 取团队身份——在中间件
 		// 这一处注入，全部下游调用无需各自透传 gin 值。
-		injectTeamScopeCtx(c, scope.TeamInfo{TeamID: claims.TeamID, TenantID: claims.TenantID, Platform: claims.Role == "admin"})
+		injectTeamScopeCtx(c, scope.TeamInfo{TeamID: claims.TeamID, TenantID: claims.TenantID, Platform: claims.Role == "admin", Role: claims.Role})
 
 		c.Next()
 	}
