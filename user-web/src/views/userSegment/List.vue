@@ -196,7 +196,7 @@
     
     <el-dialog
       v-model="viewUsersDialogVisible"
-      ::title="$t('auto.List.fb38447c')"
+      :title="'分群 ' + (currentSegment?.name) + ' 的用户列表'"
       width="900px"
     >
       <el-table :data="segmentUsers" v-loading="viewUsersLoading" stripe max-height="500">

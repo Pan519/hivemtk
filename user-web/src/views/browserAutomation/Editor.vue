@@ -55,7 +55,7 @@
                 <el-option v-for="a in actions" :key="a.value" :label="a.label" :value="a.value" />
               </el-select>
               <el-input v-if="['open_tab','click','type','extract','query'].includes(step.action)" v-model="step.target"
-                ::placeholder="$t('auto.Editor.32eeaa14')" style="width: 240px" />
+                :placeholder="step.action === 'open_tab' ? 'URL（可选，默认任务 URL）' : 'CSS selector 或 @eN'" style="width: 240px" />
               <el-input v-if="step.action === 'type'" v-model="step.value" :placeholder="$t('auto.Editor.ec47d2d3')" style="width: 180px" />
               <el-input v-if="step.action === 'post_comment'" v-model="step.value" :placeholder="$t('auto.Editor.74ad1b47')" style="width: 220px" />
               <el-input v-if="step.action === 'wait'" v-model.number="step.ms" :placeholder="$t('auto.Editor.21157cbf')" style="width: 100px" />

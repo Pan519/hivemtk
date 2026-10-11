@@ -57,7 +57,7 @@
     </el-card>
 
     <!-- Dialog -->
-    <el-dialog v-model="dialogVisible" ::title="$t('auto.PusherConfig.13e924dd')" width="560px">
+    <el-dialog v-model="dialogVisible" :title="isEdit ? '编辑平台' : '新增平台'" width="560px">
       <el-form :model="form" label-width="100px">
         <el-form-item :label="$t('auto.PusherConfig.4981287f')" required>
           <el-select v-model="form.platform" :disabled="isEdit" style="width:100%">

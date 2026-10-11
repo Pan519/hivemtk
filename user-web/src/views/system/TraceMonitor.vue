@@ -150,7 +150,7 @@
 
       
       <el-tab-pane :label="$t('auto.TraceMonitor.cdf0e419')" name="node">
-        <el-alert v-if="nodeWindow" type="info" :closable="false" ::title="$t('auto.TraceMonitor.e9e4cdfb')" class="mb-12" />
+        <el-alert v-if="nodeWindow" type="info" :closable="false" :title="'统计窗口：' + nodeWindow" class="mb-12" />
         <el-table :data="nodeRows" border stripe size="small" :empty-text="$t('auto.TraceMonitor.21efd88b')">
           <el-table-column prop="channel" :label="$t('auto.TraceMonitor.ebee0533')" width="160" />
           <el-table-column prop="node" :label="$t('auto.TraceMonitor.3bf3c0a8')" width="200" />

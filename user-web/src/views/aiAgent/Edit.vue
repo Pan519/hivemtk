@@ -174,7 +174,7 @@
             :placeholder="$t('auto.Edit.76bfbd15')"
             style="width: 100%"
             :render-after-expand="false"
-            ::empty-text="$t('auto.Edit.9e348ebf')"
+            :empty-text="loadingKB ? '加载中...' : '暂无可挂载的知识库，点击右上角【加载知识库】'"
           />
           <div class="form-tip">
             树形结构按 RAG / FAQ / SOP 三个顶层分组。挂载知识库后，对话中自动应用该 KB 下所有文档 / FAQ / SOP 模板。

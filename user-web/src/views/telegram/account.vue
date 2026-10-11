@@ -198,7 +198,7 @@
     
     <el-dialog
       v-model="dialogVisible"
-      ::title="$t('auto.account.e29c67f9')"
+      :title="dialogType === 'add' ? '添加机器人' : '编辑机器人'"
       width="640px"
       :close-on-click-modal="false"
     >
@@ -209,7 +209,7 @@
         <el-form-item label="Bot Token" prop="bot_token">
           <el-input
             v-model="accountForm.bot_token"
-            ::placeholder="$t('auto.account.af51a5d3')"
+            :placeholder="dialogType === 'edit' ? '留空则保持原 Token 不变' : '形如 123456789:AAxxxx...（共 35 位）'"
             type="password"
             show-password
           />
@@ -241,7 +241,7 @@
             </el-input>
           </el-form-item>
           <el-form-item label="Webhook Secret">
-            <el-input ::model-value="$t('auto.account.6238638a')" disabled />
+            <el-input :model-value="accountForm.webhook_secret ? '*** (已隐藏)' : '(后端自动生成)'" disabled />
           </el-form-item>
           <el-form-item :label="$t('auto.account.d2ac778b')">
             <el-tag :type="accountForm.webhook_enabled ? 'success' : 'info'" effect="plain">

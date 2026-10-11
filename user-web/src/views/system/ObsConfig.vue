@@ -183,7 +183,7 @@ import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { getObsConfigList, createObsConfig, updateObsConfig, deleteObsConfig, testObsConnection, setDefaultObsConfig } from '@/api/obs'
 
-const OBS_STATUS = { active: t('auto.ObsConfig.fd6e80f1'), disabled: t('auto.ObsConfig.710ad08b'), inactive: t('auto.ObsConfig.710ad08b'), error: t('auto.ObsConfig.7030ff64') };
+const OBS_STATUS = { active: i18n.global.t('auto.ObsConfig.fd6e80f1'), disabled: i18n.global.t('auto.ObsConfig.710ad08b'), inactive: i18n.global.t('auto.ObsConfig.710ad08b'), error: i18n.global.t('auto.ObsConfig.7030ff64') };
 const OBS_STATUS_TAG = { active: 'success', disabled: 'danger', inactive: 'danger', error: 'warning' }
 const getStatusLabel = (s) => OBS_STATUS[s] || s || '-'
 const getStatusTagType = (s) => OBS_STATUS_TAG[s] || ''

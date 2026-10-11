@@ -115,7 +115,7 @@
       <template #header>
         <span>{{ $t('auto.Statistics.1da4cbf0') }}</span>
       </template>
-      <el-table :data="typeStats" v-loading="loading" stripe ::empty-text="$t('auto.Statistics.16c826cd')">
+      <el-table :data="typeStats" v-loading="loading" stripe :empty-text="'暂无统计数据'">
         <el-table-column prop="type" :label="$t('auto.Statistics.1cc291d3')" min-width="140">
           <template #default="{ row }">
             <el-tag size="small">{{ getClueType(row.type) }}</el-tag>

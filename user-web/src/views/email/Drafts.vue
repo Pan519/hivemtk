@@ -38,7 +38,7 @@
     
     <el-dialog 
       v-model="dialogVisible"
-      ::title="$t('auto.Drafts.e5815c01')"
+      :title="dialogType === 'create' ? '新建草稿' : '编辑草稿'"
       width="70%"
       :before-close="handleClose"
     >

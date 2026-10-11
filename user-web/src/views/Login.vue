@@ -76,7 +76,7 @@
             <el-form-item v-if="registerMode === 'invite' || registerMode === 'default_team'">
               <el-input
                 v-model="registerForm.invite_code"
-                ::placeholder="$t('auto.Login.a43a4c8e')"
+                :placeholder="registerMode === 'invite' ? '邀请码（必填）' : '邀请码（选填，填了加入对应团队）'"
                 prefix-icon="Ticket"
                 size="large"
               />

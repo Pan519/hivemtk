@@ -60,7 +60,7 @@
         </el-table>
 
         <el-descriptions :column="4" border size="small" style="margin-top: 16px" :title="$t('auto.RBACMatrix.ff36d6ea')">
-          <el-descriptions-item v-for="st in data.api_key_states" :key="st.id" :label="st.id">
+          <el-descriptions-item v-for="st in data.api_key_states" :key="st.id" :label="st.label || st.id">
             <code class="mono">{{ st.id }}</code>
           </el-descriptions-item>
         </el-descriptions>

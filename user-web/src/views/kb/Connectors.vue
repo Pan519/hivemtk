@@ -44,7 +44,7 @@
       </el-table>
     </el-card>
 
-    <el-dialog v-model="dialogVisible" ::title="$t('auto.Connectors.5591a231')" width="560px">
+    <el-dialog v-model="dialogVisible" :title="editId ? '编辑连接器' : '新建连接器'" width="560px">
       <el-form label-width="110px">
         <el-form-item :label="$t('auto.Connectors.226b0912')">
           <el-select v-model="form.type" style="width: 100%" :disabled="!!editId">

@@ -206,7 +206,7 @@ import { getBatchTools, runBatch, getBatchHistories, cancelBatch, previewBatch, 
 import { toList } from '@/utils/list.js'
 import { PASS_FAIL_STATUS, getStatusLabel, getStatusTagType } from '@/constants/status';
 
-const getPreviewStatusLabel = (s) => getStatusLabel(s, PASS_FAIL_STATUS) === t('auto.List.330363df') ? t('auto.List.596149b3') : (getStatusLabel(s, PASS_FAIL_STATUS) || s || '-');
+const getPreviewStatusLabel = (s) => getStatusLabel(s, PASS_FAIL_STATUS) === i18n.global.t('auto.List.330363df') ? i18n.global.t('auto.List.596149b3') : (getStatusLabel(s, PASS_FAIL_STATUS) || s || '-');
 const getPreviewStatusTagType = (s) => getStatusTagType(s, PASS_FAIL_STATUS)
 
 const { t } = useI18n()

@@ -137,7 +137,7 @@
     </el-card>
 
     <!-- 方案弹窗 -->
-    <el-dialog v-model="planDialogVisible" ::title="$t('auto.Billing.2a3697fa')" width="480px">
+    <el-dialog v-model="planDialogVisible" :title="planEditing ? '编辑方案' : '新建方案'" width="480px">
       <el-form label-width="110px">
         <el-form-item :label="$t('auto.Billing.cc6c35a3')">
           <el-input v-model="planForm.code" :disabled="planEditing" placeholder="free/pro/..." maxlength="32" />

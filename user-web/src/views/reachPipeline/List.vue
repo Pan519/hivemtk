@@ -596,32 +596,32 @@ import { CHANNEL_OPTIONS, getChannelLabel } from '@/constants/channel'
 const stepOptions = [
   {
     value: 'audience',
-    label: t('auto.List.2c1c8b0c')
+    label: i18n.global.t('auto.List.2c1c8b0c')
   },
-  { value: 'content_prepare', label: t('auto.List.dfabcd70') },
-  { value: 'account_select', label: t('auto.List.96b55823') },
-  { value: 'rate_limit', label: t('auto.List.64b70211') },
-  { value: 'message_gen', label: t('auto.List.cb6057f7') },
-  { value: 'send', label: t('auto.List.c45a76ae') },
-  { value: 'track_result', label: t('auto.List.e4566199') },
-  { value: 'retry', label: t('auto.List.37cd8040') },
-  { value: 'report', label: t('auto.List.8468a01c') }
+  { value: 'content_prepare', label: i18n.global.t('auto.List.dfabcd70') },
+  { value: 'account_select', label: i18n.global.t('auto.List.96b55823') },
+  { value: 'rate_limit', label: i18n.global.t('auto.List.64b70211') },
+  { value: 'message_gen', label: i18n.global.t('auto.List.cb6057f7') },
+  { value: 'send', label: i18n.global.t('auto.List.c45a76ae') },
+  { value: 'track_result', label: i18n.global.t('auto.List.e4566199') },
+  { value: 'retry', label: i18n.global.t('auto.List.37cd8040') },
+  { value: 'report', label: i18n.global.t('auto.List.8468a01c') }
 ];
 
 const jobStateOptions = [
-  { value: 'pending', label: t('auto.List.0b5880b9') },
-  { value: 'running', label: t('auto.List.46e38679') },
-  { value: 'success', label: t('auto.List.330363df') },
-  { value: 'failed', label: t('auto.List.acd5cb84') },
-  { value: 'canceled', label: t('auto.List.625fb26b') },
-  { value: 'retrying', label: t('auto.List.d7a2a293') },
-  { value: 'rate_limited', label: t('auto.List.a8ac2016') }
+  { value: 'pending', label: i18n.global.t('auto.List.0b5880b9') },
+  { value: 'running', label: i18n.global.t('auto.List.46e38679') },
+  { value: 'success', label: i18n.global.t('auto.List.330363df') },
+  { value: 'failed', label: i18n.global.t('auto.List.acd5cb84') },
+  { value: 'canceled', label: i18n.global.t('auto.List.625fb26b') },
+  { value: 'retrying', label: i18n.global.t('auto.List.d7a2a293') },
+  { value: 'rate_limited', label: i18n.global.t('auto.List.a8ac2016') }
 ]
 
 const channelLabel = getChannelLabel
 const stepLabel = (v) => (stepOptions.find((s) => s.value === v) || {}).label || v
 const pipeStatusType = (s) => ({ active: 'success', paused: 'warning', archived: 'info' }[s] || 'info')
-const pipeStatusText = (s) => ({ active: t('auto.List.fe32def4'), paused: t('auto.List.8d63ef38'), archived: t('auto.List.2f51c18f') }[s] || s)
+const pipeStatusText = (s) => ({ active: i18n.global.t('auto.List.fe32def4'), paused: i18n.global.t('auto.List.8d63ef38'), archived: i18n.global.t('auto.List.2f51c18f') }[s] || s)
 const jobStateType = (s) => ({
   pending: 'info',
   running: 'warning',
@@ -632,13 +632,13 @@ const jobStateType = (s) => ({
   rate_limited: 'danger'
 }[s] || 'info')
 const jobStateText = (s) => ({
-  pending: t('auto.List.0b5880b9'),
-  running: t('auto.List.46e38679'),
-  success: t('auto.List.330363df'),
-  failed: t('auto.List.acd5cb84'),
-  canceled: t('auto.List.625fb26b'),
-  retrying: t('auto.List.d7a2a293'),
-  rate_limited: t('auto.List.a8ac2016')
+  pending: i18n.global.t('auto.List.0b5880b9'),
+  running: i18n.global.t('auto.List.46e38679'),
+  success: i18n.global.t('auto.List.330363df'),
+  failed: i18n.global.t('auto.List.acd5cb84'),
+  canceled: i18n.global.t('auto.List.625fb26b'),
+  retrying: i18n.global.t('auto.List.d7a2a293'),
+  rate_limited: i18n.global.t('auto.List.a8ac2016')
 }[s] || s)
 
 const formatTime = (t) => {

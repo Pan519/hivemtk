@@ -57,7 +57,7 @@
       </el-table>
     </el-card>
 
-    <el-dialog v-model="dialogVisible" ::title="$t('auto.QuickReply.8ef10143')" width="560px">
+    <el-dialog v-model="dialogVisible" :title="isEdit ? '编辑快捷回复' : '新增快捷回复'" width="560px">
       <el-form :model="form" label-width="100px">
         <el-form-item :label="$t('auto.QuickReply.32c65d8d')" required>
           <el-input v-model="form.title" />

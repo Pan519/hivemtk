@@ -320,28 +320,29 @@
 <script setup>
 import { computed, ref, onMounted, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
+import i18n from '@/i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import * as configParamsApi from '@/api/configParams'
 
 const SEED_GROUPS = [
   { key: 'agent_llm',    label: 'AI 大模型',      count: 16 },
   { key: 'agent_tool',   label: 'AI 工具',        count: 5  },
-  { key: 'bridge',       label: t('auto.ConfigParams.6f605ef2'),       count: 8  },
-  { key: 'cache',        label: t('auto.ConfigParams.e1b848a0'),       count: 6  },
-  { key: 'channelgw',    label: t('auto.ConfigParams.d0a40345'),       count: 5  },
-  { key: 'confidence',   label: t('auto.ConfigParams.bd493e1b'),     count: 7  },
-  { key: 'inbox_sales',  label: t('auto.ConfigParams.61c3c50c'),       count: 4  },
-  { key: 'knowledge',    label: t('auto.ConfigParams.7e433388'),         count: 12 },
-  { key: 'middleware',   label: t('auto.ConfigParams.3cbfec33'),         count: 2  },
-  { key: 'misc',         label: t('auto.ConfigParams.5a0afc9d'),           count: 18 },
-  { key: 'pagination',   label: t('auto.ConfigParams.3862626c'),           count: 3  },
-  { key: 'sales',        label: t('auto.ConfigParams.7f0dc5e3'),           count: 2  },
-  { key: 'session',      label: t('auto.ConfigParams.9a834e9a'),           count: 5  },
-  { key: 'smart_cs',     label: t('auto.ConfigParams.60144fa9'),       count: 3  },
-  { key: 'telemetry',    label: t('auto.ConfigParams.673866d9'),           count: 4  },
-  { key: 'wechat',       label: t('auto.ConfigParams.cfbf6f4c'),           count: 3  },
-  { key: 'wecom',        label: t('auto.ConfigParams.ff17b9f9'),       count: 2  },
-  { key: 'workflow',     label: t('auto.ConfigParams.228526dc'),         count: 4  }
+  { key: 'bridge',       label: i18n.global.t('auto.ConfigParams.6f605ef2'),       count: 8  },
+  { key: 'cache',        label: i18n.global.t('auto.ConfigParams.e1b848a0'),       count: 6  },
+  { key: 'channelgw',    label: i18n.global.t('auto.ConfigParams.d0a40345'),       count: 5  },
+  { key: 'confidence',   label: i18n.global.t('auto.ConfigParams.bd493e1b'),     count: 7  },
+  { key: 'inbox_sales',  label: i18n.global.t('auto.ConfigParams.61c3c50c'),       count: 4  },
+  { key: 'knowledge',    label: i18n.global.t('auto.ConfigParams.7e433388'),         count: 12 },
+  { key: 'middleware',   label: i18n.global.t('auto.ConfigParams.3cbfec33'),         count: 2  },
+  { key: 'misc',         label: i18n.global.t('auto.ConfigParams.5a0afc9d'),           count: 18 },
+  { key: 'pagination',   label: i18n.global.t('auto.ConfigParams.3862626c'),           count: 3  },
+  { key: 'sales',        label: i18n.global.t('auto.ConfigParams.7f0dc5e3'),           count: 2  },
+  { key: 'session',      label: i18n.global.t('auto.ConfigParams.9a834e9a'),           count: 5  },
+  { key: 'smart_cs',     label: i18n.global.t('auto.ConfigParams.60144fa9'),       count: 3  },
+  { key: 'telemetry',    label: i18n.global.t('auto.ConfigParams.673866d9'),           count: 4  },
+  { key: 'wechat',       label: i18n.global.t('auto.ConfigParams.cfbf6f4c'),           count: 3  },
+  { key: 'wecom',        label: i18n.global.t('auto.ConfigParams.ff17b9f9'),       count: 2  },
+  { key: 'workflow',     label: i18n.global.t('auto.ConfigParams.228526dc'),         count: 4  }
 ];
 
 const { t } = useI18n()

@@ -48,7 +48,7 @@
     </el-card>
 
     
-    <el-dialog v-model="dialogVisible" ::title="$t('auto.WhatsappDrafts.050da09b')" width="600px" @close="resetForm">
+    <el-dialog v-model="dialogVisible" :title="isEdit ? '编辑草稿' : '新建草稿'" width="600px" @close="resetForm">
       <el-form ref="formRef" :model="form" :rules="rules" label-width="80px">
         <el-form-item :label="$t('auto.WhatsappDrafts.32c65d8d')" prop="title">
           <el-input v-model="form.title" :placeholder="$t('auto.WhatsappDrafts.87eb9514')" />

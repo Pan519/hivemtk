@@ -22,7 +22,7 @@
               <el-form label-position="top" size="small">
                 <el-form-item v-for="field in credFields(c.source)" :key="field.key" :label="field.label">
                   <el-input v-model="credForm[c.source][field.key]"
-                    ::placeholder="$t('auto.Connectors.d96d8c87')"
+                    :placeholder="isMasked(c.source, field.key) ? '已配置（输入新值以更换，留空保持不变）' : field.placeholder"
                     show-password />
                 </el-form-item>
                 <el-switch v-model="credForm[c.source].enabled" :active-text="$t('auto.Connectors.7854b52a')" />

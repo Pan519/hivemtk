@@ -310,6 +310,7 @@
 <script setup>
 import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import i18n from '@/i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { humanTaskApi } from '@/api/humanTask'
 import { approvalApi } from '@/api/approval'
@@ -340,9 +341,9 @@ const STATUSES = ['pending', 'claimed', 'done', 'cancelled']
 const OPEN_STATUSES = ['pending', 'claimed']
 
 const KIND_LABELS = {
-  [KIND_HANDOFF]: t('auto.List.e8c16d26'),
-  [KIND_APPROVAL]: t('auto.List.b0bf01a4'),
-  [KIND_COLLECTION]: t('auto.List.7f180af3')
+  [KIND_HANDOFF]: i18n.global.t('auto.List.e8c16d26'),
+  [KIND_APPROVAL]: i18n.global.t('auto.List.b0bf01a4'),
+  [KIND_COLLECTION]: i18n.global.t('auto.List.7f180af3')
 }
 const KIND_TAG_TYPES = {
   [KIND_HANDOFF]: 'warning',
@@ -350,19 +351,19 @@ const KIND_TAG_TYPES = {
   [KIND_COLLECTION]: 'info'
 }
 const STATUS_LABELS = {
-  pending: t('auto.List.047109de'),
-  claimed: t('auto.List.b32d7c1e'),
-  done: t('auto.List.fad5222c'),
-  cancelled: t('auto.List.50239f4f')
+  pending: i18n.global.t('auto.List.047109de'),
+  claimed: i18n.global.t('auto.List.b32d7c1e'),
+  done: i18n.global.t('auto.List.fad5222c'),
+  cancelled: i18n.global.t('auto.List.50239f4f')
 }
 const ACTION_LABELS = {
-  claim: t('auto.List.54b931f9'),
-  release: t('auto.List.cbdcabad'),
-  complete: t('auto.List.769d88e4'),
-  cancel: t('auto.List.bd9fcf46'),
-  decide: t('auto.List.7756f1bd')
+  claim: i18n.global.t('auto.List.54b931f9'),
+  release: i18n.global.t('auto.List.cbdcabad'),
+  complete: i18n.global.t('auto.List.769d88e4'),
+  cancel: i18n.global.t('auto.List.bd9fcf46'),
+  decide: i18n.global.t('auto.List.7756f1bd')
 }
-const VERDICT_LABELS = { approved: t('auto.List.7a712b9a'), rejected: t('auto.List.32525478') }
+const VERDICT_LABELS = { approved: i18n.global.t('auto.List.7a712b9a'), rejected: i18n.global.t('auto.List.32525478') }
 
 // COUNTS_POLL_MS 未读数轮询间隔。30s 是"值班换班时看得见新账"的量级；
 // 更短只是把读接口打成压力源，而这一页的正确性不靠推送（推送归 Notifications.vue）。

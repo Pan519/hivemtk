@@ -210,6 +210,7 @@
 <script setup>
 import { ref, reactive, computed, onMounted, onBeforeUnmount, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
+import i18n from '@/i18n'
 import { useRoute } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { Delete, Lightning, Operation, Share, ForkSpoon } from '@element-plus/icons-vue'
@@ -219,10 +220,10 @@ const route = useRoute()
 const workflowId = computed(() => route.params.workflow_id || '')
 
 const nodeTypes = [
-  { value: 'trigger', label: t('auto.Editor.4696724e'), icon: Lightning },
-  { value: 'action', label: t('auto.Editor.c500cfab'), icon: Operation },
-  { value: 'condition', label: t('auto.Editor.69fbb2e5'), icon: ForkSpoon },
-  { value: 'subflow', label: t('auto.Editor.2d8cc698'), icon: Share }
+  { value: 'trigger', label: i18n.global.t('auto.Editor.4696724e'), icon: Lightning },
+  { value: 'action', label: i18n.global.t('auto.Editor.c500cfab'), icon: Operation },
+  { value: 'condition', label: i18n.global.t('auto.Editor.69fbb2e5'), icon: ForkSpoon },
+  { value: 'subflow', label: i18n.global.t('auto.Editor.2d8cc698'), icon: Share }
 ]
 
 const nodeTypeLabel = (v) => nodeTypes.find(t => t.value === v)?.label || v

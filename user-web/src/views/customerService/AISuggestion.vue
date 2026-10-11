@@ -66,7 +66,7 @@
           </template>
         </el-table-column>
         <template #empty>
-          <el-empty ::description="$t('auto.AISuggestion.6f28b65b')" />
+          <el-empty :description="sessionId ? '该会话暂无 AI 建议' : '请输入会话 ID 后加载建议'" />
         </template>
       </el-table>
     </el-card>

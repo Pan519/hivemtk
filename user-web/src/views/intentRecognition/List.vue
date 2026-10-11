@@ -9,7 +9,7 @@
         </div>
         <div class="header-actions">
           <el-tooltip
-            ::content="$t('auto.List.e8cf410c')"
+            :content="intentEnabled ? '关闭后业务链路将直接走 IntentUnknown 兜底，不再调用规则/LLM 识别' : '开启后业务链路进入规则 + LLM 识别流程'"
             placement="bottom"
             :show-after="200"
           >
@@ -479,7 +479,7 @@ import { ElMessage } from 'element-plus'
 import { Aim, MagicStick, Refresh, Loading, EditPen } from '@element-plus/icons-vue'
 import { intentApi } from '@/api/intentRecognition.js'
 import { getChannelLabel } from '@/constants/channel'
-const RECOGNIZE_METHOD = { llm: 'LLM', rule: t('auto.List.b0fae043'), keyword: t('auto.List.9699a50e'), bert: 'BERT', hybrid: t('auto.List.41ce131a') };
+const RECOGNIZE_METHOD = { llm: 'LLM', rule: i18n.global.t('auto.List.b0fae043'), keyword: i18n.global.t('auto.List.9699a50e'), bert: 'BERT', hybrid: i18n.global.t('auto.List.41ce131a') };
 const RECOGNIZE_METHOD_TAG = { llm: 'danger', rule: 'info', keyword: 'success', bert: 'warning', hybrid: 'primary' }
 const getMethodLabel = (m) => RECOGNIZE_METHOD[m] || m || '-'
 // 兜底必须是 el-tag 的合法 type：空串会触发

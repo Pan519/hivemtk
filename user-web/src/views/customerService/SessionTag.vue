@@ -44,7 +44,7 @@
       </el-table>
     </el-card>
 
-    <el-dialog v-model="dialogVisible" ::title="$t('auto.SessionTag.334671d0')" width="480px">
+    <el-dialog v-model="dialogVisible" :title="isEdit ? '编辑标签' : '新增标签'" width="480px">
       <el-form :model="form" label-width="100px">
         <el-form-item :label="$t('auto.SessionTag.0718bfa1')" required>
           <el-input v-model="form.name" />

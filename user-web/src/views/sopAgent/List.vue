@@ -240,7 +240,7 @@
     </el-tabs>
 
     
-    <el-dialog v-model="sopDialogVisible" ::title="$t('auto.List.abfb866c')" width="720px" top="6vh">
+    <el-dialog v-model="sopDialogVisible" :title="editingSop.id ? '编辑 SOP' : '创建 SOP'" width="720px" top="6vh">
       <el-form :model="sopForm" label-width="100px">
         <el-form-item :label="$t('auto.List.fad3e81a')" required>
           <el-input v-model="sopForm.name" :placeholder="$t('auto.List.74e27b6d')" />

@@ -295,7 +295,7 @@
               type="textarea"
               :rows="3"
               :disabled="currentHandler === 'ai'"
-              ::placeholder="$t('auto.List.c8f08e15')"
+              :placeholder="currentHandler === 'ai' ? 'AI 托管中（请先接管）' : '输入消息... (Ctrl+Enter 发送)'"
               @keydown.ctrl.enter="sendMessage"
             />
             <div class="input-actions">

@@ -70,7 +70,7 @@
       </div>
     </el-card>
 
-    <el-dialog v-model="dialogVisible" ::title="$t('auto.SchemaTemplates.229bc67d')" width="640px">
+    <el-dialog v-model="dialogVisible" :title="isEdit ? '编辑模板' : '新增模板'" width="640px">
       <el-form :model="form" label-width="110px">
         <el-form-item label="PageType" required>
           <el-select v-model="form.page_type" :disabled="isEdit" style="width:100%">

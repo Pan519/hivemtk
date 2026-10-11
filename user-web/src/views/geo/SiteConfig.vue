@@ -53,7 +53,7 @@
     </el-card>
 
     <!-- Dialog -->
-    <el-dialog v-model="dialogVisible" ::title="$t('auto.SiteConfig.4275a15b')" width="560px">
+    <el-dialog v-model="dialogVisible" :title="isEdit ? '编辑站点' : '新增站点'" width="560px">
       <el-form :model="form" label-width="100px">
         <el-form-item :label="$t('auto.SiteConfig.190980c7')" required>
           <el-input v-model="form.domain" placeholder="example.com" />

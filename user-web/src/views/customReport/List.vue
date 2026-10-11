@@ -153,26 +153,26 @@ import {
 } from '@/api/customReport.js'
 
 const DIM_MAP = {
-  date: { field: 'date', label: t('auto.List.4ff1e74e'), data_type: 'date', group_by: true },
-  source: { field: 'source', label: t('auto.List.26ca20b1'), data_type: 'string', group_by: true },
-  platform: { field: 'platform', label: t('auto.List.4981287f'), data_type: 'string', group_by: true },
-  region: { field: 'region', label: t('auto.List.2560b304'), data_type: 'string', group_by: true },
-  user_type: { field: 'user_type', label: t('auto.List.d340e9a6'), data_type: 'string', group_by: true },
+  date: { field: 'date', label: i18n.global.t('auto.List.4ff1e74e'), data_type: 'date', group_by: true },
+  source: { field: 'source', label: i18n.global.t('auto.List.26ca20b1'), data_type: 'string', group_by: true },
+  platform: { field: 'platform', label: i18n.global.t('auto.List.4981287f'), data_type: 'string', group_by: true },
+  region: { field: 'region', label: i18n.global.t('auto.List.2560b304'), data_type: 'string', group_by: true },
+  user_type: { field: 'user_type', label: i18n.global.t('auto.List.d340e9a6'), data_type: 'string', group_by: true },
 }
 const METRIC_MAP = {
-  count: { field: 'count', label: t('auto.List.0bf60b32'), agg_func: 'count', data_type: 'number' },
-  amount: { field: 'amount', label: t('auto.List.4cf24aba'), agg_func: 'sum', data_type: 'number' },
-  conversion: { field: 'conversion', label: t('auto.List.71505437'), agg_func: 'avg', data_type: 'percent' },
-  click_rate: { field: 'click_rate', label: t('auto.List.e6867bb9'), agg_func: 'avg', data_type: 'percent' },
-  open_rate: { field: 'open_rate', label: t('auto.List.eb9eb101'), agg_func: 'avg', data_type: 'percent' },
+  count: { field: 'count', label: i18n.global.t('auto.List.0bf60b32'), agg_func: 'count', data_type: 'number' },
+  amount: { field: 'amount', label: i18n.global.t('auto.List.4cf24aba'), agg_func: 'sum', data_type: 'number' },
+  conversion: { field: 'conversion', label: i18n.global.t('auto.List.71505437'), agg_func: 'avg', data_type: 'percent' },
+  click_rate: { field: 'click_rate', label: i18n.global.t('auto.List.e6867bb9'), agg_func: 'avg', data_type: 'percent' },
+  open_rate: { field: 'open_rate', label: i18n.global.t('auto.List.eb9eb101'), agg_func: 'avg', data_type: 'percent' },
 }
 const DIM_OPTIONS = Object.entries(DIM_MAP).map(([value, v]) => ({ value, label: v.label }))
 const METRIC_OPTIONS = Object.entries(METRIC_MAP).map(([value, v]) => ({ value, label: v.label }))
 const DS_LABELS = {
-  sessions: t('auto.List.98771135'), messages: t('auto.List.87846692'), orders: t('auto.List.69a3cf32'), clues: t('auto.List.68262f4c'),
-  users: t('auto.List.0da9b129'), rfm: 'RFM 数据', agents: t('auto.List.361fdc0c'),
+  sessions: i18n.global.t('auto.List.98771135'), messages: i18n.global.t('auto.List.87846692'), orders: i18n.global.t('auto.List.69a3cf32'), clues: i18n.global.t('auto.List.68262f4c'),
+  users: i18n.global.t('auto.List.0da9b129'), rfm: 'RFM 数据', agents: i18n.global.t('auto.List.361fdc0c'),
 }
-const CT_LABELS = { table: t('auto.List.b339aa87'), line: t('auto.List.c9c9bd87'), bar: t('auto.List.7c8ee6e3'), pie: t('auto.List.d5e33db7'), area: t('auto.List.af99db99'), card: t('auto.List.d87f215d') }
+const CT_LABELS = { table: i18n.global.t('auto.List.b339aa87'), line: i18n.global.t('auto.List.c9c9bd87'), bar: i18n.global.t('auto.List.7c8ee6e3'), pie: i18n.global.t('auto.List.d5e33db7'), area: i18n.global.t('auto.List.af99db99'), card: i18n.global.t('auto.List.d87f215d') }
 
 const { t } = useI18n()
 

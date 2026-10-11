@@ -129,13 +129,13 @@
               <el-tag size="small" :type="statusTagType(currentConv.status)">{{ statusLabel(currentConv.status) }}</el-tag>
             </div>
             <div class="thread-actions">
-              <el-tooltip ::content="$t('auto.List.beb08de4')">
+              <el-tooltip :content="currentConv.pinned ? $t('取消置顶') : $t('置顶')">
                 <el-button size="small" :type="currentConv.pinned ? 'primary' : 'default'" :icon="Top" circle @click="handleTogglePin(currentConv)" />
               </el-tooltip>
-              <el-tooltip ::content="$t('auto.List.b95e8f41')">
+              <el-tooltip :content="currentConv.starred ? $t('取消星标') : $t('星标')">
                 <el-button size="small" :type="currentConv.starred ? 'warning' : 'default'" :icon="currentConv.starred ? StarFilled : Star" circle @click="handleToggleStar(currentConv)" />
               </el-tooltip>
-              <el-tooltip ::content="$t('auto.List.883f9134')">
+              <el-tooltip :content="currentConv.muted ? $t('取消静音') : $t('静音')">
                 <el-button size="small" :type="currentConv.muted ? 'info' : 'default'" :icon="Mute" circle @click="handleToggleMute(currentConv)" />
               </el-tooltip>
               <el-button size="small" @click="tagDialogVisible = true">{{ $t('标签') }}</el-button>

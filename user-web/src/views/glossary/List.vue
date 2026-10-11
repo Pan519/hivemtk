@@ -143,7 +143,7 @@
     
     <el-dialog
       v-model="formDialogVisible"
-      ::title="$t('auto.List.bd027986')"
+      :title="isEdit ? $t('编辑术语') : $t('新增术语')"
       width="720px"
       top="6vh"
       :close-on-click-modal="false"
@@ -332,11 +332,11 @@ import {
 } from '@/constants/languages'
 
 const categoryOptions = [
-  { value: 'brand', label: t('auto.List.94c1f813') },
-  { value: 'product', label: t('auto.List.882337d7') },
-  { value: 'entity', label: t('auto.List.d041a5e8') },
-  { value: 'technical', label: t('auto.List.85f2d0d4') },
-  { value: 'custom', label: t('auto.List.f1d4ff50') }
+  { value: 'brand', label: i18n.global.t('auto.List.94c1f813') },
+  { value: 'product', label: i18n.global.t('auto.List.882337d7') },
+  { value: 'entity', label: i18n.global.t('auto.List.d041a5e8') },
+  { value: 'technical', label: i18n.global.t('auto.List.85f2d0d4') },
+  { value: 'custom', label: i18n.global.t('auto.List.f1d4ff50') }
 ];
 const categoryMap = categoryOptions.reduce((acc, o) => { acc[o.value] = o.label; return acc }, {})
 const getCategoryLabel = (v) => categoryMap[v] || v || '-'

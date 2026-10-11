@@ -13,7 +13,7 @@
           <el-option
             v-for="a in accounts"
             :key="a.account.id"
-            ::label="$t('auto.Data.a5e6e376')"
+            :label="a.account.corp_id || ('账号 #' + a.account.id)"
             :value="a.account.id"
           />
         </el-select>

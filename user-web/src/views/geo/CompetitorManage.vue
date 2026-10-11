@@ -44,7 +44,7 @@
     </el-card>
 
     
-    <el-dialog v-model="dialogVisible" ::title="$t('auto.CompetitorManage.e2045dc4')" width="520px" destroy-on-close>
+    <el-dialog v-model="dialogVisible" :title="editing ? '编辑竞品' : '新增竞品'" width="520px" destroy-on-close>
       <el-form :model="form" label-width="90px" size="default">
         <el-form-item :label="$t('auto.CompetitorManage.d7ec2d3f')">
           <el-input v-model="form.name" :placeholder="$t('auto.CompetitorManage.68edbd0b')" />

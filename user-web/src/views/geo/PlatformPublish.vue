@@ -89,7 +89,7 @@
           <el-option v-for="a in articles" :key="a.id" :label="a.title || a.id" :value="a.id" />
         </el-select>
         <el-select v-model="selectedPlatforms" multiple :placeholder="$t('auto.PlatformPublish.e2c01ffc')" size="small" style="min-width:260px">
-          <el-option v-for="p in realApiPlatforms" :key="p.name" ::label="$t('auto.PlatformPublish.25e49195')" :value="p.name" />
+          <el-option v-for="p in realApiPlatforms" :key="p.name" :label="p.display_name + ' (真实API)'" :value="p.name" />
         </el-select>
         <el-button size="small" type="primary" :disabled="!selectedArticle || !selectedPlatforms.length" :loading="pipelineRunning" @click="runPipeline">{{ $t('auto.PlatformPublish.25de77cb') }}</el-button>
       </div>

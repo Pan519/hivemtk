@@ -98,7 +98,7 @@
     </el-card>
 
     <!-- 新建/编辑弹窗 -->
-    <el-dialog v-model="dialogVisible" ::title="$t('auto.Teams.f9b0ed4d')" width="480px">
+    <el-dialog v-model="dialogVisible" :title="editing ? '编辑团队' : '新建团队'" width="480px">
       <el-form label-width="100px">
         <el-form-item :label="$t('auto.Teams.6ce21a3c')">
           <el-input v-model="form.name" maxlength="100" :placeholder="$t('auto.Teams.6bc959ff')" />

@@ -53,6 +53,7 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount, reactive } from 'vue'
 import { useI18n } from 'vue-i18n'
+import i18n from '@/i18n'
 import { useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import {
@@ -64,10 +65,10 @@ import HostInstallGuide from './HostInstallGuide.vue'
 const router = useRouter()
 
 const statusOptions = [
-  { value: 'draft', label: t('auto.List.22b4334f') }, { value: 'ready', label: t('auto.List.c0d2181d') },
-  { value: 'running', label: t('auto.List.46e38679') }, { value: 'paused', label: t('auto.List.a2d930fd') },
-  { value: 'done', label: t('auto.List.769d88e4') }, { value: 'failed', label: t('auto.List.acd5cb84') },
-  { value: 'archived', label: t('auto.List.c3ba167c') },
+  { value: 'draft', label: i18n.global.t('auto.List.22b4334f') }, { value: 'ready', label: i18n.global.t('auto.List.c0d2181d') },
+  { value: 'running', label: i18n.global.t('auto.List.46e38679') }, { value: 'paused', label: i18n.global.t('auto.List.a2d930fd') },
+  { value: 'done', label: i18n.global.t('auto.List.769d88e4') }, { value: 'failed', label: i18n.global.t('auto.List.acd5cb84') },
+  { value: 'archived', label: i18n.global.t('auto.List.c3ba167c') },
 ]
 
 const { t } = useI18n()

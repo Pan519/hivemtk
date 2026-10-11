@@ -486,6 +486,7 @@
 <script setup>
 import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import i18n from '@/i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { badCaseApi } from '@/api/badCase'
 import { toList } from '@/utils/list'
@@ -512,9 +513,9 @@ import {
 // **显示用**的：值域来自 taxonomy，命中就译、没命中就原样显示英文枚举值。
 
 const SOURCE_LABELS = {
-  low_confidence: t('auto.List.0c4305ae'),
-  zero_hit: t('auto.List.8732b9ba'),
-  manual: t('auto.List.9fcf7ba3')
+  low_confidence: i18n.global.t('auto.List.0c4305ae'),
+  zero_hit: i18n.global.t('auto.List.8732b9ba'),
+  manual: i18n.global.t('auto.List.9fcf7ba3')
 }
 const SOURCE_TAG_TYPES = {
   low_confidence: 'warning',
@@ -522,27 +523,27 @@ const SOURCE_TAG_TYPES = {
   manual: 'info'
 }
 const STATUS_LABELS = {
-  pending: t('auto.List.5a7f3fe1'),
-  labeled: t('auto.List.f36e8a36'),
-  exported: t('auto.List.5c51c3b8'),
-  dismissed: t('auto.List.50239f4f')
+  pending: i18n.global.t('auto.List.5a7f3fe1'),
+  labeled: i18n.global.t('auto.List.f36e8a36'),
+  exported: i18n.global.t('auto.List.5c51c3b8'),
+  dismissed: i18n.global.t('auto.List.50239f4f')
 }
 const LABEL_NAMES = {
-  kb_missing: t('auto.List.27de62bf'),
-  kb_stale: t('auto.List.2167b799'),
-  retrieve_miss: t('auto.List.df4c6e70'),
-  retrieve_wrong: t('auto.List.5ae0bd55'),
-  generation_wrong: t('auto.List.e739d3ab'),
-  generation_style: t('auto.List.626c87bc'),
-  intent_misjudge: t('auto.List.811e6025')
+  kb_missing: i18n.global.t('auto.List.27de62bf'),
+  kb_stale: i18n.global.t('auto.List.2167b799'),
+  retrieve_miss: i18n.global.t('auto.List.df4c6e70'),
+  retrieve_wrong: i18n.global.t('auto.List.5ae0bd55'),
+  generation_wrong: i18n.global.t('auto.List.e739d3ab'),
+  generation_style: i18n.global.t('auto.List.626c87bc'),
+  intent_misjudge: i18n.global.t('auto.List.811e6025')
 }
 const LAYER_LABELS = {
-  knowledge: t('auto.List.7e433388'),
-  retrieval: t('auto.List.8bedce4e'),
-  generation: t('auto.List.4dfe7036'),
-  intent: t('auto.List.ef84bdf4')
+  knowledge: i18n.global.t('auto.List.7e433388'),
+  retrieval: i18n.global.t('auto.List.8bedce4e'),
+  generation: i18n.global.t('auto.List.4dfe7036'),
+  intent: i18n.global.t('auto.List.ef84bdf4')
 }
-const ACTION_LABELS = { label: t('auto.List.56750306'), dismiss: t('auto.List.bd9fcf46') }
+const ACTION_LABELS = { label: i18n.global.t('auto.List.56750306'), dismiss: i18n.global.t('auto.List.bd9fcf46') }
 
 // STATS_POLL_MS：已判率是本卡北极星，值班要的是"打开时看到的是此刻的数"。
 // 30s 与待办中心同档；更短只是把读接口打成压力源。

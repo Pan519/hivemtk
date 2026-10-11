@@ -225,7 +225,7 @@
               <el-table-column prop="factor" :label="$t('auto.List.a7c4560b')" min-width="180" />
               <el-table-column prop="impact" :label="$t('auto.List.f6590a76')" width="120">
                 <template #default="{ row: r }">
-                  <el-tag ::type="$t('auto.List.ef044656')" size="small">
+                  <el-tag :type="r.impact === '高' ? 'danger' : r.impact === '中' ? 'warning' : 'info'" size="small">
                     {{ r.impact }}
                   </el-tag>
                 </template>

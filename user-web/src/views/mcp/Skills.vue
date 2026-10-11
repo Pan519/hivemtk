@@ -49,7 +49,7 @@
     </el-card>
 
     <!-- 登记 / 编辑弹窗 -->
-    <el-dialog v-model="editorVisible" ::title="$t('auto.Skills.a63a1c87')" width="560px">
+    <el-dialog v-model="editorVisible" :title="editing ? '编辑 Skill' : '登记 Skill'" width="560px">
       <el-form label-width="90px">
         <el-form-item :label="$t('auto.Skills.d7ec2d3f')" required>
           <el-input v-model="form.name" :placeholder="$t('auto.Skills.4f3a5228')" maxlength="128" />

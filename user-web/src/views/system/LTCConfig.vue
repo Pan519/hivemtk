@@ -217,7 +217,7 @@
       type="warning"
       :closable="false"
       show-icon
-      ::title="$t('auto.LTCConfig.865f2617')"
+      :title="'开关已改，但这次变更没进审计：' + saveNotice.audit_error"
     />
 
     <div class="actions">
@@ -245,33 +245,34 @@
 <script setup>
 import { computed, onMounted, reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import i18n from '@/i18n'
 import { ElMessage } from 'element-plus'
 import { getLTCConfig, saveLTCConfig } from '@/api/ltcConfig'
 
 // 阶段键与中文名：顺序照后端 LTCKnownStages（销售流程顺序），
 // 键名照 ltc.config 的 JSON 字面量 —— 这两处错一处，保存就会被后端拒收。
 const STAGES = [
-  { stage: 'opportunity', label: t('auto.LTCConfig.55290e55') },
-  { stage: 'outreach', label: t('auto.LTCConfig.301dd54b') },
-  { stage: 'quote', label: t('auto.LTCConfig.00bae3b9') },
-  { stage: 'bill', label: t('auto.LTCConfig.a08c6e69') },
-  { stage: 'payment', label: t('auto.LTCConfig.1755fc2a') },
-  { stage: 'collection', label: t('auto.LTCConfig.b01bde53') }
+  { stage: 'opportunity', label: i18n.global.t('auto.LTCConfig.55290e55') },
+  { stage: 'outreach', label: i18n.global.t('auto.LTCConfig.301dd54b') },
+  { stage: 'quote', label: i18n.global.t('auto.LTCConfig.00bae3b9') },
+  { stage: 'bill', label: i18n.global.t('auto.LTCConfig.a08c6e69') },
+  { stage: 'payment', label: i18n.global.t('auto.LTCConfig.1755fc2a') },
+  { stage: 'collection', label: i18n.global.t('auto.LTCConfig.b01bde53') }
 ]
 
 const THRESHOLDS = [
-  { key: 'lead_score', label: t('auto.LTCConfig.fb1e8b62') },
-  { key: 'confidence', label: t('auto.LTCConfig.94fa8ea9') },
-  { key: 'discount_percent', label: t('auto.LTCConfig.42cf7fb6') },
-  { key: 'win_probability', label: t('auto.LTCConfig.7ff8686a') }
+  { key: 'lead_score', label: i18n.global.t('auto.LTCConfig.fb1e8b62') },
+  { key: 'confidence', label: i18n.global.t('auto.LTCConfig.94fa8ea9') },
+  { key: 'discount_percent', label: i18n.global.t('auto.LTCConfig.42cf7fb6') },
+  { key: 'win_probability', label: i18n.global.t('auto.LTCConfig.7ff8686a') }
 ]
 
 const REASON_TEXT = {
-  active: t('auto.LTCConfig.45639999'),
-  master_off: t('auto.LTCConfig.ea6e3329'),
-  stage_off: t('auto.LTCConfig.9bff6a01'),
-  degraded: t('auto.LTCConfig.3d8283fb'),
-  unknown_stage: t('auto.LTCConfig.2a1bfefb')
+  active: i18n.global.t('auto.LTCConfig.45639999'),
+  master_off: i18n.global.t('auto.LTCConfig.ea6e3329'),
+  stage_off: i18n.global.t('auto.LTCConfig.9bff6a01'),
+  degraded: i18n.global.t('auto.LTCConfig.3d8283fb'),
+  unknown_stage: i18n.global.t('auto.LTCConfig.2a1bfefb')
 }
 
 const emptyCfg = () => ({

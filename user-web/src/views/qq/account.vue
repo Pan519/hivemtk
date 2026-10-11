@@ -77,7 +77,7 @@
 
     <el-dialog
       v-model="dialogVisible"
-      ::title="$t('auto.account.801f3433')"
+      :title="dialogType === 'add' ? '添加 QQ 机器人' : '编辑 QQ 机器人'"
       width="640px"
       :close-on-click-modal="false"
     >
@@ -91,7 +91,7 @@
         <el-form-item label="AppSecret" prop="app_secret">
           <el-input
             v-model="accountForm.app_secret"
-            ::placeholder="$t('auto.account.1c9593e0')"
+            :placeholder="dialogType === 'edit' ? '留空则保持原 Secret 不变' : 'QQ 开放平台 AppSecret'"
             type="password"
             show-password
           />
@@ -99,7 +99,7 @@
         <el-form-item label="BotSecret" prop="webhook_secret">
           <el-input
             v-model="accountForm.webhook_secret"
-            ::placeholder="$t('auto.account.9edfaf3f')"
+            :placeholder="dialogType === 'edit' ? '留空则保持原值不变' : '开放平台管理端 BotSecret，用于 Ed25519 验签'"
             type="password"
             show-password
           />
@@ -107,7 +107,7 @@
         <el-form-item label="Webhook URL" prop="webhook_url">
           <el-input
             v-model="accountForm.webhook_url"
-            ::placeholder="$t('auto.account.b18f5132')"
+            :placeholder="accountForm.webhook_url_suggested ? '' : '未配置 PUBLIC_BASE_URL，请手填（https，端口限 80/443/8080/8443）'"
             :disabled="webhookUrlLocked"
           >
             <template v-if="accountForm.webhook_url" #append>

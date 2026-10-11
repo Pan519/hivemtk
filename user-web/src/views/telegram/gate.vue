@@ -51,7 +51,7 @@
       </el-table-column>
     </el-table>
 
-    <el-dialog v-model="dialogVisible" ::title="$t('auto.gate.75b5073d')" width="620px" :close-on-click-modal="false">
+    <el-dialog v-model="dialogVisible" :title="dialogType === 'add' ? '添加群组管控' : '编辑群组管控'" width="620px" :close-on-click-modal="false">
       <el-form ref="gateFormRef" :model="gateForm" :rules="rules" label-width="130px">
         <el-form-item :label="$t('auto.gate.f8a61f3f')" prop="account_id">
           <el-select v-model="gateForm.account_id" :placeholder="$t('auto.gate.30b05276')" :disabled="dialogType === 'edit'" style="width: 100%">

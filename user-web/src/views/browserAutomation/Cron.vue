@@ -68,7 +68,7 @@
       </template>
     </el-table>
 
-    <el-dialog v-model="dialog.visible" ::title="$t('auto.Cron.0213ddf5')" width="520px">
+    <el-dialog v-model="dialog.visible" :title="dialog.id ? '编辑触发器' : '新建触发器'" width="520px">
       <el-form :model="dialog" label-width="100px">
         <el-form-item :label="$t('auto.Cron.0e46d8d6')" required>
           <el-select v-model="dialog.task_id" :disabled="!!dialog.id" :placeholder="$t('auto.Cron.b3d2d54f')" style="width: 100%">

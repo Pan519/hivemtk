@@ -49,7 +49,7 @@
     </el-card>
 
     
-    <el-dialog v-model="dialogVisible" ::title="$t('auto.MergeRuleConfig.63a03695')" width="640px">
+    <el-dialog v-model="dialogVisible" :title="editing.id ? '编辑规则' : '新增规则'" width="640px">
       <el-form :model="editing" label-width="100px">
         <el-form-item :label="$t('auto.MergeRuleConfig.87080256')">
           <el-input v-model="editing.name" />
@@ -116,13 +116,13 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import { http } from '@/utils/request'
 
 const FIELD_LABELS = {
-  phone: t('auto.MergeRuleConfig.8098e2b4'),
-  email: t('auto.MergeRuleConfig.3bc5e602'),
-  wechat_open_id: t('auto.MergeRuleConfig.cfbf6f4c'),
-  douyin_id: t('auto.MergeRuleConfig.277a984f'),
-  nickname: t('auto.MergeRuleConfig.23eb0e60'),
-  region: t('auto.MergeRuleConfig.2560b304'),
-  device_fingerprint: t('auto.MergeRuleConfig.039fbcca')
+  phone: i18n.global.t('auto.MergeRuleConfig.8098e2b4'),
+  email: i18n.global.t('auto.MergeRuleConfig.3bc5e602'),
+  wechat_open_id: i18n.global.t('auto.MergeRuleConfig.cfbf6f4c'),
+  douyin_id: i18n.global.t('auto.MergeRuleConfig.277a984f'),
+  nickname: i18n.global.t('auto.MergeRuleConfig.23eb0e60'),
+  region: i18n.global.t('auto.MergeRuleConfig.2560b304'),
+  device_fingerprint: i18n.global.t('auto.MergeRuleConfig.039fbcca')
 }
 const fieldLabel = (k) => FIELD_LABELS[k] || k
 

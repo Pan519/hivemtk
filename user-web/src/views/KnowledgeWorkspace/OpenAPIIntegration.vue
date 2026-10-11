@@ -73,7 +73,7 @@
     </el-card>
 
     
-    <el-dialog v-model="showCreateDialog" ::title="$t('auto.OpenAPIIntegration.1d403842')" width="720px" :close-on-click-modal="false">
+    <el-dialog v-model="showCreateDialog" :title="editingId ? '编辑数据源' : '新建数据源'" width="720px" :close-on-click-modal="false">
       <el-form :model="form" :rules="rules" ref="formRef" label-width="100px">
         <el-form-item :label="$t('auto.OpenAPIIntegration.d7ec2d3f')" prop="name">
           <el-input v-model="form.name" :placeholder="$t('auto.OpenAPIIntegration.819e4d1d')" />
@@ -205,7 +205,7 @@ import { PASS_FAIL_STATUS, getStatusLabel, getStatusTagType } from '@/constants/
 const HTTP_METHOD_TAG = { GET: '', POST: 'success', PUT: 'warning', DELETE: 'danger', PATCH: 'warning' };
 const getMethodLabel = (m) => (m || '').toUpperCase()
 const getMethodTagType = (m) => HTTP_METHOD_TAG[(m || '').toUpperCase()] || 'info'
-const getLastStatusLabel = (s) => (s ? getStatusLabel(s, PASS_FAIL_STATUS) : t('auto.OpenAPIIntegration.a0bf20e8'));
+const getLastStatusLabel = (s) => (s ? getStatusLabel(s, PASS_FAIL_STATUS) : i18n.global.t('auto.OpenAPIIntegration.a0bf20e8'));
 const getLastStatusTagType = (s) => (s ? getStatusTagType(s, PASS_FAIL_STATUS) : 'info')
 
 const { t } = useI18n()

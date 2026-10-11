@@ -95,7 +95,7 @@
       <template #header>
         <div class="card-header">
           <span class="card-title">{{ $t('auto.Verification.53119fb3') }}</span>
-          <el-tooltip ::content="$t('auto.Verification.f8761e2c')" :disabled="!!form.brand_name.trim()" placement="top">
+          <el-tooltip :content="form.brand_name.trim() ? '' : '请先填写品牌名称'" :disabled="!!form.brand_name.trim()" placement="top">
             <el-button type="warning" :loading="monitoring" :disabled="!form.brand_name.trim()" @click="handleMonitorNegative">
               <el-icon><Warning /></el-icon><span>{{ $t('auto.Verification.2e00d171') }}</span>
             </el-button>

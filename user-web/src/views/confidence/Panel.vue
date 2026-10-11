@@ -210,7 +210,7 @@
     </el-tabs>
 
     
-    <el-dialog v-model="policyDialogVisible" ::title="$t('auto.Panel.9ad05b10')" width="640px">
+    <el-dialog v-model="policyDialogVisible" :title="editingPolicy.id ? '编辑阈值策略' : '新建阈值策略'" width="640px">
       <el-form :model="editingPolicy" label-width="120px">
         <el-form-item :label="$t('auto.Panel.27bf5b30')" required>
           <el-input v-model="editingPolicy.name" :placeholder="$t('auto.Panel.5a6dae3f')" />

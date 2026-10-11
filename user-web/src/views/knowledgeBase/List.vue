@@ -175,7 +175,7 @@
     
     <el-dialog
       v-model="formVisible"
-      ::title="$t('auto.List.3c27551b')"
+      :title="formData.id ? '编辑知识库' : '新建知识库'"
       width="520px"
       :close-on-click-modal="false"
     >

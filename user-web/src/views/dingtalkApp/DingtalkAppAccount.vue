@@ -51,7 +51,7 @@
     </el-card>
 
     
-    <el-dialog v-model="dialogVisible" ::title="$t('auto.DingtalkAppAccount.ab3ad6e0')" width="680px">
+    <el-dialog v-model="dialogVisible" :title="dialogMode === 'edit' ? '编辑钉钉应用账号' : '新增钉钉应用账号'" width="680px">
       <el-form :model="form" label-width="150px">
         <el-form-item :label="$t('auto.DingtalkAppAccount.d7ec2d3f')" prop="account_name">
           <el-input v-model="form.account_name" :placeholder="$t('auto.DingtalkAppAccount.17327f9c')" />

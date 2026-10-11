@@ -193,24 +193,25 @@
 <script setup>
 import { ref, reactive, computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
+import i18n from '@/i18n'
 import { ElMessage } from 'element-plus'
 import { listWorkflows, saveWorkflow, deleteWorkflow, runWorkflow, listWorkflowExecutions } from '@/api/geoEntity.js'
 
 const STEP_TYPES = {
-  trigger:  { label: t('auto.WorkflowEditor.4696724e'),     kind: 'control', default: {} },
-  action:   { label: t('auto.WorkflowEditor.f429d49a'),   kind: 'control', default: {} },
-  decision: { label: t('auto.WorkflowEditor.c71b1268'),   kind: 'control', default: { condition: '', jump_to: '' } },
-  end:      { label: t('auto.WorkflowEditor.642f9673'),   kind: 'control', default: {} },
+  trigger:  { label: i18n.global.t('auto.WorkflowEditor.4696724e'),     kind: 'control', default: {} },
+  action:   { label: i18n.global.t('auto.WorkflowEditor.f429d49a'),   kind: 'control', default: {} },
+  decision: { label: i18n.global.t('auto.WorkflowEditor.c71b1268'),   kind: 'control', default: { condition: '', jump_to: '' } },
+  end:      { label: i18n.global.t('auto.WorkflowEditor.642f9673'),   kind: 'control', default: {} },
 
   content_generate:     { label: 'LLM 内容生成', kind: 'executor', color: 'primary', default: { topic: '', brand: 'HiveMTK', keyword: '', advantages: '', platform: '' } },
-  content_score:        { label: t('auto.WorkflowEditor.18a44270'), kind: 'executor', color: 'warning', default: { min_score: 70, brand: 'HiveMTK' } },
+  content_score:        { label: i18n.global.t('auto.WorkflowEditor.18a44270'), kind: 'executor', color: 'warning', default: { min_score: 70, brand: 'HiveMTK' } },
   eeat_enhance:         { label: 'EEAT 权威增强', kind: 'executor', color: 'success', default: { brand: 'HiveMTK' } },
-  fact_density_enhance: { label: t('auto.WorkflowEditor.3225f385'), kind: 'executor', color: 'success', default: { target_density: 0.8 } },
-  verify:               { label: t('auto.WorkflowEditor.f314afe6'), kind: 'executor', color: 'info', default: { brand: 'HiveMTK', queries: [] } },
-  query_probe:          { label: t('auto.WorkflowEditor.169e126f'), kind: 'executor', color: 'primary', default: { keyword: '', engine: 'qwen' } },
-  source_attribution:   { label: t('auto.WorkflowEditor.f7bd7101'), kind: 'executor', color: 'info', default: {} },
-  content_gap_fill:     { label: t('auto.WorkflowEditor.17d15dab'), kind: 'executor', color: 'warning', default: { keyword: '' } },
-  capture_lead:         { label: t('auto.WorkflowEditor.1fe100f7'), kind: 'executor', color: 'danger', default: {} },
+  fact_density_enhance: { label: i18n.global.t('auto.WorkflowEditor.3225f385'), kind: 'executor', color: 'success', default: { target_density: 0.8 } },
+  verify:               { label: i18n.global.t('auto.WorkflowEditor.f314afe6'), kind: 'executor', color: 'info', default: { brand: 'HiveMTK', queries: [] } },
+  query_probe:          { label: i18n.global.t('auto.WorkflowEditor.169e126f'), kind: 'executor', color: 'primary', default: { keyword: '', engine: 'qwen' } },
+  source_attribution:   { label: i18n.global.t('auto.WorkflowEditor.f7bd7101'), kind: 'executor', color: 'info', default: {} },
+  content_gap_fill:     { label: i18n.global.t('auto.WorkflowEditor.17d15dab'), kind: 'executor', color: 'warning', default: { keyword: '' } },
+  capture_lead:         { label: i18n.global.t('auto.WorkflowEditor.1fe100f7'), kind: 'executor', color: 'danger', default: {} },
 }
 
 const { t } = useI18n()

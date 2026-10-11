@@ -52,7 +52,7 @@
     </el-card>
 
     
-    <el-dialog v-model="dialogVisible" ::title="$t('auto.WhatsappCloudAccount.571f0486')" width="640px">
+    <el-dialog v-model="dialogVisible" :title="dialogMode === 'edit' ? '编辑 WhatsApp Cloud 账号' : '新增 WhatsApp Cloud 账号'" width="640px">
       <el-form :model="form" label-width="150px">
         <el-form-item :label="$t('auto.WhatsappCloudAccount.d7ec2d3f')" prop="name">
           <el-input v-model="form.name" :placeholder="$t('auto.WhatsappCloudAccount.17327f9c')" />

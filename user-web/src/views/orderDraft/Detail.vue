@@ -15,8 +15,8 @@
       :type="loadError === 404 ? 'info' : 'warning'"
       show-icon
       :closable="false"
-      ::title="$t('auto.Detail.6dd3ac65')"
-      ::description="$t('auto.Detail.a3d4e31e')"
+      :title="loadError === 404 ? '这条草稿不存在（或已被清扫）' : '草稿读取失败'"
+      :description="loadError === 404 ? '它可能刚被别人确认/取消，或已过期被清扫器收口。' : '后端回了非 404 的错误，稍后重试；不要当成草稿没了。'"
     />
 
     <el-card
@@ -226,6 +226,7 @@
 <script setup>
 import { computed, onMounted, reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import i18n from '@/i18n'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { orderDraftApi } from '@/api/orderDraft'
@@ -238,7 +239,7 @@ import { useUserStore } from '@/stores/user'
 // 置灰按钮会被读成「我权限不够」，而真原因是这条已经不需要人再处理了。
 
 const STATUS_TAGS = { pending: 'warning', confirmed: 'success', cancelled: 'info', expired: 'danger' }
-const STATUS_LABELS = { pending: t('auto.Detail.2a2772fa'), confirmed: t('auto.Detail.4113e726'), cancelled: t('auto.Detail.2111ccbb'), expired: t('auto.Detail.4d5ccd01') }
+const STATUS_LABELS = { pending: i18n.global.t('auto.Detail.2a2772fa'), confirmed: i18n.global.t('auto.Detail.4113e726'), cancelled: i18n.global.t('auto.Detail.2111ccbb'), expired: i18n.global.t('auto.Detail.4d5ccd01') }
 
 const route = useRoute()
 const router = useRouter()

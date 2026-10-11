@@ -174,7 +174,7 @@
         </el-table-column>
         <el-table-column prop="status" :label="$t('auto.KeywordMining.3fea7ca7')" width="80">
           <template #default="{ row }">
-            <el-tag size="small" ::type="$t('auto.KeywordMining.550edcf5')">
+            <el-tag size="small" :type="row.status === '已优化' ? 'success' : 'info'">
               {{ row.status || '待处理' }}
             </el-tag>
           </template>

@@ -92,12 +92,12 @@ import mjml2html from 'mjml-browser'
 import { http } from '@/utils/request'
 
 const BLOCK_TYPES = [
-  { type: 'text', label: t('auto.DragEditor.97d07614'), icon: 'EditPen', default: { content: t('auto.DragEditor.657b6324') } },
-  { type: 'image', label: t('auto.DragEditor.20def794'), icon: 'Picture', default: { src: '', alt: '' } },
-  { type: 'button', label: t('auto.DragEditor.fa966345'), icon: 'PriceTag', default: { text: t('auto.DragEditor.65e6e645'), url: '#', color: '#4F46E5' } },
-  { type: 'divider', label: t('auto.DragEditor.8c47ecd4'), icon: 'Minus' },
-  { type: 'social', label: t('auto.DragEditor.8b85881d'), icon: 'Share', default: { networks: ['wechat', 'weibo'] } },
-  { type: 'coupon', label: t('auto.DragEditor.2f36359e'), icon: 'PriceTag', default: { code: 'SAVE10', amount: 10, expires: '30d' } }
+  { type: 'text', label: i18n.global.t('auto.DragEditor.97d07614'), icon: 'EditPen', default: { content: i18n.global.t('auto.DragEditor.657b6324') } },
+  { type: 'image', label: i18n.global.t('auto.DragEditor.20def794'), icon: 'Picture', default: { src: '', alt: '' } },
+  { type: 'button', label: i18n.global.t('auto.DragEditor.fa966345'), icon: 'PriceTag', default: { text: i18n.global.t('auto.DragEditor.65e6e645'), url: '#', color: '#4F46E5' } },
+  { type: 'divider', label: i18n.global.t('auto.DragEditor.8c47ecd4'), icon: 'Minus' },
+  { type: 'social', label: i18n.global.t('auto.DragEditor.8b85881d'), icon: 'Share', default: { networks: ['wechat', 'weibo'] } },
+  { type: 'coupon', label: i18n.global.t('auto.DragEditor.2f36359e'), icon: 'PriceTag', default: { code: 'SAVE10', amount: 10, expires: '30d' } }
 ]
 
 const blocks = BLOCK_TYPES.map((b) => ({ ...b, icon: resolveIcon(b.icon) }))

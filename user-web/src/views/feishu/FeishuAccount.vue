@@ -47,7 +47,7 @@
             </el-table-column>
             <el-table-column label="Token" width="110" align="center">
               <template #default="scope">
-                <el-tooltip ::content="$t('auto.FeishuAccount.caf951e0')" placement="top">
+                <el-tooltip :content="scope.row.token_cached ? '已缓存 tenant_access_token' : '尚未缓存'" placement="top">
                   <el-tag :type="scope.row.token_cached ? 'success' : 'warning'" effect="plain">
                     {{ scope.row.token_cached ? '已缓存' : '未缓存' }}
                   </el-tag>
@@ -76,7 +76,7 @@
     
     <el-dialog
       v-model="dialogVisible"
-      ::title="$t('auto.FeishuAccount.ec5f1b30')"
+      :title="dialogType === 'add' ? '添加飞书账号' : '编辑飞书账号'"
       width="640px"
       :close-on-click-modal="false"
     >
@@ -90,7 +90,7 @@
         <el-form-item label="App Secret" prop="app_secret">
           <el-input
             v-model="accountForm.app_secret"
-            ::placeholder="$t('auto.FeishuAccount.6a205ea0')"
+            :placeholder="dialogType === 'edit' ? '留空则保持原 Secret 不变' : '请输入飞书 App Secret'"
             type="password"
             show-password
           />

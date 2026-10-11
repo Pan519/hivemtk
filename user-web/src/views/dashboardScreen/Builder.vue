@@ -98,12 +98,12 @@ import { safeInit } from '@/utils/echarts'
 import { http } from '@/utils/request'
 
 const blockTypes = [
-  { type: 'line', label: t('auto.Builder.0beb478b'), icon: markRaw(TrendCharts) },
-  { type: 'bar', label: t('auto.Builder.f7fedcd0'), icon: markRaw(DataLine) },
-  { type: 'pie', label: t('auto.Builder.d5e33db7'), icon: markRaw(PieChart) },
-  { type: 'kpi', label: t('auto.Builder.cd65901b'), icon: markRaw(Document) },
-  { type: 'funnel', label: t('auto.Builder.be4e6e85'), icon: markRaw(Histogram) },
-  { type: 'map', label: t('auto.Builder.823ea45c'), icon: markRaw(LocationInformation) }
+  { type: 'line', label: i18n.global.t('auto.Builder.0beb478b'), icon: markRaw(TrendCharts) },
+  { type: 'bar', label: i18n.global.t('auto.Builder.f7fedcd0'), icon: markRaw(DataLine) },
+  { type: 'pie', label: i18n.global.t('auto.Builder.d5e33db7'), icon: markRaw(PieChart) },
+  { type: 'kpi', label: i18n.global.t('auto.Builder.cd65901b'), icon: markRaw(Document) },
+  { type: 'funnel', label: i18n.global.t('auto.Builder.be4e6e85'), icon: markRaw(Histogram) },
+  { type: 'map', label: i18n.global.t('auto.Builder.823ea45c'), icon: markRaw(LocationInformation) }
 ]
 
 const { t } = useI18n()
@@ -146,6 +146,7 @@ function resolveChart(type) {
 
 import { defineAsyncComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
+import i18n from '@/i18n'
 function loadChart(type) {
   return {
     template: `<div ref="chart" class="chart-area"></div>`,
