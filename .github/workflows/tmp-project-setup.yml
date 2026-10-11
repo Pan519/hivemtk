@@ -1,0 +1,19 @@
+name: tmp-project-setup
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  projects: write
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 查询 projects
+        run: |
+          curl -sS -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d '{"query":"query { repository(owner: \"Pan519\", name: \"hivemtk\") { projectsV2(first: 5) { nodes { id title url } } } }"}' \
+            https://api.github.com/graphql
