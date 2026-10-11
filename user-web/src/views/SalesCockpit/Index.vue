@@ -1,51 +1,51 @@
 <template>
   <div class="sales-cockpit">
-    <PageHeader title="AI 销冠驾驶舱" subtitle="ReAct 智能体、SOP、RAG、触达四大核心能力全景" />
+    <PageHeader :title="$t('auto.Index.1.a97d88')" :subtitle="$t('auto.Index.2.a47a3b')" />
 
     
     <el-row :gutter="20">
       <el-col :span="6">
         <el-card class="capability-card">
           <div class="capability-icon">🤖</div>
-          <div class="capability-name">ReAct 智能体</div>
+          <div class="capability-name">{{ $t('auto.Index.19.2778e1') }}</div>
           <div class="capability-stat">
             <span class="big-num">{{ cockpit.react.totalRuns }}</span>
-            <span class="unit">本周期调用</span>
+            <span class="unit">{{ $t('auto.Index.20.bb24ac') }}</span>
           </div>
-          <div class="capability-meta">5 轮 / 30s 防线</div>
+          <div class="capability-meta">{{ $t('auto.Index.21.ef320c') }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="capability-card">
           <div class="capability-icon">📋</div>
-          <div class="capability-name">SOP 引擎</div>
+          <div class="capability-name">{{ $t('auto.Index.22.a191ae') }}</div>
           <div class="capability-stat">
             <span class="big-num">{{ cockpit.sop.executions }}</span>
-            <span class="unit">执行中</span>
+            <span class="unit">{{ $t('auto.Index.23.46e386') }}</span>
           </div>
-          <div class="capability-meta">14 节点 DAG</div>
+          <div class="capability-meta">{{ $t('auto.Index.24.be6e40') }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="capability-card">
           <div class="capability-icon">🔍</div>
-          <div class="capability-name">RAG 三级检索</div>
+          <div class="capability-name">{{ $t('auto.Index.25.423e78') }}</div>
           <div class="capability-stat">
             <span class="big-num">{{ cockpit.rag.queries }}</span>
-            <span class="unit">命中</span>
+            <span class="unit">{{ $t('auto.Index.26.68ea25') }}</span>
           </div>
-          <div class="capability-meta">L1 缓存 / L2 PG / L3 Rerank</div>
+          <div class="capability-meta">{{ $t('auto.Index.27.eae9c4') }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="capability-card">
           <div class="capability-icon">📡</div>
-          <div class="capability-name">触达 Pipeline</div>
+          <div class="capability-name">{{ $t('auto.Index.28.58dfae') }}</div>
           <div class="capability-stat">
             <span class="big-num">{{ cockpit.reach.sentToday }}</span>
-            <span class="unit">今日发送</span>
+            <span class="unit">{{ $t('auto.Index.29.ec5058') }}</span>
           </div>
-          <div class="capability-meta">9 渠道 / 限流</div>
+          <div class="capability-meta">{{ $t('auto.Index.30.07dc3a') }}</div>
         </el-card>
       </el-col>
     </el-row>
@@ -120,18 +120,18 @@
 
     <el-row :gutter="20" class="mt-20">
       <el-col :span="12">
-        <el-card header="意图分布（12 类）">
+        <el-card :header="$t('auto.Index.3.bb42b1')">
           <div ref="intentChart" style="height: 300px;"></div>
         </el-card>
       </el-col>
       <el-col :span="12">
-        <el-card header="LLM 路由（6 厂商 / 8 场景）">
+        <el-card :header="$t('auto.Index.4.306bd4')">
           <el-table :data="cockpit.llmRoutes" stripe>
-            <el-table-column prop="scenario" label="场景" />
-            <el-table-column prop="primary" label="首选" />
-            <el-table-column prop="fallback" label="备选" />
+            <el-table-column prop="scenario" :label="$t('auto.Index.5.c93165')" />
+            <el-table-column prop="primary" :label="$t('auto.Index.6.ac51ee')" />
+            <el-table-column prop="fallback" :label="$t('auto.Index.7.2cf8d0')" />
             <el-table-column prop="qps" label="QPS" />
-            <el-table-column prop="errorRate" label="错误率" />
+            <el-table-column prop="errorRate" :label="$t('auto.Index.8.0c8524')" />
           </el-table>
         </el-card>
       </el-col>
@@ -140,30 +140,30 @@
     
     <el-row :gutter="20" class="mt-20">
       <el-col :span="12">
-        <el-card header="9 触达渠道健康度">
+        <el-card :header="$t('auto.Index.9.47af0a')">
           <el-table :data="cockpit.channelHealth" stripe>
-            <el-table-column prop="channel" label="渠道" />
-            <el-table-column prop="qpsLimit" label="QPS 限" />
-            <el-table-column prop="qpsUsed" label="已用" />
-            <el-table-column label="状态">
+            <el-table-column prop="channel" :label="$t('auto.Index.10.ebee05')" />
+            <el-table-column prop="qpsLimit" :label="$t('auto.Index.11.e90619')" />
+            <el-table-column prop="qpsUsed" :label="$t('auto.Index.12.0cdb5e')" />
+            <el-table-column :label="$t('auto.Index.13.3fea7c')">
               <template #default="{ row }">
                 <el-tag :type="row.qpsUsed / row.qpsLimit > 0.8 ? 'warning' : 'success'">
                   {{ row.qpsUsed / row.qpsLimit > 0.8 ? '繁忙' : '正常' }}
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="errorRate" label="错误率" />
+            <el-table-column prop="errorRate" :label="$t('auto.Index.8.0c8524')" />
           </el-table>
         </el-card>
       </el-col>
       <el-col :span="12">
-        <el-card header="智能体工具使用 TOP 10">
+        <el-card :header="$t('auto.Index.14.4e1818')">
           <el-table :data="cockpit.topTools" stripe>
             <el-table-column type="index" label="#" width="50" />
-            <el-table-column prop="name" label="工具" />
-            <el-table-column prop="category" label="分类" />
-            <el-table-column prop="calls" label="调用次数" />
-            <el-table-column prop="avgLatency" label="平均延迟" />
+            <el-table-column prop="name" :label="$t('auto.Index.15.20dce2')" />
+            <el-table-column prop="category" :label="$t('auto.Index.16.d0771a')" />
+            <el-table-column prop="calls" :label="$t('auto.Index.17.00d5bd')" />
+            <el-table-column prop="avgLatency" :label="$t('auto.Index.18.a1df2e')" />
           </el-table>
         </el-card>
       </el-col>
@@ -173,11 +173,14 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted, nextTick } from 'vue'
+import { useI18n } from 'vue-i18n'
 import PageHeader from '@/components/PageHeader.vue'
 import { getSalesCockpit } from '@/api/cockpit'
 import LtcRatesApi from '@/api/ltcRates'
 import * as echarts from 'echarts'
 import { safeInit } from '@/utils/echarts'
+
+const { t } = useI18n()
 
 const intentChart = ref(null)
 const cockpit = ref({
@@ -196,9 +199,9 @@ const cockpit = ref({
  * 每率 {rate, numerator, denominator}。分子分母摆出来，AC① 对账直接可比。
  */
 const ltc = ref({
-  closureText: '—', closureMeta: '加载中…',
-  collectionText: '—', collectionMeta: '加载中…',
-  overdueText: '—', overdueMeta: '加载中…'
+  closureText: '—', closureMeta: t('auto.Index.31.fb4ca1'),
+  collectionText: '—', collectionMeta: t('auto.Index.31.fb4ca1'),
+  overdueText: '—', overdueMeta: t('auto.Index.31.fb4ca1')
 })
 
 function fmtRate(v) {
@@ -228,9 +231,9 @@ async function loadLtcRates() {
   } catch (err) {
     console.error('load ltc rates failed:', err)
     ltc.value = {
-      closureText: '—', closureMeta: '加载失败',
-      collectionText: '—', collectionMeta: '加载失败',
-      overdueText: '—', overdueMeta: '加载失败'
+      closureText: '—', closureMeta: t('auto.Index.32.866b79'),
+      collectionText: '—', collectionMeta: t('auto.Index.32.866b79'),
+      overdueText: '—', overdueMeta: t('auto.Index.32.866b79')
     }
   }
 }
@@ -269,7 +272,7 @@ function adaptCockpit(src) {
 
   // 意图分布 → echarts pie [{name, value}]
   const intentDistribution = (s.intentDistribution || []).map(r => ({
-    name: r.intent || '未分类',
+    name: r.intent || t('auto.Index.33.ecf7eb'),
     value: Number(r.cnt || 0)
   }))
 

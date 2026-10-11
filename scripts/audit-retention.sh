@@ -21,7 +21,7 @@ if [ "$1" = "--execute" ]; then EXECUTE=1; [ "$2" = "--days" ] && DAYS="${3:-90}
 PW=$(grep -m1 '^POSTGRES_PASSWORD=' /opt/hivemtk/.env | cut -d= -f2-)
 PSQL="docker exec -e PGPASSWORD=$PW mtk-postgres psql -U admin -p 8202 -d user_db -tAc"
 
-echo "== 审计保留清理（保留 ${DAYS} 天，execute=$EXECUTE）=="
+echo "== 审计保留清理（保留 ${DAYS} 天，execute=${EXECUTE}）=="
 for t in operation_logs mcp_call_audits mcp_credential_audit_logs; do
   cnt=$($PSQL "SELECT count(*) FROM $t WHERE created_at < now() - interval '$DAYS days';")
   echo "  $t: 将删 $cnt 行"

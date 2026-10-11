@@ -2,25 +2,25 @@
   <div class="app-container trace-monitor">
     <el-tabs v-model="activeTab" class="trace-tabs">
       
-      <el-tab-pane label="消息链路明细" name="trace">
+      <el-tab-pane :label="$t('auto.TraceMonitor.1.33668d')" name="trace">
         <el-form :inline="true" class="trace-query" @submit.prevent>
           <el-form-item label="Trace ID">
-            <el-input v-model.trim="form.trace_id" placeholder="单轮对话 trace_id" clearable style="width: 260px" />
+            <el-input v-model.trim="form.trace_id" :placeholder="$t('auto.TraceMonitor.2.7eac93')" clearable style="width: 260px" />
           </el-form-item>
-          <el-form-item label="会话 ID">
-            <el-input v-model.trim="form.conversation_id" placeholder="会话 conversation_id" clearable style="width: 260px" />
+          <el-form-item :label="$t('auto.TraceMonitor.3.427bc5')">
+            <el-input v-model.trim="form.conversation_id" :placeholder="$t('auto.TraceMonitor.4.8b6554')" clearable style="width: 260px" />
           </el-form-item>
-          <el-form-item label="消息 ID">
-            <el-input v-model.trim="form.msg_id" placeholder="消息 msg_id（反查）" clearable style="width: 220px" />
+          <el-form-item :label="$t('auto.TraceMonitor.5.795e00')">
+            <el-input v-model.trim="form.msg_id" :placeholder="$t('auto.TraceMonitor.6.bccd98')" clearable style="width: 220px" />
           </el-form-item>
-          <el-form-item label="渠道">
-            <el-select v-model="form.channel" placeholder="全部" clearable style="width: 160px">
+          <el-form-item :label="$t('auto.TraceMonitor.7.ebee05')">
+            <el-select v-model="form.channel" :placeholder="$t('auto.TraceMonitor.8.a8b0c2')" clearable style="width: 160px">
               <el-option v-for="c in channels" :key="c" :label="c" :value="c" />
             </el-select>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" :loading="loadingTree" @click="loadTree">查询</el-button>
-            <el-button @click="resetForm">重置</el-button>
+            <el-button type="primary" :loading="loadingTree" @click="loadTree">{{ $t('auto.TraceMonitor.62.bee912') }}</el-button>
+            <el-button @click="resetForm">{{ $t('auto.TraceMonitor.63.4b9c32') }}</el-button>
           </el-form-item>
         </el-form>
 
@@ -40,7 +40,7 @@
           <span class="trace-count">共 {{ tree.spans ? tree.spans.length : 0 }} 个 Span</span>
         </div>
 
-        <el-empty v-if="!loadingTree && !tree && !treeError" description="输入 Trace ID / 会话 ID 查询完整链路" />
+        <el-empty v-if="!loadingTree && !tree && !treeError" :description="$t('auto.TraceMonitor.9.e4417d')" />
         <el-skeleton v-else-if="loadingTree" :rows="8" animated />
 
         <div v-else class="trace-tree">
@@ -54,7 +54,7 @@
             >
               <div class="span-head" role="button" tabindex="0" :aria-expanded="!!expanded[item.id]" @click="toggle(item)" @keydown.enter.prevent="toggle(item)" @keydown.space.prevent="toggle(item)">
                 <span class="caret">{{ expanded[item.id] ? '▾' : '▸' }}</span>
-                <span class="span-kind kind-lifecycle">生命周期</span>
+                <span class="span-kind kind-lifecycle">{{ $t('auto.TraceMonitor.64.176808') }}</span>
                 <span class="span-title">{{ nodeLabel(item.node) }}</span>
                 <span class="span-node">{{ item.node }}</span>
                 <el-tag size="small" :type="statusType(item)">{{ statusText(item) }}</el-tag>
@@ -63,14 +63,14 @@
               </div>
               <div v-show="expanded[item.id]" class="span-body">
                 <el-descriptions :column="1" border size="small">
-                  <el-descriptions-item label="入参">
+                  <el-descriptions-item :label="$t('auto.TraceMonitor.10.c6b523')">
                     <pre class="code-block">{{ fmt(item.input) }}</pre>
                   </el-descriptions-item>
-                  <el-descriptions-item label="出参">
+                  <el-descriptions-item :label="$t('auto.TraceMonitor.11.bd30be')">
                     <pre class="code-block">{{ fmt(item.output) }}</pre>
                   </el-descriptions-item>
-                  <el-descriptions-item label="预期结果">{{ item.expected || '—' }}</el-descriptions-item>
-                  <el-descriptions-item v-if="item.abnormal || item.error" label="异常">
+                  <el-descriptions-item :label="$t('auto.TraceMonitor.12.384c09')">{{ item.expected || '—' }}</el-descriptions-item>
+                  <el-descriptions-item v-if="item.abnormal || item.error" :label="$t('auto.TraceMonitor.13.c195df')">
                     <span class="err-text">{{ item.error || '异常' }}</span>
                   </el-descriptions-item>
                 </el-descriptions>
@@ -81,7 +81,7 @@
             <el-card v-else-if="item._turn" class="span-card turn-card" shadow="hover">
               <div class="span-head" role="button" tabindex="0" :aria-expanded="!!expanded[item.turn.id]" @click="toggle(item.turn)" @keydown.enter.prevent="toggle(item.turn)" @keydown.space.prevent="toggle(item.turn)">
                 <span class="caret">{{ expanded[item.turn.id] ? '▾' : '▸' }}</span>
-                <span class="span-kind kind-turn">Agent 轮</span>
+                <span class="span-kind kind-turn">{{ $t('auto.TraceMonitor.65.35dcb8') }}</span>
                 <span class="span-title">第 {{ item.ti }} 轮</span>
                 <span v-if="item.turn.agent_id" class="span-node">{{ item.turn.agent_id }}</span>
                 <el-tag size="small" :type="statusType(item.turn)">{{ statusText(item.turn) }}</el-tag>
@@ -90,13 +90,13 @@
               </div>
               <div v-show="expanded[item.turn.id]" class="span-body">
                 <el-descriptions :column="1" border size="small">
-                  <el-descriptions-item label="入参">
+                  <el-descriptions-item :label="$t('auto.TraceMonitor.10.c6b523')">
                     <pre class="code-block">{{ fmt(item.turn.input) }}</pre>
                   </el-descriptions-item>
-                  <el-descriptions-item label="出参">
+                  <el-descriptions-item :label="$t('auto.TraceMonitor.11.bd30be')">
                     <pre class="code-block">{{ fmt(item.turn.output) }}</pre>
                   </el-descriptions-item>
-                  <el-descriptions-item v-if="item.turn.abnormal || item.turn.error" label="异常">
+                  <el-descriptions-item v-if="item.turn.abnormal || item.turn.error" :label="$t('auto.TraceMonitor.13.c195df')">
                     <span class="err-text">{{ item.turn.error || '异常' }}</span>
                   </el-descriptions-item>
                 </el-descriptions>
@@ -106,7 +106,7 @@
             
             <el-card v-else class="span-card tool-card" shadow="never">
               <div class="span-head">
-                <span class="span-kind kind-tool">工具</span>
+                <span class="span-kind kind-tool">{{ $t('auto.TraceMonitor.66.20dce2') }}</span>
                 <span class="span-title">{{ item.tool.tool_name }}</span>
                 <el-tag size="small" :type="statusType(item.tool)">{{ statusText(item.tool) }}</el-tag>
                 <span class="span-dur">{{ item.tool.duration_ms }} ms</span>
@@ -114,13 +114,13 @@
               </div>
               <div class="span-body">
                 <el-descriptions :column="1" border size="small">
-                  <el-descriptions-item label="入参">
+                  <el-descriptions-item :label="$t('auto.TraceMonitor.10.c6b523')">
                     <pre class="code-block">{{ fmt(item.tool.input) }}</pre>
                   </el-descriptions-item>
-                  <el-descriptions-item label="出参">
+                  <el-descriptions-item :label="$t('auto.TraceMonitor.11.bd30be')">
                     <pre class="code-block">{{ fmt(item.tool.output) }}</pre>
                   </el-descriptions-item>
-                  <el-descriptions-item v-if="item.tool.abnormal || item.tool.error" label="异常">
+                  <el-descriptions-item v-if="item.tool.abnormal || item.tool.error" :label="$t('auto.TraceMonitor.13.c195df')">
                     <span class="err-text">{{ item.tool.error || '异常' }}</span>
                   </el-descriptions-item>
                 </el-descriptions>
@@ -131,7 +131,7 @@
       </el-tab-pane>
 
       
-      <el-tab-pane label="业务健康概览" name="health">
+      <el-tab-pane :label="$t('auto.TraceMonitor.14.fce779')" name="health">
         <div class="stat-grid">
           <el-card v-for="s in healthStats" :key="s.label" shadow="hover" class="stat-card">
             <div class="stat-label">{{ s.label }}</div>
@@ -143,24 +143,24 @@
           v-if="health && ((health.stuck_reachable || 0) > 0 || (health.stuck_unreachable || 0) > 0 || (health.sync_gap_count || 0) > 0)"
           type="warning"
           :closable="false"
-          title="存在链路卡住或数据缺口，请见「异常」页"
+          :title="$t('auto.TraceMonitor.15.8bd911')"
           class="mt-12"
         />
       </el-tab-pane>
 
       
-      <el-tab-pane label="节点健康" name="node">
-        <el-alert v-if="nodeWindow" type="info" :closable="false" :title="'统计窗口：' + nodeWindow" class="mb-12" />
-        <el-table :data="nodeRows" border stripe size="small" empty-text="暂无数据">
-          <el-table-column prop="channel" label="渠道" width="160" />
-          <el-table-column prop="node" label="节点" width="200" />
-          <el-table-column prop="total" label="样本数" width="100" />
-          <el-table-column prop="avg_duration_ms" label="平均耗时(ms)" width="130" />
+      <el-tab-pane :label="$t('auto.TraceMonitor.16.cdf0e4')" name="node">
+        <el-alert v-if="nodeWindow" type="info" :closable="false" ::title="$t('auto.TraceMonitor.17.e9e4cd')" class="mb-12" />
+        <el-table :data="nodeRows" border stripe size="small" :empty-text="$t('auto.TraceMonitor.18.21efd8')">
+          <el-table-column prop="channel" :label="$t('auto.TraceMonitor.7.ebee05')" width="160" />
+          <el-table-column prop="node" :label="$t('auto.TraceMonitor.19.3bf3c0')" width="200" />
+          <el-table-column prop="total" :label="$t('auto.TraceMonitor.20.c1ce23')" width="100" />
+          <el-table-column prop="avg_duration_ms" :label="$t('auto.TraceMonitor.21.188b05')" width="130" />
           <el-table-column prop="p95_duration_ms" label="P95(ms)" width="120" />
-          <el-table-column label="异常率" width="120">
+          <el-table-column :label="$t('auto.TraceMonitor.22.ab80c8')" width="120">
             <template #default="{ row }">{{ (row.abnormal_rate * 100).toFixed(1) }}%</template>
           </el-table-column>
-          <el-table-column label="健康" width="100">
+          <el-table-column :label="$t('auto.TraceMonitor.23.fbc026')" width="100">
             <template #default="{ row }">
               <el-tag :type="row.abnormal_rate > 0.3 ? 'danger' : row.abnormal_rate > 0.05 ? 'warning' : 'success'" size="small">
                 {{ row.abnormal_rate > 0.3 ? '差' : row.abnormal_rate > 0.05 ? '中' : '良' }}
@@ -171,124 +171,124 @@
       </el-tab-pane>
 
       
-      <el-tab-pane label="端到端时延" name="latency">
-        <el-table :data="latencyRows" border stripe size="small" empty-text="暂无数据">
-          <el-table-column prop="channel" label="渠道" width="180" />
+      <el-tab-pane :label="$t('auto.TraceMonitor.24.b445ee')" name="latency">
+        <el-table :data="latencyRows" border stripe size="small" :empty-text="$t('auto.TraceMonitor.18.21efd8')">
+          <el-table-column prop="channel" :label="$t('auto.TraceMonitor.7.ebee05')" width="180" />
           <el-table-column prop="p50_ms" label="P50(ms)" width="140" />
           <el-table-column prop="p95_ms" label="P95(ms)" width="140" />
-          <el-table-column prop="sample_size" label="样本数" width="120" />
+          <el-table-column prop="sample_size" :label="$t('auto.TraceMonitor.20.c1ce23')" width="120" />
         </el-table>
       </el-tab-pane>
 
       
-      <el-tab-pane label="会话链路" name="lifecycle">
+      <el-tab-pane :label="$t('auto.TraceMonitor.25.63b892')" name="lifecycle">
         <el-form :inline="true" @submit.prevent>
-          <el-form-item label="会话 ID">
-            <el-input v-model.trim="lcForm.conversation_id" placeholder="会话 conversation_id" clearable style="width: 260px" />
+          <el-form-item :label="$t('auto.TraceMonitor.3.427bc5')">
+            <el-input v-model.trim="lcForm.conversation_id" :placeholder="$t('auto.TraceMonitor.4.8b6554')" clearable style="width: 260px" />
           </el-form-item>
           <el-form-item label="Trace ID">
-            <el-input v-model.trim="lcForm.trace_id" placeholder="单轮 trace_id" clearable style="width: 260px" />
+            <el-input v-model.trim="lcForm.trace_id" :placeholder="$t('auto.TraceMonitor.26.b0313a')" clearable style="width: 260px" />
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" :loading="loadingLc" @click="loadLifecycle">查询</el-button>
+            <el-button type="primary" :loading="loadingLc" @click="loadLifecycle">{{ $t('auto.TraceMonitor.62.bee912') }}</el-button>
           </el-form-item>
         </el-form>
-        <el-table :data="lifecycleRows" border stripe size="small" empty-text="暂无数据" class="mt-12">
+        <el-table :data="lifecycleRows" border stripe size="small" :empty-text="$t('auto.TraceMonitor.18.21efd8')" class="mt-12">
           <el-table-column prop="trace_id" label="Trace" width="180" />
-          <el-table-column prop="node" label="节点" width="180" />
-          <el-table-column prop="channel" label="渠道" width="120" />
-          <el-table-column prop="direction" label="方向" width="100" />
-          <el-table-column prop="duration_ms" label="耗时(ms)" width="100" />
-          <el-table-column label="状态" width="100">
+          <el-table-column prop="node" :label="$t('auto.TraceMonitor.19.3bf3c0')" width="180" />
+          <el-table-column prop="channel" :label="$t('auto.TraceMonitor.7.ebee05')" width="120" />
+          <el-table-column prop="direction" :label="$t('auto.TraceMonitor.27.a465db')" width="100" />
+          <el-table-column prop="duration_ms" :label="$t('auto.TraceMonitor.28.7f62c0')" width="100" />
+          <el-table-column :label="$t('auto.TraceMonitor.29.3fea7c')" width="100">
             <template #default="{ row }">
               <el-tag :type="row.abnormal ? 'danger' : 'success'" size="small">
                 {{ row.abnormal ? '异常' : '正常' }}
               </el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="expected" label="预期" min-width="160" />
-          <el-table-column prop="error" label="异常信息" min-width="160" show-overflow-tooltip />
+          <el-table-column prop="expected" :label="$t('auto.TraceMonitor.30.c633a3')" min-width="160" />
+          <el-table-column prop="error" :label="$t('auto.TraceMonitor.31.c8d506')" min-width="160" show-overflow-tooltip />
         </el-table>
       </el-tab-pane>
 
       
-      <el-tab-pane label="链路列表" name="traces">
-        <el-table :data="traceRows" border stripe size="small" empty-text="暂无数据">
+      <el-tab-pane :label="$t('auto.TraceMonitor.32.9b9378')" name="traces">
+        <el-table :data="traceRows" border stripe size="small" :empty-text="$t('auto.TraceMonitor.18.21efd8')">
           <el-table-column prop="trace_id" label="Trace" width="180" />
-          <el-table-column prop="conversation_id" label="会话" width="180" />
-          <el-table-column prop="channel" label="渠道" width="120" />
-          <el-table-column prop="node_count" label="节点数" width="90" />
-          <el-table-column label="异常数" width="90">
+          <el-table-column prop="conversation_id" :label="$t('auto.TraceMonitor.33.9a834e')" width="180" />
+          <el-table-column prop="channel" :label="$t('auto.TraceMonitor.7.ebee05')" width="120" />
+          <el-table-column prop="node_count" :label="$t('auto.TraceMonitor.34.93cb16')" width="90" />
+          <el-table-column :label="$t('auto.TraceMonitor.35.8eaadf')" width="90">
             <template #default="{ row }">
               <el-tag :type="row.abnormal_count > 0 ? 'danger' : 'info'" size="small">{{ row.abnormal_count }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="first_at" label="首节点" width="180" />
-          <el-table-column prop="last_at" label="末节点" width="180" />
-          <el-table-column label="操作" width="100" fixed="right">
+          <el-table-column prop="first_at" :label="$t('auto.TraceMonitor.36.935c21')" width="180" />
+          <el-table-column prop="last_at" :label="$t('auto.TraceMonitor.37.fea8c1')" width="180" />
+          <el-table-column :label="$t('auto.TraceMonitor.38.2b6bc0')" width="100" fixed="right">
             <template #default="{ row }">
-              <el-button type="primary" link @click="openTrace(row)">查看</el-button>
+              <el-button type="primary" link @click="openTrace(row)">{{ $t('auto.TraceMonitor.67.607e7a') }}</el-button>
             </template>
           </el-table-column>
         </el-table>
       </el-tab-pane>
 
       
-      <el-tab-pane label="异常" name="anomalies">
+      <el-tab-pane :label="$t('auto.TraceMonitor.13.c195df')" name="anomalies">
         <el-collapse v-if="anomaly" v-model="anomalyActive">
-          <el-collapse-item title="数据缺口（缺同步回执）" name="sync_gap">
-            <el-table :data="anomaly.sync_gap || []" border size="small" empty-text="无">
-              <el-table-column prop="conversation_id" label="会话" width="200" />
-              <el-table-column prop="channel" label="渠道" width="120" />
-              <el-table-column prop="message_count" label="缺口数" width="100" />
+          <el-collapse-item :title="$t('auto.TraceMonitor.39.4a7da2')" name="sync_gap">
+            <el-table :data="anomaly.sync_gap || []" border size="small" :empty-text="$t('auto.TraceMonitor.40.d81bb2')">
+              <el-table-column prop="conversation_id" :label="$t('auto.TraceMonitor.33.9a834e')" width="200" />
+              <el-table-column prop="channel" :label="$t('auto.TraceMonitor.7.ebee05')" width="120" />
+              <el-table-column prop="message_count" :label="$t('auto.TraceMonitor.41.99e6f4')" width="100" />
             </el-table>
           </el-collapse-item>
-          <el-collapse-item title="卡住（可直接送达）" name="stuck_reachable">
-            <el-table :data="anomaly.stuck_reachable || []" border size="small" empty-text="无">
-              <el-table-column prop="conversation_id" label="会话" width="200" />
-              <el-table-column prop="channel" label="渠道" width="120" />
-              <el-table-column prop="age_min" label="滞留(分)" width="100" />
+          <el-collapse-item :title="$t('auto.TraceMonitor.42.d152be')" name="stuck_reachable">
+            <el-table :data="anomaly.stuck_reachable || []" border size="small" :empty-text="$t('auto.TraceMonitor.40.d81bb2')">
+              <el-table-column prop="conversation_id" :label="$t('auto.TraceMonitor.33.9a834e')" width="200" />
+              <el-table-column prop="channel" :label="$t('auto.TraceMonitor.7.ebee05')" width="120" />
+              <el-table-column prop="age_min" :label="$t('auto.TraceMonitor.43.0e6c96')" width="100" />
             </el-table>
           </el-collapse-item>
-          <el-collapse-item title="卡住（不可达）" name="stuck_unreachable">
-            <el-table :data="anomaly.stuck_unreachable || []" border size="small" empty-text="无">
-              <el-table-column prop="conversation_id" label="会话" width="200" />
-              <el-table-column prop="channel" label="渠道" width="120" />
-              <el-table-column prop="age_min" label="滞留(分)" width="100" />
+          <el-collapse-item :title="$t('auto.TraceMonitor.44.d45211')" name="stuck_unreachable">
+            <el-table :data="anomaly.stuck_unreachable || []" border size="small" :empty-text="$t('auto.TraceMonitor.40.d81bb2')">
+              <el-table-column prop="conversation_id" :label="$t('auto.TraceMonitor.33.9a834e')" width="200" />
+              <el-table-column prop="channel" :label="$t('auto.TraceMonitor.7.ebee05')" width="120" />
+              <el-table-column prop="age_min" :label="$t('auto.TraceMonitor.43.0e6c96')" width="100" />
             </el-table>
           </el-collapse-item>
-          <el-collapse-item title="不可达（无激活会话）" name="unreachable">
-            <el-table :data="anomaly.unreachable || []" border size="small" empty-text="无">
-              <el-table-column prop="conversation_id" label="会话" width="200" />
-              <el-table-column prop="channel" label="渠道" width="120" />
+          <el-collapse-item :title="$t('auto.TraceMonitor.45.9726d0')" name="unreachable">
+            <el-table :data="anomaly.unreachable || []" border size="small" :empty-text="$t('auto.TraceMonitor.40.d81bb2')">
+              <el-table-column prop="conversation_id" :label="$t('auto.TraceMonitor.33.9a834e')" width="200" />
+              <el-table-column prop="channel" :label="$t('auto.TraceMonitor.7.ebee05')" width="120" />
             </el-table>
           </el-collapse-item>
-          <el-collapse-item title="节点异常" name="node_abnormal">
-            <el-table :data="anomaly.node_abnormal || []" border size="small" empty-text="无">
-              <el-table-column prop="channel" label="渠道" width="140" />
-              <el-table-column prop="node" label="节点" width="180" />
-              <el-table-column prop="abnormal_rate" label="异常率" width="120">
+          <el-collapse-item :title="$t('auto.TraceMonitor.46.209a8c')" name="node_abnormal">
+            <el-table :data="anomaly.node_abnormal || []" border size="small" :empty-text="$t('auto.TraceMonitor.40.d81bb2')">
+              <el-table-column prop="channel" :label="$t('auto.TraceMonitor.7.ebee05')" width="140" />
+              <el-table-column prop="node" :label="$t('auto.TraceMonitor.19.3bf3c0')" width="180" />
+              <el-table-column prop="abnormal_rate" :label="$t('auto.TraceMonitor.22.ab80c8')" width="120">
                 <template #default="{ row }">{{ (row.abnormal_rate * 100).toFixed(1) }}%</template>
               </el-table-column>
             </el-table>
           </el-collapse-item>
         </el-collapse>
-        <el-empty v-else description="暂无异常" />
+        <el-empty v-else :description="$t('auto.TraceMonitor.47.3a617d')" />
       </el-tab-pane>
 
       
-      <el-tab-pane label="自学习 / 知识库权重" name="learn">
+      <el-tab-pane :label="$t('auto.TraceMonitor.48.03059f')" name="learn">
         <div class="learn-toolbar">
           <el-form :inline="true" @submit.prevent>
-            <el-form-item label="扫描窗口(小时)">
+            <el-form-item :label="$t('auto.TraceMonitor.49.e54e95')">
               <el-input-number v-model="evalHours" :min="1" :max="168" :step="12" style="width: 140px" />
             </el-form-item>
-            <el-form-item label="单次条数">
+            <el-form-item :label="$t('auto.TraceMonitor.50.cbda81')">
               <el-input-number v-model="evalLimit" :min="1" :max="200" :step="10" style="width: 130px" />
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" :loading="triggerLoading" @click="triggerEval">手动触发评估</el-button>
-              <el-button :loading="triggerLoading" @click="refreshLearn">刷新</el-button>
+              <el-button type="primary" :loading="triggerLoading" @click="triggerEval">{{ $t('auto.TraceMonitor.68.34cc3b') }}</el-button>
+              <el-button :loading="triggerLoading" @click="refreshLearn">{{ $t('auto.TraceMonitor.69.694fc5') }}</el-button>
             </el-form-item>
           </el-form>
           <el-alert
@@ -301,47 +301,47 @@
           />
         </div>
 
-        <el-divider content-position="left">打分记录（LLM 对每条 trace 完整请求-响应链评分）</el-divider>
-        <el-table :data="evalLogs" border stripe size="small" empty-text="暂无打分记录，点上方「手动触发评估」" class="mt-12">
-          <el-table-column prop="created_at" label="评估时间" width="180" />
-          <el-table-column prop="channel" label="渠道" width="120" />
+        <el-divider content-position="left">{{ $t('auto.TraceMonitor.70.bd7701') }}</el-divider>
+        <el-table :data="evalLogs" border stripe size="small" :empty-text="$t('auto.TraceMonitor.51.670f26')" class="mt-12">
+          <el-table-column prop="created_at" :label="$t('auto.TraceMonitor.52.0ca2ff')" width="180" />
+          <el-table-column prop="channel" :label="$t('auto.TraceMonitor.7.ebee05')" width="120" />
           <el-table-column prop="trace_id" label="Trace" width="180" show-overflow-tooltip />
-          <el-table-column label="评分" width="80">
+          <el-table-column :label="$t('auto.TraceMonitor.53.108db1')" width="80">
             <template #default="{ row }">
               <el-tag :type="scoreType(row.score)" size="small">{{ row.score }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column label="质量" width="80">
+          <el-table-column :label="$t('auto.TraceMonitor.54.3a7170')" width="80">
             <template #default="{ row }">
               <el-tag :type="row.bad ? 'danger' : row.score >= 85 ? 'success' : 'warning'" size="small" effect="plain">
                 {{ row.bad ? '差' : row.score >= 85 ? '优' : '中' }}
               </el-tag>
             </template>
           </el-table-column>
-          <el-table-column label="维度" min-width="230">
+          <el-table-column :label="$t('auto.TraceMonitor.55.f29c54')" min-width="230">
             <template #default="{ row }">{{ dimText(row.dimensions) }}</template>
           </el-table-column>
-          <el-table-column label="原因" prop="reason" min-width="200" show-overflow-tooltip />
-          <el-table-column label="权重调整" width="130">
+          <el-table-column :label="$t('auto.TraceMonitor.56.41dfb0')" prop="reason" min-width="200" show-overflow-tooltip />
+          <el-table-column :label="$t('auto.TraceMonitor.57.b20aad')" width="130">
             <template #default="{ row }">
               <span v-if="adjustedList(row.adjusted_chunks).length">{{ adjustedList(row.adjusted_chunks).length }} 个 chunk</span>
-              <span v-else class="muted">无</span>
+              <span v-else class="muted">{{ $t('auto.TraceMonitor.40.d81bb2') }}</span>
             </template>
           </el-table-column>
         </el-table>
 
-        <el-divider content-position="left">知识库权重排行（运行时权重，偏离 1.0 最大者优先）</el-divider>
-        <el-table :data="weights" border stripe size="small" empty-text="暂无权重偏离（全部为默认 1.0）" class="mt-12">
+        <el-divider content-position="left">{{ $t('auto.TraceMonitor.71.5e24ab') }}</el-divider>
+        <el-table :data="weights" border stripe size="small" :empty-text="$t('auto.TraceMonitor.58.91336e')" class="mt-12">
           <el-table-column prop="id" label="Chunk ID" width="100" />
-          <el-table-column prop="content" label="内容" min-width="280" show-overflow-tooltip />
-          <el-table-column label="权重" width="120">
+          <el-table-column prop="content" :label="$t('auto.TraceMonitor.59.2d711b')" min-width="280" show-overflow-tooltip />
+          <el-table-column :label="$t('auto.TraceMonitor.60.4aac55')" width="120">
             <template #default="{ row }">
               <el-tag :type="row.weight < 1 ? 'danger' : row.weight > 1 ? 'success' : 'info'" size="small">
                 {{ Number(row.weight).toFixed(2) }}
               </el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="hit_count" label="命中次数" width="100" />
+          <el-table-column prop="hit_count" :label="$t('auto.TraceMonitor.61.e5852c')" width="100" />
         </el-table>
       </el-tab-pane>
     </el-tabs>
@@ -350,10 +350,13 @@
 
 <script setup>
 import { ref, reactive, computed, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import { MonitorApi as monitorApi } from '@/api/monitor'
 
 const channels = ['douyin', 'xiaohongshu', 'wechat', 'telegram', 'whatsapp', 'instagram', 'facebook', 'line', 'kuaishou', 'weibo']
+
+const { t } = useI18n()
 
 const activeTab = ref('trace')
 const form = reactive({ trace_id: '', conversation_id: '', msg_id: '', channel: '' })
@@ -384,12 +387,12 @@ const evalLimit = ref(20)
 const learningLoaded = ref(false)
 
 const NODE_LABEL = {
-  ingest: '上报接入',
+  ingest: t('auto.TraceMonitor.72.90375b'),
   ai_dispatch: 'AI 调度',
-  outbound_enqueue: '下发入队',
-  inbox_sync: '收件同步',
-  downlink_fetch: '下行拉取',
-  delivered_ack: '送达确认'
+  outbound_enqueue: t('auto.TraceMonitor.73.f2fc7d'),
+  inbox_sync: t('auto.TraceMonitor.74.72a37d'),
+  downlink_fetch: t('auto.TraceMonitor.75.182a50'),
+  delivered_ack: t('auto.TraceMonitor.76.aae560')
 }
 
 const nodeLabel = (n) => NODE_LABEL[n] || n || '—'
@@ -411,9 +414,9 @@ function statusType(sp) {
 }
 
 function statusText(sp) {
-  if (sp.abnormal || sp.status === 'abnormal' || sp.error) return '异常'
-  if (sp.status === 'failed') return '失败'
-  return '正常'
+  if (sp.abnormal || sp.status === 'abnormal' || sp.error) return t('auto.TraceMonitor.13.c195df')
+  if (sp.status === 'failed') return t('auto.TraceMonitor.77.acd5cb')
+  return t('auto.TraceMonitor.78.fd6e80')
 }
 
 function toggle(sp) {
@@ -451,16 +454,16 @@ const healthStats = computed(() => {
   const h = health.value
   if (!h) return []
   return [
-    { label: '入站速率', value: h.inbound_rate_per_min, unit: '条/分' },
-    { label: '出站速率', value: h.outbound_rate_per_min, unit: '条/分' },
-    { label: '待发送', value: h.pending_count, unit: '条', cls: h.pending_count > 0 ? 'warn' : '' },
-    { label: '最早待发滞留', value: h.oldest_pending_min, unit: '分', cls: h.oldest_pending_min > 10 ? 'warn' : '' },
-    { label: '已送达', value: h.delivered_count, unit: '条' },
-    { label: '失败', value: h.failed_count, unit: '条', cls: h.failed_count > 0 ? 'err' : '' },
-    { label: '数据缺口', value: h.sync_gap_count, unit: '个', cls: h.sync_gap_count > 0 ? 'warn' : '' },
-    { label: '卡住(可达)', value: h.stuck_reachable, unit: '个', cls: (h.stuck_reachable || 0) > 0 ? 'err' : '' },
-    { label: '卡住(不可达)', value: h.stuck_unreachable, unit: '个', cls: (h.stuck_unreachable || 0) > 0 ? 'err' : '' },
-    { label: '异常节点', value: h.abnormal_count, unit: '个', cls: h.abnormal_count > 0 ? 'warn' : '' }
+    { label: t('auto.TraceMonitor.79.727844'), value: h.inbound_rate_per_min, unit: t('auto.TraceMonitor.80.a356de') },
+    { label: t('auto.TraceMonitor.81.f1b6f8'), value: h.outbound_rate_per_min, unit: t('auto.TraceMonitor.80.a356de') },
+    { label: t('auto.TraceMonitor.82.57a3b6'), value: h.pending_count, unit: t('auto.TraceMonitor.83.cc1bac'), cls: h.pending_count > 0 ? 'warn' : '' },
+    { label: t('auto.TraceMonitor.84.4d8ddb'), value: h.oldest_pending_min, unit: t('auto.TraceMonitor.85.daf783'), cls: h.oldest_pending_min > 10 ? 'warn' : '' },
+    { label: t('auto.TraceMonitor.86.f87f48'), value: h.delivered_count, unit: t('auto.TraceMonitor.83.cc1bac') },
+    { label: t('auto.TraceMonitor.77.acd5cb'), value: h.failed_count, unit: t('auto.TraceMonitor.83.cc1bac'), cls: h.failed_count > 0 ? 'err' : '' },
+    { label: t('auto.TraceMonitor.87.4e564c'), value: h.sync_gap_count, unit: t('auto.TraceMonitor.88.930882'), cls: h.sync_gap_count > 0 ? 'warn' : '' },
+    { label: t('auto.TraceMonitor.89.1daba9'), value: h.stuck_reachable, unit: t('auto.TraceMonitor.88.930882'), cls: (h.stuck_reachable || 0) > 0 ? 'err' : '' },
+    { label: t('auto.TraceMonitor.90.e7dc4b'), value: h.stuck_unreachable, unit: t('auto.TraceMonitor.88.930882'), cls: (h.stuck_unreachable || 0) > 0 ? 'err' : '' },
+    { label: t('auto.TraceMonitor.91.a95f46'), value: h.abnormal_count, unit: t('auto.TraceMonitor.88.930882'), cls: h.abnormal_count > 0 ? 'warn' : '' }
   ]
 })
 
@@ -485,13 +488,13 @@ async function loadTree() {
     const res = await monitorApi.traceTree(params)
     tree.value = res || null
     if (!tree.value || !tree.value.spans || !tree.value.spans.length) {
-      treeError.value = '未找到链路数据'
+      treeError.value = t('auto.TraceMonitor.92.dba63f')
     } else {
       const firstAbn = tree.value.spans.find(s => isAbnormal(s));
       if (firstAbn) expanded[firstAbn.id] = true
     }
   } catch (e) {
-    treeError.value = (e && e.message) || '查询失败'
+    treeError.value = (e && e.message) || t('auto.TraceMonitor.93.0d66ed')
   } finally {
     loadingTree.value = false
   }
@@ -502,14 +505,14 @@ async function loadLifecycle() {
   if (lcForm.conversation_id) params.conversation_id = lcForm.conversation_id
   if (lcForm.trace_id) params.trace_id = lcForm.trace_id
   if (!params.conversation_id && !params.trace_id) {
-    ElMessage.warning('请填写会话 ID 或 Trace ID')
+    ElMessage.warning(t('auto.TraceMonitor.94.deaf34'))
     return
   }
   loadingLc.value = true
   try {
     lifecycleRows.value = await monitorApi.lifecycle(params)
   } catch (e) {
-    ElMessage.error((e && e.message) || '查询失败')
+    ElMessage.error((e && e.message) || t('auto.TraceMonitor.93.0d66ed'))
   } finally {
     loadingLc.value = false
   }
@@ -552,10 +555,10 @@ function parseJSON(v, fallback) {
 function dimText(dims) {
   const d = parseJSON(dims, {})
   const order = [
-    ['relevance', '相关性'],
-    ['accuracy', '准确'],
-    ['usefulness', '有用'],
-    ['safety', '合规']
+    ['relevance', t('auto.TraceMonitor.95.326c88')],
+    ['accuracy', t('auto.TraceMonitor.96.a8e10d')],
+    ['usefulness', t('auto.TraceMonitor.97.93fa21')],
+    ['safety', t('auto.TraceMonitor.98.6d266c')]
   ]
   return order.map(([k, label]) => `${label} ${d[k] != null ? d[k] : '—'}`).join(' · ')
 }
@@ -588,7 +591,7 @@ async function triggerEval() {
     await refreshLearn()
   } catch (e) {
     triggerMsgType.value = 'error'
-    triggerMsg.value = (e && e.message) || '触发评估失败'
+    triggerMsg.value = (e && e.message) || t('auto.TraceMonitor.99.b0b8b8')
   } finally {
     triggerLoading.value = false
   }

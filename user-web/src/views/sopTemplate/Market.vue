@@ -4,8 +4,8 @@
     <el-card class="header-card" shadow="never">
       <div class="header-content">
         <div>
-          <h2>SOP 模板市场</h2>
-          <p class="subtitle">浏览、搜索、一键导入预置 SOP 模板，覆盖 5 大业务场景</p>
+          <h2>{{ $t('auto.Market.13.0a638b') }}</h2>
+          <p class="subtitle">{{ $t('auto.Market.14.ab0f3e') }}</p>
         </div>
         <div class="header-stats">
           <el-tag type="info" size="large">
@@ -19,20 +19,20 @@
     
     <el-card shadow="never" class="filter-card">
       <el-form :inline="true" :model="filter" @submit.prevent>
-        <el-form-item label="关键词">
+        <el-form-item :label="$t('auto.Market.1.9699a5')">
           <el-input
             v-model="filter.keyword"
-            placeholder="搜索模板名称/描述"
+            :placeholder="$t('auto.Market.2.ca75e9')"
             clearable
             style="width: 220px"
             @keyup.enter="onSearch"
             @clear="onSearch"
           />
         </el-form-item>
-        <el-form-item label="业务场景">
+        <el-form-item :label="$t('auto.Market.3.d54920')">
           <el-select
             v-model="filter.category"
-            placeholder="全部场景"
+            :placeholder="$t('auto.Market.4.4f9a05')"
             clearable
             style="width: 180px"
             @change="onSearch"
@@ -50,7 +50,7 @@
             <el-icon><Search /></el-icon>
             搜索
           </el-button>
-          <el-button @click="resetFilter">重置</el-button>
+          <el-button @click="resetFilter">{{ $t('auto.Market.15.4b9c32') }}</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -59,7 +59,7 @@
     <div class="template-grid" v-loading="loading">
       <el-empty
         v-if="!loading && filteredTemplates.length === 0"
-        description="未找到匹配的模板"
+        :description="$t('auto.Market.5.5c9a55')"
       />
       <el-card
         v-for="tpl in filteredTemplates"
@@ -82,7 +82,7 @@
         <p class="tpl-desc">{{ tpl.description }}</p>
 
         <div class="tpl-scenarios">
-          <span class="scenario-label">适用场景：</span>
+          <span class="scenario-label">{{ $t('auto.Market.16.fa272f') }}</span>
           <el-tag
             v-for="sc in tpl.scenarios"
             :key="sc"
@@ -97,17 +97,17 @@
 
         <div class="tpl-stats">
           <div class="stat-item">
-            <span class="stat-label">意图</span>
+            <span class="stat-label">{{ $t('auto.Market.17.764aca') }}</span>
             <el-tag size="small" type="warning">{{ tpl.intent }}</el-tag>
           </div>
           <div class="stat-item">
-            <span class="stat-label">阶段</span>
+            <span class="stat-label">{{ $t('auto.Market.18.d31633') }}</span>
             <el-tag size="small" type="info">{{ tpl.stage }}</el-tag>
           </div>
         </div>
 
         <div class="tpl-preview">
-          <div class="preview-label">模板预览：</div>
+          <div class="preview-label">{{ $t('auto.Market.19.b638e6') }}</div>
           <pre class="preview-content">{{ truncate(tpl.template, 140) }}</pre>
         </div>
 
@@ -147,29 +147,29 @@
     
     <el-dialog
       v-model="detailVisible"
-      :title="currentTpl?.name || '模板详情'"
+      ::title="$t('auto.Market.6.013c0e')"
       width="720px"
       :close-on-click-modal="false"
     >
       <template v-if="currentTpl">
         <el-descriptions :column="2" border>
-          <el-descriptions-item label="模板编码">{{ currentTpl.code }}</el-descriptions-item>
-          <el-descriptions-item label="业务场景">
+          <el-descriptions-item :label="$t('auto.Market.7.9118f5')">{{ currentTpl.code }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.Market.3.d54920')">
             {{ getCategoryLabel(currentTpl.category) }}
           </el-descriptions-item>
-          <el-descriptions-item label="意图标签">{{ currentTpl.intent }}</el-descriptions-item>
-          <el-descriptions-item label="对话阶段">{{ currentTpl.stage }}</el-descriptions-item>
-          <el-descriptions-item label="优先级">{{ currentTpl.priority }}</el-descriptions-item>
-          <el-descriptions-item label="最低置信度">{{ (currentTpl.confidence * 100).toFixed(0) }}%</el-descriptions-item>
-          <el-descriptions-item label="描述" :span="2">
+          <el-descriptions-item :label="$t('auto.Market.8.269f95')">{{ currentTpl.intent }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.Market.9.73c766')">{{ currentTpl.stage }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.Market.10.ee8ecb')">{{ currentTpl.priority }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.Market.11.23d4eb')">{{ (currentTpl.confidence * 100).toFixed(0) }}%</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.Market.12.3bdd08')" :span="2">
             {{ currentTpl.description }}
           </el-descriptions-item>
         </el-descriptions>
 
-        <h4 style="margin-top: 16px">模板内容：</h4>
+        <h4 style="margin-top: 16px">{{ $t('auto.Market.20.7bcd31') }}</h4>
         <pre class="full-template">{{ currentTpl.template }}</pre>
 
-        <h4 style="margin-top: 16px">变量说明：</h4>
+        <h4 style="margin-top: 16px">{{ $t('auto.Market.21.ebbcc1') }}</h4>
         <ul class="vars-list">
           <li v-for="(v, idx) in currentTpl.vars" :key="idx">
             <code v-text="'{{' + v.name + '}}'"></code> - {{ v.desc }}
@@ -178,7 +178,7 @@
       </template>
 
       <template #footer>
-        <el-button @click="detailVisible = false">关闭</el-button>
+        <el-button @click="detailVisible = false">{{ $t('auto.Market.22.b15d91') }}</el-button>
         <el-button
           v-if="currentTpl && !currentTpl.imported"
           type="primary"
@@ -194,6 +194,7 @@
 
 <script setup>
 import { ref, markRaw, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import {
   Collection,
@@ -210,11 +211,13 @@ import {
 } from '@element-plus/icons-vue'
 import { sopTemplateApi } from '@/api/sopTemplate'
 
+const { t } = useI18n()
+
 const builtInTemplates = ref([
   {
     code: 'pre_sale_followup',
-    name: '售前跟进 SOP',
-    description: '客户首次咨询后的标准化跟进流程，覆盖介绍产品、了解需求、引导试用三个阶段',
+    name: t('auto.Market.23.82939b'),
+    description: t('auto.Market.24.141506'),
     category: 'presale',
     // icon 是 Vue 组件对象。builtInTemplates 是深响应 ref（下面还要就地写 t.imported，
     // 不能改用 shallowRef，否则模板 :116 的 v-if="tpl.imported" 会失去响应性），
@@ -229,7 +232,7 @@ const builtInTemplates = ref([
     confidence: 0.85,
     imported: false,
     _importing: false,
-    scenarios: ['新客咨询', '产品介绍', '需求摸底'],
+    scenarios: [t('auto.Market.25.a90015'), t('auto.Market.26.725965'), t('auto.Market.27.2d9990')],
     template: `您好 {{customer_name}}，感谢您对{{product_name}}的关注！
 我是{{agent_name}}，专注于为{{industry}}客户提供解决方案。
 
@@ -240,19 +243,19 @@ const builtInTemplates = ref([
 
 请问您方便本周{{time_slot}}安排一次 15 分钟的线上沟通吗？`,
     vars: [
-      { name: 'customer_name', desc: '客户称呼' },
-      { name: 'product_name', desc: '产品名称' },
-      { name: 'agent_name', desc: '客服名称' },
-      { name: 'industry', desc: '客户行业' },
-      { name: 'topic', desc: '咨询主题' },
-      { name: 'case_count', desc: '案例数' },
-      { name: 'time_slot', desc: '可预约时段' }
+      { name: 'customer_name', desc: t('auto.Market.28.d1bdc4') },
+      { name: 'product_name', desc: t('auto.Market.29.ff6855') },
+      { name: 'agent_name', desc: t('auto.Market.30.907f27') },
+      { name: 'industry', desc: t('auto.Market.31.71d93c') },
+      { name: 'topic', desc: t('auto.Market.32.faf193') },
+      { name: 'case_count', desc: t('auto.Market.33.bfe258') },
+      { name: 'time_slot', desc: t('auto.Market.34.c2b7ca') }
     ]
   },
   {
     code: 'aftersale_service',
-    name: '售后服务 SOP',
-    description: '客户报修/退款/咨询的标准响应流程，确保 1 小时首响应、24 小时解决方案',
+    name: t('auto.Market.35.3508de'),
+    description: t('auto.Market.36.aa747f'),
     category: 'aftersale',
     icon: markRaw(Service),
     color: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
@@ -262,7 +265,7 @@ const builtInTemplates = ref([
     confidence: 0.9,
     imported: false,
     _importing: false,
-    scenarios: ['问题反馈', '退换货', '技术咨询'],
+    scenarios: [t('auto.Market.37.4cd514'), t('auto.Market.38.296a31'), t('auto.Market.39.e80c6e')],
     template: `{{customer_name}}您好，我是售后客服{{agent_name}}。
 
 您反馈的{{issue_type}}问题，工单号 #{{ticket_id}}，我们已收到。
@@ -274,19 +277,19 @@ const builtInTemplates = ref([
 如有任何疑问，请直接回复本消息，我会第一时间跟进。
 您也可以拨打 400-xxx-xxxx 转工单号查询进度。`,
     vars: [
-      { name: 'customer_name', desc: '客户称呼' },
-      { name: 'agent_name', desc: '客服名称' },
-      { name: 'issue_type', desc: '问题类型' },
-      { name: 'ticket_id', desc: '工单号' },
-      { name: 'handler', desc: '处理人' },
-      { name: 'eta', desc: '预计解决时间' },
-      { name: 'compensation', desc: '补偿方案' }
+      { name: 'customer_name', desc: t('auto.Market.28.d1bdc4') },
+      { name: 'agent_name', desc: t('auto.Market.30.907f27') },
+      { name: 'issue_type', desc: t('auto.Market.40.d5a57c') },
+      { name: 'ticket_id', desc: t('auto.Market.41.769eb3') },
+      { name: 'handler', desc: t('auto.Market.42.4c8c9d') },
+      { name: 'eta', desc: t('auto.Market.43.5d4fd2') },
+      { name: 'compensation', desc: t('auto.Market.44.ca4f8f') }
     ]
   },
   {
     code: 'festival_marketing',
-    name: '节日营销 SOP',
-    description: '春节/双11/618 等大促节点的批量触达模板，集成优惠券 + 个性化推荐',
+    name: t('auto.Market.45.544297'),
+    description: t('auto.Market.46.a007b7'),
     category: 'marketing',
     icon: markRaw(Present),
     color: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
@@ -296,7 +299,7 @@ const builtInTemplates = ref([
     confidence: 0.75,
     imported: false,
     _importing: false,
-    scenarios: ['节日促销', '活动通知', '优惠提醒'],
+    scenarios: [t('auto.Market.47.506fb9'), t('auto.Market.48.d920c6'), t('auto.Market.49.92a663')],
     template: `🎉 {{festival_name}} 限时特惠！
 
 亲爱的{{customer_name}}：
@@ -312,18 +315,18 @@ const builtInTemplates = ref([
 
 祝您和家人{{festival_name}}快乐！`,
     vars: [
-      { name: 'festival_name', desc: '节日名' },
-      { name: 'customer_name', desc: '客户称呼' },
-      { name: 'threshold', desc: '满减门槛' },
-      { name: 'discount', desc: '减免金额' },
-      { name: 'coupon_code', desc: '优惠券码' },
-      { name: 'deadline', desc: '截止时间' }
+      { name: 'festival_name', desc: t('auto.Market.50.a07520') },
+      { name: 'customer_name', desc: t('auto.Market.28.d1bdc4') },
+      { name: 'threshold', desc: t('auto.Market.51.13d6df') },
+      { name: 'discount', desc: t('auto.Market.52.2fc887') },
+      { name: 'coupon_code', desc: t('auto.Market.53.390c08') },
+      { name: 'deadline', desc: t('auto.Market.54.468c54') }
     ]
   },
   {
     code: 'holiday_greeting',
-    name: '节假日问候 SOP',
-    description: '元旦/中秋/端午等传统节日的温情问候，提升品牌温度与客户粘性',
+    name: t('auto.Market.55.ffc9c1'),
+    description: t('auto.Market.56.2083e7'),
     category: 'marketing',
     icon: markRaw(Sunny),
     color: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
@@ -333,7 +336,7 @@ const builtInTemplates = ref([
     confidence: 0.7,
     imported: false,
     _importing: false,
-    scenarios: ['节日问候', '客户关怀', '品牌建设'],
+    scenarios: [t('auto.Market.57.1e61a8'), t('auto.Market.58.81f041'), t('auto.Market.59.6da69c')],
     template: `🌕 {{customer_name}}，{{holiday_name}}快乐！
 
 值此{{holiday_name}}佳节，{{company_name}}全体员工
@@ -347,16 +350,16 @@ const builtInTemplates = ref([
 
 ——{{company_name}}`,
     vars: [
-      { name: 'customer_name', desc: '客户称呼' },
-      { name: 'holiday_name', desc: '节日名' },
-      { name: 'company_name', desc: '公司名' },
-      { name: 'tip', desc: '节日小贴士' }
+      { name: 'customer_name', desc: t('auto.Market.28.d1bdc4') },
+      { name: 'holiday_name', desc: t('auto.Market.50.a07520') },
+      { name: 'company_name', desc: t('auto.Market.60.079627') },
+      { name: 'tip', desc: t('auto.Market.61.1fe1bd') }
     ]
   },
   {
     code: 'new_customer_conversion',
-    name: '新客转化 SOP',
-    description: '首次注册到首次付费的 7 日引导流程，含注册、激活、试用、付费 4 个关键触点',
+    name: t('auto.Market.62.da4d37'),
+    description: t('auto.Market.63.20bd1c'),
     category: 'presale',
     icon: markRaw(UserFilled),
     color: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
@@ -366,7 +369,7 @@ const builtInTemplates = ref([
     confidence: 0.8,
     imported: false,
     _importing: false,
-    scenarios: ['新客激活', '试用引导', '首单转化'],
+    scenarios: [t('auto.Market.64.78e92e'), t('auto.Market.65.d8eca8'), t('auto.Market.66.8500cb')],
     template: `Hi {{customer_name}}，欢迎加入{{product_name}}！
 
 我们注意到您已经完成了第{{step}}/4 步：
@@ -383,14 +386,14 @@ const builtInTemplates = ref([
 
 有任何问题随时找我，我是{{agent_name}}。`,
     vars: [
-      { name: 'customer_name', desc: '客户称呼' },
-      { name: 'product_name', desc: '产品名' },
-      { name: 'step', desc: '当前步骤 (1-4)' },
-      { name: 'progress_bar', desc: '进度条' },
-      { name: 'next_step', desc: '下一步建议' },
-      { name: 'discount', desc: '首单优惠' },
-      { name: 'next_action', desc: '下一步动作' },
-      { name: 'agent_name', desc: '客服名称' }
+      { name: 'customer_name', desc: t('auto.Market.28.d1bdc4') },
+      { name: 'product_name', desc: t('auto.Market.67.c6afa0') },
+      { name: 'step', desc: t('auto.Market.68.01a858') },
+      { name: 'progress_bar', desc: t('auto.Market.69.e2e33e') },
+      { name: 'next_step', desc: t('auto.Market.70.95d760') },
+      { name: 'discount', desc: t('auto.Market.71.65e9d3') },
+      { name: 'next_action', desc: t('auto.Market.72.38e09d') },
+      { name: 'agent_name', desc: t('auto.Market.30.907f27') }
     ]
   }
 ]);
@@ -401,9 +404,9 @@ const detailVisible = ref(false)
 const currentTpl = ref(null)
 
 const categories = [
-  { value: 'presale', label: '售前' },
-  { value: 'aftersale', label: '售后' },
-  { value: 'marketing', label: '营销' }
+  { value: 'presale', label: t('auto.Market.73.63d2ec') },
+  { value: 'aftersale', label: t('auto.Market.74.59bd68') },
+  { value: 'marketing', label: t('auto.Market.75.916801') }
 ]
 
 const filteredTemplates = computed(() => {
@@ -452,7 +455,7 @@ const loadImportedState = async () => {
       t.imported = importedCodes.has(t.code)
     })
   } catch (e) {
-    console.warn('加载已导入状态失败', e)
+    console.warn(t('auto.Market.76.e51224'), e)
   }
 };
 
@@ -487,7 +490,7 @@ const onImport = async (tpl) => {
       detailVisible.value = false
     }
   } catch (e) {
-    ElMessage.error('导入失败：' + (e?.message || '未知错误'))
+    ElMessage.error(t('auto.Market.77.013db1') + (e?.message || t('auto.Market.78.974e74')))
   } finally {
     tpl._importing = false
   }

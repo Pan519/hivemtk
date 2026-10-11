@@ -1,96 +1,96 @@
 <template>
   <div class="lead-mining-page">
     <el-tabs v-model="activeTab">
-      <el-tab-pane label="发掘设置" name="setting">
+      <el-tab-pane :label="$t('auto.Index.1.e67e0d')" name="setting">
         <el-card shadow="never">
           <el-form :model="form" label-width="120px" class="setting-form">
-            <el-form-item label="启用发掘">
+            <el-form-item :label="$t('auto.Index.2.9d4058')">
               <el-switch v-model="form.enabled" />
-              <span class="hint">关闭后不再对消息做线索判断（已发掘线索保留）</span>
+              <span class="hint">{{ $t('auto.Index.21.6e34ec') }}</span>
             </el-form-item>
 
-            <el-form-item label="监测渠道">
+            <el-form-item :label="$t('auto.Index.3.7d5c5d')">
               <el-checkbox-group v-model="form.channels">
                 <el-checkbox v-for="c in channelOptions" :key="c.value" :label="c.value">{{ c.label }}</el-checkbox>
               </el-checkbox-group>
-              <div class="hint">不勾选任何渠道 = 监测全部渠道（含 TG 群聊 / 抖音群聊的每条消息）</div>
+              <div class="hint">{{ $t('auto.Index.22.40f49f') }}</div>
             </el-form-item>
 
-            <el-form-item label="关键词">
+            <el-form-item :label="$t('auto.Index.4.9699a5')">
               <el-input
                 v-model="keywordsText"
                 type="textarea"
                 :rows="3"
-                placeholder="多个关键词用逗号或换行分隔，例如：报价, 购买, 代理, 合作"
+                :placeholder="$t('auto.Index.5.1b0dfa')"
               />
-              <div class="hint">命中任一关键词将提升线索意向分（仅供 LLM 参考，非唯一标准）</div>
+              <div class="hint">{{ $t('auto.Index.23.adb19e') }}</div>
             </el-form-item>
 
-            <el-form-item label="线索标签">
+            <el-form-item :label="$t('auto.Index.6.2f1ae5')">
               <el-input
                 v-model="tagsText"
                 type="textarea"
                 :rows="2"
-                placeholder="命中线索后打给客户的标签，逗号分隔，例如：高意向, 待跟进"
+                :placeholder="$t('auto.Index.7.75a182')"
               />
             </el-form-item>
 
-            <el-form-item label="线索要求">
+            <el-form-item :label="$t('auto.Index.8.12e04d')">
               <el-input
                 v-model="form.requirement"
                 type="textarea"
                 :rows="4"
-                placeholder="用自然语言描述「什么算线索」，例如：客户明确表达购买意向、询问价格/代理政策、留下联系方式等"
+                :placeholder="$t('auto.Index.9.46a3ee')"
               />
             </el-form-item>
 
-            <el-form-item label="意向分阈值">
+            <el-form-item :label="$t('auto.Index.10.bb3526')">
               <el-input-number v-model="form.min_intent_score" :min="0" :max="100" :step="5" />
-              <span class="hint">LLM 给出的意向分 ≥ 该值才记入线索库存</span>
+              <span class="hint">{{ $t('auto.Index.24.84f741') }}</span>
             </el-form-item>
 
-            <el-form-item label="指定模型">
-              <el-input v-model="form.model" placeholder="留空使用默认推理模型" style="max-width: 320px" />
+            <el-form-item :label="$t('auto.Index.11.92702b')">
+              <el-input v-model="form.model" :placeholder="$t('auto.Index.12.832d7c')" style="max-width: 320px" />
             </el-form-item>
 
             <el-form-item>
-              <el-button type="primary" :loading="saving" @click="onSave">保存设置</el-button>
-              <el-button @click="onReset">重置</el-button>
+              <el-button type="primary" :loading="saving" @click="onSave">{{ $t('auto.Index.25.4323be') }}</el-button>
+              <el-button @click="onReset">{{ $t('auto.Index.26.4b9c32') }}</el-button>
             </el-form-item>
           </el-form>
         </el-card>
       </el-tab-pane>
 
-      <el-tab-pane label="线索库" name="leads">
+      <el-tab-pane :label="$t('auto.Index.13.1e76b4')" name="leads">
         <el-card shadow="never">
           <div class="toolbar">
             <el-input
               v-model="kw"
-              placeholder="搜索摘要/名称"
+              :placeholder="$t('auto.Index.14.feb0a9')"
               clearable
               style="width: 240px"
               @input="loadLeads"
             />
-            <el-button type="primary" @click="loadLeads">刷新</el-button>
+            <el-button type="primary" @click="loadLeads">{{ $t('auto.Index.27.694fc5') }}</el-button>
           </div>
           <el-table :data="leads" v-loading="loading" stripe style="margin-top: 12px">
-            <el-table-column prop="name" label="名称" min-width="160" />
-            <el-table-column prop="desc" label="线索摘要" min-width="320" show-overflow-tooltip />
-            <el-table-column label="意向分" width="100">
+            <el-table-column prop="name" :label="$t('auto.Index.15.d7ec2d')" min-width="160" />
+            <el-table-column prop="desc" :label="$t('auto.Index.16.0de668')" min-width="320" show-overflow-tooltip />
+            <el-table-column :label="$t('auto.Index.17.c29004')" width="100">
               <template #default="{ row }">
                 <el-tag :type="row.intent_score >= 70 ? 'danger' : (row.intent_score >= 40 ? 'warning' : 'info')">
                   {{ row.intent_score }}
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column label="商机" width="90">
+            <el-table-column :label="$t('auto.Index.18.55290e')" width="90">
               <template #default="{ row }">
-                <el-tag v-if="row.is_opportunity === 1 || row.is_opportunity === true" type="success">高意向</el-tag>
+                <el-tag v-if="row.is_opportunity === 1 || row.is_opportunity === true" type="success">{{ $t('auto.Index.28.2601e2') }}</el-tag>
                 <span v-else>-</span>
               </template>
             </el-table-column>
-            <el-table-column prop="one_id" label="客户标识" min-width="160" show-overflow-tooltip />
-            <el-table-column label="发现时间" width="170">
+            <el-table-column prop="one_id" :label="$t('auto.Index.19.d40915')" min-width="160" show-overflow-tooltip />
+            <el-table-column :label="$t('auto.Index.20.2fe5f3')" width="170">
               <template #default="{ row }">{{ formatTime(row.create_time) }}</template>
             </el-table-column>
           </el-table>
@@ -110,9 +110,12 @@
 
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import { getLeadMiningConfig, saveLeadMiningConfig } from '@/api/leadMining'
 import { clueApi } from '@/api/clue'
+
+const { t } = useI18n()
 
 const activeTab = ref('setting')
 const saving = ref(false)
@@ -129,12 +132,12 @@ const form = reactive({
 const channelOptions = [
   { value: 'telegram', label: 'Telegram' },
   { value: 'whatsapp', label: 'WhatsApp' },
-  { value: 'douyin', label: '抖音' },
-  { value: 'xiaohongshu', label: '小红书' },
-  { value: 'wecom', label: '企业微信' },
-  { value: 'wechat', label: '微信' },
-  { value: 'xianyu', label: '闲鱼' },
-  { value: 'kuaishou', label: '快手' },
+  { value: 'douyin', label: t('auto.Index.29.277a98') },
+  { value: 'xiaohongshu', label: t('auto.Index.30.ae26bb') },
+  { value: 'wecom', label: t('auto.Index.31.ff17b9') },
+  { value: 'wechat', label: t('auto.Index.32.cfbf6f') },
+  { value: 'xianyu', label: t('auto.Index.33.9d4865') },
+  { value: 'kuaishou', label: t('auto.Index.34.f32c0a') },
   { value: 'tiktok', label: 'TikTok' },
   { value: 'instagram', label: 'Instagram' }
 ]
@@ -159,7 +162,7 @@ async function loadConfig() {
     keywordsText.value = (data.keywords || []).join(', ')
     tagsText.value = (data.tags || []).join(', ')
   } catch (e) {
-    ElMessage.error('加载配置失败：' + (e.message || e))
+    ElMessage.error(t('auto.Index.35.2f3675') + (e.message || e))
   }
 }
 
@@ -176,9 +179,9 @@ async function onSave() {
   }
   try {
     await saveLeadMiningConfig(payload)
-    ElMessage.success('保存成功')
+    ElMessage.success(t('auto.Index.36.3b1083'))
   } catch (e) {
-    ElMessage.error('保存失败：' + (e.message || e))
+    ElMessage.error(t('auto.Index.37.78d235') + (e.message || e))
   } finally {
     saving.value = false
   }
@@ -220,7 +223,7 @@ async function loadLeads() {
     leads.value = filtered
     total.value = data?.total ?? list.length
   } catch (e) {
-    ElMessage.error('加载线索失败：' + (e.message || e))
+    ElMessage.error(t('auto.Index.38.a2a651') + (e.message || e))
   } finally {
     loading.value = false
   }

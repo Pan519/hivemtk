@@ -32,38 +32,38 @@
         </template>
         <el-row :gutter="20">
           <el-col :span="12">
-            <el-form-item label="智能体编码" prop="agent_code">
-              <el-input v-model="form.agent_code" placeholder="如 sales_agent_01，唯一标识" :disabled="isEdit" />
+            <el-form-item :label="$t('auto.Edit.1.a708d3')" prop="agent_code">
+              <el-input v-model="form.agent_code" :placeholder="$t('auto.Edit.2.9b4fcd')" :disabled="isEdit" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="智能体名称" prop="name">
-              <el-input v-model="form.name" placeholder="请输入智能体名称" />
+            <el-form-item :label="$t('auto.Edit.3.63ecdf')" prop="name">
+              <el-input v-model="form.name" :placeholder="$t('auto.Edit.4.2272d5')" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="智能体类型" prop="agent_type">
+            <el-form-item :label="$t('auto.Edit.5.40d4da')" prop="agent_type">
               <el-select v-model="form.agent_type" style="width: 100%">
-                <el-option label="销售智能体" value="sales" />
-                <el-option label="客服智能体" value="customer_service" />
-                <el-option label="混合智能体" value="hybrid" />
+                <el-option :label="$t('auto.Edit.6.facb6b')" value="sales" />
+                <el-option :label="$t('auto.Edit.7.afaab1')" value="customer_service" />
+                <el-option :label="$t('auto.Edit.8.bac247')" value="hybrid" />
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="智能体模式" prop="agent_mode">
+            <el-form-item :label="$t('auto.Edit.9.28a44c')" prop="agent_mode">
               <el-select v-model="form.agent_mode" style="width: 100%">
-                <el-option label="被动响应（用户问才答）" value="passive" />
-                <el-option label="主动出击（会主动推荐/推送）" value="active" />
+                <el-option :label="$t('auto.Edit.10.635fa1')" value="passive" />
+                <el-option :label="$t('auto.Edit.11.691800')" value="active" />
               </el-select>
-              <div class="form-tip">被动=客服风格只响应提问；主动=销售风格会主动推荐商品/活动/逼单</div>
+              <div class="form-tip">{{ $t('auto.Edit.66.c5821b') }}</div>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="资产包">
+            <el-form-item :label="$t('auto.Edit.12.673c20')">
               <el-select
                 v-model="form.asset_bundle_id"
-                placeholder="选择资产包（含话术/SOP/FAQ）"
+                :placeholder="$t('auto.Edit.13.3fc8e5')"
                 clearable
                 filterable
                 style="width: 100%"
@@ -78,17 +78,17 @@
                   <span style="float: right; color: #8492a6; font-size: 12px">{{ b.industry || '' }}</span>
                 </el-option>
               </el-select>
-              <div class="form-tip">资产包包含该智能体的话术模板、SOP流程、FAQ知识库。创建时绑定，运行时自动注入 system prompt。</div>
+              <div class="form-tip">{{ $t('auto.Edit.67.34fb9a') }}</div>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="头像URL">
-              <el-input v-model="form.avatar" placeholder="头像图片URL" />
+            <el-form-item :label="$t('auto.Edit.14.21aa15')">
+              <el-input v-model="form.avatar" :placeholder="$t('auto.Edit.15.1ff94e')" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="内部语言" prop="internal_language">
-              <el-select v-model="form.internal_language" placeholder="请选择内部语言" style="width: 100%">
+            <el-form-item :label="$t('auto.Edit.16.573278')" prop="internal_language">
+              <el-select v-model="form.internal_language" :placeholder="$t('auto.Edit.17.5c0be5')" style="width: 100%">
                 <el-option
                   v-for="lang in internalLanguageOptions"
                   :key="lang.value"
@@ -96,12 +96,12 @@
                   :value="lang.value"
                 />
               </el-select>
-              <div class="form-tip">商户维护知识库使用的语言，影响内部工具处理精度。默认中文。</div>
+              <div class="form-tip">{{ $t('auto.Edit.68.ff8ccf') }}</div>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="目标语言" prop="target_language">
-              <el-select v-model="form.target_language" placeholder="请选择目标语言" clearable style="width: 100%">
+            <el-form-item :label="$t('auto.Edit.18.129d05')" prop="target_language">
+              <el-select v-model="form.target_language" :placeholder="$t('auto.Edit.19.c91ca0')" clearable style="width: 100%">
                 <el-option
                   v-for="lang in targetLanguageOptions"
                   :key="lang.value"
@@ -109,12 +109,12 @@
                   :value="lang.value"
                 />
               </el-select>
-              <div class="form-tip">智能体对外输出语言。空表示跟随内部语言（同语种零开销）。</div>
+              <div class="form-tip">{{ $t('auto.Edit.69.7caf6c') }}</div>
             </el-form-item>
           </el-col>
           <el-col :span="24">
-            <el-form-item label="描述">
-              <el-input v-model="form.description" type="textarea" :rows="2" placeholder="智能体用途说明" />
+            <el-form-item :label="$t('auto.Edit.20.3bdd08')">
+              <el-input v-model="form.description" type="textarea" :rows="2" :placeholder="$t('auto.Edit.21.8a648a')" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -123,26 +123,26 @@
       
       <el-card shadow="never" class="section-card">
         <template #header>
-          <div class="card-title"><el-icon><UserFilled /></el-icon> 人设配置</div>
+          <div class="card-title"><el-icon><UserFilled /></el-icon>{{ $t('auto.Edit.70.d4ffdd') }}</div>
         </template>
-        <el-form-item label="人设描述" prop="persona">
+        <el-form-item :label="$t('auto.Edit.22.5749e0')" prop="persona">
           <el-input
             v-model="form.persona"
             type="textarea"
             :rows="4"
-            placeholder="智能体的角色设定，如：你是一名资深的汽车销售顾问，擅长挖掘客户需求..."
+            :placeholder="$t('auto.Edit.23.7d36b6')"
           />
         </el-form-item>
-        <el-form-item label="系统提示词">
+        <el-form-item :label="$t('auto.Edit.24.cbdb6b')">
           <el-input
             v-model="form.system_prompt"
             type="textarea"
             :rows="4"
-            placeholder="LLM 系统提示词，附加在人设之上微调行为"
+            :placeholder="$t('auto.Edit.25.2d9aef')"
           />
         </el-form-item>
-        <el-form-item label="欢迎语">
-          <el-input v-model="form.greeting" placeholder="会话开始时的欢迎语" />
+        <el-form-item :label="$t('auto.Edit.26.45eddf')">
+          <el-input v-model="form.greeting" :placeholder="$t('auto.Edit.27.55c6ec')" />
         </el-form-item>
       </el-card>
 
@@ -156,7 +156,7 @@
             </el-button>
           </div>
         </template>
-        <el-form-item label="挂载知识库">
+        <el-form-item :label="$t('auto.Edit.28.7f2c76')">
           <el-tree-select
             v-model="form.kb_ids"
             :data="kbTree"
@@ -171,10 +171,10 @@
             clearable
             filterable
             :default-expand-all="false"
-            placeholder="选择要挂载的知识库（按类型分组）"
+            :placeholder="$t('auto.Edit.29.76bfbd')"
             style="width: 100%"
             :render-after-expand="false"
-            :empty-text="loadingKB ? '加载中...' : '暂无可挂载的知识库，点击右上角【加载知识库】'"
+            ::empty-text="$t('auto.Edit.30.9e348e')"
           />
           <div class="form-tip">
             树形结构按 RAG / FAQ / SOP 三个顶层分组。挂载知识库后，对话中自动应用该 KB 下所有文档 / FAQ / SOP 模板。
@@ -183,13 +183,13 @@
         </el-form-item>
         <el-row :gutter="20">
           <el-col :span="8">
-            <el-form-item label="RAG产品 (旧)">
+            <el-form-item :label="$t('auto.Edit.31.572770')">
               <el-select
                 v-model="form.rag_product_ids"
                 multiple
                 filterable
                 clearable
-                placeholder="兼容旧字段"
+                :placeholder="$t('auto.Edit.32.270bdc')"
                 style="width: 100%"
               >
                 <el-option
@@ -202,13 +202,13 @@
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="FAQ (旧)">
+            <el-form-item :label="$t('auto.Edit.33.e93654')">
               <el-select
                 v-model="form.faq_entry_ids"
                 multiple
                 filterable
                 clearable
-                placeholder="兼容旧字段"
+                :placeholder="$t('auto.Edit.32.270bdc')"
                 style="width: 100%"
               >
                 <el-option
@@ -221,13 +221,13 @@
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="SOP (旧)">
+            <el-form-item :label="$t('auto.Edit.34.79e06e')">
               <el-select
                 v-model="form.sop_template_ids"
                 multiple
                 filterable
                 clearable
-                placeholder="兼容旧字段"
+                :placeholder="$t('auto.Edit.32.270bdc')"
                 style="width: 100%"
               >
                 <el-option
@@ -245,15 +245,15 @@
       
       <el-card shadow="never" class="section-card">
         <template #header>
-          <div class="card-title"><el-icon><Connection /></el-icon> SOP 挂载</div>
+          <div class="card-title"><el-icon><Connection /></el-icon>{{ $t('auto.Edit.71.2932d0') }}</div>
         </template>
-        <el-form-item label="SOP列表">
+        <el-form-item :label="$t('auto.Edit.35.9a78fb')">
           <el-select
             v-model="form.sop_ids"
             multiple
             filterable
             clearable
-            placeholder="选择要挂载的 SOP 流程"
+            :placeholder="$t('auto.Edit.36.6354b2')"
             style="width: 100%"
           >
             <el-option
@@ -269,15 +269,15 @@
       
       <el-card shadow="never" class="section-card">
         <template #header>
-          <div class="card-title"><el-icon><ChatLineSquare /></el-icon> 话术库挂载</div>
+          <div class="card-title"><el-icon><ChatLineSquare /></el-icon>{{ $t('auto.Edit.72.6399cc') }}</div>
         </template>
-        <el-form-item label="话术模板">
+        <el-form-item :label="$t('auto.Edit.37.d49563')">
           <el-select
             v-model="form.script_library_ids"
             multiple
             filterable
             clearable
-            placeholder="选择要挂载的话术模板"
+            :placeholder="$t('auto.Edit.38.57869c')"
             style="width: 100%"
           >
             <el-option
@@ -293,11 +293,11 @@
       
       <el-card shadow="never" class="section-card">
         <template #header>
-          <div class="card-title"><el-icon><Cpu /></el-icon> LLM 配置</div>
+          <div class="card-title"><el-icon><Cpu /></el-icon>{{ $t('auto.Edit.73.742a08') }}</div>
         </template>
         <el-row :gutter="20">
           <el-col :span="12">
-            <el-form-item label="LLM模型">
+            <el-form-item :label="$t('auto.Edit.39.248d0f')">
               <el-select v-model="form.llm_model" style="width: 100%">
                 <el-option label="gpt-4o-mini" value="gpt-4o-mini" />
                 <el-option label="gpt-4o" value="gpt-4o" />
@@ -311,12 +311,12 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="最大Token">
+            <el-form-item :label="$t('auto.Edit.40.b20b40')">
               <el-input-number v-model="form.max_tokens" :min="100" :max="8192" :step="100" style="width: 100%" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="温度">
+            <el-form-item :label="$t('auto.Edit.41.c9bf0b')">
               <el-slider v-model="form.temperature" :min="0" :max="2" :step="0.1" show-input />
             </el-form-item>
           </el-col>
@@ -326,12 +326,12 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="频率惩罚">
+            <el-form-item :label="$t('auto.Edit.42.b8f0c7')">
               <el-slider v-model="form.frequency_penalty" :min="-2" :max="2" :step="0.1" show-input />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="存在惩罚">
+            <el-form-item :label="$t('auto.Edit.43.ca5ae4')">
               <el-slider v-model="form.presence_penalty" :min="-2" :max="2" :step="0.1" show-input />
             </el-form-item>
           </el-col>
@@ -341,31 +341,31 @@
       
       <el-card shadow="never" class="section-card">
         <template #header>
-          <div class="card-title"><el-icon><Open /></el-icon> 销售引擎开关</div>
+          <div class="card-title"><el-icon><Open /></el-icon>{{ $t('auto.Edit.74.8a79d6') }}</div>
         </template>
         <el-row :gutter="20">
           <el-col :span="8">
-            <el-form-item label="RAG检索">
+            <el-form-item :label="$t('auto.Edit.44.9a39a6')">
               <el-switch v-model="form.enable_rag" />
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="话术匹配">
+            <el-form-item :label="$t('auto.Edit.45.b45459')">
               <el-switch v-model="form.enable_script_match" />
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="拟人化润色">
+            <el-form-item :label="$t('auto.Edit.46.cf9838')">
               <el-switch v-model="form.enable_humanize_polish" />
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="内容审核">
+            <el-form-item :label="$t('auto.Edit.47.8d8c65')">
               <el-switch v-model="form.enable_content_audit" />
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="销冠话术">
+            <el-form-item :label="$t('auto.Edit.48.655e22')">
               <el-switch v-model="form.enable_playbook" />
             </el-form-item>
           </el-col>
@@ -375,7 +375,7 @@
       
       <el-card shadow="never" class="section-card">
         <template #header>
-          <div class="card-title"><el-icon><Setting /></el-icon> 高级参数</div>
+          <div class="card-title"><el-icon><Setting /></el-icon>{{ $t('auto.Edit.75.4bcc78') }}</div>
         </template>
         <el-row :gutter="20">
           <el-col :span="8">
@@ -384,12 +384,12 @@
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="置信度阈值">
+            <el-form-item :label="$t('auto.Edit.49.bd493e')">
               <el-slider v-model="form.confidence_threshold" :min="0" :max="1" :step="0.05" show-input />
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="AI连续回复上限">
+            <el-form-item :label="$t('auto.Edit.50.755a7c')">
               <el-input-number v-model="form.max_ai_consecutive" :min="1" :max="50" :step="1" style="width: 100%" />
             </el-form-item>
           </el-col>
@@ -398,7 +398,7 @@
 
       
       <div class="footer-actions">
-        <el-button @click="goBack">取消</el-button>
+        <el-button @click="goBack">{{ $t('auto.Edit.76.625fb2') }}</el-button>
         <el-button type="primary" :loading="saving" @click="onSave">
           <el-icon><Check /></el-icon>
           {{ isEdit ? '保存更新' : '创建智能体' }}
@@ -407,20 +407,20 @@
     </el-form>
 
     
-    <el-dialog v-model="testDialogVisible" title="测试智能体" width="760px" top="6vh">
+    <el-dialog v-model="testDialogVisible" :title="$t('auto.Edit.51.353e8d')" width="760px" top="6vh">
       <el-form :model="testForm" label-width="90px">
-        <el-form-item label="智能体">
+        <el-form-item :label="$t('auto.Edit.52.72fbb9')">
           <el-input :model-value="form.name || form.agent_code" disabled />
         </el-form-item>
-        <el-form-item label="客户ID">
-          <el-input v-model="testForm.customer_id" placeholder="请输入客户ID（可选）" />
+        <el-form-item :label="$t('auto.Edit.53.1c2ecf')">
+          <el-input v-model="testForm.customer_id" :placeholder="$t('auto.Edit.54.7bfb0d')" />
         </el-form-item>
-        <el-form-item label="消息内容" required>
+        <el-form-item :label="$t('auto.Edit.55.b87b77')" required>
           <el-input
             v-model="testForm.message"
             type="textarea"
             :rows="3"
-            placeholder="请输入要测试的客户消息"
+            :placeholder="$t('auto.Edit.56.cc633c')"
           />
         </el-form-item>
         <el-form-item>
@@ -428,20 +428,20 @@
             <el-icon><VideoPlay /></el-icon>
             执行测试
           </el-button>
-          <el-button @click="testResult = null">清空结果</el-button>
+          <el-button @click="testResult = null">{{ $t('auto.Edit.77.7e61ac') }}</el-button>
         </el-form-item>
       </el-form>
 
       <template v-if="testResult">
-        <el-divider content-position="left">测试结果</el-divider>
+        <el-divider content-position="left">{{ $t('auto.Edit.78.c6c9da') }}</el-divider>
         <el-descriptions :column="2" border size="small">
-          <el-descriptions-item label="回复内容" :span="2">
+          <el-descriptions-item :label="$t('auto.Edit.57.fab08d')" :span="2">
             <div class="reply-box">{{ testResult.reply || '-' }}</div>
           </el-descriptions-item>
-          <el-descriptions-item label="LLM模型">{{ testResult.llm_model || '-' }}</el-descriptions-item>
-          <el-descriptions-item label="耗时(ms)">{{ testResult.latency_ms || 0 }}</el-descriptions-item>
-          <el-descriptions-item label="消耗Token">{{ testResult.cost_tokens || 0 }}</el-descriptions-item>
-          <el-descriptions-item label="是否转人工">
+          <el-descriptions-item :label="$t('auto.Edit.39.248d0f')">{{ testResult.llm_model || '-' }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.Edit.58.7f62c0')">{{ testResult.latency_ms || 0 }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.Edit.59.8f5f4e')">{{ testResult.cost_tokens || 0 }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.Edit.60.39e5fb')">
             <el-tag :type="testResult.transferred_to_human ? 'warning' : 'success'" size="small">
               {{ testResult.transferred_to_human ? '是' : '否' }}
             </el-tag>
@@ -449,20 +449,20 @@
           </el-descriptions-item>
         </el-descriptions>
 
-        <div class="chain-title">9步链路日志</div>
+        <div class="chain-title">{{ $t('auto.Edit.79.cda843') }}</div>
         <el-table :data="testResult.steps || []" stripe size="small" border>
           <el-table-column type="index" label="#" width="50" align="center" />
-          <el-table-column prop="step" label="步骤" min-width="160" show-overflow-tooltip />
-          <el-table-column label="状态" width="90" align="center">
+          <el-table-column prop="step" :label="$t('auto.Edit.61.52b365')" min-width="160" show-overflow-tooltip />
+          <el-table-column :label="$t('auto.Edit.62.3fea7c')" width="90" align="center">
             <template #default="{ row }">
               <el-tag :type="getStepStatusType(row.status)" size="small">{{ row.status || '-' }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column label="耗时(ms)" width="100" align="center">
+          <el-table-column :label="$t('auto.Edit.58.7f62c0')" width="100" align="center">
             <template #default="{ row }">{{ row.latency_ms || 0 }}</template>
           </el-table-column>
-          <el-table-column prop="detail" label="详情" min-width="200" show-overflow-tooltip />
-          <el-table-column prop="error" label="错误" min-width="160" show-overflow-tooltip>
+          <el-table-column prop="detail" :label="$t('auto.Edit.63.f26225')" min-width="200" show-overflow-tooltip />
+          <el-table-column prop="error" :label="$t('auto.Edit.64.7030ff')" min-width="160" show-overflow-tooltip>
             <template #default="{ row }">
               <span v-if="row.error" class="error-text">{{ row.error }}</span>
               <span v-else>-</span>
@@ -470,7 +470,7 @@
           </el-table-column>
         </el-table>
       </template>
-      <el-empty v-else-if="!testing" description="执行测试后显示结果" :image-size="80" />
+      <el-empty v-else-if="!testing" :description="$t('auto.Edit.65.5910a5')" :image-size="80" />
     </el-dialog>
   </div>
 </template>
@@ -479,6 +479,7 @@
 import i18n from '@/i18n'
 
 import { ref, reactive, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import {
@@ -501,6 +502,8 @@ const targetLanguageOptions = TARGET_LANGUAGE_OPTIONS
 
 const route = useRoute()
 const router = useRouter()
+
+const { t } = useI18n()
 
 const formRef = ref();
 const pageLoading = ref(false)
@@ -559,17 +562,17 @@ const form = reactive(getDefaultForm())
 
 const rules = {
   agent_code: [
-    { required: true, message: i18n.global.t('请输入智能体编码'), trigger: 'blur' },
-    { pattern: /^[a-zA-Z0-9_-]+$/, message: i18n.global.t('编码仅支持字母、数字、下划线、连字符'), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.Edit.80.f817e5')), trigger: 'blur' },
+    { pattern: /^[a-zA-Z0-9_-]+$/, message: i18n.global.t(t('auto.Edit.81.2777ef')), trigger: 'blur' }
   ],
   name: [
-    { required: true, message: i18n.global.t('请输入智能体名称'), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.Edit.4.2272d5')), trigger: 'blur' }
   ],
   agent_type: [
-    { required: true, message: i18n.global.t('请选择智能体类型'), trigger: 'change' }
+    { required: true, message: i18n.global.t(t('auto.Edit.82.0251af')), trigger: 'change' }
   ],
   persona: [
-    { required: true, message: i18n.global.t('请输入人设描述'), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.Edit.83.984951')), trigger: 'blur' }
   ]
 };
 
@@ -590,7 +593,7 @@ const loadRagProducts = async () => {
     const res = await ragProductConfigAPI.getRagProducts({ page: 1, page_size: 100 })
     ragProductOptions.value = res?.items || res?.list || []
   } catch (e) {
-    console.warn('加载RAG产品列表失败：', e?.message);
+    console.warn(t('auto.Edit.84.f33732'), e?.message);
   }
 };
 
@@ -599,7 +602,7 @@ const loadSopOptions = async () => {
     const res = await sopApi.list({ page: 1, page_size: 100 })
     sopOptions.value = res?.list || res?.items || []
   } catch (e) {
-    console.warn('加载SOP列表失败：', e?.message)
+    console.warn(t('auto.Edit.85.c6f24a'), e?.message)
   }
 }
 
@@ -608,7 +611,7 @@ const loadScriptOptions = async () => {
     const res = await getScriptTemplateList({ page: 1, page_size: 100 })
     scriptOptions.value = res?.list || res?.items || []
   } catch (e) {
-    console.warn('加载话术模板列表失败：', e?.message)
+    console.warn(t('auto.Edit.86.2b96b2'), e?.message)
   }
 }
 
@@ -617,7 +620,7 @@ const loadAssetBundles = async () => {
     const res = await listBundles({ page: 1, page_size: 200, status: 'active' })
     assetBundleOptions.value = res?.list || res?.items || []
   } catch (e) {
-    console.warn('加载资产包列表失败：', e?.message)
+    console.warn(t('auto.Edit.87.b1e8a6'), e?.message)
   }
 }
 
@@ -626,7 +629,7 @@ const loadFaqOptions = async () => {
     const res = await faqApi.list({ page: 1, page_size: 200 })
     faqOptions.value = res?.list || []
   } catch (e) {
-    console.warn('加载 FAQ 列表失败：', e?.message)
+    console.warn(t('auto.Edit.88.db4e4c'), e?.message)
   }
 }
 
@@ -635,7 +638,7 @@ const loadSopTemplateOptions = async () => {
     const res = await sopTemplateApi.list({ page: 1, page_size: 100 })
     sopTemplateOptions.value = res?.list || []
   } catch (e) {
-    console.warn('加载 SOP 模板列表失败：', e?.message)
+    console.warn(t('auto.Edit.89.3a1ee2'), e?.message)
   }
 }
 
@@ -672,13 +675,13 @@ const buildKBTree = async () => {
       tree.push({ id: 'kb-type-sop', label: `SOP 模板库 (${sopChildren.length})`, children: sopChildren, isLeaf: false, disabled: true, kb_type: 'sop' })
     }
     if (tree.length === 0) {
-      tree.push({ id: 'kb-empty', label: '暂未配置任何知识库', isLeaf: true, disabled: true });
+      tree.push({ id: 'kb-empty', label: t('auto.Edit.90.6f7142'), isLeaf: true, disabled: true });
     }
     kbTree.value = tree
     return tree
   } catch (e) {
-    console.warn('加载知识库列表失败：', e?.message)
-    kbTree.value = [{ id: 'kb-error', label: '加载失败：' + (e?.message || '未知错误'), isLeaf: true, disabled: true }]
+    console.warn(t('auto.Edit.91.fc9815'), e?.message)
+    kbTree.value = [{ id: 'kb-error', label: t('auto.Edit.92.c4fa9b') + (e?.message || t('auto.Edit.93.974e74')), isLeaf: true, disabled: true }]
     return []
   } finally {
     loadingKB.value = false
@@ -698,7 +701,7 @@ const loadAgentKBBindings = async () => {
     const list = res?.list || res?.items || (Array.isArray(res) ? res : [])
     form.kb_ids = list.map((it) => it.kb_id ?? it.id)
   } catch (e) {
-    console.warn('加载智能体知识库绑定失败：', e?.message)
+    console.warn(t('auto.Edit.94.0d5a9d'), e?.message)
     form.kb_ids = []
   }
 };
@@ -720,7 +723,7 @@ const loadAgentDetail = async () => {
       form.target_language = res.target_language || ''
     }
   } catch (e) {
-    ElMessage.error('加载智能体详情失败：' + (e.message || '未知错误'))
+    ElMessage.error(t('auto.Edit.95.6ad039') + (e.message || t('auto.Edit.93.974e74')))
     goBack()
   } finally {
     pageLoading.value = false
@@ -731,7 +734,7 @@ const onSave = async () => {
   if (!formRef.value) return
   await formRef.value.validate(async (valid) => {
     if (!valid) {
-      ElMessage.warning(i18n.global.t('请完善必填项后再提交'))
+      ElMessage.warning(i18n.global.t(t('auto.Edit.96.341de0')))
       return
     }
     saving.value = true
@@ -774,9 +777,9 @@ const onSave = async () => {
         try {
           await replaceAgentKBs(agentId.value, form.kb_ids.map(String))
         } catch (kbErr) {
-          console.warn('同步智能体知识库挂载失败：', kbErr?.message)
+          console.warn(t('auto.Edit.97.3a622c'), kbErr?.message)
         }
-        ElMessage.success(i18n.global.t('智能体更新成功'))
+        ElMessage.success(i18n.global.t(t('auto.Edit.98.8baf0b')))
       } else {
         const created = await createAgent(data)
         const newId = created?.id || created?.ID;
@@ -784,14 +787,14 @@ const onSave = async () => {
           try {
             await replaceAgentKBs(newId, form.kb_ids.map(String))
           } catch (kbErr) {
-            console.warn('挂载智能体知识库失败：', kbErr?.message)
+            console.warn(t('auto.Edit.99.047a0f'), kbErr?.message)
           }
         }
-        ElMessage.success(i18n.global.t('智能体创建成功'))
+        ElMessage.success(i18n.global.t(t('auto.Edit.100.0cca28')))
       }
       goBack()
     } catch (e) {
-      ElMessage.error('保存失败：' + (e.message || '未知错误'))
+      ElMessage.error(t('auto.Edit.101.78d235') + (e.message || t('auto.Edit.93.974e74')))
     } finally {
       saving.value = false
     }
@@ -804,11 +807,11 @@ const goBack = () => {
 
 const openTestDialog = () => {
   if (isEdit.value && !form.id) {
-    ElMessage.warning(i18n.global.t('智能体信息加载中，请稍候'))
+    ElMessage.warning(i18n.global.t(t('auto.Edit.102.573b39')))
     return
   }
   if (!isEdit.value) {
-    ElMessage.warning(i18n.global.t('请先创建智能体后再进行测试'))
+    ElMessage.warning(i18n.global.t(t('auto.Edit.103.f4521c')))
     return
   }
   testForm.value = { customer_id: '', message: '' }
@@ -818,7 +821,7 @@ const openTestDialog = () => {
 
 const runTest = async () => {
   if (!testForm.value.message || !testForm.value.message.trim()) {
-    ElMessage.warning(i18n.global.t('请输入消息内容'))
+    ElMessage.warning(i18n.global.t(t('auto.Edit.104.fa967b')))
     return
   }
   testing.value = true
@@ -830,9 +833,9 @@ const runTest = async () => {
     }
     const res = await testAgent(agentId.value, data)
     testResult.value = res
-    ElMessage.success(i18n.global.t('测试执行完成'))
+    ElMessage.success(i18n.global.t(t('auto.Edit.105.2afc98')))
   } catch (e) {
-    ElMessage.error('测试失败：' + (e.message || '未知错误'))
+    ElMessage.error(t('auto.Edit.106.4b3cb9') + (e.message || t('auto.Edit.93.974e74')))
   } finally {
     testing.value = false
   }

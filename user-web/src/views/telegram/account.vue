@@ -5,33 +5,33 @@
     <el-card shadow="never" class="setup-guide-card">
       <template #header>
         <div class="guide-header">
-          <span class="guide-title">📖 Telegram 机器人配置指南</span>
-          <el-tag effect="plain" size="small">首次使用必读 · 约 2 分钟</el-tag>
+          <span class="guide-title">{{ $t('auto.account.37.2a60fd') }}</span>
+          <el-tag effect="plain" size="small">{{ $t('auto.account.38.717738') }}</el-tag>
         </div>
       </template>
 
       <el-steps :active="0" direction="horizontal" finish-status="success" simple>
-        <el-step title="1. 创建 Bot" description="@BotFather 申请" />
-        <el-step title="2. 拉进群+设管理员" description="必要权限配置" />
-        <el-step title="3. 关闭隐私模式" description="收不到群消息的根因" />
-        <el-step title="4. 粘贴 Token 到此页" description="其余全自动" />
+        <el-step :title="$t('auto.account.1.8dbf13')" :description="$t('auto.account.2.204d1d')" />
+        <el-step :title="$t('auto.account.3.5f8e77')" :description="$t('auto.account.4.ff5b77')" />
+        <el-step :title="$t('auto.account.5.77363f')" :description="$t('auto.account.6.17e4b6')" />
+        <el-step :title="$t('auto.account.7.a8d907')" :description="$t('auto.account.8.08049a')" />
       </el-steps>
 
       <el-collapse class="guide-collapse" accordion>
 
         <!-- Step 1: 创建 Bot -->
-        <el-collapse-item title="① 创建 Bot（一次性操作）" name="s1">
+        <el-collapse-item :title="$t('auto.account.9.df4224')" name="s1">
           <div class="guide-content">
             <ol>
-              <li>打开 Telegram → 搜索 <code>@BotFather</code></li>
-              <li>发送 <code>/newbot</code> → 给 Bot 起名字（展示用）</li>
-              <li>发送 <code>/setdescription</code> <code>/setabouttext</code> <code>/setuserpic</code> 配置 Bot 信息（可选）</li>
-              <li><strong>⚠️ 关键一步：发送 <code>/setjoingroups</code> → 选 <code>Enable</code></strong>
-                <br>默认是 Disable，不改的话 Bot 加不进任何群！</li>
-              <li><strong>⚠️ 关键一步：发送 <code>/setprivacy</code> → 选 <code>Disable</code></strong>
-                <br>默认是 Enable，不改的话 Bot 收不到群内 @消息和 reply！</li>
-              <li>发送 <code>/token</code> → 复制出来的 API Token 就是 Bot 凭证</li>
-              <li>发送 <code>/mybots</code> → 选你的 Bot → 可以随时重新生成 Token</li>
+              <li>{{ $t('auto.account.39.694996') }}<code>@BotFather</code></li>
+              <li>{{ $t('auto.account.40.1535fc') }}<code>/newbot</code>{{ $t('auto.account.41.da97ca') }}</li>
+              <li>{{ $t('auto.account.40.1535fc') }}<code>/setdescription</code> <code>/setabouttext</code> <code>/setuserpic</code>{{ $t('auto.account.42.575b08') }}</li>
+              <li><strong>{{ $t('auto.account.43.d1c885') }}<code>/setjoingroups</code>{{ $t('auto.account.44.52478b') }}<code>Enable</code></strong>
+                <br>{{ $t('auto.account.45.c78f5d') }}</li>
+              <li><strong>{{ $t('auto.account.43.d1c885') }}<code>/setprivacy</code>{{ $t('auto.account.44.52478b') }}<code>Disable</code></strong>
+                <br>{{ $t('auto.account.46.b859e1') }}</li>
+              <li>{{ $t('auto.account.40.1535fc') }}<code>/token</code>{{ $t('auto.account.47.609af8') }}</li>
+              <li>{{ $t('auto.account.40.1535fc') }}<code>/mybots</code>{{ $t('auto.account.48.18613e') }}</li>
             </ol>
             <el-alert type="warning" :closable="false" show-icon>
               <template #title>
@@ -42,18 +42,18 @@
         </el-collapse-item>
 
         <!-- Step 2: 拉进群+权限 -->
-        <el-collapse-item title="② 拉进群 + 设管理员权限" name="s2">
+        <el-collapse-item :title="$t('auto.account.10.88a86b')" name="s2">
           <div class="guide-content">
             <ol>
-              <li>打开你的 Telegram 群 → 群设置 → 成员列表 → 「邀请成员」</li>
-              <li>搜索你刚创建的 Bot 用户名（如 @hivemtk_bot）→ 添加</li>
-              <li>群设置 → 管理员 → 「添加管理员」→ 选这个 Bot</li>
-              <li><strong>勾选以下权限（根据需求）：</strong>
+              <li>{{ $t('auto.account.49.1f2c07') }}</li>
+              <li>{{ $t('auto.account.50.e95e7e') }}</li>
+              <li>{{ $t('auto.account.51.d25424') }}</li>
+              <li><strong>{{ $t('auto.account.52.38e808') }}</strong>
                 <ul>
-                  <li>✅ <code>can_invite_users</code> 邀请用户 / 批准入群申请（方案 A 审批制需要）</li>
-                  <li>✅ <code>can_restrict_members</code> 限制成员 / 禁言（方案 B 进群后禁言解锁需要）</li>
-                  <li>✅ <code>can_delete_messages</code> 删除消息（群规维护）</li>
-                  <li>✅ <code>can_send_messages</code> 发送消息（基本能力）</li>
+                  <li>✅ <code>can_invite_users</code>{{ $t('auto.account.53.8349fc') }}</li>
+                  <li>✅ <code>can_restrict_members</code>{{ $t('auto.account.54.3dc150') }}</li>
+                  <li>✅ <code>can_delete_messages</code>{{ $t('auto.account.55.565cae') }}</li>
+                  <li>✅ <code>can_send_messages</code>{{ $t('auto.account.56.4d1929') }}</li>
                 </ul>
               </li>
             </ol>
@@ -66,53 +66,53 @@
         </el-collapse-item>
 
         <!-- Step 3: Webhook vs Polling -->
-        <el-collapse-item title="③ Webhook vs Polling（后端自动选择）" name="s3">
+        <el-collapse-item :title="$t('auto.account.11.9de605')" name="s3">
           <div class="guide-content">
             <table class="guide-table">
               <thead>
-                <tr><th>模式</th><th>适用场景</th><th>需要公网？</th><th>性能</th></tr>
+                <tr><th>{{ $t('auto.account.57.f0789e') }}</th><th>{{ $t('auto.account.58.62b37e') }}</th><th>{{ $t('auto.account.59.d68f38') }}</th><th>{{ $t('auto.account.60.c3318e') }}</th></tr>
               </thead>
               <tbody>
-                <tr><td>🔗 Webhook</td><td>生产部署，有公网域名 + HTTPS</td><td>✅ 需要</td><td>⭐⭐⭐ 低延迟、高并发</td></tr>
-                <tr><td>🔄 Polling</td><td>本地开发 / 内网测试</td><td>❌ 不需要</td><td>⭐ 低延迟、并发有限</td></tr>
+                <tr><td>🔗 Webhook</td><td>{{ $t('auto.account.61.5c9b49') }}</td><td>{{ $t('auto.account.62.b591a1') }}</td><td>{{ $t('auto.account.63.638cab') }}</td></tr>
+                <tr><td>🔄 Polling</td><td>{{ $t('auto.account.64.ef9f9b') }}</td><td>{{ $t('auto.account.65.7b051f') }}</td><td>{{ $t('auto.account.66.ceb143') }}</td></tr>
               </tbody>
             </table>
-            <p><strong>系统自动决策：</strong>创建 Bot 时如果后端配置了 <code>PUBLIC_BASE_URL</code>（如 <code>https://your-domain.com</code>），自动走 Webhook 模式；否则自动降级 Polling。</p>
-            <p>想强制切换？到列表页点「注册 Webhook」按钮，或重启服务自动重选。</p>
+            <p><strong>{{ $t('auto.account.67.afef8f') }}</strong>{{ $t('auto.account.68.d0db4e') }}<code>PUBLIC_BASE_URL</code>{{ $t('auto.account.69.90808b') }}<code>https://your-domain.com</code>{{ $t('auto.account.70.cab1e7') }}</p>
+            <p>{{ $t('auto.account.71.f16ed6') }}</p>
           </div>
         </el-collapse-item>
 
         <!-- Step 4: 绑定智能体 -->
-        <el-collapse-item title="④ 绑定智能体 + 资产包" name="s4">
+        <el-collapse-item :title="$t('auto.account.12.e704fe')" name="s4">
           <div class="guide-content">
-            <p>创建 Bot 后，到 <strong>智能体页面</strong> 创建一个智能体，选择对应的<strong>资产包</strong>，然后在本页 Bot 行点「绑定智能体」按钮关联即可。</p>
-            <p>推荐配置：</p>
+            <p>{{ $t('auto.account.72.f8d4a3') }}<strong>{{ $t('auto.account.73.e8f183') }}</strong>{{ $t('auto.account.74.165a45') }}<strong>{{ $t('auto.account.75.673c20') }}</strong>{{ $t('auto.account.76.072c27') }}</p>
+            <p>{{ $t('auto.account.77.691814') }}</p>
             <ul>
-              <li><code>hivemtk_bot</code>（产品社群）→ 绑定「hivemtk自用智能体」+「hivemtk社群资产包」</li>
-              <li><code>lovesanrenxing_bot</code>（普通社群）→ 绑定「通用社群混合智能体」+「通用社群混合资产包」</li>
-              <li>电商场景 → 绑定「通用电商混合智能体」+「通用电商销售混合资产包」</li>
+              <li><code>hivemtk_bot</code>{{ $t('auto.account.78.427df6') }}</li>
+              <li><code>lovesanrenxing_bot</code>{{ $t('auto.account.79.6f22f2') }}</li>
+              <li>{{ $t('auto.account.80.ed6a16') }}</li>
             </ul>
           </div>
         </el-collapse-item>
 
         <!-- 常见问题 -->
-        <el-collapse-item title="⑤ 常见问题 FAQ" name="s5">
+        <el-collapse-item :title="$t('auto.account.13.89a149')" name="s5">
           <div class="guide-content">
             <div class="faq-item">
-              <strong>❓ Bot 创建了但群内 @不回复？</strong>
-              <p>99% 是没关隐私模式 → @BotFather → /setprivacy → Disable。重启服务生效。</p>
+              <strong>{{ $t('auto.account.81.de361f') }}</strong>
+              <p>{{ $t('auto.account.82.e7609b') }}</p>
             </div>
             <div class="faq-item">
-              <strong>❓ Webhook 注册失败 401？</strong>
-              <p>服务器需要公网 HTTPS 域名 + 能被 Telegram 访问。本地开发自动降级 Polling，不用管。</p>
+              <strong>{{ $t('auto.account.83.118bec') }}</strong>
+              <p>{{ $t('auto.account.84.9c0af4') }}</p>
             </div>
             <div class="faq-item">
-              <strong>❓ Token 健康度显示「无效」？</strong>
-              <p>Token 被 @BotFather 吊销了。到本页点「编辑」→ 粘贴新 Token → 保存。</p>
+              <strong>{{ $t('auto.account.85.cf2e5f') }}</strong>
+              <p>{{ $t('auto.account.86.b9c7ec') }}</p>
             </div>
             <div class="faq-item">
-              <strong>❓ 智能体不自动回群消息？</strong>
-              <p>① 检查是否绑定了智能体（本页「绑定智能体」按钮）<br>② 检查资产包是否正确挂载<br>③ 群内需要 @机器人 或配置关键词触发</p>
+              <strong>{{ $t('auto.account.87.2f228e') }}</strong>
+              <p>{{ $t('auto.account.88.4cab04') }}<br>{{ $t('auto.account.89.52b84d') }}<br>{{ $t('auto.account.90.1e60ad') }}</p>
             </div>
           </div>
         </el-collapse-item>
@@ -125,7 +125,7 @@
         <div class="account-search">
           <el-input
             v-model="searchKeyword"
-            :placeholder="$t('输入账号名称搜索')"
+            ::placeholder="$t('auto.account.14.9d9a5f')"
             prefix-icon="Search"
             clearable
             @clear="handleSearch"
@@ -142,16 +142,16 @@
 
         <div v-loading="loading" class="account-list">
           <el-table :data="filteredAccounts" style="width: 100%" border>
-            <el-table-column prop="account_name" :label="$t('账号名称')" min-width="160" />
+            <el-table-column prop="account_name" ::label="$t('auto.account.15.5f0720')" min-width="160" />
             <el-table-column prop="bot_token_masked" label="Bot Token" min-width="200" />
-            <el-table-column label="Token 健康度" width="130" align="center">
+            <el-table-column :label="$t('auto.account.16.fb7dd8')" width="130" align="center">
               <template #default="scope">
                 <el-tooltip v-if="scope.row.last_error_msg && (scope.row.last_error_msg.includes('401') || scope.row.last_error_msg.includes('404'))" placement="top">
-                  <template #content>Telegram 返回 401/404：Token 无效或已撤销。<br/>到 @BotFather → /mybots → API Token 重新生成，<br/>点「编辑」粘贴新 Token</template>
-                  <el-tag type="danger" effect="plain">无效 → 点「编辑」换 Token</el-tag>
+                  <template #content>{{ $t('auto.account.91.1d6537') }}<br/>{{ $t('auto.account.92.403e67') }}<br/>{{ $t('auto.account.93.374279') }}</template>
+                  <el-tag type="danger" effect="plain">{{ $t('auto.account.94.93fc3f') }}</el-tag>
                 </el-tooltip>
                 <el-tag v-else-if="scope.row.last_error_msg" type="warning" effect="plain">{{ scope.row.last_error_msg.includes('429') ? '限流中' : '有错误' }}</el-tag>
-                <el-tag v-else type="success" effect="plain">正常</el-tag>
+                <el-tag v-else type="success" effect="plain">{{ $t('auto.account.95.fd6e80') }}</el-tag>
               </template>
             </el-table-column>
             <el-table-column prop="webhook_url" label="Webhook URL" min-width="240" show-overflow-tooltip />
@@ -162,35 +162,35 @@
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column label="智能体" width="110" align="center">
+            <el-table-column :label="$t('auto.account.17.72fbb9')" width="110" align="center">
               <template #default="scope">
                 <el-tag :type="scope.row.ai_agent_enabled ? 'success' : 'info'" effect="plain">
                   {{ scope.row.ai_agent_enabled ? '已启用' : '未启用' }}
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column label="状态" width="100" align="center">
+            <el-table-column :label="$t('auto.account.18.3fea7c')" width="100" align="center">
               <template #default="scope">
                 <el-tag :type="scope.row.status === 1 ? 'success' : 'danger'" effect="plain">
                   {{ scope.row.status === 1 ? '正常' : '停用' }}
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="last_error_msg" label="最近错误" min-width="180" show-overflow-tooltip />
-            <el-table-column label="操作" width="400" fixed="right">
+            <el-table-column prop="last_error_msg" :label="$t('auto.account.19.a2b83d')" min-width="180" show-overflow-tooltip />
+            <el-table-column :label="$t('auto.account.20.2b6bc0')" width="400" fixed="right">
               <template #default="scope">
-                <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
-                <el-button size="small" type="success" @click="handleRegisterWebhook(scope.row)">注册Webhook</el-button>
-                <el-button size="small" type="warning" @click="handleTestSend(scope.row)">测试发送</el-button>
-                <el-button size="small" type="primary" @click="openBindingDialog(scope.row)">绑定AI</el-button>
-                <el-button size="small" type="danger" @click="handleDelete(scope.row)">删除</el-button>
+                <el-button size="small" @click="handleEdit(scope.row)">{{ $t('auto.account.96.95b351') }}</el-button>
+                <el-button size="small" type="success" @click="handleRegisterWebhook(scope.row)">{{ $t('auto.account.97.fdb9b4') }}</el-button>
+                <el-button size="small" type="warning" @click="handleTestSend(scope.row)">{{ $t('auto.account.98.e1c652') }}</el-button>
+                <el-button size="small" type="primary" @click="openBindingDialog(scope.row)">{{ $t('auto.account.99.c9e87d') }}</el-button>
+                <el-button size="small" type="danger" @click="handleDelete(scope.row)">{{ $t('auto.account.100.2f4aad') }}</el-button>
               </template>
             </el-table-column>
           </el-table>
         </div>
 
         <div v-if="!loading && filteredAccounts.length === 0" class="empty-data">
-          <el-empty description="暂无 Bot 账号，点击右上角添加" />
+          <el-empty :description="$t('auto.account.21.a4859a')" />
         </div>
       </div>
     </div>
@@ -198,18 +198,18 @@
     
     <el-dialog
       v-model="dialogVisible"
-      :title="dialogType === 'add' ? '添加机器人' : '编辑机器人'"
+      ::title="$t('auto.account.22.e29c67')"
       width="640px"
       :close-on-click-modal="false"
     >
       <el-form ref="accountFormRef" :model="accountForm" :rules="rules" label-width="140px">
-        <el-form-item label="账号名称" prop="account_name">
-          <el-input v-model="accountForm.account_name" placeholder="用于识别，例如：售前咨询Bot" />
+        <el-form-item :label="$t('auto.account.23.17327f')" prop="account_name">
+          <el-input v-model="accountForm.account_name" :placeholder="$t('auto.account.24.db1e20')" />
         </el-form-item>
         <el-form-item label="Bot Token" prop="bot_token">
           <el-input
             v-model="accountForm.bot_token"
-            :placeholder="dialogType === 'edit' ? '留空则保持原 Token 不变' : '形如 123456789:AAxxxx...（共 35 位）'"
+            ::placeholder="$t('auto.account.25.af51a5')"
             type="password"
             show-password
           />
@@ -229,31 +229,31 @@
 
         <!-- ========== 以下为"编辑模式只读展示区"（创建模式不显示） ========== -->
         <template v-if="dialogType === 'edit'">
-          <el-divider content-position="left">系统自动配置（只读）</el-divider>
-          <el-form-item label="Bot 用户名">
-            <el-input :model-value="accountForm.bot_username || '(后端自动填充)'" disabled />
+          <el-divider content-position="left">{{ $t('auto.account.101.be6c19') }}</el-divider>
+          <el-form-item :label="$t('auto.account.26.735df6')">
+            <el-input ::model-value="$t('auto.account.27.8b7bb7')" disabled />
           </el-form-item>
           <el-form-item label="Webhook URL">
-            <el-input :model-value="accountForm.webhook_url || '(后端自动推导)'" disabled>
+            <el-input ::model-value="$t('auto.account.28.bd191d')" disabled>
               <template v-if="accountForm.webhook_url" #append>
-                <el-button @click="copyText(accountForm.webhook_url)">复制</el-button>
+                <el-button @click="copyText(accountForm.webhook_url)">{{ $t('auto.account.102.79d3ab') }}</el-button>
               </template>
             </el-input>
           </el-form-item>
           <el-form-item label="Webhook Secret">
-            <el-input :model-value="accountForm.webhook_secret ? '*** (已隐藏)' : '(后端自动生成)'" disabled />
+            <el-input ::model-value="$t('auto.account.29.623863')" disabled />
           </el-form-item>
-          <el-form-item label="Webhook 状态">
+          <el-form-item :label="$t('auto.account.30.d2ac77')">
             <el-tag :type="accountForm.webhook_enabled ? 'success' : 'info'" effect="plain">
               {{ accountForm.webhook_enabled ? '已注册' : '未注册' }}
             </el-tag>
           </el-form-item>
-          <el-form-item label="智能体开关">
+          <el-form-item :label="$t('auto.account.31.a1194f')">
             <el-tag :type="accountForm.ai_agent_enabled ? 'success' : 'info'" effect="plain">
               {{ accountForm.ai_agent_enabled ? '已启用' : '未启用' }}
             </el-tag>
           </el-form-item>
-          <el-form-item label="状态">
+          <el-form-item :label="$t('auto.account.18.3fea7c')">
             <el-tag :type="accountForm.status === 1 ? 'success' : 'danger'" effect="plain">
               {{ accountForm.status === 1 ? '正常' : '停用' }}
             </el-tag>
@@ -265,7 +265,7 @@
       </el-form>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="dialogVisible = false">取消</el-button>
+          <el-button @click="dialogVisible = false">{{ $t('auto.account.103.625fb2') }}</el-button>
           <el-button type="primary" :loading="submitting" @click="submitForm">
             {{ dialogType === 'add' ? '创建（自动配置）' : '保存' }}
           </el-button>
@@ -274,19 +274,19 @@
     </el-dialog>
 
     
-    <el-dialog v-model="testDialogVisible" title="测试发送消息" width="500px">
+    <el-dialog v-model="testDialogVisible" :title="$t('auto.account.32.880075')" width="500px">
       <el-form :model="testForm" label-width="100px">
-        <el-form-item label="目标 Chat ID">
-          <el-input v-model.number="testForm.chat_id" placeholder="请输入目标 Chat ID（群组为负数）" />
+        <el-form-item :label="$t('auto.account.33.35f1ba')">
+          <el-input v-model.number="testForm.chat_id" :placeholder="$t('auto.account.34.3dc3ac')" />
         </el-form-item>
-        <el-form-item label="消息内容">
-          <el-input v-model="testForm.text" type="textarea" :rows="3" placeholder="请输入测试消息内容" />
+        <el-form-item :label="$t('auto.account.35.b87b77')">
+          <el-input v-model="testForm.text" type="textarea" :rows="3" :placeholder="$t('auto.account.36.2477fb')" />
         </el-form-item>
       </el-form>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="testDialogVisible = false">取消</el-button>
-          <el-button type="primary" :loading="testing" @click="submitTestSend">发送</el-button>
+          <el-button @click="testDialogVisible = false">{{ $t('auto.account.103.625fb2') }}</el-button>
+          <el-button type="primary" :loading="testing" @click="submitTestSend">{{ $t('auto.account.40.1535fc') }}</el-button>
         </span>
       </template>
     </el-dialog>
@@ -306,6 +306,7 @@
 import i18n from '@/i18n'
 
 import { ref, reactive, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import {
   listAccounts,
@@ -316,6 +317,8 @@ import {
   testSend
 } from '@/api/telegram'
 import AgentBindingDialog from '@/components/AgentBindingDialog.vue'
+
+const { t } = useI18n()
 
 const loading = ref(false)
 const submitting = ref(false)
@@ -350,8 +353,8 @@ const fetchAccounts = async () => {
     const res = await listAccounts()
     accounts.value = (res && res.list) || []
   } catch (e) {
-    console.error('获取 Bot 账号失败:', e)
-    ElMessage.error(i18n.global.t('获取 Bot 账号失败'))
+    console.error(t('auto.account.104.071091'), e)
+    ElMessage.error(i18n.global.t(t('auto.account.105.2701a1')))
   } finally {
     loading.value = false
   }
@@ -381,12 +384,12 @@ const showTestToken = computed(() => {
 })
 
 const rules = {
-  account_name: [{ required: true, message: i18n.global.t('请输入账号名称'), trigger: 'blur' }],
+  account_name: [{ required: true, message: i18n.global.t(t('auto.account.106.1f3797')), trigger: 'blur' }],
   bot_token: [
     {
       validator: (rule, value, callback) => {
         if (dialogType.value === 'add' && !value) {
-          return callback(new Error('请输入 Bot Token'))
+          return callback(new Error(t('auto.account.107.25d758')))
         }
         if (value && !/^\d{6,10}:[A-Za-z0-9_-]{35}$/.test(value.trim())) {
           return callback(new Error('Token 格式不对：应为「数字:35位字母数字」，请到 @BotFather → /mybots → API Token 完整复制'))
@@ -439,7 +442,7 @@ const handleEdit = (row) => {
 const handleTestToken = async () => {
   const token = (accountForm.bot_token || '').trim()
   if (!token) {
-    ElMessage.warning('请先填写 Bot Token')
+    ElMessage.warning(t('auto.account.108.8df062'))
     return
   }
   testingToken.value = true
@@ -467,8 +470,8 @@ const handleTestToken = async () => {
       ElMessage.error(`Token 无效: ${desc}`)
     }
   } catch (err) {
-    tokenTestResult.value = { ok: false, msg: '网络错误，无法连接 Telegram API' }
-    ElMessage.error('网络错误: ' + err.message)
+    tokenTestResult.value = { ok: false, msg: t('auto.account.109.749733') }
+    ElMessage.error(t('auto.account.110.98d1ef') + err.message)
   } finally {
     testingToken.value = false
   }
@@ -477,9 +480,9 @@ const handleTestToken = async () => {
 const copyText = async (text) => {
   try {
     await navigator.clipboard.writeText(text)
-    ElMessage.success('已复制到剪贴板')
+    ElMessage.success(t('auto.account.111.4fb42e'))
   } catch {
-    ElMessage.warning('浏览器不支持自动复制，请手动复制')
+    ElMessage.warning(t('auto.account.112.5268f8'))
   }
 }
 
@@ -508,10 +511,10 @@ const submitForm = () => {
       }
       if (accountForm.id) {
         await updateAccount(accountForm.id, payload)
-        ElMessage.success(i18n.global.t('更新成功'))
+        ElMessage.success(i18n.global.t(t('auto.account.113.55aa63')))
       } else {
         const res = await createAccount(payload)
-        ElMessage.success(i18n.global.t('创建成功！正在后台自动配置 Bot...'))
+        ElMessage.success(i18n.global.t(t('auto.account.114.464f3a')))
         // 创建成功后立刻刷新列表，展示后端自动填充的字段
         fetchAccounts()
       }
@@ -520,8 +523,8 @@ const submitForm = () => {
         fetchAccounts()
       }
     } catch (e) {
-      console.error('保存失败:', e)
-      ElMessage.error('保存失败：' + (e.message || e))
+      console.error(t('auto.account.115.4d5731'), e)
+      ElMessage.error(t('auto.account.116.78d235') + (e.message || e))
     } finally {
       submitting.value = false
     }
@@ -529,18 +532,18 @@ const submitForm = () => {
 }
 
 const handleDelete = (row) => {
-  ElMessageBox.confirm(`确定要删除机器人 ${row.account_name} 吗？`, '警告', {
-    confirmButtonText: '确定',
-    cancelButtonText: '取消',
+  ElMessageBox.confirm(`确定要删除机器人 ${row.account_name} 吗？`, t('auto.account.117.900c70'), {
+    confirmButtonText: t('auto.account.118.38cf16'),
+    cancelButtonText: t('auto.account.103.625fb2'),
     type: 'warning'
   })
     .then(async () => {
       try {
         await deleteAccount(row.id)
-        ElMessage.success(i18n.global.t('删除成功'))
+        ElMessage.success(i18n.global.t(t('auto.account.119.0007d1')))
         fetchAccounts()
       } catch (e) {
-        ElMessage.error('删除失败：' + (e.message || e))
+        ElMessage.error(t('auto.account.120.bc42bb') + (e.message || e))
       }
     })
     .catch(() => {})
@@ -550,7 +553,7 @@ const handleRegisterWebhook = (row) => {
   // 前置自检：给出可操作的提示，避免打到 Telegram 才收到晦涩报错
   const problems = []
   if (row.last_error_msg && row.last_error_msg.includes('401')) {
-    problems.push('当前 Bot Token 已被 Telegram 判定无效（401）。请先到 @BotFather 重新生成 Token 并在「编辑」里更新，再注册 Webhook')
+    problems.push(t('auto.account.121.9f7c67'))
   }
   if (row.webhook_url && row.webhook_url.startsWith('http://')) {
     problems.push('Webhook URL 是 http:// 开头，Telegram 强制要求 https://，请在「编辑」里修改')
@@ -559,12 +562,12 @@ const handleRegisterWebhook = (row) => {
     problems.push('Webhook URL 为空：请先在「编辑」对话框填入（或等待后端自动推导完成后再点注册）')
   }
   if (problems.length) {
-    ElMessageBox.alert(problems.join('\n'), '注册前检查未通过', { type: 'warning', confirmButtonText: '知道了' })
+    ElMessageBox.alert(problems.join('\n'), t('auto.account.122.223983'), { type: 'warning', confirmButtonText: t('auto.account.123.ce2695') })
     return
   }
-  ElMessageBox.confirm(`确定要为机器人 ${row.account_name} 注册 Webhook 吗？`, '确认', {
-    confirmButtonText: '确定',
-    cancelButtonText: '取消',
+  ElMessageBox.confirm(`确定要为机器人 ${row.account_name} 注册 Webhook 吗？`, t('auto.account.124.e83a25'), {
+    confirmButtonText: t('auto.account.118.38cf16'),
+    cancelButtonText: t('auto.account.103.625fb2'),
     type: 'info'
   })
     .then(async () => {
@@ -586,26 +589,26 @@ let currentTestAccountId = null
 const handleTestSend = (row) => {
   currentTestAccountId = row.id
   testForm.chat_id = null
-  testForm.text = '你好，这是一条来自营销工具箱的测试消息。'
+  testForm.text = t('auto.account.125.5ae844')
   testDialogVisible.value = true
 }
 
 const submitTestSend = async () => {
   if (!testForm.chat_id) {
-    ElMessage.warning(i18n.global.t('请输入目标 Chat ID'))
+    ElMessage.warning(i18n.global.t(t('auto.account.126.6d3eaa')))
     return
   }
   if (!testForm.text) {
-    ElMessage.warning(i18n.global.t('请输入消息内容'))
+    ElMessage.warning(i18n.global.t(t('auto.account.127.fa967b')))
     return
   }
   testing.value = true
   try {
     await testSend(currentTestAccountId, { chat_id: testForm.chat_id, text: testForm.text })
-    ElMessage.success(i18n.global.t('发送成功'))
+    ElMessage.success(i18n.global.t(t('auto.account.128.9db9a7')))
     testDialogVisible.value = false
   } catch (e) {
-    ElMessage.error('发送失败：' + (e.message || e))
+    ElMessage.error(t('auto.account.129.9704ea') + (e.message || e))
   } finally {
     testing.value = false
   }

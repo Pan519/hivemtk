@@ -11,18 +11,18 @@
       
       <div class="search-bar">
         <el-form :inline="true" :model="searchForm" class="search-form">
-          <el-form-item label="活码名称">
-            <el-input v-model="searchForm.name" placeholder="请输入活码名称" clearable />
+          <el-form-item :label="$t('auto.LiveCodeManagement.1.7338bb')">
+            <el-input v-model="searchForm.name" :placeholder="$t('auto.LiveCodeManagement.2.ae4e3d')" clearable />
           </el-form-item>
-          <el-form-item label="状态">
-            <el-select v-model="searchForm.status" placeholder="请选择状态" clearable>
-              <el-option label="启用" :value="1" />
-              <el-option label="禁用" :value="0" />
+          <el-form-item :label="$t('auto.LiveCodeManagement.3.3fea7c')">
+            <el-select v-model="searchForm.status" :placeholder="$t('auto.LiveCodeManagement.4.e1c965')" clearable>
+              <el-option :label="$t('auto.LiveCodeManagement.5.7854b5')" :value="1" />
+              <el-option :label="$t('auto.LiveCodeManagement.6.710ad0')" :value="0" />
             </el-select>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="handleSearch">查询</el-button>
-            <el-button @click="resetSearch">重置</el-button>
+            <el-button type="primary" @click="handleSearch">{{ $t('auto.LiveCodeManagement.22.bee912') }}</el-button>
+            <el-button @click="resetSearch">{{ $t('auto.LiveCodeManagement.23.4b9c32') }}</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -30,32 +30,32 @@
       
       <el-table :data="liveCodeList" style="width: 100%" v-loading="loading">
         <el-table-column prop="id" label="ID" width="80" />
-        <el-table-column prop="name" label="活码名称" />
-        <el-table-column prop="short_link" label="短链" />
-        <el-table-column prop="full_short_link" label="完整短链" min-width="200">
+        <el-table-column prop="name" :label="$t('auto.LiveCodeManagement.1.7338bb')" />
+        <el-table-column prop="short_link" :label="$t('auto.LiveCodeManagement.7.ae651e')" />
+        <el-table-column prop="full_short_link" :label="$t('auto.LiveCodeManagement.8.0cd34c')" min-width="200">
           <template #default="scope">
             <el-link :href="scope.row.full_short_link" target="_blank" type="primary">
               {{ scope.row.full_short_link }}
             </el-link>
           </template>
         </el-table-column>
-        <el-table-column prop="total_views" label="总访问量" width="100" />
-        <el-table-column prop="today_views" label="今日访问" width="100" />
-        <el-table-column prop="status" label="状态" width="100">
+        <el-table-column prop="total_views" :label="$t('auto.LiveCodeManagement.9.7f08e2')" width="100" />
+        <el-table-column prop="today_views" :label="$t('auto.LiveCodeManagement.10.c7810f')" width="100" />
+        <el-table-column prop="status" :label="$t('auto.LiveCodeManagement.3.3fea7c')" width="100">
           <template #default="scope">
             <el-tag :type="scope.row.status === 1 ? 'success' : 'danger'">
               {{ scope.row.status === 1 ? '启用' : '禁用' }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="created_at" label="创建时间" width="180" />
-        <el-table-column label="操作" width="300" fixed="right">
+        <el-table-column prop="created_at" :label="$t('auto.LiveCodeManagement.11.eca37c')" width="180" />
+        <el-table-column :label="$t('auto.LiveCodeManagement.12.2b6bc0')" width="300" fixed="right">
           <template #default="scope">
-            <el-button type="primary" size="small" @click="handleEdit(scope.row)">编辑</el-button>
-            <el-button type="success" size="small" @click="handleViewQR(scope.row)">二维码</el-button>
-            <el-button type="info" size="small" @click="handleStats(scope.row)">统计</el-button>
-            <el-button type="warning" size="small" @click="handleShare(scope.row)">分享</el-button>
-            <el-button type="danger" size="small" @click="handleDelete(scope.row)">删除</el-button>
+            <el-button type="primary" size="small" @click="handleEdit(scope.row)">{{ $t('auto.LiveCodeManagement.24.95b351') }}</el-button>
+            <el-button type="success" size="small" @click="handleViewQR(scope.row)">{{ $t('auto.LiveCodeManagement.25.22b03c') }}</el-button>
+            <el-button type="info" size="small" @click="handleStats(scope.row)">{{ $t('auto.LiveCodeManagement.26.d7656a') }}</el-button>
+            <el-button type="warning" size="small" @click="handleShare(scope.row)">{{ $t('auto.LiveCodeManagement.27.c31f48') }}</el-button>
+            <el-button type="danger" size="small" @click="handleDelete(scope.row)">{{ $t('auto.LiveCodeManagement.28.2f4aad') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -87,41 +87,41 @@
         :rules="liveCodeRules"
         label-width="120px"
       >
-        <el-form-item label="活码名称" prop="name">
+        <el-form-item :label="$t('auto.LiveCodeManagement.1.7338bb')" prop="name">
           <el-input v-model="liveCodeForm.name" />
         </el-form-item>
-        <el-form-item label="短链" prop="short_link">
+        <el-form-item :label="$t('auto.LiveCodeManagement.7.ae651e')" prop="short_link">
           <el-input v-model="liveCodeForm.short_link" />
         </el-form-item>
-        <el-form-item label="短链域名ID" prop="short_domain_id">
+        <el-form-item :label="$t('auto.LiveCodeManagement.13.9fac4e')" prop="short_domain_id">
           <el-input-number v-model="liveCodeForm.short_domain_id" :min="1" />
         </el-form-item>
-        <el-form-item label="入口域名ID" prop="entry_domain_id">
+        <el-form-item :label="$t('auto.LiveCodeManagement.14.fac103')" prop="entry_domain_id">
           <el-input-number v-model="liveCodeForm.entry_domain_id" :min="1" />
         </el-form-item>
-        <el-form-item label="落地域名ID" prop="landing_domain_id">
+        <el-form-item :label="$t('auto.LiveCodeManagement.15.b6559c')" prop="landing_domain_id">
           <el-input-number v-model="liveCodeForm.landing_domain_id" :min="1" />
         </el-form-item>
-        <el-form-item label="图片URL" prop="image_url">
+        <el-form-item :label="$t('auto.LiveCodeManagement.16.844bf1')" prop="image_url">
           <el-input v-model="liveCodeForm.image_url" />
         </el-form-item>
-        <el-form-item label="入口URL" prop="entry_url">
+        <el-form-item :label="$t('auto.LiveCodeManagement.17.02047b')" prop="entry_url">
           <el-input v-model="liveCodeForm.entry_url" />
         </el-form-item>
-        <el-form-item label="落地URL" prop="landing_url">
+        <el-form-item :label="$t('auto.LiveCodeManagement.18.96900c')" prop="landing_url">
           <el-input v-model="liveCodeForm.landing_url" />
         </el-form-item>
-        <el-form-item label="状态" prop="status">
+        <el-form-item :label="$t('auto.LiveCodeManagement.3.3fea7c')" prop="status">
           <el-radio-group v-model="liveCodeForm.status">
-            <el-radio :label="1">启用</el-radio>
-            <el-radio :label="0">禁用</el-radio>
+            <el-radio :label="1">{{ $t('auto.LiveCodeManagement.5.7854b5') }}</el-radio>
+            <el-radio :label="0">{{ $t('auto.LiveCodeManagement.6.710ad0') }}</el-radio>
           </el-radio-group>
         </el-form-item>
       </el-form>
       
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="dialogVisible = false">取消</el-button>
+          <el-button @click="dialogVisible = false">{{ $t('auto.LiveCodeManagement.29.625fb2') }}</el-button>
           <el-button type="primary" @click="handleSubmit" :loading="submitLoading">
             确定
           </el-button>
@@ -132,29 +132,29 @@
     
     <el-dialog
       v-model="qrDialogVisible"
-      title="二维码管理"
+      :title="$t('auto.LiveCodeManagement.19.def900')"
       width="800px"
     >
       <div class="qr-header">
-        <el-button type="primary" @click="handleAddQR">新增二维码</el-button>
+        <el-button type="primary" @click="handleAddQR">{{ $t('auto.LiveCodeManagement.30.693b48') }}</el-button>
       </div>
       
       <el-table :data="qrList" style="width: 100%" v-loading="qrLoading">
           <el-table-column prop="id" label="ID" width="80" />
-          <el-table-column prop="daily_limit" label="每日限制" width="100">
+          <el-table-column prop="daily_limit" :label="$t('auto.LiveCodeManagement.20.83e448')" width="100">
             <template #default="scope">
               {{ scope.row.daily_limit }}次
             </template>
           </el-table-column>
-          <el-table-column prop="status" label="状态" width="100">
+          <el-table-column prop="status" :label="$t('auto.LiveCodeManagement.3.3fea7c')" width="100">
             <template #default="scope">
               <el-tag :type="scope.row.status === 1 ? 'success' : 'danger'">
                 {{ scope.row.status === 1 ? '启用' : '禁用' }}
               </el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="created_at" label="创建时间" width="180" />
-          <el-table-column label="操作" width="200" fixed="right">
+          <el-table-column prop="created_at" :label="$t('auto.LiveCodeManagement.11.eca37c')" width="180" />
+          <el-table-column :label="$t('auto.LiveCodeManagement.12.2b6bc0')" width="200" fixed="right">
             <template #default="scope">
               <el-button
                 type="primary"
@@ -176,7 +176,7 @@
       
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="qrDialogVisible = false">关闭</el-button>
+          <el-button @click="qrDialogVisible = false">{{ $t('auto.LiveCodeManagement.31.b15d91') }}</el-button>
         </span>
       </template>
     </el-dialog>
@@ -194,7 +194,7 @@
         :rules="qrRules"
         label-width="120px"
       >
-        <el-form-item label="每日限制" prop="daily_limit">
+        <el-form-item :label="$t('auto.LiveCodeManagement.20.83e448')" prop="daily_limit">
           <el-input-number 
             v-model="qrForm.daily_limit" 
             :min="50" 
@@ -202,19 +202,19 @@
             :step="50"
             controls-position="right"
           />
-          <span style="margin-left: 10px;">次</span>
+          <span style="margin-left: 10px;">{{ $t('auto.LiveCodeManagement.32.7229ec') }}</span>
         </el-form-item>
-        <el-form-item label="状态" prop="status">
+        <el-form-item :label="$t('auto.LiveCodeManagement.3.3fea7c')" prop="status">
           <el-radio-group v-model="qrForm.status">
-            <el-radio :label="1">启用</el-radio>
-            <el-radio :label="0">禁用</el-radio>
+            <el-radio :label="1">{{ $t('auto.LiveCodeManagement.5.7854b5') }}</el-radio>
+            <el-radio :label="0">{{ $t('auto.LiveCodeManagement.6.710ad0') }}</el-radio>
           </el-radio-group>
         </el-form-item>
       </el-form>
       
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="qrFormVisible = false">取消</el-button>
+          <el-button @click="qrFormVisible = false">{{ $t('auto.LiveCodeManagement.29.625fb2') }}</el-button>
           <el-button type="primary" @click="handleQRSubmit" :loading="qrSubmitLoading">
             确定
           </el-button>
@@ -225,7 +225,7 @@
     
     <el-dialog
       v-model="statsDialogVisible"
-      title="活码统计"
+      :title="$t('auto.LiveCodeManagement.21.ded4c4')"
       width="800px"
     >
       <div class="stats-container">
@@ -234,7 +234,7 @@
             <el-card class="stats-card">
               <div class="stats-item">
                 <div class="stats-value">{{ statsData.total_views || 0 }}</div>
-                <div class="stats-label">总浏览量</div>
+                <div class="stats-label">{{ $t('auto.LiveCodeManagement.33.7e6ff5') }}</div>
               </div>
             </el-card>
           </el-col>
@@ -242,7 +242,7 @@
             <el-card class="stats-card">
               <div class="stats-item">
                 <div class="stats-value">{{ statsData.today_views || 0 }}</div>
-                <div class="stats-label">今日浏览</div>
+                <div class="stats-label">{{ $t('auto.LiveCodeManagement.34.635684') }}</div>
               </div>
             </el-card>
           </el-col>
@@ -250,7 +250,7 @@
             <el-card class="stats-card">
               <div class="stats-item">
                 <div class="stats-value">{{ statsData.active_qr_count || 0 }}</div>
-                <div class="stats-label">活跃二维码</div>
+                <div class="stats-label">{{ $t('auto.LiveCodeManagement.35.2fc160') }}</div>
               </div>
             </el-card>
           </el-col>
@@ -258,7 +258,7 @@
             <el-card class="stats-card">
               <div class="stats-item">
                 <div class="stats-value">{{ statsData.total_qr_count || 0 }}</div>
-                <div class="stats-label">总二维码数</div>
+                <div class="stats-label">{{ $t('auto.LiveCodeManagement.36.b603ec') }}</div>
               </div>
             </el-card>
           </el-col>
@@ -271,7 +271,7 @@
       
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="statsDialogVisible = false">关闭</el-button>
+          <el-button @click="statsDialogVisible = false">{{ $t('auto.LiveCodeManagement.31.b15d91') }}</el-button>
         </span>
       </template>
     </el-dialog>
@@ -282,6 +282,7 @@
 import i18n from '@/i18n'
 
 import { ref, reactive, onMounted, nextTick } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { 
   getLiveCodes, 
@@ -295,6 +296,8 @@ import {
   updateLiveCodeQR,
   shareLiveCode
 } from '@/api/livecode'
+
+const { t } = useI18n()
 
 const loading = ref(false);
 const submitLoading = ref(false)
@@ -345,26 +348,26 @@ const qrForm = reactive({
 
 const liveCodeRules = {
   name: [
-    { required: true, message: i18n.global.t('请输入活码名称'), trigger: 'blur' },
-    { min: 2, max: 50, message: i18n.global.t('活码名称长度在 2 到 50 个字符'), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.LiveCodeManagement.2.ae4e3d')), trigger: 'blur' },
+    { min: 2, max: 50, message: i18n.global.t(t('auto.LiveCodeManagement.37.40a289')), trigger: 'blur' }
   ],
   short_link: [
-    { required: true, message: i18n.global.t('请输入短链'), trigger: 'blur' }
+    { required: true, message: i18n.global.t(t('auto.LiveCodeManagement.38.5d95fa')), trigger: 'blur' }
   ],
   short_domain_id: [
-    { required: true, message: i18n.global.t('请输入短链域名ID'), trigger: 'blur', type: 'number' }
+    { required: true, message: i18n.global.t(t('auto.LiveCodeManagement.39.0aad3f')), trigger: 'blur', type: 'number' }
   ],
   entry_domain_id: [
-    { required: true, message: i18n.global.t('请输入入口域名ID'), trigger: 'blur', type: 'number' }
+    { required: true, message: i18n.global.t(t('auto.LiveCodeManagement.40.d9f931')), trigger: 'blur', type: 'number' }
   ],
   landing_domain_id: [
-    { required: true, message: i18n.global.t('请输入落地域名ID'), trigger: 'blur', type: 'number' }
+    { required: true, message: i18n.global.t(t('auto.LiveCodeManagement.41.93be4f')), trigger: 'blur', type: 'number' }
   ]
 };
 
 const qrRules = {
   daily_limit: [
-    { required: true, message: i18n.global.t('请输入每日限制'), trigger: 'blur', type: 'number' }
+    { required: true, message: i18n.global.t(t('auto.LiveCodeManagement.42.3491d3')), trigger: 'blur', type: 'number' }
   ]
 };
 
@@ -389,7 +392,7 @@ const fetchLiveCodeList = async () => {
     liveCodeList.value = response.list
     pagination.total = response.total
   } catch (error) {
-    ElMessage.error(i18n.global.t('获取活码列表失败'))
+    ElMessage.error(i18n.global.t(t('auto.LiveCodeManagement.43.4cf8da')))
   } finally {
     loading.value = false
   }
@@ -401,7 +404,7 @@ const fetchQRList = async (liveCodeId) => {
     const response = await getLiveCodeQRs(liveCodeId)
     qrList.value = response
   } catch (error) {
-    ElMessage.error(i18n.global.t('获取二维码列表失败'))
+    ElMessage.error(i18n.global.t(t('auto.LiveCodeManagement.44.7fad51')))
   } finally {
     qrLoading.value = false
   }
@@ -430,7 +433,7 @@ const handleCurrentChange = (val) => {
 };
 
 const handleAdd = () => {
-  dialogTitle.value = '新增活码'
+  dialogTitle.value = t('auto.LiveCodeManagement.45.1baa06')
   dialogVisible.value = true
   
   Object.assign(liveCodeForm, {
@@ -448,7 +451,7 @@ const handleAdd = () => {
 };
 
 const handleEdit = (row) => {
-  dialogTitle.value = '编辑活码'
+  dialogTitle.value = t('auto.LiveCodeManagement.46.fc7150')
   dialogVisible.value = true
   
   Object.assign(liveCodeForm, {
@@ -468,20 +471,20 @@ const handleEdit = (row) => {
 const handleDelete = (row) => {
   ElMessageBox.confirm(
     `确定要删除活码 "${row.name}" 吗？`,
-    '提示',
+    t('auto.LiveCodeManagement.47.02d981'),
     {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
+      confirmButtonText: t('auto.LiveCodeManagement.48.38cf16'),
+      cancelButtonText: t('auto.LiveCodeManagement.29.625fb2'),
       type: 'warning'
     }
   )
     .then(async () => {
       try {
         await deleteLiveCode(row.id)
-        ElMessage.success(i18n.global.t('删除成功'))
+        ElMessage.success(i18n.global.t(t('auto.LiveCodeManagement.49.0007d1')))
         fetchLiveCodeList()
       } catch (error) {
-        ElMessage.error(i18n.global.t('删除失败'))
+        ElMessage.error(i18n.global.t(t('auto.LiveCodeManagement.50.acf066')))
       }
     })
     .catch(() => {})
@@ -494,7 +497,7 @@ const handleViewQR = (row) => {
 };
 
 const handleAddQR = () => {
-  qrFormTitle.value = '新增二维码'
+  qrFormTitle.value = t('auto.LiveCodeManagement.30.693b48')
   qrFormVisible.value = true
   
   Object.assign(qrForm, {
@@ -505,7 +508,7 @@ const handleAddQR = () => {
 };
 
 const handleEditQR = (row) => {
-  qrFormTitle.value = '编辑二维码'
+  qrFormTitle.value = t('auto.LiveCodeManagement.51.7a9162')
   qrFormVisible.value = true
   
   Object.assign(qrForm, {
@@ -518,20 +521,20 @@ const handleEditQR = (row) => {
 const handleDeleteQR = (row) => {
   ElMessageBox.confirm(
     `确定要删除二维码 "${row.name}" 吗？`,
-    '提示',
+    t('auto.LiveCodeManagement.47.02d981'),
     {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
+      confirmButtonText: t('auto.LiveCodeManagement.48.38cf16'),
+      cancelButtonText: t('auto.LiveCodeManagement.29.625fb2'),
       type: 'warning'
     }
   )
     .then(async () => {
       try {
         await deleteLiveCodeQR(row.id)
-        ElMessage.success(i18n.global.t('删除成功'))
+        ElMessage.success(i18n.global.t(t('auto.LiveCodeManagement.49.0007d1')))
         fetchQRList(currentLiveCodeId.value)
       } catch (error) {
-        ElMessage.error(i18n.global.t('删除失败'))
+        ElMessage.error(i18n.global.t(t('auto.LiveCodeManagement.50.acf066')))
       }
     })
     .catch(() => {})
@@ -543,7 +546,7 @@ const handleStats = async (row) => {
     statsData.value = response
     statsDialogVisible.value = true;
   } catch (error) {
-    ElMessage.error(i18n.global.t('获取统计数据失败'))
+    ElMessage.error(i18n.global.t(t('auto.LiveCodeManagement.52.063dc7')))
   }
 };
 
@@ -559,9 +562,9 @@ const handleShare = async (row) => {
     document.execCommand('copy')
     document.body.removeChild(input)
     
-    ElMessage.success(i18n.global.t('分享链接已复制到剪贴板'))
+    ElMessage.success(i18n.global.t(t('auto.LiveCodeManagement.53.08e4b0')))
   } catch (error) {
-    ElMessage.error(i18n.global.t('分享失败'))
+    ElMessage.error(i18n.global.t(t('auto.LiveCodeManagement.54.e8e25a')))
   }
 };
 
@@ -574,10 +577,10 @@ const handleSubmit = async () => {
     
     if (liveCodeForm.id) {
       await updateLiveCode(liveCodeForm.id, liveCodeForm);
-      ElMessage.success(i18n.global.t('更新成功'))
+      ElMessage.success(i18n.global.t(t('auto.LiveCodeManagement.55.55aa63')))
     } else {
       await createLiveCode(liveCodeForm);
-      ElMessage.success(i18n.global.t('创建成功'))
+      ElMessage.success(i18n.global.t(t('auto.LiveCodeManagement.56.04a691')))
     }
     
     dialogVisible.value = false
@@ -600,10 +603,10 @@ const handleQRSubmit = async () => {
     
     if (qrForm.id) {
       await updateLiveCodeQR(qrForm.id, qrForm);
-      ElMessage.success(i18n.global.t('更新成功'))
+      ElMessage.success(i18n.global.t(t('auto.LiveCodeManagement.55.55aa63')))
     } else {
       await generateLiveCodeQR(currentLiveCodeId.value, qrForm);
-      ElMessage.success(i18n.global.t('创建成功'))
+      ElMessage.success(i18n.global.t(t('auto.LiveCodeManagement.56.04a691')))
     }
     
     qrFormVisible.value = false

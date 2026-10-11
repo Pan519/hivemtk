@@ -125,7 +125,8 @@ def convert_file(path: Path) -> int:
     sc_end = src3.find("</script>")
     if sc_start >= 0 and sc_end > sc_start:
         head, script, tail = src3[:sc_start], src3[sc_start:sc_end], src3[sc_end:]
-        cjk_str = re.compile(r"'([^'\n]*[\u4e00-\u9fff][^'\n]*)'")
+        # 串首必须是中文（'中文...'）：'AI: 中文' 这类映射值的英文 key 段不转换（实测会破坏对象字面量）
+        cjk_str = re.compile(r"'([" + "\u4e00-\u9fff" + r"][^'\n]*)'")
         script = cjk_str.sub(
             lambda m: "t('" + key_for(m.group(1)) + "')" if cn.search(m.group(1)) else m.group(0),
             script)

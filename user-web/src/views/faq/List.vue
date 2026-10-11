@@ -4,8 +4,8 @@
     <el-card class="header-card" shadow="never">
       <div class="header-content">
         <div>
-          <h2>FAQ 知识库</h2>
-          <p class="subtitle">Layer1 FAQ 快速匹配知识库：客户消息命中即跳过 LLM 直接返回标准答案</p>
+          <h2>{{ $t('auto.List.25.e571cd') }}</h2>
+          <p class="subtitle">{{ $t('auto.List.26.836022') }}</p>
         </div>
         <div class="header-actions">
           <el-button @click="loadList" :loading="loading">
@@ -28,25 +28,25 @@
     <el-row :gutter="20" class="stat-row" v-if="stats">
       <el-col :span="6">
         <el-card shadow="never" class="stat-card">
-          <div class="stat-label">总数</div>
+          <div class="stat-label">{{ $t('auto.List.27.9ed7d3') }}</div>
           <div class="stat-value">{{ stats.total || 0 }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card shadow="never" class="stat-card">
-          <div class="stat-label">启用</div>
+          <div class="stat-label">{{ $t('auto.List.9.7854b5') }}</div>
           <div class="stat-value text-success">{{ stats.enabled || 0 }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card shadow="never" class="stat-card">
-          <div class="stat-label">启用率</div>
+          <div class="stat-label">{{ $t('auto.List.28.ba5a60') }}</div>
           <div class="stat-value text-primary">{{ enableRate }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card shadow="never" class="stat-card">
-          <div class="stat-label">分类数</div>
+          <div class="stat-label">{{ $t('auto.List.29.cc59b3') }}</div>
           <div class="stat-value text-info">{{ categoryCount }}</div>
         </el-card>
       </el-col>
@@ -55,35 +55,35 @@
     
     <el-card shadow="never" class="filter-card">
       <el-form :inline="true" :model="filter" @submit.prevent>
-        <el-form-item label="关键词">
+        <el-form-item :label="$t('auto.List.1.9699a5')">
           <el-input
             v-model="filter.keyword"
-            placeholder="搜索问题/答案/关键词"
+            :placeholder="$t('auto.List.2.6f505a')"
             clearable
             style="width: 240px"
             @keyup.enter="onSearch"
             @clear="onSearch"
           />
         </el-form-item>
-        <el-form-item label="分类">
-          <el-select v-model="filter.category" placeholder="全部分类" clearable style="width: 160px" @change="onSearch">
+        <el-form-item :label="$t('auto.List.3.d0771a')">
+          <el-select v-model="filter.category" :placeholder="$t('auto.List.4.1a7503')" clearable style="width: 160px" @change="onSearch">
             <el-option v-for="c in categoryOptions" :key="c" :label="c" :value="c" />
           </el-select>
         </el-form-item>
-        <el-form-item label="意图">
+        <el-form-item :label="$t('auto.List.5.764aca')">
           <el-input
             v-model="filter.intent"
-            placeholder="如: shipping, refund"
+            :placeholder="$t('auto.List.6.3814c5')"
             clearable
             style="width: 160px"
             @keyup.enter="onSearch"
             @clear="onSearch"
           />
         </el-form-item>
-        <el-form-item label="状态">
-          <el-select v-model="filter.enabled" placeholder="全部状态" clearable style="width: 130px" @change="onSearch">
-            <el-option label="启用" :value="true" />
-            <el-option label="禁用" :value="false" />
+        <el-form-item :label="$t('auto.List.7.3fea7c')">
+          <el-select v-model="filter.enabled" :placeholder="$t('auto.List.8.443483')" clearable style="width: 130px" @change="onSearch">
+            <el-option :label="$t('auto.List.9.7854b5')" :value="true" />
+            <el-option :label="$t('auto.List.10.710ad0')" :value="false" />
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -91,7 +91,7 @@
             <el-icon><Search /></el-icon>
             搜索
           </el-button>
-          <el-button @click="resetFilter">重置</el-button>
+          <el-button @click="resetFilter">{{ $t('auto.List.30.4b9c32') }}</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -100,7 +100,7 @@
     <el-card shadow="never">
       <el-table :data="list" v-loading="loading" stripe border>
         <el-table-column prop="id" label="ID" width="70" align="center" />
-        <el-table-column label="问题" min-width="280" show-overflow-tooltip>
+        <el-table-column :label="$t('auto.List.11.5dc99f')" min-width="280" show-overflow-tooltip>
           <template #default="{ row }">
             <div class="question-text">{{ row.question }}</div>
             <div v-if="row.keywords && row.keywords.length" class="keyword-list">
@@ -111,10 +111,10 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column label="答案预览" min-width="220" show-overflow-tooltip>
+        <el-table-column :label="$t('auto.List.12.1a1dcc')" min-width="220" show-overflow-tooltip>
           <template #default="{ row }">{{ truncate(row.answer, 80) }}</template>
         </el-table-column>
-        <el-table-column label="所属知识库" width="180" show-overflow-tooltip>
+        <el-table-column :label="$t('auto.List.13.de9210')" width="180" show-overflow-tooltip>
           <template #default="{ row }">
             <el-tag
               v-if="getKBName(row.kb_id)"
@@ -124,22 +124,22 @@
             >
               {{ getKBName(row.kb_id) }}
             </el-tag>
-            <span v-else class="text-muted">未挂载</span>
+            <span v-else class="text-muted">{{ $t('auto.List.31.f64a38') }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="分类" width="120" align="center">
+        <el-table-column :label="$t('auto.List.3.d0771a')" width="120" align="center">
           <template #default="{ row }">
             <el-tag v-if="row.category" size="small" type="info">{{ row.category }}</el-tag>
             <span v-else>-</span>
           </template>
         </el-table-column>
-        <el-table-column label="意图" width="120" align="center">
+        <el-table-column :label="$t('auto.List.5.764aca')" width="120" align="center">
           <template #default="{ row }">
             <el-tag v-if="row.intent" size="small" type="warning">{{ row.intent }}</el-tag>
             <span v-else>-</span>
           </template>
         </el-table-column>
-        <el-table-column label="置信度" width="100" align="center">
+        <el-table-column :label="$t('auto.List.14.8f3599')" width="100" align="center">
           <template #default="{ row }">
             <el-progress
               :percentage="Math.round((row.confidence || 0) * 100)"
@@ -150,14 +150,14 @@
             />
           </template>
         </el-table-column>
-        <el-table-column label="命中次数" width="100" align="center">
+        <el-table-column :label="$t('auto.List.15.e5852c')" width="100" align="center">
           <template #default="{ row }">
             <el-tag size="small" :type="row.hit_count > 0 ? 'success' : 'info'">
               {{ row.hit_count || 0 }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="状态" width="90" align="center">
+        <el-table-column :label="$t('auto.List.7.3fea7c')" width="90" align="center">
           <template #default="{ row }">
             <el-switch
               :model-value="row.enabled !== false"
@@ -166,18 +166,18 @@
             />
           </template>
         </el-table-column>
-        <el-table-column label="更新时间" width="160">
+        <el-table-column :label="$t('auto.List.16.a001a2')" width="160">
           <template #default="{ row }">{{ formatTime(row.updated_at) }}</template>
         </el-table-column>
-        <el-table-column label="操作" width="180" fixed="right">
+        <el-table-column :label="$t('auto.List.17.2b6bc0')" width="180" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" size="small" @click="goEdit(row)">编辑</el-button>
-            <el-button link type="primary" size="small" @click="onTestOne(row)">测试</el-button>
-            <el-button link type="danger" size="small" @click="onDelete(row)">删除</el-button>
+            <el-button link type="primary" size="small" @click="goEdit(row)">{{ $t('auto.List.32.95b351') }}</el-button>
+            <el-button link type="primary" size="small" @click="onTestOne(row)">{{ $t('auto.List.33.db06c7') }}</el-button>
+            <el-button link type="danger" size="small" @click="onDelete(row)">{{ $t('auto.List.34.2f4aad') }}</el-button>
           </template>
         </el-table-column>
         <template #empty>
-          <el-empty description="暂无 FAQ 数据" />
+          <el-empty :description="$t('auto.List.18.804d71')" />
         </template>
       </el-table>
 
@@ -195,14 +195,14 @@
     </el-card>
 
     
-    <el-dialog v-model="testDialogVisible" title="FAQ 匹配测试" width="640px" top="6vh">
+    <el-dialog v-model="testDialogVisible" :title="$t('auto.List.19.8dc65c')" width="640px" top="6vh">
       <el-form :model="testForm" label-width="80px">
-        <el-form-item label="测试问题">
+        <el-form-item :label="$t('auto.List.20.dd6023')">
           <el-input
             v-model="testForm.msg"
             type="textarea"
             :rows="2"
-            placeholder="请输入要匹配的测试问题"
+            :placeholder="$t('auto.List.21.4fb347')"
           />
         </el-form-item>
         <el-form-item>
@@ -213,31 +213,32 @@
         </el-form-item>
       </el-form>
       <template v-if="testResult.length">
-        <el-divider content-position="left">匹配结果</el-divider>
+        <el-divider content-position="left">{{ $t('auto.List.35.8cfdfd') }}</el-divider>
         <el-table :data="testResult" stripe size="small" border>
-          <el-table-column type="index" label="排名" width="70" align="center" />
-          <el-table-column label="问题" min-width="200" show-overflow-tooltip>
+          <el-table-column type="index" :label="$t('auto.List.22.a4dc00')" width="70" align="center" />
+          <el-table-column :label="$t('auto.List.11.5dc99f')" min-width="200" show-overflow-tooltip>
             <template #default="{ row }">{{ row.entry?.question }}</template>
           </el-table-column>
-          <el-table-column label="置信度" width="100" align="center">
+          <el-table-column :label="$t('auto.List.14.8f3599')" width="100" align="center">
             <template #default="{ row }">
               <el-tag :type="getMatchTagType(row.score)" size="small">{{ (row.score * 100).toFixed(0) }}%</el-tag>
             </template>
           </el-table-column>
-          <el-table-column label="匹配类型" width="120" align="center">
+          <el-table-column :label="$t('auto.List.23.194ffd')" width="120" align="center">
             <template #default="{ row }">
               <el-tag size="small" type="info">{{ row.match_type || '-' }}</el-tag>
             </template>
           </el-table-column>
         </el-table>
       </template>
-      <el-empty v-else-if="!testLoading && testTouched" description="无匹配结果" :image-size="60" />
+      <el-empty v-else-if="!testLoading && testTouched" :description="$t('auto.List.24.f10c91')" :image-size="60" />
     </el-dialog>
   </div>
 </template>
 
 <script setup>
 import { ref, computed, onMounted, reactive } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { Refresh, Plus, Search, Aim } from '@element-plus/icons-vue'
@@ -245,6 +246,8 @@ import { faqApi } from '@/api/faq'
 import { listKBs } from '@/api/knowledgeBase'
 
 const router = useRouter()
+
+const { t } = useI18n()
 
 const loading = ref(false);
 const list = ref([])
@@ -347,7 +350,7 @@ const loadList = async () => {
     list.value = res?.list || []
     total.value = res?.total || 0
   } catch (e) {
-    ElMessage.error('加载 FAQ 列表失败：' + (e.message || '未知错误'))
+    ElMessage.error(t('auto.List.36.db4e4c') + (e.message || t('auto.List.37.974e74')))
   } finally {
     loading.value = false
   }
@@ -358,7 +361,7 @@ const loadStats = async () => {
     const res = await faqApi.stats()
     stats.value = res || { total: 0, enabled: 0 }
   } catch (e) {
-    console.warn('加载 FAQ 统计失败：', e?.message);
+    console.warn(t('auto.List.38.f1051b'), e?.message);
   }
 }
 
@@ -397,11 +400,11 @@ const onToggle = async (row, v) => {
   row._toggling = true
   try {
     await faqApi.update(row.id, { ...stripToPayload(row), enabled: v })
-    ElMessage.success(v ? '已启用' : '已禁用')
+    ElMessage.success(v ? t('auto.List.39.53ace4') : t('auto.List.40.1c1ed9'))
     await loadList()
     await loadStats()
   } catch (e) {
-    ElMessage.error('状态切换失败：' + (e.message || '未知错误'))
+    ElMessage.error(t('auto.List.41.428b3b') + (e.message || t('auto.List.37.974e74')))
   } finally {
     row._toggling = false
   }
@@ -417,18 +420,18 @@ const stripToPayload = (row) => ({
 })
 
 const onDelete = (row) => {
-  ElMessageBox.confirm(`确认删除 FAQ「${truncate(row.question, 30)}」吗？删除后不可恢复。`, '删除确认', {
+  ElMessageBox.confirm(`确认删除 FAQ「${truncate(row.question, 30)}」吗？删除后不可恢复。`, t('auto.List.42.50eaf9'), {
     type: 'warning',
-    confirmButtonText: '确认删除',
-    cancelButtonText: '取消'
+    confirmButtonText: t('auto.List.43.631cd2'),
+    cancelButtonText: t('auto.List.44.625fb2')
   }).then(async () => {
     try {
       await faqApi.remove(row.id)
-      ElMessage.success('删除成功')
+      ElMessage.success(t('auto.List.45.0007d1'))
       await loadList()
       await loadStats()
     } catch (e) {
-      ElMessage.error('删除失败：' + (e.message || '未知错误'))
+      ElMessage.error(t('auto.List.46.bc42bb') + (e.message || t('auto.List.37.974e74')))
     }
   }).catch(() => {})
 };
@@ -442,7 +445,7 @@ const onTestOne = (row) => {
 
 const runTest = async () => {
   if (!testForm.value.msg || !testForm.value.msg.trim()) {
-    ElMessage.warning('请输入测试问题')
+    ElMessage.warning(t('auto.List.47.2b216e'))
     return
   }
   testLoading.value = true
@@ -452,7 +455,7 @@ const runTest = async () => {
     testResult.value = res || []
   } catch (e) {
     testResult.value = []
-    ElMessage.error('匹配失败：' + (e.message || '未知错误'))
+    ElMessage.error(t('auto.List.48.a4ccd5') + (e.message || t('auto.List.37.974e74')))
   } finally {
     testLoading.value = false
   }

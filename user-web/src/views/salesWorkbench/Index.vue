@@ -2,7 +2,7 @@
   <div class="sales-workbench">
     <div class="wb-header">
       <div class="wb-title">
-        <h3>销售工作台</h3>
+        <h3>{{ $t('auto.Index.18.05f652') }}</h3>
         <span class="wb-sub">
           {{ overview.name || '—' }}{{ overview.team ? ' · ' + overview.team : '' }}
           <el-tag
@@ -65,22 +65,22 @@
           </template>
           <div class="wb-stats">
             <div class="wb-stat">
-              <span class="num">{{ n(overview.today?.new_orders) }}</span><span class="lab">新订单</span>
+              <span class="num">{{ n(overview.today?.new_orders) }}</span><span class="lab">{{ $t('auto.Index.19.ea1053') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ money(overview.today?.new_revenue) }}</span><span class="lab">新营收</span>
+              <span class="num">{{ money(overview.today?.new_revenue) }}</span><span class="lab">{{ $t('auto.Index.20.a3c215') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ n(overview.today?.follow_ups) }}</span><span class="lab">跟进</span>
+              <span class="num">{{ n(overview.today?.follow_ups) }}</span><span class="lab">{{ $t('auto.Index.12.994dcf') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ n(overview.today?.conversions) }}</span><span class="lab">转化</span>
+              <span class="num">{{ n(overview.today?.conversions) }}</span><span class="lab">{{ $t('auto.Index.21.613b48') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ rate(overview.today?.conversion_rate) }}</span><span class="lab">转化率</span>
+              <span class="num">{{ rate(overview.today?.conversion_rate) }}</span><span class="lab">{{ $t('auto.Index.13.715054') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ n(overview.today?.ai_deals) }}</span><span class="lab">AI 成单</span>
+              <span class="num">{{ n(overview.today?.ai_deals) }}</span><span class="lab">{{ $t('auto.Index.22.124bec') }}</span>
             </div>
           </div>
         </el-card>
@@ -98,22 +98,22 @@
           </template>
           <div class="wb-stats">
             <div class="wb-stat">
-              <span class="num">{{ n(overview.month?.total_orders) }}</span><span class="lab">订单</span>
+              <span class="num">{{ n(overview.month?.total_orders) }}</span><span class="lab">{{ $t('auto.Index.10.4c117f') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ money(overview.month?.total_revenue) }}</span><span class="lab">营收</span>
+              <span class="num">{{ money(overview.month?.total_revenue) }}</span><span class="lab">{{ $t('auto.Index.11.a883e8') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ n(overview.month?.follow_ups) }}</span><span class="lab">跟进</span>
+              <span class="num">{{ n(overview.month?.follow_ups) }}</span><span class="lab">{{ $t('auto.Index.12.994dcf') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ n(overview.month?.conversions) }}</span><span class="lab">转化</span>
+              <span class="num">{{ n(overview.month?.conversions) }}</span><span class="lab">{{ $t('auto.Index.21.613b48') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ rate(overview.month?.conversion_rate) }}</span><span class="lab">转化率</span>
+              <span class="num">{{ rate(overview.month?.conversion_rate) }}</span><span class="lab">{{ $t('auto.Index.13.715054') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ n(overview.month?.new_customers) }}</span><span class="lab">新客户</span>
+              <span class="num">{{ n(overview.month?.new_customers) }}</span><span class="lab">{{ $t('auto.Index.23.8759f4') }}</span>
             </div>
           </div>
         </el-card>
@@ -131,22 +131,22 @@
           </template>
           <div class="wb-stats">
             <div class="wb-stat">
-              <span class="num">{{ money(overview.metrics?.avg_deal_amount) }}</span><span class="lab">客单价</span>
+              <span class="num">{{ money(overview.metrics?.avg_deal_amount) }}</span><span class="lab">{{ $t('auto.Index.24.53c7e7') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ rate(overview.metrics?.renewal_rate) }}</span><span class="lab">续约率</span>
+              <span class="num">{{ rate(overview.metrics?.renewal_rate) }}</span><span class="lab">{{ $t('auto.Index.25.b1a24e') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ rate(overview.metrics?.repurchase_rate) }}</span><span class="lab">复购率</span>
+              <span class="num">{{ rate(overview.metrics?.repurchase_rate) }}</span><span class="lab">{{ $t('auto.Index.26.106d49') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ rate(overview.metrics?.churn_rate) }}</span><span class="lab">流失率</span>
+              <span class="num">{{ rate(overview.metrics?.churn_rate) }}</span><span class="lab">{{ $t('auto.Index.27.f620ee') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ n(overview.metrics?.active_customers) }}</span><span class="lab">活跃客户</span>
+              <span class="num">{{ n(overview.metrics?.active_customers) }}</span><span class="lab">{{ $t('auto.Index.28.023ff0') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ n(overview.metrics?.dormant_customers) }}</span><span class="lab">沉睡客户</span>
+              <span class="num">{{ n(overview.metrics?.dormant_customers) }}</span><span class="lab">{{ $t('auto.Index.29.5ad07e') }}</span>
             </div>
           </div>
         </el-card>
@@ -160,8 +160,8 @@
       class="wb-card wb-block"
     >
       <template #header>
-        <span>快捷入口</span>
-        <span class="wb-hint">常用页面一键直达</span>
+        <span>{{ $t('auto.Index.30.9fdf0e') }}</span>
+        <span class="wb-hint">{{ $t('auto.Index.31.661cac') }}</span>
       </template>
       <div class="wb-quick">
         <el-button
@@ -181,7 +181,7 @@
       class="wb-card wb-block"
     >
       <template #header>
-        <span>我的待办</span>
+        <span>{{ $t('auto.Index.32.536d2e') }}</span>
         <span class="wb-hint">共 {{ overview.todos?.length || 0 }} 条，点击可跳转对应落点</span>
       </template>
       <el-table
@@ -190,7 +190,7 @@
         size="small"
       >
         <el-table-column
-          label="优先级"
+          :label="$t('auto.Index.1.ee8ecb')"
           width="80"
         >
           <template #default="{ row }">
@@ -203,7 +203,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="类型"
+          :label="$t('auto.Index.2.226b09')"
           width="90"
         >
           <template #default="{ row }">
@@ -217,18 +217,18 @@
         </el-table-column>
         <el-table-column
           prop="title"
-          label="事项"
+          :label="$t('auto.Index.3.1bff23')"
           min-width="160"
           show-overflow-tooltip
         />
         <el-table-column
           prop="description"
-          label="说明"
+          :label="$t('auto.Index.4.f411d0')"
           min-width="200"
           show-overflow-tooltip
         />
         <el-table-column
-          label="截止"
+          :label="$t('auto.Index.5.cd8fbf')"
           width="140"
         >
           <template #default="{ row }">
@@ -236,7 +236,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="操作"
+          :label="$t('auto.Index.6.2b6bc0')"
           width="90"
         >
           <template #default="{ row }">
@@ -254,7 +254,7 @@
       </el-table>
       <el-empty
         v-else
-        description="暂无待办"
+        :description="$t('auto.Index.7.44406e')"
         :image-size="60"
       />
     </el-card>
@@ -288,21 +288,21 @@
             />
             <el-table-column
               prop="name"
-              label="销售"
+              :label="$t('auto.Index.8.7f0dc5')"
               min-width="90"
             />
             <el-table-column
               prop="team"
-              label="团队"
+              :label="$t('auto.Index.9.4675fb')"
               width="90"
             />
             <el-table-column
               prop="total_orders"
-              label="订单"
+              :label="$t('auto.Index.10.4c117f')"
               width="70"
             />
             <el-table-column
-              label="营收"
+              :label="$t('auto.Index.11.a883e8')"
               width="120"
             >
               <template #default="{ row }">
@@ -311,11 +311,11 @@
             </el-table-column>
             <el-table-column
               prop="total_follow_ups"
-              label="跟进"
+              :label="$t('auto.Index.12.994dcf')"
               width="70"
             />
             <el-table-column
-              label="转化率"
+              :label="$t('auto.Index.13.715054')"
               width="90"
             >
               <template #default="{ row }">
@@ -324,13 +324,13 @@
             </el-table-column>
             <el-table-column
               prop="active_days"
-              label="活跃天"
+              :label="$t('auto.Index.14.9dc1f6')"
               width="80"
             />
           </el-table>
           <el-empty
             v-else
-            description="近窗内暂无排行数据"
+            :description="$t('auto.Index.15.3b80b3')"
             :image-size="60"
           />
         </el-card>
@@ -370,7 +370,7 @@
           <!-- journey 未装配时后端回 funnel=null（少一块 ≠ 500），按"未装配"措辞，不当成没数据 -->
           <el-empty
             v-else
-            description="漏斗未装配（草稿/旅程运行时未启用）"
+            :description="$t('auto.Index.16.e3f177')"
             :image-size="60"
           />
         </el-card>
@@ -435,7 +435,7 @@
           </div>
           <el-empty
             v-if="!champion.common_tags?.length && !champion.insights?.length"
-            description="近窗内暂无画像数据"
+            :description="$t('auto.Index.17.dfcbe6')"
             :image-size="60"
           />
         </el-card>
@@ -449,33 +449,33 @@
           class="wb-card"
         >
           <template #header>
-            <span>AI 产能（本月）</span>
-            <span class="wb-hint">事件流口径，与 /api/ai-productivity 报表并存</span>
+            <span>{{ $t('auto.Index.33.4d22ac') }}</span>
+            <span class="wb-hint">{{ $t('auto.Index.34.ab516c') }}</span>
           </template>
           <div class="wb-stats">
             <div class="wb-stat">
-              <span class="num">{{ n(overview.ai_product?.total_ai_deals) }}</span><span class="lab">AI 成单</span>
+              <span class="num">{{ n(overview.ai_product?.total_ai_deals) }}</span><span class="lab">{{ $t('auto.Index.22.124bec') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ n(overview.ai_product?.ai_replied) }}</span><span class="lab">AI 应答</span>
+              <span class="num">{{ n(overview.ai_product?.ai_replied) }}</span><span class="lab">{{ $t('auto.Index.35.53ac19') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ rate(overview.ai_product?.reply_rate) }}</span><span class="lab">应答率</span>
+              <span class="num">{{ rate(overview.ai_product?.reply_rate) }}</span><span class="lab">{{ $t('auto.Index.36.0d0782') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ rate(overview.ai_product?.transfer_rate) }}</span><span class="lab">转人工率</span>
+              <span class="num">{{ rate(overview.ai_product?.transfer_rate) }}</span><span class="lab">{{ $t('auto.Index.37.381706') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ rate(overview.ai_product?.ai_conversion_rate) }}</span><span class="lab">AI 转化</span>
+              <span class="num">{{ rate(overview.ai_product?.ai_conversion_rate) }}</span><span class="lab">{{ $t('auto.Index.38.3da640') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ rate(overview.ai_product?.productivity_gain) }}</span><span class="lab">产能增益</span>
+              <span class="num">{{ rate(overview.ai_product?.productivity_gain) }}</span><span class="lab">{{ $t('auto.Index.39.b9fb73') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ n(overview.ai_product?.total_cost_tokens) }}</span><span class="lab">消耗 Token</span>
+              <span class="num">{{ n(overview.ai_product?.total_cost_tokens) }}</span><span class="lab">{{ $t('auto.Index.40.c75aff') }}</span>
             </div>
             <div class="wb-stat">
-              <span class="num">{{ money(overview.ai_product?.solo_deal_amount) }}</span><span class="lab">AI 独立成单额</span>
+              <span class="num">{{ money(overview.ai_product?.solo_deal_amount) }}</span><span class="lab">{{ $t('auto.Index.41.3e9680') }}</span>
             </div>
           </div>
         </el-card>
@@ -486,6 +486,7 @@
 
 <script setup>
 import { onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { Refresh } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
@@ -501,6 +502,8 @@ import { useUserStore } from '@/stores/user'
 // 不把它说成"暂无数据"。rate 后端已 *100（0–100 口径），前端不再乘。
 const router = useRouter()
 const userStore = useUserStore()
+
+const { t } = useI18n()
 
 const loading = ref(false)
 const error = ref('')
@@ -521,9 +524,9 @@ const rate = (v) => Number(v ?? 0).toFixed(1) + '%'
 const stagePct = (v) => Math.min(100, Math.max(0, Number(v ?? 0)))
 const fmtTime = (t) => (t ? String(t).replace('T', ' ').slice(0, 16) : '—')
 
-const priorityLabel = (p) => ({ 5: '紧急', 4: '高', 3: '低' }[p] || '普通')
+const priorityLabel = (p) => ({ 5: t('auto.Index.42.cb0ed5'), 4: t('auto.Index.43.4296d7'), 3: t('auto.Index.44.19ac67') }[p] || t('auto.Index.45.35242c'))
 const priorityType = (p) => (p >= 5 ? 'danger' : p === 4 ? 'warning' : 'info')
-const typeLabel = (t) => ({ draft: '订单草稿', followup: '跟进' }[t] || t || '—')
+const typeLabel = (t) => ({ draft: t('auto.Index.46.83861e'), followup: t('auto.Index.12.994dcf') }[t] || t || '—')
 
 function errMsg(e, what) {
   const s = e?.status
@@ -535,7 +538,7 @@ function errMsg(e, what) {
 async function loadOverview() {
   const id = me()
   if (!id) {
-    error.value = '未获取到登录身份，无法加载个人概览'
+    error.value = t('auto.Index.47.689e23')
     return
   }
   overview.value = await salesWorkbenchApi.overview(id)
@@ -563,7 +566,7 @@ async function loadAll() {
   try {
     await Promise.all([loadOverview(), loadTeam(), loadQuickActions()])
   } catch (e) {
-    error.value = errMsg(e, '加载工作台数据')
+    error.value = errMsg(e, t('auto.Index.48.1ccf79'))
   } finally {
     loading.value = false
   }
@@ -583,11 +586,11 @@ function goResolved(url, kind) {
 }
 
 function goTodo(row) {
-  goResolved(row.url, '待办')
+  goResolved(row.url, t('auto.Index.49.b60ec8'))
 }
 
 function goQuick(action) {
-  goResolved(action.url, '快链')
+  goResolved(action.url, t('auto.Index.50.9b4a03'))
 }
 
 onMounted(loadAll)

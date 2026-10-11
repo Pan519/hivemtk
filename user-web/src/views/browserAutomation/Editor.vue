@@ -3,16 +3,16 @@
     <h2>{{ isEdit ? '编辑任务' : '新建任务' }}</h2>
     <el-alert v-if="taskLoadError" type="error" :closable="false" show-icon style="max-width: 860px; margin-bottom: 12px">
       <template #title>这条任务读不到，下面摊开的是空白默认值而不是它的内容：{{ taskLoadError }}</template>
-      <el-button size="small" style="margin-top: 6px" @click="router.push('/browser-automation/tasks')">返回任务列表</el-button>
+      <el-button size="small" style="margin-top: 6px" @click="router.push('/browser-automation/tasks')">{{ $t('auto.Editor.44.90e22f') }}</el-button>
     </el-alert>
     <el-form :model="form" label-width="120px" style="max-width: 860px">
-      <el-form-item label="名称" required>
+      <el-form-item :label="$t('auto.Editor.1.d7ec2d')" required>
         <el-input v-model="form.name" maxlength="256" />
       </el-form-item>
-      <el-form-item label="描述">
+      <el-form-item :label="$t('auto.Editor.2.3bdd08')">
         <el-input v-model="form.description" type="textarea" :rows="2" />
       </el-form-item>
-      <el-form-item label="平台" required>
+      <el-form-item :label="$t('auto.Editor.3.498128')" required>
         <el-select v-model="form.platform" style="width: 220px" @change="onPlatformChange">
           <el-option v-for="p in platforms" :key="p.identifier" :value="p.identifier"
             :label="platformLabel(p)" :disabled="false" />
@@ -21,116 +21,116 @@
           {{ platformLabel(currentPlatform) }} 暂不支持发评论（接口未公开/待 M3）
         </span>
       </el-form-item>
-      <el-form-item label="起始 URL" required>
+      <el-form-item :label="$t('auto.Editor.4.3451af')" required>
         <el-input v-model="form.url" placeholder="https://..." />
       </el-form-item>
-      <el-form-item label="任务类型">
+      <el-form-item :label="$t('auto.Editor.5.bb763c')">
         <el-select v-model="form.task_type" style="width: 200px">
-          <el-option label="单次 (one_shot)" value="one_shot" />
-          <el-option label="循环 (loop)" value="loop" />
-          <el-option label="定时 (cron)" value="cron" />
-          <el-option label="工作流 (workflow)" value="workflow" />
+          <el-option :label="$t('auto.Editor.6.6efc0a')" value="one_shot" />
+          <el-option :label="$t('auto.Editor.7.108e55')" value="loop" />
+          <el-option :label="$t('auto.Editor.8.39fd49')" value="cron" />
+          <el-option :label="$t('auto.Editor.9.1644d2')" value="workflow" />
         </el-select>
       </el-form-item>
-      <el-form-item label="执行模式">
+      <el-form-item :label="$t('auto.Editor.10.94fa6c')">
         <el-radio-group v-model="form.brain_mode">
-          <el-radio :value="false">显式步骤编排</el-radio>
-          <el-radio :value="true">Brain 目标驱动（LLM）</el-radio>
+          <el-radio :value="false">{{ $t('auto.Editor.45.c32706') }}</el-radio>
+          <el-radio :value="true">{{ $t('auto.Editor.46.a3f0b3') }}</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item v-if="form.brain_mode" label="Brain 目标" required>
-        <el-input v-model="form.brain_goal" type="textarea" :rows="3" placeholder="例：打开页面搜索“机械键盘”，记录前 10 个结果的标题与价格" />
+      <el-form-item v-if="form.brain_mode" :label="$t('auto.Editor.11.0f80fa')" required>
+        <el-input v-model="form.brain_goal" type="textarea" :rows="3" :placeholder="$t('auto.Editor.12.069485')" />
       </el-form-item>
 
       <template v-if="!form.brain_mode">
         <el-form-item>
-          <el-button size="small" type="primary" plain @click="applyPreset">平台预设模板</el-button>
-          <span class="preset-hint">按当前平台生成读链路编排（标题/作者/评论提取 + 截图），可再手动调整</span>
+          <el-button size="small" type="primary" plain @click="applyPreset">{{ $t('auto.Editor.47.7be2a0') }}</el-button>
+          <span class="preset-hint">{{ $t('auto.Editor.48.67368e') }}</span>
         </el-form-item>
-        <el-form-item label="步骤编排">
+        <el-form-item :label="$t('auto.Editor.13.08bb8d')">
           <div class="steps-editor">
             <div v-for="(step, i) in form.steps" :key="i" class="step-row">
               <span class="step-index">{{ i + 1 }}</span>
-              <el-select v-model="step.action" style="width: 160px" placeholder="动作">
+              <el-select v-model="step.action" style="width: 160px" :placeholder="$t('auto.Editor.14.c500cf')">
                 <el-option v-for="a in actions" :key="a.value" :label="a.label" :value="a.value" />
               </el-select>
               <el-input v-if="['open_tab','click','type','extract','query'].includes(step.action)" v-model="step.target"
-                :placeholder="step.action === 'open_tab' ? 'URL（可选，默认任务 URL）' : 'CSS selector 或 @eN'" style="width: 240px" />
-              <el-input v-if="step.action === 'type'" v-model="step.value" placeholder="输入内容" style="width: 180px" />
-              <el-input v-if="step.action === 'post_comment'" v-model="step.value" placeholder="评论文本" style="width: 220px" />
-              <el-input v-if="step.action === 'wait'" v-model.number="step.ms" placeholder="毫秒" style="width: 100px" />
+                ::placeholder="$t('auto.Editor.15.32eeaa')" style="width: 240px" />
+              <el-input v-if="step.action === 'type'" v-model="step.value" :placeholder="$t('auto.Editor.16.ec47d2')" style="width: 180px" />
+              <el-input v-if="step.action === 'post_comment'" v-model="step.value" :placeholder="$t('auto.Editor.17.74ad1b')" style="width: 220px" />
+              <el-input v-if="step.action === 'wait'" v-model.number="step.ms" :placeholder="$t('auto.Editor.18.21157c')" style="width: 100px" />
               <el-input v-if="step.action === 'wait_for_selector'" v-model="step.selector" placeholder="selector" style="width: 160px" />
-              <el-input v-if="step.action === 'wait_for_selector'" v-model.number="step.timeout_ms" placeholder="超时ms" style="width: 100px" />
+              <el-input v-if="step.action === 'wait_for_selector'" v-model.number="step.timeout_ms" :placeholder="$t('auto.Editor.19.f24257')" style="width: 100px" />
               <el-select v-if="step.action === 'scroll'" v-model="step.direction" style="width: 90px">
                 <el-option v-for="d in ['up','down','left','right']" :key="d" :label="d" :value="d" />
               </el-select>
               <el-input v-if="step.action === 'scroll'" v-model.number="step.amount" placeholder="px" style="width: 90px" />
               <el-select v-if="step.action === 'assert'" v-model="step.assert_kind" style="width: 150px">
-                <el-option label="包含文本" value="contains_text" />
-                <el-option label="元素存在" value="selector_exists" />
+                <el-option :label="$t('auto.Editor.20.483913')" value="contains_text" />
+                <el-option :label="$t('auto.Editor.21.b11d22')" value="selector_exists" />
               </el-select>
-              <el-input v-if="step.action === 'assert'" v-model="step.value" placeholder="断言文本/selector" style="width: 180px" />
-              <el-input v-if="step.action === 'click_near'" v-model="step.anchor" placeholder="锚点 CSS selector" style="width: 160px" />
-              <el-input v-if="step.action === 'click_near'" v-model="step.button_text" placeholder="按钮文本" style="width: 110px" />
+              <el-input v-if="step.action === 'assert'" v-model="step.value" :placeholder="$t('auto.Editor.22.e275b0')" style="width: 180px" />
+              <el-input v-if="step.action === 'click_near'" v-model="step.anchor" :placeholder="$t('auto.Editor.23.0f59a9')" style="width: 160px" />
+              <el-input v-if="step.action === 'click_near'" v-model="step.button_text" :placeholder="$t('auto.Editor.24.9fc706')" style="width: 110px" />
               <el-select v-if="step.action === 'query'" v-model="step.query_kind" style="width: 130px">
-                <el-option label="取文本" value="text" />
-                <el-option label="是否存在" value="exists" />
-                <el-option label="计数" value="count" />
-                <el-option label="取属性" value="attr" />
+                <el-option :label="$t('auto.Editor.25.58dd5d')" value="text" />
+                <el-option :label="$t('auto.Editor.26.6f2851')" value="exists" />
+                <el-option :label="$t('auto.Editor.27.b33303')" value="count" />
+                <el-option :label="$t('auto.Editor.28.427977')" value="attr" />
               </el-select>
-              <el-input v-if="step.action === 'query' && step.query_kind === 'attr'" v-model="step.attribute" placeholder="属性名（href/src/value）" style="width: 150px" />
-              <el-checkbox v-model="step.continue_on_error" label="失败继续" />
-              <el-checkbox v-model="step.is_write" label="写操作">
-                <span class="step-write-hint">不可逆（服务端强制禁重试 + 记台账）</span>
+              <el-input v-if="step.action === 'query' && step.query_kind === 'attr'" v-model="step.attribute" :placeholder="$t('auto.Editor.29.3088f3')" style="width: 150px" />
+              <el-checkbox v-model="step.continue_on_error" :label="$t('auto.Editor.30.5753fe')" />
+              <el-checkbox v-model="step.is_write" :label="$t('auto.Editor.31.a6abfd')">
+                <span class="step-write-hint">{{ $t('auto.Editor.49.1c68e6') }}</span>
               </el-checkbox>
               <el-input-number v-model="step.retry_count" :min="0" :max="10" size="small" style="width: 90px" />
               <el-button size="small" type="danger" icon="Delete" circle @click="removeStep(i)" />
             </div>
-            <el-button size="small" icon="Plus" @click="addStep">添加步骤</el-button>
+            <el-button size="small" icon="Plus" @click="addStep">{{ $t('auto.Editor.50.7a3f6a') }}</el-button>
           </div>
         </el-form-item>
       </template>
 
-      <el-form-item v-if="form.task_type === 'cron'" label="定时表达式" required>
-        <el-input v-model="form.cron_expr" placeholder="*/5 * * * *（5 段：分 时 日 月 周）" style="width: 260px" />
-        <el-select v-model="form.cron_tz" clearable placeholder="时区（默认服务器本地）" style="width: 200px; margin-left: 12px">
+      <el-form-item v-if="form.task_type === 'cron'" :label="$t('auto.Editor.32.3ef44e')" required>
+        <el-input v-model="form.cron_expr" :placeholder="$t('auto.Editor.33.121826')" style="width: 260px" />
+        <el-select v-model="form.cron_tz" clearable :placeholder="$t('auto.Editor.34.8c4afe')" style="width: 200px; margin-left: 12px">
           <el-option v-for="tz in TIMEZONES" :key="tz" :label="tz" :value="tz" />
         </el-select>
         <div class="form-hint" style="margin-left: 0; width: 100%">
           <template v-if="existingTrigger">已有触发器 #{{ existingTrigger.id }}（{{ existingTrigger.cron_expr }}{{ existingTrigger.enabled ? '' : '，已停用' }}），保存会连着它一起改</template>
-          <template v-else>保存后会自动为这条任务创建触发器；留空则不创建</template>
+          <template v-else>{{ $t('auto.Editor.51.f103cc') }}</template>
           <div v-if="!cronRunnable" class="form-warn">
             任务还不是可执行状态（新建默认是草稿）：触发器照常排程，但到点会被执行入口拒掉、不产生会话——发布后才会真跑
           </div>
         </div>
       </el-form-item>
 
-      <el-form-item label="循环次数">
+      <el-form-item :label="$t('auto.Editor.35.2dbd74')">
         <el-input-number v-model="form.loop_count" :min="1" :max="1000" />
       </el-form-item>
-      <el-form-item label="步间间隔(ms)">
+      <el-form-item :label="$t('auto.Editor.36.3e61e1')">
         <el-input-number v-model="form.delay_ms" :min="0" :max="60000" :step="500" />
       </el-form-item>
-      <el-form-item label="超时(秒)">
+      <el-form-item :label="$t('auto.Editor.37.1815af')">
         <el-input-number v-model="form.timeout_sec" :min="10" :max="3600" :step="10" />
       </el-form-item>
 
-      <el-form-item label="失败自动重试">
+      <el-form-item :label="$t('auto.Editor.38.72e451')">
         <el-switch v-model="form.retry_on_fail" />
         <template v-if="form.retry_on_fail">
           <el-input-number v-model="form.retry_delay_sec" :min="30" :max="86400" :step="30" style="margin-left: 12px" />
-          <span style="margin: 0 8px">秒后重试，最多</span>
+          <span style="margin: 0 8px">{{ $t('auto.Editor.52.437f0e') }}</span>
           <el-input-number v-model="form.max_retry_times" :min="1" :max="10" />
-          <span style="margin-left: 8px">次</span>
+          <span style="margin-left: 8px">{{ $t('auto.Editor.53.7229ec') }}</span>
         </template>
       </el-form-item>
 
-      <el-form-item label="写操作人工确认">
+      <el-form-item :label="$t('auto.Editor.39.9fdb4c')">
         <el-switch v-model="form.require_confirm" />
         <template v-if="form.require_confirm">
-          <span style="margin: 0 8px">最长等待</span>
+          <span style="margin: 0 8px">{{ $t('auto.Editor.54.2d3869') }}</span>
           <el-input-number v-model="form.confirm_wait_sec" :min="1" :max="900" :step="30" />
-          <span class="form-hint">秒（与上方「超时」是两条独立预算：那条管自动化跑多久，这条管等人多久）</span>
+          <span class="form-hint">{{ $t('auto.Editor.55.9901a6') }}</span>
         </template>
         <div class="form-hint" style="margin-left: 0; width: 100%">
           开启后不可逆提交点前挂起，需在监控页点「确认放行」才真正发出（超时/中断则中止且不提交）。
@@ -139,19 +139,19 @@
         </div>
       </el-form-item>
 
-      <el-form-item v-if="form.task_type === 'workflow'" label="依赖前置任务">
-        <el-select v-model="form.depends_on_task_id" clearable placeholder="选择已发布任务" style="width: 300px">
+      <el-form-item v-if="form.task_type === 'workflow'" :label="$t('auto.Editor.40.26fa91')">
+        <el-select v-model="form.depends_on_task_id" clearable :placeholder="$t('auto.Editor.41.1678d3')" style="width: 300px">
           <el-option v-for="t in depOptions" :key="t.id" :label="depLabel(t)" :value="t.id" />
         </el-select>
         <el-select v-if="form.depends_on_task_id" v-model="form.depends_on_mode" style="width: 160px; margin-left: 12px">
-          <el-option label="前置完成 (all_done)" value="all_done" />
-          <el-option label="前置曾成功 (any_success)" value="any_success" />
+          <el-option :label="$t('auto.Editor.42.60140f')" value="all_done" />
+          <el-option :label="$t('auto.Editor.43.9f5146')" value="any_success" />
         </el-select>
       </el-form-item>
 
       <el-form-item>
-        <el-button type="primary" :loading="saving" @click="save">保存</el-button>
-        <el-button @click="$router.back()">取消</el-button>
+        <el-button type="primary" :loading="saving" @click="save">{{ $t('auto.Editor.56.be5fbb') }}</el-button>
+        <el-button @click="$router.back()">{{ $t('auto.Editor.57.625fb2') }}</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -159,6 +159,7 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import {
@@ -169,6 +170,8 @@ import {
 const route = useRoute()
 const router = useRouter()
 const isEdit = computed(() => !!route.params.id)
+const { t } = useI18n()
+
 const saving = ref(false)
 const taskLoadError = ref('')
 const readyTasks = ref([])
@@ -179,17 +182,17 @@ const TIMEZONES = ['Asia/Shanghai', 'Asia/Tokyo', 'Europe/London', 'America/New_
 const RUNNABLE_STATUS = ['ready', 'paused', 'done', 'failed']
 
 const actions = [
-  { value: 'open_tab', label: '打开标签页' }, { value: 'click', label: '点击' },
-  { value: 'type', label: '输入' }, { value: 'click_near', label: '锚点附近点击' }, { value: 'post_comment', label: '发评论（服务端禁重试）' },
-  { value: 'snapshot', label: '页面快照' },
-  { value: 'markdown', label: '页面 Markdown' }, { value: 'screenshot', label: '截图' },
-  { value: 'wait', label: '等待' }, { value: 'wait_for_selector', label: '等待元素' },
-  { value: 'scroll', label: '滚动' }, { value: 'extract', label: '提取数据' },
-  { value: 'assert', label: '断言' }, { value: 'query', label: '查询元素' },
-  { value: 'close_tab', label: '关闭标签页' },
+  { value: 'open_tab', label: t('auto.Editor.58.8230e5') }, { value: 'click', label: t('auto.Editor.59.4363c1') },
+  { value: 'type', label: t('auto.Editor.60.e47d59') }, { value: 'click_near', label: t('auto.Editor.61.8b411f') }, { value: 'post_comment', label: t('auto.Editor.62.7433c6') },
+  { value: 'snapshot', label: t('auto.Editor.63.612529') },
+  { value: 'markdown', label: t('auto.Editor.64.13940c') }, { value: 'screenshot', label: t('auto.Editor.65.369abf') },
+  { value: 'wait', label: t('auto.Editor.66.879792') }, { value: 'wait_for_selector', label: t('auto.Editor.67.ab5b8d') },
+  { value: 'scroll', label: t('auto.Editor.68.c76c60') }, { value: 'extract', label: t('auto.Editor.69.407cf7') },
+  { value: 'assert', label: t('auto.Editor.70.67920e') }, { value: 'query', label: t('auto.Editor.71.c8bfce') },
+  { value: 'close_tab', label: t('auto.Editor.72.4c00e9') },
 ]
 
-const platformNames = { xiaohongshu: '小红书', douyin: '抖音', xianyu: '闲鱼' }
+const platformNames = { xiaohongshu: t('auto.Editor.73.ae26bb'), douyin: t('auto.Editor.74.277a98'), xianyu: t('auto.Editor.75.9d4865') }
 const platformLabel = (p) => platformNames[p?.identifier] || p?.identifier || p
 const currentPlatform = computed(() => platforms.value.find((p) => p.identifier === form.value.platform))
 
@@ -279,10 +282,10 @@ async function ensureDepOption() {
   if (!id || readyTasks.value.some((t) => t.id === id)) return
   try {
     const t = unpack(await getBrowserTask(id))
-    depOption.value = t ? { id: t.id, name: t.name, status: t.status } : { id, name: '前置任务读不到', status: '' }
+    depOption.value = t ? { id: t.id, name: t.name, status: t.status } : { id, name: t('auto.Editor.76.7f3077'), status: '' }
   } catch {
     // 读不到本身就是一条要显出来的信息：默默不显示，等于替用户把这条依赖藏了
-    depOption.value = { id, name: '已删除或无权限', status: '' }
+    depOption.value = { id, name: t('auto.Editor.77.1afab3'), status: '' }
   }
 }
 
@@ -386,7 +389,7 @@ async function save() {
       router.push('/browser-automation/tasks')
       return
     }
-    ElMessage.success('已保存')
+    ElMessage.success(t('auto.Editor.78.f8dfed'))
     router.push('/browser-automation/tasks')
   } catch (e) {
     ElMessage.error(String(e?.message || e))

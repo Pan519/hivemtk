@@ -6,8 +6,8 @@
     <el-card style="width:260px; flex-shrink:0">
       <template #header>
         <div class="flex items-center justify-between">
-          <span class="font-bold">Workflow 模板</span>
-          <el-button size="small" type="primary" @click="onNewWorkflow">新建</el-button>
+          <span class="font-bold">{{ $t('auto.WorkflowEditor.19.8d6dc4') }}</span>
+          <el-button size="small" type="primary" @click="onNewWorkflow">{{ $t('auto.WorkflowEditor.20.26bb84') }}</el-button>
         </div>
       </template>
       <div class="space-y-2">
@@ -36,11 +36,11 @@
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-3">
               <span class="font-bold">工作流：{{ currentWorkflow?.name || '未选择' }}</span>
-              <el-input v-model="wfName" placeholder="工作流名称" size="small" style="width:200px" v-if="currentWorkflow" />
+              <el-input v-model="wfName" :placeholder="$t('auto.WorkflowEditor.1.ec7361')" size="small" style="width:200px" v-if="currentWorkflow" />
             </div>
             <div class="flex items-center gap-2">
-              <el-button size="small" @click="onSaveWorkflow" :disabled="!currentWorkflow">保存</el-button>
-              <el-button size="small" type="danger" plain @click="onDeleteWorkflow" :disabled="!currentWorkflow?.id">删除</el-button>
+              <el-button size="small" @click="onSaveWorkflow" :disabled="!currentWorkflow">{{ $t('auto.WorkflowEditor.21.be5fbb') }}</el-button>
+              <el-button size="small" type="danger" plain @click="onDeleteWorkflow" :disabled="!currentWorkflow?.id">{{ $t('auto.WorkflowEditor.22.2f4aad') }}</el-button>
               <el-button size="small" type="primary" @click="onRunNow" :disabled="!currentWorkflow" :loading="running">Run Now</el-button>
             </div>
           </div>
@@ -62,63 +62,63 @@
                      `undefined || ''` 会把空串传给 el-tag 的 type，触发 prop 校验告警并回落到
                      default(primary)。合法集合为 primary/success/info/warning/danger，中性用 info。 -->
                 <el-tag v-else size="small" :type="stepMeta(step.type, 'color') || 'info'" effect="light" style="margin-right:6px">{{ stepMeta(step.type, 'label') }}</el-tag>
-                <el-input v-model="step.name" size="small" placeholder="步骤名称" style="width:200px" />
+                <el-input v-model="step.name" size="small" :placeholder="$t('auto.WorkflowEditor.2.9a2536')" style="width:200px" />
               </div>
               <div class="step-config">
                 
                 <template v-if="step.type === 'trigger'">
-                  <el-tag size="small" type="info">工作流入口节点，接收触发事件</el-tag>
+                  <el-tag size="small" type="info">{{ $t('auto.WorkflowEditor.23.8d293e') }}</el-tag>
                 </template>
                 <template v-else-if="step.type === 'end'">
-                  <el-tag size="small" type="info">工作流结束节点，输出最终结果</el-tag>
+                  <el-tag size="small" type="info">{{ $t('auto.WorkflowEditor.24.ab65b4') }}</el-tag>
                 </template>
                 <template v-else-if="step.type === 'decision'">
                   <div class="flex gap-2 items-center">
-                    <el-input v-model="step.condition" size="small" placeholder="条件表达式，如 意向识别==high" style="flex:1" />
-                    <el-input v-model="step.jump_to" size="small" placeholder="跳转至步骤名" style="width:160px" />
+                    <el-input v-model="step.condition" size="small" :placeholder="$t('auto.WorkflowEditor.3.07c216')" style="flex:1" />
+                    <el-input v-model="step.jump_to" size="small" :placeholder="$t('auto.WorkflowEditor.4.1f4333')" style="width:160px" />
                   </div>
                 </template>
                 <template v-else-if="step.type === 'action'">
-                  <el-tag size="small" type="info">通用动作节点 — 如需实际执行，请改为具体执行器类型</el-tag>
+                  <el-tag size="small" type="info">{{ $t('auto.WorkflowEditor.25.57553c') }}</el-tag>
                 </template>
 
                 
                 <template v-else-if="step.type === 'content_generate'">
                   <div class="flex gap-2 flex-wrap">
-                    <el-input v-model="step.topic" size="small" placeholder="文章主题" style="flex:1;min-width:140px" />
-                    <el-input v-model="step.keyword" size="small" placeholder="目标关键词" style="width:160px" />
-                    <el-input v-model="step.brand" size="small" placeholder="品牌名" style="width:140px" />
-                    <el-input v-model="step.platform" size="small" placeholder="发布平台" style="width:140px" />
+                    <el-input v-model="step.topic" size="small" :placeholder="$t('auto.WorkflowEditor.5.f9f840')" style="flex:1;min-width:140px" />
+                    <el-input v-model="step.keyword" size="small" :placeholder="$t('auto.WorkflowEditor.6.011565')" style="width:160px" />
+                    <el-input v-model="step.brand" size="small" :placeholder="$t('auto.WorkflowEditor.7.fc4a05')" style="width:140px" />
+                    <el-input v-model="step.platform" size="small" :placeholder="$t('auto.WorkflowEditor.8.0b4228')" style="width:140px" />
                   </div>
-                  <el-input v-model="step.advantages" size="small" placeholder="核心卖点，逗号分隔" class="mt-2" />
+                  <el-input v-model="step.advantages" size="small" :placeholder="$t('auto.WorkflowEditor.9.805268')" class="mt-2" />
                 </template>
                 <template v-else-if="step.type === 'content_score'">
                   <div class="flex gap-2 items-center">
-                    <span class="text-xs text-gray-500">最低分数：</span>
+                    <span class="text-xs text-gray-500">{{ $t('auto.WorkflowEditor.26.521a84') }}</span>
                     <el-input-number v-model="step.min_score" :min="0" :max="100" size="small" style="width:100px" />
-                    <el-input v-model="step.brand" size="small" placeholder="品牌名" style="width:160px" />
+                    <el-input v-model="step.brand" size="small" :placeholder="$t('auto.WorkflowEditor.7.fc4a05')" style="width:160px" />
                   </div>
                 </template>
                 <template v-else-if="step.type === 'eeat_enhance'">
-                  <el-input v-model="step.brand" size="small" placeholder="品牌名" style="width:200px" />
-                  <span class="text-xs text-gray-500 ml-2">自动从上一步结果提取内容进行 EEAT 增强</span>
+                  <el-input v-model="step.brand" size="small" :placeholder="$t('auto.WorkflowEditor.7.fc4a05')" style="width:200px" />
+                  <span class="text-xs text-gray-500 ml-2">{{ $t('auto.WorkflowEditor.27.c33daa') }}</span>
                 </template>
                 <template v-else-if="step.type === 'fact_density_enhance'">
                   <div class="flex gap-2 items-center">
-                    <span class="text-xs text-gray-500">目标密度：</span>
+                    <span class="text-xs text-gray-500">{{ $t('auto.WorkflowEditor.28.f02e11') }}</span>
                     <el-slider v-model="step.target_density" :min="0.1" :max="1.0" :step="0.05" style="flex:1" />
                   </div>
                 </template>
                 <template v-else-if="step.type === 'verify'">
                   <div class="flex gap-2 flex-wrap">
-                    <el-input v-model="step.brand" size="small" placeholder="要验证的品牌" style="width:180px" />
+                    <el-input v-model="step.brand" size="small" :placeholder="$t('auto.WorkflowEditor.10.2284d7')" style="width:180px" />
                   </div>
-                  <div class="text-xs text-gray-500 mt-1">使用多轮 LLM 查询验证品牌在搜索结果中的提及率</div>
+                  <div class="text-xs text-gray-500 mt-1">{{ $t('auto.WorkflowEditor.29.d1a41a') }}</div>
                 </template>
                 <template v-else-if="step.type === 'query_probe'">
                   <div class="flex gap-2 flex-wrap">
-                    <el-input v-model="step.keyword" size="small" placeholder="探针关键词" style="flex:1;min-width:160px" />
-                    <el-select v-model="step.engine" size="small" placeholder="引擎" style="width:140px">
+                    <el-input v-model="step.keyword" size="small" :placeholder="$t('auto.WorkflowEditor.11.48a10a')" style="flex:1;min-width:160px" />
+                    <el-select v-model="step.engine" size="small" :placeholder="$t('auto.WorkflowEditor.12.6c1b19')" style="width:140px">
                       <el-option label="Qwen" value="qwen" />
                       <el-option label="DeepSeek" value="deepseek" />
                       <el-option label="SenseNova" value="sensenova" />
@@ -127,13 +127,13 @@
                   </div>
                 </template>
                 <template v-else-if="step.type === 'source_attribution'">
-                  <el-tag size="small" type="info">自动分析上一步内容的信源来源并标注</el-tag>
+                  <el-tag size="small" type="info">{{ $t('auto.WorkflowEditor.30.c65f13') }}</el-tag>
                 </template>
                 <template v-else-if="step.type === 'content_gap_fill'">
-                  <el-input v-model="step.keyword" size="small" placeholder="补全目标关键词" style="width:240px" />
+                  <el-input v-model="step.keyword" size="small" :placeholder="$t('auto.WorkflowEditor.13.cddadc')" style="width:240px" />
                 </template>
                 <template v-else-if="step.type === 'capture_lead'">
-                  <el-tag size="small" type="info">自动从搜索/对话中捕获潜在客户线索</el-tag>
+                  <el-tag size="small" type="info">{{ $t('auto.WorkflowEditor.31.ece49a') }}</el-tag>
                 </template>
                 <template v-else>
                   <div class="text-xs text-gray-400">未知步骤类型：{{ step.type }}</div>
@@ -148,13 +148,13 @@
           </div>
 
           <div class="mt-4">
-            <div class="text-xs text-gray-500 mb-1">控制节点：</div>
+            <div class="text-xs text-gray-500 mb-1">{{ $t('auto.WorkflowEditor.32.7945f0') }}</div>
             <div class="flex gap-2 flex-wrap mb-2">
               <template v-for="(t, k) in STEP_TYPES" :key="'c-'+k">
                 <el-button v-if="t.kind==='control'" size="small" plain @click="addStep(k)">+ {{ t.label }}</el-button>
               </template>
             </div>
-            <div class="text-xs text-gray-500 mb-1">执行器节点：</div>
+            <div class="text-xs text-gray-500 mb-1">{{ $t('auto.WorkflowEditor.33.b8348b') }}</div>
             <div class="flex gap-2 flex-wrap">
               <template v-for="(t, k) in STEP_TYPES" :key="'e-'+k">
                 <el-button v-if="t.kind==='executor'" size="small" plain @click="addStep(k)">+ {{ t.label }}</el-button>
@@ -166,23 +166,23 @@
 
       
       <el-card>
-        <template #header><span class="font-bold">执行监控</span></template>
+        <template #header><span class="font-bold">{{ $t('auto.WorkflowEditor.34.0a8e24') }}</span></template>
         <el-table :data="executions" v-loading="execLoading" size="small">
           <el-table-column prop="id" label="ID" width="80" />
           <el-table-column prop="workflow_name" label="Workflow" width="160" />
-          <el-table-column prop="status" label="状态" width="120">
+          <el-table-column prop="status" :label="$t('auto.WorkflowEditor.14.3fea7c')" width="120">
             <template #default="{ row }">
               <el-tag :type="execStatusType(row.status)" size="small">{{ row.status }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="current_step" label="当前步骤" width="140" />
-          <el-table-column prop="progress" label="进度" width="160">
+          <el-table-column prop="current_step" :label="$t('auto.WorkflowEditor.15.59cecb')" width="140" />
+          <el-table-column prop="progress" :label="$t('auto.WorkflowEditor.16.c7bff7')" width="160">
             <template #default="{ row }">
               <el-progress :percentage="row.progress || 0" size="small" />
             </template>
           </el-table-column>
-          <el-table-column prop="started_at" label="开始时间" width="180" />
-          <el-table-column prop="finished_at" label="结束时间" width="180" />
+          <el-table-column prop="started_at" :label="$t('auto.WorkflowEditor.17.592c59')" width="180" />
+          <el-table-column prop="finished_at" :label="$t('auto.WorkflowEditor.18.f78277')" width="180" />
         </el-table>
       </el-card>
     </div>
@@ -192,25 +192,28 @@
 
 <script setup>
 import { ref, reactive, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import { listWorkflows, saveWorkflow, deleteWorkflow, runWorkflow, listWorkflowExecutions } from '@/api/geoEntity.js'
 
 const STEP_TYPES = {
-  trigger:  { label: '触发器',     kind: 'control', default: {} },
-  action:   { label: '动作步骤',   kind: 'control', default: {} },
-  decision: { label: '条件分支',   kind: 'control', default: { condition: '', jump_to: '' } },
-  end:      { label: '结束节点',   kind: 'control', default: {} },
+  trigger:  { label: t('auto.WorkflowEditor.35.469672'),     kind: 'control', default: {} },
+  action:   { label: t('auto.WorkflowEditor.36.f429d4'),   kind: 'control', default: {} },
+  decision: { label: t('auto.WorkflowEditor.37.c71b12'),   kind: 'control', default: { condition: '', jump_to: '' } },
+  end:      { label: t('auto.WorkflowEditor.38.642f96'),   kind: 'control', default: {} },
 
   content_generate:     { label: 'LLM 内容生成', kind: 'executor', color: 'primary', default: { topic: '', brand: 'HiveMTK', keyword: '', advantages: '', platform: '' } },
-  content_score:        { label: '内容质量评分', kind: 'executor', color: 'warning', default: { min_score: 70, brand: 'HiveMTK' } },
+  content_score:        { label: t('auto.WorkflowEditor.39.18a442'), kind: 'executor', color: 'warning', default: { min_score: 70, brand: 'HiveMTK' } },
   eeat_enhance:         { label: 'EEAT 权威增强', kind: 'executor', color: 'success', default: { brand: 'HiveMTK' } },
-  fact_density_enhance: { label: '事实密度增强', kind: 'executor', color: 'success', default: { target_density: 0.8 } },
-  verify:               { label: '品牌提及验证', kind: 'executor', color: 'info', default: { brand: 'HiveMTK', queries: [] } },
-  query_probe:          { label: '搜索引擎探针', kind: 'executor', color: 'primary', default: { keyword: '', engine: 'qwen' } },
-  source_attribution:   { label: '来源归因分析', kind: 'executor', color: 'info', default: {} },
-  content_gap_fill:     { label: '内容缺口补全', kind: 'executor', color: 'warning', default: { keyword: '' } },
-  capture_lead:         { label: '线索自动捕获', kind: 'executor', color: 'danger', default: {} },
+  fact_density_enhance: { label: t('auto.WorkflowEditor.40.3225f3'), kind: 'executor', color: 'success', default: { target_density: 0.8 } },
+  verify:               { label: t('auto.WorkflowEditor.41.f314af'), kind: 'executor', color: 'info', default: { brand: 'HiveMTK', queries: [] } },
+  query_probe:          { label: t('auto.WorkflowEditor.42.169e12'), kind: 'executor', color: 'primary', default: { keyword: '', engine: 'qwen' } },
+  source_attribution:   { label: t('auto.WorkflowEditor.43.f7bd71'), kind: 'executor', color: 'info', default: {} },
+  content_gap_fill:     { label: t('auto.WorkflowEditor.44.17d15d'), kind: 'executor', color: 'warning', default: { keyword: '' } },
+  capture_lead:         { label: t('auto.WorkflowEditor.45.1fe100'), kind: 'executor', color: 'danger', default: {} },
 }
+
+const { t } = useI18n()
 
 const workflows = ref([])
 const currentWorkflow = ref(null)
@@ -223,7 +226,7 @@ const execLoading = ref(false)
 
 const stepMeta = (type, key) => {
   const meta = STEP_TYPES[type]
-  if (!meta) return key === 'label' ? (type || '未知') : undefined
+  if (!meta) return key === 'label' ? (type || t('auto.WorkflowEditor.46.1622dc')) : undefined
   return meta[key]
 };
 
@@ -234,8 +237,8 @@ const selectWorkflow = (w) => {
 }
 
 const onNewWorkflow = () => {
-  currentWorkflow.value = { name: '新工作流', description: '', steps: [] }
-  wfName.value = '新工作流'
+  currentWorkflow.value = { name: t('auto.WorkflowEditor.47.c3ad92'), description: '', steps: [] }
+  wfName.value = t('auto.WorkflowEditor.47.c3ad92')
   steps.value = []
 }
 
@@ -260,11 +263,11 @@ const onSaveWorkflow = async () => {
       steps: steps.value
     }
     const result = await saveWorkflow(payload)
-    ElMessage.success('保存成功')
+    ElMessage.success(t('auto.WorkflowEditor.48.3b1083'))
     loadWorkflows()
     if (result?.id) currentWorkflow.value.id = result.id
   } catch (e) {
-    ElMessage.error('保存失败：' + (e?.message || e))
+    ElMessage.error(t('auto.WorkflowEditor.49.78d235') + (e?.message || e))
   }
 }
 
@@ -272,12 +275,12 @@ const onDeleteWorkflow = async () => {
   if (!currentWorkflow.value?.id) return
   try {
     await deleteWorkflow(currentWorkflow.value.id)
-    ElMessage.success('已删除')
+    ElMessage.success(t('auto.WorkflowEditor.50.5cc232'))
     currentWorkflow.value = null
     steps.value = []
     loadWorkflows()
   } catch (e) {
-    ElMessage.error(e?.message || '删除失败')
+    ElMessage.error(e?.message || t('auto.WorkflowEditor.51.acf066'))
   }
 }
 
@@ -286,10 +289,10 @@ const onRunNow = async () => {
   running.value = true
   try {
     await runWorkflow(currentWorkflow.value.id || wfName.value, { steps: steps.value })
-    ElMessage.success('工作流已启动')
+    ElMessage.success(t('auto.WorkflowEditor.52.6f8c8d'))
     loadExecutions()
   } catch (e) {
-    ElMessage.error('执行失败：' + (e?.message || e))
+    ElMessage.error(t('auto.WorkflowEditor.53.95324f') + (e?.message || e))
   } finally {
     running.value = false
   }

@@ -2,8 +2,8 @@
   <div class="churn-prediction-page">
     <el-card class="header-card">
       <div class="header-content">
-        <h2>流失预测</h2>
-        <p class="subtitle">基于机器学习预测用户流失风险，提前干预</p>
+        <h2>{{ $t('auto.List.39.e01632') }}</h2>
+        <p class="subtitle">{{ $t('auto.List.40.e4aa48') }}</p>
       </div>
       <div>
         <el-button type="primary" :loading="predicting" @click="runPrediction">
@@ -19,12 +19,12 @@
 
     <el-tabs v-model="activeTab">
       
-      <el-tab-pane label="预测列表" name="predictions">
+      <el-tab-pane :label="$t('auto.List.1.a6440f')" name="predictions">
         <el-row :gutter="20" class="stats-row">
           <el-col :span="6">
             <el-card>
               <div class="stat-item">
-                <div class="stat-label">高风险用户</div>
+                <div class="stat-label">{{ $t('auto.List.41.28198f') }}</div>
                 <div class="stat-value" style="color: #EF4444">{{ stats.highRisk }}</div>
               </div>
             </el-card>
@@ -32,7 +32,7 @@
           <el-col :span="6">
             <el-card>
               <div class="stat-item">
-                <div class="stat-label">中风险用户</div>
+                <div class="stat-label">{{ $t('auto.List.42.36e164') }}</div>
                 <div class="stat-value" style="color: #F59E0B">{{ stats.mediumRisk }}</div>
               </div>
             </el-card>
@@ -40,7 +40,7 @@
           <el-col :span="6">
             <el-card>
               <div class="stat-item">
-                <div class="stat-label">低风险用户</div>
+                <div class="stat-label">{{ $t('auto.List.43.d9c0b8') }}</div>
                 <div class="stat-value" style="color: #10B981">{{ stats.lowRisk }}</div>
               </div>
             </el-card>
@@ -48,7 +48,7 @@
           <el-col :span="6">
             <el-card>
               <div class="stat-item">
-                <div class="stat-label">极高风险用户</div>
+                <div class="stat-label">{{ $t('auto.List.44.beab8b') }}</div>
                 <div class="stat-value" style="color: #B91C1C">{{ stats.criticalRisk }}</div>
               </div>
             </el-card>
@@ -58,105 +58,105 @@
         <el-card>
           <template #header>
             <div class="card-header">
-              <span>高风险用户列表</span>
-              <el-input v-model="searchKeyword" placeholder="搜索用户ID" clearable style="width: 200px" />
+              <span>{{ $t('auto.List.45.82b808') }}</span>
+              <el-input v-model="searchKeyword" :placeholder="$t('auto.List.2.c3635c')" clearable style="width: 200px" />
             </div>
           </template>
           <el-table :data="filteredUsers" v-loading="loadingPred" stripe>
-            <el-table-column prop="user_id" label="用户ID" width="120" />
-            <el-table-column prop="churn_score" label="风险评分" width="160">
+            <el-table-column prop="user_id" :label="$t('auto.List.3.30acd2')" width="120" />
+            <el-table-column prop="churn_score" :label="$t('auto.List.4.8372f3')" width="160">
               <template #default="{ row }">
                 <el-progress :percentage="Math.round(row.churn_score || 0)" :color="getRiskColor(row.churn_score)" />
               </template>
             </el-table-column>
-            <el-table-column prop="churn_risk" label="风险等级" width="100">
+            <el-table-column prop="churn_risk" :label="$t('auto.List.5.25eb6b')" width="100">
               <template #default="{ row }">
                 <el-tag :type="getRiskLevelType(row.churn_risk)">{{ row.churn_risk }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="last_activity_at" label="最后活跃" min-width="180" />
-            <el-table-column prop="predicted_at" label="预测时间" min-width="180" />
-            <el-table-column prop="risk_factors" label="流失原因" min-width="200" show-overflow-tooltip />
-            <el-table-column label="操作" width="180" fixed="right">
+            <el-table-column prop="last_activity_at" :label="$t('auto.List.6.7f2846')" min-width="180" />
+            <el-table-column prop="predicted_at" :label="$t('auto.List.7.e79e7b')" min-width="180" />
+            <el-table-column prop="risk_factors" :label="$t('auto.List.8.0bed4e')" min-width="200" show-overflow-tooltip />
+            <el-table-column :label="$t('auto.List.9.2b6bc0')" width="180" fixed="right">
               <template #default="{ row }">
-                <el-button link type="primary" @click="viewUserDetail(row)">详情</el-button>
-                <el-button link type="success" @click="intervene(row)">干预</el-button>
+                <el-button link type="primary" @click="viewUserDetail(row)">{{ $t('auto.List.46.f26225') }}</el-button>
+                <el-button link type="success" @click="intervene(row)">{{ $t('auto.List.47.ba996d') }}</el-button>
               </template>
             </el-table-column>
             <template #empty>
-              <el-empty description="暂无数据" />
+              <el-empty :description="$t('auto.List.10.21efd8')" />
             </template>
           </el-table>
         </el-card>
       </el-tab-pane>
 
       
-      <el-tab-pane label="预警列表" name="warnings">
+      <el-tab-pane :label="$t('auto.List.11.8c9bcb')" name="warnings">
         <el-card>
           <el-table :data="warnings" v-loading="loadingWarn" stripe>
-            <el-table-column prop="user_id" label="用户ID" width="120" />
-            <el-table-column prop="warning_level" label="预警等级" width="100">
+            <el-table-column prop="user_id" :label="$t('auto.List.3.30acd2')" width="120" />
+            <el-table-column prop="warning_level" :label="$t('auto.List.12.64d58e')" width="100">
               <template #default="{ row }">
                 <el-tag :type="warnLevelType(row.warning_level)">{{ row.warning_level }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="warning_type" label="类型" width="140" />
-            <el-table-column prop="description" label="描述" min-width="200" show-overflow-tooltip />
-            <el-table-column prop="suggestion" label="建议措施" min-width="200" show-overflow-tooltip />
-            <el-table-column label="状态" width="100">
+            <el-table-column prop="warning_type" :label="$t('auto.List.13.226b09')" width="140" />
+            <el-table-column prop="description" :label="$t('auto.List.14.3bdd08')" min-width="200" show-overflow-tooltip />
+            <el-table-column prop="suggestion" :label="$t('auto.List.15.6dca6f')" min-width="200" show-overflow-tooltip />
+            <el-table-column :label="$t('auto.List.16.3fea7c')" width="100">
               <template #default="{ row }">
                 <el-tag :type="row.is_handled ? 'success' : 'danger'">
                   {{ row.is_handled ? '已处理' : '未处理' }}
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column label="操作" width="120" fixed="right">
+            <el-table-column :label="$t('auto.List.9.2b6bc0')" width="120" fixed="right">
               <template #default="{ row }">
                 <el-button v-if="!row.is_handled" size="small" type="primary" @click="handleWarning(row)">
                   标记已处理
                 </el-button>
-                <span v-else class="handled-text">已处理</span>
+                <span v-else class="handled-text">{{ $t('auto.List.48.5ad605') }}</span>
               </template>
             </el-table-column>
             <template #empty>
-              <el-empty description="暂无预警" />
+              <el-empty :description="$t('auto.List.17.f80068')" />
             </template>
           </el-table>
         </el-card>
       </el-tab-pane>
 
       
-      <el-tab-pane label="模型配置" name="config">
+      <el-tab-pane :label="$t('auto.List.18.73cbcf')" name="config">
         <el-card>
           <el-form :model="configForm" label-width="170px" style="max-width: 640px">
-            <el-divider content-position="left">权重配置</el-divider>
-            <el-form-item label="未活跃天数权重">
+            <el-divider content-position="left">{{ $t('auto.List.49.fa2d94') }}</el-divider>
+            <el-form-item :label="$t('auto.List.19.82c8e8')">
               <el-input-number v-model="configForm.inactive_days_weight" :step="0.05" :min="0" :max="1" />
             </el-form-item>
-            <el-form-item label="购买频率权重">
+            <el-form-item :label="$t('auto.List.20.3ff416')">
               <el-input-number v-model="configForm.purchase_freq_weight" :step="0.05" :min="0" :max="1" />
             </el-form-item>
-            <el-form-item label="订单金额权重">
+            <el-form-item :label="$t('auto.List.21.5a4d65')">
               <el-input-number v-model="configForm.order_value_weight" :step="0.05" :min="0" :max="1" />
             </el-form-item>
-            <el-form-item label="互动频率权重">
+            <el-form-item :label="$t('auto.List.22.4f0085')">
               <el-input-number v-model="configForm.engagement_weight" :step="0.05" :min="0" :max="1" />
             </el-form-item>
-            <el-divider content-position="left">阈值配置</el-divider>
-            <el-form-item label="未活跃阈值(天)">
+            <el-divider content-position="left">{{ $t('auto.List.50.35a388') }}</el-divider>
+            <el-form-item :label="$t('auto.List.23.a12f2b')">
               <el-input-number v-model="configForm.inactive_threshold" :min="1" :max="365" />
             </el-form-item>
-            <el-form-item label="未购买阈值(天)">
+            <el-form-item :label="$t('auto.List.24.0d33fc')">
               <el-input-number v-model="configForm.purchase_threshold" :min="1" :max="365" />
             </el-form-item>
-            <el-form-item label="高风险分数">
+            <el-form-item :label="$t('auto.List.25.877151')">
               <el-input-number v-model="configForm.high_risk_score" :min="0" :max="100" />
             </el-form-item>
-            <el-form-item label="极高风险分数">
+            <el-form-item :label="$t('auto.List.26.448449')">
               <el-input-number v-model="configForm.critical_risk_score" :min="0" :max="100" />
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" :loading="savingConfig" @click="saveConfig">保存配置</el-button>
+              <el-button type="primary" :loading="savingConfig" @click="saveConfig">{{ $t('auto.List.51.ed7526') }}</el-button>
             </el-form-item>
           </el-form>
         </el-card>
@@ -164,23 +164,23 @@
     </el-tabs>
 
     
-    <el-dialog v-model="interveneDialogVisible" title="流失干预" width="500px">
+    <el-dialog v-model="interveneDialogVisible" :title="$t('auto.List.27.defbd8')" width="500px">
       <el-form :model="interveneForm" label-width="100px">
-        <el-form-item label="干预方式">
+        <el-form-item :label="$t('auto.List.28.66a3c7')">
           <el-select v-model="interveneForm.method" style="width: 100%">
-            <el-option label="发送优惠" value="coupon" />
-            <el-option label="发送关怀短信" value="sms" />
-            <el-option label="人工跟进" value="manual" />
-            <el-option label="推送通知" value="push" />
+            <el-option :label="$t('auto.List.29.53285e')" value="coupon" />
+            <el-option :label="$t('auto.List.30.1f9b1f')" value="sms" />
+            <el-option :label="$t('auto.List.31.997fd2')" value="manual" />
+            <el-option :label="$t('auto.List.32.9a4e5d')" value="push" />
           </el-select>
         </el-form-item>
-        <el-form-item label="干预内容">
+        <el-form-item :label="$t('auto.List.33.34f5ab')">
           <el-input v-model="interveneForm.content" type="textarea" :rows="4" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="interveneDialogVisible = false">取消</el-button>
-        <el-button type="primary" :loading="submittingIntervene" @click="confirmIntervene">确认干预</el-button>
+        <el-button @click="interveneDialogVisible = false">{{ $t('auto.List.52.625fb2') }}</el-button>
+        <el-button type="primary" :loading="submittingIntervene" @click="confirmIntervene">{{ $t('auto.List.53.d97d59') }}</el-button>
       </template>
     </el-dialog>
 
@@ -189,19 +189,19 @@
          元素，Vue 会打 "Runtime directive used on component with non-element root node.
          The directives will not function as intended."，指令也实际不生效。挂到弹窗体内
          的普通 div 上才是 Element Plus 的正确用法。 -->
-    <el-dialog v-model="detailVisible" title="用户流失风险详情" width="700px">
+    <el-dialog v-model="detailVisible" :title="$t('auto.List.34.214890')" width="700px">
       <div v-loading="detailLoading" style="min-height: 80px">
         <template v-if="currentUser">
           <el-descriptions :column="2" border>
-            <el-descriptions-item label="用户ID">{{ currentUser.user_id }}</el-descriptions-item>
-            <el-descriptions-item label="风险等级">
+            <el-descriptions-item :label="$t('auto.List.3.30acd2')">{{ currentUser.user_id }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.List.5.25eb6b')">
               <el-tag :type="getRiskLevelType(currentUser.churn_risk)">{{ currentUser.churn_risk }}</el-tag>
             </el-descriptions-item>
-            <el-descriptions-item label="最后活跃">{{ currentUser.last_activity_at }}</el-descriptions-item>
-            <el-descriptions-item label="预测时间">{{ currentUser.predicted_at }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.List.6.7f2846')">{{ currentUser.last_activity_at }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.List.7.e79e7b')">{{ currentUser.predicted_at }}</el-descriptions-item>
           </el-descriptions>
 
-          <el-divider content-position="left">风险评分</el-divider>
+          <el-divider content-position="left">{{ $t('auto.List.4.8372f3') }}</el-divider>
           <div style="padding: 0 20px">
             <el-progress
               :percentage="Math.round(currentUser.churn_score || 0)"
@@ -210,7 +210,7 @@
             />
           </div>
 
-          <el-divider content-position="left">流失原因分析</el-divider>
+          <el-divider content-position="left">{{ $t('auto.List.54.ba2a87') }}</el-divider>
           <el-alert
             v-if="currentUser.risk_factors"
             :title="currentUser.risk_factors"
@@ -220,17 +220,17 @@
           />
 
           <template v-if="currentUser.riskFactors && currentUser.riskFactors.length">
-            <el-divider content-position="left">风险因素</el-divider>
+            <el-divider content-position="left">{{ $t('auto.List.55.914b48') }}</el-divider>
             <el-table :data="currentUser.riskFactors" border size="small">
-              <el-table-column prop="factor" label="因素" min-width="180" />
-              <el-table-column prop="impact" label="影响程度" width="120">
+              <el-table-column prop="factor" :label="$t('auto.List.35.a7c456')" min-width="180" />
+              <el-table-column prop="impact" :label="$t('auto.List.36.f6590a')" width="120">
                 <template #default="{ row: r }">
-                  <el-tag :type="r.impact === '高' ? 'danger' : r.impact === '中' ? 'warning' : 'info'" size="small">
+                  <el-tag ::type="$t('auto.List.37.ef0446')" size="small">
                     {{ r.impact }}
                   </el-tag>
                 </template>
               </el-table-column>
-              <el-table-column prop="description" label="说明" min-width="200" show-overflow-tooltip />
+              <el-table-column prop="description" :label="$t('auto.List.38.f411d0')" min-width="200" show-overflow-tooltip />
             </el-table>
           </template>
         </template>
@@ -241,6 +241,7 @@
 
 <script setup>
 import { ref, reactive, computed, onMounted, onActivated } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { Operation, Refresh } from '@element-plus/icons-vue'
 import {
@@ -254,6 +255,8 @@ import {
   markWarningHandled,
 } from '@/api/churnPrediction.js'
 import { toList } from '@/utils/list.js'
+
+const { t } = useI18n()
 
 const activeTab = ref('predictions')
 const loadingPred = ref(false)
@@ -326,7 +329,7 @@ const loadPredictions = async () => {
     users.value = toList(res?.data ?? res)
     computeStats(users.value)
   } catch (e) {
-    ElMessage.error('加载预测失败：' + (e && e.message ? e.message : ''))
+    ElMessage.error(t('auto.List.56.d13651') + (e && e.message ? e.message : ''))
   } finally {
     loadingPred.value = false
   }
@@ -338,7 +341,7 @@ const loadWarnings = async () => {
     const res = await getChurnWarnings({ page: 1, page_size: 100 })
     warnings.value = toList(res?.data ?? res)
   } catch (e) {
-    ElMessage.error('加载预警失败：' + (e && e.message ? e.message : ''))
+    ElMessage.error(t('auto.List.57.84109e') + (e && e.message ? e.message : ''))
   } finally {
     loadingWarn.value = false
   }
@@ -372,10 +375,10 @@ const runPrediction = async () => {
   predicting.value = true
   try {
     await runChurnPrediction()
-    ElMessage.success('预测完成')
+    ElMessage.success(t('auto.List.58.38db5c'))
     await refreshAll()
   } catch (e) {
-    ElMessage.error('预测失败：' + (e && e.message ? e.message : ''))
+    ElMessage.error(t('auto.List.59.bc20e0') + (e && e.message ? e.message : ''))
   } finally {
     predicting.value = false
   }
@@ -396,10 +399,10 @@ const confirmIntervene = async () => {
       intervention_type: interveneForm.method,
       note: interveneForm.content,
     })
-    ElMessage.success('干预已执行')
+    ElMessage.success(t('auto.List.60.02178c'))
     interveneDialogVisible.value = false
   } catch (e) {
-    ElMessage.error('干预失败：' + (e && e.message ? e.message : ''))
+    ElMessage.error(t('auto.List.61.625b6a') + (e && e.message ? e.message : ''))
   } finally {
     submittingIntervene.value = false
   }
@@ -428,17 +431,17 @@ const viewUserDetail = async (row) => {
 
 const handleWarning = async (row) => {
   try {
-    const { value } = await ElMessageBox.prompt('请输入处理备注', '标记预警已处理', {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
+    const { value } = await ElMessageBox.prompt(t('auto.List.62.5dfa6d'), t('auto.List.63.4247e2'), {
+      confirmButtonText: t('auto.List.64.38cf16'),
+      cancelButtonText: t('auto.List.52.625fb2'),
       inputType: 'textarea',
     })
     await markWarningHandled(row.id, { note: value || '' })
-    ElMessage.success('已标记为处理')
+    ElMessage.success(t('auto.List.65.193512'))
     await loadWarnings()
   } catch (e) {
     if (e !== 'cancel' && e && e.message) {
-      ElMessage.error('操作失败：' + e.message)
+      ElMessage.error(t('auto.List.66.79585f') + e.message)
     }
   }
 }
@@ -447,9 +450,9 @@ const saveConfig = async () => {
   savingConfig.value = true
   try {
     await saveChurnModelConfig({ ...configForm })
-    ElMessage.success('配置已保存')
+    ElMessage.success(t('auto.List.67.e94729'))
   } catch (e) {
-    ElMessage.error('保存失败：' + (e && e.message ? e.message : ''))
+    ElMessage.error(t('auto.List.68.78d235') + (e && e.message ? e.message : ''))
   } finally {
     savingConfig.value = false
   }

@@ -4,8 +4,8 @@
     <el-card class="header-card" shadow="never">
       <div class="header-content">
         <div>
-          <h2>AI 智能体管理</h2>
-          <p class="subtitle">管理销售/客服/混合智能体，配置人设、知识库、SOP、话术与 LLM 参数</p>
+          <h2>{{ $t('auto.List.44.fd92a0') }}</h2>
+          <p class="subtitle">{{ $t('auto.List.45.74691f') }}</p>
         </div>
         <div class="header-actions">
           <el-button @click="loadList" :loading="loading">
@@ -23,23 +23,23 @@
     
     <el-card shadow="never" class="filter-card">
       <el-form :inline="true" :model="filter" @submit.prevent>
-        <el-form-item :label="$t('智能体类型')">
-          <el-select v-model="filter.type" :placeholder="$t('全部类型')" clearable style="width: 160px" @change="onSearch">
-            <el-option :label="$t('销售智能体')" value="sales" />
-            <el-option :label="$t('客服智能体')" value="customer_service" />
-            <el-option :label="$t('混合智能体')" value="hybrid" />
+        <el-form-item ::label="$t('auto.List.1.bc7a99')">
+          <el-select v-model="filter.type" ::placeholder="$t('auto.List.2.dea2f9')" clearable style="width: 160px" @change="onSearch">
+            <el-option ::label="$t('auto.List.3.c76c18')" value="sales" />
+            <el-option ::label="$t('auto.List.4.323f35')" value="customer_service" />
+            <el-option ::label="$t('auto.List.5.2d9fc1')" value="hybrid" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('状态')">
-          <el-select v-model="filter.status" :placeholder="$t('全部状态')" clearable style="width: 140px" @change="onSearch">
-            <el-option :label="$t('启用')" :value="1" />
-            <el-option :label="$t('禁用')" :value="0" />
+        <el-form-item ::label="$t('auto.List.6.1b8578')">
+          <el-select v-model="filter.status" ::placeholder="$t('auto.List.7.925332')" clearable style="width: 140px" @change="onSearch">
+            <el-option ::label="$t('auto.List.8.0e4c2a')" :value="1" />
+            <el-option ::label="$t('auto.List.9.27ea4f')" :value="0" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('关键词')">
+        <el-form-item ::label="$t('auto.List.10.648229')">
           <el-input
             v-model="filter.keyword"
-            :placeholder="$t('搜索名称/编码')"
+            ::placeholder="$t('auto.List.11.e31366')"
             clearable
             style="width: 220px"
             @keyup.enter="onSearch"
@@ -60,7 +60,7 @@
     <el-card shadow="never">
       <el-table :data="list" v-loading="loading" stripe border>
         <el-table-column prop="id" label="ID" width="70" align="center" />
-        <el-table-column :label="$t('头像')" width="80" align="center">
+        <el-table-column ::label="$t('auto.List.12.ae73fc')" width="80" align="center">
           <template #default="{ row }">
             <el-avatar :size="36" :src="row.avatar" v-if="row.avatar">
               <el-icon><User /></el-icon>
@@ -70,24 +70,24 @@
             </el-avatar>
           </template>
         </el-table-column>
-        <el-table-column prop="name" label="名称" min-width="140" show-overflow-tooltip />
-        <el-table-column prop="agent_code" label="编码" width="160" show-overflow-tooltip />
-        <el-table-column label="类型" width="120">
+        <el-table-column prop="name" :label="$t('auto.List.13.d7ec2d')" min-width="140" show-overflow-tooltip />
+        <el-table-column prop="agent_code" :label="$t('auto.List.14.cc6c35')" width="160" show-overflow-tooltip />
+        <el-table-column :label="$t('auto.List.15.226b09')" width="120">
           <template #default="{ row }">
             <el-tag :type="getTypeTagType(row.agent_type)" size="small">{{ getTypeLabel(row.agent_type) }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="状态" width="90" align="center">
+        <el-table-column :label="$t('auto.List.16.3fea7c')" width="90" align="center">
           <template #default="{ row }">
             <el-tag :type="row.status === 1 ? 'success' : 'info'" size="small">
               {{ row.status === 1 ? '启用' : '禁用' }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="llm_model" label="LLM模型" width="140" show-overflow-tooltip>
+        <el-table-column prop="llm_model" :label="$t('auto.List.17.248d0f')" width="140" show-overflow-tooltip>
           <template #default="{ row }">{{ row.llm_model || '-' }}</template>
         </el-table-column>
-        <el-table-column label="语言" width="170">
+        <el-table-column :label="$t('auto.List.18.295bb7')" width="170">
           <template #default="{ row }">
             <div class="lang-cell">
               <span>内部：{{ getLanguageLabel(row.internal_language || 'zh') }}</span>
@@ -95,17 +95,17 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column label="人设摘要" min-width="200" show-overflow-tooltip>
+        <el-table-column :label="$t('auto.List.19.5d5dd3')" min-width="200" show-overflow-tooltip>
           <template #default="{ row }">
             <span class="persona-text">{{ truncateText(row.persona, 50) }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="创建时间" width="160">
+        <el-table-column :label="$t('auto.List.20.eca37c')" width="160">
           <template #default="{ row }">{{ formatTime(row.created_at) }}</template>
         </el-table-column>
-        <el-table-column label="操作" width="280" fixed="right">
+        <el-table-column :label="$t('auto.List.21.2b6bc0')" width="280" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" size="small" @click="goEdit(row)">编辑</el-button>
+            <el-button link type="primary" size="small" @click="goEdit(row)">{{ $t('auto.List.46.95b351') }}</el-button>
             <el-button
               link
               :type="row.status === 1 ? 'warning' : 'success'"
@@ -114,32 +114,32 @@
             >
               {{ row.status === 1 ? '禁用' : '启用' }}
             </el-button>
-            <el-button link type="primary" size="small" @click="openTestDialog(row)">测试</el-button>
-            <el-button link type="info" size="small" @click="openBindingDialog(row)">绑定关系</el-button>
-            <el-button link type="danger" size="small" @click="onDelete(row)">删除</el-button>
+            <el-button link type="primary" size="small" @click="openTestDialog(row)">{{ $t('auto.List.47.db06c7') }}</el-button>
+            <el-button link type="info" size="small" @click="openBindingDialog(row)">{{ $t('auto.List.48.0dacc2') }}</el-button>
+            <el-button link type="danger" size="small" @click="onDelete(row)">{{ $t('auto.List.49.2f4aad') }}</el-button>
           </template>
         </el-table-column>
         <template #empty>
-          <el-empty description="暂无智能体数据" />
+          <el-empty :description="$t('auto.List.22.fb73da')" />
         </template>
       </el-table>
     </el-card>
 
     
-    <el-dialog v-model="testDialogVisible" title="测试智能体" width="760px" top="6vh">
+    <el-dialog v-model="testDialogVisible" :title="$t('auto.List.23.353e8d')" width="760px" top="6vh">
       <el-form :model="testForm" label-width="90px">
-        <el-form-item label="智能体">
+        <el-form-item :label="$t('auto.List.24.72fbb9')">
           <el-input :model-value="currentAgentLabel" disabled />
         </el-form-item>
-        <el-form-item label="客户ID">
-          <el-input v-model="testForm.customer_id" placeholder="请输入客户ID（可选，留空使用默认上下文）" />
+        <el-form-item :label="$t('auto.List.25.1c2ecf')">
+          <el-input v-model="testForm.customer_id" :placeholder="$t('auto.List.26.774823')" />
         </el-form-item>
-        <el-form-item label="消息内容" required>
+        <el-form-item :label="$t('auto.List.27.b87b77')" required>
           <el-input
             v-model="testForm.message"
             type="textarea"
             :rows="3"
-            placeholder="请输入要测试的客户消息"
+            :placeholder="$t('auto.List.28.cc633c')"
           />
         </el-form-item>
         <el-form-item>
@@ -147,21 +147,21 @@
             <el-icon><VideoPlay /></el-icon>
             执行测试
           </el-button>
-          <el-button @click="clearTestResult">清空结果</el-button>
+          <el-button @click="clearTestResult">{{ $t('auto.List.50.7e61ac') }}</el-button>
         </el-form-item>
       </el-form>
 
       
       <template v-if="testResult">
-        <el-divider content-position="left">测试结果</el-divider>
+        <el-divider content-position="left">{{ $t('auto.List.51.c6c9da') }}</el-divider>
         <el-descriptions :column="2" border size="small">
-          <el-descriptions-item label="回复内容" :span="2">
+          <el-descriptions-item :label="$t('auto.List.29.fab08d')" :span="2">
             <div class="reply-box">{{ testResult.reply || '-' }}</div>
           </el-descriptions-item>
-          <el-descriptions-item label="LLM模型">{{ testResult.llm_model || '-' }}</el-descriptions-item>
-          <el-descriptions-item label="耗时(ms)">{{ testResult.latency_ms || 0 }}</el-descriptions-item>
-          <el-descriptions-item label="消耗Token">{{ testResult.cost_tokens || 0 }}</el-descriptions-item>
-          <el-descriptions-item label="是否转人工">
+          <el-descriptions-item :label="$t('auto.List.17.248d0f')">{{ testResult.llm_model || '-' }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.30.7f62c0')">{{ testResult.latency_ms || 0 }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.31.8f5f4e')">{{ testResult.cost_tokens || 0 }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.32.39e5fb')">
             <el-tag :type="testResult.transferred_to_human ? 'warning' : 'success'" size="small">
               {{ testResult.transferred_to_human ? '是' : '否' }}
             </el-tag>
@@ -170,20 +170,20 @@
         </el-descriptions>
 
         
-        <div class="chain-title">9步链路日志</div>
+        <div class="chain-title">{{ $t('auto.List.52.cda843') }}</div>
         <el-table :data="testResult.steps || []" stripe size="small" border>
           <el-table-column type="index" label="#" width="50" align="center" />
-          <el-table-column prop="step" label="步骤" min-width="160" show-overflow-tooltip />
-          <el-table-column label="状态" width="90" align="center">
+          <el-table-column prop="step" :label="$t('auto.List.33.52b365')" min-width="160" show-overflow-tooltip />
+          <el-table-column :label="$t('auto.List.16.3fea7c')" width="90" align="center">
             <template #default="{ row }">
               <el-tag :type="getStepStatusType(row.status)" size="small">{{ row.status || '-' }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column label="耗时(ms)" width="100" align="center">
+          <el-table-column :label="$t('auto.List.30.7f62c0')" width="100" align="center">
             <template #default="{ row }">{{ row.latency_ms || 0 }}</template>
           </el-table-column>
-          <el-table-column prop="detail" label="详情" min-width="200" show-overflow-tooltip />
-          <el-table-column prop="error" label="错误" min-width="160" show-overflow-tooltip>
+          <el-table-column prop="detail" :label="$t('auto.List.34.f26225')" min-width="200" show-overflow-tooltip />
+          <el-table-column prop="error" :label="$t('auto.List.35.7030ff')" min-width="160" show-overflow-tooltip>
             <template #default="{ row }">
               <span v-if="row.error" class="error-text">{{ row.error }}</span>
               <span v-else>-</span>
@@ -191,41 +191,41 @@
           </el-table-column>
         </el-table>
       </template>
-      <el-empty v-else-if="!testing" description="执行测试后显示结果" :image-size="80" />
+      <el-empty v-else-if="!testing" :description="$t('auto.List.36.5910a5')" :image-size="80" />
     </el-dialog>
 
     
-    <el-dialog v-model="bindingDialogVisible" title="智能体绑定关系" width="720px" top="6vh">
+    <el-dialog v-model="bindingDialogVisible" :title="$t('auto.List.37.88cc83')" width="720px" top="6vh">
       <template v-if="currentAgent">
         <el-descriptions :column="2" border size="small">
-          <el-descriptions-item label="智能体名称">{{ currentAgent.name }}</el-descriptions-item>
-          <el-descriptions-item label="编码">{{ currentAgent.agent_code }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.38.63ecdf')">{{ currentAgent.name }}</el-descriptions-item>
+          <el-descriptions-item :label="$t('auto.List.14.cc6c35')">{{ currentAgent.agent_code }}</el-descriptions-item>
         </el-descriptions>
       </template>
 
-      <el-divider content-position="left">渠道账号绑定</el-divider>
+      <el-divider content-position="left">{{ $t('auto.List.53.f42c0d') }}</el-divider>
       <el-table :data="channelBindings" v-loading="bindingLoading" stripe size="small" border>
         <el-table-column prop="id" label="ID" width="70" align="center" />
-        <el-table-column prop="channel_type" label="渠道类型" width="120" />
-        <el-table-column prop="account_id" label="账号ID" min-width="140" show-overflow-tooltip />
-        <el-table-column label="主绑定" width="90" align="center">
+        <el-table-column prop="channel_type" :label="$t('auto.List.39.474684')" width="120" />
+        <el-table-column prop="account_id" :label="$t('auto.List.40.14d171')" min-width="140" show-overflow-tooltip />
+        <el-table-column :label="$t('auto.List.41.7e5157')" width="90" align="center">
           <template #default="{ row }">
-            <el-tag v-if="row.is_primary" type="success" size="small">主</el-tag>
+            <el-tag v-if="row.is_primary" type="success" size="small">{{ $t('auto.List.54.7bbc73') }}</el-tag>
             <span v-else>-</span>
           </template>
         </el-table-column>
-        <el-table-column label="启用" width="80" align="center">
+        <el-table-column :label="$t('auto.List.42.7854b5')" width="80" align="center">
           <template #default="{ row }">
             <el-tag :type="row.enabled ? 'success' : 'info'" size="small">
               {{ row.enabled ? '是' : '否' }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="创建时间" width="160">
+        <el-table-column :label="$t('auto.List.20.eca37c')" width="160">
           <template #default="{ row }">{{ formatTime(row.created_at) }}</template>
         </el-table-column>
         <template #empty>
-          <el-empty description="暂无渠道绑定" :image-size="60" />
+          <el-empty :description="$t('auto.List.43.17be1d')" :image-size="60" />
         </template>
       </el-table>
     </el-dialog>
@@ -236,6 +236,7 @@
 import i18n from '@/i18n'
 
 import { ref, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { Refresh, Plus, Search, User, VideoPlay } from '@element-plus/icons-vue'
@@ -253,6 +254,8 @@ const currentAgentLabel = computed(() => {
   return code ? `${name}（${code}）` : name
 });
 
+const { t } = useI18n()
+
 const loading = ref(false);
 const list = ref([])
 const filter = ref({ type: '', status: '', keyword: '' })
@@ -268,9 +271,9 @@ const bindingLoading = ref(false)
 const channelBindings = ref([])
 
 const typeMap = {
-  sales: '销售智能体',
-  customer_service: '客服智能体',
-  hybrid: '混合智能体'
+  sales: t('auto.List.55.facb6b'),
+  customer_service: t('auto.List.56.afaab1'),
+  hybrid: t('auto.List.57.bac247')
 };
 
 const getTypeLabel = (type) => typeMap[type] || type || '-'
@@ -312,7 +315,7 @@ const loadList = async () => {
     const res = await listAgents(params)
     list.value = res?.list || [];
   } catch (e) {
-    ElMessage.error('加载智能体列表失败：' + (e.message || '未知错误'))
+    ElMessage.error(t('auto.List.58.2d3424') + (e.message || t('auto.List.59.974e74')))
   } finally {
     loading.value = false
   }
@@ -337,34 +340,34 @@ const goEdit = (row) => {
 
 const onToggle = (row) => {
   const nextStatus = row.status === 1 ? 0 : 1
-  const action = nextStatus === 1 ? '启用' : '禁用'
-  ElMessageBox.confirm(`确认${action}智能体「${row.name}」吗？`, '操作确认', {
+  const action = nextStatus === 1 ? t('auto.List.42.7854b5') : t('auto.List.60.710ad0')
+  ElMessageBox.confirm(`确认${action}智能体「${row.name}」吗？`, t('auto.List.61.ce828a'), {
     type: 'warning',
     confirmButtonText: `确认${action}`,
-    cancelButtonText: '取消'
+    cancelButtonText: t('auto.List.62.625fb2')
   }).then(async () => {
     try {
       await toggleAgent(row.id, nextStatus)
       ElMessage.success(`${action}成功`)
       loadList()
     } catch (e) {
-      ElMessage.error(`${action}失败：` + (e.message || '未知错误'))
+      ElMessage.error(`${action}失败：` + (e.message || t('auto.List.59.974e74')))
     }
   }).catch(() => {})
 };
 
 const onDelete = (row) => {
-  ElMessageBox.confirm(`确认删除智能体「${row.name}」吗？删除后不可恢复。`, '删除确认', {
+  ElMessageBox.confirm(`确认删除智能体「${row.name}」吗？删除后不可恢复。`, t('auto.List.63.50eaf9'), {
     type: 'warning',
-    confirmButtonText: '确认删除',
-    cancelButtonText: '取消'
+    confirmButtonText: t('auto.List.64.631cd2'),
+    cancelButtonText: t('auto.List.62.625fb2')
   }).then(async () => {
     try {
       await deleteAgent(row.id)
-      ElMessage.success(i18n.global.t('删除成功'))
+      ElMessage.success(i18n.global.t(t('auto.List.65.0007d1')))
       loadList()
     } catch (e) {
-      ElMessage.error('删除失败：' + (e.message || '未知错误'))
+      ElMessage.error(t('auto.List.66.bc42bb') + (e.message || t('auto.List.59.974e74')))
     }
   }).catch(() => {})
 };
@@ -378,7 +381,7 @@ const openTestDialog = (row) => {
 
 const runTest = async () => {
   if (!testForm.value.message || !testForm.value.message.trim()) {
-    ElMessage.warning(i18n.global.t('请输入消息内容'))
+    ElMessage.warning(i18n.global.t(t('auto.List.67.fa967b')))
     return
   }
   if (!currentAgent.value) return
@@ -391,9 +394,9 @@ const runTest = async () => {
     }
     const res = await testAgent(currentAgent.value.id, data)
     testResult.value = res
-    ElMessage.success(i18n.global.t('测试执行完成'))
+    ElMessage.success(i18n.global.t(t('auto.List.68.2afc98')))
   } catch (e) {
-    ElMessage.error('测试失败：' + (e.message || '未知错误'))
+    ElMessage.error(t('auto.List.69.4b3cb9') + (e.message || t('auto.List.59.974e74')))
   } finally {
     testing.value = false
   }
@@ -413,7 +416,7 @@ const openBindingDialog = async (row) => {
     const res = await listBindingsByAgent(row.id)
     channelBindings.value = res?.list || res || []
   } catch (e) {
-    ElMessage.error('加载绑定关系失败：' + (e.message || '未知错误'))
+    ElMessage.error(t('auto.List.70.8c8827') + (e.message || t('auto.List.59.974e74')))
   } finally {
     bindingLoading.value = false
   }

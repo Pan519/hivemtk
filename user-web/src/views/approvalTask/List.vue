@@ -6,8 +6,8 @@
       type="warning"
       show-icon
       :closable="false"
-      title="待办底座不可用"
-      description="后端回的是 503（待办竖未装配或缺 DB 句柄）。下面的空列表不是「人工清完了」，是一次都没读到。"
+      :title="$t('auto.List.1.fdbee8')"
+      :description="$t('auto.List.2.ad96af')"
     />
     <el-alert
       v-if="!me"
@@ -15,14 +15,14 @@
       type="info"
       show-icon
       :closable="false"
-      title="登录态里没有 user id"
-      description="动作类端点全部要求 operator，所以这一页此刻只能看不能点。重新登录通常就能拿回身份。"
+      :title="$t('auto.List.3.d5e452')"
+      :description="$t('auto.List.4.978472')"
     />
 
     <el-card shadow="never">
       <template #header>
         <div class="card-header">
-          <span>待办中心</span>
+          <span>{{ $t('auto.List.26.ba7506') }}</span>
           <el-button
             :loading="loading"
             @click="refresh"
@@ -56,14 +56,14 @@
         inline
         class="mb-12"
       >
-        <el-form-item label="类型">
+        <el-form-item :label="$t('auto.List.5.226b09')">
           <el-select
             v-model="filter.kind"
             class="filter-select"
             multiple
             clearable
             collapse-tags
-            placeholder="全部类型"
+            :placeholder="$t('auto.List.6.c079e7')"
             @change="reload"
           >
             <el-option
@@ -74,14 +74,14 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="状态">
+        <el-form-item :label="$t('auto.List.7.3fea7c')">
           <el-select
             v-model="filter.status"
             class="filter-select"
             multiple
             clearable
             collapse-tags
-            placeholder="开放态（待处理＋已认领）"
+            :placeholder="$t('auto.List.8.5f17fb')"
             @change="reload"
           >
             <el-option
@@ -92,18 +92,18 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="归属">
+        <el-form-item :label="$t('auto.List.9.2296bd')">
           <el-select
             v-model="filter.assignee"
             class="filter-select"
             @change="reload"
           >
             <el-option
-              label="全部待办"
+              :label="$t('auto.List.10.04d85c')"
               value="all"
             />
             <el-option
-              label="挂在我名下"
+              :label="$t('auto.List.11.b671b7')"
               value="me"
             />
           </el-select>
@@ -116,7 +116,7 @@
         stripe
       >
         <el-table-column
-          label="类型"
+          :label="$t('auto.List.5.226b09')"
           width="110"
         >
           <template #default="{ row }">
@@ -129,7 +129,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="标题"
+          :label="$t('auto.List.12.32c65d')"
           min-width="240"
         >
           <template #default="{ row }">
@@ -149,7 +149,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="状态"
+          :label="$t('auto.List.7.3fea7c')"
           width="100"
         >
           <template #default="{ row }">
@@ -157,7 +157,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="认领人"
+          :label="$t('auto.List.13.b5d396')"
           width="100"
         >
           <template #default="{ row }">
@@ -165,7 +165,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="截止"
+          :label="$t('auto.List.14.cd8fbf')"
           width="170"
         >
           <template #default="{ row }">
@@ -173,7 +173,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="操作"
+          :label="$t('auto.List.15.2b6bc0')"
           width="240"
           fixed="right"
         >
@@ -203,7 +203,7 @@
 
     <el-drawer
       v-model="detail.visible"
-      title="待办详情"
+      :title="$t('auto.List.16.a152e1')"
       size="42%"
     >
       <pre class="json-preview">{{ detail.text }}</pre>
@@ -211,7 +211,7 @@
 
     <el-drawer
       v-model="decide.visible"
-      title="审批裁决"
+      :title="$t('auto.List.17.e722a3')"
       size="46%"
     >
       <el-alert
@@ -234,33 +234,33 @@
           border
           class="mb-12"
         >
-          <el-descriptions-item label="待办">
+          <el-descriptions-item :label="$t('auto.List.18.b60ec8')">
             {{ decide.task?.title || '—' }}
           </el-descriptions-item>
-          <el-descriptions-item label="审批 id">
+          <el-descriptions-item :label="$t('auto.List.19.84a2c6')">
             {{ decide.approvalId }}
           </el-descriptions-item>
-          <el-descriptions-item label="策略">
+          <el-descriptions-item :label="$t('auto.List.20.669145')">
             {{ decide.approval?.policy_key || '—' }}
           </el-descriptions-item>
-          <el-descriptions-item label="被审对象">
+          <el-descriptions-item :label="$t('auto.List.21.5249b6')">
             {{ subjectText(decide.approval) }}
           </el-descriptions-item>
-          <el-descriptions-item label="审批状态">
+          <el-descriptions-item :label="$t('auto.List.22.d352ae')">
             {{ decide.approval?.status || '—' }}
           </el-descriptions-item>
-          <el-descriptions-item label="截止">
+          <el-descriptions-item :label="$t('auto.List.14.cd8fbf')">
             {{ formatTime(decide.approval?.expires_at) }}
           </el-descriptions-item>
           <el-descriptions-item
             v-if="decide.approval?.decided_by"
-            label="裁决者"
+            :label="$t('auto.List.23.d43c7a')"
           >
             {{ decide.approval.decided_by }}
           </el-descriptions-item>
           <el-descriptions-item
             v-if="decide.approval?.decision_note"
-            label="裁决说明"
+            :label="$t('auto.List.24.fe9803')"
           >
             {{ decide.approval.decision_note }}
           </el-descriptions-item>
@@ -270,14 +270,14 @@
           v-if="verdicts.length"
           label-position="top"
         >
-          <el-form-item label="裁决说明">
+          <el-form-item :label="$t('auto.List.24.fe9803')">
             <el-input
               v-model="decide.note"
               type="textarea"
               :rows="3"
               maxlength="2000"
               show-word-limit
-              placeholder="批给谁、凭什么批；驳回的话必须写清为什么（驳回没有理由是复盘时最难补的一句）"
+              :placeholder="$t('auto.List.25.850b27')"
             />
           </el-form-item>
         </el-form>
@@ -309,6 +309,7 @@
 
 <script setup>
 import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { humanTaskApi } from '@/api/humanTask'
 import { approvalApi } from '@/api/approval'
@@ -339,9 +340,9 @@ const STATUSES = ['pending', 'claimed', 'done', 'cancelled']
 const OPEN_STATUSES = ['pending', 'claimed']
 
 const KIND_LABELS = {
-  [KIND_HANDOFF]: '会话转人工',
-  [KIND_APPROVAL]: '待审批',
-  [KIND_COLLECTION]: '催收升级'
+  [KIND_HANDOFF]: t('auto.List.27.e8c16d'),
+  [KIND_APPROVAL]: t('auto.List.28.b0bf01'),
+  [KIND_COLLECTION]: t('auto.List.29.7f180a')
 }
 const KIND_TAG_TYPES = {
   [KIND_HANDOFF]: 'warning',
@@ -349,19 +350,19 @@ const KIND_TAG_TYPES = {
   [KIND_COLLECTION]: 'info'
 }
 const STATUS_LABELS = {
-  pending: '待处理',
-  claimed: '已认领',
-  done: '已完成',
-  cancelled: '已撤销'
+  pending: t('auto.List.30.047109'),
+  claimed: t('auto.List.31.b32d7c'),
+  done: t('auto.List.32.fad522'),
+  cancelled: t('auto.List.33.50239f')
 }
 const ACTION_LABELS = {
-  claim: '认领',
-  release: '释放',
-  complete: '完成',
-  cancel: '撤销',
-  decide: '裁决'
+  claim: t('auto.List.34.54b931'),
+  release: t('auto.List.35.cbdcab'),
+  complete: t('auto.List.36.769d88'),
+  cancel: t('auto.List.37.bd9fcf'),
+  decide: t('auto.List.38.7756f1')
 }
-const VERDICT_LABELS = { approved: '批准', rejected: '驳回' }
+const VERDICT_LABELS = { approved: t('auto.List.39.7a712b'), rejected: t('auto.List.40.325254') }
 
 // COUNTS_POLL_MS 未读数轮询间隔。30s 是"值班换班时看得见新账"的量级；
 // 更短只是把读接口打成压力源，而这一页的正确性不靠推送（推送归 Notifications.vue）。
@@ -371,6 +372,8 @@ const userStore = useUserStore()
 // 后端的 operator / assignee_user_id 存的是 user id 的十进制字符串；这里统一成字符串，
 // 否则 userInfo.id 是数字时 rowActions 的"是不是我认领的"会永远判否。
 const me = computed(() => String(userStore.userInfo?.id ?? ''))
+
+const { t } = useI18n()
 
 const loading = ref(false)
 const unavailable = ref(false)
@@ -391,7 +394,7 @@ const decide = reactive({
   note: ''
 })
 
-const kindLabel = (k) => KIND_LABELS[k] || k || '未知类型'
+const kindLabel = (k) => KIND_LABELS[k] || k || t('auto.List.41.485d34')
 const kindTagType = (k) => KIND_TAG_TYPES[k] || 'info'
 const statusLabel = (s) => STATUS_LABELS[s] || s
 const actionLabel = (a) => ACTION_LABELS[a] || a
@@ -402,7 +405,7 @@ const verdicts = computed(() => verdictButtons(decide.approval))
 // 没有按钮时要说得出为什么没有：只把按钮收起来，读的人看到的是"这条点不动"，
 // 而他会去查的方向（权限？数据坏了？）和真原因（时限已过）往往不是同一个。
 const decideHint = computed(() =>
-  verdictBlockReason(decide.approval) || '这条审批已经不需要人来裁决了（已落定或已由清扫器按 TTL 收口）。'
+  verdictBlockReason(decide.approval) || t('auto.List.42.005f2b')
 )
 
 function formatTime(value) {
@@ -433,7 +436,7 @@ function slaText(row) {
   const field = slaField(row.kind)
   if (!field) return '—'
   const due = dueAt(row)
-  if (!due) return '未设截止'
+  if (!due) return t('auto.List.43.a534e7')
   if (row.status === 'done' || row.status === 'cancelled') return formatTime(row[field])
   return `${formatTime(row[field])} 前`
 }
@@ -506,14 +509,14 @@ async function openDecide(row) {
   decide.note = ''
   decide.error = ''
   if (!decide.approvalId) {
-    decide.error = '这条待办没有指向任何审批记录（subject_id 为空）'
+    decide.error = t('auto.List.44.8f071b')
     return
   }
   decide.loading = true
   try {
     decide.approval = await approvalApi.get(decide.approvalId)
   } catch (err) {
-    decide.error = err?.message || '审批详情读取失败'
+    decide.error = err?.message || t('auto.List.45.22c5fa')
   } finally {
     decide.loading = false
   }
@@ -523,7 +526,7 @@ async function submitDecide(verdict) {
   decide.submitting = true
   try {
     decide.approval = await approvalApi.decide(decide.approvalId, verdict, decide.note)
-    ElMessage.success(verdict === 'approved' ? '已批准，等待中的流程会被叫醒' : '已驳回')
+    ElMessage.success(verdict === 'approved' ? t('auto.List.46.58464f') : t('auto.List.47.dbf36d'))
     decide.visible = false
     refresh()
   } catch (err) {
@@ -531,7 +534,7 @@ async function submitDecide(verdict) {
       // 两个人同时开着这条详情：后端在 409 的响应体里回的就是当前那一行，
       // 直接把它显示出来 —— 这比"刷新一下看看"准，因为它不会把别人的结论冲成新读取。
       decide.approval = err.response?.data?.data || decide.approval
-      ElMessage.warning(err.message || '这条审批已被别人裁决，界面显示的是当前状态')
+      ElMessage.warning(err.message || t('auto.List.48.12ec83'))
       refresh()
     }
   } finally {
@@ -569,19 +572,19 @@ async function runAction(row, action) {
 async function cancelTask(row) {
   let value
   try {
-    ({ value } = await ElMessageBox.prompt('撤销这条待办，必须给理由', '撤销待办', {
+    ({ value } = await ElMessageBox.prompt(t('auto.List.49.df10c5'), t('auto.List.50.b622ae'), {
       inputType: 'textarea',
-      inputPlaceholder: '例如：客户已自行解决 / 这次裁决已在别处完成',
-      inputValidator: (v) => (hasRejectReason(v) ? true : '撤销必须写理由'),
-      confirmButtonText: '撤销',
-      cancelButtonText: '返回'
+      inputPlaceholder: t('auto.List.51.c9823f'),
+      inputValidator: (v) => (hasRejectReason(v) ? true : t('auto.List.52.9c365d')),
+      confirmButtonText: t('auto.List.37.bd9fcf'),
+      cancelButtonText: t('auto.List.53.5f4112')
     }))
   } catch {
     return // 点了返回
   }
   try {
     await humanTaskApi.cancel(row.id, value)
-    ElMessage.success('已撤销')
+    ElMessage.success(t('auto.List.33.50239f'))
     refresh()
   } catch (err) {
     if (err?.status === 409 || err?.status === 403) refresh()

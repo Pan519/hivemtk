@@ -27,21 +27,21 @@
         <span>{{ $t('操作历史') }}</span>
       </template>
       <el-table :data="histories" v-loading="loading" stripe>
-        <el-table-column prop="tool" label="工具" width="150" />
-        <el-table-column prop="target" label="目标" min-width="200" />
-        <el-table-column prop="totalCount" label="总数" width="100" />
-        <el-table-column prop="successCount" label="成功" width="100" />
-        <el-table-column prop="failedCount" label="失败" width="100" />
-        <el-table-column prop="status" label="状态" width="120">
+        <el-table-column prop="tool" :label="$t('auto.List.1.20dce2')" width="150" />
+        <el-table-column prop="target" :label="$t('auto.List.2.73e825')" min-width="200" />
+        <el-table-column prop="totalCount" :label="$t('auto.List.3.9ed7d3')" width="100" />
+        <el-table-column prop="successCount" :label="$t('auto.List.4.330363')" width="100" />
+        <el-table-column prop="failedCount" :label="$t('auto.List.5.acd5cb')" width="100" />
+        <el-table-column prop="status" :label="$t('auto.List.6.3fea7c')" width="120">
           <template #default="{ row }">
             <el-tag :type="getStatusType(row.status)">{{ getStatusText(row.status) }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="createdAt" label="执行时间" width="180" />
-        <el-table-column label="操作" width="150" fixed="right">
+        <el-table-column prop="createdAt" :label="$t('auto.List.7.70b363')" width="180" />
+        <el-table-column :label="$t('auto.List.8.2b6bc0')" width="150" fixed="right">
           <template #default="{ row }">
-            <el-button link type="primary" @click="viewDetail(row)">详情</el-button>
-            <el-button link type="danger" v-if="row.status === 'running'" @click="cancelTask(row)">取消</el-button>
+            <el-button link type="primary" @click="viewDetail(row)">{{ $t('auto.List.34.f26225') }}</el-button>
+            <el-button link type="danger" v-if="row.status === 'running'" @click="cancelTask(row)">{{ $t('auto.List.35.625fb2') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -49,56 +49,56 @@
 
     <el-dialog v-model="dialogVisible" :title="currentTool?.name" width="800px">
       <el-form :model="form" label-width="120px">
-        <el-form-item label="操作类型">
+        <el-form-item :label="$t('auto.List.9.de9cc3')">
           <el-input :value="currentTool?.name" disabled />
         </el-form-item>
-        <el-form-item label="数据来源">
+        <el-form-item :label="$t('auto.List.10.a094e5')">
           <el-radio-group v-model="form.source">
-            <el-radio label="all">全部</el-radio>
-            <el-radio label="filter">筛选</el-radio>
-            <el-radio label="import">导入</el-radio>
+            <el-radio label="all">{{ $t('auto.List.36.a8b0c2') }}</el-radio>
+            <el-radio label="filter">{{ $t('auto.List.37.c2fe62') }}</el-radio>
+            <el-radio label="import">{{ $t('auto.List.38.8d9a07') }}</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="筛选条件" v-if="form.source === 'filter'">
+        <el-form-item :label="$t('auto.List.11.5148fc')" v-if="form.source === 'filter'">
           <el-input v-model="form.filter" type="textarea" :rows="3" placeholder='{"status": "active", "created_at": ">2024-01-01"}' />
         </el-form-item>
-        <el-form-item label="导入文件" v-if="form.source === 'import'">
+        <el-form-item :label="$t('auto.List.12.7499f4')" v-if="form.source === 'import'">
           <el-upload action="/api/batch/import" :show-file-list="false">
-            <el-button>选择文件</el-button>
+            <el-button>{{ $t('auto.List.39.fd7e0c') }}</el-button>
           </el-upload>
         </el-form-item>
-        <el-form-item label="执行参数">
+        <el-form-item :label="$t('auto.List.13.716c8a')">
           <el-input v-model="form.params" type="textarea" :rows="4" placeholder='{"action": "send_message", "template": "welcome"}' />
         </el-form-item>
-        <el-form-item label="是否预览">
+        <el-form-item :label="$t('auto.List.14.874469')">
           <el-switch v-model="form.dryRun" />
-          <span class="form-tip">预览模式不会真正执行</span>
+          <span class="form-tip">{{ $t('auto.List.40.8e80c2') }}</span>
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="dialogVisible = false">取消</el-button>
-        <el-button @click="preview">预览</el-button>
-        <el-button type="primary" @click="execute">执行</el-button>
+        <el-button @click="dialogVisible = false">{{ $t('auto.List.35.625fb2') }}</el-button>
+        <el-button @click="preview">{{ $t('auto.List.41.645dbc') }}</el-button>
+        <el-button type="primary" @click="execute">{{ $t('auto.List.42.1a6aa2') }}</el-button>
       </template>
     </el-dialog>
 
     
-    <el-dialog v-model="previewVisible" title="批量操作预览" width="900px" :close-on-click-modal="false">
+    <el-dialog v-model="previewVisible" :title="$t('auto.List.15.c66881')" width="900px" :close-on-click-modal="false">
       <div v-loading="previewLoading">
         <div class="preview-summary" v-if="!previewLoading">
           <el-row :gutter="20">
             <el-col :span="8">
-              <el-statistic title="总影响条数" :value="previewSummary.total" />
+              <el-statistic :title="$t('auto.List.16.625daf')" :value="previewSummary.total" />
             </el-col>
             <el-col :span="8">
-              <el-statistic title="预计成功" :value="previewSummary.success">
+              <el-statistic :title="$t('auto.List.17.6f4fa8')" :value="previewSummary.success">
                 <template #suffix>
                   <el-icon color="#10B981"><component :is="'Check'" /></el-icon>
                 </template>
               </el-statistic>
             </el-col>
             <el-col :span="8">
-              <el-statistic title="预计失败" :value="previewSummary.failed">
+              <el-statistic :title="$t('auto.List.18.18fcd5')" :value="previewSummary.failed">
                 <template #suffix>
                   <el-icon color="#EF4444"><component :is="'Close'" /></el-icon>
                 </template>
@@ -108,7 +108,7 @@
         </div>
 
         <div class="preview-errors" v-if="previewSummary.errors.length > 0">
-          <h4>警告信息</h4>
+          <h4>{{ $t('auto.List.43.18e60c') }}</h4>
           <el-alert
             v-for="(err, idx) in previewSummary.errors"
             :key="idx"
@@ -121,53 +121,53 @@
         </div>
 
         <el-table :data="previewData" style="margin-top: 20px" v-if="previewData.length > 0">
-          <el-table-column type="index" label="序号" width="60" />
-          <el-table-column prop="target" label="目标" min-width="200" />
-          <el-table-column prop="action" label="操作" width="150" />
-          <el-table-column prop="status" label="预览状态" width="120">
+          <el-table-column type="index" :label="$t('auto.List.19.faaadc')" width="60" />
+          <el-table-column prop="target" :label="$t('auto.List.2.73e825')" min-width="200" />
+          <el-table-column prop="action" :label="$t('auto.List.8.2b6bc0')" width="150" />
+          <el-table-column prop="status" :label="$t('auto.List.20.8136c5')" width="120">
             <template #default="{ row }">
               <el-tag :type="getPreviewStatusTagType(row.status)" size="small">
                 {{ getPreviewStatusLabel(row.status) }}
               </el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="message" label="备注" show-overflow-tooltip min-width="200" />
+          <el-table-column prop="message" :label="$t('auto.List.21.2432b5')" show-overflow-tooltip min-width="200" />
         </el-table>
 
-        <el-empty v-if="!previewLoading && previewData.length === 0" description="暂无预览数据" />
+        <el-empty v-if="!previewLoading && previewData.length === 0" :description="$t('auto.List.22.65fa2e')" />
       </div>
 
       <template #footer>
-        <el-button @click="previewVisible = false">关闭</el-button>
-        <el-button type="primary" @click="execute">确认执行</el-button>
+        <el-button @click="previewVisible = false">{{ $t('auto.List.44.b15d91') }}</el-button>
+        <el-button type="primary" @click="execute">{{ $t('auto.List.45.d575bf') }}</el-button>
       </template>
     </el-dialog>
 
     
-    <el-dialog v-model="detailDialogVisible" title="批量任务执行详情" width="800px">
+    <el-dialog v-model="detailDialogVisible" :title="$t('auto.List.23.5288a9')" width="800px">
       <div v-loading="detailLoading">
         <template v-if="taskDetail">
           <el-descriptions :column="2" border>
-            <el-descriptions-item label="任务ID">{{ taskDetail.id }}</el-descriptions-item>
-            <el-descriptions-item label="工具名称">{{ taskDetail.tool }}</el-descriptions-item>
-            <el-descriptions-item label="目标">{{ taskDetail.target}}</el-descriptions-item>
-            <el-descriptions-item label="状态">
+            <el-descriptions-item :label="$t('auto.List.24.3a3778')">{{ taskDetail.id }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.List.25.ac6116')">{{ taskDetail.tool }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.List.2.73e825')">{{ taskDetail.target}}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.List.6.3fea7c')">
               <el-tag :type="getStatusType(taskDetail.status)">{{ getStatusText(taskDetail.status) }}</el-tag>
             </el-descriptions-item>
-            <el-descriptions-item label="执行时间">{{ taskDetail.createdAt }}</el-descriptions-item>
-            <el-descriptions-item label="完成时间">{{ taskDetail.finishedAt}}</el-descriptions-item>
-            <el-descriptions-item label="总数量">{{ taskDetail.totalCount }}</el-descriptions-item>
-            <el-descriptions-item label="成功数量">
+            <el-descriptions-item :label="$t('auto.List.7.70b363')">{{ taskDetail.createdAt }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.List.26.7cbadb')">{{ taskDetail.finishedAt}}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.List.27.8887e3')">{{ taskDetail.totalCount }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.List.28.7586c6')">
               <span style="color: #10B981">{{ taskDetail.successCount }}</span>
             </el-descriptions-item>
-            <el-descriptions-item label="失败数量">
+            <el-descriptions-item :label="$t('auto.List.29.21a0bb')">
               <span style="color: #EF4444">{{ taskDetail.failedCount }}</span>
             </el-descriptions-item>
-            <el-descriptions-item label="跳过数量">{{ taskDetail.skippedCount || 0 }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('auto.List.30.fea070')">{{ taskDetail.skippedCount || 0 }}</el-descriptions-item>
           </el-descriptions>
 
           <div v-if="taskDetail.errorMessage" style="margin-top: 20px">
-            <h4>错误信息</h4>
+            <h4>{{ $t('auto.List.46.4604d5') }}</h4>
             <el-alert
               :title="taskDetail.errorMessage"
               type="error"
@@ -177,19 +177,19 @@
           </div>
 
           <div v-if="taskDetail.errorDetails && taskDetail.errorDetails.length > 0" style="margin-top: 20px">
-            <h4>错误详情</h4>
+            <h4>{{ $t('auto.List.47.71f623') }}</h4>
             <el-table :data="taskDetail.errorDetails" stripe max-height="300">
-              <el-table-column type="index" label="序号" width="60" />
-              <el-table-column prop="target" label="目标" min-width="150" />
-              <el-table-column prop="error" label="错误原因" min-width="250" show-overflow-tooltip />
-              <el-table-column prop="time" label="时间" width="170" />
+              <el-table-column type="index" :label="$t('auto.List.19.faaadc')" width="60" />
+              <el-table-column prop="target" :label="$t('auto.List.2.73e825')" min-width="150" />
+              <el-table-column prop="error" :label="$t('auto.List.31.2fc597')" min-width="250" show-overflow-tooltip />
+              <el-table-column prop="time" :label="$t('auto.List.32.19fcb9')" width="170" />
             </el-table>
           </div>
         </template>
-        <el-empty v-if="!detailLoading && !taskDetail" description="暂无任务详情" />
+        <el-empty v-if="!detailLoading && !taskDetail" :description="$t('auto.List.33.e10f76')" />
       </div>
       <template #footer>
-        <el-button @click="detailDialogVisible = false">关闭</el-button>
+        <el-button @click="detailDialogVisible = false">{{ $t('auto.List.44.b15d91') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -199,14 +199,17 @@
 import i18n from '@/i18n'
 
 import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { Plus, User, ChatLineRound, Promotion, Money, Document, Bell, ShoppingCart } from '@element-plus/icons-vue'
 import { getBatchTools, runBatch, getBatchHistories, cancelBatch, previewBatch, getBatchDetail } from '@/api/batchOperation.js'
 import { toList } from '@/utils/list.js'
 import { PASS_FAIL_STATUS, getStatusLabel, getStatusTagType } from '@/constants/status';
 
-const getPreviewStatusLabel = (s) => getStatusLabel(s, PASS_FAIL_STATUS) === '成功' ? '可通过' : (getStatusLabel(s, PASS_FAIL_STATUS) || s || '-');
+const getPreviewStatusLabel = (s) => getStatusLabel(s, PASS_FAIL_STATUS) === t('auto.List.4.330363') ? t('auto.List.48.596149') : (getStatusLabel(s, PASS_FAIL_STATUS) || s || '-');
 const getPreviewStatusTagType = (s) => getStatusTagType(s, PASS_FAIL_STATUS)
+
+const { t } = useI18n()
 
 const loading = ref(false)
 const tools = ref([])
@@ -225,15 +228,15 @@ const previewData = ref([])
 const previewSummary = ref({ total: 0, success: 0, failed: 0, errors: [] })
 
 const getStatusType = (s) => ({ running: 'warning', success: 'success', failed: 'danger', partial: 'warning' }[s])
-const getStatusText = (s) => ({ running: '执行中', success: '完成', failed: '失败', partial: '部分成功' }[s] || s)
+const getStatusText = (s) => ({ running: t('auto.List.49.46e386'), success: t('auto.List.50.769d88'), failed: t('auto.List.5.acd5cb'), partial: t('auto.List.51.983b68') }[s] || s)
 
 const loadTools = async () => {
   const res = await getBatchTools()
   tools.value = res || [
-    { name: '批量发送消息', description: '批量发送邮件/短信/WhatsApp', color: '#4F46E5', icon: 'ChatLineRound', usedCount: 0 },
-    { name: '批量导入线索', description: 'Excel/CSV 批量导入', color: '#10B981', icon: 'Document', usedCount: 0 },
-    { name: '批量更新标签', description: '为客户批量打标签', color: '#F59E0B', icon: 'Promotion', usedCount: 0 },
-    { name: '批量分配销售', description: '将线索分配给销售', color: '#EF4444', icon: 'User', usedCount: 0 }
+    { name: t('auto.List.52.3182c7'), description: t('auto.List.53.17fb37'), color: '#4F46E5', icon: 'ChatLineRound', usedCount: 0 },
+    { name: t('auto.List.54.be8c0a'), description: 'Excel/CSV 批量导入', color: '#10B981', icon: 'Document', usedCount: 0 },
+    { name: t('auto.List.55.52140d'), description: t('auto.List.56.05e713'), color: '#F59E0B', icon: 'Promotion', usedCount: 0 },
+    { name: t('auto.List.57.b2879b'), description: t('auto.List.58.9ceef4'), color: '#EF4444', icon: 'User', usedCount: 0 }
   ]
 }
 
@@ -271,7 +274,7 @@ const preview = async () => {
       errors: data.errors || []
     }
   } catch (error) {
-    ElMessage.error('预览失败：' + (error?.message || error))
+    ElMessage.error(t('auto.List.59.943ad7') + (error?.message || error))
     previewVisible.value = false
   } finally {
     previewLoading.value = false
@@ -279,17 +282,17 @@ const preview = async () => {
 }
 
 const execute = async () => {
-  const loading = ElMessage({ message: i18n.global.t('正在执行批量操作...'), type: 'info', duration: 0 })
+  const loading = ElMessage({ message: i18n.global.t(t('auto.List.60.c380d7')), type: 'info', duration: 0 })
   try {
     await runBatch({ tool: currentTool.value.name, ...form.value })
     loading.close()
-    ElMessage.success(i18n.global.t('批量任务已提交'))
+    ElMessage.success(i18n.global.t(t('auto.List.61.b29706')))
     dialogVisible.value = false
     previewVisible.value = false
     loadHistories()
   } catch (error) {
     loading.close()
-    ElMessage.error(i18n.global.t('执行失败'))
+    ElMessage.error(i18n.global.t(t('auto.List.62.1c83d7')))
   }
 }
 
@@ -308,12 +311,12 @@ const viewDetail = async (row) => {
 
 const cancelTask = async (row) => {
   try {
-    await ElMessageBox.confirm('确定取消该任务？', '确认', { type: 'warning' })
+    await ElMessageBox.confirm(t('auto.List.63.1fed38'), t('auto.List.64.e83a25'), { type: 'warning' })
     await cancelBatch(row.id)
-    ElMessage.success(i18n.global.t('已取消'))
+    ElMessage.success(i18n.global.t(t('auto.List.65.2111cc')))
     loadHistories()
   } catch (e) {
-    if (e !== 'cancel') ElMessage.error(i18n.global.t('取消失败'))
+    if (e !== 'cancel') ElMessage.error(i18n.global.t(t('auto.List.66.482e85')))
   }
 }
 

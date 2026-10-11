@@ -4,8 +4,8 @@
     <el-card class="header-card" shadow="never">
       <div class="header-content">
         <div>
-          <h2>AI 工具管理</h2>
-          <p class="subtitle">管理 40 个 AI 工具的启用状态和账号绑定</p>
+          <h2>{{ $t('auto.ToolList.31.d3c67f') }}</h2>
+          <p class="subtitle">{{ $t('auto.ToolList.32.949f0e') }}</p>
         </div>
         <div class="header-actions">
           <el-button @click="loadTools" :loading="loading">
@@ -21,25 +21,25 @@
       <el-col :span="6">
         <el-card shadow="never" class="stat-card">
           <div class="stat-value">{{ stats.total }}</div>
-          <div class="stat-label">工具总数</div>
+          <div class="stat-label">{{ $t('auto.ToolList.33.be7fc8') }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card shadow="never" class="stat-card stat-success">
           <div class="stat-value">{{ stats.enabled }}</div>
-          <div class="stat-label">已启用</div>
+          <div class="stat-label">{{ $t('auto.ToolList.10.53ace4') }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card shadow="never" class="stat-card stat-warning">
           <div class="stat-value">{{ stats.disabled }}</div>
-          <div class="stat-label">已禁用</div>
+          <div class="stat-label">{{ $t('auto.ToolList.11.1c1ed9') }}</div>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card shadow="never" class="stat-card stat-info">
           <div class="stat-value">{{ stats.categories }}</div>
-          <div class="stat-label">工具分类</div>
+          <div class="stat-label">{{ $t('auto.ToolList.34.b0a53c') }}</div>
         </el-card>
       </el-col>
     </el-row>
@@ -47,24 +47,24 @@
     
     <el-card shadow="never" class="filter-card">
       <el-form :inline="true" :model="filter">
-        <el-form-item label="分类">
-          <el-select v-model="filter.category" placeholder="全部分类" clearable @change="loadTools">
-            <el-option label="触达工具" value="reach" />
-            <el-option label="客户工具" value="customer" />
-            <el-option label="知识工具" value="knowledge" />
-            <el-option label="业务工具" value="business" />
-            <el-option label="私信工具" value="private_message" />
+        <el-form-item :label="$t('auto.ToolList.1.d0771a')">
+          <el-select v-model="filter.category" :placeholder="$t('auto.ToolList.2.1a7503')" clearable @change="loadTools">
+            <el-option :label="$t('auto.ToolList.3.59fa82')" value="reach" />
+            <el-option :label="$t('auto.ToolList.4.110f30')" value="customer" />
+            <el-option :label="$t('auto.ToolList.5.b9a1ca')" value="knowledge" />
+            <el-option :label="$t('auto.ToolList.6.7a8e9c')" value="business" />
+            <el-option :label="$t('auto.ToolList.7.358d33')" value="private_message" />
           </el-select>
         </el-form-item>
-        <el-form-item label="状态">
-          <el-select v-model="filter.enabled" placeholder="全部状态" clearable @change="loadTools">
-            <el-option label="已启用" :value="true" />
-            <el-option label="已禁用" :value="false" />
+        <el-form-item :label="$t('auto.ToolList.8.3fea7c')">
+          <el-select v-model="filter.enabled" :placeholder="$t('auto.ToolList.9.443483')" clearable @change="loadTools">
+            <el-option :label="$t('auto.ToolList.10.53ace4')" :value="true" />
+            <el-option :label="$t('auto.ToolList.11.1c1ed9')" :value="false" />
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="loadTools">搜索</el-button>
-          <el-button @click="resetFilter">重置</el-button>
+          <el-button type="primary" @click="loadTools">{{ $t('auto.ToolList.35.e5f71f') }}</el-button>
+          <el-button @click="resetFilter">{{ $t('auto.ToolList.36.4b9c32') }}</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -72,7 +72,7 @@
     
     <el-card shadow="never">
       <el-table :data="tools" v-loading="loading" stripe border>
-        <el-table-column label="工具" min-width="280">
+        <el-table-column :label="$t('auto.ToolList.12.20dce2')" min-width="280">
           <template #default="{ row }">
             <div class="tool-info">
               <div class="tool-name">{{ row.tool_name }}</div>
@@ -80,14 +80,14 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column label="分类" width="120">
+        <el-table-column :label="$t('auto.ToolList.1.d0771a')" width="120">
           <template #default="{ row }">
             <el-tag :type="getCategoryTagType(row.category)" size="small">
               {{ getCategoryLabel(row.category) }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="状态" width="100" align="center">
+        <el-table-column :label="$t('auto.ToolList.8.3fea7c')" width="100" align="center">
           <template #default="{ row }">
             <el-switch
               v-model="row.is_enabled"
@@ -96,7 +96,7 @@
             />
           </template>
         </el-table-column>
-        <el-table-column label="绑定账号" min-width="200">
+        <el-table-column :label="$t('auto.ToolList.13.0529dc')" min-width="200">
           <template #default="{ row }">
             <div v-if="row.bound_accounts?.length">
               <el-tag
@@ -118,7 +118,7 @@
             <span v-else class="text-muted">-</span>
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="120" fixed="right">
+        <el-table-column :label="$t('auto.ToolList.14.2b6bc0')" width="120" fixed="right">
           <template #default="{ row }">
             <el-button link type="primary" size="small" @click="openDetail(row)">
               详情
@@ -129,21 +129,21 @@
     </el-card>
 
     
-    <el-dialog v-model="detailVisible" title="工具详情" width="600px">
+    <el-dialog v-model="detailVisible" :title="$t('auto.ToolList.15.ab7eba')" width="600px">
       <el-descriptions :column="2" border v-if="currentTool">
-        <el-descriptions-item label="工具名称">{{ currentTool.tool_name }}</el-descriptions-item>
-        <el-descriptions-item label="分类">
+        <el-descriptions-item :label="$t('auto.ToolList.16.ac6116')">{{ currentTool.tool_name }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.ToolList.1.d0771a')">
           <el-tag :type="getCategoryTagType(currentTool.category)" size="small">
             {{ getCategoryLabel(currentTool.category) }}
           </el-tag>
         </el-descriptions-item>
-        <el-descriptions-item label="状态">
+        <el-descriptions-item :label="$t('auto.ToolList.8.3fea7c')">
           <el-tag :type="currentTool.is_enabled ? 'success' : 'info'" size="small">
             {{ currentTool.is_enabled ? '已启用' : '已禁用' }}
           </el-tag>
         </el-descriptions-item>
-        <el-descriptions-item label="显示顺序">{{ currentTool.display_order }}</el-descriptions-item>
-        <el-descriptions-item label="配置" :span="2">
+        <el-descriptions-item :label="$t('auto.ToolList.17.0a05b1')">{{ currentTool.display_order }}</el-descriptions-item>
+        <el-descriptions-item :label="$t('auto.ToolList.18.224e2c')" :span="2">
           <pre class="config-json">{{ JSON.stringify(currentTool.config || {}, null, 2) }}</pre>
         </el-descriptions-item>
       </el-descriptions>
@@ -152,29 +152,29 @@
     
     <el-dialog v-model="bindDialogVisible" :title="`绑定账号 - ${currentTool?.tool_name}`" width="600px">
       <el-form :model="bindForm" label-width="100px">
-        <el-form-item label="账号类型">
-          <el-select v-model="bindForm.account_type" placeholder="选择账号类型">
-            <el-option label="短信" value="sms" />
-            <el-option label="邮件" value="email" />
+        <el-form-item :label="$t('auto.ToolList.19.c65d92')">
+          <el-select v-model="bindForm.account_type" :placeholder="$t('auto.ToolList.20.c3b31c')">
+            <el-option :label="$t('auto.ToolList.21.485c3a')" value="sms" />
+            <el-option :label="$t('auto.ToolList.22.e9e805')" value="email" />
             <el-option label="Telegram" value="telegram" />
-            <el-option label="企业微信" value="wecom" />
-            <el-option label="飞书" value="feishu" />
+            <el-option :label="$t('auto.ToolList.23.ff17b9')" value="wecom" />
+            <el-option :label="$t('auto.ToolList.24.7714e5')" value="feishu" />
             <el-option label="WhatsApp" value="whatsapp" />
-            <el-option label="抖音" value="douyin" />
-            <el-option label="快手" value="kuaishou" />
-            <el-option label="小红书" value="xhs" />
+            <el-option :label="$t('auto.ToolList.25.277a98')" value="douyin" />
+            <el-option :label="$t('auto.ToolList.26.f32c0a')" value="kuaishou" />
+            <el-option :label="$t('auto.ToolList.27.ae26bb')" value="xhs" />
           </el-select>
         </el-form-item>
-        <el-form-item label="账号ID">
-          <el-input v-model="bindForm.account_id" placeholder="输入账号ID" />
+        <el-form-item :label="$t('auto.ToolList.28.14d171')">
+          <el-input v-model="bindForm.account_id" :placeholder="$t('auto.ToolList.29.37c32e')" />
         </el-form-item>
-        <el-form-item label="设为主账号">
+        <el-form-item :label="$t('auto.ToolList.30.a2c1a2')">
           <el-switch v-model="bindForm.is_primary" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="bindDialogVisible = false">取消</el-button>
-        <el-button type="primary" @click="onBind">确定</el-button>
+        <el-button @click="bindDialogVisible = false">{{ $t('auto.ToolList.37.625fb2') }}</el-button>
+        <el-button type="primary" @click="onBind">{{ $t('auto.ToolList.38.38cf16') }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -182,9 +182,12 @@
 
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import { Refresh, Star } from '@element-plus/icons-vue'
 import { listTools, updateToolStatus, bindToolAccount } from '@/api/aiTool.js'
+
+const { t } = useI18n()
 
 const loading = ref(false);
 const tools = ref([])
@@ -210,11 +213,11 @@ const bindForm = reactive({
 })
 
 const categoryMap = {
-  reach: '触达工具',
-  customer: '客户工具',
-  knowledge: '知识工具',
-  business: '业务工具',
-  private_message: '私信工具'
+  reach: t('auto.ToolList.3.59fa82'),
+  customer: t('auto.ToolList.4.110f30'),
+  knowledge: t('auto.ToolList.5.b9a1ca'),
+  business: t('auto.ToolList.6.7a8e9c'),
+  private_message: t('auto.ToolList.7.358d33')
 };
 
 const getCategoryLabel = (category) => categoryMap[category] || category
@@ -248,7 +251,7 @@ const loadTools = async () => {
     stats.enabled = tools.value.filter(t => t.is_enabled).length
     stats.disabled = tools.value.filter(t => !t.is_enabled).length
   } catch (e) {
-    ElMessage.error('加载工具列表失败：' + e.message)
+    ElMessage.error(t('auto.ToolList.39.162848') + e.message)
   } finally {
     loading.value = false
   }
@@ -258,10 +261,10 @@ const onToggleTool = async (tool) => {
   tool._toggling = true
   try {
     await updateToolStatus(tool.tool_name, tool.is_enabled)
-    ElMessage.success(`${tool.is_enabled ? '启用' : '禁用'}成功`)
+    ElMessage.success(`${tool.is_enabled ? t('auto.ToolList.40.7854b5') : t('auto.ToolList.41.710ad0')}成功`)
   } catch (e) {
     tool.is_enabled = !tool.is_enabled
-    ElMessage.error('操作失败：' + e.message)
+    ElMessage.error(t('auto.ToolList.42.79585f') + e.message)
   } finally {
     tool._toggling = false
   }
@@ -288,7 +291,7 @@ const openBindDialog = (tool) => {
 
 const onBind = async () => {
   if (!bindForm.account_type || !bindForm.account_id) {
-    ElMessage.warning('请选择账号类型并输入账号ID')
+    ElMessage.warning(t('auto.ToolList.43.d2d422'))
     return
   }
 
@@ -299,11 +302,11 @@ const onBind = async () => {
       bindForm.account_id,
       bindForm.is_primary
     )
-    ElMessage.success('绑定成功')
+    ElMessage.success(t('auto.ToolList.44.1974fe'))
     bindDialogVisible.value = false
     loadTools()
   } catch (e) {
-    ElMessage.error('绑定失败：' + e.message)
+    ElMessage.error(t('auto.ToolList.45.8cbf8b') + e.message)
   }
 };
 
