@@ -104,10 +104,10 @@ func (r *systemUserRepo) List(ctx context.Context, page, pageSize int) ([]*model
 	if pageSize <= 0 {
 		pageSize = 20
 	}
-	if err := r.db.WithContext(ctx).Model(&model.SystemUser{}).Count(&total).Error; err != nil {
+	if err := r.db.WithContext(ctx).Model(&model.SystemUser{}).Scopes(scope.TenantUserScoped(ctx)).Count(&total).Error; err != nil {
 		return nil, 0, err
 	}
-	if err := r.db.WithContext(ctx).Order("created_at DESC").
+	if err := r.db.WithContext(ctx).Scopes(scope.TenantUserScoped(ctx)).Order("created_at DESC").
 		Offset((page - 1) * pageSize).
 		Limit(pageSize).
 		Find(&list).Error; err != nil {
