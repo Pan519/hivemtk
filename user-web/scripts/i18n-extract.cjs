@@ -161,7 +161,9 @@ function main() {
     report.locales[code] = ks.size;
     if (code === FLAGS.base) continue;
 
-    const missing = [...usedKeys].filter((k) => !ks.has(k)).sort();
+    // auto.* 段是机械转换产物，zh 为唯一事实源（fallbackLocale: 'zh' 兜底），
+    // 其余 locale 刻意不放——按设计豁免，不算缺失。
+    const missing = [...usedKeys].filter((k) => !ks.has(k) && !(FLAGS.base === 'zh' && k.startsWith('auto.'))).sort();
     const unused = [...ks].filter((k) => !usedKeys.has(k)).sort();
     report.missingInLocale[code] = missing;
     report.unusedInCode[code] = unused.slice(0, 20);  // 仅报告前 20 个 unused

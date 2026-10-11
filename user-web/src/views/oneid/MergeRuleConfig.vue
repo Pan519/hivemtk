@@ -111,6 +111,7 @@
 
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
+import i18n from '@/i18n'
 import { useI18n } from 'vue-i18n';
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { http } from '@/utils/request'

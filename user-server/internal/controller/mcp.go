@@ -2,7 +2,6 @@ package controller
 
 import (
 	"context"
-	"hivemtk-user/internal/repository/scope"
 	"io"
 	"net/http"
 
@@ -65,11 +64,16 @@ func (c *MCPController) Handle(ctx *gin.Context) {
 		ua := ctx.Request.UserAgent()
 		traceID, _ := ctx.Get("trace_id")
 		reqID, _ := traceID.(string)
-		teamInfo, _ := scope.TeamInfoFromCtx(ctx.Request.Context())
+		var auditTeamID uint
+		if v, ok := ctx.Get("team_id"); ok {
+			if id, ok2 := v.(uint); ok2 {
+				auditTeamID = id
+			}
+		}
 		mcpSrv.SetAuditSink(func(rec mcp.AuditRecord) {
 			rec.ClientID = cid
 			c.auditWith(ctx.Request.Context(), rec, ctx.ClientIP(), credentialID, keyID,
-				ua, reqID, teamInfo.TeamID)
+				ua, reqID, auditTeamID)
 		})
 	}
 
